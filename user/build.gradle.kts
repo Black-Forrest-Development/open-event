@@ -7,8 +7,6 @@ plugins {
     id("io.micronaut.application") version "3.6.2"
 }
 
-
-
 micronaut {
     runtime("netty")
     testRuntime("junit5")
@@ -20,18 +18,7 @@ micronaut {
 
 
 dependencies {
-    kapt("io.micronaut:micronaut-http-validation")
-    implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut:micronaut-jackson-databind")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    implementation("io.micronaut:micronaut-validation")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation(project(":common"))
 }
 
 application {

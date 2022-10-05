@@ -14,6 +14,8 @@ repositories {
 subprojects {
 
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.kotlin.kapt")
+    apply(plugin = "io.micronaut.application")
 
     repositories {
         mavenCentral()
@@ -27,21 +29,67 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
         testImplementation("io.mockk:mockk:1.13.2")
+
+        // https
+        implementation("io.micronaut:micronaut-jackson-databind")
+        implementation("io.micronaut:micronaut-http-client")
+
+        // validation
+        kapt("io.micronaut:micronaut-http-validation")
+        implementation("io.micronaut:micronaut-validation")
+
+        // openapi
+        kapt("io.micronaut.openapi:micronaut-openapi")
+        implementation("io.swagger.core.v3:swagger-annotations")
+
+        // security
+        kapt("io.micronaut.security:micronaut-security-annotations")
+        implementation("io.micronaut.security:micronaut-security")
+        implementation("io.micronaut.security:micronaut-security-jwt")
+        implementation("io.micronaut.security:micronaut-security-oauth2")
+
+        // kotlin
+        implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
+        implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
+        runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+        // caching
+        implementation("io.micronaut.cache:micronaut-cache-caffeine")
+
+        // reactor
+        implementation("io.micronaut.reactor:micronaut-reactor")
+        implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+
+        // coroutines
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.4")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
+
+        // data
+        kapt("io.micronaut.data:micronaut-data-processor")
+        implementation("io.micronaut.data:micronaut-data-jdbc")
+        implementation("io.micronaut.flyway:micronaut-flyway")
+        implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+        implementation("jakarta.annotation:jakarta.annotation-api")
+        implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+
     }
 
     java {
-        sourceCompatibility = JavaVersion.toVersion("17")
+        sourceCompatibility = JavaVersion.toVersion("18")
     }
 
     tasks {
         compileKotlin {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "18"
             }
         }
         compileTestKotlin {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "18"
             }
         }
     }

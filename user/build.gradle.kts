@@ -19,6 +19,19 @@ micronaut {
 
 dependencies {
     implementation(project(":common"))
+    // keycloak
+    implementation("org.keycloak:keycloak-common:19.0.2")
+    implementation("org.keycloak:keycloak-core:19.0.2")
+
+    // database
+    kapt("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    runtimeOnly("org.postgresql:postgresql")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.testcontainers:testcontainers")
 }
 
 application {

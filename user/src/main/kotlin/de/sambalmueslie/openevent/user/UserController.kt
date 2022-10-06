@@ -4,7 +4,6 @@ package de.sambalmueslie.openevent.user
 import de.sambalmueslie.openevent.user.api.UserChangeRequest
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
-import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/user")
@@ -12,18 +11,18 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class UserController(private val service: UserService) {
 
     @Get("/{userId}")
-    fun get(auth: Authentication, userId: Long) = service.get(auth, userId)
+    fun get(userId: Long) = service.get(userId)
 
     @Get()
-    fun getAll(auth: Authentication, pageable: Pageable) = service.getAll(auth, pageable)
+    fun getAll(pageable: Pageable) = service.getAll(pageable)
 
     @Post()
-    fun create(auth: Authentication, @Body request: UserChangeRequest) = service.create(auth, request)
+    fun create(@Body request: UserChangeRequest) = service.create(request)
 
     @Put("/{userId}")
-    fun update(auth: Authentication, userId: Long, @Body request: UserChangeRequest) = service.update(auth, userId, request)
+    fun update(userId: Long, @Body request: UserChangeRequest) = service.update(userId, request)
 
     @Delete("/{userId}")
-    fun delete(auth: Authentication, userId: Long) = service.delete(auth, userId)
+    fun delete(userId: Long) = service.delete(userId)
 
 }

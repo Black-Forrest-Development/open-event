@@ -12,22 +12,22 @@ import java.time.LocalDateTime
 @Table(name = "_user")
 data class UserData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    override var id: Long,
+    var id: Long,
     @Column
-    override var externalId: String,
+    var externalId: String,
     @Column
-    override var userName: String,
+    var userName: String,
     @Column
-    override var email: String,
+    var email: String,
     @Column
-    override var firstName: String,
+    var firstName: String,
     @Column
-    override var lastName: String,
+    var lastName: String,
     @Column
     var created: LocalDateTime,
     @Column
     var updated: LocalDateTime?,
-) : User, DataObject<User> {
+) : DataObject<User> {
 
     companion object {
         fun create(request: UserChangeRequest, timestamp: LocalDateTime): UserData {
@@ -36,7 +36,7 @@ data class UserData(
     }
 
     override fun convert(): User {
-        return this
+        return User(id, externalId, userName, email, firstName, lastName)
     }
 
     fun update(request: UserChangeRequest, timestamp: LocalDateTime): UserData {

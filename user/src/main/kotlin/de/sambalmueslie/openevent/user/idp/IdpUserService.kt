@@ -35,9 +35,9 @@ class IdpUserService(
         .expireAfterWrite(Duration.ofMinutes(10))
         .build { externalId -> updateData(externalId) }
 
-    fun get(auth: Authentication): Mono<User> {
-        val externalId = auth.name ?: return Mono.empty()
-        return Mono.justOrEmpty(externalIdCache[externalId])
+    fun get(auth: Authentication): User? {
+        val externalId = auth.name ?: return null
+        return externalIdCache[externalId]?.convert()
     }
 
     private fun updateData(externalId: String): UserData? {

@@ -1,10 +1,6 @@
-@file:Suppress("BlockingMethodInNonBlockingContext")
-
 package de.sambalmueslie.openevent.user
 
 
-import com.github.benmanes.caffeine.cache.Caffeine
-import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.common.crud.BaseCrudService
 import de.sambalmueslie.openevent.common.error.InvalidRequestException
 import de.sambalmueslie.openevent.common.time.TimeProvider
@@ -13,15 +9,11 @@ import de.sambalmueslie.openevent.user.api.User
 import de.sambalmueslie.openevent.user.api.UserChangeRequest
 import de.sambalmueslie.openevent.user.db.UserData
 import de.sambalmueslie.openevent.user.db.UserRepository
-import de.sambalmueslie.openevent.user.idp.update.IdpUserUpdater
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
-import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import reactor.core.publisher.Mono
-import java.time.Duration
 
 @Singleton
 class UserService(
@@ -32,40 +24,39 @@ class UserService(
         private val logger: Logger = LoggerFactory.getLogger(UserService::class.java)
     }
 
-    override fun get(id: Long): Mono<User> {
-        return Mono.justOrEmpty(repository.findByIdOrNull(id))
+    override fun get(id: Long): User? {
+        return repository.findByIdOrNull(id)?.convert()
     }
 
-    override fun getAll(pageable: Pageable): Mono<Page<User>> {
-        return Mono.just(repository.findAll(pageable).map { it.convert() })
+    override fun getAll(pageable: Pageable): Page<User> {
+        return repository.findAll(pageable).map { it.convert() }
     }
 
 
-    override fun create(request: UserChangeRequest): Mono<User> {
+    override fun create(request: UserChangeRequest): User {
         isValid(request)
         val existing = repository.findByEmail(request.email)
         if (existing.isNotEmpty()) throw InvalidRequestException("User email is already existing ${existing.size} times")
 
-        val data = repository.save(UserData.create(request, timeProvider.now()))
-        val result = repository.findByIdOrNull(data.id) ?: return Mono.empty()
-        notifyCreated(result)
-        return Mono.just(result)
+        val data = repository.save(UserData.create(request, timeProvider.now())).convert()
+        notifyCreated(data)
+        return data
     }
 
-    override fun update(id: Long, request: UserChangeRequest): Mono<User> {
+    override fun update(id: Long, request: UserChangeRequest): User {
         val data = repository.findByIdOrNull(id) ?: return create(request)
         isValid(request)
-        repository.update(data.update(request, timeProvider.now()))
-        val result = repository.findByIdOrNull(data.id) ?: return Mono.empty()
+        val result = repository.update(data.update(request, timeProvider.now())).convert()
         notifyUpdated(result)
-        return Mono.just(result)
+        return result
     }
 
-    override fun delete(id: Long): Mono<Long> {
-        val data = repository.findByIdOrNull(id) ?: return Mono.empty()
+    override fun delete(id: Long): User? {
+        val data = repository.findByIdOrNull(id) ?: return null
         repository.delete(data)
-        notifyDeleted(data)
-        return Mono.just(id)
+        val result = data.convert()
+        notifyDeleted(result)
+        return result
     }
 
     private fun isValid(request: UserChangeRequest) {

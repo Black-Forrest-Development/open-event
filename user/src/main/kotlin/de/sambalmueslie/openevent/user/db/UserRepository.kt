@@ -9,5 +9,6 @@ import io.micronaut.data.repository.PageableRepository
 @JdbcRepository(dialect = Dialect.POSTGRES)
 interface UserRepository : PageableRepository<UserData, Long> {
     fun findByEmail(email: String): List<UserData>
+
     fun findByExternalId(externalId: String): List<UserData>
 }

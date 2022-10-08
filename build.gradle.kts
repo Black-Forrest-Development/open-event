@@ -94,5 +94,12 @@ subprojects {
         }
     }
 
+}
 
+sonarqube {
+    properties {
+        property("sonar.projectKey", "Black-Forrest-Development_open-event")
+        property("sonar.organization", "black-forrest-development")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }

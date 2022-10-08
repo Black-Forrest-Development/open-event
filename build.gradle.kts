@@ -111,11 +111,16 @@ tasks.jacocoTestReport {
     }
 }
 
+jacoco{
+    toolVersion = "0.8.8"
+}
 
 sonarqube {
     properties {
         property("sonar.projectKey", "Black-Forrest-Development_open-event")
         property("sonar.organization", "black-forrest-development")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.core.codeCoveragePlugin", "jacoco")
     }
 }

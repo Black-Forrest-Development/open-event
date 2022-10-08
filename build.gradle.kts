@@ -5,6 +5,7 @@ plugins {
     id("org.sonarqube") version "3.4.0.2513"
     id("com.google.cloud.tools.jib") version "3.3.0" apply (false)
     id("io.micronaut.application") version "3.6.2" apply (false)
+    jacoco
 }
 
 repositories {
@@ -95,6 +96,16 @@ subprojects {
     }
 
 }
+
+
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
 
 sonarqube {
     properties {

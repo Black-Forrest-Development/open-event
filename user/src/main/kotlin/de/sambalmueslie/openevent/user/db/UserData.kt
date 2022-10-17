@@ -35,9 +35,7 @@ data class UserData(
         }
     }
 
-    override fun convert(): User {
-        return User(id, externalId, userName, email, firstName, lastName)
-    }
+    override fun convert() = User(id, externalId, userName, email, firstName, lastName)
 
     fun update(request: UserChangeRequest, timestamp: LocalDateTime): UserData {
         externalId = request.externalId

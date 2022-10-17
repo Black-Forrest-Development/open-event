@@ -21,7 +21,7 @@ class UserController(private val service: UserService) {
     }
 
     @Get("/{userId}")
-    fun get(auth: Authentication, userId: Long): Mono<User> = auth.checkPermission(PERMISSION_USER_READ) {
+    fun get(auth: Authentication, @PathVariable userId: Long): Mono<User> = auth.checkPermission(PERMISSION_USER_READ) {
         Mono.justOrEmpty(service.get(userId))
     }
 
@@ -36,12 +36,12 @@ class UserController(private val service: UserService) {
     }
 
     @Put("/{userId}")
-    fun update(auth: Authentication, userId: Long, @Body request: UserChangeRequest): Mono<User> = auth.checkPermission(PERMISSION_USER_WRITE) {
+    fun update(auth: Authentication, @PathVariable userId: Long, @Body request: UserChangeRequest): Mono<User> = auth.checkPermission(PERMISSION_USER_WRITE) {
         Mono.just(service.update(userId, request))
     }
 
     @Delete("/{userId}")
-    fun delete(auth: Authentication, userId: Long): Mono<User> = auth.checkPermission(PERMISSION_USER_WRITE) {
+    fun delete(auth: Authentication, @PathVariable userId: Long): Mono<User> = auth.checkPermission(PERMISSION_USER_WRITE) {
         Mono.justOrEmpty(service.delete(userId))
     }
 

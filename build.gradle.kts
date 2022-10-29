@@ -2,7 +2,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.kotlin.kapt") version "1.7.20"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.7.20"
-    id("org.sonarqube") version "3.4.0.2513"
+    id("org.sonarqube") version "3.5.0.2730"
     id("com.google.cloud.tools.jib") version "3.3.0" apply (false)
     id("io.micronaut.application") version "3.6.2" apply (false)
     jacoco

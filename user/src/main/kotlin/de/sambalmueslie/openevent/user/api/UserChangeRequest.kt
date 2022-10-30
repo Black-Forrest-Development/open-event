@@ -4,9 +4,11 @@ import de.sambalmueslie.openevent.common.crud.BusinessObjectChangeRequest
 
 data class UserChangeRequest(
     val externalId: String,
+    val type: UserType,
     val userName: String,
-    val email: String,
     val firstName: String,
     val lastName: String,
-) : BusinessObjectChangeRequest {
-}
+    val email: String,
+    val mobile: String,
+    val phone: String,
+) : BusinessObjectChangeRequest

@@ -4,6 +4,7 @@ import de.sambalmueslie.openevent.common.time.TimeProvider
 import de.sambalmueslie.openevent.user.api.User
 import de.sambalmueslie.openevent.user.api.UserChangeListener
 import de.sambalmueslie.openevent.user.api.UserChangeRequest
+import de.sambalmueslie.openevent.user.api.UserType
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.annotation.MockBean
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
@@ -13,7 +14,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -39,10 +39,12 @@ internal class UserServiceTest {
         service.register(listener)
 
         // create
-        val createRequest = UserChangeRequest("externalId", "userName", "email", "firstName", "lastName")
+        val createRequest = UserChangeRequest("externalId", UserType.IDP, "userName", "firstName", "lastName", "email", "mobile", "phone")
         var result = service.create(createRequest)
 
-        var reference = User(1, createRequest.externalId, createRequest.userName, createRequest.email, createRequest.firstName, createRequest.lastName)
+        var reference = User(
+            1, createRequest.externalId, createRequest.type, createRequest.userName, createRequest.firstName, createRequest.lastName, createRequest.email, createRequest.mobile, createRequest.phone
+        )
         assertEquals(reference, result)
         verify { listener.handleCreated(reference) }
         verify { listener.hashCode() }
@@ -53,10 +55,20 @@ internal class UserServiceTest {
         assertEquals(listOf(reference), service.getAll(Pageable.from(0)).content)
 
         // update
-        val updateRequest = UserChangeRequest("update-externalId", "update-userName", "update-email", "update-firstName", "update-lastName")
+        val updateRequest = UserChangeRequest("update-externalId", UserType.MANUAL, "update-userName", "update-firstName", "update-lastName", "update-email", "update-mobile", "update-phone")
         result = service.update(reference.id, updateRequest)
 
-        reference = User(1, updateRequest.externalId, updateRequest.userName, updateRequest.email, updateRequest.firstName, updateRequest.lastName)
+        reference = User(
+            1,
+            updateRequest.externalId,
+            updateRequest.type,
+            updateRequest.userName,
+            updateRequest.firstName,
+            updateRequest.lastName,
+            updateRequest.email,
+            updateRequest.mobile,
+            updateRequest.phone
+        )
         assertEquals(reference, result)
         verify { listener.handleUpdated(reference) }
         verify { listener.hashCode() }

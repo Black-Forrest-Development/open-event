@@ -1,7 +1,8 @@
-package de.sambalmueslie.openevent.user
+package de.sambalmueslie.openevent.group
 
 import de.sambalmueslie.openevent.common.time.TimeProvider
-import de.sambalmueslie.openevent.user.api.GroupChangeRequest
+import de.sambalmueslie.openevent.group.api.GroupChangeRequest
+import de.sambalmueslie.openevent.user.UserService
 import de.sambalmueslie.openevent.user.api.UserChangeRequest
 import de.sambalmueslie.openevent.user.api.UserType
 import io.micronaut.data.model.Pageable

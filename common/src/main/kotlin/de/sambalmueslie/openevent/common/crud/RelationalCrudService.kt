@@ -7,46 +7,57 @@ import io.micronaut.data.model.Pageable
 import io.micronaut.data.repository.PageableRepository
 import org.slf4j.Logger
 
-abstract class GenericCrudService<T, O : BusinessObject<T>, R : BusinessObjectChangeRequest, D : DataObject<O>>(
+abstract class RelationalCrudService<T, O : BusinessObject<T>, R : BusinessObjectChangeRequest, D : RelationalDataObject<O>>(
     private val repository: PageableRepository<D, T>,
     logger: Logger
 ) : BaseCrudService<T, O, R>(logger) {
 
     final override fun get(id: T): O? {
-        return repository.findByIdOrNull(id)?.convert()
+        return repository.findByIdOrNull(id)?.let { convert(it) }
     }
 
     final override fun getAll(pageable: Pageable): Page<O> {
-        return repository.findAll(pageable).map { it.convert() }
+        return repository.findAll(pageable).map { convert(it) }
     }
 
     override fun create(request: R): O {
         isValid(request)
 
-        val data = repository.save(createData(request)).convert()
-        notifyCreated(data)
-        return data
+        val data = repository.save(createData(request))
+        createRelationalData(request, data)
+        val result = convert(data)
+        notifyCreated(result)
+        return result
     }
 
+    protected abstract fun convert(data: D): O
+
     protected abstract fun createData(request: R): D
+    protected abstract fun createRelationalData(request: R, data: D)
 
     override fun update(id: T, request: R): O {
-        val data = repository.findByIdOrNull(id) ?: return create(request)
+        var data = repository.findByIdOrNull(id) ?: return create(request)
         isValid(request)
-        val result = repository.update(updateData(data, request)).convert()
+        data = repository.update(updateData(data, request))
+        updateRelationalData(request, data)
+        val result = convert(data)
         notifyUpdated(result)
         return result
     }
 
     protected abstract fun updateData(data: D, request: R): D
+    protected abstract fun updateRelationalData(request: R, data: D)
 
     override fun delete(id: T): O? {
         val data = repository.findByIdOrNull(id) ?: return null
+        deleteRelationalData(data)
         repository.delete(data)
-        val result = data.convert()
+        val result = convert(data)
         notifyDeleted(result)
         return result
     }
+
+    protected abstract fun deleteRelationalData(data: D)
 
     protected abstract fun isValid(request: R)
 }

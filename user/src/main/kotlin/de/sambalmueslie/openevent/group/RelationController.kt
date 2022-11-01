@@ -1,8 +1,8 @@
-package de.sambalmueslie.openevent.user
+package de.sambalmueslie.openevent.group
 
 
 import de.sambalmueslie.openevent.common.auth.checkPermission
-import de.sambalmueslie.openevent.user.api.Group
+import de.sambalmueslie.openevent.group.api.Group
 import de.sambalmueslie.openevent.user.api.User
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

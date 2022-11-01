@@ -1,6 +1,9 @@
-package de.sambalmueslie.openevent.user
+package de.sambalmueslie.openevent.group
 
 import de.sambalmueslie.openevent.common.time.TimeProvider
+import de.sambalmueslie.openevent.group.api.Group
+import de.sambalmueslie.openevent.group.api.GroupChangeListener
+import de.sambalmueslie.openevent.group.api.GroupChangeRequest
 import de.sambalmueslie.openevent.user.api.*
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.annotation.MockBean

@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.user.api
+package de.sambalmueslie.openevent.group.api
 
 import de.sambalmueslie.openevent.common.crud.BusinessObjectChangeListener
 

@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.user.db
+package de.sambalmueslie.openevent.group.db
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

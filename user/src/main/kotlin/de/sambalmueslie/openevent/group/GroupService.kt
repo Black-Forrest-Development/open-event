@@ -1,13 +1,13 @@
-package de.sambalmueslie.openevent.user
+package de.sambalmueslie.openevent.group
 
 
 import de.sambalmueslie.openevent.common.crud.GenericCrudService
 import de.sambalmueslie.openevent.common.error.InvalidRequestException
 import de.sambalmueslie.openevent.common.time.TimeProvider
-import de.sambalmueslie.openevent.user.api.Group
-import de.sambalmueslie.openevent.user.api.GroupChangeRequest
-import de.sambalmueslie.openevent.user.db.GroupData
-import de.sambalmueslie.openevent.user.db.GroupRepository
+import de.sambalmueslie.openevent.group.api.Group
+import de.sambalmueslie.openevent.group.api.GroupChangeRequest
+import de.sambalmueslie.openevent.group.db.GroupData
+import de.sambalmueslie.openevent.group.db.GroupRepository
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

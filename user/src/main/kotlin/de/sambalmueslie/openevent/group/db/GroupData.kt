@@ -1,8 +1,8 @@
-package de.sambalmueslie.openevent.user.db
+package de.sambalmueslie.openevent.group.db
 
 import de.sambalmueslie.openevent.common.crud.DataObject
-import de.sambalmueslie.openevent.user.api.Group
-import de.sambalmueslie.openevent.user.api.GroupChangeRequest
+import de.sambalmueslie.openevent.group.api.Group
+import de.sambalmueslie.openevent.group.api.GroupChangeRequest
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

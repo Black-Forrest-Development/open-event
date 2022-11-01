@@ -1,10 +1,11 @@
-package de.sambalmueslie.openevent.user
+package de.sambalmueslie.openevent.group
 
 
-import de.sambalmueslie.openevent.user.api.Group
+import de.sambalmueslie.openevent.group.api.Group
+import de.sambalmueslie.openevent.group.db.GroupUserRelation
+import de.sambalmueslie.openevent.group.db.GroupUserRelationRepository
+import de.sambalmueslie.openevent.user.UserService
 import de.sambalmueslie.openevent.user.api.User
-import de.sambalmueslie.openevent.user.db.GroupUserRelation
-import de.sambalmueslie.openevent.user.db.GroupUserRelationRepository
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton

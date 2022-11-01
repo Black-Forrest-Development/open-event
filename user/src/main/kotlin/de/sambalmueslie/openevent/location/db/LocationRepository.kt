@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.user.db
+package de.sambalmueslie.openevent.location.db
 
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jdbc.annotation.JdbcRepository
@@ -7,6 +7,4 @@ import io.micronaut.data.repository.PageableRepository
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface GroupRepository : PageableRepository<GroupData, Long> {
-    fun findByName(name: String): List<GroupData>
-}
+interface LocationRepository : PageableRepository<LocationData, Long>

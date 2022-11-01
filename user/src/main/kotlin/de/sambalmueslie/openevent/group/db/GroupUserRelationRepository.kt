@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.user.db
+package de.sambalmueslie.openevent.group.db
 
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jdbc.annotation.JdbcRepository

@@ -26,7 +26,7 @@ subprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.21")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.21")
-        implementation("ch.qos.logback:logback-classic:1.4.4")
+        implementation("ch.qos.logback:logback-classic:1.4.5")
 
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")

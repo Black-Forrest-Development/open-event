@@ -25,7 +25,7 @@ subprojects {
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10")
         implementation("ch.qos.logback:logback-classic:1.4.5")
 
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
@@ -54,7 +54,7 @@ subprojects {
         implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
         implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
         // caching

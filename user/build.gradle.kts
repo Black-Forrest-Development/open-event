@@ -21,7 +21,7 @@ dependencies {
     implementation(project(":common"))
     // keycloak
     implementation("org.keycloak:keycloak-common:20.0.3")
-    implementation("org.keycloak:keycloak-core:20.0.3")
+    implementation("org.keycloak:keycloak-core:20.0.4")
 
     // database
     kapt("io.micronaut.data:micronaut-data-processor")

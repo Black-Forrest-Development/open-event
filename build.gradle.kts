@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.8.21"
     id("org.sonarqube") version "4.0.0.2929"
     id("com.google.cloud.tools.jib") version "3.3.1" apply (false)
-    id("io.micronaut.application") version "3.7.8" apply (false)
+    id("io.micronaut.application") version "3.7.9" apply (false)
     jacoco
 }
 

@@ -20,7 +20,7 @@ micronaut {
 dependencies {
     implementation(project(":common"))
     // keycloak
-    implementation("org.keycloak:keycloak-common:21.1.1")
+    implementation("org.keycloak:keycloak-common:21.1.2")
     implementation("org.keycloak:keycloak-core:21.1.1")
 
     // database

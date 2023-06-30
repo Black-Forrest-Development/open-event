@@ -66,7 +66,7 @@ subprojects {
 
         // coroutines
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.7.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.7.2")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.2")
 
         // data

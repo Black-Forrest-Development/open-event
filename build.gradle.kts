@@ -1,6 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    id("org.jetbrains.kotlin.kapt") version "1.8.22"
+    id("org.jetbrains.kotlin.kapt") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.8.22"
     id("org.sonarqube") version "4.2.1.3168"
     id("com.google.cloud.tools.jib") version "3.3.2" apply (false)

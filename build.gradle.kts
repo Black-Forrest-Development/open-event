@@ -28,7 +28,7 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")
         implementation("ch.qos.logback:logback-classic:1.4.8")
 
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
         testImplementation("io.mockk:mockk:1.13.5")
 

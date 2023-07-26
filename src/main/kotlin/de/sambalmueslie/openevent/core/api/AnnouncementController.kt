@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Announcement API")
 class AnnouncementController(
     private val service: AnnouncementCrudService,
-    private val userService: AccountCrudService
+    private val accountService: AccountCrudService
 ) : AnnouncementAPI {
 
     @Get("/{id}")
@@ -37,8 +37,8 @@ class AnnouncementController(
     @Post()
     override fun create(auth: Authentication, @Body request: AnnouncementChangeRequest): Announcement {
         return auth.checkPermission(PERMISSION_WRITE) {
-            val author = userService.findByEmail(auth.getEmail())
-                ?: throw InvalidRequestException("Cannot find author user")
+            val author = accountService.findByEmail(auth.getEmail())
+                ?: throw InvalidRequestException("Cannot find author account")
             service.create(author, request)
         }
     }

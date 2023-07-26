@@ -14,18 +14,18 @@ CREATE TABLE category
 CREATE SEQUENCE account_seq;
 CREATE TABLE account
 (
-    id           BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('account_seq'::regclass),
-    external_id  VARCHAR(255) UNIQUE,
-    name         VARCHAR(255)                NOT NULL,
-    first_name   VARCHAR(255)                NOT NULL,
-    last_name    VARCHAR(255)                NOT NULL,
-    email        VARCHAR(255)                NOT NULL UNIQUE,
-    icon_url     VARCHAR(255)                NOT NULL,
-    service_user BOOLEAN                     NOT NULL,
+    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('account_seq'::regclass),
+    external_id     VARCHAR(255) UNIQUE,
+    name            VARCHAR(255)                NOT NULL,
+    first_name      VARCHAR(255)                NOT NULL,
+    last_name       VARCHAR(255)                NOT NULL,
+    email           VARCHAR(255)                NOT NULL UNIQUE,
+    icon_url        VARCHAR(255)                NOT NULL,
+    service_account BOOLEAN                     NOT NULL,
 
-    last_sync    TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    created      TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated      TIMESTAMP WITHOUT TIME ZONE
+    last_sync       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- announcement

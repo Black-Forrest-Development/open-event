@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.storage.user
+package de.sambalmueslie.openevent.storage.account
 
 
 import de.sambalmueslie.openevent.core.logic.AccountStorage

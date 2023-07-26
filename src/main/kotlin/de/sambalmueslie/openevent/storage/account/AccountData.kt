@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.storage.user
+package de.sambalmueslie.openevent.storage.account
 
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
@@ -16,7 +16,7 @@ data class AccountData(
     @Column var lastName: String,
     @Column var email: String,
     @Column var iconUrl: String,
-    @Column var serviceUser: Boolean,
+    @Column var serviceAccount: Boolean,
 
     @Column var lastSync: LocalDateTime = LocalDateTime.now(),
     @Column var created: LocalDateTime = LocalDateTime.now(),
@@ -44,7 +44,7 @@ data class AccountData(
     }
 
     override fun convert(): Account {
-        return Account(id, externalId, name, firstName, lastName, email, iconUrl, serviceUser)
+        return Account(id, externalId, name, firstName, lastName, email, iconUrl, serviceAccount)
     }
 
     fun update(request: AccountChangeRequest, timestamp: LocalDateTime): AccountData {

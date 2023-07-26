@@ -36,7 +36,7 @@ class AnnouncementStorageService(
     }
 
     override fun createData(request: AnnouncementChangeRequest, properties: Map<String, Any>): AnnouncementData {
-        val account = properties[AUTHOR_REFERENCE] as? Account ?: throw InvalidRequestException("Cannot find user")
+        val account = properties[AUTHOR_REFERENCE] as? Account ?: throw InvalidRequestException("Cannot find account")
         return AnnouncementData.create(account, request, timeProvider.now())
     }
 

@@ -14,9 +14,9 @@ import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
 
-@Controller("/api/user")
-@Tag(name = "User API")
-class UserController(private val service: AccountCrudService) : AccountAPI {
+@Controller("/api/account")
+@Tag(name = "Account API")
+class AccountController(private val service: AccountCrudService) : AccountAPI {
 
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Account? {

@@ -15,5 +15,9 @@ fun <T> Authentication.checkPermission(permission: String, function: () -> T): T
     throw InsufficientPermissionsException("No permission to access resource")
 }
 
+fun Authentication.getEmail(): String {
+    return attributes["email"] as? String ?: ""
+}
+
 class AuthUtils
 

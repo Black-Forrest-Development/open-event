@@ -14,8 +14,8 @@ import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
 
-@Controller("/api/nation")
-@Tag(name = "Nation API")
+@Controller("/api/category")
+@Tag(name = "Category API")
 class CategoryController(private val service: CategoryCrudService) : CategoryAPI {
 
     @Get("/{id}")

@@ -31,7 +31,7 @@ class CategoryStorageService(
     }
 
     override fun createData(request: CategoryChangeRequest, properties: Map<String, Any>): CategoryData {
-        logger.info("Create world $request")
+        logger.info("Create category $request")
         return CategoryData.create(request, timeProvider.now())
     }
 

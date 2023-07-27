@@ -45,8 +45,11 @@ class LocationStorageService(
     }
 
     override fun isValid(request: LocationChangeRequest) {
-        TODO("Not yet implemented")
+        // intentionally left empty
     }
 
+    override fun findByEvent(event: Event): Location? {
+        return repository.findByEventId(event.id)?.convert()
+    }
 
 }

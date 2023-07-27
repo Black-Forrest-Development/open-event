@@ -47,7 +47,11 @@ class RegistrationStorageService(
     }
 
     override fun isValid(request: RegistrationChangeRequest) {
-        if (request.maxGuestAmount > 0) throw InvalidRequestException("Max guest must be positive number")
+        if (request.maxGuestAmount <= 0) throw InvalidRequestException("Max guest must be positive number")
+    }
+
+    override fun findByEvent(event: Event): Registration? {
+        return repository.findByEventId(event.id)?.convert()
     }
 
 

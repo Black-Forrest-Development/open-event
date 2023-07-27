@@ -70,24 +70,24 @@ CREATE TABLE event
 CREATE SEQUENCE location_seq;
 CREATE TABLE location
 (
-    id             BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('location_seq'::regclass),
+    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('location_seq'::regclass),
 
-    event_id       BIGINT                      NOT NULL REFERENCES event (id),
+    event_id        BIGINT                      NOT NULL REFERENCES event (id),
 
-    street         VARCHAR(255)                NOT NULL,
-    streetNumber   VARCHAR(255)                NOT NULL,
-    zip            VARCHAR(255)                NOT NULL,
-    city           VARCHAR(255)                NOT NULL,
-    country        VARCHAR(255)                NOT NULL,
-    additionalInfo VARCHAR(255)                NOT NULL,
+    street          VARCHAR(255)                NOT NULL,
+    street_number   VARCHAR(255)                NOT NULL,
+    zip             VARCHAR(255)                NOT NULL,
+    city            VARCHAR(255)                NOT NULL,
+    country         VARCHAR(255)                NOT NULL,
+    additional_info VARCHAR(255)                NOT NULL,
 
-    lat            DOUBLE PRECISION            NOT NULL,
-    lon            DOUBLE PRECISION            NOT NULL,
+    lat             DOUBLE PRECISION            NOT NULL,
+    lon             DOUBLE PRECISION            NOT NULL,
 
-    size           INT                         NOT NULL,
+    size            INT                         NOT NULL,
 
-    created        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated        TIMESTAMP WITHOUT TIME ZONE
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- registration

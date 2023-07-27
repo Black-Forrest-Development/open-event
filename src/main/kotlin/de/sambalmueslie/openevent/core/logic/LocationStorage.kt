@@ -1,0 +1,10 @@
+package de.sambalmueslie.openevent.core.logic
+
+import de.sambalmueslie.openevent.core.Storage
+import de.sambalmueslie.openevent.core.model.Event
+import de.sambalmueslie.openevent.core.model.Location
+import de.sambalmueslie.openevent.core.model.LocationChangeRequest
+
+interface LocationStorage : Storage<Long, Location, LocationChangeRequest> {
+    fun create(request: LocationChangeRequest, event: Event): Location
+}

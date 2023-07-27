@@ -22,5 +22,23 @@ class LocationCrudService(
         return storage.create(request, event)
     }
 
+    fun findByEvent(event: Event): Location? {
+        return storage.findByEvent(event)
+    }
+
+    fun updateByEvent(event: Event, request: LocationChangeRequest): Location {
+        val existing = storage.findByEvent(event)
+        return if (existing != null) {
+            storage.update(existing.id, request)
+        } else {
+            storage.create(request, event)
+        }
+    }
+
+    fun deleteByEvent(event: Event): Location? {
+        val existing = storage.findByEvent(event) ?: return null
+        return storage.delete(existing.id)
+    }
+
 
 }

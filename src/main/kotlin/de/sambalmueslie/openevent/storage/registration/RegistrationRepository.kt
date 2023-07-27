@@ -8,4 +8,6 @@ import io.micronaut.data.repository.PageableRepository
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface RegistrationRepository : PageableRepository<RegistrationData, Long>
+interface RegistrationRepository : PageableRepository<RegistrationData, Long> {
+    fun findByEventId(eventId: Long): RegistrationData?
+}

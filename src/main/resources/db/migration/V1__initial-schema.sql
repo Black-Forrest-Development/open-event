@@ -40,3 +40,68 @@ CREATE TABLE announcement
     created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated   TIMESTAMP WITHOUT TIME ZONE
 );
+
+-- event
+CREATE SEQUENCE event_seq;
+CREATE TABLE event
+(
+    id               BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('event_seq'::regclass),
+    owner_id         BIGINT                      NOT NULL REFERENCES account (id),
+
+    start            TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    finish           TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+
+    title            VARCHAR(255)                NOT NULL,
+    short_text       VARCHAR(255)                NOT NULL,
+    long_text        TEXT                        NOT NULL,
+    image_url        VARCHAR(255)                NOT NULL,
+    icon_url         VARCHAR(255)                NOT NULL,
+
+    has_location     BOOLEAN                     NOT NULL,
+    has_registration BOOLEAN                     NOT NULL,
+    published        BOOLEAN                     NOT NULL,
+
+    created          TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated          TIMESTAMP WITHOUT TIME ZONE
+);
+
+
+-- location
+CREATE SEQUENCE location_seq;
+CREATE TABLE location
+(
+    id             BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('location_seq'::regclass),
+
+    event_id       BIGINT                      NOT NULL REFERENCES event (id),
+
+    street         VARCHAR(255)                NOT NULL,
+    streetNumber   VARCHAR(255)                NOT NULL,
+    zip            VARCHAR(255)                NOT NULL,
+    city           VARCHAR(255)                NOT NULL,
+    country        VARCHAR(255)                NOT NULL,
+    additionalInfo VARCHAR(255)                NOT NULL,
+
+    lat            DOUBLE PRECISION            NOT NULL,
+    lon            DOUBLE PRECISION            NOT NULL,
+
+    size           INT                         NOT NULL,
+
+    created        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated        TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- registration
+CREATE SEQUENCE registration_seq;
+CREATE TABLE registration
+(
+    id                 BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('registration_seq'::regclass),
+    event_id           BIGINT                      NOT NULL REFERENCES event (id),
+
+    max_guest_amount   INT                         NOT NULL,
+    interested_allowed BOOLEAN                     NOT NULL,
+    attendant_allowed  BOOLEAN                     NOT NULL,
+    tickets_enabled    BOOLEAN                     NOT NULL,
+
+    created            TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated            TIMESTAMP WITHOUT TIME ZONE
+);

@@ -1,9 +1,11 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
+import de.sambalmueslie.openevent.core.BusinessObjectChangeListener
 import de.sambalmueslie.openevent.core.model.*
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import io.mockk.*
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -24,29 +26,46 @@ class EventCrudServiceTest : TimeBasedTest() {
     @Inject
     lateinit var registrationService: RegistrationCrudService
 
+    private val eventListener = mockk<BusinessObjectChangeListener<Long, Event>>()
+    private val locationListener = mockk<BusinessObjectChangeListener<Long, Location>>()
+    private val registrationListener = mockk<BusinessObjectChangeListener<Long, Registration>>()
+
     @Test
     fun eventCrud() {
+        setupListener()
+
         val owner = accountService.create(AccountChangeRequest("name", "first-name", "last-name", "email", ""))
 
-        val start = LocalDateTime.of(2023, 10, 1, 20, 15)
-        val finish = LocalDateTime.of(2023, 10, 1, 22, 15)
-        val locationRequest = LocationChangeRequest("street", "nr", "zip", "city", "country", "info", 1.0, 2.0, 3)
-        val registrationRequest = RegistrationChangeRequest(10, true, true, false)
-        val request = EventChangeRequest(
-            start, finish,
-            "title",
-            "short",
-            "long",
-            "image",
-            "icon",
-            locationRequest, registrationRequest
-        )
+        val request = buildCreateRequest()
         var event = service.create(request, owner)
+        verify { eventListener.handleCreated(event) }
+        verify { locationListener.handleCreated(locationService.findByEvent(event)!!) }
+        verify { registrationListener.handleCreated(registrationService.findByEvent(event)!!) }
         validate(request, event)
 
         assertEquals(event, service.get(event.id))
         assertEquals(listOf(event), service.getAll(Pageable.from(0)).content)
 
+        val update = buildUpdateRequest(request)
+        event = service.update(event.id, update)
+        verify { eventListener.handleUpdated(event) }
+        verify { locationListener.handleUpdated(locationService.findByEvent(event)!!) }
+        verify { registrationListener.handleUpdated(registrationService.findByEvent(event)!!) }
+        validate(update, event)
+
+        val location = locationService.findByEvent(event)!!
+        val registration = registrationService.findByEvent(event)!!
+        service.delete(event.id)
+        verify { eventListener.handleDeleted(event) }
+        verify { locationListener.handleDeleted(location) }
+        verify { registrationListener.handleDeleted(registration) }
+        assertEquals(emptyList<Event>(), service.getAll(Pageable.from(0)).content)
+        assertEquals(emptyList<Location>(), locationService.getAll(Pageable.from(0)).content)
+        assertEquals(emptyList<Registration>(), registrationService.getAll(Pageable.from(0)).content)
+
+    }
+
+    private fun buildUpdateRequest(request: EventChangeRequest): EventChangeRequest {
         val locationUpdate = LocationChangeRequest(
             "street-update",
             "nr-update",
@@ -60,7 +79,7 @@ class EventCrudServiceTest : TimeBasedTest() {
         )
         val registrationUpdate = RegistrationChangeRequest(100, false, false, true)
         val update = EventChangeRequest(
-            start.plusDays(1), finish.plusDays(1),
+            request.start.plusDays(1), request.finish.plusDays(1),
             "title-update",
             "short-update",
             "long-update",
@@ -68,15 +87,40 @@ class EventCrudServiceTest : TimeBasedTest() {
             "icon-update",
             locationUpdate, registrationUpdate
         )
+        return update
+    }
 
-        event = service.update(event.id, update)
-        validate(update, event)
+    private fun buildCreateRequest(): EventChangeRequest {
+        val locationRequest = LocationChangeRequest("street", "nr", "zip", "city", "country", "info", 1.0, 2.0, 3)
+        val registrationRequest = RegistrationChangeRequest(10, true, true, false)
+        val request = EventChangeRequest(
+            LocalDateTime.of(2023, 10, 1, 20, 15),
+            LocalDateTime.of(2023, 10, 1, 22, 15),
+            "title",
+            "short",
+            "long",
+            "image",
+            "icon",
+            locationRequest, registrationRequest
+        )
+        return request
+    }
 
-        service.delete(event.id)
-        assertEquals(emptyList<Event>(), service.getAll(Pageable.from(0)).content)
-        assertEquals(emptyList<Location>(), locationService.getAll(Pageable.from(0)).content)
-        assertEquals(emptyList<Registration>(), registrationService.getAll(Pageable.from(0)).content)
+    private fun setupListener() {
+        service.register(eventListener)
+        every { eventListener.handleCreated(any()) } just Runs
+        every { eventListener.handleUpdated(any()) } just Runs
+        every { eventListener.handleDeleted(any()) } just Runs
 
+        locationService.register(locationListener)
+        every { locationListener.handleCreated(any()) } just Runs
+        every { locationListener.handleUpdated(any()) } just Runs
+        every { locationListener.handleDeleted(any()) } just Runs
+
+        registrationService.register(registrationListener)
+        every { registrationListener.handleCreated(any()) } just Runs
+        every { registrationListener.handleUpdated(any()) } just Runs
+        every { registrationListener.handleDeleted(any()) } just Runs
     }
 
     private fun validate(request: EventChangeRequest, event: Event) {
@@ -90,9 +134,8 @@ class EventCrudServiceTest : TimeBasedTest() {
 
         val locationRequest = request.location
         if (locationRequest != null) {
-            val location = locationService.findByEvent(event)
-            assertNotNull(location)
-            assertEquals(locationRequest.street, location!!.street)
+            val location = locationService.findByEvent(event)!!
+            assertEquals(locationRequest.street, location.street)
             assertEquals(locationRequest.streetNumber, location.streetNumber)
             assertEquals(locationRequest.zip, location.zip)
             assertEquals(locationRequest.city, location.city)

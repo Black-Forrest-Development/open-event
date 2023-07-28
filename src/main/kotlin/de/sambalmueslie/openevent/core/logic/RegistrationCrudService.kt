@@ -19,24 +19,34 @@ class RegistrationCrudService(
     }
 
     fun create(event: Event, request: RegistrationChangeRequest): Registration {
-        return storage.create(request, event)
+        val result = storage.create(request, event)
+        notifyCreated(result)
+        return result
     }
 
 
     fun findByEvent(event: Event): Registration? {
         return storage.findByEvent(event)
     }
+
     fun updateByEvent(event: Event, request: RegistrationChangeRequest): Registration {
         val existing = storage.findByEvent(event)
         return if (existing != null) {
-            storage.update(existing.id, request)
+            val result = storage.update(existing.id, request)
+            notifyUpdated(result)
+            result
         } else {
-            storage.create(request, event)
+            val result = storage.create(request, event)
+            notifyCreated(result)
+            result
         }
     }
+
     fun deleteByEvent(event: Event): Registration? {
         val existing = storage.findByEvent(event) ?: return null
-        return storage.delete(existing.id)
+        storage.delete(existing.id)
+        notifyDeleted(existing)
+        return existing
     }
 
 }

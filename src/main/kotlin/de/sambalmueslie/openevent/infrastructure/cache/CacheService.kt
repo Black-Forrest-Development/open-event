@@ -2,7 +2,6 @@ package de.sambalmueslie.openevent.infrastructure.cache
 
 
 import com.github.benmanes.caffeine.cache.LoadingCache
-import de.sambalmueslie.openevent.core.model.CacheInfo
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,7 +16,7 @@ class CacheService {
 
     private val caches = mutableMapOf<String, LoadingCache<*, *>>()
 
-    fun <T,O: Any> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
+    private fun <T,O: Any> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
         logger.info("Register cache for $key")
         val cache = builder.invoke()
         caches[key] = cache

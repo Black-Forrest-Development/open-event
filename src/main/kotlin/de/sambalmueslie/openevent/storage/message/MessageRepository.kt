@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.storage.category
+package de.sambalmueslie.openevent.storage.message
 
 
 import io.micronaut.data.annotation.Repository
@@ -8,7 +8,6 @@ import io.micronaut.data.repository.PageableRepository
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface CategoryRepository : PageableRepository<CategoryData, Long> {
-    fun findByName(name: String): CategoryData?
-    fun findByIdIn(ids: Set<Long>): List<CategoryData>
+interface MessageRepository : PageableRepository<MessageData, Long> {
+    fun findByIdIn(ids: Set<Long>): List<MessageData>
 }

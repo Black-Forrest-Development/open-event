@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.CacheInfo
+import de.sambalmueslie.openevent.infrastructure.cache.CacheInfo
 import io.micronaut.security.authentication.Authentication
 
 interface CacheAPI {

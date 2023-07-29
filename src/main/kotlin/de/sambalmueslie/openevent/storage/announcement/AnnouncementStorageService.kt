@@ -31,6 +31,7 @@ class AnnouncementStorageService(
         private val logger: Logger = LoggerFactory.getLogger(AnnouncementStorageService::class.java)
         private const val AUTHOR_REFERENCE = "author"
     }
+
     override fun create(request: AnnouncementChangeRequest, author: Account): Announcement {
         return create(request, mapOf(Pair(AUTHOR_REFERENCE, author)))
     }
@@ -48,5 +49,8 @@ class AnnouncementStorageService(
         return data.update(request, timeProvider.now())
     }
 
-
+    fun findByIds(ids: Set<Long>): List<Announcement> {
+        val result = repository.findByIdIn(ids)
+        return converter.convert(result)
+    }
 }

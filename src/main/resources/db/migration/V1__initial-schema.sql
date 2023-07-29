@@ -65,6 +65,20 @@ CREATE TABLE event
     updated          TIMESTAMP WITHOUT TIME ZONE
 );
 
+-- event category
+CREATE TABLE event_category
+(
+    event_id    BIGINT NOT NULL references event (id),
+    category_id BIGINT NOT NULL references category (id),
+    PRIMARY KEY (event_id, category_id)
+);
+-- event announcement
+CREATE TABLE event_announcement
+(
+    event_id    BIGINT NOT NULL references event (id),
+    announcement_id BIGINT NOT NULL references announcement (id),
+    PRIMARY KEY (event_id, announcement_id)
+);
 
 -- location
 CREATE SEQUENCE location_seq;

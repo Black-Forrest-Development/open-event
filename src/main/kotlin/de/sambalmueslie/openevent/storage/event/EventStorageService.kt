@@ -2,13 +2,13 @@ package de.sambalmueslie.openevent.storage.event
 
 
 import de.sambalmueslie.openevent.core.logic.EventStorage
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Event
-import de.sambalmueslie.openevent.core.model.EventChangeRequest
+import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import de.sambalmueslie.openevent.storage.BaseStorageService
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,6 +17,10 @@ import org.slf4j.LoggerFactory
 class EventStorageService(
     private val repository: EventRepository,
     private val converter: EventConverter,
+
+    private val categoryRelationService: EventCategoryRelationService,
+    private val announcementRelationService: EventAnnouncementRelationService,
+
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
 ) : BaseStorageService<Long, Event, EventChangeRequest, EventData>(
@@ -49,5 +53,28 @@ class EventStorageService(
         if (request.title.isBlank()) throw InvalidRequestException("Title cannot be blank")
     }
 
+    override fun assign(event: Event, category: Category) {
+        categoryRelationService.assign(event, category)
+    }
+
+    override fun assign(event: Event, announcement: Announcement) {
+        announcementRelationService.assign(event, announcement)
+    }
+
+    override fun revoke(event: Event, category: Category) {
+        categoryRelationService.revoke(event, category)
+    }
+
+    override fun revoke(event: Event, announcement: Announcement) {
+        announcementRelationService.revoke(event, announcement)
+    }
+
+    override fun getCategories(event: Event, pageable: Pageable): Page<Category> {
+        return categoryRelationService.get(event, pageable)
+    }
+
+    override fun getAnnouncements(event: Event, pageable: Pageable): Page<Announcement> {
+        return announcementRelationService.get(event, pageable)
+    }
 
 }

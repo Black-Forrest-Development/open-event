@@ -47,4 +47,6 @@ class CategoryStorageService(
         return repository.findByName(name)?.convert()
     }
 
+    fun findByIds(ids: Set<Long>) = repository.findByIdIn(ids).map { it.convert() }
+
 }

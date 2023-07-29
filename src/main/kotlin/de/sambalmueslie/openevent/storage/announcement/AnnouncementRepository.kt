@@ -8,4 +8,6 @@ import io.micronaut.data.repository.PageableRepository
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface AnnouncementRepository : PageableRepository<AnnouncementData, Long>
+interface AnnouncementRepository : PageableRepository<AnnouncementData, Long> {
+    fun findByIdIn(ids: Set<Long>): List<AnnouncementData>
+}

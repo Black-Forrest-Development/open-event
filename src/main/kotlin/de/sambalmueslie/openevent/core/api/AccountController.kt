@@ -16,7 +16,9 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/account")
 @Tag(name = "Account API")
-class AccountController(private val service: AccountCrudService) : AccountAPI {
+class AccountController(
+    private val service: AccountCrudService
+) : AccountAPI {
 
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Account? {

@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.model
+package de.sambalmueslie.openevent.infrastructure.cache
 
 data class CacheInfo(
     val key: String,

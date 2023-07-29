@@ -104,6 +104,7 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
         return result
     }
 
+    @Deprecated("Move that to core")
     abstract fun isValid(request: R)
     protected open fun existing(request: R): D? {
         return null

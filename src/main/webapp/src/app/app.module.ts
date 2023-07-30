@@ -16,6 +16,7 @@ import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {AuthModule} from "./auth/auth.module";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,8 +48,9 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
       autoClose: true,
       position: 'bottom-right'
     }),
-
-    DashboardModule
+    // my modules
+    DashboardModule,
+    AuthModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},

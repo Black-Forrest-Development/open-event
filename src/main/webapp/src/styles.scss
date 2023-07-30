@@ -2,7 +2,7 @@
 
 @include mat.core();
 
-$open-event-primary: mat.define-palette(mat.$gray-palette, 800);
+$open-event-primary: mat.define-palette(mat.$gray-palette, 900);
 $open-event-accent: mat.define-palette(mat.$green-palette, 700);
 $open-event-warn: mat.define-palette(mat.$red-palette,900);
 

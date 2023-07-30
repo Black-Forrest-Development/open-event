@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
 import {Principal} from "./principal";
-import {User} from "../registration/model/user";
 import {HttpClient} from "@angular/common/http";
-import {catchError, retry} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 
 @Injectable({
@@ -16,8 +14,7 @@ export class AuthService {
   public static MANAGER = 'MANAGER';
   public static USER = 'USER';
 
-  private principal: Principal = null;
-  private user: User = null;
+  private principal: Principal | undefined;
 
   constructor(private keycloak: KeycloakService, private http: HttpClient) {
     try {
@@ -60,28 +57,14 @@ export class AuthService {
     return this.principal != null
   }
 
-  public getUser(): User {
-    return this.user;
-  }
 
-
-  public getUserObservable(): Observable<User> {
-    const url = "/api/user";
-    return (this.user != null) ? Observable.create(this.user) :
-      this.http.get<User>(url).pipe(
-      retry(3),
-      catchError(this.handleError(url, undefined)),
-    )
-  }
-
-  public getPrincipal(): Principal {
+  public getPrincipal(): Principal | undefined {
     return this.principal
   }
 
   private clearPrincipal() {
     console.log('Clear principal');
-    this.principal = null;
-    this.user = null;
+    this.principal = undefined;
   }
 
   private setPrincipal(token: any) {
@@ -95,13 +78,6 @@ export class AuthService {
 
     this.principal = new Principal(id, email, username, given_name, family_name, roles);
     console.log('Set principal to ' + JSON.stringify(this.principal));
-
-    const url = "/api/user";
-    const observable = this.http.get<User>(url);
-    observable.pipe(
-      retry(3),
-      catchError(this.handleError(url, undefined)),
-    ).subscribe(data => this.user = data)
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

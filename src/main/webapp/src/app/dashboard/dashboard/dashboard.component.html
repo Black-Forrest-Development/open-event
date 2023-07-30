@@ -12,14 +12,23 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>open-event</span>
+      <div class="d-flex flex-row gap-2 flex-fill align-content-center align-items-center justify-content-center">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span class="h4">Willkommen zu Open Church: {{this.authService.getPrincipal()?.username}}</span>
+        <div class="flex-fill"></div>
+        <mat-form-field class="dense-1" subscriptSizing="dynamic">
+          <mat-select [value]="lang" (selectionChange)="changeLang($event)">
+            <mat-option value="en">English</mat-option>
+            <mat-option value="de">Deutsch</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -7,7 +7,7 @@ import {KeycloakAuthGuard, KeycloakService} from "keycloak-angular";
 })
 export class AuthGuard extends KeycloakAuthGuard implements CanActivate {
 
-  constructor(protected router: Router, protected keycloakAngular: KeycloakService) {
+  constructor(protected override router: Router, protected override keycloakAngular: KeycloakService) {
     super(router, keycloakAngular);
   }
 
@@ -19,7 +19,7 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivate {
         return reject(false);
       }
 
-      const requiredRoles: string[] = route.data.roles;
+      const requiredRoles: string[] = route.data['roles'];
       if (!requiredRoles || requiredRoles.length === 0) {
         return resolve(true);
       } else {

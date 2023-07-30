@@ -1,18 +1,18 @@
 <mat-toolbar color="primary">
   <div class="d-flex flex-row gap-2 flex-fill align-items-center">
 
-    <mat-form-field subscriptSizing="dynamic" class="dense-1" style="flex: 0 1 calc(25%);">
-      <mat-label>Search</mat-label>
-      <input matInput placeholder="" value="">
-    </mat-form-field>
-    <button mat-flat-button color="accent">
-      <mat-icon>search</mat-icon>
-      Search
-    </button>
+    <div class="d-flex flex-row gap-2 flex-fill align-items-center" style="flex: 0 1 calc(50% - .5rem - 100px)">
+      <mat-form-field subscriptSizing="dynamic" class="dense-1" style="flex: 0 1 calc(50%);">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="" value="">
+      </mat-form-field>
+      <button mat-mini-fab color="accent">
+        <mat-icon>search</mat-icon>
+      </button>
 
-    <div style="flex: 0 1 50px;"></div>
+    </div>
 
-    <button mat-flat-button color="accent">
+    <button mat-fab color="warn" style="flex: 0 1 200px;" extended>
       <mat-icon>event</mat-icon>
       Create Event
     </button>

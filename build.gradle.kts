@@ -6,7 +6,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.3.2"
     id("io.micronaut.application") version "4.0.1"
     id("io.micronaut.test-resources") version "4.0.1"
-    id("io.micronaut.aot") version "4.0.1"
+    id("io.micronaut.aot") version "4.0.2"
     jacoco
 }
 

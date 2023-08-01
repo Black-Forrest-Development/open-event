@@ -1,6 +1,5 @@
 package de.sambalmueslie.openevent.core.api
 
-
 import de.sambalmueslie.openevent.api.AccountAPI
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_WRITE
@@ -8,6 +7,7 @@ import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.AccountCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
+import de.sambalmueslie.openevent.core.model.AccountValidationResult
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
@@ -60,5 +60,13 @@ class AccountController(
     override fun delete(auth: Authentication, id: Long): Account? {
         return auth.checkPermission(PERMISSION_WRITE) { service.delete(id) }
     }
+
+    @Get("/validate")
+    override fun validate(auth: Authentication): AccountValidationResult {
+        return service.validate(auth)
+    }
+
+    @Get("/test")
+    fun test() = "Hallo Welt"
 
 }

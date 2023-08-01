@@ -8,4 +8,5 @@ data class AccountChangeRequest(
     val lastName: String,
     val email: String,
     val iconUrl: String,
+    val externalId: String?,
 ) : BusinessObjectChangeRequest

@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 
@@ -15,7 +15,7 @@
     <logger name="io.micronaut.runtime" level="INFO"/>
     <logger name="io.micronaut.http" level="INFO"/>
     <logger name="io.micronaut.security" level="INFO"/>
+    <logger name="io.micronaut" level="INFO"/>
     <logger name="org.flywaydb" level="INFO"/>
-    <logger name="io.micronaut.core.io.service" level="INFO"/>
     <logger name="de.sambalmueslie" level="INFO"/>
 </configuration>

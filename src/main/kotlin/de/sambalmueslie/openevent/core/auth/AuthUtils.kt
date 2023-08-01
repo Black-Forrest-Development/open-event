@@ -19,5 +19,21 @@ fun Authentication.getEmail(): String {
     return attributes["email"] as? String ?: ""
 }
 
+fun Authentication.getUsername(): String {
+    return attributes["preferred_username"] as? String ?: ""
+}
+
+fun Authentication.getExternalId(): String {
+    return attributes["sub"] as? String ?: ""
+}
+
+fun Authentication.getFirstName(): String {
+    return attributes["given_name"] as? String ?: ""
+}
+
+fun Authentication.getLastName(): String {
+    return attributes["family_name"] as? String ?: ""
+}
+
 class AuthUtils
 

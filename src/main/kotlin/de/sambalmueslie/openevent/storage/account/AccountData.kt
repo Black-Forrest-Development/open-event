@@ -30,7 +30,7 @@ data class AccountData(
         ): AccountData {
             return AccountData(
                 0,
-                null,
+                request.externalId,
                 request.name,
                 request.firstName,
                 request.lastName,
@@ -48,6 +48,7 @@ data class AccountData(
     }
 
     fun update(request: AccountChangeRequest, timestamp: LocalDateTime): AccountData {
+        externalId = request.externalId
         name = request.name
         firstName = request.firstName
         lastName = request.lastName

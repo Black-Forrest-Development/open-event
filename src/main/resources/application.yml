@@ -3,7 +3,7 @@ micronaut:
     name: open-event
   server:
     port: 8080
-    thread-selection: auto
+    thread-selection: AUTO
     netty:
       access-logger:
         enabled: true
@@ -23,7 +23,7 @@ micronaut:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
   security:
-    enabled: false
+    enabled: true
     endpoints:
       login:
         enabled: false
@@ -31,11 +31,11 @@ micronaut:
         enabled: false
     token:
       jwt:
-        enabled: true
         signatures:
           jwks:
-            auth0:
+            keycloak:
               url: ""
+        enabled: true
     intercept-url-map:
       - pattern: /swagger/**
         access:

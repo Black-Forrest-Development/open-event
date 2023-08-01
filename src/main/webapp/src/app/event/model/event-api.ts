@@ -1,3 +1,5 @@
+import {Account} from "../../account/model/account-api";
+
 export interface Event {
   id: number,
   owner: Account,
@@ -13,14 +15,4 @@ export interface Event {
   hasLocation: boolean,
   hasRegistration: boolean,
   published: boolean,
-}
-
-
-export interface Account {
-  id: number,
-  name: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  iconUrl: string,
 }

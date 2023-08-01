@@ -1,16 +1,19 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.0"
-    id("org.jetbrains.kotlin.kapt") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.0"
+    id("org.jetbrains.kotlin.kapt") version "1.9.0"
     id("org.sonarqube") version "4.3.0.3225"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.3.2"
-    id("io.micronaut.application") version "4.0.1"
-    id("io.micronaut.test-resources") version "4.0.1"
-    id("io.micronaut.aot") version "4.0.1"
+    id("io.micronaut.application") version "4.0.2"
+    id("io.micronaut.aot") version "4.0.2"
     jacoco
 }
 
 repositories {
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        mavenContent { snapshotsOnly() }
+    }
     mavenCentral()
 }
 
@@ -20,7 +23,7 @@ micronaut {
     runtime("netty")
     testRuntime("junit5")
     processing {
-        incremental(true)
+        incremental(false)
         annotations("de.sambalmueslie.openevent.*")
     }
     aot {
@@ -57,6 +60,7 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
 
     // validation
+    implementation("jakarta.validation:jakarta.validation-api")
     kapt("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut.validation:micronaut-validation")
 

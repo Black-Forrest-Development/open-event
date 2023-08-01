@@ -3,11 +3,14 @@ import {CommonModule} from '@angular/common';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {MaterialModule} from "../material/material.module";
 import {AppRoutingModule} from "../app-routing.module";
+import {LoadingScreenComponent} from './loading-screen/loading-screen.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    LoadingScreenComponent
   ],
   exports: [
     DashboardComponent
@@ -15,7 +18,8 @@ import {AppRoutingModule} from "../app-routing.module";
   imports: [
     CommonModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule
   ]
 })
 export class DashboardModule {

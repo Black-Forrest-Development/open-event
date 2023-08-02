@@ -1,0 +1,30 @@
+<ng-container *ngIf="form">
+  <form [formGroup]="form">
+    <div class="d-flex flex-column gap-2 align-items-stretch flex-fill pt-2">
+      <mat-form-field class="dense-1" style="flex: 1 1 auto">
+        <mat-label>{{'event.form.maxGuests' | translate}}</mat-label>
+        <input type="number" matInput formControlName="maxGuestAmount" required>
+        <mat-hint align="start">{{'event.form.hint.MaxGuest'| translate}}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="dense-1" style="flex: 1 1 auto" *ngIf="isVisible('interestedAllowed')">
+        <mat-label>{{'event.form.interestedAllowed' | translate}}</mat-label>
+        <mat-select formControlName="interestedAllowed">
+          <mat-option [value]="true">{{'ACTION.YES'|translate}}</mat-option>
+          <mat-option [value]="false">{{'ACTION.NO'|translate}}</mat-option>
+        </mat-select>
+        <mat-hint align="start">{{'event.form.hint.interestedAllowed' | translate}}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="dense-1" style="flex: 1 1 auto" *ngIf="isVisible('ticketsEnabled')">
+        <mat-label>{{'event.form.ticketsEnabled' | translate}}</mat-label>
+        <mat-select formControlName="ticketsEnabled">
+          <mat-option [value]="true">{{'ACTION.YES'|translate}}</mat-option>
+          <mat-option [value]="false">{{'ACTION.NO'|translate}}</mat-option>
+        </mat-select>
+        <mat-hint align="start">{{'event.form.hint.ticketsEnabled' | translate}}</mat-hint>
+      </mat-form-field>
+
+    </div>
+  </form>
+</ng-container>

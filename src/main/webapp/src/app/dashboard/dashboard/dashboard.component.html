@@ -12,7 +12,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <div class="d-flex flex-row gap-2 flex-fill align-content-center align-items-center justify-content-center">
+      <div class="d-flex flex-row gap-3 flex-fill align-content-center align-items-center justify-content-center">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -20,8 +20,14 @@
           (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span class="h4">Willkommen zu Open Church: {{this.authService.getPrincipal()?.username}}</span>
+        <a routerLink="/"><img src="assets/img/logo.png"/></a>
+        <span class="header">{{'text.welcome' | translate}}</span>
         <div class="flex-fill"></div>
+        <mat-chip-listbox>
+          <mat-chip-option color="accent" selected [selectable]="false">
+            {{this.authService.getPrincipal()?.given_name}} {{this.authService.getPrincipal()?.family_name}}
+          </mat-chip-option>
+        </mat-chip-listbox>
         <mat-form-field class="dense-1" subscriptSizing="dynamic">
           <mat-select [value]="lang" (selectionChange)="changeLang($event)">
             <mat-option value="en">English</mat-option>

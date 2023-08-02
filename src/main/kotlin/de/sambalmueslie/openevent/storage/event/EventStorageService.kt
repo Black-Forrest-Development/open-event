@@ -77,4 +77,8 @@ class EventStorageService(
         return announcementRelationService.get(event, pageable)
     }
 
+    override fun setPublished(id: Long, value: PatchRequest<Boolean>): Event? {
+        return patchData(id) { it.setPublished(value.value, timeProvider.now()) }
+    }
+
 }

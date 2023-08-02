@@ -113,7 +113,6 @@ CREATE TABLE registration
 
     max_guest_amount   INT                         NOT NULL,
     interested_allowed BOOLEAN                     NOT NULL,
-    attendant_allowed  BOOLEAN                     NOT NULL,
     tickets_enabled    BOOLEAN                     NOT NULL,
 
     created            TIMESTAMP WITHOUT TIME ZONE NOT NULL,

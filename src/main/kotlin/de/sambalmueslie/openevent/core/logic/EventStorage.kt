@@ -16,4 +16,6 @@ interface EventStorage : Storage<Long, Event, EventChangeRequest> {
     fun revoke(event: Event, announcement: Announcement)
     fun getAnnouncements(event: Event, pageable: Pageable): Page<Announcement>
 
+    fun setPublished(id: Long, value: PatchRequest<Boolean>): Event?
+
 }

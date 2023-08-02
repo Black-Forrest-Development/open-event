@@ -8,6 +8,7 @@ import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.EventCrudService
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.EventChangeRequest
+import de.sambalmueslie.openevent.core.model.PatchRequest
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
@@ -30,7 +31,7 @@ class EventController(private val service: EventCrudService) : EventAPI {
 
     @Post()
     override fun create(auth: Authentication, @Body request: EventChangeRequest): Event {
-        return auth.checkPermission(PERMISSION_WRITE) { service.create(request) }
+        return auth.checkPermission(PERMISSION_WRITE) { service.create(request, auth) }
     }
 
     @Put("/{id}")
@@ -41,6 +42,11 @@ class EventController(private val service: EventCrudService) : EventAPI {
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Event? {
         return auth.checkPermission(PERMISSION_WRITE) { service.delete(id) }
+    }
+
+    @Put("/{id}/published")
+    override fun setPublished(auth: Authentication, id: Long, @Body value: PatchRequest<Boolean>): Event? {
+        return auth.checkPermission(PERMISSION_WRITE) { service.setPublished(id, value) }
     }
 
 }

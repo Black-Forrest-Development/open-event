@@ -42,4 +42,8 @@ class AccountCrudService(
         val result = storage.create(AccountChangeRequest(auth.getUsername(), auth.getFirstName(), auth.getLastName(), email, "", auth.getExternalId()))
         return AccountValidationResult(true, result)
     }
+
+    fun get(auth: Authentication): Account? {
+        return findByEmail(auth.getEmail())
+    }
 }

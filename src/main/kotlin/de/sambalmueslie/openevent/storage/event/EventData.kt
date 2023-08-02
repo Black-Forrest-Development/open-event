@@ -83,6 +83,12 @@ data class EventData(
         updated = timestamp
         return this
     }
+
+    fun setPublished(value: Boolean, timestamp: LocalDateTime): EventData {
+        this.published = value
+        updated = timestamp
+        return this
+    }
 }
 
 

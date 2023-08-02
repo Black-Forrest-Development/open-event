@@ -17,7 +17,6 @@ data class RegistrationData(
 
     @Column var maxGuestAmount: Int,
     @Column var interestedAllowed: Boolean,
-    @Column var attendantAllowed: Boolean,
     @Column var ticketsEnabled: Boolean,
 
     @Column var created: LocalDateTime = LocalDateTime.now(),
@@ -34,7 +33,6 @@ data class RegistrationData(
                 event.id,
                 request.maxGuestAmount,
                 request.interestedAllowed,
-                request.attendantAllowed,
                 request.ticketsEnabled,
                 timestamp
             )
@@ -42,13 +40,12 @@ data class RegistrationData(
     }
 
     override fun convert(): Registration {
-        return Registration(id, maxGuestAmount, interestedAllowed, attendantAllowed, ticketsEnabled)
+        return Registration(id, maxGuestAmount, interestedAllowed,  ticketsEnabled)
     }
 
     fun update(request: RegistrationChangeRequest, timestamp: LocalDateTime): RegistrationData {
         maxGuestAmount = request.maxGuestAmount
         interestedAllowed = request.interestedAllowed
-        attendantAllowed = request.attendantAllowed
         ticketsEnabled = request.ticketsEnabled
         updated = timestamp
         return this

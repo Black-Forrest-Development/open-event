@@ -2,8 +2,9 @@ package de.sambalmueslie.openevent.core.model
 
 
 import de.sambalmueslie.openevent.core.BusinessObjectChangeRequest
+import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDateTime
-
+@Serdeable
 data class EventChangeRequest(
     val start: LocalDateTime,
     val finish: LocalDateTime,

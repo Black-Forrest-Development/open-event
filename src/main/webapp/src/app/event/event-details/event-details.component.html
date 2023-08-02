@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+    <button mat-mini-fab (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="title ps-2">{{event?.longText}}</span>
+    <div class="flex-fill"></div>
+
+    <button mat-flat-button color="accent" *ngIf="!event?.published" (click)="publish()">
+      <mat-icon *ngIf="!publishing">publish</mat-icon>
+      <mat-icon *ngIf="publishing">
+        <mat-spinner diameter="18"></mat-spinner>
+      </mat-icon>
+      {{'event.publish' |translate}}
+    </button>
+
+    <button mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
+
+<p>event-details works!</p>

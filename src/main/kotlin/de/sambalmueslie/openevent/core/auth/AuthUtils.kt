@@ -5,7 +5,7 @@ import io.micronaut.security.authentication.Authentication
 
 
 fun <T> Authentication.checkPermission(permission: String, function: () -> T): T {
-    if (roles.contains(permission)) return function.invoke()
+    if (getRealmRoles().contains(permission)) return function.invoke()
     val permissions = attributes["permissions"]
     if (permissions != null) {
         val values =
@@ -13,6 +13,13 @@ fun <T> Authentication.checkPermission(permission: String, function: () -> T): T
         if (values.contains(permission)) return function.invoke()
     }
     throw InsufficientPermissionsException("No permission to access resource")
+}
+
+@Suppress("UNCHECKED_CAST")
+fun Authentication.getRealmRoles(): Set<String>{
+    val realmAccess = attributes["realm_access"] as? Map<String, Any> ?: return emptySet()
+    val roles = realmAccess["roles"] as? List<String> ?: return emptySet()
+    return roles.toSet()
 }
 
 fun Authentication.getEmail(): String {

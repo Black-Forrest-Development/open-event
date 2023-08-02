@@ -63,10 +63,8 @@ class AccountController(
 
     @Get("/validate")
     override fun validate(auth: Authentication): AccountValidationResult {
-        return service.validate(auth)
+        return auth.checkPermission(PERMISSION_READ) { service.validate(auth) }
     }
 
-    @Get("/test")
-    fun test() = "Hallo Welt"
 
 }

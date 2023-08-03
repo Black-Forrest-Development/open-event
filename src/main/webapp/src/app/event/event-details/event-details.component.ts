@@ -4,6 +4,9 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Event} from "../model/event-api";
 import {Location} from "@angular/common";
 import {HotToastService} from "@ngneat/hot-toast";
+import {ThemePalette} from "@angular/material/core";
+import {EventMenuComponent} from "../event-menu/event-menu.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-event-details',
@@ -13,8 +16,9 @@ import {HotToastService} from "@ngneat/hot-toast";
 export class EventDetailsComponent {
 
   reloading: boolean = false
-  publishing: boolean = false
+
   event: Event | undefined
+  menu: EventMenuComponent
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +26,9 @@ export class EventDetailsComponent {
     private location: Location,
     private service: EventService,
     private toastService: HotToastService,
+    public dialog: MatDialog,
   ) {
+    this.menu = new EventMenuComponent(router, dialog, service, toastService)
   }
 
   ngOnInit() {
@@ -41,24 +47,28 @@ export class EventDetailsComponent {
 
   private handleData(d: Event) {
     this.event = d
+    this.menu.data = d
     this.reloading = false
-    this.publishing = false
   }
 
   back() {
     this.location.back()
   }
 
-  publish() {
-    if (!this.event) return
-    if (this.publishing || this.reloading) return
-    this.publishing = true
-    this.service.publish(this.event.id).subscribe({
-      next: d => this.handleData(d),
-      error: err => {
-        this.toastService.error(err)
-        this.publishing = false
-      }
-    })
+
+  links = ['First', 'Second', 'Third'];
+  activeLink = this.links[0];
+  background: ThemePalette = undefined;
+
+  edit() {
+
+  }
+
+  delete() {
+
+  }
+
+  copy() {
+
   }
 }

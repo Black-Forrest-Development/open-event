@@ -6,19 +6,46 @@
     <span class="title ps-2">{{event?.longText}}</span>
     <div class="flex-fill"></div>
 
-    <button mat-flat-button color="accent" *ngIf="!event?.published" (click)="publish()">
-      <mat-icon *ngIf="!publishing">publish</mat-icon>
-      <mat-icon *ngIf="publishing">
-        <mat-spinner diameter="18"></mat-spinner>
-      </mat-icon>
-      {{'event.publish' |translate}}
-    </button>
+    <ng-container *ngIf="!menu.publishMenuItem.disabled">
+      <button mat-mini-fab class="action-fab" *ngIf="!event?.published" (click)="menu.publishMenuItem.handleClick()">
+        <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
+        <mat-icon *ngIf="menu.publishing">
+          <mat-spinner diameter="18"></mat-spinner>
+        </mat-icon>
+      </button>
+    </ng-container>
 
-    <button mat-icon-button>
+    <ng-container *ngFor="let item of menu.menuItems">
+      <button mat-mini-fab class="action-fab" (click)="item.handleClick()">
+        <mat-icon>{{item.icon}}</mat-icon>
+      </button>
+    </ng-container>
+
+    <button mat-icon-button [matMenuTriggerFor]="contextMenu">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
 </mat-toolbar>
+
+<mat-menu #contextMenu="matMenu">
+  <ng-container *ngFor="let item of menu.menuItems">
+    <button mat-menu-item [disabled]="item.disabled" (click)="item.handleClick()">
+      <mat-icon>{{item.icon}}</mat-icon>
+      {{item.text | translate}}
+    </button>
+  </ng-container>
+</mat-menu>
+
+
 <mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
 
-<p>event-details works!</p>
+<div class="d-flex flex-column gap-2 align-items-stretch">
+  <mat-card>
+    <nav mat-tab-nav-bar [backgroundColor]="background" [tabPanel]="tabPanel">
+      <a mat-tab-link *ngFor="let link of links"
+         (click)="activeLink = link"
+         [active]="activeLink == link"> {{link}} </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  </mat-card>
+</div>

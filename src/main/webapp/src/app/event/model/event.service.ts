@@ -29,4 +29,8 @@ export class EventService extends BaseService {
   publish(id: number): Observable<Event> {
     return this.put('' + id + '/published', new PatchRequest(true))
   }
+
+  deleteEvent(id: number): Observable<Event> {
+    return this.delete('' + id)
+  }
 }

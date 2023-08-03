@@ -12,9 +12,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {EventChangeFormEventComponent} from './event-change-form-event/event-change-form-event.component';
 import {EventChangeFormLocationComponent} from './event-change-form-location/event-change-form-location.component';
 import {
-    EventChangeFormRegistrationComponent
+  EventChangeFormRegistrationComponent
 } from './event-change-form-registration/event-change-form-registration.component';
 import {HotToastModule} from "@ngneat/hot-toast";
+import {EventMenuComponent} from './event-menu/event-menu.component';
+import {EventDeleteDialogComponent} from './event-delete-dialog/event-delete-dialog.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {HotToastModule} from "@ngneat/hot-toast";
         EventDetailsComponent,
         EventChangeFormEventComponent,
         EventChangeFormLocationComponent,
-        EventChangeFormRegistrationComponent
+        EventChangeFormRegistrationComponent,
+        EventMenuComponent,
+        EventDeleteDialogComponent
     ],
     imports: [
         CommonModule,

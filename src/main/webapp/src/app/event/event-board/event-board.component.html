@@ -1,26 +1,2 @@
 <app-event-board-header></app-event-board-header>
-
-<mat-progress-bar mode="indeterminate" *ngIf="service.reloading"></mat-progress-bar>
-
-<div class="d-flex flex-column gap-2 p-2 ">
-  <mat-card>
-    <mat-list>
-      <ng-container *ngFor="let event of service.events">
-        <mat-list-item routerLink="./details/{{event.id}}">
-          <mat-icon matListItemIcon>event</mat-icon>
-          <div matListItemTitle>{{event.longText}}</div>
-          <div matListItemLine>{{event.start | date}}</div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </ng-container>
-    </mat-list>
-    <mat-paginator [length]="service.totalSize"
-                   [pageIndex]="service.pageIndex"
-                   [pageSize]="service.pageSize"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
-                   class="mb-2"
-    >
-    </mat-paginator>
-  </mat-card>
-
-</div>
+<app-event-board-list></app-event-board-list>

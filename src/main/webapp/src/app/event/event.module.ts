@@ -17,6 +17,10 @@ import {
 import {HotToastModule} from "@ngneat/hot-toast";
 import {EventMenuComponent} from './event-menu/event-menu.component';
 import {EventDeleteDialogComponent} from './event-delete-dialog/event-delete-dialog.component';
+import {AccountModule} from "../account/account.module";
+import {LocationModule} from "../location/location.module";
+import {EventBoardListComponent} from './event-board-list/event-board-list.component';
+import {EventBoardListEntryComponent} from './event-board-list-entry/event-board-list-entry.component';
 
 
 @NgModule({
@@ -29,16 +33,20 @@ import {EventDeleteDialogComponent} from './event-delete-dialog/event-delete-dia
         EventChangeFormLocationComponent,
         EventChangeFormRegistrationComponent,
         EventMenuComponent,
-        EventDeleteDialogComponent
+        EventDeleteDialogComponent,
+        EventBoardListComponent,
+        EventBoardListEntryComponent
     ],
-    imports: [
-        CommonModule,
-        EventRoutingModule,
-        MaterialModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        HotToastModule
-    ]
+  imports: [
+    CommonModule,
+    EventRoutingModule,
+    MaterialModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    HotToastModule,
+    AccountModule,
+    LocationModule
+  ]
 })
 export class EventModule {
 }

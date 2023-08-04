@@ -16,6 +16,7 @@ import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {AuthModule} from "./auth/auth.module";
+import {FALLBACK, GravatarModule, RATING} from "ngx-gravatar";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +33,14 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    GravatarModule.forRoot({
+      fallback: FALLBACK.mp,
+      rating: RATING.x,
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+      hasBorder: true,
+      preferGravatar: false
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

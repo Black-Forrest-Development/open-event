@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {EventService} from "../model/event.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {Event} from "../model/event-api";
+import {EventInfo} from "../model/event-api";
 import {Location} from "@angular/common";
 import {HotToastService} from "@ngneat/hot-toast";
-import {ThemePalette} from "@angular/material/core";
 import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {MatDialog} from "@angular/material/dialog";
+
 
 @Component({
   selector: 'app-event-details',
@@ -17,7 +17,7 @@ export class EventDetailsComponent {
 
   reloading: boolean = false
 
-  event: Event | undefined
+  info: EventInfo | undefined
   menu: EventMenuComponent
 
   constructor(
@@ -35,19 +35,20 @@ export class EventDetailsComponent {
     this.route.paramMap.subscribe(p => this.handleParams(p))
   }
 
+
   private handleParams(p: ParamMap) {
     let idParam = p.get('id')
     let id = idParam !== null ? +idParam : null
     if (!id) return
 
     this.reloading = true;
-    this.service.getEvent(id).subscribe(d => this.handleData(d))
+    this.service.getEventInfo(id).subscribe(d => this.handleData(d))
 
   }
 
-  private handleData(d: Event) {
-    this.event = d
-    this.menu.data = d
+  private handleData(d: EventInfo) {
+    this.info = d
+    this.menu.data = d.event
     this.reloading = false
   }
 
@@ -55,20 +56,4 @@ export class EventDetailsComponent {
     this.location.back()
   }
 
-
-  links = ['First', 'Second', 'Third'];
-  activeLink = this.links[0];
-  background: ThemePalette = undefined;
-
-  edit() {
-
-  }
-
-  delete() {
-
-  }
-
-  copy() {
-
-  }
 }

@@ -5,13 +5,15 @@ import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.Location
 import de.sambalmueslie.openevent.core.model.LocationChangeRequest
+import de.sambalmueslie.openevent.infrastructure.geo.GeoLocationResolver
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Singleton
 class LocationCrudService(
-    private val storage: LocationStorage
+    private val storage: LocationStorage,
+    private val geoLocationResolver: GeoLocationResolver
 ) : BaseCrudService<Long, Location, LocationChangeRequest>(storage, logger) {
 
     companion object {
@@ -19,7 +21,7 @@ class LocationCrudService(
     }
 
     fun create(event: Event, request: LocationChangeRequest): Location {
-        val result = storage.create(request, event)
+        val result = storage.create(resolveGeoLocation(request), event)
         notifyCreated(result)
         return result
     }
@@ -29,16 +31,27 @@ class LocationCrudService(
     }
 
     fun updateByEvent(event: Event, request: LocationChangeRequest): Location {
-        val existing = storage.findByEvent(event)
-        return if (existing != null) {
-            val result = storage.update(existing.id, request)
-            notifyUpdated(result)
-            result
-        } else {
-            val result = storage.create(request, event)
-            notifyCreated(result)
-            result
-        }
+        val existing = storage.findByEvent(event) ?: return create(event, request)
+
+        val result = storage.update(existing.id, resolveGeoLocation(request))
+        notifyUpdated(result)
+        return result
+    }
+
+    private fun resolveGeoLocation(request: LocationChangeRequest): LocationChangeRequest {
+        val geoLocation = geoLocationResolver.get(request) ?: return request
+
+        return LocationChangeRequest(
+            request.street,
+            request.streetNumber,
+            request.zip,
+            request.city,
+            request.country,
+            request.additionalInfo,
+            geoLocation.lat,
+            geoLocation.lon,
+            request.size
+        )
     }
 
     fun deleteByEvent(event: Event): Location? {

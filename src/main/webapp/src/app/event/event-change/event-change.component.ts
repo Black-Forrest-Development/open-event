@@ -5,9 +5,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngneat/hot-toast";
 import {Location} from "@angular/common";
-import {Event, EventChangeRequest, LocationChangeRequest, RegistrationChangeRequest} from "../model/event-api";
+import {Event, EventChangeRequest, EventInfo,} from "../model/event-api";
 import * as moment from "moment";
 import {Moment} from "moment";
+import {LocationChangeRequest} from "../../location/model/location-api";
+import {RegistrationChangeRequest} from "../../registration/model/registration-api";
 
 @Component({
   selector: 'app-event-change',
@@ -24,7 +26,7 @@ export class EventChangeComponent {
   locationForm: FormGroup
   registrationForm: FormGroup
 
-  event: Event | undefined
+  event: EventInfo | undefined
 
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
@@ -104,20 +106,66 @@ export class EventChangeComponent {
   }
 
   private handleDataCreate() {
-    this.translationService.get("EVENT.CHANGE.Create").subscribe(text => this.title = text);
+    this.translationService.get("event.change.Create").subscribe(text => this.title = text);
   }
 
-  private loadData(id: number, callback: (e: Event) => void) {
+  private loadData(id: number, callback: (e: EventInfo) => void) {
     this.reloading = true
-    this.service.getEvent(id).subscribe(data => callback(data));
+    this.service.getEventInfo(id).subscribe(data => callback(data));
   }
 
-  private handleDataCopy(e: Event) {
+  private handleDataCopy(e: EventInfo) {
 
+    this.reloading = true
   }
 
-  private handleDataEdit(e: Event) {
+  private handleDataEdit(e: EventInfo) {
+    this.event = e
+    this.initValues(e)
+    this.translationService.get("event.change.Update", {event: e.event.shortText}).subscribe(text => this.title = text);
+    this.reloading = false
+  }
 
+  private initValues(e: EventInfo) {
+    // init event form
+    let start = moment(e.event.start)
+    let startTime = start.format("HH:mm")
+    let finish = moment(e.event.finish)
+    let finishTime = start.format("HH:mm")
+
+    this.eventForm.setValue({
+      startTime: startTime,
+      startDate: start,
+      endTime: finishTime,
+      endDate: finish,
+
+      imageUrl: e.event.imageUrl ?? "",
+      iconUrl: e.event.iconUrl ?? "",
+      longText: e.event.longText ?? "",
+      shortText: e.event.shortText ?? "",
+      title: e.event.title ?? "",
+    })
+    // init location form
+    let location = e.location
+    if (location) {
+      this.locationForm.setValue({
+        city: location.city ?? "",
+        country: location.country ?? "",
+        street: location.street ?? "",
+        streetNumber: location.streetNumber ?? "",
+        zip: location.zip ?? "",
+        additionalInfo: location.additionalInfo ?? "",
+      })
+    }
+    // init registration form
+    let registration = e.registration
+    if (registration) {
+      this.registrationForm.setValue({
+        ticketsEnabled: registration.ticketsEnabled,
+        maxGuestAmount: registration.maxGuestAmount,
+        interestedAllowed: registration.interestedAllowed
+      })
+    }
   }
 
   cancel() {
@@ -140,16 +188,48 @@ export class EventChangeComponent {
   }
 
   private update() {
-
+    if (!this.event) return
+    let request = this.createRequest()
+    if (!request) return
+    this.service.updateEvent(this.event.event.id, request).subscribe({
+      next: event => {
+        this.translationService.get("event.message.update.succeed").subscribe(
+          msg => {
+            this.toastService.success(msg)
+            this.router.navigate(["/event/details/" + event.id]).then()
+          }
+        )
+      },
+      error: err => this.translationService.get("event.message.update.failed").subscribe(
+        msg => this.toastService.error(msg)
+      )
+    })
   }
 
   private create() {
-    let value = this.fg.value
+    let request = this.createRequest()
+    if (!request) return
+    this.service.createEvent(request).subscribe({
+      next: event => {
+        this.translationService.get("event.message.create.succeed").subscribe(
+          msg => {
+            this.toastService.success(msg)
+            this.router.navigate(["/event/details/" + event.id]).then()
+          }
+        )
+      },
+      error: err => this.translationService.get("event.message.create.failed").subscribe(
+        msg => this.toastService.error(msg)
+      )
+    })
+  }
 
+  private createRequest(): EventChangeRequest | undefined {
+    let value = this.fg.value
     let start = this.createDateTime(value.event.startTime, value.event.startDate);
     let endHidden = this.isEndHidden()
     let end = endHidden ? this.createDateTime(value.event.endTime, value.event.startDate) : this.createDateTime(value.event.endTime, value.event.endDate);
-    if (!start || !end) return
+    if (!start || !end) return undefined
 
     let location = new LocationChangeRequest(
       value.location.street,
@@ -168,7 +248,8 @@ export class EventChangeComponent {
       value.registration.ticketsEnabled
     )
 
-    let request = new EventChangeRequest(
+
+    return new EventChangeRequest(
       start.format("YYYY-MM-DD[T]HH:mm:ss"),
       end.format("YYYY-MM-DD[T]HH:mm:ss"),
       value.event.title,
@@ -179,19 +260,6 @@ export class EventChangeComponent {
       location,
       registration
     )
-    this.service.createEvent(request).subscribe({
-      next: event => {
-        this.translationService.get("EVENT.MESSAGE.INFO.CREATION_SUCCEED").subscribe(
-          msg => {
-            this.toastService.success(msg)
-            this.router.navigate(["/event/details/" + event.id]).then()
-          }
-        )
-      },
-      error: err => this.translationService.get("EVENT.MESSAGE.ERROR.CREATION_FAILED").subscribe(
-        msg => this.toastService.error(msg)
-      )
-    })
   }
 
   private createDateTime(timeStr: string, date: any): Moment | undefined {

@@ -8,8 +8,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class EventChangeFormEventComponent {
   @Input() form: FormGroup | undefined
-
-  @Input() hiddenFields: string[] = [];
+  @Input() hiddenFields: string[] = []
 
 
   get imageUrl() {

@@ -1,8 +1,6 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.Event
-import de.sambalmueslie.openevent.core.model.EventChangeRequest
-import de.sambalmueslie.openevent.core.model.PatchRequest
+import de.sambalmueslie.openevent.core.model.*
 import io.micronaut.security.authentication.Authentication
 
 interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
@@ -12,5 +10,7 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
     }
 
     fun setPublished(auth: Authentication, id: Long, value: PatchRequest<Boolean>): Event?
-
+    fun getInfo(auth: Authentication, id: Long): EventInfo?
+    fun getLocation(auth: Authentication, id: Long): Location?
+    fun getRegistration(auth: Authentication, id: Long): Registration?
 }

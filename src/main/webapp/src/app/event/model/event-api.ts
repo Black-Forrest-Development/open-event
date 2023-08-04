@@ -1,4 +1,6 @@
 import {Account} from "../../account/model/account-api";
+import {Location, LocationChangeRequest} from "../../location/model/location-api";
+import {Registration, RegistrationChangeRequest} from "../../registration/model/registration-api";
 
 export interface Event {
   id: number,
@@ -17,6 +19,12 @@ export interface Event {
   published: boolean,
 }
 
+export interface EventInfo {
+  event: Event,
+  location: Location | undefined
+  registration: Registration | undefined
+}
+
 
 export class EventChangeRequest {
   constructor(
@@ -33,29 +41,6 @@ export class EventChangeRequest {
   }
 }
 
-export class LocationChangeRequest {
-  constructor(
-    public street: string,
-    public streetNumber: string,
-    public zip: string,
-    public city: string,
-    public country: string,
-    public additionalInfo: string,
-    public lat: number,
-    public lon: number,
-    public size: number
-  ) {
-  }
-}
-
-export class RegistrationChangeRequest {
-  constructor(
-    public maxGuestAmount: number,
-    public interestedAllowed: boolean,
-    public ticketsEnabled: boolean
-  ) {
-  }
-}
 
 export class PatchRequest<T> {
   constructor(

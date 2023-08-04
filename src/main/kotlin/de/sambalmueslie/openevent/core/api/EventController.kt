@@ -6,9 +6,7 @@ import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.EventCrudService
-import de.sambalmueslie.openevent.core.model.Event
-import de.sambalmueslie.openevent.core.model.EventChangeRequest
-import de.sambalmueslie.openevent.core.model.PatchRequest
+import de.sambalmueslie.openevent.core.model.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
@@ -22,6 +20,11 @@ class EventController(private val service: EventCrudService) : EventAPI {
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Event? {
         return auth.checkPermission(PERMISSION_READ) { service.get(id) }
+    }
+
+    @Get("/{id}/info")
+    override fun getInfo(auth: Authentication, id: Long): EventInfo? {
+        return auth.checkPermission(PERMISSION_READ) { service.getInfo(id) }
     }
 
     @Get()
@@ -47,6 +50,17 @@ class EventController(private val service: EventCrudService) : EventAPI {
     @Put("/{id}/published")
     override fun setPublished(auth: Authentication, id: Long, @Body value: PatchRequest<Boolean>): Event? {
         return auth.checkPermission(PERMISSION_WRITE) { service.setPublished(id, value) }
+    }
+
+    @Get("/{id}/location")
+    override fun getLocation(auth: Authentication, id: Long): Location? {
+        return auth.checkPermission(PERMISSION_READ) { service.getLocation(id) }
+    }
+
+
+    @Get("/{id}/registration")
+    override fun getRegistration(auth: Authentication, id: Long): Registration? {
+        return auth.checkPermission(PERMISSION_READ) { service.getRegistration(id) }
     }
 
 }

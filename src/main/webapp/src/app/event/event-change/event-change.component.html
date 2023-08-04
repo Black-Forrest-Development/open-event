@@ -28,7 +28,7 @@
                                             [hiddenFields]="hiddenFields"></app-event-change-form-registration>
         <div class="d-flex flex-row justify-content-end gap-2">
           <button mat-flat-button matStepperPrevious color="primary">{{'action.back' | translate}}</button>
-          <button mat-flat-button type="submit" color="accent" [disabled]="!fg.valid || reloading" (click)="submit()">
+          <button mat-flat-button type="submit" color="accent" [disabled]="!fg.valid || !fg.touched || reloading" (click)="submit()">
             {{'action.submit' | translate}}
             <mat-icon *ngIf="reloading" >
               <mat-spinner diameter="18"></mat-spinner>

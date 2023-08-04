@@ -6,7 +6,7 @@
     <span class="title ps-2">{{event?.longText}}</span>
     <div class="flex-fill"></div>
 
-    <ng-container *ngIf="!menu.publishMenuItem.disabled">
+    <ng-container *ngIf="!reloading && !menu.publishMenuItem.disabled">
       <button mat-mini-fab class="action-fab" *ngIf="!event?.published" (click)="menu.publishMenuItem.handleClick()">
         <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
         <mat-icon *ngIf="menu.publishing">

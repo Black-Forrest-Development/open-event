@@ -1,0 +1,18 @@
+<ng-container *ngIf="event">
+  <div class="d-flex flex-row gap-5 align-items-center px-4 py-2 flex-fill" routerLink="./details/{{event.id}}">
+    <app-account [account]="event.owner"></app-account>
+
+    <div class="d-flex flex-row gap-2">
+      <div>{{event.start | date:'fullDate'}}</div>
+      <div>{{event.start | date:'shortTime'}} - {{event.finish | date:'shortTime'}}</div>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+      <div>{{event.longText}}</div>
+    </div>
+
+    <div class="flex-fill"></div>
+    <a mat-mini-fab color="primary" routerLink="./details/{{event.id}}"><mat-icon>read_more</mat-icon></a>
+  </div>
+  <mat-divider></mat-divider>
+</ng-container>

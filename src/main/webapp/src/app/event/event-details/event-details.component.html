@@ -3,11 +3,12 @@
     <button mat-mini-fab (click)="back()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <span class="title ps-2">{{event?.longText}}</span>
+    <span class="title ps-2">{{info?.event?.longText}}</span>
     <div class="flex-fill"></div>
 
     <ng-container *ngIf="!reloading && !menu.publishMenuItem.disabled">
-      <button mat-mini-fab class="action-fab" *ngIf="!event?.published" (click)="menu.publishMenuItem.handleClick()">
+      <button mat-mini-fab class="action-fab" *ngIf="!info?.event?.published"
+              (click)="menu.publishMenuItem.handleClick()">
         <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
         <mat-icon *ngIf="menu.publishing">
           <mat-spinner diameter="18"></mat-spinner>
@@ -39,13 +40,47 @@
 
 <mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
 
-<div class="d-flex flex-column gap-2 align-items-stretch">
-  <mat-card>
-    <nav mat-tab-nav-bar [backgroundColor]="background" [tabPanel]="tabPanel">
-      <a mat-tab-link *ngFor="let link of links"
-         (click)="activeLink = link"
-         [active]="activeLink == link"> {{link}} </a>
-    </nav>
-    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-  </mat-card>
+
+<div class="d-flex flex-column p-2" *ngIf="info">
+  <div class="d-flex flex-row row-wrap gap-2">
+    <div class="d-flex flex-column gap-2 col">
+      <!-- INFO-->
+      <mat-card>
+        <mat-card-header>
+          <div class="d-flex flex-row gap-2 align-items-center pb-2 flex-fill">
+            <app-account [account]="info.event.owner"></app-account>
+            <div class="flex-fill"></div>
+            <div>{{info.event.start | date:'fullDate'}}</div>
+            <div>{{info.event.start | date:'shortTime'}} - {{info.event.finish | date:'shortTime'}}</div>
+          </div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <img mat-card-image src="{{info.event.imageUrl.length}}" alt=""
+             *ngIf="info.event.imageUrl && info.event.imageUrl.length > 0">
+        <mat-card-content>
+          <div class="pt-2">{{info.event.longText}}</div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Location -->
+      <ng-container *ngIf="info.location">
+        <mat-card>
+          <mat-card-header class="pb-2">
+            <mat-card-title>{{info.location.street}} {{info.location.streetNumber}} {{info.location.additionalInfo}}</mat-card-title>
+            <mat-card-subtitle>{{info.location.zip}} {{info.location.city}} {{info.location.country}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <app-location-map mat-card-image [data]="info.location"></app-location-map>
+        </mat-card>
+
+
+      </ng-container>
+    </div>
+    <div class="col">
+      <mat-card>
+        <mat-card-content>
+          <span style="color:red">TODO add registration stuff here</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>

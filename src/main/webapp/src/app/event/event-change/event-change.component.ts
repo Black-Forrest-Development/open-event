@@ -131,7 +131,7 @@ export class EventChangeComponent {
     let start = moment(e.event.start)
     let startTime = start.format("HH:mm")
     let finish = moment(e.event.finish)
-    let finishTime = start.format("HH:mm")
+    let finishTime = finish.format("HH:mm")
 
     this.eventForm.setValue({
       startTime: startTime,

@@ -56,9 +56,6 @@ micronaut:
         access:
           - isAnonymous()
 
-jackson:
-  serialization-inclusion: always
-  bean-introspection-module: true
 
 datasources:
   default:

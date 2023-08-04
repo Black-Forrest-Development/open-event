@@ -2,10 +2,7 @@ package de.sambalmueslie.openevent.core.logic
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Event
-import de.sambalmueslie.openevent.core.model.EventChangeRequest
-import de.sambalmueslie.openevent.core.model.PatchRequest
+import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Singleton
@@ -57,6 +54,23 @@ class EventCrudService(
 
     fun setPublished(id: Long, value: PatchRequest<Boolean>): Event? {
         return storage.setPublished(id, value)
+    }
+
+    fun getLocation(id: Long): Location? {
+        val event = get(id) ?: return null
+        return locationCrudService.findByEvent(event)
+    }
+
+    fun getRegistration(id: Long): Registration? {
+        val event = get(id) ?: return null
+        return registrationCrudService.findByEvent(event)
+    }
+
+    fun getInfo(id: Long): EventInfo? {
+        val event = get(id) ?: return null
+        val location = locationCrudService.findByEvent(event)
+        val registration = registrationCrudService.findByEvent(event)
+        return EventInfo(event, location, registration)
     }
 
 

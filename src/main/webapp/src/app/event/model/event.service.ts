@@ -3,7 +3,7 @@ import {BaseService} from "../../base-service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../page";
-import {Event, EventChangeRequest, PatchRequest} from "./event-api";
+import {Event, EventChangeRequest, EventInfo, PatchRequest} from "./event-api";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,16 @@ export class EventService extends BaseService {
     return this.get('' + id)
   }
 
+  getEventInfo(id: number): Observable<EventInfo> {
+    return this.get('' + id + '/info')
+  }
+
   createEvent(request: EventChangeRequest): Observable<Event> {
     return this.post('', request)
+  }
+
+  updateEvent(id: number, request: EventChangeRequest): Observable<Event> {
+    return this.put('' + id, request)
   }
 
   publish(id: number): Observable<Event> {

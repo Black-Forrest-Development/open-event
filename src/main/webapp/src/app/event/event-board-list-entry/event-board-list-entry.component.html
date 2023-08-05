@@ -1,5 +1,5 @@
 <ng-container *ngIf="info">
-  <div class="d-flex flex-row gap-5 align-items-center align-content-stretch px-4 py-2 flex-fill list-entry"
+  <div class="d-flex flex-column gap-2 align-items-start align-content-stretch px-4 py-2 flex-fill list-entry"
        routerLink="./details/{{info.event.id}}">
     <app-account [account]="info.event.owner"></app-account>
     <div class="d-flex flex-row gap-2 align-items-center flex-fill">
@@ -31,11 +31,6 @@
         </ng-container>
       </mat-chip-listbox>
     </div>
-
-    <div class="flex-fill"></div>
-    <a mat-mini-fab color="primary" routerLink="./details/{{info.event.id}}">
-      <mat-icon>read_more</mat-icon>
-    </a>
   </div>
   <mat-divider></mat-divider>
 </ng-container>

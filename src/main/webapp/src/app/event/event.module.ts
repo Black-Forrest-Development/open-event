@@ -22,6 +22,7 @@ import {LocationModule} from "../location/location.module";
 import {EventBoardListComponent} from './event-board-list/event-board-list.component';
 import {EventBoardListEntryComponent} from './event-board-list-entry/event-board-list-entry.component';
 import {ChipSelectModule} from "../shared/chip-select-pane/chip-select.module";
+import {EventBoardTableComponent} from './event-board-table/event-board-table.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {ChipSelectModule} from "../shared/chip-select-pane/chip-select.module";
     EventMenuComponent,
     EventDeleteDialogComponent,
     EventBoardListComponent,
-    EventBoardListEntryComponent
+    EventBoardListEntryComponent,
+    EventBoardTableComponent
   ],
   imports: [
     CommonModule,

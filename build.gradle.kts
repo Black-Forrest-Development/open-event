@@ -52,7 +52,7 @@ dependencies {
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut:micronaut-jackson-databind")
-    implementation("io.micronaut.serde:micronaut-serde-jackson")
+//    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 

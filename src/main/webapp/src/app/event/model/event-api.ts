@@ -1,6 +1,7 @@
 import {Account} from "../../account/model/account-api";
 import {Location, LocationChangeRequest} from "../../location/model/location-api";
 import {Registration, RegistrationChangeRequest} from "../../registration/model/registration-api";
+import {Category} from "../../category/model/category-api";
 
 export interface Event {
   id: number,
@@ -22,7 +23,8 @@ export interface Event {
 export interface EventInfo {
   event: Event,
   location: Location | undefined
-  registration: Registration | undefined
+  registration: Registration | undefined,
+  categories: Category[]
 }
 
 
@@ -35,6 +37,7 @@ export class EventChangeRequest {
     public longText: string,
     public imageUrl: string,
     public iconUrl: string,
+    public categoryIds: number[],
     public location: LocationChangeRequest,
     public registration: RegistrationChangeRequest
   ) {

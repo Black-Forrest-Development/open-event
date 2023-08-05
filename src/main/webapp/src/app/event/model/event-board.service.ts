@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {EventService} from "./event.service";
-import {Page} from "../../page";
 import {HotToastService} from "@ngneat/hot-toast";
 import {EventInfo} from "./event-api";
+import {Page} from "../../shared/model/page";
 
 @Injectable({
   providedIn: 'root'

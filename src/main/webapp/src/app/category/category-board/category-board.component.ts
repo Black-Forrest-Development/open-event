@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Category} from "../model/category-api";
 import {CategoryService} from "../model/category.service";
-import {Page} from "../../page";
+import {Page} from "../../shared/model/page";
 
 @Component({
   selector: 'app-category-board',

@@ -58,8 +58,16 @@
         <img mat-card-image src="{{info.event.imageUrl.length}}" alt=""
              *ngIf="info.event.imageUrl && info.event.imageUrl.length > 0">
         <mat-card-content>
-          <div class="pt-2">{{info.event.longText}}</div>
+          <div class="py-2">{{info.event.longText}}</div>
         </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <mat-chip-listbox>
+            <ng-container *ngFor="let category of info.categories">
+              <mat-chip>{{category.name}}</mat-chip>
+            </ng-container>
+          </mat-chip-listbox>
+        </mat-card-actions>
       </mat-card>
       <!-- Location -->
       <ng-container *ngIf="info.location">

@@ -34,8 +34,38 @@ class EventCategoryRelationService(
     fun get(event: Event, pageable: Pageable): Page<Category> {
         val relations = repository.findByEventId(event.id, pageable)
         val categoryIds = relations.content.map { it.categoryId }.toSet()
-        val result = service.findByIds(categoryIds)
+        val result = service.getByIds(categoryIds)
         return Page.of(result, relations.pageable, relations.totalSize)
     }
+
+    fun get(event: Event): List<Category> {
+        val relations = repository.findByEventId(event.id)
+        val categoryIds = relations.map { it.categoryId }.toSet()
+        return service.getByIds(categoryIds)
+    }
+
+    fun getByEventIds(eventIds: Set<Long>): Map<Long, List<Category>> {
+        val relations = repository.findByEventIdIn(eventIds)
+        val categoryIds = relations.map { it.categoryId }.toSet()
+        val categories = service.getByIds(categoryIds).associateBy { it.id }
+        return relations.mapNotNull { r -> categories[r.categoryId]?.let { r.eventId to it } }
+            .groupBy { it.first }
+            .mapValues { it.value.map { it.second } }
+    }
+
+
+    fun set(event: Event, categories: List<Category>) {
+        val relations = repository.findByEventId(event.id)
+        val addedCategoryIds = relations.map { it.categoryId }.toSet()
+
+        val toAdd = categories.filter { !addedCategoryIds.contains(it.id) }
+            .map { EventCategoryRelation(it.id, event.id) }
+        if (toAdd.isNotEmpty()) repository.saveAll(toAdd)
+
+        val newCategoryIds = categories.map { it.id }
+        val toRemove = relations.filter { !newCategoryIds.contains(it.categoryId) }
+        toRemove.forEach { repository.deleteByCategoryIdAndEventId(it.categoryId, it.eventId) }
+    }
+
 
 }

@@ -69,8 +69,16 @@ class EventStorageService(
         announcementRelationService.revoke(event, announcement)
     }
 
-    override fun getCategories(event: Event, pageable: Pageable): Page<Category> {
-        return categoryRelationService.get(event, pageable)
+    override fun set(event: Event, categories: List<Category>) {
+        categoryRelationService.set(event, categories)
+    }
+
+    override fun getCategories(event: Event): List<Category> {
+        return categoryRelationService.get(event)
+    }
+
+    override fun getCategoriesByEventIds(eventIds: Set<Long>): Map<Long, List<Category>> {
+        return categoryRelationService.getByEventIds(eventIds)
     }
 
     override fun getAnnouncements(event: Event, pageable: Pageable): Page<Announcement> {
@@ -79,6 +87,10 @@ class EventStorageService(
 
     override fun setPublished(id: Long, value: PatchRequest<Boolean>): Event? {
         return patchData(id) { it.setPublished(value.value, timeProvider.now()) }
+    }
+
+    override fun getAllForAccount(account: Account, pageable: Pageable): Page<Event> {
+        return repository.findByOwnerIdOrPublishedTrue(account.id, pageable).let { converter.convert(it) }
     }
 
 }

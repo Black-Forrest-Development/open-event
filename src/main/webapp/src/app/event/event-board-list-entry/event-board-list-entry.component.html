@@ -1,18 +1,33 @@
-<ng-container *ngIf="event">
-  <div class="d-flex flex-row gap-5 align-items-center px-4 py-2 flex-fill" routerLink="./details/{{event.id}}">
-    <app-account [account]="event.owner"></app-account>
-
-    <div class="d-flex flex-row gap-2">
-      <div>{{event.start | date:'fullDate'}}</div>
-      <div>{{event.start | date:'shortTime'}} - {{event.finish | date:'shortTime'}}</div>
+<ng-container *ngIf="info">
+  <div class="d-flex flex-row gap-5 align-items-center align-content-stretch px-4 py-2 flex-fill list-entry"
+       routerLink="./details/{{info.event.id}}">
+    <app-account [account]="info.event.owner"></app-account>
+    <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <mat-icon>schedule</mat-icon>
+      <div class="d-flex flex-column gap-1">
+        <div>{{info.event.start | date:'fullDate'}}</div>
+        <div>{{info.event.start | date:'shortTime'}} - {{info.event.finish | date:'shortTime'}}</div>
+      </div>
     </div>
 
-    <div class="d-flex flex-column gap-2">
-      <div>{{event.longText}}</div>
+    <div class="d-flex flex-row gap-2 align-items-center flex-fill" *ngIf="info.location">
+      <mat-icon>location_pin</mat-icon>
+      <div>{{info.location.zip}} {{info.location.city}}</div>
+    </div>
+
+    <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <mat-icon>description</mat-icon>
+      <div>{{info.event.longText}}</div>
+    </div>
+
+    <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <span style="color:red">TODO Status</span>
     </div>
 
     <div class="flex-fill"></div>
-    <a mat-mini-fab color="primary" routerLink="./details/{{event.id}}"><mat-icon>read_more</mat-icon></a>
+    <a mat-mini-fab color="primary" routerLink="./details/{{info.event.id}}">
+      <mat-icon>read_more</mat-icon>
+    </a>
   </div>
   <mat-divider></mat-divider>
 </ng-container>

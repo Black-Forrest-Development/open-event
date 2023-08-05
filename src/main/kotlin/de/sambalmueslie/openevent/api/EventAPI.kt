@@ -1,6 +1,8 @@
 package de.sambalmueslie.openevent.api
 
 import de.sambalmueslie.openevent.core.model.*
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
 
 interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
@@ -11,6 +13,7 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
 
     fun setPublished(auth: Authentication, id: Long, value: PatchRequest<Boolean>): Event?
     fun getInfo(auth: Authentication, id: Long): EventInfo?
+    fun getInfos(auth: Authentication, pageable: Pageable): Page<EventInfo>
     fun getLocation(auth: Authentication, id: Long): Location?
     fun getRegistration(auth: Authentication, id: Long): Registration?
 }

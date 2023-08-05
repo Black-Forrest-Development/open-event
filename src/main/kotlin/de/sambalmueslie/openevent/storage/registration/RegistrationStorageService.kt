@@ -53,6 +53,8 @@ class RegistrationStorageService(
     override fun findByEvent(event: Event): Registration? {
         return repository.findByEventId(event.id)?.convert()
     }
-
+    override fun findByEventIds(eventIds: Set<Long>): List<Registration> {
+        return repository.findByEventIdIn(eventIds).map { it.convert() }
+    }
 
 }

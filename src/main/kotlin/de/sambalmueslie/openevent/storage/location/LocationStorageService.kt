@@ -52,4 +52,8 @@ class LocationStorageService(
         return repository.findByEventId(event.id)?.convert()
     }
 
+    override fun findByEventIds(eventIds: Set<Long>): List<Location> {
+        return repository.findByEventIdIn(eventIds).map { it.convert() }
+    }
+
 }

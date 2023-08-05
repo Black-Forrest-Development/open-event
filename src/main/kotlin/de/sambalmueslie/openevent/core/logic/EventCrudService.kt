@@ -4,6 +4,8 @@ package de.sambalmueslie.openevent.core.logic
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.error.InvalidRequestException
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Singleton
 import org.slf4j.Logger
@@ -71,6 +73,15 @@ class EventCrudService(
         val location = locationCrudService.findByEvent(event)
         val registration = registrationCrudService.findByEvent(event)
         return EventInfo(event, location, registration)
+    }
+
+    fun getInfos(pageable: Pageable): Page<EventInfo> {
+        val events = getAll(pageable)
+        val eventIds = events.content.map { it.id }.toSet()
+        val locations = locationCrudService.findByEventIds(eventIds).associateBy { it.id }
+        val registrations = registrationCrudService.findByEventIds(eventIds).associateBy { it.id }
+
+        return events.map { EventInfo(it, locations[it.id], registrations[it.id]) }
     }
 
 

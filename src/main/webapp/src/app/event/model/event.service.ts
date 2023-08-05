@@ -26,6 +26,10 @@ export class EventService extends BaseService {
     return this.get('' + id + '/info')
   }
 
+  getEventInfos(page: number, size: number): Observable<Page<EventInfo>> {
+    return this.getPaged('info', page, size)
+  }
+
   createEvent(request: EventChangeRequest): Observable<Event> {
     return this.post('', request)
   }

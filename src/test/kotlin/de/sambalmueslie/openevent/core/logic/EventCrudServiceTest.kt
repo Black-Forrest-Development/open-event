@@ -34,7 +34,7 @@ class EventCrudServiceTest : TimeBasedTest() {
     fun eventCrud() {
         setupListener()
 
-        val owner = accountService.create(AccountChangeRequest("name", "first-name", "last-name", "email", ""))
+        val owner = accountService.create(AccountChangeRequest("name", "first-name", "last-name", "email", "", null))
 
         val request = buildCreateRequest()
         var event = service.create(request, owner)
@@ -77,7 +77,7 @@ class EventCrudServiceTest : TimeBasedTest() {
             20.0,
             30
         )
-        val registrationUpdate = RegistrationChangeRequest(100, false, false, true)
+        val registrationUpdate = RegistrationChangeRequest(100,  false, true)
         val update = EventChangeRequest(
             request.start.plusDays(1), request.finish.plusDays(1),
             "title-update",
@@ -92,7 +92,7 @@ class EventCrudServiceTest : TimeBasedTest() {
 
     private fun buildCreateRequest(): EventChangeRequest {
         val locationRequest = LocationChangeRequest("street", "nr", "zip", "city", "country", "info", 1.0, 2.0, 3)
-        val registrationRequest = RegistrationChangeRequest(10, true, true, false)
+        val registrationRequest = RegistrationChangeRequest(10,  true, false)
         val request = EventChangeRequest(
             LocalDateTime.of(2023, 10, 1, 20, 15),
             LocalDateTime.of(2023, 10, 1, 22, 15),

@@ -5,12 +5,16 @@ import {MaterialModule} from "../material/material.module";
 import {AppRoutingModule} from "../app-routing.module";
 import {LoadingScreenComponent} from './loading-screen/loading-screen.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {ConfirmLogoutDialogComponent} from './confirm-logout-dialog/confirm-logout-dialog.component';
+import {MainNavEntryComponent} from './main-nav-entry/main-nav-entry.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    ConfirmLogoutDialogComponent,
+    MainNavEntryComponent
   ],
   exports: [
     DashboardComponent

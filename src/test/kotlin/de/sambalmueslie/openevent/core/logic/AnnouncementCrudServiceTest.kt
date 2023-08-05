@@ -29,7 +29,7 @@ class AnnouncementCrudServiceTest : TimeBasedTest() {
         every { listener.handleUpdated(any()) } just Runs
         every { listener.handleDeleted(any()) } just Runs
 
-        val author = accountService.create(AccountChangeRequest("name", "first-name", "last-name", "email", ""))
+        val author = accountService.create(AccountChangeRequest("name", "first-name", "last-name", "email", "", null))
 
         val request = AnnouncementChangeRequest("subject", "content")
         var announcement = service.create(author, request)

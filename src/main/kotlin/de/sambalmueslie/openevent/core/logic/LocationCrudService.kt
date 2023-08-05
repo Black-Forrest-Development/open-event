@@ -61,5 +61,9 @@ class LocationCrudService(
         return existing
     }
 
+    fun findByEventIds(eventIds: Set<Long>): List<Location> {
+        return storage.findByEventIds(eventIds)
+    }
+
 
 }

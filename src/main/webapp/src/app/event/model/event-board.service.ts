@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {EventService} from "./event.service";
 import {Page} from "../../page";
 import {HotToastService} from "@ngneat/hot-toast";
-import {Event} from "./event-api";
+import {EventInfo} from "./event-api";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class EventBoardService {
   pageSize: number = 20
   pageIndex: number = 0
   totalSize: number = 0
-  events: Event[] = []
+  infos: EventInfo[] = []
 
   constructor(private service: EventService, private toast: HotToastService) {
   }
@@ -21,21 +21,21 @@ export class EventBoardService {
   reload() {
     if (this.reloading) return
     this.reloading = true
-    this.service.getAllEvents(this.pageIndex, this.pageSize).subscribe({
+    this.service.getEventInfos(this.pageIndex, this.pageSize).subscribe({
       next: value => this.handleData(value),
       error: e => this.handleError(e)
     })
   }
 
-  private handleData(value: Page<Event>) {
-    this.events = value.content
+  private handleData(value: Page<EventInfo>) {
+    this.infos = value.content
     this.pageSize = value.pageable.size
     this.pageIndex = value.pageable.number
     this.totalSize = value.totalSize
     this.reloading = false
   }
 
-  private handleError(err: any){
+  private handleError(err: any) {
     // this.toast.error("Failed to load data")
     this.reloading = false
   }

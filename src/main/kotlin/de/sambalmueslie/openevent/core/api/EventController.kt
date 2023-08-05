@@ -32,6 +32,11 @@ class EventController(private val service: EventCrudService) : EventAPI {
         return auth.checkPermission(PERMISSION_READ) { service.getAll(pageable) }
     }
 
+    @Get("/info")
+    override fun getInfos(auth: Authentication, pageable: Pageable): Page<EventInfo> {
+        return auth.checkPermission(PERMISSION_READ) { service.getInfos(pageable) }
+    }
+
     @Post()
     override fun create(auth: Authentication, @Body request: EventChangeRequest): Event {
         return auth.checkPermission(PERMISSION_WRITE) { service.create(request, auth) }

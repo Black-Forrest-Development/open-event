@@ -3,9 +3,9 @@
 
 <div class="d-flex flex-column gap-2 p-2 ">
   <mat-card>
-    <div class="d-flex flex-column gap-2">
-      <ng-container *ngFor="let event of service.events">
-        <app-event-board-list-entry [event]="event"></app-event-board-list-entry>
+    <div class="d-flex flex-column">
+      <ng-container *ngFor="let info of service.infos">
+        <app-event-board-list-entry [info]="info"></app-event-board-list-entry>
       </ng-container>
     </div>
     <mat-paginator [length]="service.totalSize"

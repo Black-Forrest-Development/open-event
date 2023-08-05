@@ -49,4 +49,8 @@ class RegistrationCrudService(
         return existing
     }
 
+    fun findByEventIds(eventIds: Set<Long>): List<Registration> {
+        return storage.findByEventIds(eventIds)
+    }
+
 }

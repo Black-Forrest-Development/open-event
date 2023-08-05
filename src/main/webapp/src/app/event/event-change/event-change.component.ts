@@ -27,7 +27,6 @@ export class EventChangeComponent {
   registrationForm: FormGroup
 
   event: EventInfo | undefined
-
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
   constructor(
@@ -64,6 +63,7 @@ export class EventChangeComponent {
       maxGuestAmount: [4, Validators.required],
       interestedAllowed: [false, Validators.required],
       ticketsEnabled: [false, Validators.required],
+      categories: [[]]
     })
 
     this.fg = this.fb.group({
@@ -72,7 +72,6 @@ export class EventChangeComponent {
       registration: this.registrationForm
     })
   }
-
 
   ngOnInit() {
     this.route.paramMap.subscribe(p => this.handleParams(p))
@@ -163,7 +162,8 @@ export class EventChangeComponent {
       this.registrationForm.setValue({
         ticketsEnabled: registration.ticketsEnabled,
         maxGuestAmount: registration.maxGuestAmount,
-        interestedAllowed: registration.interestedAllowed
+        interestedAllowed: registration.interestedAllowed,
+        categories: e.categories.map(c => c.id)
       })
     }
   }
@@ -257,6 +257,7 @@ export class EventChangeComponent {
       value.event.longText,
       value.event.imageUrl,
       value.event.iconUrl,
+      value.registration.categories,
       location,
       registration
     )
@@ -276,6 +277,5 @@ export class EventChangeComponent {
   private isEndHidden() {
     return this.hiddenFields.find(f => f === 'endDate') != null
   }
-
 
 }

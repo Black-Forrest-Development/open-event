@@ -65,7 +65,7 @@ const MATERIAL_IMPORTS = [
   MatProgressBarModule,
   MatBadgeModule,
   MatTooltipModule,
-  MatRadioModule
+  MatRadioModule,
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
     companion object {
         const val PERMISSION_READ = "openevent.event.read"
         const val PERMISSION_WRITE = "openevent.event.write"
+        const val PERMISSION_ADMIN = "openevent.event.admin"
     }
 
     fun setPublished(auth: Authentication, id: Long, value: PatchRequest<Boolean>): Event?
@@ -16,4 +17,5 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
     fun getInfos(auth: Authentication, pageable: Pageable): Page<EventInfo>
     fun getLocation(auth: Authentication, id: Long): Location?
     fun getRegistration(auth: Authentication, id: Long): Registration?
+    fun getCategories(auth: Authentication, id: Long): List<Category>
 }

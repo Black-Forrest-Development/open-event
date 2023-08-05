@@ -16,7 +16,8 @@ class EventCrudService(
     private val accountCrudService: AccountCrudService,
     private val storage: EventStorage,
     private val locationCrudService: LocationCrudService,
-    private val registrationCrudService: RegistrationCrudService
+    private val registrationCrudService: RegistrationCrudService,
+    private val categoryCrudService: CategoryCrudService
 ) : BaseCrudService<Long, Event, EventChangeRequest>(storage, logger) {
 
     companion object {
@@ -31,6 +32,8 @@ class EventCrudService(
     fun create(request: EventChangeRequest, owner: Account): Event {
         val result = storage.create(request, owner)
         notifyCreated(result)
+        val categories = categoryCrudService.getByIds(request.categoryIds)
+        if (categories.isNotEmpty()) storage.set(result, categories)
         request.location?.let { locationCrudService.create(result, it) }
         registrationCrudService.create(result, request.registration)
         return result
@@ -38,6 +41,8 @@ class EventCrudService(
 
     override fun update(id: Long, request: EventChangeRequest): Event {
         val result = super.update(id, request)
+        val categories = categoryCrudService.getByIds(request.categoryIds)
+        if (categories.isNotEmpty()) storage.set(result, categories)
         if (request.location == null) {
             locationCrudService.deleteByEvent(result)
         } else {
@@ -68,20 +73,37 @@ class EventCrudService(
         return registrationCrudService.findByEvent(event)
     }
 
+    fun getCategories(id: Long): List<Category> {
+        val event = get(id) ?: return emptyList()
+        return storage.getCategories(event)
+    }
+
     fun getInfo(id: Long): EventInfo? {
         val event = get(id) ?: return null
         val location = locationCrudService.findByEvent(event)
         val registration = registrationCrudService.findByEvent(event)
-        return EventInfo(event, location, registration)
+        val categories = storage.getCategories(event)
+        return EventInfo(event, location, registration, categories)
     }
 
     fun getInfos(pageable: Pageable): Page<EventInfo> {
-        val events = getAll(pageable)
+        return convertInfo(getAll(pageable))
+    }
+
+    fun getAllForAccount(account: Account, pageable: Pageable): Page<Event> {
+        return storage.getAllForAccount(account, pageable)
+    }
+
+    fun getInfosForAccount(account: Account, pageable: Pageable): Page<EventInfo> {
+        return convertInfo(getAllForAccount(account, pageable))
+    }
+
+    private fun convertInfo(events: Page<Event>): Page<EventInfo> {
         val eventIds = events.content.map { it.id }.toSet()
         val locations = locationCrudService.findByEventIds(eventIds).associateBy { it.id }
         val registrations = registrationCrudService.findByEventIds(eventIds).associateBy { it.id }
-
-        return events.map { EventInfo(it, locations[it.id], registrations[it.id]) }
+        val categories = storage.getCategoriesByEventIds(eventIds)
+        return events.map { EventInfo(it, locations[it.id], registrations[it.id], categories[it.id] ?: emptyList()) }
     }
 
 

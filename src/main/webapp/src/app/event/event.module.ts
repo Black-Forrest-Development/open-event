@@ -21,22 +21,23 @@ import {AccountModule} from "../account/account.module";
 import {LocationModule} from "../location/location.module";
 import {EventBoardListComponent} from './event-board-list/event-board-list.component';
 import {EventBoardListEntryComponent} from './event-board-list-entry/event-board-list-entry.component';
+import {ChipSelectModule} from "../shared/chip-select-pane/chip-select.module";
 
 
 @NgModule({
-    declarations: [
-        EventBoardComponent,
-        EventBoardHeaderComponent,
-        EventChangeComponent,
-        EventDetailsComponent,
-        EventChangeFormEventComponent,
-        EventChangeFormLocationComponent,
-        EventChangeFormRegistrationComponent,
-        EventMenuComponent,
-        EventDeleteDialogComponent,
-        EventBoardListComponent,
-        EventBoardListEntryComponent
-    ],
+  declarations: [
+    EventBoardComponent,
+    EventBoardHeaderComponent,
+    EventChangeComponent,
+    EventDetailsComponent,
+    EventChangeFormEventComponent,
+    EventChangeFormLocationComponent,
+    EventChangeFormRegistrationComponent,
+    EventMenuComponent,
+    EventDeleteDialogComponent,
+    EventBoardListComponent,
+    EventBoardListEntryComponent
+  ],
   imports: [
     CommonModule,
     EventRoutingModule,
@@ -45,7 +46,8 @@ import {EventBoardListEntryComponent} from './event-board-list-entry/event-board
     ReactiveFormsModule,
     HotToastModule,
     AccountModule,
-    LocationModule
+    LocationModule,
+    ChipSelectModule
   ]
 })
 export class EventModule {

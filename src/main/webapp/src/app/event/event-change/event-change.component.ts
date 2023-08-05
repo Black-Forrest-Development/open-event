@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngneat/hot-toast";
 import {Location} from "@angular/common";
-import {Event, EventChangeRequest, EventInfo,} from "../model/event-api";
+import {EventChangeRequest, EventInfo,} from "../model/event-api";
 import * as moment from "moment";
 import {Moment} from "moment";
 import {LocationChangeRequest} from "../../location/model/location-api";
@@ -275,19 +275,6 @@ export class EventChangeComponent {
 
   private isEndHidden() {
     return this.hiddenFields.find(f => f === 'endDate') != null
-  }
-
-  private handleCreateResult(result: Event) {
-    if (result == null) {
-      this.translationService.get("EVENT.MESSAGE.ERROR.CREATION_FAILED").subscribe(
-        msg => this.toastService.error(msg)
-      )
-    } else {
-      this.translationService.get("EVENT.MESSAGE.INFO.CREATION_SUCCEED").subscribe(
-        msg => this.toastService.success(msg).afterClosed
-          .subscribe(() => this.router.navigate(["/event/details/" + result.id]))
-      )
-    }
   }
 
 

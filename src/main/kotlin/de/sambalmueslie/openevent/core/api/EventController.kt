@@ -7,8 +7,8 @@ import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getRealmRoles
-import de.sambalmueslie.openevent.core.logic.AccountCrudService
-import de.sambalmueslie.openevent.core.logic.EventCrudService
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.model.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

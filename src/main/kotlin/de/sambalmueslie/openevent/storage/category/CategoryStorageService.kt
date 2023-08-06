@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.storage.category
 
 
-import de.sambalmueslie.openevent.core.logic.CategoryStorage
 import de.sambalmueslie.openevent.core.model.Category
 import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
+import de.sambalmueslie.openevent.core.storage.CategoryStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

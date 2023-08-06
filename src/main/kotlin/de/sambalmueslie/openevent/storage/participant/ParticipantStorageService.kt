@@ -1,11 +1,11 @@
 package de.sambalmueslie.openevent.storage.participant
 
 
-import de.sambalmueslie.openevent.core.logic.ParticipantStorage
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Participant
 import de.sambalmueslie.openevent.core.model.ParticipantChangeRequest
 import de.sambalmueslie.openevent.core.model.Registration
+import de.sambalmueslie.openevent.core.storage.ParticipantStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

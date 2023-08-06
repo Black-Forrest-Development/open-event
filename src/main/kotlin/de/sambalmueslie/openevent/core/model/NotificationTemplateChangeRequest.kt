@@ -4,8 +4,8 @@ import de.sambalmueslie.openevent.core.BusinessObjectChangeRequest
 import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
-data class NotificationSchemeChangeRequest(
-    val name: String,
-    val enabled: Boolean,
-    val plain: Boolean,
+data class NotificationTemplateChangeRequest(
+    val subject: String,
+    val lang: String,
+    val content: String
 ) : BusinessObjectChangeRequest

@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.storage.message
 
 
-import de.sambalmueslie.openevent.core.logic.MessageStorage
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Message
 import de.sambalmueslie.openevent.core.model.MessageChangeRequest
+import de.sambalmueslie.openevent.core.storage.MessageStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

@@ -4,9 +4,9 @@ import de.sambalmueslie.openevent.core.BusinessObject
 import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
-data class NotificationScheme(
+data class NotificationTemplate(
     override val id: Long,
-    val name: String,
-    val enabled: Boolean,
-    val plain: Boolean,
+    val subject: String,
+    val lang: String,
+    val content: String
 ) : BusinessObject<Long>

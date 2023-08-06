@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.account
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.core.auth.*
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
 import de.sambalmueslie.openevent.core.model.AccountValidationResult
+import de.sambalmueslie.openevent.core.storage.AccountStorage
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication

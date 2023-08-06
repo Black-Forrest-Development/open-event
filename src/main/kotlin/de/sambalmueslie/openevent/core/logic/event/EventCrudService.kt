@@ -1,8 +1,13 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.event
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
+import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
+import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.storage.EventStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

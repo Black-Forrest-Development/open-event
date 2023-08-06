@@ -1,8 +1,10 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.registration
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
+import de.sambalmueslie.openevent.core.logic.participant.ParticipantCrudService
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.storage.RegistrationStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

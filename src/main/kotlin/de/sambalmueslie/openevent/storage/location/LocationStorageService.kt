@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.storage.location
 
 
-import de.sambalmueslie.openevent.core.logic.LocationStorage
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.Location
 import de.sambalmueslie.openevent.core.model.LocationChangeRequest
+import de.sambalmueslie.openevent.core.storage.LocationStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

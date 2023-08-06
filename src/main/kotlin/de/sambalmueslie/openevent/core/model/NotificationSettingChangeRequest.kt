@@ -1,9 +1,11 @@
 package de.sambalmueslie.openevent.core.model
 
 import de.sambalmueslie.openevent.core.BusinessObjectChangeRequest
+import io.micronaut.serde.annotation.Serdeable
 
-data class NotificationSchemeEntryChangeRequest(
-    val key: String,
+@Serdeable
+data class NotificationSettingChangeRequest(
     val name: String,
-    val description: String
+    val enabled: Boolean
 ) : BusinessObjectChangeRequest
+

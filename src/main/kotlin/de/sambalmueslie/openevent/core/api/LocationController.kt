@@ -5,7 +5,7 @@ import de.sambalmueslie.openevent.api.LocationAPI
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
-import de.sambalmueslie.openevent.core.logic.LocationCrudService
+import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
 import de.sambalmueslie.openevent.core.model.Location
 import de.sambalmueslie.openevent.core.model.LocationChangeRequest
 import io.micronaut.data.model.Page

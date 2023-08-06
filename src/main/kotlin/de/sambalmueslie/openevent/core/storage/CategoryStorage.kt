@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.storage
 
 import de.sambalmueslie.openevent.core.Storage
 import de.sambalmueslie.openevent.core.model.Category

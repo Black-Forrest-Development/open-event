@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.core.BusinessObjectChangeListener
+import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.model.Category
 import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
 import io.micronaut.data.model.Pageable

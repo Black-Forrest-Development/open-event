@@ -8,4 +8,6 @@ import io.micronaut.serde.annotation.Serdeable
 class ParticipantChangeRequest(
     val size: Long,
     val status: ParticipantStatus,
+    val rank: Int,
+    val waitingList: Boolean,
 ) : BusinessObjectChangeRequest

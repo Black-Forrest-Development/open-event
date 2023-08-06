@@ -11,10 +11,10 @@ data class ParticipantData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long = 0,
 
     @Column var registrationId: Long,
-    @Column var authorId: Long,
+    @Column var accountId: Long,
 
     @Column var size: Long,
-    @Column var status: ParticipantStatus,
+    @Column @Enumerated(EnumType.STRING) var status: ParticipantStatus,
     @Column var rank: Int,
     @Column var waitingList: Boolean,
 
@@ -28,7 +28,16 @@ data class ParticipantData(
             request: ParticipantChangeRequest,
             timestamp: LocalDateTime
         ): ParticipantData {
-            return ParticipantData(0, registration.id, account.id, request.size, request.status, -1, false, timestamp)
+            return ParticipantData(
+                0,
+                registration.id,
+                account.id,
+                request.size,
+                request.status,
+                request.rank,
+                request.waitingList,
+                timestamp
+            )
         }
     }
 
@@ -39,6 +48,8 @@ data class ParticipantData(
     fun update(request: ParticipantChangeRequest, timestamp: LocalDateTime): ParticipantData {
         size = request.size
         status = request.status
+        rank = request.rank
+        waitingList = request.waitingList
         updated = timestamp
         return this
     }

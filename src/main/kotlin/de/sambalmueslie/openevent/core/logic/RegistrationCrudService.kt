@@ -2,16 +2,15 @@ package de.sambalmueslie.openevent.core.logic
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Event
-import de.sambalmueslie.openevent.core.model.Registration
-import de.sambalmueslie.openevent.core.model.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.model.*
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Singleton
 class RegistrationCrudService(
-    private val storage: RegistrationStorage
+    private val storage: RegistrationStorage,
+    private val participantCrudService: ParticipantCrudService
 ) : BaseCrudService<Long, Registration, RegistrationChangeRequest>(storage, logger) {
 
     companion object {
@@ -51,6 +50,16 @@ class RegistrationCrudService(
 
     fun findByEventIds(eventIds: Set<Long>): List<Registration> {
         return storage.findByEventIds(eventIds)
+    }
+
+    fun getParticipants(id: Long): List<Participant> {
+        val registration = get(id) ?: return emptyList()
+        return participantCrudService.get(registration)
+    }
+
+    fun addParticipant(id: Long, account: Account, request: ParticipateRequest): ParticipateResponse? {
+        val registration = get(id) ?: return null
+        return participantCrudService.add(registration, account, request)
     }
 
 }

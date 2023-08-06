@@ -21,17 +21,17 @@ class EventConverter(
     override fun convert(objs: List<EventData>): List<Event> {
         val ownerIds = objs.map { it.ownerId }.toSet()
         val author = accountService.getByIds(ownerIds).associateBy { it.id }
-        return objs.map { convert(it, author[it.id]) }
+        return objs.map { convert(it, author[it.ownerId]) }
     }
 
     override fun convert(page: Page<EventData>): Page<Event> {
         val ownerIds = page.content.map { it.ownerId }.toSet()
         val author = accountService.getByIds(ownerIds).associateBy { it.id }
-        return page.map { convert(it, author[it.id]) }
+        return page.map { convert(it, author[it.ownerId]) }
     }
 
     private fun convert(data: EventData, author: Account?): Event {
-        if (author == null) throw InconsistentDataException("Cannot find author for announcement")
+        if (author == null) throw InconsistentDataException("Cannot find author for event")
         return data.convert(author)
     }
 }

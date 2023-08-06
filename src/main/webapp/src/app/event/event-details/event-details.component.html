@@ -1,45 +1,6 @@
-<mat-toolbar color="primary">
-  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
-    <button mat-mini-fab (click)="back()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span class="title ps-2">{{info?.event?.longText}}</span>
-    <div class="flex-fill"></div>
-
-    <ng-container *ngIf="!reloading && !menu.publishMenuItem.disabled">
-      <button mat-mini-fab class="action-fab" *ngIf="!info?.event?.published"
-              (click)="menu.publishMenuItem.handleClick()">
-        <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
-        <mat-icon *ngIf="menu.publishing">
-          <mat-spinner diameter="18"></mat-spinner>
-        </mat-icon>
-      </button>
-    </ng-container>
-
-    <ng-container *ngFor="let item of menu.menuItems">
-      <button mat-mini-fab class="action-fab" (click)="item.handleClick()">
-        <mat-icon>{{item.icon}}</mat-icon>
-      </button>
-    </ng-container>
-
-    <button mat-icon-button [matMenuTriggerFor]="contextMenu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
-
-<mat-menu #contextMenu="matMenu">
-  <ng-container *ngFor="let item of menu.menuItems">
-    <button mat-menu-item [disabled]="item.disabled" (click)="item.handleClick()">
-      <mat-icon>{{item.icon}}</mat-icon>
-      {{item.text | translate}}
-    </button>
-  </ng-container>
-</mat-menu>
-
+<app-event-details-header [data]="info" [reloading]="reloading"></app-event-details-header>
 
 <mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
-
 
 <div class="d-flex flex-column p-2" *ngIf="info">
   <div class="d-flex flex-row row-wrap gap-2">
@@ -58,16 +19,19 @@
         <img mat-card-image src="{{info.event.imageUrl.length}}" alt=""
              *ngIf="info.event.imageUrl && info.event.imageUrl.length > 0">
         <mat-card-content>
-          <div class="py-2">{{info.event.longText}}</div>
+          <div class="pt-3">{{info.event.longText}}</div>
         </mat-card-content>
-        <mat-divider></mat-divider>
-        <mat-card-actions>
-          <mat-chip-listbox>
-            <ng-container *ngFor="let category of info.categories">
-              <mat-chip>{{category.name}}</mat-chip>
-            </ng-container>
-          </mat-chip-listbox>
-        </mat-card-actions>
+        <ng-container *ngIf="info.categories.length > 0">
+          <div class="pt-3"></div>
+          <mat-divider></mat-divider>
+          <mat-card-actions>
+            <mat-chip-listbox>
+              <ng-container *ngFor="let category of info.categories">
+                <mat-chip>{{category.name}}</mat-chip>
+              </ng-container>
+            </mat-chip-listbox>
+          </mat-card-actions>
+        </ng-container>
       </mat-card>
       <!-- Location -->
       <ng-container *ngIf="info.location">
@@ -83,12 +47,8 @@
 
       </ng-container>
     </div>
-    <div class="col">
-      <mat-card>
-        <mat-card-content>
-          <span style="color:red">TODO add registration stuff here</span>
-        </mat-card-content>
-      </mat-card>
+    <div class="d-flex flex-column gap-2 col">
+      <app-registration-details [data]="info.registration" *ngIf="info.registration"></app-registration-details>
     </div>
   </div>
 </div>

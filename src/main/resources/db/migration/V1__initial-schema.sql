@@ -75,7 +75,7 @@ CREATE TABLE event_category
 -- event announcement
 CREATE TABLE event_announcement
 (
-    event_id    BIGINT NOT NULL references event (id),
+    event_id        BIGINT NOT NULL references event (id),
     announcement_id BIGINT NOT NULL references announcement (id),
     PRIMARY KEY (event_id, announcement_id)
 );
@@ -117,4 +117,21 @@ CREATE TABLE registration
 
     created            TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated            TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- participant
+CREATE SEQUENCE participant_seq;
+CREATE TABLE participant
+(
+    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('participant_seq'::regclass),
+    registration_id BIGINT                      NOT NULL REFERENCES registration (id),
+    account_id      BIGINT                      NOT NULL REFERENCES account (id),
+
+    size            BIGINT                      NOT NULL,
+    status          VARCHAR(255)                NOT NULL,
+    rank            INT                         NOT NULL,
+    waiting_list    BOOLEAN                     NOT NULL,
+
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
 );

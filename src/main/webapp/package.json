@@ -29,6 +29,7 @@
     "keycloak-angular": "^14.0.0",
     "keycloak-js": "^21.1.2",
     "leaflet": "^1.9.4",
+    "logrocket": "^5.0.1",
     "moment": "^2.29.4",
     "ngx-echarts": "^16.0.0",
     "ngx-gravatar": "^13.0.0",

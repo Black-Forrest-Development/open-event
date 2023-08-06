@@ -4,7 +4,6 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {EventInfo} from "../model/event-api";
 import {Location} from "@angular/common";
 import {HotToastService} from "@ngneat/hot-toast";
-import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {MatDialog} from "@angular/material/dialog";
 
 
@@ -16,9 +15,8 @@ import {MatDialog} from "@angular/material/dialog";
 export class EventDetailsComponent {
 
   reloading: boolean = false
-
   info: EventInfo | undefined
-  menu: EventMenuComponent
+
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +26,6 @@ export class EventDetailsComponent {
     private toastService: HotToastService,
     public dialog: MatDialog,
   ) {
-    this.menu = new EventMenuComponent(router, dialog, service, toastService)
   }
 
   ngOnInit() {
@@ -48,12 +45,7 @@ export class EventDetailsComponent {
 
   private handleData(d: EventInfo) {
     this.info = d
-    this.menu.data = d.event
     this.reloading = false
-  }
-
-  back() {
-    this.location.back()
   }
 
 }

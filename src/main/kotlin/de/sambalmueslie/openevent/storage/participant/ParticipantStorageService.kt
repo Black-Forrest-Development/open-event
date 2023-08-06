@@ -58,5 +58,9 @@ class ParticipantStorageService(
        if(request.size <= 0) throw InvalidRequestException("Size cannot be below zero")
     }
 
+    override fun get(registration: Registration): List<Participant> {
+        return repository.findByRegistrationId(registration.id).let { converter.convert(it) }
+    }
+
 
 }

@@ -16,7 +16,7 @@ class CacheService {
 
     private val caches = mutableMapOf<String, LoadingCache<*, *>>()
 
-    private fun <T,O: Any> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
+    fun <T,O: Any> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
         logger.info("Register cache for $key")
         val cache = builder.invoke()
         caches[key] = cache

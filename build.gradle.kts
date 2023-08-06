@@ -98,6 +98,19 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("org.postgresql:postgresql")
 
+    // velocity
+    implementation("org.apache.velocity:velocity-engine-core:2.3")
+    implementation("org.apache.velocity.tools:velocity-tools-generic:3.1")
+
+    // POI
+    implementation("org.apache.poi:poi:5.2.3")
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
+
+    // mail
+    implementation("org.simplejavamail:simple-java-mail:8.1.3")
+    implementation("org.simplejavamail:batch-module:8.1.3")
+    implementation("org.simplejavamail:authenticated-socks-module:8.1.3")
+
     // test
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")

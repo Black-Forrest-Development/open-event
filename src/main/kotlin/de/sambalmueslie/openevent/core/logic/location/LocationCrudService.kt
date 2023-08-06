@@ -1,10 +1,11 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.location
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.Location
 import de.sambalmueslie.openevent.core.model.LocationChangeRequest
+import de.sambalmueslie.openevent.core.storage.LocationStorage
 import de.sambalmueslie.openevent.infrastructure.geo.GeoLocationResolver
 import jakarta.inject.Singleton
 import org.slf4j.Logger

@@ -1,8 +1,8 @@
 package de.sambalmueslie.openevent.storage.event
 
 
-import de.sambalmueslie.openevent.core.logic.EventStorage
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.storage.EventStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

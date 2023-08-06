@@ -5,7 +5,7 @@ import de.sambalmueslie.openevent.api.ParticipantAPI
 import de.sambalmueslie.openevent.api.ParticipantAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.ParticipantAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
-import de.sambalmueslie.openevent.core.logic.ParticipantCrudService
+import de.sambalmueslie.openevent.core.logic.participant.ParticipantCrudService
 import de.sambalmueslie.openevent.core.model.Participant
 import de.sambalmueslie.openevent.core.model.ParticipantChangeRequest
 import io.micronaut.data.model.Page

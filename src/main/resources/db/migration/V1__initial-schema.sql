@@ -207,27 +207,40 @@ INSERT INTO setting(key, value, type, created)
 VALUES ('text.title', 'APP.Title', 'STRING', now());
 
 -- notification
+CREATE SEQUENCE notification_setting_seq;
+CREATE TABLE notification_setting
+(
+    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_setting_seq'::regclass),
+    name    VARCHAR(255)                NOT NULL,
+    enabled BOOLEAN                     NOT NULL,
+
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated TIMESTAMP WITHOUT TIME ZONE
+);
+
 CREATE SEQUENCE notification_scheme_seq;
 CREATE TABLE notification_scheme
 (
-    id          BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_scheme_seq'::regclass),
-    name        VARCHAR(255)                NOT NULL,
-    description TEXT                        NOT NULL,
+    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_scheme_seq'::regclass),
+    name    VARCHAR(255)                NOT NULL,
+    enabled BOOLEAN                     NOT NULL,
+    plain   BOOLEAN                     NOT NULL,
 
-    created     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated     TIMESTAMP WITHOUT TIME ZONE
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated TIMESTAMP WITHOUT TIME ZONE
 );
 
-CREATE SEQUENCE notification_scheme_entry_seq;
-CREATE TABLE notification_scheme_entry
+
+CREATE SEQUENCE notification_template_seq;
+CREATE TABLE notification_template
 (
-    id          BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_scheme_entry_seq'::regclass),
-    scheme_id   BIGINT                      NOT NULL REFERENCES notification_scheme (id),
+    id        BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_template_seq'::regclass),
+    scheme_id BIGINT                      NOT NULL references notification_scheme (id),
 
-    key         VARCHAR(255)                NOT NULL,
-    name        VARCHAR(255)                NOT NULL,
-    description TEXT                        NOT NULL,
+    subject   VARCHAR(255)                NOT NULL,
+    lang      VARCHAR(255)                NOT NULL,
+    content   TEXT                        NOT NULL,
 
-    created     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated     TIMESTAMP WITHOUT TIME ZONE
+    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated   TIMESTAMP WITHOUT TIME ZONE
 );

@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.storage.account
 
 
-import de.sambalmueslie.openevent.core.logic.AccountStorage
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
+import de.sambalmueslie.openevent.core.storage.AccountStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

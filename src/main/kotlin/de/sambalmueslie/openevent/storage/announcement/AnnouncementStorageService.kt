@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.storage.announcement
 
 
-import de.sambalmueslie.openevent.core.logic.AnnouncementStorage
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Announcement
 import de.sambalmueslie.openevent.core.model.AnnouncementChangeRequest
+import de.sambalmueslie.openevent.core.storage.AnnouncementStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

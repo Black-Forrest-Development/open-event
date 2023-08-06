@@ -1,10 +1,11 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.announcement
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Announcement
 import de.sambalmueslie.openevent.core.model.AnnouncementChangeRequest
+import de.sambalmueslie.openevent.core.storage.AnnouncementStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

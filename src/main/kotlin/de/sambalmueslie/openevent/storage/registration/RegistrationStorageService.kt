@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.storage.registration
 
 
-import de.sambalmueslie.openevent.core.logic.RegistrationStorage
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.Registration
 import de.sambalmueslie.openevent.core.model.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.storage.RegistrationStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

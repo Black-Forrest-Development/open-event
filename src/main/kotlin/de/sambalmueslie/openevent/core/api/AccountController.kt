@@ -4,7 +4,7 @@ import de.sambalmueslie.openevent.api.AccountAPI
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
-import de.sambalmueslie.openevent.core.logic.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
 import de.sambalmueslie.openevent.core.model.AccountValidationResult

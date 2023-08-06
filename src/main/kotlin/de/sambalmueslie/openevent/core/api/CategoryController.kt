@@ -5,7 +5,7 @@ import de.sambalmueslie.openevent.api.CategoryAPI
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
-import de.sambalmueslie.openevent.core.logic.CategoryCrudService
+import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.model.Category
 import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
 import io.micronaut.data.model.Page

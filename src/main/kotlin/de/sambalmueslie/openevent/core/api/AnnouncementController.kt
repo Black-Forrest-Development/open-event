@@ -6,8 +6,8 @@ import de.sambalmueslie.openevent.api.AnnouncementAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AnnouncementAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getEmail
-import de.sambalmueslie.openevent.core.logic.AccountCrudService
-import de.sambalmueslie.openevent.core.logic.AnnouncementCrudService
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudService
 import de.sambalmueslie.openevent.core.model.Announcement
 import de.sambalmueslie.openevent.core.model.AnnouncementChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException

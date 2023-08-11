@@ -66,17 +66,17 @@ export class RegistrationDetailsComponent {
     this.handleData(response.participants)
     switch (response.status) {
       case 'ACCEPTED':
-        this.translation.get('registration.participate.accepted').subscribe(msg => this.hotToast.success(msg))
+        this.translation.get('registration.message.accepted').subscribe(msg => this.hotToast.success(msg))
         break;
       case 'WAITING_LIST_DECREASE_SIZE':
       case 'WAITING_LIST':
-        this.translation.get('registration.participate.waiting').subscribe(msg => this.hotToast.info(msg))
+        this.translation.get('registration.message.waiting').subscribe(msg => this.hotToast.info(msg))
         break;
       case 'DECLINED':
-        this.translation.get('registration.participate.declined').subscribe(msg => this.hotToast.warning(msg))
+        this.translation.get('registration.message.declined').subscribe(msg => this.hotToast.warning(msg))
         break;
       case 'FAILED':
-        this.translation.get('registration.participate.failed').subscribe(msg => this.hotToast.error(msg))
+        this.translation.get('registration.message.failed').subscribe(msg => this.hotToast.error(msg))
         break;
     }
     this.reloading = false

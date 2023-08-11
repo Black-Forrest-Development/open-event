@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.infrastructure.settings
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.github.benmanes.caffeine.cache.LoadingCache
+import de.sambalmueslie.openevent.api.SettingsAPI
 import de.sambalmueslie.openevent.core.model.Setting
 import de.sambalmueslie.openevent.core.model.SettingChangeRequest
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
@@ -69,6 +70,10 @@ class SettingsService(
 
     fun findByKey(key: String): Setting? {
         return keyCache[key]
+    }
+
+    fun getTitle(): String {
+        return findByKey(SettingsAPI.SETTINGS_TEXT_TITLE)?.value as? String ?: ""
     }
 
 

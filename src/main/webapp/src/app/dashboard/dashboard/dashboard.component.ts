@@ -9,13 +9,14 @@ import {MatSidenav} from "@angular/material/sidenav";
 import {MainNavItem} from "./main-nav-item";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmLogoutDialogComponent} from "../confirm-logout-dialog/confirm-logout-dialog.component";
+import {DashboardService} from "../model/dashboard.service";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent  implements AfterViewInit{
+export class DashboardComponent implements AfterViewInit {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -46,7 +47,8 @@ export class DashboardComponent  implements AfterViewInit{
     router: Router,
     private breakpointObserver: BreakpointObserver,
     private changeDetectorRef: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public service: DashboardService
   ) {
     translate.setDefaultLang('en')
     translate.use(this.lang)
@@ -84,6 +86,7 @@ export class DashboardComponent  implements AfterViewInit{
       if (result) this.authService.logout()
     })
   }
+
   toggleCollapsed() {
     this.collapsed = !this.collapsed;
   }

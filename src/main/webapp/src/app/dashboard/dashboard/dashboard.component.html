@@ -52,7 +52,7 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <a routerLink="/"><img src="assets/img/logo.png"/></a>
-        <span class="header">{{'text.welcome' | translate}}</span>
+        <span class="header"> {{ service.title | translate}}</span>
         <div class="flex-fill"></div>
         <mat-chip-listbox>
           <mat-chip-option color="accent" selected [selectable]="false">

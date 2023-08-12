@@ -83,7 +83,7 @@ flyway:
 
 tracing:
   jaeger:
-    enabled: true
+    enabled: false
     sampler:
       probability: 1
   exclusions:

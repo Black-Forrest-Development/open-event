@@ -103,7 +103,7 @@ class EventCrudService(
         return convertInfo(getAllForAccount(account, pageable))
     }
 
-    private fun convertInfo(events: Page<Event>): Page<EventInfo> {
+    internal fun convertInfo(events: Page<Event>): Page<EventInfo> {
         val eventIds = events.content.map { it.id }.toSet()
         val locations = locationCrudService.findByEventIds(eventIds).associateBy { it.id }
         val registrations = registrationCrudService.findInfosByEventIds(eventIds).associateBy { it.registration.id }

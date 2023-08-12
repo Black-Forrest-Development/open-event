@@ -6,7 +6,7 @@
         <mat-label>{{'setting.search' | translate}}</mat-label>
         <input matInput placeholder="" value="" #input [disabled]="reloading" (keyup)="keyUp.emit(input.value)">
       </mat-form-field>
-      <button mat-mini-fab color="accent">
+      <button mat-mini-fab color="accent" (click)="search(input.value)">
         <mat-icon>search</mat-icon>
       </button>
 

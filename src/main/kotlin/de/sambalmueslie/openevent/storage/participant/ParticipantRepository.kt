@@ -11,4 +11,6 @@ import io.micronaut.data.repository.PageableRepository
 interface ParticipantRepository : PageableRepository<ParticipantData, Long> {
     fun findByIdIn(ids: Set<Long>): List<ParticipantData>
     fun findByRegistrationId(id: Long): List<ParticipantData>
+    fun findByRegistrationIdAndAccountId(registrationId: Long, accountId: Long): ParticipantData?
+    fun findByRegistrationIdIn(regIds: Set<Long>): List<ParticipantData>
 }

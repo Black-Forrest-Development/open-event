@@ -2,7 +2,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+               [opened]="false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngFor="let item of accessibleItems" routerLink="{{item.url}}" routerLinkActive="active">

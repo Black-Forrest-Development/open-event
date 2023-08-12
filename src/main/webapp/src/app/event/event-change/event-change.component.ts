@@ -160,9 +160,9 @@ export class EventChangeComponent {
     let registration = e.registration
     if (registration) {
       this.registrationForm.setValue({
-        ticketsEnabled: registration.ticketsEnabled,
-        maxGuestAmount: registration.maxGuestAmount,
-        interestedAllowed: registration.interestedAllowed,
+        ticketsEnabled: registration.registration.ticketsEnabled,
+        maxGuestAmount: registration.registration.maxGuestAmount,
+        interestedAllowed: registration.registration.interestedAllowed,
         categories: e.categories.map(c => c.id)
       })
     }

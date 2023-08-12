@@ -121,6 +121,9 @@ dependencies {
 
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
+
+    // solr
+    implementation("org.apache.solr:solr-solrj:9.3.0")
 }
 
 java {

@@ -26,16 +26,16 @@ export class DashboardComponent implements AfterViewInit {
   collapsed: boolean = true
   @ViewChild('drawer') drawer: MatSidenav | undefined
   navItems: MainNavItem[] = [
-    new MainNavItem('/home', 'MENU.Home', 'home'),
-    new MainNavItem('/event', 'event.Type', 'event_note'),
-    new MainNavItem('/category', 'category.Type', 'label'),
+    new MainNavItem('/event', 'event.type', 'event_note'),
+    new MainNavItem('/category', 'category.type', 'label'),
+    new MainNavItem('/settings', 'settings.type', 'settings_applications'),
 
 
-    new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),
-    new MainNavItem('/structure', 'STRUCT.Type', 'ballot'),
-    new MainNavItem('/profile', 'MENU.Profile', 'person'),
-    new MainNavItem('/administration', 'MENU.Administration', 'settings_applications'),
-    new MainNavItem('/imprint', 'MENU.Imprint', 'contact_support'),
+    // new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),
+    // new MainNavItem('/structure', 'STRUCT.Type', 'ballot'),
+    // new MainNavItem('/profile', 'MENU.Profile', 'person'),
+    // new MainNavItem('/administration', 'MENU.Administration', 'settings_applications'),
+    // new MainNavItem('/imprint', 'MENU.Imprint', 'contact_support'),
   ];
 
 

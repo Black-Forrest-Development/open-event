@@ -118,6 +118,9 @@ dependencies {
 
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+
+    // tracing
+    implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
 }
 
 java {

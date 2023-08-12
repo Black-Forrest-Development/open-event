@@ -53,7 +53,16 @@
     }
   },
   "registration": {
-    "participate": "Participate",
+    "title": "Participants",
+    "space": "Seats",
+    "waitlist": "Waiting List",
+    "action": {
+      "participate": "Participate",
+      "participateAccount": "Add Account",
+      "participateManual": "Add manual",
+      "edit": "Change Participation",
+      "cancel": "Cancel Participation"
+    },
     "people": "people",
     "peopleAmount": "Amount of people",
     "dialog": {
@@ -70,6 +79,10 @@
         "title": "Cancel participation",
         "question": "Do you relay want to cancel the participation?",
         "message": "Participation cancel successfully processed"
+      },
+      "manual": {
+        "title": "Add manual participant",
+        "question": "Add the data of the participant please"
       }
     },
     "message": {
@@ -77,6 +90,15 @@
       "waiting": "You have been added to the waiting list",
       "declined": "Participation cancel successfully processed",
       "failed": "Some critical error occurred contact site admin"
+    },
+    "status": {
+      "full": "Full",
+      "available": "Available"
+    },
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email"
     }
   }
 }

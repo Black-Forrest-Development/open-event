@@ -52,7 +52,7 @@ class SettingsController(private val service: SettingsService) : SettingsAPI {
     override fun findByKey(auth: Authentication, key: String) =
         auth.checkPermission(PERMISSION_READ) { service.findByKey(key) }
 
-    @Get("setting/title")
+    @Get("title")
     fun getTitle() = TextResponse(service.getTitle())
 
 }

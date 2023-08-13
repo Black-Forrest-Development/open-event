@@ -11,6 +11,7 @@ import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudServic
 import de.sambalmueslie.openevent.core.model.Announcement
 import de.sambalmueslie.openevent.core.model.AnnouncementChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException
+import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
@@ -21,8 +22,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Announcement API")
 class AnnouncementController(
     private val service: AnnouncementCrudService,
-    private val accountService: AccountCrudService
+    private val accountService: AccountCrudService,
+    audit: AuditService,
 ) : AnnouncementAPI {
+    private val logger = audit.getLogger("Announcement API")
 
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Announcement? {
@@ -39,18 +42,20 @@ class AnnouncementController(
         return auth.checkPermission(PERMISSION_WRITE) {
             val author = accountService.findByEmail(auth.getEmail())
                 ?: throw InvalidRequestException("Cannot find author account")
-            service.create(author, request)
+            logger.traceCreate(auth, request) { service.create(author, request) }
         }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: AnnouncementChangeRequest): Announcement {
-        return auth.checkPermission(PERMISSION_WRITE) { service.update(id, request) }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceUpdate(auth, request) { service.update(id, request) }
+        }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Announcement? {
-        return auth.checkPermission(PERMISSION_WRITE) { service.delete(id) }
+        return auth.checkPermission(PERMISSION_WRITE) { logger.traceDelete(auth) { service.delete(id) } }
     }
 
 }

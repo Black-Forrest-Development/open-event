@@ -10,6 +10,7 @@ import de.sambalmueslie.openevent.core.logic.notification.NotificationSchemeCrud
 import de.sambalmueslie.openevent.core.logic.notification.NotificationSettingCrudService
 import de.sambalmueslie.openevent.core.logic.notification.NotificationTemplateCrudService
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
@@ -22,7 +23,9 @@ class NotificationController(
     private val schemeService: NotificationSchemeCrudService,
     private val templateService: NotificationTemplateCrudService,
     private val settingService: NotificationSettingCrudService,
+    audit: AuditService,
 ) : NotificationAPI {
+    private val logger = audit.getLogger("Notification API")
 
     @Get("/settings")
     override fun getSettings(auth: Authentication, pageable: Pageable): Page<NotificationSetting> {
@@ -51,8 +54,14 @@ class NotificationController(
 
     @Post("/scheme")
     override fun create(auth: Authentication, @Body request: NotificationSchemeChangeRequest): NotificationScheme {
-        return auth.checkPermission(PERMISSION_WRITE) { schemeService.create(request) }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceCreate(
+                auth,
+                request
+            ) { schemeService.create(request) }
+        }
     }
+
     @Put("/setting/{id}/enabled")
     override fun setSchemeEnabled(auth: Authentication, id: Long, value: PatchRequest<Boolean>): NotificationScheme? {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) { schemeService.setEnabled(id, value) }
@@ -64,12 +73,14 @@ class NotificationController(
         id: Long,
         @Body request: NotificationSchemeChangeRequest
     ): NotificationScheme {
-        return auth.checkPermission(PERMISSION_WRITE) { schemeService.update(id, request) }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceUpdate(auth, request) { schemeService.update(id, request) }
+        }
     }
 
     @Delete("/scheme/{id}")
     override fun delete(auth: Authentication, id: Long): NotificationScheme? {
-        return auth.checkPermission(PERMISSION_WRITE) { schemeService.delete(id) }
+        return auth.checkPermission(PERMISSION_WRITE) { logger.traceDelete(auth) { schemeService.delete(id) } }
     }
 
     @Post("/scheme/{schemeId}/template")

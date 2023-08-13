@@ -34,7 +34,10 @@ class EventController(
 
     @Get("/{id}/info")
     override fun getInfo(auth: Authentication, id: Long): EventInfo? {
-        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) { service.getInfo(id) }
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.getInfo(id, account)
+        }
     }
 
     @Get()

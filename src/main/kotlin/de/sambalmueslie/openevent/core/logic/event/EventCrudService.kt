@@ -83,12 +83,13 @@ class EventCrudService(
         return storage.getCategories(event)
     }
 
-    fun getInfo(id: Long): EventInfo? {
+    fun getInfo(id: Long, account: Account): EventInfo? {
         val event = get(id) ?: return null
         val location = locationCrudService.findByEvent(event)
         val registration = registrationCrudService.findInfoByEvent(event)
         val categories = storage.getCategories(event)
-        return EventInfo(event, location, registration, categories)
+        val canEdit = event.owner.id == account.id
+        return EventInfo(event, location, registration, categories, canEdit)
     }
 
     fun getInfos(pageable: Pageable): Page<EventInfo> {
@@ -100,17 +101,25 @@ class EventCrudService(
     }
 
     fun getInfosForAccount(account: Account, pageable: Pageable): Page<EventInfo> {
-        return convertInfo(getAllForAccount(account, pageable))
+        return convertInfo(getAllForAccount(account, pageable), account)
     }
 
-    internal fun convertInfo(events: Page<Event>): Page<EventInfo> {
+    internal fun convertInfo(events: Page<Event>, account: Account? = null): Page<EventInfo> {
         val eventIds = events.content.map { it.id }.toSet()
         val locations = locationCrudService.findByEventIds(eventIds).associateBy { it.id }
         val registrations = registrationCrudService.findInfosByEventIds(eventIds).associateBy { it.registration.id }
         val categories = storage.getCategoriesByEventIds(eventIds)
-        return events.map { EventInfo(it, locations[it.id], registrations[it.id], categories[it.id] ?: emptyList()) }
+        val canEdit = events.content.associate { it.id to (it.owner.id == account?.id) }
+        return events.map {
+            EventInfo(
+                it,
+                locations[it.id],
+                registrations[it.id],
+                categories[it.id] ?: emptyList(),
+                canEdit[it.id] ?: false
+            )
+        }
     }
-
 
 
 }

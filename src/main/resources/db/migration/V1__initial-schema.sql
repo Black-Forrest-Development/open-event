@@ -244,3 +244,18 @@ CREATE TABLE notification_template
     created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated   TIMESTAMP WITHOUT TIME ZONE
 );
+
+-- audit
+CREATE SEQUENCE audit_log_entry_seq;
+CREATE TABLE audit_log_entry
+(
+    id           BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('audit_log_entry_seq'::regclass),
+    timestamp    TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    actor        VARCHAR(255)                NOT NULL,
+    level        VARCHAR(255)                NOT NULL,
+    message      TEXT                        NOT NULL,
+    request      TEXT                        NOT NULL,
+    reference_id VARCHAR(255)                NOT NULL,
+    reference    TEXT                        NOT NULL,
+    source       VARCHAR(255)                NOT NULL
+);

@@ -51,7 +51,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     QuillModule.forRoot(
       {
         modules: {
-          syntax: true,
+          syntax: false,
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
             ['blockquote', 'code-block'],

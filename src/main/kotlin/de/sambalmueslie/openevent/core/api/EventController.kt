@@ -12,6 +12,7 @@ import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.EventSearchService
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.HttpResponse
@@ -24,8 +25,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class EventController(
     private val service: EventCrudService,
     private val search: EventSearchService,
-    private val accountService: AccountCrudService
+    private val accountService: AccountCrudService,
+    audit: AuditService,
 ) : EventAPI {
+    private val logger = audit.getLogger("Event API")
 
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Event? {
@@ -67,17 +70,26 @@ class EventController(
 
     @Post()
     override fun create(auth: Authentication, @Body request: EventChangeRequest): Event {
-        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) { service.create(request, auth) }
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceCreate(auth, request) { service.create(request, auth) }
+        }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: EventChangeRequest): Event {
-        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) { service.update(id, request) }
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceUpdate(
+                auth,
+                request
+            ) { service.update(id, request) }
+        }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Event? {
-        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) { service.delete(id) }
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceDelete(auth) { service.delete(id) }
+        }
     }
 
     @Put("/{id}/published")

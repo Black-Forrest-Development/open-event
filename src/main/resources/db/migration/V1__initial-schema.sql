@@ -170,7 +170,7 @@ CREATE TABLE mail_job_history
     message   TEXT                        NOT NULL,
     timestamp TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 
-    job_id    BIGINT                      NOT NULL UNIQUE REFERENCES mail_job (id)
+    job_id    BIGINT                      NOT NULL REFERENCES mail_job (id)
 );
 
 

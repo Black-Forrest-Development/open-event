@@ -57,7 +57,7 @@ class ParticipantCrudService(
         notifyCreated(actor, result)
 
         val status: ParticipateStatus = if (waitingList) ParticipateStatus.WAITING_LIST else ParticipateStatus.ACCEPTED
-        return getResponse(registration, status)
+        return getResponse(registration, status, result)
     }
 
     fun remove(actor: Account, registration: Registration, account: Account): ParticipateResponse {
@@ -69,7 +69,7 @@ class ParticipantCrudService(
         notifyDeleted(actor, existing)
 
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, result, status)
+        return ParticipateResponse(registration, existing, result, status)
     }
 
     fun change(
@@ -115,9 +115,9 @@ class ParticipantCrudService(
             rank,
             waitingList
         )
-        storage.update(participant.id, changeRequest)
+        val participant = storage.update(participant.id, changeRequest)
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, result, status)
+        return ParticipateResponse(registration, participant, result, status)
     }
 
     fun remove(actor: Account, registration: Registration, participantId: Long): ParticipateResponse {
@@ -127,7 +127,7 @@ class ParticipantCrudService(
         notifyDeleted(actor, participant)
 
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, result, status)
+        return ParticipateResponse(registration, participant, result, status)
     }
 
     private fun updateWaitList(actor: Account, registration: Registration): List<Participant> {
@@ -181,9 +181,14 @@ class ParticipantCrudService(
     }
 
 
-    private fun getResponse(registration: Registration, status: ParticipateStatus): ParticipateResponse {
+    private fun getResponse(
+        registration: Registration,
+        status: ParticipateStatus,
+        participant: Participant? = null,
+    ): ParticipateResponse {
         return ParticipateResponse(
             registration,
+            participant,
             storage.get(registration),
             status
         )

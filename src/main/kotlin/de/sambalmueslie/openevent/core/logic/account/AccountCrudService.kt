@@ -21,6 +21,7 @@ class AccountCrudService(
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(AccountCrudService::class.java)
+        private const val SYSTEM_ACCOUNT_EMAIL = "system@localhost"
     }
 
     fun findByExternalId(externalId: String): Account? {
@@ -62,6 +63,14 @@ class AccountCrudService(
         val result = get(auth)
         require(result != null) { "Cannot find account for user" }
         return result
+    }
+
+    fun getSystemAccount(): Account {
+        val existing = storage.findByEmail(SYSTEM_ACCOUNT_EMAIL)
+        if (existing != null) return existing
+
+        val request = AccountChangeRequest("system", "system", "system", SYSTEM_ACCOUNT_EMAIL, "", null)
+        return storage.createServiceAccount(request)
     }
 
 

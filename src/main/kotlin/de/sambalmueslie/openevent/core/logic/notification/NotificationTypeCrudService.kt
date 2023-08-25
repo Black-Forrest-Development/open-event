@@ -39,4 +39,8 @@ class NotificationTypeCrudService(
     fun findByKey(key: String): NotificationType? {
         return storage.findByKey(key)
     }
+
+    fun findByKeys(keys: Set<String>): List<NotificationType>{
+        return storage.findByKeys(keys)
+    }
 }

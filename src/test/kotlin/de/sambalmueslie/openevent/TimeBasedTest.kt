@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent
 
 
+import de.sambalmueslie.openevent.infrastructure.mail.external.MailClient
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.test.annotation.MockBean
 import io.mockk.every
@@ -21,8 +22,14 @@ abstract class TimeBasedTest {
     @MockBean(TimeProvider::class)
     fun timeProvider() = provider
 
+    val mailClient = mockk<MailClient>()
+
+    @MockBean(MailClient::class)
+    fun mailClient() = mailClient
+
     init {
         every { provider.now() } returns timestamp
+        every { mailClient.send(any(), any(), any()) } returns true
     }
 
 }

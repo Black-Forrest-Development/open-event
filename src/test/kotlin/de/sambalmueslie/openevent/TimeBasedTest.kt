@@ -15,7 +15,6 @@ abstract class TimeBasedTest {
         private val logger: Logger = LoggerFactory.getLogger(TimeBasedTest::class.java)
     }
 
-
     val timestamp = LocalDateTime.of(2023, 7, 28, 22, 33, 10)
     val provider: TimeProvider = mockk()
 

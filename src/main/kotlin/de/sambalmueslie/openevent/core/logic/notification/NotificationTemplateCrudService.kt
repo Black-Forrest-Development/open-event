@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
+import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.NotificationScheme
 import de.sambalmueslie.openevent.core.model.NotificationTemplate
 import de.sambalmueslie.openevent.core.model.NotificationTemplateChangeRequest
@@ -15,15 +16,17 @@ import org.slf4j.LoggerFactory
 @Singleton
 class NotificationTemplateCrudService(
     private val storage: NotificationTemplateStorage
-) : BaseCrudService<Long, NotificationTemplate, NotificationTemplateChangeRequest>(storage, logger) {
+) : BaseCrudService<Long, NotificationTemplate, NotificationTemplateChangeRequest, NotificationTemplateChangeListener>(
+    storage
+) {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(NotificationTemplateCrudService::class.java)
     }
 
-    fun create(scheme: NotificationScheme, request: NotificationTemplateChangeRequest): NotificationTemplate {
+    fun create(actor: Account, scheme: NotificationScheme, request: NotificationTemplateChangeRequest): NotificationTemplate {
         val result = storage.create(scheme, request)
-        notifyCreated(result)
+        notifyCreated(actor,result)
         return result
     }
 

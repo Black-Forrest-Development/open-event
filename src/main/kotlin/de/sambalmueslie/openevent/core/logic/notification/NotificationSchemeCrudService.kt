@@ -14,16 +14,20 @@ import org.slf4j.LoggerFactory
 class NotificationSchemeCrudService(
     private val storage: NotificationSchemeStorage,
     private val templateService: NotificationTemplateCrudService,
-) : BaseCrudService<Long, NotificationScheme, NotificationSchemeChangeRequest>(storage, logger) {
+) : BaseCrudService<Long, NotificationScheme, NotificationSchemeChangeRequest, NotificationSchemeChangeListener>(storage) {
 
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(NotificationSchemeCrudService::class.java)
     }
 
-    fun createTemplate(schemeId: Long, request: NotificationTemplateChangeRequest): NotificationTemplate? {
+    fun createTemplate(
+        actor: Account,
+        schemeId: Long,
+        request: NotificationTemplateChangeRequest
+    ): NotificationTemplate? {
         val scheme = get(schemeId) ?: return null
-        return templateService.create(scheme, request)
+        return templateService.create(actor, scheme, request)
     }
 
     fun getTemplates(schemeId: Long, pageable: Pageable): Page<NotificationTemplate> {

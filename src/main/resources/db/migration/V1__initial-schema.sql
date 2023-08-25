@@ -245,6 +245,25 @@ CREATE TABLE notification_template
     updated   TIMESTAMP WITHOUT TIME ZONE
 );
 
+CREATE SEQUENCE notification_type_seq;
+CREATE TABLE notification_type
+(
+    id          BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_type_seq'::regclass),
+
+    key         VARCHAR(255)                NOT NULL UNIQUE,
+    name        VARCHAR(255)                NOT NULL,
+    description TEXT                        NOT NULL,
+
+    created     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated     TIMESTAMP WITHOUT TIME ZONE
+);
+
+CREATE TABLE notification_type_scheme_relation
+(
+    type_id   BIGINT NOT NULL references notification_type (id),
+    scheme_id BIGINT NOT NULL references notification_scheme (id)
+);
+
 -- audit
 CREATE SEQUENCE audit_log_entry_seq;
 CREATE TABLE audit_log_entry

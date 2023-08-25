@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.LocationAPI
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
 import de.sambalmueslie.openevent.core.model.Location
 import de.sambalmueslie.openevent.core.model.LocationChangeRequest
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Location API")
 class LocationController(
     private val service: LocationCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : LocationAPI {
     private val logger = audit.getLogger("Location API")
@@ -35,19 +37,23 @@ class LocationController(
 
     @Post()
     override fun create(auth: Authentication, @Body request: LocationChangeRequest): Location {
-        return auth.checkPermission(PERMISSION_WRITE) { logger.traceCreate(auth, request) { service.create(request) } }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceCreate(auth, request) { service.create(accountService.find(auth),request) }
+        }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: LocationChangeRequest): Location {
         return auth.checkPermission(PERMISSION_WRITE) {
-            logger.traceUpdate(auth, request) { service.update(id, request) }
+            logger.traceUpdate(auth, request) { service.update(accountService.find(auth),id, request) }
         }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Location? {
-        return auth.checkPermission(PERMISSION_WRITE) { logger.traceDelete(auth) { service.delete(id) } }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceDelete(auth) { service.delete(accountService.find(auth),id) }
+        }
     }
 
 }

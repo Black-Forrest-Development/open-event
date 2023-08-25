@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 class AccountCrudService(
     private val storage: AccountStorage
-) : BaseCrudService<Long, Account, AccountChangeRequest>(storage, logger) {
+) : BaseCrudService<Long, Account, AccountChangeRequest, AccountChangeListener>(storage) {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(AccountCrudService::class.java)
@@ -50,7 +50,7 @@ class AccountCrudService(
                 auth.getExternalId()
             )
         )
-        notifyCreated(result)
+        notifyCreated(result, result)
         return AccountValidationResult(true, result)
     }
 
@@ -58,6 +58,11 @@ class AccountCrudService(
         return findByEmail(auth.getEmail())
     }
 
+    fun find(auth: Authentication): Account {
+        val result = get(auth)
+        require(result != null) { "Cannot find account for user" }
+        return result
+    }
 
 
 }

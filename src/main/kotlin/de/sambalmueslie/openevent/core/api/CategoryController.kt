@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.logic.category.CategorySearchService
 import de.sambalmueslie.openevent.core.model.Category
@@ -23,6 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class CategoryController(
     private val service: CategoryCrudService,
     private val search: CategorySearchService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : CategoryAPI {
     private val logger = audit.getLogger("Category API")
@@ -44,17 +46,23 @@ class CategoryController(
 
     @Post()
     override fun create(auth: Authentication, @Body request: CategoryChangeRequest): Category {
-        return auth.checkPermission(PERMISSION_WRITE) { logger.traceCreate(auth, request) { service.create(request) } }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceCreate(auth, request) { service.create(accountService.find(auth), request) }
+        }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: CategoryChangeRequest): Category {
-        return auth.checkPermission(PERMISSION_WRITE) { logger.traceUpdate(auth, request) { service.update(id, request) }}
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceUpdate(auth, request) { service.update(accountService.find(auth), id, request) }
+        }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Category? {
-        return auth.checkPermission(PERMISSION_WRITE) { logger.traceDelete(auth) {service.delete(id)} }
+        return auth.checkPermission(PERMISSION_WRITE) {
+            logger.traceDelete(auth) { service.delete(accountService.find(auth), id) }
+        }
     }
 
     @Get("/search")

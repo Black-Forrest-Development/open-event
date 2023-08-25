@@ -71,30 +71,33 @@ class EventController(
     @Post()
     override fun create(auth: Authentication, @Body request: EventChangeRequest): Event {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceCreate(auth, request) { service.create(request, auth) }
+            logger.traceCreate(auth, request) { service.create(accountService.find(auth), request) }
         }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: EventChangeRequest): Event {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceUpdate(
-                auth,
-                request
-            ) { service.update(id, request) }
+            logger.traceUpdate(auth, request) {
+                service.update(accountService.find(auth), id, request)
+            }
         }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Event? {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceDelete(auth) { service.delete(id) }
+            logger.traceDelete(auth) { service.delete(accountService.find(auth), id) }
         }
     }
 
     @Put("/{id}/published")
     override fun setPublished(auth: Authentication, id: Long, @Body value: PatchRequest<Boolean>): Event? {
-        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) { service.setPublished(id, value) }
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceAction(auth, "PUBLISHED", id.toString(), value) {
+                service.setPublished(accountService.find(auth), id, value)
+            }
+        }
     }
 
     @Get("/{id}/location")

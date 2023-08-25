@@ -86,14 +86,14 @@ class NotificationController(
         }
     }
 
-    @Post("/scheme/{schemeId}/template")
+    @Post("/type/{typeId}/template")
     override fun createTemplate(
         auth: Authentication,
-        schemeId: Long,
+        typeId: Long,
         @Body request: NotificationTemplateChangeRequest
     ): NotificationTemplate? {
         return auth.checkPermission(PERMISSION_WRITE) {
-            schemeService.createTemplate(accountService.find(auth), schemeId, request)
+            typeService.createTemplate(accountService.find(auth), typeId, request)
         }
     }
 
@@ -111,9 +111,9 @@ class NotificationController(
         return auth.checkPermission(PERMISSION_WRITE) { templateService.delete(accountService.find(auth), id) }
     }
 
-    @Get("/scheme/{schemeId}/template")
-    override fun getTemplates(auth: Authentication, schemeId: Long, pageable: Pageable): Page<NotificationTemplate> {
-        return auth.checkPermission(PERMISSION_READ) { schemeService.getTemplates(schemeId, pageable) }
+    @Get("/type/{typeId}/template")
+    override fun getTemplates(auth: Authentication, typeId: Long, pageable: Pageable): Page<NotificationTemplate> {
+        return auth.checkPermission(PERMISSION_READ) { typeService.getTemplates(typeId, pageable) }
     }
 
     @Get("/type")

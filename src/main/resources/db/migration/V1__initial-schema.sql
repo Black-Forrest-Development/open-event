@@ -224,26 +224,18 @@ CREATE TABLE notification_scheme
     id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_scheme_seq'::regclass),
     name    VARCHAR(255)                NOT NULL,
     enabled BOOLEAN                     NOT NULL,
-    plain   BOOLEAN                     NOT NULL,
 
     created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated TIMESTAMP WITHOUT TIME ZONE
 );
 
-
-CREATE SEQUENCE notification_template_seq;
-CREATE TABLE notification_template
+CREATE TABLE notification_scheme_subscriber_relation
 (
-    id        BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_template_seq'::regclass),
-    scheme_id BIGINT                      NOT NULL references notification_scheme (id),
-
-    subject   VARCHAR(255)                NOT NULL,
-    lang      VARCHAR(255)                NOT NULL,
-    content   TEXT                        NOT NULL,
-
-    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated   TIMESTAMP WITHOUT TIME ZONE
+    scheme_id  BIGINT NOT NULL references notification_scheme (id),
+    account_id BIGINT NOT NULL references account (id),
+    PRIMARY KEY (scheme_id, account_id)
 );
+
 
 CREATE SEQUENCE notification_type_seq;
 CREATE TABLE notification_type
@@ -261,8 +253,27 @@ CREATE TABLE notification_type
 CREATE TABLE notification_type_scheme_relation
 (
     type_id   BIGINT NOT NULL references notification_type (id),
-    scheme_id BIGINT NOT NULL references notification_scheme (id)
+    scheme_id BIGINT NOT NULL references notification_scheme (id),
+    PRIMARY KEY (type_id, scheme_id)
 );
+
+
+
+CREATE SEQUENCE notification_template_seq;
+CREATE TABLE notification_template
+(
+    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('notification_template_seq'::regclass),
+    type_id BIGINT                      NOT NULL references notification_type (id),
+
+    subject VARCHAR(255)                NOT NULL,
+    lang    VARCHAR(255)                NOT NULL,
+    content TEXT                        NOT NULL,
+    plain   BOOLEAN                     NOT NULL,
+
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated TIMESTAMP WITHOUT TIME ZONE
+);
+
 
 -- audit
 CREATE SEQUENCE audit_log_entry_seq;

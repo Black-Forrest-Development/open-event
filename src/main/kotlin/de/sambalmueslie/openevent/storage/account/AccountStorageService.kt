@@ -57,9 +57,5 @@ class AccountStorageService(
         return repository.findByEmail(email)?.convert()
     }
 
-    override fun getByIds(ids: Set<Long>): List<Account> {
-        return repository.findByIdIn(ids).map { it.convert() }
-    }
-
 
 }

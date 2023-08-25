@@ -8,6 +8,7 @@ import de.sambalmueslie.openevent.core.logic.notification.NotificationService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.storage.notification.NotificationSettingStorageService
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,7 +16,8 @@ import org.slf4j.LoggerFactory
 @Singleton
 class EventNotificationHandler(
     eventService: EventCrudService,
-    private val service: NotificationService
+    private val service: NotificationService,
+    private val settingsService: NotificationSettingStorageService
 ) : NotificationHandler, EventChangeListener {
 
     companion object {
@@ -39,29 +41,40 @@ class EventNotificationHandler(
         )
     }
 
+
+    private var notifyOwner: Boolean = false
+
     init {
         eventService.register(this)
     }
 
     override fun handleCreated(actor: Account, obj: Event) {
-        service.process(NotificationEvent(KEY_EVENT_CREATED, actor, obj))
+        service.process(NotificationEvent(KEY_EVENT_CREATED, actor, obj), getRecipients(actor, obj))
     }
 
-
     override fun handleUpdated(actor: Account, obj: Event) {
-        service.process(NotificationEvent(KEY_EVENT_UPDATED, actor, obj))
+        service.process(NotificationEvent(KEY_EVENT_UPDATED, actor, obj), getRecipients(actor, obj))
     }
 
     override fun handleDeleted(actor: Account, obj: Event) {
-        service.process(NotificationEvent(KEY_EVENT_DELETED, actor, obj))
+        service.process(NotificationEvent(KEY_EVENT_DELETED, actor, obj), getRecipients(actor, obj))
     }
 
     override fun publishedChanged(actor: Account, event: Event) {
         if (event.published) {
-            service.process(NotificationEvent(KEY_EVENT_PUBLISHED, actor, event))
+            service.process(NotificationEvent(KEY_EVENT_PUBLISHED, actor, event), getRecipients(actor, event))
         } else {
-            service.process(NotificationEvent(KEY_EVENT_UNPUBLISHED, actor, event))
+            service.process(NotificationEvent(KEY_EVENT_UNPUBLISHED, actor, event), getRecipients(actor, event))
         }
+    }
+
+    private fun getRecipients(actor: Account, event: Event): Set<Account> {
+        val recipients = mutableSetOf<Account>()
+        val changeByOwner = actor.id == event.owner.id
+        if (!changeByOwner && notifyOwner) {
+            recipients.add(event.owner)
+        }
+        return recipients
     }
 
 }

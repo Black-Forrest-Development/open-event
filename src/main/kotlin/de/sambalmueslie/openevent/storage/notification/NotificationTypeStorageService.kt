@@ -49,4 +49,8 @@ class NotificationTypeStorageService(
         if (request.key.isBlank()) throw InvalidRequestException("Key cannot be blank.")
     }
 
+    override fun findByKey(key: String): NotificationType? {
+        return repository.findByKey(key)?.convert()
+    }
+
 }

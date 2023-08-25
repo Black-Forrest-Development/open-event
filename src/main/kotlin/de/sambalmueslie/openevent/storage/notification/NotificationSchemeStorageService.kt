@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.storage.notification
 
 import de.sambalmueslie.openevent.core.model.NotificationScheme
 import de.sambalmueslie.openevent.core.model.NotificationSchemeChangeRequest
+import de.sambalmueslie.openevent.core.model.NotificationType
 import de.sambalmueslie.openevent.core.model.PatchRequest
 import de.sambalmueslie.openevent.core.storage.NotificationSchemeStorage
 import de.sambalmueslie.openevent.error.InvalidRequestException
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 class NotificationSchemeStorageService(
     private val repository: NotificationSchemeRepository,
+    private val typeRelationRepository: TypeSchemeRelationRepository,
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
 ) : BaseStorageService<Long, NotificationScheme, NotificationSchemeChangeRequest, NotificationSchemeData>(
@@ -52,6 +54,22 @@ class NotificationSchemeStorageService(
 
     override fun setEnabled(id: Long, value: PatchRequest<Boolean>): NotificationScheme? {
         return patchData(id) { it.setEnabled(value.value, timeProvider.now()) }
+    }
+
+    override fun deleteDependencies(data: NotificationSchemeData) {
+        typeRelationRepository.deleteBySchemeId(data.id)
+    }
+
+    override fun assign(scheme: NotificationScheme, types: List<NotificationType>) {
+        val existing = typeRelationRepository.findBySchemeId(scheme.id).map { it.typeId }.toSet()
+
+        val toAdd = types.filter { !existing.contains(it.id) }
+            .map { TypeSchemeRelation(it.id, scheme.id) }
+        if (toAdd.isNotEmpty()) typeRelationRepository.saveAll(toAdd)
+
+        val typeIds = types.map { it.id }.toSet()
+        val toRemove = existing.filter { !typeIds.contains(it) }
+        toRemove.forEach { typeRelationRepository.deleteByTypeId(it) }
     }
 
 }

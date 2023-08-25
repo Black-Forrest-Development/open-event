@@ -57,21 +57,21 @@ class AccountController(
     @Post()
     override fun create(auth: Authentication, @Body request: AccountChangeRequest): Account {
         return auth.checkPermission(PERMISSION_WRITE) {
-            logger.traceCreate(auth, request) { service.create(request) }
+            logger.traceCreate(auth, request) { service.create(service.find(auth), request) }
         }
     }
 
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: AccountChangeRequest): Account {
         return auth.checkPermission(PERMISSION_WRITE) {
-            logger.traceUpdate(auth, request) { service.update(id, request) }
+            logger.traceUpdate(auth, request) { service.update(service.find(auth), id, request) }
         }
     }
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Account? {
         return auth.checkPermission(PERMISSION_WRITE) {
-            logger.traceDelete(auth) { service.delete(id) }
+            logger.traceDelete(auth) { service.delete(service.find(auth), id) }
         }
     }
 

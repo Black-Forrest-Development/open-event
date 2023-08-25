@@ -19,7 +19,7 @@ interface NotificationAPI : CrudAPI<Long, NotificationScheme, NotificationScheme
 
     fun createTemplate(
         auth: Authentication,
-        schemeId: Long,
+        typeId: Long,
         request: NotificationTemplateChangeRequest
     ): NotificationTemplate?
 
@@ -31,7 +31,9 @@ interface NotificationAPI : CrudAPI<Long, NotificationScheme, NotificationScheme
 
     fun deleteTemplate(auth: Authentication, id: Long): NotificationTemplate?
 
-    fun getTemplates(auth: Authentication, schemeId: Long, pageable: Pageable): Page<NotificationTemplate>
+    fun getTemplates(auth: Authentication, typeId: Long, pageable: Pageable): Page<NotificationTemplate>
 
     fun getTypes(auth: Authentication, pageable: Pageable): Page<NotificationType>
+
+
 }

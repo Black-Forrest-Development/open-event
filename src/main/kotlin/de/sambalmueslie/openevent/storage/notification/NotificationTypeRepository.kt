@@ -7,4 +7,6 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface NotificationTypeRepository : DataObjectRepository<Long, NotificationTypeData>
+interface NotificationTypeRepository : DataObjectRepository<Long, NotificationTypeData> {
+    fun findByKey(key: String): NotificationTypeData?
+}

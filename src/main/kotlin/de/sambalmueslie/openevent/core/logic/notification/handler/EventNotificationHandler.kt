@@ -5,10 +5,10 @@ import de.sambalmueslie.openevent.core.logic.event.EventChangeListener
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.logic.notification.NotificationService
+import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.NotificationTypeChangeRequest
-import de.sambalmueslie.openevent.storage.notification.NotificationSettingStorageService
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory
 @Singleton
 class EventNotificationHandler(
     eventService: EventCrudService,
+    private val registrationService: RegistrationCrudService,
     private val service: NotificationService,
-    private val settingsService: NotificationSettingStorageService
 ) : NotificationHandler, EventChangeListener {
 
     companion object {
@@ -31,7 +31,7 @@ class EventNotificationHandler(
 
     override fun getName(): String = EventNotificationHandler::class.java.simpleName
 
-    override fun getDefinitions(): Set<NotificationTypeChangeRequest> {
+    override fun getTypes(): Set<NotificationTypeChangeRequest> {
         return setOf(
             NotificationTypeChangeRequest(KEY_EVENT_CREATED, "Event created", ""),
             NotificationTypeChangeRequest(KEY_EVENT_UPDATED, "Event changed", ""),
@@ -40,9 +40,6 @@ class EventNotificationHandler(
             NotificationTypeChangeRequest(KEY_EVENT_UNPUBLISHED, "Event unpublished", ""),
         )
     }
-
-
-    private var notifyOwner: Boolean = false
 
     init {
         eventService.register(this)
@@ -71,8 +68,13 @@ class EventNotificationHandler(
     private fun getRecipients(actor: Account, event: Event): Set<Account> {
         val recipients = mutableSetOf<Account>()
         val changeByOwner = actor.id == event.owner.id
-        if (!changeByOwner && notifyOwner) {
+        if (!changeByOwner) {
             recipients.add(event.owner)
+        }
+        val registration = registrationService.findByEvent(event)
+        if (registration != null) {
+            val participants = registrationService.getParticipants(registration.id)
+            participants.forEach { recipients.add(it.author) }
         }
         return recipients
     }

@@ -53,4 +53,8 @@ class NotificationTypeStorageService(
         return repository.findByKey(key)?.convert()
     }
 
+    override fun findByKeys(keys: Set<String>): List<NotificationType> {
+        return repository.findByKeyIn(keys).map { it.convert() }
+    }
+
 }

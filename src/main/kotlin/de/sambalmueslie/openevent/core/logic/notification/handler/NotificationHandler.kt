@@ -4,5 +4,5 @@ import de.sambalmueslie.openevent.core.model.NotificationTypeChangeRequest
 
 interface NotificationHandler {
     fun getName(): String
-    fun getDefinitions(): Set<NotificationTypeChangeRequest>
+    fun getTypes(): Set<NotificationTypeChangeRequest>
 }

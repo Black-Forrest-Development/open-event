@@ -1,5 +1,6 @@
 package de.sambalmueslie.openevent.core.logic
 
+import de.sambalmueslie.openevent.TimeBasedTest
 import de.sambalmueslie.openevent.core.logic.category.CategoryChangeListener
 import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.model.AccountChangeRequest
@@ -15,7 +16,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @MicronautTest
-class CategoryCrudServiceTest {
+class CategoryCrudServiceTest : TimeBasedTest() {
 
     @Inject
     lateinit var accountStorage: AccountStorage

@@ -6,4 +6,5 @@ import de.sambalmueslie.openevent.core.model.NotificationTypeChangeRequest
 
 interface NotificationTypeStorage : Storage<Long, NotificationType, NotificationTypeChangeRequest> {
     fun findByKey(key: String): NotificationType?
+    fun findByKeys(keys: Set<String>): List<NotificationType>
 }

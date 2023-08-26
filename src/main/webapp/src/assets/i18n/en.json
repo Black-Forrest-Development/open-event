@@ -7,7 +7,8 @@
     "next": "Next",
     "back": "Back",
     "submit": "Submit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "help": "Help"
   },
   "event": {
     "search": "Search for event",
@@ -21,7 +22,8 @@
     "step": {
       "event": "Event",
       "location": "Location",
-      "registration": "Registration"
+      "registration": "Registration",
+      "incomplete": "Missing required fields"
     },
     "change": {
       "create": "Create new event",
@@ -49,6 +51,11 @@
         "startTime": "The time the event begins",
         "endTime": "The time the event probably ends",
         "maxGuest": "How many guests coult attend to the event"
+      },
+      "error": {
+        "title": "Please input some title",
+        "shortText": "Please input some short description",
+        "longText": "Please input some long description"
       }
     }
   },

@@ -7,7 +7,8 @@
     "next": "Weiter",
     "back": "Zurück",
     "submit": "Speichern",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "help": "Hilfe"
   },
   "event": {
     "search": "Suche nach einer Veranstaltung",
@@ -21,7 +22,8 @@
     "step": {
       "event": "Veranstaltung",
       "location": "Addresse",
-      "registration": "Sonstiges"
+      "registration": "Sonstiges",
+      "incomplete": "Angaben unvollständig"
     },
     "change": {
       "create": "Neue Veranstaltung erstellen",
@@ -49,6 +51,11 @@
         "startTime": "Beginn der Veranstaltung",
         "endTime": "Voraussichtliches Ende der Veranstaltung",
         "maxGuest": "Wie viele Besucher/Gäste können an der Veranstaltung teilnehmen?"
+      },
+      "error": {
+        "title": "Bitte einen Titel angeben",
+        "shortText": "Bitte einen Kurztext angeben",
+        "longText": "Bitte eine Beschreibung angeben"
       }
     }
   },

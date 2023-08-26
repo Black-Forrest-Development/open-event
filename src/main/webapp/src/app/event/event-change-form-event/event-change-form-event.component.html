@@ -7,7 +7,7 @@
         <input matInput #titleInput formControlName="title" maxlength="40">
         <mat-hint align="end">{{titleInput.value?.length || 0}}/40</mat-hint>
         <mat-error *ngIf="!title?.valid && title?.touched">
-          {{'event.form.titleError' | translate}}
+          {{'event.form.error.title' | translate}}
         </mat-error>
       </mat-form-field>
       <!-- shortText-->
@@ -16,11 +16,17 @@
         <input matInput formControlName="shortText">
         <mat-hint align="start">{{'event.form.hint.shortText'| translate}}</mat-hint>
         <mat-error *ngIf="!shortText?.valid && shortText?.touched">
-          {{'event.form.shortTextError' | translate}}
+          {{'event.form.error.shortText' | translate}}
         </mat-error>
       </mat-form-field>
       <!-- longText-->
-      <quill-editor formControlName="longText" placeholder="{{'event.form.hint.LongDescr' | translate}}" class="pb-3"></quill-editor>
+      <div class="d-flex flex-column pb-3">
+        <quill-editor formControlName="longText" placeholder="{{'event.form.longText' | translate}}*" [required]="true"></quill-editor>
+        <mat-hint align="end" class="ps-3" *ngIf="longText?.valid">{{'event.form.hint.LongDescr' | translate}}</mat-hint>
+        <mat-error *ngIf="!longText?.valid && longText?.touched" class="ps-3">
+          {{'event.form.error.longText' | translate}}
+        </mat-error>
+      </div>
       <!-- imageUrl-->
       <mat-form-field *ngIf="isVisible('imageUrl')" class="dense-1">
         <mat-label>{{'event.form.imageUrl' | translate}}</mat-label>

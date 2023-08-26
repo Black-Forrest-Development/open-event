@@ -10,11 +10,13 @@ import * as moment from "moment";
 import {Moment} from "moment";
 import {LocationChangeRequest} from "../../location/model/location-api";
 import {RegistrationChangeRequest} from "../../registration/model/registration-api";
+import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 
 @Component({
   selector: 'app-event-change',
   templateUrl: './event-change.component.html',
-  styleUrls: ['./event-change.component.scss']
+  styleUrls: ['./event-change.component.scss'],
+  providers: [{provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true},},],
 })
 export class EventChangeComponent {
 
@@ -28,6 +30,8 @@ export class EventChangeComponent {
 
   event: EventInfo | undefined
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
+
+  helpVisible: boolean = true
 
   constructor(
     private fb: FormBuilder,
@@ -278,4 +282,7 @@ export class EventChangeComponent {
     return this.hiddenFields.find(f => f === 'endDate') != null
   }
 
+  toggleHelp(step: string) {
+    this.helpVisible = !this.helpVisible
+  }
 }

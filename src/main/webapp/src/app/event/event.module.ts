@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 import {EventRoutingModule} from './event-routing.module';
 import {MaterialModule} from "../material/material.module";
@@ -26,6 +26,7 @@ import {EventBoardTableComponent} from './event-board-table/event-board-table.co
 import {EventDetailsHeaderComponent} from './event-details-header/event-details-header.component';
 import {RegistrationModule} from "../registration/registration.module";
 import {QuillModule} from "ngx-quill";
+import {EventChangeHelpComponent} from './event-change-help/event-change-help.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {QuillModule} from "ngx-quill";
     EventBoardListComponent,
     EventBoardListEntryComponent,
     EventBoardTableComponent,
-    EventDetailsHeaderComponent
+    EventDetailsHeaderComponent,
+    EventChangeHelpComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import {QuillModule} from "ngx-quill";
     LocationModule,
     ChipSelectModule,
     RegistrationModule,
-    QuillModule
+    QuillModule,
+    NgOptimizedImage
   ]
 })
 export class EventModule {

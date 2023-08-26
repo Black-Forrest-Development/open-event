@@ -174,6 +174,7 @@ CREATE TABLE mail_job_history
 );
 
 
+
 -- setting
 CREATE SEQUENCE setting_seq;
 CREATE TABLE setting

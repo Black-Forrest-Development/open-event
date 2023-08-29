@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
 import {Principal} from "./principal";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class AuthService {
 
 
   public logout() {
-    this.keycloak.logout("/").then()
+    this.keycloak.logout(environment.logoutUrl).then()
   }
 
   public getPrincipal(): Principal | undefined {

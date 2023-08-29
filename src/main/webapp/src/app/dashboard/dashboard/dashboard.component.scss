@@ -27,6 +27,8 @@
   color: black;
 }
 
-.mat-nav-list a.active {
-
+.active {
+  border-color: #388e3c;
+  border-width: 1px 1px 1px 5px;
+  border-style: solid;
 }

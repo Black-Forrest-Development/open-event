@@ -8,9 +8,14 @@
     "back": "Back",
     "submit": "Submit",
     "cancel": "Cancel",
-    "help": "Help"
+    "help": "Help",
+    "yes": "Yes",
+    "no": "No",
+    "logout": "Logout",
+    "collapse": "Collapse"
   },
   "event": {
+    "type": "Event",
     "search": "Search for event",
     "create": "Create new event",
     "action": {
@@ -57,6 +62,12 @@
         "shortText": "Please input some short description",
         "longText": "Please input some long description"
       }
+    },
+    "dialog": {
+      "delete": {
+        "title": "Delete event",
+        "question": "Do you really want to delete the event?"
+      }
     }
   },
   "registration": {
@@ -100,12 +111,29 @@
     },
     "status": {
       "full": "Full",
-      "available": "Available"
+      "available": "{{remaining}} of {{available}} available seats"
     },
     "form": {
       "firstName": "First Name",
       "lastName": "Last Name",
       "email": "Email"
+    }
+  },
+  "category": {
+    "type": "Category"
+  },
+  "settings": {
+    "type": "Settings"
+  },
+  "cache": {
+    "type": "Cache"
+  },
+  "user": {
+    "logout": {
+      "confirm": {
+        "Title": "Confirm Logout",
+        "Text": "Do you realy want to logout?"
+      }
     }
   }
 }

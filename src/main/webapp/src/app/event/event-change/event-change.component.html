@@ -10,7 +10,7 @@
 <div class="d-flex flex-row gap-2 justify-content-start align-content-stretch">
   <div class="d-flex flex-column gap-2 p-2 flex-fill">
     <mat-card>
-      <mat-stepper orientation="horizontal" #stepper>
+      <mat-stepper [orientation]="(stepperOrientation | async)!" #stepper>
         <mat-step [stepControl]="eventForm" label="{{'event.step.event' | translate}}"
                   errorMessage="{{'event.step.incomplete' | translate}}">
           <app-event-change-form-event [form]="eventForm" [hiddenFields]="hiddenFields"></app-event-change-form-event>

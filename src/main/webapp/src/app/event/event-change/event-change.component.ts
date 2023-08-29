@@ -10,7 +10,9 @@ import * as moment from "moment";
 import {Moment} from "moment";
 import {LocationChangeRequest} from "../../location/model/location-api";
 import {RegistrationChangeRequest} from "../../registration/model/registration-api";
-import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
+import {BreakpointObserver} from "@angular/cdk/layout";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-event-change',
@@ -31,7 +33,9 @@ export class EventChangeComponent {
   event: EventInfo | undefined
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
-  helpVisible: boolean = true
+  helpVisible: boolean = false
+
+  stepperOrientation: Observable<StepperOrientation>
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +44,8 @@ export class EventChangeComponent {
     private toastService: HotToastService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    breakpointObserver: BreakpointObserver
   ) {
     this.eventForm = this.fb.group({
       startTime: this.fb.control('', Validators.required),
@@ -75,6 +80,10 @@ export class EventChangeComponent {
       location: this.locationForm,
       registration: this.registrationForm
     })
+
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
 
   ngOnInit() {

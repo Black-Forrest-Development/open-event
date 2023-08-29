@@ -124,6 +124,8 @@ dependencies {
 
     // solr
     implementation("org.apache.solr:solr-solrj:9.3.0")
+    // jsoup
+    implementation("org.jsoup:jsoup:1.16.1")
 }
 
 java {

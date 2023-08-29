@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./auth/auth.guard";
 import {AuthService} from "./auth/auth.service";
+import {PageNotFoundComponent} from "./dashboard/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'event'},
@@ -24,6 +25,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: [AuthService.CACHE_READ, AuthService.CACHE_WRITE]}
   },
+  {
+    path: '**', component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

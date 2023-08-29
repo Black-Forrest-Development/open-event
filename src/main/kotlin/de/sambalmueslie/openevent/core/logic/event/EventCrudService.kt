@@ -2,7 +2,6 @@ package de.sambalmueslie.openevent.core.logic.event
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 class EventCrudService(
-    private val accountCrudService: AccountCrudService,
     private val storage: EventStorage,
     private val locationCrudService: LocationCrudService,
     private val registrationCrudService: RegistrationCrudService,

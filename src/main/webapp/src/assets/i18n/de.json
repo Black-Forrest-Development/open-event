@@ -8,9 +8,14 @@
     "back": "Zurück",
     "submit": "Speichern",
     "cancel": "Abbrechen",
-    "help": "Hilfe"
+    "help": "Hilfe",
+    "yes": "Ja",
+    "no": "Nein",
+    "logout": "Ausloggen",
+    "collapse": "Collapse"
   },
   "event": {
+    "type": "Veranstaltungen",
     "search": "Suche nach einer Veranstaltung",
     "create": "Neue Veranstaltung erstellen",
     "action": {
@@ -57,6 +62,12 @@
         "shortText": "Bitte einen Kurztext angeben",
         "longText": "Bitte eine Beschreibung angeben"
       }
+    },
+    "dialog": {
+      "delete": {
+        "title": "Veranstaltung löschen",
+        "question": "Soll die Veranstaltung wirklich gelöscht werden?"
+      }
     }
   },
   "registration": {
@@ -100,12 +111,29 @@
     },
     "status": {
       "full": "Ausgebucht",
-      "available": "Plätze frei"
+      "available": "{{remaining}} von {{available}} Plätzen frei"
     },
     "form": {
       "firstName": "Vorname",
       "lastName": "Familienname",
       "email": "Email"
+    }
+  },
+  "category": {
+    "type": "Kategorien"
+  },
+  "settings": {
+    "type": "Einstellungen"
+  },
+  "cache": {
+    "type": "Cache"
+  },
+  "user": {
+    "logout": {
+      "confirm": {
+        "Title": "Ausloggen bestätigen",
+        "Text": "Wollen Sie sich wirklich ausloggen?"
+      }
     }
   }
 }

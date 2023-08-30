@@ -7,7 +7,6 @@ import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import de.sambalmueslie.openevent.storage.BaseStorageService
-import de.sambalmueslie.openevent.storage.registration.RegistrationStorageService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -21,7 +20,6 @@ class EventStorageService(
 
     private val categoryRelationService: EventCategoryRelationService,
     private val announcementRelationService: EventAnnouncementRelationService,
-    private val registrationService: RegistrationStorageService,
 
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
@@ -81,6 +79,11 @@ class EventStorageService(
 
     override fun getCategoriesByEventIds(eventIds: Set<Long>): Map<Long, List<Category>> {
         return categoryRelationService.getByEventIds(eventIds)
+    }
+
+    override fun deleteDependencies(data: EventData) {
+        announcementRelationService.delete(data)
+        categoryRelationService.delete(data)
     }
 
     override fun getAnnouncements(event: Event, pageable: Pageable): Page<Announcement> {

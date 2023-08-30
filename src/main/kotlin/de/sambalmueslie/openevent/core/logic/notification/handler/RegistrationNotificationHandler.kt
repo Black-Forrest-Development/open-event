@@ -80,58 +80,45 @@ class RegistrationNotificationHandler(
         participant: Participant,
         status: ParticipateStatus
     ) {
-        val event = eventService.get(registration.eventId)
-        if (event != null) {
-            service.process(NotificationEvent(KEY_PARTICIPANT_CHANGED, actor, registration), listOf(event.owner))
+        val event = eventService.get(registration.eventId) ?: return logger.error("Cannot find event for registration ${registration.id}")
+        val location = eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
+        val content = RegistrationEventContent(event, registration, participant, location)
+
+        service.process(NotificationEvent(KEY_PARTICIPANT_CHANGED, actor, content), listOf(event.owner))
+
+        val eventType = when (status) {
+            ParticipateStatus.ACCEPTED -> KEY_PARTICIPANT_ACCEPTED
+            ParticipateStatus.DECLINED -> KEY_PARTICIPANT_DECLINED
+            ParticipateStatus.WAITING_LIST -> KEY_PARTICIPANT_WAITLIST
+            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> KEY_PARTICIPANT_WAITLIST
+            else -> null
+        }
+        if (eventType == null) {
+            logger.error("Unconsidered participant status $status")
+            return
         }
 
-        when (status) {
-            ParticipateStatus.ACCEPTED -> service.process(
-                NotificationEvent(
-                    KEY_PARTICIPANT_ACCEPTED,
-                    actor,
-                    registration
-                ), listOf(participant.author)
-            )
-
-            ParticipateStatus.DECLINED -> service.process(
-                NotificationEvent(
-                    KEY_PARTICIPANT_DECLINED,
-                    actor,
-                    registration
-                ), listOf(participant.author)
-            )
-
-            ParticipateStatus.WAITING_LIST -> service.process(
-                NotificationEvent(
-                    KEY_PARTICIPANT_WAITLIST,
-                    actor,
-                    registration
-                ), listOf(participant.author)
-            )
-
-            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> service.process(
-                NotificationEvent(
-                    KEY_PARTICIPANT_WAITLIST,
-                    actor,
-                    registration
-                ), listOf(participant.author)
-            )
-
-            else -> logger.error("Unconsidered participant status $status")
-        }
+        service.process(
+            NotificationEvent(
+                eventType,
+                actor,
+                content
+            ), listOf(participant.author)
+        )
     }
 
     override fun participantRemoved(actor: Account, registration: Registration, participant: Participant) {
-        val event = eventService.get(registration.eventId)
-        if (event != null) {
-            service.process(NotificationEvent(KEY_PARTICIPANT_REMOVED, actor, registration), listOf(event.owner))
-        }
+        val event = eventService.get(registration.eventId) ?: return logger.error("Cannot find event for registration ${registration.id}")
+        val location = eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
+        val content = RegistrationEventContent(event, registration, participant, location)
+
+        service.process(NotificationEvent(KEY_PARTICIPANT_REMOVED, actor, content), listOf(event.owner))
+
         service.process(
             NotificationEvent(
                 KEY_PARTICIPANT_DECLINED,
                 actor,
-                registration
+                content
             ), listOf(participant.author)
         )
     }

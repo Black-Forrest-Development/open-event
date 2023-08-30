@@ -33,7 +33,7 @@ class SimpleJavaMailClient(
     private val mailer = MailerBuilder
         .withSMTPServer(config.server, config.port, config.username, config.password)
         .withTransportStrategy(TransportStrategy.SMTPS)
-        .withDebugLogging(true)
+        .withDebugLogging(false)
         .buildMailer()
 
     override fun send(

@@ -19,4 +19,8 @@ data class Location(
 
     val size: Int
 
-) : BusinessObject<Long>
+) : BusinessObject<Long> {
+    fun format(): String {
+        return "$street $streetNumber, $zip $city"
+    }
+}

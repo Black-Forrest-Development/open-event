@@ -48,7 +48,7 @@ data class EventData(
                 request.iconUrl,
                 request.location != null,
                 true,
-                false,
+                request.published,
                 timestamp
             )
         }

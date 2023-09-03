@@ -127,8 +127,9 @@ export class EventChangeComponent {
   }
 
   private handleDataCopy(e: EventInfo) {
-
-    this.reloading = true
+    this.initValues(e)
+    this.translationService.get("event.change.copy", {event: e.event.shortText}).subscribe(text => this.title = text);
+    this.reloading = false
   }
 
   private handleDataEdit(e: EventInfo) {
@@ -272,7 +273,8 @@ export class EventChangeComponent {
       value.event.iconUrl,
       value.registration.categories,
       location,
-      registration
+      registration,
+      true
     )
   }
 

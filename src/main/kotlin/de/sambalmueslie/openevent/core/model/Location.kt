@@ -7,6 +7,8 @@ import io.micronaut.serde.annotation.Serdeable
 data class Location(
     override val id: Long,
 
+    val eventId: Long,
+
     val street: String,
     val streetNumber: String,
     val zip: String,

@@ -95,9 +95,12 @@ class EventStorageService(
     }
 
     override fun getAllForAccount(account: Account, pageable: Pageable): Page<Event> {
-        return repository.findByOwnerIdOrPublishedTrue(account.id, pageable).let { converter.convert(it) }
+        return repository.findForUser(account.id, pageable).let { converter.convert(it) }
     }
 
+    override fun getAll(pageable: Pageable): Page<Event> {
+        return repository.findAllOrderByStart(pageable).let { converter.convert(it) }
+    }
 
 
 }

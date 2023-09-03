@@ -5,7 +5,7 @@ plugins {
     id("org.sonarqube") version "4.3.0.3225"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.3.2"
-    id("io.micronaut.application") version "4.0.2"
+    id("io.micronaut.application") version "4.0.3"
     id("io.micronaut.aot") version "4.0.3"
     jacoco
 }

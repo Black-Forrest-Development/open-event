@@ -27,6 +27,8 @@ export class AuthService {
   public static EVENT_WRITE = "openevent.event.write"
   public static EVENT_ADMIN = "openevent.event.admin"
 
+  public static MAIL_READ = "openevent.mail.read"
+  public static MAIL_WRITE = "openevent.mail.write"
 
   private principal: Principal | undefined;
 

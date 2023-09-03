@@ -29,6 +29,7 @@ export class DashboardComponent implements AfterViewInit {
     new MainNavItem('/event', 'event.type', 'event_note'),
     new MainNavItem('/category', 'category.type', 'label', [AuthService.CATEGORY_WRITE]),
     new MainNavItem('/settings', 'settings.type', 'settings_applications', [AuthService.SETTINGS_READ, AuthService.SETTINGS_WRITE]),
+    new MainNavItem('/mail', 'mail.type', 'email', [AuthService.MAIL_READ, AuthService.MAIL_WRITE]),
     new MainNavItem('/cache', 'cache.type', 'memory', [AuthService.CACHE_READ, AuthService.CACHE_WRITE]),
 
 

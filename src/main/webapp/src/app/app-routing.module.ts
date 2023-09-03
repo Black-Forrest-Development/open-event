@@ -26,6 +26,12 @@ const routes: Routes = [
     data: {roles: [AuthService.CACHE_READ, AuthService.CACHE_WRITE]}
   },
   {
+    path: 'mail',
+    loadChildren: () => import('./mail/mail.module').then(m => m.MailModule),
+    canActivate: [AuthGuard],
+    data: {roles: [AuthService.MAIL_READ, AuthService.MAIL_WRITE]}
+  },
+  {
     path: '**', component: PageNotFoundComponent
   }
 ];

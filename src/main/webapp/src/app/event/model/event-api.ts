@@ -40,7 +40,8 @@ export class EventChangeRequest {
     public iconUrl: string,
     public categoryIds: number[],
     public location: LocationChangeRequest,
-    public registration: RegistrationChangeRequest
+    public registration: RegistrationChangeRequest,
+    public published: boolean
   ) {
   }
 }

@@ -102,6 +102,15 @@ dependencies {
     implementation("org.apache.velocity:velocity-engine-core:2.3")
     implementation("org.apache.velocity.tools:velocity-tools-generic:3.1")
 
+    // FOP
+    implementation("org.apache.xmlgraphics:fop:2.9")
+    implementation("org.apache.xmlgraphics:xmlgraphics-commons:2.9")
+
+
+    // qrcode
+    implementation("com.google.zxing:core:3.5.0")
+    implementation("com.google.zxing:javase:3.5.0")
+
     // POI
     implementation("org.apache.poi:poi:5.2.3")
     implementation("org.apache.poi:poi-ooxml:5.2.3")

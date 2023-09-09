@@ -3,7 +3,7 @@ import {BaseService} from "../../shared/model/base-service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/model/page";
-import {Event, EventChangeRequest, EventInfo, PatchRequest} from "./event-api";
+import {Event, EventChangeRequest, EventInfo, EventStats, PatchRequest} from "./event-api";
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +50,14 @@ export class EventService extends BaseService {
   deleteEvent(id: number): Observable<Event> {
     return this.delete('' + id)
   }
+
+  buildIndex(): Observable<any> {
+    return this.post('search', {})
+  }
+
+  getStats(): Observable<EventStats[]> {
+    return this.get('stats')
+  }
+
+
 }

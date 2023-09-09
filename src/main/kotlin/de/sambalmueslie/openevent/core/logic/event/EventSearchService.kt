@@ -66,4 +66,5 @@ open class EventSearchService(
     override fun handleDeleted(actor: Account, obj: Event) {
         super.handleRemoved(obj)
     }
+
 }

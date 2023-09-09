@@ -20,15 +20,15 @@ class ExportService(
         private val logger: Logger = LoggerFactory.getLogger(ExportService::class.java)
     }
 
-    fun exportEventsPdf(): SystemFile? {
-        return exportEvents(pdfExporter)
+    fun exportEventsPdf(account: Account): SystemFile? {
+        return exportEvents(account, pdfExporter)
     }
 
-    fun exportEventsExcel(): SystemFile? {
-        return exportEvents(excelExporter)
+    fun exportEventsExcel(account: Account): SystemFile? {
+        return exportEvents(account, excelExporter)
     }
 
-    private fun exportEvents(exporter: EventExporter): SystemFile? {
+    private fun exportEvents(account: Account, exporter: EventExporter): SystemFile? {
         return exporter.exportEvents { PageableSequence { eventService.getInfos(it) } }
     }
 

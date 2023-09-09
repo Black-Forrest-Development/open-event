@@ -4,7 +4,9 @@ package de.sambalmueslie.openevent.core.logic.export
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
-import de.sambalmueslie.openevent.core.model.EventInfo
+import de.sambalmueslie.openevent.api.SettingsAPI
+import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.core.io.ResourceLoader
 import io.micronaut.http.server.types.files.SystemFile
@@ -30,9 +32,11 @@ import javax.xml.transform.sax.SAXResult
 import javax.xml.transform.stream.StreamSource
 import kotlin.jvm.optionals.getOrNull
 
+
 @Singleton
 class EventPdfExporter(
     private val loader: ResourceLoader,
+    private val settingsService: SettingsService,
     private val timeProvider: TimeProvider
 ) : EventExporter {
 
@@ -44,7 +48,7 @@ class EventPdfExporter(
     }
 
     private val config = loader.getResource("classpath:fop/fop.xconf").getOrNull()!!
-    private val fopFactory: FopFactory = FopFactory.newInstance(config.toURI())
+    private val fopFactory: FopFactory = FopFactory.newInstance(File(config.toURI()))
     private val ve = VelocityEngine()
 
     init {
@@ -52,33 +56,55 @@ class EventPdfExporter(
     }
 
     override fun exportEvents(provider: () -> Sequence<EventInfo>): SystemFile? {
-        TODO("Not yet implemented")
+        val infos = provider.invoke().toList()
+        return renderPdf(infos)
     }
 
     override fun exportEvent(info: EventInfo): SystemFile? {
+        return renderPdf(listOf(info))
+    }
 
+    private fun createQrCode(event: Event): String {
         val barcodeWriter = QRCodeWriter()
-        val url = "https://open.psm.church/event/details/" + info.event.id
-        val bitMatrix = barcodeWriter.encode(url, BarcodeFormat.QR_CODE, 250, 250)
+        val url = settingsService.findByKey(SettingsAPI.SETTINGS_PDF_EVENT_DETAILS_URL)?.value ?: ""
+        val eventUrl = "${url}${event.id}"
+        val bitMatrix = barcodeWriter.encode(eventUrl, BarcodeFormat.QR_CODE, 250, 250)
         val qrCodeImage = MatrixToImageWriter.toBufferedImage(bitMatrix)
         val qrCodeByteArray = ByteArrayOutputStream()
         ImageIO.write(qrCodeImage, "png", qrCodeByteArray)
+        return Base64.getEncoder().encodeToString(qrCodeByteArray.toByteArray())
+    }
 
-        val registration = info.registration
-        val availableSpace = registration?.let {
+    private fun getAvailableSpace(registration: Registration): List<Char> {
+        return registration.let {
             generateSequence { 's' }.take(6).toList()
-        } ?: emptyList<Char>()
+        }
+    }
+
+    private fun getContent(info: EventInfo): EventPdfContent? {
+        val event: Event = info.event
+        val location: Location = info.location ?: return null
+        val registration: RegistrationInfo = info.registration ?: return null
+        val categories: List<Category> = info.categories
+
+        val qrCode = createQrCode(info.event)
+        val availableSpace = getAvailableSpace(registration.registration)
+
+        return EventPdfContent(event, location, registration, categories, qrCode, availableSpace)
+    }
+
+    private fun renderPdf(infos: List<EventInfo>): SystemFile? {
+        val content = infos.mapNotNull { getContent(it) }
+
         val properties = mapOf(
             Pair("esc", EscapeTool()),
-            Pair("user", info.event.owner),
-            Pair("info", info),
-            Pair("availableSpace", availableSpace),
-            Pair("qr", Base64.getEncoder().encodeToString(qrCodeByteArray.toByteArray())),
+            Pair("content", content),
+            Pair("logo", settingsService.findByKey(SettingsAPI.SETTINGS_PDF_LOGO_URL)?.value ?: ""),
+            Pair("image", settingsService.findByKey(SettingsAPI.SETTINGS_PDF_IMAGE_URL)?.value ?: ""),
             Pair("date", formatter.format(LocalDateTime.now(ZoneId.of("Europe/Berlin"))))
         )
         val context = VelocityContext(properties)
         val writer = StringWriter()
-
 
         ve.evaluate(
             context,
@@ -103,6 +129,7 @@ class EventPdfExporter(
         val date = timeProvider.now().toLocalDate()
         val filename = "${date}-event-export.pdf"
         return SystemFile(file).attach(filename)
+
     }
 
 

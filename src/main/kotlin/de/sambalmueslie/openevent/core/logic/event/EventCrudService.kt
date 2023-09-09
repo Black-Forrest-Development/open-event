@@ -7,6 +7,7 @@ import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.core.storage.EventStorage
+import de.sambalmueslie.openevent.storage.util.PageableSequence
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -113,6 +114,43 @@ class EventCrudService(
                 canEdit[it.id] ?: false
             )
         }
+    }
+
+    fun getStats(): List<EventStats> {
+        return PageableSequence { getInfos(it) }.mapNotNull { convertStats(it) }.toList()
+    }
+
+    private fun convertStats(info: EventInfo): EventStats? {
+        val registration = info.registration ?: return null
+
+        val totalAmount = registration.registration.maxGuestAmount
+
+        var participantsSize = 0L
+        var participantsAmount = 0L
+        var waitingListSize = 0L
+        var waitingListAmount = 0L
+
+        registration.participants.forEach { p ->
+            if (p.waitingList) {
+                waitingListSize++
+                waitingListAmount += p.size
+            } else {
+                participantsSize++
+                participantsAmount += p.size
+            }
+        }
+
+        val isFull = totalAmount in 1..participantsAmount
+        val isEmpty = participantsSize <= 0
+        return EventStats(
+            info.event,
+            isFull,
+            isEmpty,
+            participantsSize,
+            participantsAmount,
+            waitingListSize,
+            waitingListAmount
+        )
     }
 
 

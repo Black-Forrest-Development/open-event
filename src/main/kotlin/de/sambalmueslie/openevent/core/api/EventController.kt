@@ -125,10 +125,14 @@ class EventController(
 
     @Post("/search")
     fun buildIndex(auth: Authentication) {
-        return auth.checkPermission(CategoryAPI.PERMISSION_ADMIN) {
+        return auth.checkPermission(PERMISSION_ADMIN) {
             search.createIndex()
             HttpResponse.created("")
         }
+    }
 
+    @Get("/stats")
+    override fun getStats(auth: Authentication): List<EventStats> {
+        return auth.checkPermission(CategoryAPI.PERMISSION_ADMIN) { service.getStats() }
     }
 }

@@ -31,6 +31,7 @@ export class DashboardComponent implements AfterViewInit {
     new MainNavItem('/settings', 'settings.type', 'settings_applications', [AuthService.SETTINGS_READ, AuthService.SETTINGS_WRITE]),
     new MainNavItem('/mail', 'mail.type', 'email', [AuthService.MAIL_READ, AuthService.MAIL_WRITE]),
     new MainNavItem('/cache', 'cache.type', 'memory', [AuthService.CACHE_READ, AuthService.CACHE_WRITE]),
+    new MainNavItem('/backoffice', 'backoffice.type', 'admin_panel_settings', [AuthService.BACKOFFICE_ACCESS]),
 
 
     // new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),

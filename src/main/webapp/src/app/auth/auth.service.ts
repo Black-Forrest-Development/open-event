@@ -14,6 +14,7 @@ export class AuthService {
 
   public static CATEGORY_READ = "openevent.category.read"
   public static CATEGORY_WRITE = "openevent.category.write"
+  public static CATEGORY_ADMIN = "openevent.category.admin"
 
   public static REGISTRATION_READ = "openevent.registration.read"
   public static REGISTRATION_WRITE = "openevent.registration.write"
@@ -27,10 +28,19 @@ export class AuthService {
   public static EVENT_WRITE = "openevent.event.write"
   public static EVENT_ADMIN = "openevent.event.admin"
 
+
+  public static ACCOUNT_READ = "openevent.account.read"
+  public static ACCOUNT_WRITE = "openevent.account.write"
+  public static ACCOUNT_ADMIN = "openevent.account.admin"
+
   public static MAIL_READ = "openevent.mail.read"
   public static MAIL_WRITE = "openevent.mail.write"
 
+  static BACKOFFICE_ACCESS = "openevent.backoffice.access";
+  static PERMISSION_EXPORT = "openevent.export";
+
   private principal: Principal | undefined;
+
 
   constructor(private keycloak: KeycloakService) {
     try {

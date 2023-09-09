@@ -32,6 +32,12 @@ const routes: Routes = [
     data: {roles: [AuthService.MAIL_READ, AuthService.MAIL_WRITE]}
   },
   {
+    path: 'backoffice',
+    loadChildren: () => import('./backoffice/backoffice.module').then(m => m.BackofficeModule),
+    canActivate: [AuthGuard],
+    data: {roles: [AuthService.BACKOFFICE_ACCESS]}
+  },
+  {
     path: '**', component: PageNotFoundComponent
   }
 ];

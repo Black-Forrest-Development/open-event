@@ -12,7 +12,9 @@
     "yes": "Ja",
     "no": "Nein",
     "logout": "Ausloggen",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "close": "Schliesen",
+    "ok": "Ok"
   },
   "event": {
     "type": "Veranstaltungen",
@@ -133,6 +135,56 @@
       "confirm": {
         "Title": "Ausloggen bestätigen",
         "Text": "Wollen Sie sich wirklich ausloggen?"
+      }
+    }
+  },
+  "account": {
+    "search": "Suche nach Benutzer",
+    "dialog": {
+      "create": {
+        "title": "Neuen Benutzer erstellen"
+      },
+      "search": {
+        "title": "Existierende Benutzer durchsuchen"
+      }
+    },
+    "form": {
+      "name": "Name",
+      "firstName": "Vorname",
+      "lastName": "Familienname",
+      "email": "Email"
+    },
+    "message": {
+      "created": "Benutzer erfolgreich erstellt"
+    }
+  },
+  "backoffice": {
+    "title": "Backoffice",
+    "stats": {
+      "title": "Statistik"
+    },
+    "export": {
+      "title": "Export",
+      "action": {
+        "all": "Export aller Veranstaltungen"
+      }
+    },
+    "account": {
+      "title": "Benutzer",
+      "action": {
+        "search": "Benutzer durchsuchen",
+        "create": "Benutzer erstellen"
+      }
+    },
+    "event": {
+      "title": "Veranstaltung"
+    },
+    "solr": {
+      "title": "Suche",
+      "action": {
+        "account": "Benutzer Index neu erstellen",
+        "category": "Kategorie Index neu erstellen",
+        "event": "Veranstaltung Index neu erstellen"
       }
     }
   }

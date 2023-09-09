@@ -12,7 +12,9 @@
     "yes": "Yes",
     "no": "No",
     "logout": "Logout",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "close": "Close",
+    "ok": "Ok"
   },
   "event": {
     "type": "Event",
@@ -133,6 +135,56 @@
       "confirm": {
         "Title": "Confirm Logout",
         "Text": "Do you realy want to logout?"
+      }
+    }
+  },
+  "account": {
+    "search": "Search for an account",
+    "dialog": {
+      "create": {
+        "title": "Create new manual account"
+      },
+      "search": {
+        "title": "Search for existing account"
+      }
+    },
+    "form": {
+      "name": "Name",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email"
+    },
+    "message": {
+      "created": "Account created successfully"
+    }
+  },
+  "backoffice": {
+    "title": "Backoffice",
+    "stats": {
+      "title": "Stats"
+    },
+    "export": {
+      "title": "Export",
+      "action": {
+        "all": "Export all events as pdf"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "action": {
+        "search": "Search for account",
+        "create": "Create account"
+      }
+    },
+    "event": {
+      "title": "Event"
+    },
+    "solr": {
+      "title": "Search",
+      "action": {
+        "account": "Reindex account",
+        "category": "Reindex category",
+        "event": "Reindex event"
       }
     }
   }

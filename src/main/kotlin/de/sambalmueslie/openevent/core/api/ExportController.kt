@@ -24,12 +24,18 @@ class ExportController(
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/pdf")
     override fun exportEventsPdf(auth: Authentication): SystemFile? {
-        return auth.checkPermission(PERMISSION_EXPORT) { service.exportEventsPdf() }
+        return auth.checkPermission(PERMISSION_EXPORT) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.exportEventsPdf(account)
+        }
     }
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/excel")
     override fun exportEventsExcel(auth: Authentication): SystemFile? {
-        return auth.checkPermission(PERMISSION_EXPORT) { service.exportEventsExcel() }
+        return auth.checkPermission(PERMISSION_EXPORT) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.exportEventsExcel(account)
+        }
     }
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/{eventId}/excel")

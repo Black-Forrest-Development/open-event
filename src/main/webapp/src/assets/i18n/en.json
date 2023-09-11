@@ -14,7 +14,8 @@
     "logout": "Logout",
     "collapse": "Collapse",
     "close": "Close",
-    "ok": "Ok"
+    "ok": "Ok",
+    "details": "Details"
   },
   "event": {
     "type": "Event",

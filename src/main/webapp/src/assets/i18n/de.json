@@ -14,7 +14,8 @@
     "logout": "Ausloggen",
     "collapse": "Collapse",
     "close": "Schliesen",
-    "ok": "Ok"
+    "ok": "Ok",
+    "details": "Details"
   },
   "event": {
     "type": "Veranstaltungen",

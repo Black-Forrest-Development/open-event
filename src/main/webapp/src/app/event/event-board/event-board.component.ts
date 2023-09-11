@@ -10,6 +10,7 @@ import {BreakpointObserver, BreakpointState} from "@angular/cdk/layout";
 export class EventBoardComponent {
 
   mobileView: boolean = false
+  mode: string = 'list'
 
   constructor(public service: EventBoardService, private responsive: BreakpointObserver) {
   }

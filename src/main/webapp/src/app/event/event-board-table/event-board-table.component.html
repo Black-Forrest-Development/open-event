@@ -1,4 +1,4 @@
-<mat-progress-bar mode="indeterminate" *ngIf="service.reloading"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="service.reloading | async"></mat-progress-bar>
 
 
 <div class="d-flex flex-column gap-2 p-2 ">

@@ -27,6 +27,10 @@ import {EventDetailsHeaderComponent} from './event-details-header/event-details-
 import {RegistrationModule} from "../registration/registration.module";
 import {QuillModule} from "ngx-quill";
 import {EventChangeHelpComponent} from './event-change-help/event-change-help.component';
+import {EventBoardMapComponent} from './event-board-map/event-board-map.component';
+import {EventBoardCalendarComponent} from './event-board-calendar/event-board-calendar.component';
+import {EventBoardMapPopupComponent} from './event-board-map-popup/event-board-map-popup.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 
 @NgModule({
@@ -44,27 +48,31 @@ import {EventChangeHelpComponent} from './event-change-help/event-change-help.co
         EventBoardListEntryComponent,
         EventBoardTableComponent,
         EventDetailsHeaderComponent,
-        EventChangeHelpComponent
+        EventChangeHelpComponent,
+        EventBoardMapComponent,
+        EventBoardCalendarComponent,
+        EventBoardMapPopupComponent
     ],
   exports: [
     EventChangeFormEventComponent,
     EventChangeFormLocationComponent,
     EventChangeFormRegistrationComponent
   ],
-    imports: [
-        CommonModule,
-        EventRoutingModule,
-        MaterialModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        HotToastModule,
-        AccountModule,
-        LocationModule,
-        ChipSelectModule,
-        RegistrationModule,
-        QuillModule,
-        NgOptimizedImage
-    ]
+  imports: [
+    CommonModule,
+    EventRoutingModule,
+    MaterialModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    HotToastModule,
+    AccountModule,
+    LocationModule,
+    ChipSelectModule,
+    RegistrationModule,
+    QuillModule,
+    NgOptimizedImage,
+    FullCalendarModule
+  ]
 })
 export class EventModule {
 }

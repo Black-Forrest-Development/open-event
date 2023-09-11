@@ -17,6 +17,7 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {AuthModule} from "./auth/auth.module";
 import {FALLBACK, GravatarModule, RATING} from "ngx-gravatar";
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,6 +78,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
       autoClose: true,
       position: 'top-center'
     }),
+    FullCalendarModule,
     // my modules
     DashboardModule,
     AuthModule,

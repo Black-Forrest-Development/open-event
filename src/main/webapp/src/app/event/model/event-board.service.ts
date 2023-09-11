@@ -3,13 +3,14 @@ import {EventService} from "./event.service";
 import {HotToastService} from "@ngneat/hot-toast";
 import {EventInfo} from "./event-api";
 import {Page} from "../../shared/model/page";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventBoardService {
 
-  reloading: boolean = false
+  reloading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   searching: boolean = false
   pageSize: number = 20
   pageIndex: number = 0
@@ -21,8 +22,8 @@ export class EventBoardService {
   }
 
   reload() {
-    if (this.reloading) return
-    this.reloading = true
+    if (this.reloading.value) return
+    this.reloading.next(true)
     if (this.query.length <= 0) {
       this.service.getEventInfos(this.pageIndex, this.pageSize).subscribe({
         next: value => this.handleData(value),
@@ -41,13 +42,13 @@ export class EventBoardService {
     this.pageSize = value.pageable.size
     this.pageIndex = value.pageable.number
     this.totalSize = value.totalSize
-    this.reloading = false
+    this.reloading.next(false)
     this.searching = false
   }
 
   private handleError(err: any) {
     // this.toast.error("Failed to load data")
-    this.reloading = false
+    this.reloading.next(false)
   }
 
   search(query: string) {

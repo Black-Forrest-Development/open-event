@@ -57,11 +57,11 @@ export class PatchRequest<T> {
 }
 
 export interface EventStats {
-   event: Event,
-   isFull: boolean,
-   isEmpty: boolean,
-   participantsSize: number,
-   participantsAmount: number,
-   waitingListSize: number,
-   waitingListAmount: number
+  event: Event,
+  isFull: boolean,
+  isEmpty: boolean,
+  participantsSize: number,
+  participantsAmount: number,
+  waitingListSize: number,
+  waitingListAmount: number
 }

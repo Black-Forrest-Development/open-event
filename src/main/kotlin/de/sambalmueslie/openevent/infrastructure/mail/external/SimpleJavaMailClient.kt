@@ -52,6 +52,7 @@ class SimpleJavaMailClient(
         builder.from(from.name, from.address)
         mail.plainText?.let { builder.withPlainText(it) }
         mail.htmlText?.let { builder.withHTMLText(it) }
+        mail.attachments.forEach { builder.withAttachment(it.name, it.data, it.mimeType) }
 
         val email = builder.buildEmail()
         try {

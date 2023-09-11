@@ -20,4 +20,5 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
     fun getCategories(auth: Authentication, id: Long): List<Category>
     fun search(auth: Authentication, query: String, pageable: Pageable): Page<EventInfo>
     fun getStats(auth: Authentication): List<EventStats>
+    fun create(auth: Authentication, ownerId: Long, request: EventChangeRequest): Event
 }

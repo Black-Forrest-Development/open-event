@@ -5,11 +5,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngneat/hot-toast";
 import {Location} from "@angular/common";
-import {EventChangeRequest, EventInfo,} from "../model/event-api";
+import {EventInfo,} from "../model/event-api";
 import * as moment from "moment";
-import {Moment} from "moment";
-import {LocationChangeRequest} from "../../location/model/location-api";
-import {RegistrationChangeRequest} from "../../registration/model/registration-api";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
@@ -203,7 +200,7 @@ export class EventChangeComponent {
 
   private update() {
     if (!this.event) return
-    let request = this.createRequest()
+    let request = this.service.createRequest(this.fg.value,this.isEndHidden() )
     if (!request) return
     this.service.updateEvent(this.event.event.id, request).subscribe({
       next: event => {
@@ -221,7 +218,7 @@ export class EventChangeComponent {
   }
 
   private create() {
-    let request = this.createRequest()
+    let request = this.service.createRequest(this.fg.value,this.isEndHidden() )
     if (!request) return
     this.service.createEvent(request).subscribe({
       next: event => {
@@ -236,57 +233,6 @@ export class EventChangeComponent {
         msg => this.toastService.error(msg)
       )
     })
-  }
-
-  private createRequest(): EventChangeRequest | undefined {
-    let value = this.fg.value
-    let start = this.createDateTime(value.event.startTime, value.event.startDate);
-    let endHidden = this.isEndHidden()
-    let end = endHidden ? this.createDateTime(value.event.endTime, value.event.startDate) : this.createDateTime(value.event.endTime, value.event.endDate);
-    if (!start || !end) return undefined
-
-    let location = new LocationChangeRequest(
-      value.location.street,
-      value.location.streetNumber,
-      value.location.zip,
-      value.location.city,
-      value.location.country,
-      value.location.additionalInfo,
-      0.0,
-      0.0,
-      -1
-    )
-    let registration = new RegistrationChangeRequest(
-      value.registration.maxGuestAmount,
-      value.registration.interestedAllowed,
-      value.registration.ticketsEnabled
-    )
-
-
-    return new EventChangeRequest(
-      start.format("YYYY-MM-DD[T]HH:mm:ss"),
-      end.format("YYYY-MM-DD[T]HH:mm:ss"),
-      value.event.title,
-      value.event.shortText,
-      value.event.longText,
-      value.event.imageUrl,
-      value.event.iconUrl,
-      value.registration.categories,
-      location,
-      registration,
-      true
-    )
-  }
-
-  private createDateTime(timeStr: string, date: any): Moment | undefined {
-    let mDate = moment(date)
-    let time = timeStr.split(":");
-    if (time.length == 2 && mDate.isValid()) {
-      mDate.hours(parseInt(time[0]));
-      mDate.minutes(parseInt(time[1]));
-      return mDate
-    }
-    return undefined;
   }
 
   private isEndHidden() {

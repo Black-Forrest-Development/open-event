@@ -30,36 +30,41 @@ import {EventChangeHelpComponent} from './event-change-help/event-change-help.co
 
 
 @NgModule({
-  declarations: [
-    EventBoardComponent,
-    EventBoardHeaderComponent,
-    EventChangeComponent,
-    EventDetailsComponent,
+    declarations: [
+        EventBoardComponent,
+        EventBoardHeaderComponent,
+        EventChangeComponent,
+        EventDetailsComponent,
+        EventChangeFormEventComponent,
+        EventChangeFormLocationComponent,
+        EventChangeFormRegistrationComponent,
+        EventMenuComponent,
+        EventDeleteDialogComponent,
+        EventBoardListComponent,
+        EventBoardListEntryComponent,
+        EventBoardTableComponent,
+        EventDetailsHeaderComponent,
+        EventChangeHelpComponent
+    ],
+  exports: [
     EventChangeFormEventComponent,
     EventChangeFormLocationComponent,
-    EventChangeFormRegistrationComponent,
-    EventMenuComponent,
-    EventDeleteDialogComponent,
-    EventBoardListComponent,
-    EventBoardListEntryComponent,
-    EventBoardTableComponent,
-    EventDetailsHeaderComponent,
-    EventChangeHelpComponent
+    EventChangeFormRegistrationComponent
   ],
-  imports: [
-    CommonModule,
-    EventRoutingModule,
-    MaterialModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    HotToastModule,
-    AccountModule,
-    LocationModule,
-    ChipSelectModule,
-    RegistrationModule,
-    QuillModule,
-    NgOptimizedImage
-  ]
+    imports: [
+        CommonModule,
+        EventRoutingModule,
+        MaterialModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        HotToastModule,
+        AccountModule,
+        LocationModule,
+        ChipSelectModule,
+        RegistrationModule,
+        QuillModule,
+        NgOptimizedImage
+    ]
 })
 export class EventModule {
 }

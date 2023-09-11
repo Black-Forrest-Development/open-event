@@ -13,6 +13,9 @@ import {BoardCardExportComponent} from './board-card-export/board-card-export.co
 import {BoardCardSolrComponent} from './board-card-solr/board-card-solr.component';
 import {BoardCardAccountComponent} from './board-card-account/board-card-account.component';
 import {BoardCardEventComponent} from './board-card-event/board-card-event.component';
+import {EventCreateComponent} from './event-create/event-create.component';
+import {EventModule} from "../event/event.module";
+import {AccountModule} from "../account/account.module";
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import {BoardCardEventComponent} from './board-card-event/board-card-event.compo
     BoardCardExportComponent,
     BoardCardSolrComponent,
     BoardCardAccountComponent,
-    BoardCardEventComponent
+    BoardCardEventComponent,
+    EventCreateComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +37,8 @@ import {BoardCardEventComponent} from './board-card-event/board-card-event.compo
     HotToastModule,
     NgxEchartsModule.forChild(),
     RegistrationModule,
+    EventModule,
+    AccountModule,
   ]
 })
 export class BackofficeModule {

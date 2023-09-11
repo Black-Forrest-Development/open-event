@@ -1,15 +1,24 @@
 package de.sambalmueslie.openevent.core.logic.notification.handler
 
 
+import biweekly.Biweekly
+import biweekly.ICalendar
+import biweekly.component.VEvent
+import biweekly.property.Summary
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.logic.notification.NotificationService
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationChangeListener
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.infrastructure.mail.api.Attachment
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.nio.charset.Charset
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 @Singleton
 class RegistrationNotificationHandler(
@@ -28,6 +37,7 @@ class RegistrationNotificationHandler(
         const val KEY_PARTICIPANT_ACCEPTED = "registration.participant.accepted"
         const val KEY_PARTICIPANT_DECLINED = "registration.participant.declined"
         const val KEY_PARTICIPANT_WAITLIST = "registration.participant.waitlist"
+        private val ZONE_OFFSET = ZoneId.of("Europe/Berlin")
     }
 
     override fun getName(): String = RegistrationNotificationHandler::class.java.simpleName
@@ -80,11 +90,18 @@ class RegistrationNotificationHandler(
         participant: Participant,
         status: ParticipateStatus
     ) {
-        val event = eventService.get(registration.eventId) ?: return logger.error("Cannot find event for registration ${registration.id}")
-        val location = eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
+        val event = eventService.get(registration.eventId)
+            ?: return logger.error("Cannot find event for registration ${registration.id}")
+        val location =
+            eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
         val content = RegistrationEventContent(event, registration, participant, location)
-
-        service.process(NotificationEvent(KEY_PARTICIPANT_CHANGED, actor, content), listOf(event.owner))
+        service.process(
+            NotificationEvent(
+                KEY_PARTICIPANT_CHANGED,
+                actor,
+                content
+            ), listOf(event.owner)
+        )
 
         val eventType = when (status) {
             ParticipateStatus.ACCEPTED -> KEY_PARTICIPANT_ACCEPTED
@@ -98,18 +115,43 @@ class RegistrationNotificationHandler(
             return
         }
 
+        val attachment = createAttachment(event)
+
         service.process(
             NotificationEvent(
                 eventType,
                 actor,
-                content
-            ), listOf(participant.author)
+                content,
+                attachments = listOf(attachment)
+            ),
+            listOf(participant.author),
         )
     }
 
+    private fun createAttachment(event: Event): Attachment {
+        val cal = ICalendar()
+        val e = VEvent()
+        e.summary = Summary(event.title)
+
+        e.setDateStart(convert(event.start), true)
+        e.setDateEnd(convert(event.finish), true)
+        cal.addEvent(e)
+
+        val content = Biweekly.write(cal).go().toByteArray(Charset.defaultCharset())
+        return Attachment("invitation.ics", content, "text/calendar")
+    }
+
+    private fun convert(timestamp: LocalDateTime): Date {
+        val offset = ZONE_OFFSET.rules.getOffset(timestamp)
+        val instant = timestamp.toInstant(offset)
+        return Date.from(instant)
+    }
+
     override fun participantRemoved(actor: Account, registration: Registration, participant: Participant) {
-        val event = eventService.get(registration.eventId) ?: return logger.error("Cannot find event for registration ${registration.id}")
-        val location = eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
+        val event = eventService.get(registration.eventId)
+            ?: return logger.error("Cannot find event for registration ${registration.id}")
+        val location =
+            eventService.getLocation(event.id) ?: return logger.error("Cannot find location for event ${event.id}")
         val content = RegistrationEventContent(event, registration, participant, location)
 
         service.process(NotificationEvent(KEY_PARTICIPANT_REMOVED, actor, content), listOf(event.owner))

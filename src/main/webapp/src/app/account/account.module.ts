@@ -9,6 +9,7 @@ import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HotToastModule} from "@ngneat/hot-toast";
+import {SelectAccountComponent} from './select-account/select-account.component';
 
 
 @NgModule({
@@ -16,11 +17,13 @@ import {HotToastModule} from "@ngneat/hot-toast";
     AccountComponent,
     AccountDisplayNamePipe,
     CreateAccountDialogComponent,
-    SearchAccountDialogComponent
+    SearchAccountDialogComponent,
+    SelectAccountComponent
   ],
   exports: [
     AccountComponent,
-    AccountDisplayNamePipe
+    AccountDisplayNamePipe,
+    SelectAccountComponent
   ],
   imports: [
     CommonModule,

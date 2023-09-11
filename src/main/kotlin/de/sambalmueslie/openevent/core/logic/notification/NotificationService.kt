@@ -37,6 +37,7 @@ class NotificationService(
             ?: return logger.warn("Cannot template for type ${type.key}")
 
         val mail = renderer.render(event, template)
+        event.attachments.forEach { mail.attachments.add(it) }
 
         notify(event, mail, additionalRecipients)
 

@@ -26,7 +26,6 @@ class EventCrudService(
         private val logger: Logger = LoggerFactory.getLogger(EventCrudService::class.java)
     }
 
-
     fun create(actor: Account, request: EventChangeRequest): Event {
         val result = storage.create(request, actor)
         notifyCreated(actor, result)

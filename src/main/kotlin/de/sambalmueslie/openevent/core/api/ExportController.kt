@@ -6,13 +6,16 @@ import de.sambalmueslie.openevent.api.ExportAPI.Companion.PERMISSION_EXPORT
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.export.ExportService
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
+import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.http.server.types.files.SystemFile
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
+
 
 @Controller("/api/export")
 @Tag(name = "Export API")
@@ -29,6 +32,17 @@ class ExportController(
             service.exportEventsPdf(account)
         }
     }
+
+    @Post("/event/pdf")
+    override fun exportEventsPdfToEmail(auth: Authentication): HttpStatus {
+        return auth.checkPermission(PERMISSION_EXPORT) {
+            val account = accountService.get(auth) ?: return@checkPermission HttpStatus.BAD_REQUEST
+            service.exportEventsPdfToEmail(account)
+            HttpStatus.CREATED
+        }
+    }
+
+
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/excel")
     override fun exportEventsExcel(auth: Authentication): SystemFile? {
@@ -37,6 +51,7 @@ class ExportController(
             service.exportEventsExcel(account)
         }
     }
+
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/{eventId}/excel")
     override fun exportEventExcel(auth: Authentication, eventId: Long): SystemFile? {
@@ -45,6 +60,7 @@ class ExportController(
             service.exportEventExcel(eventId, account)
         }
     }
+
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/{eventId}/pdf")
     override fun exportEventPdf(auth: Authentication, eventId: Long): SystemFile? {
@@ -53,7 +69,6 @@ class ExportController(
             service.exportEventPdf(eventId, account)
         }
     }
-
 
 
 }

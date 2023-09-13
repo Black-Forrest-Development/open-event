@@ -16,6 +16,16 @@
       </button>
     </ng-container>
 
+    <ng-container *ngIf="!reloading && !menu.exportMenuItem.disabled && isAdminOrCanEdit">
+      <button mat-mini-fab class="action-fab" (click)="menu.exportMenuItem.handleClick()">
+        <mat-icon *ngIf="!menu.exporting">{{menu.exportMenuItem.icon}}</mat-icon>
+        <mat-icon *ngIf="menu.exporting">
+          <mat-spinner diameter="18"></mat-spinner>
+        </mat-icon>
+      </button>
+    </ng-container>
+
+
     <ng-container *ngIf="isAdminOrCanEdit">
       <ng-container *ngFor="let item of menu.menuItems">
         <button mat-mini-fab class="action-fab" (click)="item.handleClick()">

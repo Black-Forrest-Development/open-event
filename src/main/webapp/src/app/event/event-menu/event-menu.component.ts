@@ -7,6 +7,9 @@ import {EventNavigationService} from "../event-navigation.service";
 import {EventDeleteDialogComponent} from "../event-delete-dialog/event-delete-dialog.component";
 import {EventMenuItem} from "../model/event-menu-item";
 import {HotToastService} from "@ngneat/hot-toast";
+import {ExportService} from "../../backoffice/model/export.service";
+import {HttpResponse} from "@angular/common/http";
+import FileSaver from "file-saver";
 
 @Component({
   selector: 'app-event-menu',
@@ -25,10 +28,12 @@ export class EventMenuComponent {
   event: Event | undefined
 
   publishing: boolean = false
+  exporting: boolean = false
 
   editMenuItem = new EventMenuItem('edit', 'event.action.edit', this.handleActionEdit.bind(this), false)
   copyMenuItem = new EventMenuItem('content_copy', 'event.action.copy', this.handleActionCopy.bind(this), false)
   deleteMenuItem = new EventMenuItem('delete', 'event.action.delete', this.handleActionDelete.bind(this), false)
+  exportMenuItem = new EventMenuItem('download', 'event.action.export', this.handleActionExport.bind(this), false)
   publishMenuItem = new EventMenuItem('publish', 'event.action.publish', this.handleActionPublish.bind(this), false)
 
   menuItems = [
@@ -41,6 +46,7 @@ export class EventMenuComponent {
     private router: Router,
     public dialog: MatDialog,
     private service: EventService,
+    private exportService: ExportService,
     private toastService: HotToastService
   ) {
   }
@@ -55,6 +61,24 @@ export class EventMenuComponent {
 
   private handleActionShowDetails() {
     if (this.event) EventNavigationService.navigateToEventDetails(this.router, this.event.id)
+  }
+
+  private handleActionExport() {
+    if (!this.event) return
+
+    if (this.exporting) return
+    this.exporting = true
+    this.exportService.exportEvent(this.event.id).subscribe(r => this.handleExportResponse(r))
+  }
+
+  private handleExportResponse(response: HttpResponse<Blob>) {
+    let contentDispositionHeader = response.headers.get("content-disposition")
+    if (contentDispositionHeader) {
+      let fileName = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '')
+      let content = response.body
+      if (content) FileSaver.saveAs(content, fileName)
+    }
+    this.exporting = false
   }
 
   private handleActionDelete() {

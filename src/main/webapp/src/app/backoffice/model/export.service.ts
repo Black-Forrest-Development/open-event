@@ -15,4 +15,11 @@ export class ExportService extends BaseService {
   exportEvents(): Observable<HttpResponse<Blob>> {
     return this.getBlob('event/pdf')
   }
+  exportEventsToEmail(): Observable<any> {
+    return this.post('event/pdf', {})
+  }
+
+  exportEvent(eventId: number): Observable<HttpResponse<Blob>> {
+    return this.getBlob('event/' + eventId + '/pdf')
+  }
 }

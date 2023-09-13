@@ -167,7 +167,12 @@
     "export": {
       "title": "Export",
       "action": {
-        "all": "Export all events as pdf"
+        "all": "Export as pdf",
+        "mail": {
+          "title": "Export as email",
+          "success": "Export successfully started",
+          "failed": "Failed to start export"
+        }
       }
     },
     "account": {
@@ -178,7 +183,10 @@
       }
     },
     "event": {
-      "title": "Event"
+      "title": "Event",
+      "action": {
+        "create": "Create event"
+      }
     },
     "solr": {
       "title": "Search",

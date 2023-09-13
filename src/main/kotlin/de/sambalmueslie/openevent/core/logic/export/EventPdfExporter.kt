@@ -96,8 +96,10 @@ class EventPdfExporter(
     private fun renderPdf(infos: List<EventInfo>): SystemFile? {
         val content = infos.mapNotNull { getContent(it) }
 
+        val escapeTool = EscapeTool()
         val properties = mapOf(
-            Pair("esc", EscapeTool()),
+            Pair("esc", escapeTool),
+            Pair("html", HtmlConverter(escapeTool)),
             Pair("content", content),
             Pair("logo", settingsService.findByKey(SettingsAPI.SETTINGS_PDF_LOGO_URL)?.value ?: ""),
             Pair("image", settingsService.findByKey(SettingsAPI.SETTINGS_PDF_IMAGE_URL)?.value ?: ""),

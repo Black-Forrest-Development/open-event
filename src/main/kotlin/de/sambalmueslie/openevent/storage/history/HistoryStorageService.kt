@@ -7,6 +7,7 @@ import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import de.sambalmueslie.openevent.storage.BaseStorageService
+import de.sambalmueslie.openevent.storage.event.EventData
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -35,7 +36,14 @@ class HistoryStorageService(
     }
 
     override fun create(request: HistoryEntryChangeRequest, event: Event, actor: Account): HistoryEntry {
-        return create(request, mapOf(Pair(EVENT_REFERENCE, event), Pair(ACTOR_REFERENCE, actor), Pair(TIMESTAMP_REFERENCE, timeProvider.now())))
+        return create(
+            request,
+            mapOf(
+                Pair(EVENT_REFERENCE, event),
+                Pair(ACTOR_REFERENCE, actor),
+                Pair(TIMESTAMP_REFERENCE, timeProvider.now())
+            )
+        )
     }
 
     override fun create(
@@ -44,13 +52,17 @@ class HistoryStorageService(
         actor: Account,
         timestamp: LocalDateTime
     ): HistoryEntry {
-        return create(request, mapOf(Pair(EVENT_REFERENCE, event), Pair(ACTOR_REFERENCE, actor), Pair(TIMESTAMP_REFERENCE, timestamp)))
+        return create(
+            request,
+            mapOf(Pair(EVENT_REFERENCE, event), Pair(ACTOR_REFERENCE, actor), Pair(TIMESTAMP_REFERENCE, timestamp))
+        )
     }
 
     override fun createData(request: HistoryEntryChangeRequest, properties: Map<String, Any>): HistoryEntryData {
         val event = properties[EVENT_REFERENCE] as? Event ?: throw InvalidRequestException("Cannot find event")
         val actor = properties[ACTOR_REFERENCE] as? Account ?: throw InvalidRequestException("Cannot find actor")
-        val timestamp = properties[TIMESTAMP_REFERENCE] as? LocalDateTime ?: throw InvalidRequestException("Cannot find timestamp")
+        val timestamp =
+            properties[TIMESTAMP_REFERENCE] as? LocalDateTime ?: throw InvalidRequestException("Cannot find timestamp")
         return HistoryEntryData.create(event, actor, request, timestamp)
     }
 
@@ -87,6 +99,10 @@ class HistoryStorageService(
     ): Page<HistoryEntry> {
         return repository.findAllForAccount(account.id, source, pageable)
             .map { converter.convert(it) }
+    }
+
+    fun deleteByEvent(event: EventData) {
+        repository.deleteByEventId(event.id)
     }
 
 }

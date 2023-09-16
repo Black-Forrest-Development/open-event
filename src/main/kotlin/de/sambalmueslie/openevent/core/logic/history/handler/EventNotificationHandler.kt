@@ -43,12 +43,6 @@ class EventNotificationHandler(
         service.create(actor, obj, request)
     }
 
-    override fun handleDeleted(actor: Account, obj: Event) {
-        val request = HistoryEntryChangeRequest(
-            HistoryEntryType.EVENT_DELETED, KEY_EVENT_DELETED, HistoryEntrySource.EVENT, ""
-        )
-        service.create(actor, obj, request)
-    }
 
     override fun publishedChanged(actor: Account, event: Event) {
         val request = if (event.published) {

@@ -24,6 +24,7 @@ class EventCrudServiceTest : TimeBasedTest() {
 
     @Inject
     lateinit var accountStorage: AccountStorage
+
     @Inject
     lateinit var accountService: AccountCrudService
 
@@ -44,9 +45,6 @@ class EventCrudServiceTest : TimeBasedTest() {
     fun eventCrud() {
         val actor = accountStorage.create(AccountChangeRequest("user", "first", "last", "email@localhost", "", ""))
         setupListener()
-
-        val owner =
-            accountService.create(actor, AccountChangeRequest("name", "first-name", "last-name", "email", "", null))
 
         val request = buildCreateRequest()
         var event = service.create(actor, request)

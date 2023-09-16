@@ -28,7 +28,6 @@ export class AuthService {
   public static EVENT_WRITE = "openevent.event.write"
   public static EVENT_ADMIN = "openevent.event.admin"
 
-
   public static ACCOUNT_READ = "openevent.account.read"
   public static ACCOUNT_WRITE = "openevent.account.write"
   public static ACCOUNT_ADMIN = "openevent.account.admin"
@@ -38,6 +37,9 @@ export class AuthService {
 
   static BACKOFFICE_ACCESS = "openevent.backoffice.access";
   static PERMISSION_EXPORT = "openevent.export";
+
+  public static HISTORY_READ = "openevent.history.read"
+  public static HISTORY_ADMIN = "openevent.history.admin"
 
   private principal: Principal | undefined;
 

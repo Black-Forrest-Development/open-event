@@ -31,6 +31,7 @@ import {EventBoardMapComponent} from './event-board-map/event-board-map.componen
 import {EventBoardCalendarComponent} from './event-board-calendar/event-board-calendar.component';
 import {EventBoardMapPopupComponent} from './event-board-map-popup/event-board-map-popup.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import {EventActionExportComponent} from './event-action-export/event-action-export.component';
 
 
 @NgModule({
@@ -51,12 +52,14 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         EventChangeHelpComponent,
         EventBoardMapComponent,
         EventBoardCalendarComponent,
-        EventBoardMapPopupComponent
+        EventBoardMapPopupComponent,
+        EventActionExportComponent
     ],
   exports: [
     EventChangeFormEventComponent,
     EventChangeFormLocationComponent,
-    EventChangeFormRegistrationComponent
+    EventChangeFormRegistrationComponent,
+    EventActionExportComponent
   ],
   imports: [
     CommonModule,

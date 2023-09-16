@@ -74,9 +74,11 @@
       <!-- Publish Column -->
       <ng-container matColumnDef="publish">
         <td mat-cell *matCellDef="let info">
-          <button mat-mini-fab class="action-fab" *ngIf="!info.event.published">
-            <mat-icon>unpublished</mat-icon>
-          </button>
+          <div class="d-flex flex-row flex-wrap">
+            <button mat-mini-fab class="action-fab" *ngIf="!info.event.published">
+              <mat-icon>unpublished</mat-icon>
+            </button>
+          </div>
         </td>
       </ng-container>
 
@@ -88,6 +90,7 @@
                    [pageIndex]="service.pageIndex"
                    [pageSize]="service.pageSize"
                    [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="service.handlePageChange($event)"
                    class="mb-2"
     >
     </mat-paginator>

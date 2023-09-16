@@ -16,7 +16,7 @@ export class EventBoardComponent {
   }
 
   ngOnInit() {
-    this.service.reload()
+    this.service.reload(this.service.pageIndex, this.service.pageSize)
 
     this.responsive
       .observe(['(min-width: 1000px)'])

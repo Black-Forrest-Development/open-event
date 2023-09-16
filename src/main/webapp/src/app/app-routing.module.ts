@@ -38,6 +38,12 @@ const routes: Routes = [
     data: {roles: [AuthService.BACKOFFICE_ACCESS]}
   },
   {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then(m => m.HistoryModule),
+    canActivate: [AuthGuard],
+    data: {roles: [AuthService.HISTORY_ADMIN]}
+  },
+  {
     path: '**', component: PageNotFoundComponent
   }
 ];

@@ -1,56 +1,44 @@
 import {Component, EventEmitter} from '@angular/core';
+import {HistoryService} from "../model/history.service";
 import {Page} from "../../shared/model/page";
-import {MailJob} from "../model/mail-api";
 import {PageEvent} from "@angular/material/paginator";
+import {HistoryEventInfo} from "../model/history-api";
 import {HotToastService} from "@ngneat/hot-toast";
-import {MailService} from "../model/mail.service";
-import {debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil, timer} from "rxjs";
-import {tap} from "rxjs/operators";
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-mail-board',
-  templateUrl: './mail-board.component.html',
-  styleUrls: ['./mail-board.component.scss']
+  selector: 'app-history-board',
+  templateUrl: './history-board.component.html',
+  styleUrls: ['./history-board.component.scss']
 })
-export class MailBoardComponent {
-
+export class HistoryBoardComponent {
   reloading: boolean = false
   pageNumber = 0
   pageSize = 25
   totalElements = 0
 
-  data: MailJob[] = []
-
-  displayedColumns: string[] = ['timestamp', 'status', 'title', 'cmd']
+  displayedColumns: string[] = ['timestamp', 'actor', 'type', 'message', 'source', 'info']
 
   keyUp: EventEmitter<string> = new EventEmitter<string>()
   searching: boolean = false
 
+  data: HistoryEventInfo[] = []
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
   constructor(
-    private service: MailService,
+    private service: HistoryService,
     private toastService: HotToastService
   ) {
   }
 
-  private unsub = new Subject<void>();
-
-  ngOnInit(): void {
-    timer(0, 15000).pipe(
-      tap((x) => console.log(x)),
-      takeUntil(this.unsub),
-      switchMap(async () => this.reload())
-    ).subscribe();
-
-    this.keyUp.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(data => this.search(data))
+  ngOnInit() {
+    this.reload()
   }
 
-  ngOnDestroy(): void {
-    this.unsub.next();
-    this.unsub.complete();
-  }
 
   reload() {
     this.loadPage(this.pageNumber)
@@ -60,10 +48,10 @@ export class MailBoardComponent {
     if (this.reloading) return
     this.reloading = true
 
-    this.service.getJobs(number, this.pageSize).subscribe(p => this.handleData(p))
+    this.service.getAllHistoryEventInfos(number, this.pageSize).subscribe(p => this.handleData(p))
   }
 
-  private handleData(page: Page<MailJob>) {
+  private handleData(page: Page<HistoryEventInfo>) {
     if (page == null) {
       this.data = [];
       this.pageNumber = 0;

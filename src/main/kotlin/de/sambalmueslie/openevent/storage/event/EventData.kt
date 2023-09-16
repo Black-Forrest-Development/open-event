@@ -67,7 +67,9 @@ data class EventData(
             iconUrl,
             hasLocation,
             hasRegistration,
-            published
+            published,
+            created,
+            updated
         )
     }
 

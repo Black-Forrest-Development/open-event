@@ -7,7 +7,6 @@ import {EventService} from "../model/event.service";
 import {HotToastService} from "@ngneat/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../auth/auth.service";
-import {ExportService} from "../../backoffice/model/export.service";
 
 @Component({
   selector: 'app-event-details-header',
@@ -33,12 +32,11 @@ export class EventDetailsHeaderComponent {
     router: Router,
     private location: Location,
     service: EventService,
-    exportService: ExportService,
     toastService: HotToastService,
     dialog: MatDialog,
     private authService: AuthService
   ) {
-    this.menu = new EventMenuComponent(router, dialog, service, exportService, toastService)
+    this.menu = new EventMenuComponent(router, dialog, service, toastService)
   }
 
   ngOnInit() {

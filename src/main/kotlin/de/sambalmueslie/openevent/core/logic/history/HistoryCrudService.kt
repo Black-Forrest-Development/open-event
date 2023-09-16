@@ -49,6 +49,15 @@ class HistoryCrudService(
 
     fun getAllInfos(pageable: Pageable): Page<HistoryEventInfo> {
         val page = storage.getAll(pageable)
+        return convert(page)
+    }
+
+    fun getAllInfosForAccount(account: Account, pageable: Pageable): Page<HistoryEventInfo> {
+        val page = storage.getAllForAccountOrSource(account, source, pageable)
+        return convert(page)
+    }
+
+    private fun convert(page: Page<HistoryEntry>): Page<HistoryEventInfo> {
         val entries = page.content.groupBy { it.eventId }
         val events = eventService.getByIds(entries.keys)
 
@@ -60,10 +69,6 @@ class HistoryCrudService(
     private fun convert(event: Event, entries: List<HistoryEntry>?): HistoryEventInfo? {
         if (entries == null) return null
         return HistoryEventInfo(event, entries)
-    }
-
-    fun getAllInfosForAccount(account: Account, pageable: Pageable): Page<HistoryEventInfo> {
-        TODO("Not yet implemented")
     }
 
 

@@ -29,4 +29,5 @@ interface HistoryEntryRepository : DataObjectRepository<Long, HistoryEntryData> 
         countQuery = "SELECT h.* FROM history_entry INNER JOIN event e ON e.id = h.event_id WHERE (e.owner_id = :actorId) OR (h.actor_id = :actorId) OR (h.source in (:source))"
     )
     fun findAllForAccount(actorId: Long,source: Set<HistoryEntrySource>, pageable: Pageable): Page<HistoryEntryData>
+    fun deleteByEventId(id: Long)
 }

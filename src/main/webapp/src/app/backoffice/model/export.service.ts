@@ -22,4 +22,8 @@ export class ExportService extends BaseService {
   exportEvent(eventId: number): Observable<HttpResponse<Blob>> {
     return this.getBlob('event/' + eventId + '/pdf')
   }
+
+  exportSummary(): Observable<HttpResponse<Blob>> {
+    return this.getBlob('event/summary')
+  }
 }

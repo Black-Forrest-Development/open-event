@@ -172,7 +172,8 @@
           "title": "Export per Mail",
           "success": "Export gestartet",
           "failed": "Export fehlgeschlagen"
-        }
+        },
+        "summary": "Excel Zusammenfassung"
       }
     },
     "account": {

@@ -10,8 +10,7 @@ interface ExportAPI {
         const val PERMISSION_EXPORT = "openevent.export"
     }
 
-    fun exportEventsExcel(auth: Authentication): SystemFile?
-    fun exportEventExcel(auth: Authentication, eventId: Long): SystemFile?
+    fun exportEventSummaryExcel(auth: Authentication): SystemFile?
 
     fun exportEventsPdf(auth: Authentication): SystemFile?
     fun exportEventsPdfToEmail(auth: Authentication): HttpStatus

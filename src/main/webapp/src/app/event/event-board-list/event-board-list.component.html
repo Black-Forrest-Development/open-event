@@ -12,6 +12,7 @@
                    [pageIndex]="service.pageIndex"
                    [pageSize]="service.pageSize"
                    [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="service.handlePageChange($event)"
                    class="mb-2"
     >
     </mat-paginator>

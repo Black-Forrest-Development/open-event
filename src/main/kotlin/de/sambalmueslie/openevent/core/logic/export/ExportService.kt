@@ -31,16 +31,8 @@ open class ExportService(
         return exportEvents(account, pdfExporter)
     }
 
-    fun exportEventsExcel(account: Account): SystemFile? {
-        return exportEvents(account, excelExporter)
-    }
-
     private fun exportEvents(account: Account, exporter: EventExporter): SystemFile? {
         return exporter.exportEvents { PageableSequence { eventService.getInfos(it) } }
-    }
-
-    fun exportEventExcel(eventId: Long, account: Account): SystemFile? {
-        return exportEvent(eventId, account, excelExporter)
     }
 
     fun exportEventPdf(eventId: Long, account: Account): SystemFile? {
@@ -70,5 +62,9 @@ open class ExportService(
             logger.error("Exception while exporting pdf", e)
         }
         exporting.set(false)
+    }
+
+    fun exportEventSummaryExcel(account: Account): SystemFile? {
+        return exportEvents(account, excelExporter)
     }
 }

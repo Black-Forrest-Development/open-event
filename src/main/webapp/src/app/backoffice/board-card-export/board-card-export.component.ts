@@ -12,6 +12,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class BoardCardExportComponent {
   exporting: boolean = false
+  summarizing: boolean = false
 
   constructor(
     private exportService: ExportService,
@@ -34,6 +35,7 @@ export class BoardCardExportComponent {
       if (content) FileSaver.saveAs(content, fileName)
     }
     this.exporting = false
+    this.summarizing = false
   }
 
   exportMail() {
@@ -43,5 +45,11 @@ export class BoardCardExportComponent {
         error: err => this.translateService.get('backoffice.export.action.mail.error').subscribe(text => this.toastService.error(text)),
       }
     )
+  }
+
+  exportSummary() {
+    if (this.summarizing) return
+    this.summarizing = true
+    this.exportService.exportSummary().subscribe(r => this.handleExportResponse(r))
   }
 }

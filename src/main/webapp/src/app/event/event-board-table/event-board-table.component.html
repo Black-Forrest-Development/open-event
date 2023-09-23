@@ -90,8 +90,9 @@
                    [pageIndex]="service.pageIndex"
                    [pageSize]="service.pageSize"
                    [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons="true"
                    (page)="service.handlePageChange($event)"
-                   class="mb-2"
+                   class="mb-2 pe-5"
     >
     </mat-paginator>
   </mat-card>

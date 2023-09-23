@@ -172,7 +172,8 @@
           "title": "Export as email",
           "success": "Export successfully started",
           "failed": "Failed to start export"
-        }
+        },
+        "summary": "Export Summary"
       }
     },
     "account": {

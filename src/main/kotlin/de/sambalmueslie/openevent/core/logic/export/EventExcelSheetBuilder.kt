@@ -6,36 +6,35 @@ import org.apache.poi.ss.usermodel.BorderStyle
 import org.apache.poi.ss.usermodel.FillPatternType
 import org.apache.poi.ss.usermodel.HorizontalAlignment
 import org.apache.poi.ss.usermodel.VerticalAlignment
-import org.apache.poi.ss.util.CellRangeAddress
-import org.apache.poi.xssf.usermodel.IndexedColorMap
-import org.apache.poi.xssf.usermodel.XSSFColor
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.apache.poi.xssf.usermodel.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.awt.Color
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class EventExcelSheetBuilder(
     private val wb: XSSFWorkbook,
-    private val info: EventInfo
+    private val infos: List<EventInfo>
 ) {
 
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(EventExcelSheetBuilder::class.java)
 
-        private val formatter = DateTimeFormatter.ofPattern("HH:mm")
-        // Donnerstag, 16. März 2023
-        private val headlineFormatter = DateTimeFormatter.ofPattern("EEEE ,dd. LLLL yyyy")
+        private val dateFormatter = DateTimeFormatter.ofPattern("EEEE ,dd. LLLL yyyy").withLocale(Locale.GERMAN)
+        private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.GERMAN)
+
     }
 
-    private val sheet = wb.createSheet(info.event.title)
-    private var rowIndex = 3
-    private val styleOfferHeaderBold = wb.createCellStyle()
+    private val sheet = wb.createSheet("Summary")
+    private val styleHeader = wb.createCellStyle()
+    private val styleContent = wb.createCellStyle()
+    private var rowIndex = 0
+
     private val styleOfferHeaderBoldCombined = wb.createCellStyle()
     private val styleOfferHeaderText = wb.createCellStyle()
-    private val styleBooking = wb.createCellStyle()
     private val styleBookingCombined = wb.createCellStyle()
 
     private val boldFont = wb.createFont()
@@ -46,57 +45,100 @@ class EventExcelSheetBuilder(
     fun build() {
         setupStyles()
         setupSheet()
-        addTitle()
-        addDescription()
-        setupDetails()
-        setupStripes()
+        addHeader()
+        addEvents()
     }
 
+    private fun addHeader() {
+        val row = sheet.createRow(rowIndex++)
+        var c = 0
 
-    private fun addTitle() {
-        val row = sheet.createRow(1)
-        val cell = row.createCell(0)
-        cell.setCellValue(info.event.title)
-        val font = wb.createFont()
-        font.fontHeightInPoints = 14
-        font.bold = true
+        val cTitle = row.createHeaderCell(c++)
+        cTitle.setCellValue("Title")
 
-        val borderStyle = wb.createCellStyle()
-        borderStyle.borderBottom = BorderStyle.THIN
-        borderStyle.setFont(font)
-        cell.cellStyle = borderStyle
+        val cDate = row.createHeaderCell(c++)
+        cDate.setCellValue("Date")
 
-        (1..9).forEach { row.createCell(it).cellStyle = borderStyle }
-        sheet.addMergedRegion(CellRangeAddress(row.rowNum, row.rowNum, 0, 9))
+        val cTime = row.createHeaderCell(c++)
+        cTime.setCellValue("Time")
+
+        val cOwner = row.createHeaderCell(c++)
+        cOwner.setCellValue("Owner")
+
+        val cLocation = row.createHeaderCell(c++)
+        cLocation.setCellValue("Location")
+
+        val cMaxGuest = row.createHeaderCell(c++)
+        cMaxGuest.setCellValue("Max Guest")
+
+        val cAccepted = row.createHeaderCell(c++)
+        cAccepted.setCellValue("Accepted")
+
+        val cWaitlist = row.createHeaderCell(c)
+        cWaitlist.setCellValue("WaitList")
     }
 
-
-    private fun addDescription() {
-        val row = sheet.createRow(2)
-        val cell = row.createCell(0)
-        cell.setCellValue(info.event.title)
-        val font = wb.createFont()
-        font.fontHeightInPoints = 12
-
-        (1..9).forEach { row.createCell(it) }
-        sheet.addMergedRegion(CellRangeAddress(row.rowNum, row.rowNum, 0, 9))
+    private fun XSSFRow.createHeaderCell(index: Int): XSSFCell {
+        val cell = createCell(index)
+        cell.cellStyle = styleHeader
+        return cell
     }
 
+    private fun addEvents() {
 
-    private fun setupDetails() {
-        var row = sheet.createRow(rowIndex++)
-
-
-        TODO("Not yet implemented")
+        infos.forEach { addEvent(it) }
     }
 
+    private fun addEvent(info: EventInfo) {
+        val row = sheet.createRow(rowIndex++)
+
+        var c = 0
+
+        val event = info.event
 
 
-    private fun setupStripes() {
-//        TODO("Not yet implemented")
+        val cTitle = row.createContentCell(c++)
+        cTitle.setCellValue(event.title)
+
+        val cDate = row.createContentCell(c++)
+        cDate.setCellValue(event.start.format(dateFormatter))
+
+        val cTime = row.createContentCell(c++)
+        cTime.setCellValue("${event.start.format(timeFormatter)} - ${event.finish.format(timeFormatter)}")
+
+        val cOwner = row.createContentCell(c++)
+        cOwner.setCellValue(event.owner.getTitle())
+
+        val cLocation = row.createContentCell(c++)
+        cLocation.setCellValue(info.location?.format() ?: "")
+
+        val cMaxGuest = row.createContentCell(c++)
+        val cAccepted = row.createContentCell(c++)
+        val cWaitlist = row.createContentCell(c)
+
+        val registration = info.registration
+        if (registration == null) {
+            cMaxGuest.setCellValue("")
+            cAccepted.setCellValue("")
+            cWaitlist.setCellValue("")
+        } else {
+            cMaxGuest.setCellValue(registration.registration.maxGuestAmount.toString())
+            var accepted = 0L
+            var waitList = 0L
+
+            registration.participants.forEach { p -> if (p.waitingList) waitList += p.size else accepted += p.size }
+
+            cAccepted.setCellValue(accepted.toString())
+            cWaitlist.setCellValue(waitList.toString())
+        }
+
     }
 
-
+    private fun XSSFRow.createContentCell(index: Int): XSSFCell {
+        val cell = createCell(index)
+        cell.cellStyle = styleContent
+        return cell
+    }
 
     private fun setupStyles() {
         boldFont.bold = true
@@ -108,11 +150,11 @@ class EventExcelSheetBuilder(
 
         normalFont.fontHeightInPoints = 12
 
-        styleOfferHeaderBold.setFillForegroundColor(XSSFColor(Color(217, 217, 217), colorMap))
-        styleOfferHeaderBold.fillPattern = FillPatternType.SOLID_FOREGROUND
-        styleOfferHeaderBold.setFont(boldFont)
-        styleOfferHeaderBold.borderBottom = BorderStyle.THIN
-        styleOfferHeaderBold.alignment = HorizontalAlignment.CENTER
+        styleHeader.setFillForegroundColor(XSSFColor(Color(217, 217, 217), colorMap))
+        styleHeader.fillPattern = FillPatternType.SOLID_FOREGROUND
+        styleHeader.setFont(boldFont)
+        styleHeader.borderBottom = BorderStyle.THIN
+        styleHeader.alignment = HorizontalAlignment.CENTER
 
         styleOfferHeaderBoldCombined.setFillForegroundColor(XSSFColor(Color(217, 217, 217), colorMap))
         styleOfferHeaderBoldCombined.fillPattern = FillPatternType.SOLID_FOREGROUND
@@ -128,11 +170,11 @@ class EventExcelSheetBuilder(
         styleOfferHeaderText.borderBottom = BorderStyle.THIN
         styleOfferHeaderText.setFont(normalFont)
 
-        styleBooking.fillPattern = FillPatternType.NO_FILL
-        styleBooking.borderBottom = BorderStyle.THIN
-        styleBooking.verticalAlignment = VerticalAlignment.CENTER
-        styleBooking.alignment = HorizontalAlignment.CENTER
-        styleBooking.setFont(normalFont)
+        styleContent.fillPattern = FillPatternType.NO_FILL
+        styleContent.borderBottom = BorderStyle.THIN
+        styleContent.verticalAlignment = VerticalAlignment.CENTER
+        styleContent.alignment = HorizontalAlignment.CENTER
+        styleContent.setFont(normalFont)
 
         styleBookingCombined.fillPattern = FillPatternType.NO_FILL
         styleBookingCombined.borderBottom = BorderStyle.THIN
@@ -144,15 +186,16 @@ class EventExcelSheetBuilder(
     }
 
     private fun setupSheet() {
-        sheet.setColumnWidth(0, 5 * 256)
-        sheet.setColumnWidth(1, 9 * 256)
-        sheet.setColumnWidth(2, 9 * 256)
-        sheet.setColumnWidth(3, 14 * 256)
-        sheet.setColumnWidth(4, 12 * 256)
-        sheet.setColumnWidth(5, 9 * 256)
-        sheet.setColumnWidth(6, 5 * 256)
-        sheet.setColumnWidth(7, 9 * 256)
-        sheet.setColumnWidth(8, 9 * 256)
-        sheet.setColumnWidth(9, 15 * 256)
+        sheet.setColumnWidth(0, 40 * 256)
+        sheet.setColumnWidth(1, 30 * 256)
+        sheet.setColumnWidth(2, 15 * 256)
+        sheet.setColumnWidth(3, 15 * 256)
+        sheet.setColumnWidth(4, 40 * 256)
+        sheet.setColumnWidth(5, 11 * 256)
+        sheet.setColumnWidth(6, 11 * 256)
+        sheet.setColumnWidth(7, 11 * 256)
     }
 }
+
+
+

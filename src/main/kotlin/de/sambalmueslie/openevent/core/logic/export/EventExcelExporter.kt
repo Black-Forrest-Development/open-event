@@ -24,8 +24,8 @@ class EventExcelExporter(
     override fun exportEvents(provider: () -> Sequence<EventInfo>): SystemFile? {
         val wb = XSSFWorkbook()
 
-        provider.invoke().filter { it.event.published }
-            .forEach { EventExcelSheetBuilder(wb, it).build() }
+        val info = provider.invoke().filter { it.event.published }
+        EventExcelSheetBuilder(wb, info.toList()).build()
 
         val file = File.createTempFile(HEADER_EXCEL_FILE_PREFIX, HEADER_EXCEL_FILE_SUFIX)
         wb.write(file.outputStream())
@@ -37,7 +37,7 @@ class EventExcelExporter(
     override fun exportEvent(info: EventInfo): SystemFile? {
         val wb = XSSFWorkbook()
 
-        EventExcelSheetBuilder(wb, info).build()
+        EventExcelSheetBuilder(wb, listOf(info)).build()
 
         val file = File.createTempFile(HEADER_EXCEL_FILE_PREFIX, HEADER_EXCEL_FILE_SUFIX)
         wb.write(file.outputStream())

@@ -44,24 +44,6 @@ class ExportController(
 
 
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
-    @Get("/event/excel")
-    override fun exportEventsExcel(auth: Authentication): SystemFile? {
-        return auth.checkPermission(PERMISSION_EXPORT) {
-            val account = accountService.get(auth) ?: return@checkPermission null
-            service.exportEventsExcel(account)
-        }
-    }
-
-    @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
-    @Get("/event/{eventId}/excel")
-    override fun exportEventExcel(auth: Authentication, eventId: Long): SystemFile? {
-        return auth.checkPermission(PERMISSION_EXPORT) {
-            val account = accountService.get(auth) ?: return@checkPermission null
-            service.exportEventExcel(eventId, account)
-        }
-    }
-
-    @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/{eventId}/pdf")
     override fun exportEventPdf(auth: Authentication, eventId: Long): SystemFile? {
         return auth.checkPermission(PERMISSION_EXPORT) {
@@ -69,6 +51,12 @@ class ExportController(
             service.exportEventPdf(eventId, account)
         }
     }
-
-
+    @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
+    @Get("/event/summary")
+    override fun exportEventSummaryExcel(auth: Authentication): SystemFile? {
+        return auth.checkPermission(PERMISSION_EXPORT) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.exportEventSummaryExcel(account)
+        }
+    }
 }

@@ -18,7 +18,7 @@ interface EventRepository : DataObjectRepository<Long, EventData> {
 
     @Query(
         value = "select e.* from event e WHERE (e.owner_id = :ownerId or e.published = true) AND DATE(start) >= CURRENT_DATE ORDER BY e.start",
-        countQuery = "select e.* from event e WHERE (e.owner_id = :ownerId or e.published = true) AND DATE(start) >= CURRENT_DATE"
+        countQuery = "select COUNT(e.*) from event e WHERE (e.owner_id = :ownerId or e.published = true) AND DATE(start) >= CURRENT_DATE"
 
     )
     fun findForUser(ownerId: Long, pageable: Pageable): Page<EventData>

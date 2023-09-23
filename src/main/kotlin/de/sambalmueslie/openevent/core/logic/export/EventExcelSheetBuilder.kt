@@ -11,6 +11,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.awt.Color
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class EventExcelSheetBuilder(
@@ -22,8 +23,8 @@ class EventExcelSheetBuilder(
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(EventExcelSheetBuilder::class.java)
 
-        private val dateFormatter = DateTimeFormatter.ofPattern("EEEE ,dd. LLLL yyyy")
-        private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+        private val dateFormatter = DateTimeFormatter.ofPattern("EEEE ,dd. LLLL yyyy").withLocale(Locale.GERMAN)
+        private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.GERMAN)
 
     }
 

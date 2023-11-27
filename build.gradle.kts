@@ -134,7 +134,7 @@ dependencies {
     // solr
     implementation("org.apache.solr:solr-solrj:9.4.0")
     // jsoup
-    implementation("org.jsoup:jsoup:1.16.2")
+    implementation("org.jsoup:jsoup:1.17.1")
     // biweekly
     implementation("net.sf.biweekly:biweekly:0.6.7")
 }

@@ -116,7 +116,7 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.5")
 
     // mail
-    implementation("org.simplejavamail:simple-java-mail:8.3.2")
+    implementation("org.simplejavamail:simple-java-mail:8.3.5")
     implementation("org.simplejavamail:batch-module:8.3.2")
     implementation("org.simplejavamail:authenticated-socks-module:8.3.2")
 

@@ -118,7 +118,7 @@ dependencies {
     // mail
     implementation("org.simplejavamail:simple-java-mail:8.3.2")
     implementation("org.simplejavamail:batch-module:8.3.2")
-    implementation("org.simplejavamail:authenticated-socks-module:8.3.2")
+    implementation("org.simplejavamail:authenticated-socks-module:8.5.1")
 
     // test
     testImplementation("org.testcontainers:junit-jupiter")

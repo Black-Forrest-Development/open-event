@@ -136,7 +136,7 @@ dependencies {
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")
     // biweekly
-    implementation("net.sf.biweekly:biweekly:0.6.7")
+    implementation("net.sf.biweekly:biweekly:0.6.8")
 }
 
 java {

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.22"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.22"
@@ -95,6 +97,7 @@ dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.flyway:micronaut-flyway")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("org.postgresql:postgresql")
 
@@ -140,22 +143,24 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_19
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks {
     compileKotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_19)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 
     compileTestKotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_19)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 }
+
 
 
 tasks.test {
@@ -170,7 +175,7 @@ tasks.jacocoTestReport {
     }
 }
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.11"
 }
 
 
@@ -191,7 +196,7 @@ application {
 }
 
 jib {
-    from.image = "eclipse-temurin:19-jre-alpine"
+    from.image = "eclipse-temurin:21-jre-alpine"
     to {
         image = "iee1394/open-event"
         tags = setOf(version.toString(), "latest")

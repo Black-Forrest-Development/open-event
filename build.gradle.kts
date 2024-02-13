@@ -135,7 +135,7 @@ dependencies {
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
 
     // solr
-    implementation("org.apache.solr:solr-solrj:9.4.1")
+    implementation("org.apache.solr:solr-solrj:9.5.0")
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")
     // biweekly

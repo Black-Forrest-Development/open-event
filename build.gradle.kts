@@ -87,7 +87,7 @@ dependencies {
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
     // reactor

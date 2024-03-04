@@ -44,7 +44,7 @@ micronaut {
 
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.5.1")
+    implementation("ch.qos.logback:logback-classic:1.5.2")
     runtimeOnly("org.yaml:snakeyaml")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")

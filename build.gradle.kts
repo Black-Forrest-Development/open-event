@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.22"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
     id("org.jetbrains.kotlin.kapt") version "1.9.23"
     id("org.sonarqube") version "4.4.1.3373"
     id("com.github.johnrengelman.shadow") version "8.1.1"

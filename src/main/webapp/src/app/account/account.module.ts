@@ -8,7 +8,6 @@ import {SearchAccountDialogComponent} from './search-account-dialog/search-accou
 import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HotToastModule} from "@ngneat/hot-toast";
 import {SelectAccountComponent} from './select-account/select-account.component';
 
 
@@ -30,8 +29,7 @@ import {SelectAccountComponent} from './select-account/select-account.component'
     GravatarModule,
     MaterialModule,
     TranslateModule,
-    ReactiveFormsModule,
-    HotToastModule
+    ReactiveFormsModule
   ]
 })
 export class AccountModule {

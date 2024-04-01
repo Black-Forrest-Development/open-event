@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ExportService} from "../model/export.service";
 import {HttpResponse} from "@angular/common/http";
 import FileSaver from "file-saver";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({

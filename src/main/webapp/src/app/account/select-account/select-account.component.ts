@@ -5,7 +5,7 @@ import {AccountService} from "../model/account.service";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {Page} from "../../shared/model/page";
 import {CreateAccountDialogComponent} from "../create-account-dialog/create-account-dialog.component";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatOptionSelectionChange} from "@angular/material/core";

@@ -2,7 +2,7 @@ import {Component, EventEmitter} from '@angular/core';
 import {Page} from "../../shared/model/page";
 import {MailJob} from "../model/mail-api";
 import {PageEvent} from "@angular/material/paginator";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {MailService} from "../model/mail.service";
 import {debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";

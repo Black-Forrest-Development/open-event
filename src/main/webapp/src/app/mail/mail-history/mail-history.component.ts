@@ -1,7 +1,7 @@
 import {Component, EventEmitter} from '@angular/core';
 import {MailJobHistoryEntry} from "../model/mail-api";
 import {MailService} from "../model/mail.service";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";

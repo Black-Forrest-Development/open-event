@@ -4,7 +4,7 @@ import {Location} from "@angular/common";
 import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {Router} from "@angular/router";
 import {EventService} from "../model/event.service";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../auth/auth.service";
 

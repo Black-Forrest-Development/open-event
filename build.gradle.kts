@@ -17,6 +17,11 @@ repositories {
         mavenContent { snapshotsOnly() }
     }
     mavenCentral()
+    maven("https://maven.tryformation.com/releases") {
+        content {
+            includeGroup("com.jillesvangurp")
+        }
+    }
 }
 
 
@@ -133,9 +138,12 @@ dependencies {
 
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
-
-    // solr
-    implementation("org.apache.solr:solr-solrj:9.5.0")
+//    // solr
+//    implementation("org.apache.solr:solr-solrj:9.5.0")
+    // opensearch
+    implementation("com.jillesvangurp:search-client:2.1.24")
+//    implementation("org.opensearch.client:opensearch-rest-client:2.12.0")
+//    implementation("org.opensearch.client:opensearch-java:2.6.0")
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")
     // biweekly

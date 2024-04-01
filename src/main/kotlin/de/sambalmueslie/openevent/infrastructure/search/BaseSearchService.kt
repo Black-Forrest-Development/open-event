@@ -1,57 +1,119 @@
 package de.sambalmueslie.openevent.infrastructure.search
 
 
+import com.jillesvangurp.ktsearch.*
+import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
+import com.jillesvangurp.searchdsls.querydsl.ESQuery
 import de.sambalmueslie.openevent.core.BusinessObject
 import de.sambalmueslie.openevent.core.CrudService
 import de.sambalmueslie.openevent.storage.util.PageableSequence
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.scheduling.annotation.Async
-import org.apache.solr.common.SolrInputDocument
+import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
 import kotlin.system.measureTimeMillis
+import kotlin.time.Duration.Companion.seconds
 
 abstract class BaseSearchService<T, O : BusinessObject<T>>(
     private val service: CrudService<T, O, *, *>,
     searchService: SearchService,
-    name: String,
+    private val name: String,
     private val logger: Logger
 ) {
 
-    private val client = searchService.getClient<Long>(name)
+    private val client = searchService.getClient()
+
+    protected fun handleCreated(obj: O) {
+        indexDocument(obj, OperationType.Create)
+    }
+
     protected fun handleChanged(obj: O) {
-        val input = convert(obj)
-        client.save(input)
+        indexDocument(obj, OperationType.Index)
+    }
+
+    private fun indexDocument(obj: O, type: OperationType) {
+        runBlocking {
+            val duration = measureTimeMillis {
+                val input = convert(obj)
+                client.indexDocument(
+                    target = name,
+                    serializedJson = input,
+                    id = obj.id.toString(),
+                    opType = OperationType.Create
+                )
+            }
+            logger.info("[$name] index document within $duration ms.")
+        }
     }
 
     protected fun handleRemoved(obj: O) {
-        client.delete(obj.id.toString())
+        runBlocking {
+            val duration = measureTimeMillis {
+                client.deleteDocument(name, obj.id.toString())
+            }
+            logger.info("[$name] delete document within $duration ms.")
+        }
     }
 
-    protected abstract fun convert(obj: O): SolrInputDocument
 
     @Async
-    open fun createIndex() {
-        val duration = measureTimeMillis {
-            client.deleteAll()
-            val sequence = PageableSequence { service.getAll(it) }
-            sequence.forEach { handleChanged(it) }
+    open fun setup() {
+        runBlocking {
+            var duration = measureTimeMillis { createIndex() }
+            logger.info("[$name] Create index within $duration ms.")
+            duration = measureTimeMillis { initialLoad() }
+            logger.info("[$name] Initial load within $duration ms.")
         }
-        logger.info("Index build within $duration ms.")
+
     }
 
-    fun search(query: String, pageable: Pageable): Page<O> {
-        val solrQuery = buildSolrQuery(query)
-        val result = client.search(solrQuery, pageable)
-        val ids = result.mapNotNull { it.getFieldValue("id") as? String }
-            .mapNotNull { convertId(it) }
-            .toSet()
+    private suspend fun initialLoad() {
+        val sequence = PageableSequence { service.getAll(it) }
+        client.bulk(
+            target = name
+        ) {
+            sequence.forEach { obj ->
+                val c = convert(obj)
+                index(c, id = obj.id.toString())
+            }
+        }
+    }
 
+    private suspend fun createIndex() {
+        client.deleteIndex(name)
+
+        client.createIndex(name) {
+            settings {
+                replicas = 0
+                shards = 3
+                refreshInterval = 10.seconds
+            }
+            mappings(dynamicEnabled = false, createMappings())
+        }
+    }
+
+    abstract fun convert(obj: O): String
+
+    abstract fun createMappings(): FieldMappings.() -> Unit
+
+    fun search(q: String, pageable: Pageable): Page<O> {
+        val result = runBlocking {
+            client.search(name) {
+//                from = pageable.offset.toInt()
+//                resultSize = pageable.size
+                trackTotalHits = "true"
+                query = buildQuery(q)
+            }
+        }
+        val ids = result.ids.mapNotNull { convertId(it) }.toSet()
         val objs = service.getByIds(ids)
-        return Page.of(objs, result.pageable, result.totalSize)
+        return Page.of(objs, pageable, result.total)
     }
+
+    abstract fun buildQuery(q: String): ESQuery
+
 
     abstract fun convertId(id: String): T?
 
-    abstract fun buildSolrQuery(query: String): String
 }

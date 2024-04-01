@@ -6,7 +6,7 @@ import {EventService} from "../model/event.service";
 import {EventNavigationService} from "../event-navigation.service";
 import {EventDeleteDialogComponent} from "../event-delete-dialog/event-delete-dialog.component";
 import {EventMenuItem} from "../model/event-menu-item";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
   selector: 'app-event-menu',

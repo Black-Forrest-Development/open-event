@@ -3,7 +3,7 @@ import {Location} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EventService} from "../../event/model/event.service";
 import {TranslateService} from "@ngx-translate/core";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({

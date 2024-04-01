@@ -137,7 +137,7 @@ class EventController(
     @Post("/search")
     fun buildIndex(auth: Authentication) {
         return auth.checkPermission(PERMISSION_ADMIN) {
-            search.createIndex()
+            search.setup()
             HttpResponse.created("")
         }
     }

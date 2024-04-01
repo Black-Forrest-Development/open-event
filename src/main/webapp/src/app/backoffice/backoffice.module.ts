@@ -4,7 +4,6 @@ import {BackofficeBoardComponent} from './backoffice-board/backoffice-board.comp
 import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HotToastModule} from "@ngneat/hot-toast";
 import {NgxEchartsModule} from "ngx-echarts";
 import {BackofficeRoutingModule} from "./backoffice-routing.module";
 import {RegistrationModule} from "../registration/registration.module";
@@ -34,7 +33,6 @@ import {AccountModule} from "../account/account.module";
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    HotToastModule,
     NgxEchartsModule.forChild(),
     RegistrationModule,
     EventModule,

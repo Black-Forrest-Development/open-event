@@ -14,7 +14,6 @@ import {EventChangeFormLocationComponent} from './event-change-form-location/eve
 import {
   EventChangeFormRegistrationComponent
 } from './event-change-form-registration/event-change-form-registration.component';
-import {HotToastModule} from "@ngneat/hot-toast";
 import {EventMenuComponent} from './event-menu/event-menu.component';
 import {EventDeleteDialogComponent} from './event-delete-dialog/event-delete-dialog.component';
 import {AccountModule} from "../account/account.module";
@@ -67,7 +66,6 @@ import {EventActionExportComponent} from './event-action-export/event-action-exp
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    HotToastModule,
     AccountModule,
     LocationModule,
     ChipSelectModule,

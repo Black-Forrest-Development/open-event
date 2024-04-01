@@ -4,7 +4,7 @@ import {SearchAccountDialogComponent} from "../../account/search-account-dialog/
 import {CreateAccountDialogComponent} from "../../account/create-account-dialog/create-account-dialog.component";
 import {AccountService} from "../../account/model/account.service";
 import {Account, AccountChangeRequest} from "../../account/model/account-api";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({

@@ -2,15 +2,11 @@ package de.sambalmueslie.openevent.infrastructure.search
 
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
-import org.apache.solr.common.SolrDocument
-import org.apache.solr.common.SolrInputDocument
 
-interface SearchClient<T> {
+interface SearchClient<I, O> {
     fun delete(key: String)
     fun deleteAll()
-
-    fun get(key: String): SolrDocument?
-    fun save(input: SolrInputDocument)
-
-    fun search(query: String, pageable: Pageable): Page<SolrDocument>
+    fun get(key: String): O?
+    fun save(input: List<I>)
+    fun search(query: String, pageable: Pageable): Page<O>
 }

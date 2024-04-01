@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Location} from "@angular/common";
 import {CacheService} from "../model/cache.service";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {CacheInfo} from "../model/cache-api";
 import {EChartsOption} from "echarts";
 

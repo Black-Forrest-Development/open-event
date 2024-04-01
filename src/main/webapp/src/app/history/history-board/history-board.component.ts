@@ -3,7 +3,7 @@ import {HistoryService} from "../model/history.service";
 import {Page} from "../../shared/model/page";
 import {PageEvent} from "@angular/material/paginator";
 import {HistoryEventInfo} from "../model/history-api";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({

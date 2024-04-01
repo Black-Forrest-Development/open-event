@@ -1,6 +1,6 @@
 import {Component, EventEmitter} from '@angular/core';
 import {SettingService} from "../model/setting.service";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {Setting} from "../model/settings-api";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {Page} from "../../shared/model/page";

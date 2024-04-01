@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AccountService} from "../../account/model/account.service";
 import {CategoryService} from "../../category/model/category.service";
 import {EventService} from "../../event/model/event.service";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {AuthService} from "../../auth/auth.service";
 
 @Component({

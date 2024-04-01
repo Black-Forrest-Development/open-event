@@ -24,7 +24,7 @@
     "@fullcalendar/angular": "^6.1.10",
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
-    "@ngneat/hot-toast": "^7.0.0",
+    "@ngxpert/hot-toast": "^1.0.0",
     "@ngneat/overview": "^6.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",

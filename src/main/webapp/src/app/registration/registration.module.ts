@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {RegistrationDetailsComponent} from './registration-details/registration-details.component';
 import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
-import {HotToastModule} from "@ngneat/hot-toast";
 import {
   RegistrationParticipateDialogComponent
 } from './registration-participate-dialog/registration-participate-dialog.component';
@@ -30,15 +29,14 @@ import {RegistrationStatusComponent} from './registration-status/registration-st
     RegistrationParticipateManualDialogComponent,
     RegistrationStatusComponent
   ],
-    exports: [
-        RegistrationDetailsComponent,
-        RegistrationStatusComponent
-    ],
+  exports: [
+    RegistrationDetailsComponent,
+    RegistrationStatusComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     TranslateModule,
-    HotToastModule,
     ReactiveFormsModule,
     AccountModule
   ]

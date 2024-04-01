@@ -3,7 +3,7 @@ import {EventService} from "../model/event.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {Location} from "@angular/common";
 import {EventInfo,} from "../model/event-api";
 import * as moment from "moment";
@@ -52,7 +52,7 @@ export class EventChangeComponent {
 
       imageUrl: this.fb.control(''),
       iconUrl: this.fb.control(''),
-      longText: this.fb.control('', Validators.required),
+      longText: this.fb.control(''),
       shortText: this.fb.control(''),
       title: this.fb.control('', Validators.required)
     })

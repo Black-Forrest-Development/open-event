@@ -2,10 +2,10 @@ import {Component, Input} from '@angular/core';
 import {Setting, SettingChangeRequest} from "../model/settings-api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SettingService} from "../model/setting.service";
-import {HotToastService} from "@ngneat/hot-toast";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
   selector: 'app-settings-change',

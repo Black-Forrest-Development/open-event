@@ -5,7 +5,6 @@ import {CategoryRoutingModule} from "./category-routing.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HotToastModule} from "@ngneat/hot-toast";
 import {CategoryChangeComponent} from './category-change/category-change.component';
 
 
@@ -20,7 +19,6 @@ import {CategoryChangeComponent} from './category-change/category-change.compone
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    HotToastModule,
   ]
 })
 export class CategoryModule {

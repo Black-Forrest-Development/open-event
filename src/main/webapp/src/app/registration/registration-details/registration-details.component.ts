@@ -8,7 +8,7 @@ import {
 import {RegistrationService} from "../model/registration.service";
 import {Participant} from "../../participant/model/participant-api";
 import {MatDialog} from "@angular/material/dialog";
-import {HotToastService} from "@ngneat/hot-toast";
+import {HotToastService} from "@ngxpert/hot-toast";
 import {
   RegistrationParticipateDialogComponent
 } from "../registration-participate-dialog/registration-participate-dialog.component";

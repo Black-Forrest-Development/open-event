@@ -41,7 +41,7 @@
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.bubble.css",
               "node_modules/quill/dist/quill.snow.css",
-              "node_modules/@ngneat/hot-toast/src/styles/styles.css",
+              "node_modules/@ngxpert/hot-toast/src/styles/styles.css",
               "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [],

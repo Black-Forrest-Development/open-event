@@ -1,6 +1,11 @@
 package de.sambalmueslie.openevent.core.logic.event
 
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
+import com.jillesvangurp.searchdsls.querydsl.ESQuery
+import com.jillesvangurp.searchdsls.querydsl.SimpleQueryStringQuery
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.Event
 import de.sambalmueslie.openevent.core.model.EventInfo
@@ -9,7 +14,6 @@ import de.sambalmueslie.openevent.infrastructure.search.SearchService
 import io.micronaut.context.annotation.Context
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
-import org.apache.solr.common.SolrInputDocument
 import org.jsoup.Jsoup
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -24,23 +28,38 @@ open class EventSearchService(
         private val logger: Logger = LoggerFactory.getLogger(EventSearchService::class.java)
     }
 
+    private val mapper = ObjectMapper().registerKotlinModule()
+
     init {
         service.register(this)
     }
 
-    override fun convert(obj: Event): SolrInputDocument {
-        val input = SolrInputDocument()
-        input.addField("id", obj.id.toString())
-        input.addField("title", obj.title)
-        input.addField("content", Jsoup.parse(obj.longText).text())
-        input.addField("owner", obj.owner.id)
-        input.addField("published", obj.published)
-        return input
+
+    override fun createMappings(): FieldMappings.() -> Unit {
+        return {
+            number<Long>("id")
+            text("title")
+            text("content")
+            number<Long>("owner")
+            bool("published")
+        }
     }
 
-    override fun buildSolrQuery(query: String): String {
-        return "(title:*$query* OR content:*$query*) AND published:true"
+
+    override fun convert(obj: Event): String {
+        val input = mutableMapOf<String, Any>()
+        input["id"] = obj.id.toString()
+        input["title"] = obj.title
+        input["content"] = Jsoup.parse(obj.longText).text()
+        input["owner"] = obj.owner.id
+        input["published"] = obj.published
+        return mapper.writeValueAsString(input)
     }
+
+    override fun buildQuery(q: String): ESQuery {
+        return SimpleQueryStringQuery(q,  "title", "content")
+    }
+
 
     override fun convertId(id: String): Long? {
         return id.toLongOrNull()
@@ -52,7 +71,7 @@ open class EventSearchService(
     }
 
     override fun handleCreated(actor: Account, obj: Event) {
-        super.handleChanged(obj)
+        super<BaseSearchService>.handleCreated(obj)
     }
 
     override fun handleUpdated(actor: Account, obj: Event) {

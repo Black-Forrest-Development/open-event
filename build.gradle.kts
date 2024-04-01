@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "1.9.23"
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.google.cloud.tools.jib") version "3.4.1"
+    id("com.google.cloud.tools.jib") version "3.4.2"
     id("io.micronaut.application") version "4.3.5"
     id("io.micronaut.aot") version "4.3.5"
     jacoco

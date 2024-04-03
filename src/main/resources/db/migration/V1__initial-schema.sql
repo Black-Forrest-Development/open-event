@@ -17,15 +17,72 @@ CREATE TABLE account
     id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('account_seq'::regclass),
     external_id     VARCHAR(255) UNIQUE,
     name            VARCHAR(255)                NOT NULL,
-    first_name      VARCHAR(255)                NOT NULL,
-    last_name       VARCHAR(255)                NOT NULL,
-    email           VARCHAR(255)                NOT NULL UNIQUE,
     icon_url        VARCHAR(255)                NOT NULL,
+    last_login_date TIMESTAMP WITHOUT TIME ZONE,
     service_account BOOLEAN                     NOT NULL,
+    idp_linked      BOOLEAN                     NOT NULL,
 
     last_sync       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated         TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- address
+CREATE SEQUENCE address_seq;
+CREATE TABLE address
+(
+    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('address_seq'::regclass),
+    street          VARCHAR(255)                NOT NULL,
+    street_number   VARCHAR(255)                NOT NULL,
+    zip             VARCHAR(255)                NOT NULL,
+    city            VARCHAR(255)                NOT NULL,
+    country         VARCHAR(255)                NOT NULL,
+    additional_info VARCHAR(255)                NOT NULL,
+
+    lat             DOUBLE PRECISION            NOT NULL,
+    lon             DOUBLE PRECISION            NOT NULL,
+
+    account_id      BIGINT                      NOT NULL REFERENCES account (id),
+
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- profile
+CREATE SEQUENCE profile_seq;
+CREATE TABLE profile
+(
+    id             BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('profile_seq'::regclass),
+
+    email          VARCHAR(255)                NOT NULL UNIQUE,
+    phone          VARCHAR(255)                NOT NULL,
+    mobile         VARCHAR(255)                NOT NULL,
+
+    firstName      VARCHAR(255)                NOT NULL,
+    lastName       VARCHAR(255)                NOT NULL,
+
+    dateOfBirth    VARCHAR(255)                NOT NULL,
+    gender         VARCHAR(255)                NOT NULL,
+    profilePicture VARCHAR(255)                NOT NULL,
+    website        VARCHAR(255)                NOT NULL,
+
+    account_id     BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
+
+    created        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated        TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- profile
+CREATE SEQUENCE preferences_seq;
+CREATE TABLE preferences
+(
+    id                      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('preferences_seq'::regclass),
+    notify_on_event_changes BOOLEAN                     NOT NULL UNIQUE,
+
+    account_id              BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
+
+    created                 TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated                 TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- announcement

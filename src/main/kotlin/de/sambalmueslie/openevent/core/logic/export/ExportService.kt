@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.export
 
 
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
+import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.infrastructure.mail.api.Attachment
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
@@ -18,6 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 @Singleton
 open class ExportService(
     private val eventService: EventCrudService,
+    private val profileService: ProfileCrudService,
     private val excelExporter: EventExcelExporter,
     private val pdfExporter: EventPdfExporter,
     private val mailSender: MailSender
@@ -48,21 +50,24 @@ open class ExportService(
 
     @Async
     open fun exportEventsPdfToEmail(account: Account) {
+        val profile = profileService.getForAccount(account) ?: return
+        if (profile.email.isBlank()) return
+
         if (exporting.get()) return
         exporting.set(true)
-
         try {
             val result = exportEvents(account, pdfExporter) ?: return
 
             val attachment = Attachment(result.file.name, result.file.readBytes(), result.mediaType.name)
             val mail = Mail("Export der Veranstaltungen", null, "", mutableListOf(), mutableListOf(attachment))
-            mailSender.send(mail, listOf(MailParticipant(account.name, account.email)))
+            mailSender.send(mail, listOf(MailParticipant(account.name, profile.email)))
 
         } catch (e: Exception) {
             logger.error("Exception while exporting pdf", e)
         }
         exporting.set(false)
     }
+
 
     fun exportEventSummaryExcel(account: Account): SystemFile? {
         return exportEvents(account, excelExporter)

@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.logic.registration
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.participant.ParticipantCrudService
+import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
 import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.core.storage.RegistrationStorage
 import jakarta.inject.Singleton
@@ -14,7 +15,8 @@ import org.slf4j.LoggerFactory
 class RegistrationCrudService(
     private val storage: RegistrationStorage,
     private val participantCrudService: ParticipantCrudService,
-    private val accountCrudService: AccountCrudService
+    private val accountCrudService: AccountCrudService,
+    private val profileCrudService: ProfileCrudService
 ) : BaseCrudService<Long, Registration, RegistrationChangeRequest, RegistrationChangeListener>(storage) {
 
     companion object {
@@ -94,13 +96,20 @@ class RegistrationCrudService(
             actor,
             AccountChangeRequest(
                 "${request.firstName} ${request.lastName}",
-                request.firstName,
-                request.lastName,
-                request.email,
                 "",
                 null
             )
         )
+        val profile = profileCrudService.create(
+            actor, account, ProfileChangeRequest(
+                request.email,
+                request.phone,
+                request.mobile,
+                request.firstName,
+                request.lastName
+            )
+        )
+
         return changeParticipant(actor, registration, account, ParticipateRequest(request.size))
     }
 

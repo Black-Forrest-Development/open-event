@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.storage.account
 
 
 import de.sambalmueslie.openevent.storage.DataObjectRepository
+import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.Page
@@ -13,6 +14,8 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 interface AccountRepository : DataObjectRepository<Long, AccountData> {
     fun findByExternalId(externalId: String): AccountData?
     fun findByName(name: String, pageable: Pageable): Page<AccountData>
+
+    @Query("select a.* from account a inner join profile p on p.account_id = a.id WHERE p.email = :email LIMIT 1")
     fun findByEmail(email: String): AccountData?
 
 }

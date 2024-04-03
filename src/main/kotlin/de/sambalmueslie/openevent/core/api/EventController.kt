@@ -32,7 +32,9 @@ class EventController(
 
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Event? {
-        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) { service.get(id) }
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            service.get(id)
+        }
     }
 
     @Get("/{id}/info")

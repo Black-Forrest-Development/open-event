@@ -12,11 +12,11 @@ data class AccountData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long = 0,
     @Column var externalId: String?,
     @Column var name: String,
-    @Column var firstName: String,
-    @Column var lastName: String,
-    @Column var email: String,
     @Column var iconUrl: String,
+    @Column var lastLoginDate: LocalDateTime?,
+
     @Column var serviceAccount: Boolean,
+    @Column var idpLinked: Boolean,
 
     @Column var lastSync: LocalDateTime = LocalDateTime.now(),
     @Column var created: LocalDateTime = LocalDateTime.now(),
@@ -27,35 +27,35 @@ data class AccountData(
         fun create(
             request: AccountChangeRequest,
             serviceAccount: Boolean,
+            idpLinked: Boolean,
             timestamp: LocalDateTime
         ): AccountData {
             return AccountData(
                 0,
                 request.externalId,
                 request.name,
-                request.firstName,
-                request.lastName,
-                request.email,
                 request.iconUrl,
+                timestamp,
                 serviceAccount,
+                idpLinked,
                 timestamp
             )
         }
     }
 
     override fun convert(): Account {
-        return Account(id, externalId, name, firstName, lastName, email, iconUrl, serviceAccount)
+        return Account(id, externalId, name, iconUrl, created, lastLoginDate, serviceAccount, idpLinked)
     }
 
     fun update(request: AccountChangeRequest, timestamp: LocalDateTime): AccountData {
-        externalId = request.externalId
         name = request.name
-        firstName = request.firstName
-        lastName = request.lastName
-        email = request.email
         iconUrl = request.iconUrl
         updated = timestamp
         return this
     }
 
+    fun login(timestamp: LocalDateTime): AccountData {
+        lastLoginDate = timestamp
+        return this
+    }
 }

@@ -107,7 +107,7 @@ class EventExcelSheetBuilder(
         cTime.setCellValue("${event.start.format(timeFormatter)} - ${event.finish.format(timeFormatter)}")
 
         val cOwner = row.createContentCell(c++)
-        cOwner.setCellValue(event.owner.getTitle())
+        cOwner.setCellValue(event.owner.name)
 
         val cLocation = row.createContentCell(c++)
         cLocation.setCellValue(info.location?.format() ?: "")

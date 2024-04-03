@@ -2,8 +2,10 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 
 import de.sambalmueslie.openevent.api.SettingsAPI
+import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
 import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.core.model.NotificationScheme
+import de.sambalmueslie.openevent.core.model.Profile
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailParticipant
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailSender
@@ -17,6 +19,7 @@ import java.util.*
 
 @Singleton
 class NotificationService(
+    private val profileService: ProfileCrudService,
     private val typeService: NotificationTypeCrudService,
     private val templateService: NotificationTemplateCrudService,
     private val schemeService: NotificationSchemeCrudService,
@@ -53,11 +56,17 @@ class NotificationService(
 
     private fun <T> notify(event: NotificationEvent<T>, mail: Mail, recipients: Collection<Account>) {
         if (recipients.isEmpty()) return
-        val to = recipients.map { it.toParticipant() }
+        val profiles = profileService.getForAccounts(recipients).filter { it.email.isNotBlank() }
+        val to = profiles.map { it.toParticipant() }
         val adminEmail = settingsService.findByKey(SettingsAPI.SETTINGS_MAIL_DEFAULT_ADMIN_ADDRESS)?.value as? String
         val bcc = if (adminEmail != null) listOf(MailParticipant("", adminEmail)) else emptyList()
         if (event.useActorAsSender) {
-            sender.send(mail, event.actor.toParticipant(), to, bcc, single = true)
+            val actorProfile = profileService.getForAccount(event.actor)
+            if (actorProfile != null) {
+                sender.send(mail, actorProfile.toParticipant(), to, bcc, single = true)
+            } else {
+                sender.send(mail, to, bcc, single = true)
+            }
         } else {
             sender.send(mail, to, bcc, single = true)
         }
@@ -65,6 +74,7 @@ class NotificationService(
 
 }
 
-private fun Account.toParticipant(): MailParticipant {
-    return MailParticipant(name, email)
+
+private fun Profile.toParticipant(): MailParticipant {
+    return MailParticipant(getTitle(), email)
 }

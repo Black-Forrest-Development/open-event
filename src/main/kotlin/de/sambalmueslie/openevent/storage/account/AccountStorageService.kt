@@ -39,8 +39,9 @@ class AccountStorageService(
 
     override fun createData(request: AccountChangeRequest, properties: Map<String, Any>): AccountData {
         val serviceAccount = properties[SERVICE_ACCOUNT] as? Boolean ?: false
+        val idpLinked = !request.externalId.isNullOrBlank()
         logger.info("Create world $request")
-        return AccountData.create(request, serviceAccount, timeProvider.now())
+        return AccountData.create(request, serviceAccount, idpLinked, timeProvider.now())
     }
 
     override fun isValid(request: AccountChangeRequest) {

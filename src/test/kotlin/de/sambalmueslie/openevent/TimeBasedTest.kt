@@ -19,8 +19,8 @@ abstract class TimeBasedTest {
     val timestamp = LocalDateTime.of(2023, 7, 28, 22, 33, 10)
     val provider: TimeProvider = mockk()
 
-    @MockBean(TimeProvider::class)
-    fun timeProvider() = provider
+//    @MockBean(TimeProvider::class)
+//    fun timeProvider() = provider
 
     val mailClient = mockk<MailClient>()
 

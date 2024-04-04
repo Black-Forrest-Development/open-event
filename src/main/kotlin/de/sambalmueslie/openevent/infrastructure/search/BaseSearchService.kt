@@ -33,7 +33,6 @@ abstract class BaseSearchService<T, O : BusinessObject<T>>(
     }
 
     private fun updateDocument(obj: O) {
-
         runBlocking {
             val id = obj.id.toString()
             val duration = measureTimeMillis {
@@ -105,8 +104,8 @@ abstract class BaseSearchService<T, O : BusinessObject<T>>(
     fun search(q: String, pageable: Pageable): Page<O> {
         val result = runBlocking {
             client.search(name) {
-//                from = pageable.offset.toInt()
-//                resultSize = pageable.size
+                from = pageable.offset.toInt()
+                resultSize = pageable.size
                 trackTotalHits = "true"
                 query = buildQuery(q)
             }

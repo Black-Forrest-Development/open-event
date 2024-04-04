@@ -3,12 +3,11 @@
   </div>
 </mat-toolbar>
 
-<div class="d-flex flex-column gap-2 p-2 ">
-  <mat-card>
-    <p>profile-board works!</p>
-  </mat-card>
-  <app-address-board></app-address-board>
-  <app-preferences-board></app-preferences-board>
+<div class="d-flex flex-column">
+  <div class="d-flex flex-row gap-2 p-2 align-content-stretch align-items-stretch">
+    <app-profile-change class="col-4 flex-fill"></app-profile-change>
+    <app-address-board class="col-4 flex-fill"></app-address-board>
+    <app-preferences-board class="col-4 flex-fill"></app-preferences-board>
+  </div>
 </div>
-
 

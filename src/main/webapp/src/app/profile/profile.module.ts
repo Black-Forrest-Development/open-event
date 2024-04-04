@@ -8,11 +8,13 @@ import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AddressModule} from "../address/address.module";
 import {PreferencesModule} from "../preferences/preferences.module";
+import {ProfileChangeComponent} from './profile-change/profile-change.component';
 
 
 @NgModule({
   declarations: [
-    ProfileBoardComponent
+    ProfileBoardComponent,
+    ProfileChangeComponent
   ],
   imports: [
     CommonModule,

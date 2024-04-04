@@ -160,6 +160,7 @@
     }
   },
   "backoffice": {
+    "type": "Backoffice",
     "title": "Backoffice",
     "stats": {
       "title": "Stats"
@@ -197,5 +198,30 @@
         "event": "Reindex event"
       }
     }
+  },
+  "mail": {
+    "type": "E-Mail Log",
+    "title": "E-Mail",
+    "search": "Search for email",
+    "table": {
+      "timestamp": "Timestamp",
+      "status": "Status",
+      "title": "Title"
+    }
+  },
+  "history": {
+    "type": "Audit Log",
+    "title": "Event audit log",
+    "table": {
+      "timestamp": "Timestamp",
+      "actor": "Actor",
+      "type": "Type",
+      "message": "Message",
+      "source": "Source",
+      "info": "Info"
+    }
+  },
+  "profile": {
+    "type": "Userprofile"
   }
 }

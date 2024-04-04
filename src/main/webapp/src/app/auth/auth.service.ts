@@ -41,6 +41,10 @@ export class AuthService {
   public static HISTORY_READ = "openevent.history.read"
   public static HISTORY_ADMIN = "openevent.history.admin"
 
+  public static PROFILE_READ = "openevent.profile.read"
+  public static PROFILE_WRITE = "openevent.profile.write"
+  public static PROFILE_ADMIN = "openevent.profile.admin"
+
   private principal: Principal | undefined;
 
 

@@ -85,7 +85,8 @@ abstract class BaseSearchService<T, O : BusinessObject<T>>(
     }
 
     private suspend fun createIndex() {
-        client.deleteIndex(name)
+        val exists = client.exists(name)
+        if (exists) client.deleteIndex(name)
 
         client.createIndex(name) {
             settings {

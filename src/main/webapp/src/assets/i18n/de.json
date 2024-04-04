@@ -160,6 +160,7 @@
     }
   },
   "backoffice": {
+    "type": "Backoffice",
     "title": "Backoffice",
     "stats": {
       "title": "Statistik"
@@ -197,5 +198,30 @@
         "event": "Veranstaltung Index neu erstellen"
       }
     }
+  },
+  "mail": {
+    "type": "E-Mail Protokoll",
+    "title": "E-Mail",
+    "search": "Suche nach E-Mail",
+    "table": {
+      "timestamp": "Zeitstempel",
+      "status": "Status",
+      "title": "Betreff"
+    }
+  },
+  "history": {
+    "type": "Audit Log",
+    "title": "Überwachungsprotokoll",
+    "table": {
+      "timestamp": "Zeitstempel",
+      "actor": "Akteur",
+      "type": "Typ",
+      "message": "Nachricht",
+      "source": "Quelle",
+      "info": "Info"
+    }
+  },
+  "profile": {
+    "type": "Benutzerprofil"
   }
 }

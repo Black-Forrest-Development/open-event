@@ -44,6 +44,12 @@ const routes: Routes = [
     data: {roles: [AuthService.HISTORY_ADMIN]}
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthGuard],
+    data: {roles: [AuthService.PROFILE_READ]}
+  },
+  {
     path: '**', component: PageNotFoundComponent
   }
 ];

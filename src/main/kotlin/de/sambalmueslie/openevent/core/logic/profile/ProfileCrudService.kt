@@ -33,5 +33,46 @@ class ProfileCrudService(
         return storage.getForAccounts(accounts)
     }
 
+    fun handleAccountCreated(actor: Account, account: Account) {
+        val existing = storage.findByAccount(account)
+        if (existing != null) return
+
+        val request = ProfileChangeRequest(
+            null,
+            null,
+            null,
+            "",
+            "",
+            null,
+            null,
+            null,
+            null,
+        )
+
+        create(actor, account, request)
+    }
+
+    fun merge(actor: Account, account: Account, request: ProfileChangeRequest): Profile {
+        val profile = storage.findByAccount(account)
+
+        val profileRequest = ProfileChangeRequest(
+            profile?.email ?: request.email,
+            profile?.phone ?: request.phone,
+            profile?.mobile ?: request.mobile,
+            profile?.firstName.isNullOrBlank().let { request.firstName },
+            profile?.lastName.isNullOrBlank().let { request.lastName },
+            profile?.dateOfBirth ?: request.dateOfBirth,
+            profile?.gender ?: request.gender,
+            profile?.profilePicture ?: request.profilePicture,
+            profile?.website ?: request.website,
+        )
+
+        return if (profile == null) {
+            create(account, account, profileRequest)
+        } else {
+            update(account, profile.id, profileRequest)
+        }
+    }
+
 
 }

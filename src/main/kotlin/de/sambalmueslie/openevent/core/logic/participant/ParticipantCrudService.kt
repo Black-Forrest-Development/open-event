@@ -115,9 +115,9 @@ class ParticipantCrudService(
             rank,
             waitingList
         )
-        val participant = storage.update(participant.id, changeRequest)
+        val p = storage.update(participant.id, changeRequest)
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, participant, result, status)
+        return ParticipateResponse(registration, p, result, status)
     }
 
     fun remove(actor: Account, registration: Registration, participantId: Long): ParticipateResponse {

@@ -7,17 +7,17 @@ import java.time.LocalDate
 data class Profile(
     override val id: Long,
 
-    val email: String,
-    val phone: String,
-    val mobile: String,
+    val email: String?,
+    val phone: String?,
+    val mobile: String?,
 
     val firstName: String,
     val lastName: String,
 
-    val dateOfBirth: LocalDate,
-    val gender: String,
-    val profilePicture: String,
-    val website: String
+    val dateOfBirth: LocalDate?,
+    val gender: String?,
+    val profilePicture: String?,
+    val website: String?
 
 ) : BusinessObject<Long> {
 

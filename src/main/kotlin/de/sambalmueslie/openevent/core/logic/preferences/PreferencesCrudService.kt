@@ -2,9 +2,7 @@ package de.sambalmueslie.openevent.core.logic.preferences
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Preferences
-import de.sambalmueslie.openevent.core.model.PreferencesChangeRequest
+import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.core.storage.PreferencesStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
@@ -27,6 +25,18 @@ class PreferencesCrudService(
 
     fun getForAccount(account: Account): Preferences? {
         return storage.findByAccount(account)
+    }
+
+    fun handleAccountCreated(actor: Account, account: Account) {
+        val existing = storage.findByAccount(account)
+        if (existing != null) return
+
+        val request = PreferencesChangeRequest(
+            EmailNotificationsPreferences(),
+            CommunicationPreferences(),
+            NotificationPreferences()
+        )
+        create(actor, account, request)
     }
 
 

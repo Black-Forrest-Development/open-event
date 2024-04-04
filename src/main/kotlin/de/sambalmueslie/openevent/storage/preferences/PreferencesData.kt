@@ -1,8 +1,9 @@
 package de.sambalmueslie.openevent.storage.preferences
 
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Preferences
-import de.sambalmueslie.openevent.core.model.PreferencesChangeRequest
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.storage.SimpleDataObject
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -11,7 +12,9 @@ import java.time.LocalDateTime
 @Table(name = "preferences")
 data class PreferencesData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long = 0,
-    @Column var notifyOnEventChanges: Boolean,
+    @Column(name = "email") var emailNotificationsPreferencesJson: String,
+    @Column(name = "communication") var communicationPreferencesJson: String,
+    @Column(name = "notification") var notificationPreferencesJson: String,
 
     @Column var accountId: Long,
 
@@ -20,27 +23,78 @@ data class PreferencesData(
 ) : SimpleDataObject<Preferences> {
 
     companion object {
+        private val mapper = ObjectMapper().registerKotlinModule()
         fun create(
             account: Account,
             request: PreferencesChangeRequest,
             timestamp: LocalDateTime
         ): PreferencesData {
-            return PreferencesData(
-                0,
-                request.notifyOnEventChanges,
-                account.id,
-                timestamp
-            )
+            val e = mapper.writeValueAsString(request.emailNotificationsPreferences)
+            val c = mapper.writeValueAsString(request.communicationPreferences)
+            val n = mapper.writeValueAsString(request.notificationPreferences)
+
+            val data = PreferencesData(0, e, c, n, account.id, timestamp)
+            data.emailNotificationsPreferences = request.emailNotificationsPreferences
+            data.communicationPreferences = request.communicationPreferences
+            data.notificationPreferences = request.notificationPreferences
+            return data
         }
     }
 
     override fun convert(): Preferences {
-        return Preferences(id, notifyOnEventChanges)
+        return Preferences(
+            id,
+            getEmailNotificationsPreferencesObj(),
+            getCommunicationPreferencesObj(),
+            getNotificationsPreferencesObj()
+        )
     }
 
     fun update(request: PreferencesChangeRequest, timestamp: LocalDateTime): PreferencesData {
-        notifyOnEventChanges = request.notifyOnEventChanges
+        emailNotificationsPreferencesJson = mapper.writeValueAsString(request.emailNotificationsPreferences)
+        communicationPreferencesJson = mapper.writeValueAsString(request.communicationPreferences)
+        notificationPreferencesJson = mapper.writeValueAsString(request.notificationPreferences)
+
+        emailNotificationsPreferences = request.emailNotificationsPreferences
+        communicationPreferences = request.communicationPreferences
+        notificationPreferences = request.notificationPreferences
         updated = timestamp
         return this
     }
+
+
+    @Transient
+    private var emailNotificationsPreferences: EmailNotificationsPreferences? = null
+
+    @Transient
+    fun getEmailNotificationsPreferencesObj(): EmailNotificationsPreferences {
+        if (emailNotificationsPreferences == null) {
+            emailNotificationsPreferences =
+                mapper.readValue<EmailNotificationsPreferences>(emailNotificationsPreferencesJson)
+        }
+        return emailNotificationsPreferences!!
+    }
+
+    @Transient
+    private var communicationPreferences: CommunicationPreferences? = null
+
+    @Transient
+    fun getCommunicationPreferencesObj(): CommunicationPreferences {
+        if (communicationPreferences == null) {
+            communicationPreferences = mapper.readValue<CommunicationPreferences>(communicationPreferencesJson)
+        }
+        return communicationPreferences!!
+    }
+
+    @Transient
+    private var notificationPreferences: NotificationPreferences? = null
+
+    @Transient
+    fun getNotificationsPreferencesObj(): NotificationPreferences {
+        if (notificationPreferences == null) {
+            notificationPreferences = mapper.readValue<NotificationPreferences>(notificationPreferencesJson)
+        }
+        return notificationPreferences!!
+    }
+
 }

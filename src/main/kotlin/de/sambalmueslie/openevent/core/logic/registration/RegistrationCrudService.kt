@@ -100,15 +100,16 @@ class RegistrationCrudService(
                 null
             )
         )
-        val profile = profileCrudService.create(
-            actor, account, ProfileChangeRequest(
-                request.email,
-                request.phone,
-                request.mobile,
-                request.firstName,
-                request.lastName
-            )
+
+        val profileRequest = ProfileChangeRequest(
+            request.email,
+            request.phone,
+            request.mobile,
+            request.firstName,
+            request.lastName,
+            null, null, null, null
         )
+        profileCrudService.merge(account, account, profileRequest)
 
         return changeParticipant(actor, registration, account, ParticipateRequest(request.size))
     }

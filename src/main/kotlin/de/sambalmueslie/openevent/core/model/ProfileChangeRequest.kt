@@ -7,16 +7,16 @@ import java.time.LocalDate
 @Serdeable
 data class ProfileChangeRequest(
 
-    val email: String,
-    val phone: String,
-    val mobile: String,
+    val email: String? = null,
+    val phone: String? = null,
+    val mobile: String? = null,
 
     val firstName: String,
     val lastName: String,
 
-    val dateOfBirth: LocalDate = LocalDate.MIN,
-    val gender: String = "",
-    val profilePicture: String = "",
-    val website: String = ""
+    val dateOfBirth: LocalDate? = null,
+    val gender: String? = null,
+    val profilePicture: String? = null,
+    val website: String? = null
 
 ) : BusinessObjectChangeRequest

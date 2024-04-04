@@ -5,7 +5,9 @@ import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
 data class PreferencesChangeRequest(
-    val notifyOnEventChanges: Boolean
+    val emailNotificationsPreferences: EmailNotificationsPreferences,
+    val communicationPreferences: CommunicationPreferences,
+    val notificationPreferences: NotificationPreferences
 ) : BusinessObjectChangeRequest
 
 

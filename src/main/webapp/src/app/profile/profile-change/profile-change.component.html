@@ -1,0 +1,131 @@
+<mat-card>
+  <mat-card-header class="pb-3">
+    <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
+      <div class="header">
+        {{ 'profile.title' | translate }}
+      </div>
+      <div class="flex-fill"></div>
+      @if (editMode) {
+        <button mat-mini-fab color="primary" (click)="save()">
+          <mat-icon>save</mat-icon>
+        </button>
+      } @else {
+        <button mat-mini-fab color="primary" (click)="editMode = true">
+          <mat-icon>edit</mat-icon>
+        </button>
+      }
+    </div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="mt-2">
+    <mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
+    @if (profile) {
+      <div class="d-flex flex-row gap-2">
+        <mat-list>
+          <mat-list-item>
+            <b>{{ 'profile.email' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.phone' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.mobile' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.firstName' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.lastName' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.dateOfBirth' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.gender' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.profilePicture' | translate }}</b>
+          </mat-list-item>
+          <mat-list-item>
+            <b>{{ 'profile.website' | translate }}</b>
+          </mat-list-item>
+
+        </mat-list>
+        @if (editMode) {
+
+            <mat-list class="flex-grow-1">
+              <form [formGroup]="fg">
+              <!-- email-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="email">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- phone-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="phone">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- mobile-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="mobile">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- firstName-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic" required>
+                  <input matInput formControlName="firstName">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- lastName-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic" required>
+                  <input matInput formControlName="lastName">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- dateOfBirth-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="dateOfBirth">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- gender-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="gender">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- profilePicture-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="profilePicture">
+                </mat-form-field>
+              </mat-list-item>
+              <!-- website-->
+              <mat-list-item class="py-2">
+                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <input matInput formControlName="website">
+                </mat-form-field>
+              </mat-list-item>
+              </form>
+            </mat-list>
+
+        } @else {
+          <mat-list class="flex-grow-1">
+            <mat-list-item>{{ profile.email }}</mat-list-item>
+            <mat-list-item>{{ profile.phone }}</mat-list-item>
+            <mat-list-item>{{ profile.mobile }}</mat-list-item>
+            <mat-list-item>{{ profile.firstName }}</mat-list-item>
+            <mat-list-item>{{ profile.lastName }}</mat-list-item>
+            <mat-list-item>{{ profile.dateOfBirth }}</mat-list-item>
+            <mat-list-item>{{ profile.gender }}</mat-list-item>
+            <mat-list-item>{{ profile.profilePicture }}</mat-list-item>
+            <mat-list-item>{{ profile.website }}</mat-list-item>
+          </mat-list>
+        }
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

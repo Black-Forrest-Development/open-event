@@ -11,6 +11,7 @@ import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
 import de.sambalmueslie.openevent.core.model.Profile
 import de.sambalmueslie.openevent.core.model.ProfileChangeRequest
+import de.sambalmueslie.openevent.error.InsufficientPermissionsException
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -30,13 +31,10 @@ class ProfileController(
     @Get("/{id}")
     override fun get(auth: Authentication, id: Long): Profile? {
         return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
-            if (isAdmin(auth)) {
+            if (isAdmin(auth) || isOwn(auth, id)) {
                 service.get(id)
             } else {
-                val account = accountService.get(auth) ?: return@checkPermission null
-                val result = service.getForAccount(account) ?: return@checkPermission null
-                if (result.id != id) return@checkPermission null
-                result
+                null
             }
         }
     }
@@ -58,7 +56,7 @@ class ProfileController(
 
     @Post()
     override fun create(auth: Authentication, @Body request: ProfileChangeRequest): Profile {
-        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+        return auth.checkPermission(PERMISSION_ADMIN) {
             logger.traceCreate(auth, request) { service.create(accountService.find(auth), request) }
         }
     }
@@ -66,16 +64,30 @@ class ProfileController(
     @Put("/{id}")
     override fun update(auth: Authentication, id: Long, @Body request: ProfileChangeRequest): Profile {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceUpdate(auth, request) { service.update(accountService.find(auth), id, request) }
+            if (isAdmin(auth) || isOwn(auth, id)) {
+                logger.traceUpdate(auth, request) { service.update(accountService.find(auth), id, request) }
+            } else {
+                throw InsufficientPermissionsException("No permission to access resource")
+            }
         }
     }
+
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Profile? {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceDelete(auth) { service.delete(accountService.find(auth), id) }
+            if (isAdmin(auth) || isOwn(auth, id)) {
+                logger.traceDelete(auth) { service.delete(accountService.find(auth), id) }
+            } else {
+                throw InsufficientPermissionsException("No permission to access resource")
+            }
         }
     }
 
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
+
+    private fun isOwn(auth: Authentication, id: Long): Boolean {
+        val account = accountService.get(auth) ?: return false
+        return service.getForAccount(account)?.id == id
+    }
 }

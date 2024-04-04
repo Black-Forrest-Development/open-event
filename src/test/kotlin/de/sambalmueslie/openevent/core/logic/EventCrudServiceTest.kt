@@ -10,7 +10,9 @@ import de.sambalmueslie.openevent.core.logic.registration.RegistrationChangeList
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.model.*
 import de.sambalmueslie.openevent.core.storage.AccountStorage
+import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.data.model.Pageable
+import io.micronaut.test.annotation.MockBean
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*
 import jakarta.inject.Inject
@@ -36,6 +38,9 @@ class EventCrudServiceTest : TimeBasedTest() {
 
     @Inject
     lateinit var registrationService: RegistrationCrudService
+
+    @MockBean(TimeProvider::class)
+    fun timeProvider() = provider
 
     private val eventListener = mockk<EventChangeListener>()
     private val locationListener = mockk<LocationChangeListener>()

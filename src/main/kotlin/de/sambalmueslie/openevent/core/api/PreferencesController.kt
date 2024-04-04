@@ -1,0 +1,82 @@
+package de.sambalmueslie.openevent.core.api
+
+
+import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
+import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.api.PreferencesAPI
+import de.sambalmueslie.openevent.api.PreferencesAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.api.ProfileAPI
+import de.sambalmueslie.openevent.core.auth.checkPermission
+import de.sambalmueslie.openevent.core.auth.getRealmRoles
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.preferences.PreferencesCrudService
+import de.sambalmueslie.openevent.core.model.Preferences
+import de.sambalmueslie.openevent.core.model.PreferencesChangeRequest
+import de.sambalmueslie.openevent.infrastructure.audit.AuditService
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
+import io.micronaut.http.annotation.*
+import io.micronaut.security.authentication.Authentication
+import io.swagger.v3.oas.annotations.tags.Tag
+
+@Controller("/api/preferences")
+@Tag(name = "Preferences API")
+class PreferencesController(
+    private val service: PreferencesCrudService,
+    private val accountService: AccountCrudService,
+    audit: AuditService,
+) : PreferencesAPI {
+    private val logger = audit.getLogger("Preferences API")
+
+    @Get("/{id}")
+    override fun get(auth: Authentication, id: Long): Preferences? {
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            if (isAdmin(auth)) {
+                service.get(id)
+            } else {
+                val account = accountService.get(auth) ?: return@checkPermission null
+                val result = service.getForAccount(account) ?: return@checkPermission null
+                if (result.id != id) return@checkPermission null
+                result
+            }
+        }
+    }
+
+    @Get("/own")
+    override fun getOwn(auth: Authentication): Preferences? {
+        return auth.checkPermission(PERMISSION_READ, ProfileAPI.PERMISSION_ADMIN) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.getForAccount(account)
+        }
+    }
+
+    @Get()
+    override fun getAll(auth: Authentication, pageable: Pageable): Page<Preferences> {
+        return auth.checkPermission(PERMISSION_ADMIN) {
+            service.getAll(pageable)
+        }
+    }
+
+    @Post()
+    override fun create(auth: Authentication, @Body request: PreferencesChangeRequest): Preferences {
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceCreate(auth, request) { service.create(accountService.find(auth), request) }
+        }
+    }
+
+    @Put("/{id}")
+    override fun update(auth: Authentication, id: Long, @Body request: PreferencesChangeRequest): Preferences {
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceUpdate(auth, request) { service.update(accountService.find(auth), id, request) }
+        }
+    }
+
+    @Delete("/{id}")
+    override fun delete(auth: Authentication, id: Long): Preferences? {
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            logger.traceDelete(auth) { service.delete(accountService.find(auth), id) }
+        }
+    }
+
+    private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
+}

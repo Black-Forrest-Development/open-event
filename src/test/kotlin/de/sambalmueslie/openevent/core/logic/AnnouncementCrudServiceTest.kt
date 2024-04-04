@@ -30,15 +30,14 @@ class AnnouncementCrudServiceTest : TimeBasedTest() {
 
     @Test
     fun announcementCrud() {
-        val actor = accountStorage.create(AccountChangeRequest("user", "first", "last", "email@localhost", "", ""))
+        val actor = accountStorage.create(AccountChangeRequest("user", "", "actor-id"))
         val listener = mockk<AnnouncementChangeListener>()
         service.register(listener)
         every { listener.handleCreated(any(), any()) } just Runs
         every { listener.handleUpdated(any(), any()) } just Runs
         every { listener.handleDeleted(any(), any()) } just Runs
 
-        val author =
-            accountService.create(actor, AccountChangeRequest("name", "first-name", "last-name", "email", "", null))
+        val author = accountService.create(actor, AccountChangeRequest("name", "", "author-id"))
 
         val request = AnnouncementChangeRequest("subject", "content")
         var announcement = service.create(author, request)

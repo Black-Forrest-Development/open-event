@@ -26,7 +26,7 @@ class CategoryCrudServiceTest : TimeBasedTest() {
 
     @Test
     fun categoryCrud() {
-        val actor = accountStorage.create(AccountChangeRequest("user", "first", "last", "email@localhost", "", ""))
+        val actor = accountStorage.create(AccountChangeRequest("user", "", "actor-id"))
 
         val listener = mockk<CategoryChangeListener>()
         service.register(listener)

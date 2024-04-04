@@ -51,7 +51,7 @@ open class ExportService(
     @Async
     open fun exportEventsPdfToEmail(account: Account) {
         val profile = profileService.getForAccount(account) ?: return
-        if (profile.email.isBlank()) return
+        val email = profile.email ?: return
 
         if (exporting.get()) return
         exporting.set(true)
@@ -60,7 +60,7 @@ open class ExportService(
 
             val attachment = Attachment(result.file.name, result.file.readBytes(), result.mediaType.name)
             val mail = Mail("Export der Veranstaltungen", null, "", mutableListOf(), mutableListOf(attachment))
-            mailSender.send(mail, listOf(MailParticipant(account.name, profile.email)))
+            mailSender.send(mail, listOf(MailParticipant(account.name, email)))
 
         } catch (e: Exception) {
             logger.error("Exception while exporting pdf", e)

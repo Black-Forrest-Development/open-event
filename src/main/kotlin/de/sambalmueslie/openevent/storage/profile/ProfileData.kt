@@ -13,17 +13,17 @@ import java.time.LocalDateTime
 data class ProfileData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long = 0,
 
-    @Column var email: String,
-    @Column var phone: String,
-    @Column var mobile: String,
+    @Column var email: String?,
+    @Column var phone: String?,
+    @Column var mobile: String?,
 
     @Column var firstName: String,
     @Column var lastName: String,
 
-    @Column var dateOfBirth: LocalDate,
-    @Column var gender: String,
-    @Column var profilePicture: String,
-    @Column var website: String,
+    @Column var dateOfBirth: LocalDate?,
+    @Column var gender: String?,
+    @Column var profilePicture: String?,
+    @Column var website: String?,
 
     @Column var accountId: Long,
 

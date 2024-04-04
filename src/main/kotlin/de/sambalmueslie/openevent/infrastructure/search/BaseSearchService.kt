@@ -25,22 +25,26 @@ abstract class BaseSearchService<T, O : BusinessObject<T>>(
     private val client = searchService.getClient()
 
     protected fun handleCreated(obj: O) {
-        indexDocument(obj, OperationType.Create)
+        updateDocument(obj)
     }
 
     protected fun handleChanged(obj: O) {
-        indexDocument(obj, OperationType.Index)
+        updateDocument(obj)
     }
 
-    private fun indexDocument(obj: O, type: OperationType) {
+    private fun updateDocument(obj: O) {
+
         runBlocking {
+            val id = obj.id.toString()
             val duration = measureTimeMillis {
+                val existing = client.getDocument(target = name, id = id)
+                val type = if (existing.found) OperationType.Index else OperationType.Create
                 val input = convert(obj)
                 client.indexDocument(
                     target = name,
                     serializedJson = input,
-                    id = obj.id.toString(),
-                    opType = OperationType.Create
+                    id = id,
+                    opType = type
                 )
             }
             logger.info("[$name] index document within $duration ms.")

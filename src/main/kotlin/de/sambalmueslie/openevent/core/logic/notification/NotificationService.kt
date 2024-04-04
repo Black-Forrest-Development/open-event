@@ -56,7 +56,7 @@ class NotificationService(
 
     private fun <T> notify(event: NotificationEvent<T>, mail: Mail, recipients: Collection<Account>) {
         if (recipients.isEmpty()) return
-        val profiles = profileService.getForAccounts(recipients).filter { it.email.isNotBlank() }
+        val profiles = profileService.getForAccounts(recipients).filter { it.email != null }
         val to = profiles.map { it.toParticipant() }
         val adminEmail = settingsService.findByKey(SettingsAPI.SETTINGS_MAIL_DEFAULT_ADMIN_ADDRESS)?.value as? String
         val bcc = if (adminEmail != null) listOf(MailParticipant("", adminEmail)) else emptyList()
@@ -76,5 +76,5 @@ class NotificationService(
 
 
 private fun Profile.toParticipant(): MailParticipant {
-    return MailParticipant(getTitle(), email)
+    return MailParticipant(getTitle(), email ?: "")
 }

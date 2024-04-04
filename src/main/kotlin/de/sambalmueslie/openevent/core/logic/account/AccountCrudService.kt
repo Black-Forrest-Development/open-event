@@ -15,12 +15,11 @@ import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.time.LocalDate
 
 @Singleton
 class AccountCrudService(
     private val storage: AccountStorage,
-    private val profileService: ProfileCrudService
+    private val profileService: ProfileCrudService,
 ) : BaseCrudService<Long, Account, AccountChangeRequest, AccountChangeListener>(storage) {
 
     companion object {
@@ -42,33 +41,23 @@ class AccountCrudService(
 
     fun validate(auth: Authentication): AccountValidationResult {
         val email = auth.getEmail()
-        val existing = storage.findByEmail(email)
+        val existing = storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(email)
 
         if (existing != null) return AccountValidationResult(false, existing)
 
-        val result = storage.create(AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
-        notifyCreated(result, result)
+        val account = storage.create(AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
+        notifyCreated(account, account)
 
-        val profile = profileService.getForAccount(result)
-        val request = ProfileChangeRequest(
+        val profileRequest = ProfileChangeRequest(
             auth.getEmail(),
-            profile?.phone ?: "",
-            profile?.mobile ?: "",
+            null, null,
             auth.getFirstName(),
             auth.getLastName(),
-            profile?.dateOfBirth ?: LocalDate.MIN,
-            profile?.gender ?: "",
-            profile?.profilePicture ?: "",
-            profile?.website ?: "",
+            null, null, null, null
         )
+        profileService.merge(account, account, profileRequest)
 
-        if (profile == null) {
-            profileService.create(result, result, request)
-        } else {
-            profileService.update(result, profile.id, request)
-        }
-
-        return AccountValidationResult(true, result)
+        return AccountValidationResult(true, account)
     }
 
     fun get(auth: Authentication): Account? {
@@ -82,7 +71,7 @@ class AccountCrudService(
     }
 
     fun getSystemAccount(): Account {
-        val existing = storage.findByEmail(SYSTEM_ACCOUNT)
+        val existing = storage.findByExternalId(SYSTEM_ACCOUNT)
         if (existing != null) return existing
 
         val request = AccountChangeRequest("system", "system", SYSTEM_ACCOUNT)

@@ -52,37 +52,39 @@ CREATE TABLE address
 CREATE SEQUENCE profile_seq;
 CREATE TABLE profile
 (
-    id             BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('profile_seq'::regclass),
+    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('profile_seq'::regclass),
 
-    email          VARCHAR(255)                NOT NULL UNIQUE,
-    phone          VARCHAR(255)                NOT NULL,
-    mobile         VARCHAR(255)                NOT NULL,
+    email           VARCHAR(255) UNIQUE,
+    phone           VARCHAR(255),
+    mobile          VARCHAR(255),
 
-    firstName      VARCHAR(255)                NOT NULL,
-    lastName       VARCHAR(255)                NOT NULL,
+    first_name      VARCHAR(255)                NOT NULL,
+    last_name       VARCHAR(255)                NOT NULL,
 
-    dateOfBirth    VARCHAR(255)                NOT NULL,
-    gender         VARCHAR(255)                NOT NULL,
-    profilePicture VARCHAR(255)                NOT NULL,
-    website        VARCHAR(255)                NOT NULL,
+    date_of_birth   VARCHAR(255),
+    gender          VARCHAR(255),
+    profile_picture VARCHAR(255),
+    website         VARCHAR(255),
 
-    account_id     BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
+    account_id      BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
 
-    created        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated        TIMESTAMP WITHOUT TIME ZONE
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- profile
 CREATE SEQUENCE preferences_seq;
 CREATE TABLE preferences
 (
-    id                      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('preferences_seq'::regclass),
-    notify_on_event_changes BOOLEAN                     NOT NULL UNIQUE,
+    id            BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('preferences_seq'::regclass),
+    email         TEXT                        NOT NULL,
+    communication TEXT                        NOT NULL,
+    notification  TEXT                        NOT NULL,
 
-    account_id              BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
+    account_id    BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
 
-    created                 TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated                 TIMESTAMP WITHOUT TIME ZONE
+    created       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated       TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- announcement

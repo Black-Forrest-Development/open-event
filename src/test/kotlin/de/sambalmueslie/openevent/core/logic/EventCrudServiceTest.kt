@@ -43,7 +43,7 @@ class EventCrudServiceTest : TimeBasedTest() {
 
     @Test
     fun eventCrud() {
-        val actor = accountStorage.create(AccountChangeRequest("user", "first", "last", "email@localhost", "", ""))
+        val actor = accountStorage.create(AccountChangeRequest("user", "", "actor-id"))
         setupListener()
 
         val request = buildCreateRequest()

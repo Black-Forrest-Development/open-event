@@ -79,7 +79,7 @@ flyway:
       default-schema: open_event
       create-schemas: true
       schemas: open_event
-      clean-schema: true
+      clean-schema: false
 
 tracing:
   jaeger:

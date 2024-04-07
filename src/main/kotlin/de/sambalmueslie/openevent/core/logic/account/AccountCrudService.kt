@@ -41,8 +41,8 @@ class AccountCrudService(
 
         if (existing != null) return AccountValidationResult(false, existing)
 
-        val account = storage.create(AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
-        notifyCreated(account, account)
+        val system = getSystemAccount()
+        val account = create(system, AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
 
         val profileRequest = ProfileChangeRequest(
             auth.getEmail(),
@@ -51,7 +51,7 @@ class AccountCrudService(
             auth.getLastName(),
             null, null, null, null
         )
-        profileService.merge(account, account, profileRequest)
+        profileService.merge(system, account, profileRequest)
 
         return AccountValidationResult(true, account)
     }

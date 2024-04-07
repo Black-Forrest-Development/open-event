@@ -15,7 +15,7 @@ interface AccountRepository : DataObjectRepository<Long, AccountData> {
     fun findByExternalId(externalId: String): AccountData?
     fun findByName(name: String, pageable: Pageable): Page<AccountData>
 
-    @Query("select a.* from account a inner join profile p on p.account_id = a.id WHERE p.email = :email LIMIT 1")
+    @Query("select a.* from account a inner join profile p on p.id = a.id WHERE p.email = :email LIMIT 1")
     fun findByEmail(email: String): AccountData?
 
 }

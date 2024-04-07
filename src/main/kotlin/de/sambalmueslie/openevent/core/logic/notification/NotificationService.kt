@@ -3,7 +3,7 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 import de.sambalmueslie.openevent.api.SettingsAPI
 import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.account.api.Profile
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationScheme
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
@@ -32,7 +32,7 @@ class NotificationService(
         private val logger: Logger = LoggerFactory.getLogger(NotificationService::class.java)
     }
 
-    fun <T> process(event: NotificationEvent<T>, additionalRecipients: Collection<Account>) {
+    fun <T> process(event: NotificationEvent<T>, additionalRecipients: Collection<AccountInfo>) {
         val key = event.key
         val type = typeService.findByKey(key)
             ?: return logger.warn("Cannot find definition by $key")
@@ -54,10 +54,9 @@ class NotificationService(
     }
 
 
-    private fun <T> notify(event: NotificationEvent<T>, mail: Mail, recipients: Collection<Account>) {
+    private fun <T> notify(event: NotificationEvent<T>, mail: Mail, recipients: Collection<AccountInfo>) {
         if (recipients.isEmpty()) return
-        val profiles = profileService.getForAccounts(recipients).filter { it.email != null }
-        val to = profiles.map { it.toParticipant() }
+        val to = recipients.filter { it.email.isNotBlank() }.map { it.toParticipant() }
         val adminEmail = settingsService.findByKey(SettingsAPI.SETTINGS_MAIL_DEFAULT_ADMIN_ADDRESS)?.value as? String
         val bcc = if (adminEmail != null) listOf(MailParticipant("", adminEmail)) else emptyList()
         if (event.useActorAsSender) {
@@ -74,6 +73,9 @@ class NotificationService(
 
 }
 
+private fun AccountInfo.toParticipant(): MailParticipant {
+    return MailParticipant(getTitle(), email )
+}
 
 private fun Profile.toParticipant(): MailParticipant {
     return MailParticipant(getTitle(), email ?: "")

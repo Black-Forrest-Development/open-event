@@ -11,6 +11,15 @@ export interface Account {
   idpLinked: boolean,
 }
 
+export interface AccountInfo {
+   id: number,
+   name: string,
+   iconUrl: string,
+   email: string,
+   firstName: string,
+   lastName: string,
+}
+
 export interface AccountValidationResult {
   created: boolean,
   account: Account

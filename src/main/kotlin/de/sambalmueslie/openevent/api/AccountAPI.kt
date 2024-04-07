@@ -20,4 +20,5 @@ interface AccountAPI : CrudAPI<Long, Account, AccountChangeRequest> {
 
     fun getProfile(auth: Authentication): Profile?
     fun getPreferences(auth: Authentication): Preferences?
+
 }

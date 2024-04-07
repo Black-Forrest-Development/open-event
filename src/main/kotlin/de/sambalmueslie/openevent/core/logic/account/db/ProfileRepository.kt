@@ -8,7 +8,4 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface ProfileRepository : DataObjectRepository<Long, ProfileData> {
-    fun findByAccountId(accountId: Long): ProfileData?
-    fun findByAccountIdIn(accountIds: Set<Long>): List<ProfileData>
-}
+interface ProfileRepository : DataObjectRepository<Long, ProfileData>

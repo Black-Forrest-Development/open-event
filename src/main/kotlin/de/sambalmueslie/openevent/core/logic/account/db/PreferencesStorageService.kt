@@ -10,6 +10,7 @@ import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import de.sambalmueslie.openevent.storage.BaseStorageService
 import de.sambalmueslie.openevent.storage.SimpleDataObjectConverter
+import de.sambalmueslie.openevent.storage.util.findByIdOrNull
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -50,7 +51,7 @@ class PreferencesStorageService(
 
 
     override fun findByAccount(account: Account): Preferences? {
-        return repository.findByAccountId(account.id)?.convert()
+        return repository.findByIdOrNull(account.id)?.convert()
     }
 
 }

@@ -1,9 +1,10 @@
 package de.sambalmueslie.openevent.core.logic.participant.api
 
 import de.sambalmueslie.openevent.core.BusinessObject
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDateTime
+
 @Serdeable
 data class Participant(
     override val id: Long,
@@ -11,6 +12,6 @@ data class Participant(
     val status: ParticipantStatus,
     val rank: Int,
     val waitingList: Boolean,
-    val author: Account,
+    val author: AccountInfo,
     val timestamp: LocalDateTime,
 ) : BusinessObject<Long>

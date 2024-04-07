@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.notification.handler
 
 
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementChangeListener
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudService
 import de.sambalmueslie.openevent.core.logic.announcement.api.Announcement
@@ -49,7 +50,7 @@ class AnnouncementNotificationHandler(
     }
 
 
-    private fun getRecipients(actor: Account, obj: Announcement): Collection<Account> {
+    private fun getRecipients(actor: Account, obj: Announcement): Collection<AccountInfo> {
         // get event for announcement
         // get event participants (registered users)
         //        TODO("Not yet implemented")

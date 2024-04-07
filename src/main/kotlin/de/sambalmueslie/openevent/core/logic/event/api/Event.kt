@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.event.api
 
 import de.sambalmueslie.openevent.core.BusinessObject
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -11,7 +11,7 @@ import java.util.*
 data class Event(
     override val id: Long,
 
-    val owner: Account,
+    val owner: AccountInfo,
 
     val start: LocalDateTime,
     val finish: LocalDateTime,

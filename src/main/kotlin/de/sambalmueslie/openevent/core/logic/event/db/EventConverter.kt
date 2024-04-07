@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.event.db
 
 
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.error.InconsistentDataException
@@ -15,22 +15,22 @@ class EventConverter(
 ) : DataObjectConverter<Event, EventData> {
 
     override fun convert(obj: EventData): Event {
-        return convert(obj, accountService.get(obj.ownerId))
+        return convert(obj, accountService.getInfo(obj.ownerId))
     }
 
     override fun convert(objs: List<EventData>): List<Event> {
         val ownerIds = objs.map { it.ownerId }.toSet()
-        val author = accountService.getByIds(ownerIds).associateBy { it.id }
+        val author = accountService.getInfoByIds(ownerIds).associateBy { it.id }
         return objs.map { convert(it, author[it.ownerId]) }
     }
 
     override fun convert(page: Page<EventData>): Page<Event> {
         val ownerIds = page.content.map { it.ownerId }.toSet()
-        val author = accountService.getByIds(ownerIds).associateBy { it.id }
+        val author = accountService.getInfoByIds(ownerIds).associateBy { it.id }
         return page.map { convert(it, author[it.ownerId]) }
     }
 
-    private fun convert(data: EventData, author: Account?): Event {
+    private fun convert(data: EventData, author: AccountInfo?): Event {
         if (author == null) throw InconsistentDataException("Cannot find author for event")
         return data.convert(author)
     }

@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationScheme
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSchemeChangeRequest
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
@@ -34,12 +35,12 @@ class NotificationSchemeCrudService(
         return storage.getByType(type, pageable)
     }
 
-    fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<Account> {
+    fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<AccountInfo> {
         return storage.getSubscriber(scheme, pageable)
     }
 
     fun getSubscriptionStatus(account: Account): SubscriptionStatus {
-       return storage.getSubscriptionStatus(account)
+        return storage.getSubscriptionStatus(account)
     }
 
     fun subscribe(account: Account, schemeId: Long): SubscriptionStatus {

@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.notification.handler
 
 
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.event.EventChangeListener
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.api.Event
@@ -65,8 +66,8 @@ class EventNotificationHandler(
         }
     }
 
-    private fun getRecipients(actor: Account, event: Event): Set<Account> {
-        val recipients = mutableSetOf<Account>()
+    private fun getRecipients(actor: Account, event: Event): Set<AccountInfo> {
+        val recipients = mutableSetOf<AccountInfo>()
         val changeByOwner = actor.id == event.owner.id
         if (!changeByOwner) {
             recipients.add(event.owner)

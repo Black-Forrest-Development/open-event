@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.notification.db
 
 
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationScheme
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSchemeChangeRequest
@@ -86,10 +87,10 @@ class NotificationSchemeStorageService(
         return Page.of(result, relations.pageable, relations.totalSize)
     }
 
-    override fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<Account> {
+    override fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<AccountInfo> {
         val relations = subscriberRelationRepository.findBySchemeId(scheme.id, pageable)
         val accountIds = relations.content.map { it.accountId }.toSet()
-        val result = accountStorage.getByIds(accountIds)
+        val result = accountStorage.getInfoByIds(accountIds)
         return Page.of(result, relations.pageable, relations.totalSize)
     }
 

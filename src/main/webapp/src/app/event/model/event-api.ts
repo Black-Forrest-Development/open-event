@@ -1,11 +1,11 @@
-import {Account} from "../../account/model/account-api";
+import {AccountInfo} from "../../account/model/account-api";
 import {Location, LocationChangeRequest} from "../../location/model/location-api";
 import {RegistrationChangeRequest, RegistrationInfo} from "../../registration/model/registration-api";
 import {Category} from "../../category/model/category-api";
 
 export interface Event {
   id: number,
-  owner: Account,
+  owner: AccountInfo,
   start: string,
   finish: string,
 

@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.participant.db
 
 
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.logic.participant.api.Participant
 import de.sambalmueslie.openevent.error.InconsistentDataException
@@ -15,22 +15,22 @@ class ParticipantConverter(
 ) : DataObjectConverter<Participant, ParticipantData> {
 
     override fun convert(obj: ParticipantData): Participant {
-        return convert(obj, accountService.get(obj.accountId))
+        return convert(obj, accountService.getInfo(obj.accountId))
     }
 
     override fun convert(objs: List<ParticipantData>): List<Participant> {
         val authorIds = objs.map { it.accountId }.toSet()
-        val author = accountService.getByIds(authorIds).associateBy { it.id }
+        val author = accountService.getInfoByIds(authorIds).associateBy { it.id }
         return objs.map { convert(it, author[it.accountId]) }
     }
 
     override fun convert(page: Page<ParticipantData>): Page<Participant> {
         val authorIds = page.content.map { it.accountId }.toSet()
-        val author = accountService.getByIds(authorIds).associateBy { it.id }
+        val author = accountService.getInfoByIds(authorIds).associateBy { it.id }
         return page.map { convert(it, author[it.accountId]) }
     }
 
-    private fun convert(data: ParticipantData, author: Account?): Participant {
+    private fun convert(data: ParticipantData, author: AccountInfo?): Participant {
         if (author == null) throw InconsistentDataException("Cannot find author for participant")
         return data.convert(author)
     }

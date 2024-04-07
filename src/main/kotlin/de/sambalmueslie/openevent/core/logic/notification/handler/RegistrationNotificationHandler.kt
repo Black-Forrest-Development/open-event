@@ -6,6 +6,7 @@ import biweekly.ICalendar
 import biweekly.component.VEvent
 import biweekly.property.Summary
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.logic.notification.NotificationEvent
@@ -78,8 +79,8 @@ class RegistrationNotificationHandler(
     }
 
 
-    private fun getRecipients(actor: Account, registration: Registration): Collection<Account> {
-        val recipients = mutableSetOf<Account>()
+    private fun getRecipients(actor: Account, registration: Registration): Collection<AccountInfo> {
+        val recipients = mutableSetOf<AccountInfo>()
         val event = eventService.get(registration.eventId)
         if (event != null && actor.id != event.owner.id) {
             recipients.add(event.owner)

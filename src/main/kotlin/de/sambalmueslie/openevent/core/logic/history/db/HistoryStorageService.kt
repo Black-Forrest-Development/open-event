@@ -64,8 +64,9 @@ class HistoryStorageService(
     override fun createData(request: HistoryEntryChangeRequest, properties: Map<String, Any>): HistoryEntryData {
         val event = properties[EVENT_REFERENCE] as? Event ?: throw InvalidRequestException("Cannot find event")
         val actor = properties[ACTOR_REFERENCE] as? Account ?: throw InvalidRequestException("Cannot find actor")
-        val timestamp =
-            properties[TIMESTAMP_REFERENCE] as? LocalDateTime ?: throw InvalidRequestException("Cannot find timestamp")
+        val timestamp = properties[TIMESTAMP_REFERENCE] as? LocalDateTime
+            ?: throw InvalidRequestException("Cannot find timestamp")
+
         return HistoryEntryData.create(event, actor, request, timestamp)
     }
 

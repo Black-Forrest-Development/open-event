@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.event.db
 
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.storage.DataObject
@@ -54,7 +55,7 @@ data class EventData(
         }
     }
 
-    fun convert(account: Account): Event {
+    fun convert(account: AccountInfo): Event {
         return Event(
             id,
             account,

@@ -1,4 +1,4 @@
-import {Account} from "../../account/model/account-api";
+import {AccountInfo} from "../../account/model/account-api";
 
 export interface Participant {
   id: number,
@@ -6,7 +6,7 @@ export interface Participant {
   status: string,
   rank: number,
   waitingList: boolean,
-  author: Account,
+  author: AccountInfo,
   timestamp: string,
 }
 

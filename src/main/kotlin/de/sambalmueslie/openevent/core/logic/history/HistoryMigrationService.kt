@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.history
 
 
+import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
 import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryChangeRequest
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 class HistoryMigrationService(
+    private val accountService:AccountCrudService,
     private val eventService: EventCrudService,
     private val storage: HistoryEntryStorage
 ) {
@@ -51,13 +53,15 @@ class HistoryMigrationService(
         val createRequest = HistoryEntryChangeRequest(
             HistoryEntryType.EVENT_CREATED, EventNotificationHandler.KEY_EVENT_CREATED, HistoryEntrySource.EVENT, ""
         )
-        storage.create(createRequest, event.event, event.event.owner, event.event.created)
+        val owner = accountService.get(event.event.owner.id) ?: return
+        storage.create(createRequest, event.event, owner, event.event.created)
     }
     private fun addEventChangedEntry(event: EventInfo) {
         val changeRequest = HistoryEntryChangeRequest(
             HistoryEntryType.EVENT_CHANGED, EventNotificationHandler.KEY_EVENT_UPDATED, HistoryEntrySource.EVENT, ""
         )
-        storage.create(changeRequest, event.event, event.event.owner, event.event.changed!!)
+        val owner = accountService.get(event.event.owner.id) ?: return
+        storage.create(changeRequest, event.event, owner, event.event.changed!!)
     }
 
     private fun addParticipantChangedEntry(
@@ -71,7 +75,8 @@ class HistoryMigrationService(
             HistoryEntrySource.REGISTRATION,
             status.toString()
         )
-        storage.create(participantRequest, event.event, it.author, it.timestamp)
+        val author = accountService.get(it.author.id) ?: return
+        storage.create(participantRequest, event.event, author, it.timestamp)
     }
 
 

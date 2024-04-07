@@ -10,6 +10,7 @@ import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import de.sambalmueslie.openevent.storage.BaseStorageService
 import de.sambalmueslie.openevent.storage.SimpleDataObjectConverter
+import de.sambalmueslie.openevent.storage.util.findByIdOrNull
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -45,15 +46,20 @@ class ProfileStorageService(
     }
 
     override fun isValid(request: ProfileChangeRequest) {
+        // intentionally left empty
     }
 
     override fun findByAccount(account: Account): Profile? {
-        return repository.findByAccountId(account.id)?.convert()
+        return repository.findByIdOrNull(account.id)?.convert()
     }
 
     override fun getForAccounts(accounts: Collection<Account>): List<Profile> {
         val ids = accounts.map { it.id }.toSet()
-        return repository.findByAccountIdIn(ids).map { it.convert() }
+        return findByIdIn(ids)
+    }
+
+    override fun findByIdIn(ids: Set<Long>): List<Profile> {
+        return repository.findByIdIn(ids).map { it.convert() }
     }
 
 

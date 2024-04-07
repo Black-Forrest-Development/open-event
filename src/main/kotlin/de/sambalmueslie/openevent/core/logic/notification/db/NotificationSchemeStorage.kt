@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.logic.notification.db
 
 import de.sambalmueslie.openevent.core.Storage
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationScheme
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSchemeChangeRequest
 import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
@@ -15,7 +16,7 @@ interface NotificationSchemeStorage : Storage<Long, NotificationScheme, Notifica
 
     fun assign(scheme: NotificationScheme, types: List<NotificationType>)
     fun getByType(type: NotificationType, pageable: Pageable): Page<NotificationScheme>
-    fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<Account>
+    fun getSubscriber(scheme: NotificationScheme, pageable: Pageable): Page<AccountInfo>
     fun getSubscriptionStatus(account: Account): SubscriptionStatus
     fun subscribe(scheme: NotificationScheme, account: Account): SubscriptionStatus
     fun unsubscribe(scheme: NotificationScheme, account: Account): SubscriptionStatus

@@ -1,17 +1,20 @@
 <div class="d-flex flex-column">
   <div class="d-flex flex-row gap-2 align-content-stretch align-items-center">
     <mat-form-field subscriptSizing="dynamic" class="dense-1 flex-fill">
-      <mat-label>{{'event.form.owner' | translate}}</mat-label>
+      <mat-label>{{ 'event.form.owner' | translate }}</mat-label>
       <input type="text" matInput #input (keyup)="keyUp.emit(input.value)" [matAutocomplete]="auto"
              [disabled]="accountCreating">
     </mat-form-field>
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let account of accounts" (onSelectionChange)="select($event, account)" [value]="account.firstName + ' ' +account.lastName">
-        {{account.firstName}} {{account.lastName}}
+      <mat-option *ngFor="let account of accounts" (onSelectionChange)="select($event, account)"
+                  [value]="account.name">
+        <!--                  [value]="account.firstName + ' ' +account.lastName"-->
+        <!--        {{account.firstName}} {{account.lastName}}-->
+        {{ account.name }}
       </mat-option>
     </mat-autocomplete>
     <button mat-flat-button color="primary" (click)="showCreateAccountDialog()">
-      {{'backoffice.account.action.create'| translate}}
+      {{ 'backoffice.account.action.create'| translate }}
       <mat-icon *ngIf="!accountCreating">add</mat-icon>
       <mat-icon *ngIf="accountCreating">
         <mat-spinner diameter="22" color="primary"></mat-spinner>

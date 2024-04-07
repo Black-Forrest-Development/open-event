@@ -2,8 +2,10 @@ package de.sambalmueslie.openevent.core.logic.account.db
 
 
 import de.sambalmueslie.openevent.core.logic.account.AccountStorage
+import de.sambalmueslie.openevent.core.logic.account.ProfileStorage
 import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 class AccountStorageService(
     private val repository: AccountRepository,
+    private val profileStorage: ProfileStorage,
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
 ) : BaseStorageService<Long, Account, AccountChangeRequest, AccountData>(
@@ -62,6 +65,18 @@ class AccountStorageService(
 
     override fun findByEmail(email: String): Account? {
         return repository.findByEmail(email)?.convert()
+    }
+
+    fun getInfo(id: Long): AccountInfo? {
+        val account = get(id) ?: return null
+        val profile = profileStorage.get(account.id)
+        return AccountInfo.create(account, profile)
+    }
+
+    fun getInfoByIds(ids: Set<Long>): List<AccountInfo> {
+        val accounts = repository.findByIdIn(ids)
+        val profiles = profileStorage.findByIdIn(ids).associateBy { it.id }
+        return accounts.map { AccountInfo.create(it, profiles[it.id]) }
     }
 
 

@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.logic.participant.db
 
 import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.logic.participant.api.Participant
 import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantChangeRequest
 import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantStatus
@@ -45,7 +46,7 @@ data class ParticipantData(
         }
     }
 
-    fun convert(account: Account): Participant {
+    fun convert(account: AccountInfo): Participant {
         return Participant(id, size, status, rank, waitingList, account, updated ?: created)
     }
 

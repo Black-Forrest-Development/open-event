@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
-import {AccountChangeRequest} from "../model/account-api";
 
 @Component({
   selector: 'app-create-account-dialog',
@@ -27,6 +26,6 @@ export class CreateAccountDialogComponent {
     if (!this.fg.valid) return
     let value = this.fg.value
     let name = value.firstName + ' ' + value.lastName
-    this.dialogRef.close(new AccountChangeRequest(name, value.firstName, value.lastName, value.email, ''))
+    // this.dialogRef.close(new AccountChangeRequest(name, value.firstName, value.lastName, value.email, ''))
   }
 }

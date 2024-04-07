@@ -9,8 +9,8 @@ import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.logic.category.CategorySearchService
-import de.sambalmueslie.openevent.core.model.Category
-import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
+import de.sambalmueslie.openevent.core.logic.category.api.Category
+import de.sambalmueslie.openevent.core.logic.category.api.CategoryChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

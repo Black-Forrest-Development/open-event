@@ -5,13 +5,12 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.api.PreferencesAPI
 import de.sambalmueslie.openevent.api.PreferencesAPI.Companion.PERMISSION_ADMIN
-import de.sambalmueslie.openevent.api.ProfileAPI
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getRealmRoles
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
-import de.sambalmueslie.openevent.core.logic.preferences.PreferencesCrudService
-import de.sambalmueslie.openevent.core.model.Preferences
-import de.sambalmueslie.openevent.core.model.PreferencesChangeRequest
+import de.sambalmueslie.openevent.core.logic.account.PreferencesCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Preferences
+import de.sambalmueslie.openevent.core.logic.account.api.PreferencesChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -42,13 +41,6 @@ class PreferencesController(
         }
     }
 
-    @Get("/own")
-    override fun getOwn(auth: Authentication): Preferences? {
-        return auth.checkPermission(PERMISSION_READ, ProfileAPI.PERMISSION_ADMIN) {
-            val account = accountService.get(auth) ?: return@checkPermission null
-            service.getForAccount(account)
-        }
-    }
 
     @Get()
     override fun getAll(auth: Authentication, pageable: Pageable): Page<Preferences> {

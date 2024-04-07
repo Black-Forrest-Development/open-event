@@ -2,9 +2,14 @@ package de.sambalmueslie.openevent.core.logic.history
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
-import de.sambalmueslie.openevent.core.model.*
-import de.sambalmueslie.openevent.core.storage.HistoryEntryStorage
+import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntry
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryChangeRequest
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntrySource
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEventInfo
+import de.sambalmueslie.openevent.core.logic.history.db.HistoryEntryStorage
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton

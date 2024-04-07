@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.storage.message
 
-import de.sambalmueslie.openevent.core.model.Account
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.model.Message
 import de.sambalmueslie.openevent.core.model.MessageChangeRequest
 import de.sambalmueslie.openevent.storage.DataObject

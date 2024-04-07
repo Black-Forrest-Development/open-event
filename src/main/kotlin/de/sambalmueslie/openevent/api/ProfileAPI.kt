@@ -1,8 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.Profile
-import de.sambalmueslie.openevent.core.model.ProfileChangeRequest
-import io.micronaut.security.authentication.Authentication
+import de.sambalmueslie.openevent.core.logic.account.api.Profile
+import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
 
 interface ProfileAPI : CrudAPI<Long, Profile, ProfileChangeRequest> {
     companion object {
@@ -10,7 +9,5 @@ interface ProfileAPI : CrudAPI<Long, Profile, ProfileChangeRequest> {
         const val PERMISSION_WRITE = "openevent.profile.write"
         const val PERMISSION_ADMIN = "openevent.profile.admin"
     }
-
-    fun getOwn(auth: Authentication): Profile?
 
 }

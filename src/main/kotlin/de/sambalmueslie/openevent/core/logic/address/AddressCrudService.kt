@@ -2,10 +2,10 @@ package de.sambalmueslie.openevent.core.logic.address
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Address
-import de.sambalmueslie.openevent.core.model.AddressChangeRequest
-import de.sambalmueslie.openevent.core.storage.AddressStorage
+import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.address.api.Address
+import de.sambalmueslie.openevent.core.logic.address.api.AddressChangeRequest
+import de.sambalmueslie.openevent.core.logic.address.db.AddressStorage
 import de.sambalmueslie.openevent.infrastructure.geo.GeoLocationResolver
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

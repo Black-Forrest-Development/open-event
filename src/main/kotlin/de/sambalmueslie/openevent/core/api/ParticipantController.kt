@@ -7,8 +7,8 @@ import de.sambalmueslie.openevent.api.ParticipantAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.participant.ParticipantCrudService
-import de.sambalmueslie.openevent.core.model.Participant
-import de.sambalmueslie.openevent.core.model.ParticipantChangeRequest
+import de.sambalmueslie.openevent.core.logic.participant.api.Participant
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

@@ -7,8 +7,8 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
-import de.sambalmueslie.openevent.core.model.Location
-import de.sambalmueslie.openevent.core.model.LocationChangeRequest
+import de.sambalmueslie.openevent.core.logic.location.api.Location
+import de.sambalmueslie.openevent.core.logic.location.api.LocationChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

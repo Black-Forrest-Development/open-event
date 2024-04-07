@@ -3,12 +3,7 @@ package de.sambalmueslie.openevent.core.logic.account
 
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.auth.*
-import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.AccountChangeRequest
-import de.sambalmueslie.openevent.core.model.AccountValidationResult
-import de.sambalmueslie.openevent.core.model.ProfileChangeRequest
-import de.sambalmueslie.openevent.core.storage.AccountStorage
+import de.sambalmueslie.openevent.core.logic.account.api.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
@@ -20,6 +15,7 @@ import org.slf4j.LoggerFactory
 class AccountCrudService(
     private val storage: AccountStorage,
     private val profileService: ProfileCrudService,
+    private val preferencesService: PreferencesCrudService,
 ) : BaseCrudService<Long, Account, AccountChangeRequest, AccountChangeListener>(storage) {
 
     companion object {
@@ -60,6 +56,14 @@ class AccountCrudService(
         return AccountValidationResult(true, account)
     }
 
+    override fun create(actor: Account, request: AccountChangeRequest, properties: Map<String, Any>): Account {
+        val account = super.create(actor, request, properties)
+        profileService.handleAccountCreated(actor, account)
+        preferencesService.handleAccountCreated(actor, account)
+        return account
+    }
+
+
     fun get(auth: Authentication): Account? {
         return findByEmail(auth.getEmail())
     }
@@ -76,6 +80,14 @@ class AccountCrudService(
 
         val request = AccountChangeRequest("system", "system", SYSTEM_ACCOUNT)
         return storage.createServiceAccount(request)
+    }
+
+    fun getProfile(account: Account): Profile? {
+        return profileService.get(account.id)
+    }
+
+    fun getPreferences(account: Account): Preferences? {
+        return preferencesService.get(account.id)
     }
 
 

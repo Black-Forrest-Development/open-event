@@ -2,8 +2,8 @@ package de.sambalmueslie.openevent.core.logic.notification.handler
 
 
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.notification.NotificationTypeCrudService
-import de.sambalmueslie.openevent.core.model.Account
 import io.micronaut.context.annotation.Context
 import io.micronaut.context.event.ApplicationEventListener
 import io.micronaut.context.event.StartupEvent

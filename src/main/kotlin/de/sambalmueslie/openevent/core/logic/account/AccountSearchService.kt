@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import com.jillesvangurp.searchdsls.querydsl.ESQuery
 import com.jillesvangurp.searchdsls.querydsl.SimpleQueryStringQuery
-import de.sambalmueslie.openevent.core.model.Account
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.infrastructure.search.BaseSearchService
 import de.sambalmueslie.openevent.infrastructure.search.SearchService
 import io.micronaut.context.annotation.Context

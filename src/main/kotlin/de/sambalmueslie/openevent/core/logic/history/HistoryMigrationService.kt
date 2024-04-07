@@ -2,10 +2,15 @@ package de.sambalmueslie.openevent.core.logic.history
 
 
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
+import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryChangeRequest
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntrySource
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryType
+import de.sambalmueslie.openevent.core.logic.history.db.HistoryEntryStorage
 import de.sambalmueslie.openevent.core.logic.history.handler.EventNotificationHandler
 import de.sambalmueslie.openevent.core.logic.history.handler.RegistrationNotificationHandler
-import de.sambalmueslie.openevent.core.model.*
-import de.sambalmueslie.openevent.core.storage.HistoryEntryStorage
+import de.sambalmueslie.openevent.core.logic.participant.api.Participant
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.storage.util.PageableSequence
 import jakarta.inject.Singleton
 import org.slf4j.Logger

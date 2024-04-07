@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.core.logic.registration
 
 import de.sambalmueslie.openevent.core.BusinessObjectChangeListener
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Participant
-import de.sambalmueslie.openevent.core.model.ParticipateStatus
-import de.sambalmueslie.openevent.core.model.Registration
+import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.participant.api.Participant
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateStatus
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
 
 interface RegistrationChangeListener : BusinessObjectChangeListener<Long, Registration> {
     fun participantChanged(

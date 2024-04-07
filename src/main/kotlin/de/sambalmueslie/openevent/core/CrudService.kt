@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.core
 
-import de.sambalmueslie.openevent.core.model.Account
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 

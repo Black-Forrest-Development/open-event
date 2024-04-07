@@ -8,9 +8,9 @@ import de.sambalmueslie.openevent.api.ProfileAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getRealmRoles
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
-import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
-import de.sambalmueslie.openevent.core.model.Profile
-import de.sambalmueslie.openevent.core.model.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Profile
+import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.error.InsufficientPermissionsException
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
@@ -36,14 +36,6 @@ class ProfileController(
             } else {
                 null
             }
-        }
-    }
-
-    @Get("/own")
-    override fun getOwn(auth: Authentication): Profile? {
-        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
-            val account = accountService.get(auth) ?: return@checkPermission null
-            service.getForAccount(account)
         }
     }
 

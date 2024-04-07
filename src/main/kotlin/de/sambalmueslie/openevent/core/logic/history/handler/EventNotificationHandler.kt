@@ -1,10 +1,14 @@
 package de.sambalmueslie.openevent.core.logic.history.handler
 
 
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.event.EventChangeListener
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
+import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.logic.history.HistoryCrudService
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryChangeRequest
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntrySource
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntryType
 import io.micronaut.context.annotation.Context
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

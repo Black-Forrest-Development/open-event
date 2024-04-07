@@ -3,10 +3,20 @@ package de.sambalmueslie.openevent.core.logic.registration
 
 import de.sambalmueslie.openevent.core.BaseCrudService
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.logic.participant.ParticipantCrudService
-import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
-import de.sambalmueslie.openevent.core.model.*
-import de.sambalmueslie.openevent.core.storage.RegistrationStorage
+import de.sambalmueslie.openevent.core.logic.participant.api.Participant
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantAddRequest
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateRequest
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateResponse
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationInfo
+import de.sambalmueslie.openevent.core.logic.registration.db.RegistrationStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

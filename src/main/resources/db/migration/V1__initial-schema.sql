@@ -27,6 +27,40 @@ CREATE TABLE account
     updated         TIMESTAMP WITHOUT TIME ZONE
 );
 
+
+-- profile
+CREATE TABLE profile
+(
+    id              BIGINT                      NOT NULL PRIMARY KEY REFERENCES account (id),
+
+    email           VARCHAR(255) UNIQUE,
+    phone           VARCHAR(255),
+    mobile          VARCHAR(255),
+
+    first_name      VARCHAR(255)                NOT NULL,
+    last_name       VARCHAR(255)                NOT NULL,
+
+    date_of_birth   VARCHAR(255),
+    gender          VARCHAR(255),
+    profile_picture VARCHAR(255),
+    website         VARCHAR(255),
+
+    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated         TIMESTAMP WITHOUT TIME ZONE
+);
+
+-- profile
+CREATE TABLE preferences
+(
+    id            BIGINT                      NOT NULL PRIMARY KEY REFERENCES account (id),
+    email         TEXT                        NOT NULL,
+    communication TEXT                        NOT NULL,
+    notification  TEXT                        NOT NULL,
+
+    created       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated       TIMESTAMP WITHOUT TIME ZONE
+);
+
 -- address
 CREATE SEQUENCE address_seq;
 CREATE TABLE address
@@ -48,44 +82,6 @@ CREATE TABLE address
     updated         TIMESTAMP WITHOUT TIME ZONE
 );
 
--- profile
-CREATE SEQUENCE profile_seq;
-CREATE TABLE profile
-(
-    id              BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('profile_seq'::regclass),
-
-    email           VARCHAR(255) UNIQUE,
-    phone           VARCHAR(255),
-    mobile          VARCHAR(255),
-
-    first_name      VARCHAR(255)                NOT NULL,
-    last_name       VARCHAR(255)                NOT NULL,
-
-    date_of_birth   VARCHAR(255),
-    gender          VARCHAR(255),
-    profile_picture VARCHAR(255),
-    website         VARCHAR(255),
-
-    account_id      BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
-
-    created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated         TIMESTAMP WITHOUT TIME ZONE
-);
-
--- profile
-CREATE SEQUENCE preferences_seq;
-CREATE TABLE preferences
-(
-    id            BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('preferences_seq'::regclass),
-    email         TEXT                        NOT NULL,
-    communication TEXT                        NOT NULL,
-    notification  TEXT                        NOT NULL,
-
-    account_id    BIGINT                      NOT NULL UNIQUE REFERENCES account (id),
-
-    created       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated       TIMESTAMP WITHOUT TIME ZONE
-);
 
 -- announcement
 CREATE SEQUENCE announcement_seq;

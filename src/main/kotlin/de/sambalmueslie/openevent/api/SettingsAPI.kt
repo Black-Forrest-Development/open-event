@@ -1,8 +1,8 @@
 package de.sambalmueslie.openevent.api
 
 import de.sambalmueslie.openevent.core.model.PatchRequest
-import de.sambalmueslie.openevent.core.model.Setting
-import de.sambalmueslie.openevent.core.model.SettingChangeRequest
+import de.sambalmueslie.openevent.infrastructure.settings.api.Setting
+import de.sambalmueslie.openevent.infrastructure.settings.api.SettingChangeRequest
 import io.micronaut.security.authentication.Authentication
 
 interface SettingsAPI : CrudAPI<Long, Setting, SettingChangeRequest> {

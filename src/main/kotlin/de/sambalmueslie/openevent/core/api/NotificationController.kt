@@ -11,7 +11,8 @@ import de.sambalmueslie.openevent.core.logic.notification.NotificationSchemeCrud
 import de.sambalmueslie.openevent.core.logic.notification.NotificationSettingCrudService
 import de.sambalmueslie.openevent.core.logic.notification.NotificationTemplateCrudService
 import de.sambalmueslie.openevent.core.logic.notification.NotificationTypeCrudService
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.notification.api.*
+import de.sambalmueslie.openevent.core.model.PatchRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

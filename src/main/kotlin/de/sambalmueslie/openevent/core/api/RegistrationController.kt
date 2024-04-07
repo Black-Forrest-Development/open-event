@@ -8,8 +8,14 @@ import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.participant.api.Participant
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantAddRequest
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateRequest
+import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateResponse
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page

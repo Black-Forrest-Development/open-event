@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.Category
-import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
+import de.sambalmueslie.openevent.core.logic.category.api.Category
+import de.sambalmueslie.openevent.core.logic.category.api.CategoryChangeRequest
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication

@@ -9,8 +9,8 @@ import de.sambalmueslie.openevent.core.auth.getRealmRoles
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.history.HistoryCrudService
 import de.sambalmueslie.openevent.core.logic.history.HistoryMigrationService
-import de.sambalmueslie.openevent.core.model.HistoryEntry
-import de.sambalmueslie.openevent.core.model.HistoryEventInfo
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEntry
+import de.sambalmueslie.openevent.core.logic.history.api.HistoryEventInfo
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.Controller

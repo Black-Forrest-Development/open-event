@@ -5,7 +5,12 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
 import de.sambalmueslie.openevent.api.SettingsAPI
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.category.api.Category
+import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.logic.location.api.Location
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.core.io.ResourceLoader

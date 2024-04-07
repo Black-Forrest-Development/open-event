@@ -1,13 +1,13 @@
 package de.sambalmueslie.openevent.core.logic.notification.handler
 
 
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementChangeListener
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudService
+import de.sambalmueslie.openevent.core.logic.announcement.api.Announcement
 import de.sambalmueslie.openevent.core.logic.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.logic.notification.NotificationService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.Announcement
-import de.sambalmueslie.openevent.core.model.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

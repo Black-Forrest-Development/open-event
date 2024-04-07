@@ -9,9 +9,16 @@ import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getRealmRoles
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.category.api.Category
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.EventSearchService
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
+import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.logic.event.api.EventStats
+import de.sambalmueslie.openevent.core.logic.location.api.Location
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.model.PatchRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

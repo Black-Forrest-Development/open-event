@@ -9,8 +9,8 @@ import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.auth.getRealmRoles
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.address.AddressCrudService
-import de.sambalmueslie.openevent.core.model.Address
-import de.sambalmueslie.openevent.core.model.AddressChangeRequest
+import de.sambalmueslie.openevent.core.logic.address.api.Address
+import de.sambalmueslie.openevent.core.logic.address.api.AddressChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

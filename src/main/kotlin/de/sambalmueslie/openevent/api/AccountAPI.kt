@@ -1,8 +1,6 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.AccountChangeRequest
-import de.sambalmueslie.openevent.core.model.AccountValidationResult
+import de.sambalmueslie.openevent.core.logic.account.api.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
@@ -19,4 +17,7 @@ interface AccountAPI : CrudAPI<Long, Account, AccountChangeRequest> {
     fun findByEmail(auth: Authentication, email: String): Account?
     fun validate(auth: Authentication): AccountValidationResult
     fun search(auth: Authentication, query: String, pageable: Pageable): Page<Account>
+
+    fun getProfile(auth: Authentication): Profile?
+    fun getPreferences(auth: Authentication): Preferences?
 }

@@ -4,9 +4,9 @@ package de.sambalmueslie.openevent.infrastructure.settings
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.api.SettingsAPI
-import de.sambalmueslie.openevent.core.model.Setting
-import de.sambalmueslie.openevent.core.model.SettingChangeRequest
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
+import de.sambalmueslie.openevent.infrastructure.settings.api.Setting
+import de.sambalmueslie.openevent.infrastructure.settings.api.SettingChangeRequest
 import de.sambalmueslie.openevent.infrastructure.settings.db.SettingData
 import de.sambalmueslie.openevent.infrastructure.settings.db.SettingsRepository
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

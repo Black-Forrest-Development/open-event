@@ -2,14 +2,20 @@ package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.account.AccountStorage
+import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
 import de.sambalmueslie.openevent.core.logic.event.EventChangeListener
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
+import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.logic.location.LocationChangeListener
 import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
+import de.sambalmueslie.openevent.core.logic.location.api.Location
+import de.sambalmueslie.openevent.core.logic.location.api.LocationChangeRequest
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationChangeListener
 import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
-import de.sambalmueslie.openevent.core.model.*
-import de.sambalmueslie.openevent.core.storage.AccountStorage
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationChangeRequest
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.annotation.MockBean

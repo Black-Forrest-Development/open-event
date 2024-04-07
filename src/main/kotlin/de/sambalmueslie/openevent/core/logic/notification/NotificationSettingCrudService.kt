@@ -2,10 +2,10 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.NotificationSetting
-import de.sambalmueslie.openevent.core.model.NotificationSettingChangeRequest
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSetting
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSettingChangeRequest
+import de.sambalmueslie.openevent.core.logic.notification.db.NotificationSettingStorage
 import de.sambalmueslie.openevent.core.model.PatchRequest
-import de.sambalmueslie.openevent.core.storage.NotificationSettingStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

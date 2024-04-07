@@ -1,6 +1,13 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.*
+import de.sambalmueslie.openevent.core.logic.category.api.Category
+import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
+import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.logic.event.api.EventStats
+import de.sambalmueslie.openevent.core.logic.location.api.Location
+import de.sambalmueslie.openevent.core.logic.registration.api.Registration
+import de.sambalmueslie.openevent.core.model.PatchRequest
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication

@@ -1,11 +1,11 @@
 package de.sambalmueslie.openevent.storage.message
 
 
-import de.sambalmueslie.openevent.core.model.Account
+import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.model.Message
 import de.sambalmueslie.openevent.error.InconsistentDataException
 import de.sambalmueslie.openevent.storage.DataObjectConverter
-import de.sambalmueslie.openevent.storage.account.AccountStorageService
 import io.micronaut.data.model.Page
 import jakarta.inject.Singleton
 

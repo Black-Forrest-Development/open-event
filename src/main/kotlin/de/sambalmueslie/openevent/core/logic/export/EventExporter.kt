@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.core.logic.export
 
-import de.sambalmueslie.openevent.core.model.EventInfo
+import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
 import io.micronaut.http.server.types.files.SystemFile
 
 interface EventExporter {

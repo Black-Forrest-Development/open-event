@@ -2,12 +2,12 @@ package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementChangeListener
 import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudService
-import de.sambalmueslie.openevent.core.model.AccountChangeRequest
-import de.sambalmueslie.openevent.core.model.Announcement
-import de.sambalmueslie.openevent.core.model.AnnouncementChangeRequest
-import de.sambalmueslie.openevent.storage.account.AccountStorageService
+import de.sambalmueslie.openevent.core.logic.announcement.api.Announcement
+import de.sambalmueslie.openevent.core.logic.announcement.api.AnnouncementChangeRequest
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*

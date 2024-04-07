@@ -1,12 +1,14 @@
 export interface Account {
   id: number,
-  externalId: string,
+  externalId: string | undefined,
   name: string,
-  firstName: string,
-  lastName: string,
-  email: string,
   iconUrl: string,
+
+  registrationDate: string,
+  lastLoginDate: string | undefined,
+
   serviceAccount: boolean,
+  idpLinked: boolean,
 }
 
 export interface AccountValidationResult {
@@ -17,10 +19,8 @@ export interface AccountValidationResult {
 export class AccountChangeRequest {
   constructor(
     public name: string,
-    public firstName: string,
-    public lastName: string,
-    public email: string,
     public iconUrl: string,
+    public externalId: string | undefined
   ) {
   }
 }

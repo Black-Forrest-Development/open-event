@@ -2,9 +2,9 @@ package de.sambalmueslie.openevent.core.logic.category
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Category
-import de.sambalmueslie.openevent.core.model.CategoryChangeRequest
-import de.sambalmueslie.openevent.core.storage.CategoryStorage
+import de.sambalmueslie.openevent.core.logic.category.api.Category
+import de.sambalmueslie.openevent.core.logic.category.api.CategoryChangeRequest
+import de.sambalmueslie.openevent.core.logic.category.db.CategoryStorage
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

@@ -7,9 +7,7 @@ import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.auth.checkPermission
 import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
 import de.sambalmueslie.openevent.core.logic.account.AccountSearchService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.AccountChangeRequest
-import de.sambalmueslie.openevent.core.model.AccountValidationResult
+import de.sambalmueslie.openevent.core.logic.account.api.*
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -92,7 +90,20 @@ class AccountController(
             search.setup()
             HttpResponse.created("")
         }
+    }
 
+    override fun getProfile(auth: Authentication): Profile? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = service.get(auth) ?: return@checkPermission null
+            service.getProfile(account)
+        }
+    }
+
+    override fun getPreferences(auth: Authentication): Preferences? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = service.get(auth) ?: return@checkPermission null
+            service.getPreferences(account)
+        }
     }
 
 }

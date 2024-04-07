@@ -2,11 +2,11 @@ package de.sambalmueslie.openevent.core.logic.notification
 
 
 import de.sambalmueslie.openevent.core.BaseCrudService
-import de.sambalmueslie.openevent.core.model.Account
-import de.sambalmueslie.openevent.core.model.NotificationTemplate
-import de.sambalmueslie.openevent.core.model.NotificationTemplateChangeRequest
-import de.sambalmueslie.openevent.core.model.NotificationType
-import de.sambalmueslie.openevent.core.storage.NotificationTemplateStorage
+import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplate
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplateChangeRequest
+import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.logic.notification.db.NotificationTemplateStorage
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton

@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.logic.export
 
 
+import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.logic.event.EventCrudService
-import de.sambalmueslie.openevent.core.logic.profile.ProfileCrudService
-import de.sambalmueslie.openevent.core.model.Account
 import de.sambalmueslie.openevent.infrastructure.mail.api.Attachment
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailParticipant

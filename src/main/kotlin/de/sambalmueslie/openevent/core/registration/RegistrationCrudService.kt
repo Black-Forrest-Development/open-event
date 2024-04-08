@@ -2,11 +2,12 @@ package de.sambalmueslie.openevent.core.registration
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.participant.ParticipantCrudService
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipantAddRequest
@@ -24,7 +25,7 @@ import org.slf4j.LoggerFactory
 class RegistrationCrudService(
     private val storage: RegistrationStorage,
     private val participantCrudService: ParticipantCrudService,
-    private val accountCrudService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountCrudService: AccountCrudService,
     private val profileCrudService: ProfileCrudService
 ) : BaseCrudService<Long, Registration, RegistrationChangeRequest, RegistrationChangeListener>(storage) {
 

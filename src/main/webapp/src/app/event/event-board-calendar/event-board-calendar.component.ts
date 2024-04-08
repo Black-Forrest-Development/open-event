@@ -67,6 +67,11 @@ export class EventBoardCalendarComponent implements AfterViewInit {
     }
   }
 
+  handleEventClick(arg: EventClickArg) {
+    let id = arg.event.id
+    if (id) EventNavigationService.navigateToEventDetails(this.router, +id)
+  }
+
   private updateCalendar() {
     if (!this.calendarApi) return
 
@@ -79,10 +84,5 @@ export class EventBoardCalendarComponent implements AfterViewInit {
         end: e.event.finish
       })
     })
-  }
-
-  handleEventClick(arg: EventClickArg) {
-    let id = arg.event.id
-    if(id) EventNavigationService.navigateToEventDetails(this.router, +id)
   }
 }

@@ -2,9 +2,9 @@ package de.sambalmueslie.openevent.core.announcement.db
 
 
 import de.sambalmueslie.openevent.common.BaseStorageService
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.announcement.api.Announcement
 import de.sambalmueslie.openevent.core.announcement.api.AnnouncementChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

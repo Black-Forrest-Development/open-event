@@ -71,6 +71,11 @@ export class AuthService {
     return this.principal
   }
 
+  hasRole(...roles: String[]): boolean {
+    if (!this.principal) return false
+    return this.principal.roles.find(r => roles.find(p => r === p)) != null
+  }
+
   private clearPrincipal() {
     console.log('Clear principal');
     this.principal = undefined;
@@ -87,11 +92,6 @@ export class AuthService {
 
     this.principal = new Principal(id, email, username, given_name, family_name, roles);
     console.log('Set principal to ' + JSON.stringify(this.principal));
-  }
-
-  hasRole(...roles: String[]): boolean {
-    if (!this.principal) return false
-    return this.principal.roles.find(r => roles.find(p => r === p)) != null
   }
 
 

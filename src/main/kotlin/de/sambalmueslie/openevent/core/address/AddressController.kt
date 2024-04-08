@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.AddressAPI
 import de.sambalmueslie.openevent.api.AddressAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
@@ -20,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Address API")
 class AddressController(
     private val service: AddressCrudService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : AddressAPI {
     private val logger = audit.getLogger("Address API")

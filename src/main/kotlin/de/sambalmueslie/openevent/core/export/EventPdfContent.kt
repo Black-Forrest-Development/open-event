@@ -1,8 +1,8 @@
 package de.sambalmueslie.openevent.core.export
 
 import de.sambalmueslie.openevent.core.category.api.Category
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.location.api.Location
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 
 data class EventPdfContent(

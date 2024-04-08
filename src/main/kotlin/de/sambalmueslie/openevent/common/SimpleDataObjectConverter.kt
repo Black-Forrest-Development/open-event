@@ -9,7 +9,7 @@ class SimpleDataObjectConverter<T : BusinessObject<*>, O : SimpleDataObject<T>> 
     }
 
     override fun convert(objs: List<O>): List<T> {
-       return objs.map { it.convert() }
+        return objs.map { it.convert() }
     }
 
     override fun convert(page: Page<O>): Page<T> {

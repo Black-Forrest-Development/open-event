@@ -11,22 +11,24 @@ import {Page} from "../../shared/model/page";
   styleUrls: ['./event-change-form-registration.component.scss']
 })
 export class EventChangeFormRegistrationComponent {
+  fg: FormGroup | undefined
+  @Input() hiddenFields: string[] = []
+  @Input() categoryForm: FormControl | undefined
+  allCategories: ChipSelectEntry[] = []
+  categoriesLoading: boolean = false
+
+  constructor(private categoryService: CategoryService) {
+  }
+
   @Input()
   set form(value: FormGroup) {
     this.fg = value
     this.categoryForm = value.get('categories') as FormControl
   }
 
-  fg: FormGroup | undefined
-  @Input() hiddenFields: string[] = []
-
-
-  @Input() categoryForm: FormControl | undefined
-  allCategories: ChipSelectEntry[] = []
-
-  categoriesLoading: boolean = false
-
-  constructor(private categoryService: CategoryService) {
+  get ticketsEnabled(): FormControl<any> {
+    // @ts-ignore
+    return this.form!!.get('ticketsEnabled')
   }
 
   ngOnInit() {
@@ -34,14 +36,8 @@ export class EventChangeFormRegistrationComponent {
     this.categoryService.getAllCategories(0, 100).subscribe(d => this.handleCategoryData(d))
   }
 
-
   isVisible(ctrl: string): boolean {
     return this.hiddenFields.find(x => x == ctrl) == null
-  }
-
-  get ticketsEnabled(): FormControl<any> {
-    // @ts-ignore
-    return this.form!!.get('ticketsEnabled')
   }
 
   private handleCategoryData(d: Page<Category>) {

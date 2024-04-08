@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.account.api.Preferences
-import de.sambalmueslie.openevent.core.logic.account.api.PreferencesChangeRequest
+import de.sambalmueslie.openevent.core.account.api.Preferences
+import de.sambalmueslie.openevent.core.account.api.PreferencesChangeRequest
 
 interface PreferencesAPI : CrudAPI<Long, Preferences, PreferencesChangeRequest> {
     companion object {

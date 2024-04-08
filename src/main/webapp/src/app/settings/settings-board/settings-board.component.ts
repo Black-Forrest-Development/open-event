@@ -39,6 +39,16 @@ export class SettingsBoardComponent {
     ).subscribe(data => this.search(data))
   }
 
+  search(query: string) {
+    this.toastService.error("Not implemented yet to search for '" + query + "'")
+  }
+
+  handlePageChange(event: PageEvent) {
+    if (this.reloading) return
+    this.pageSize = event.pageSize
+    this.loadPage(event.pageIndex)
+  }
+
   private loadPage(number: number) {
     if (this.reloading) return
     this.reloading = true
@@ -53,15 +63,5 @@ export class SettingsBoardComponent {
     this.pageNumber = p.pageable.number
     this.pageSize = p.pageable.size
     this.reloading = false
-  }
-
-  search(query: string) {
-    this.toastService.error("Not implemented yet to search for '" + query + "'")
-  }
-
-  handlePageChange(event: PageEvent) {
-    if (this.reloading) return
-    this.pageSize = event.pageSize
-    this.loadPage(event.pageIndex)
   }
 }

@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.announcement.db
 
 import de.sambalmueslie.openevent.common.DataObject
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.announcement.api.Announcement
 import de.sambalmueslie.openevent.core.announcement.api.AnnouncementChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.api.Account
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

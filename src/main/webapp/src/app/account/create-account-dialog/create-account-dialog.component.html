@@ -1,31 +1,33 @@
-<h1 mat-dialog-title>{{"account.dialog.create.title" | translate}}</h1>
+<h1 mat-dialog-title>{{ "account.dialog.create.title" | translate }}</h1>
 <div mat-dialog-content>
   <form [formGroup]="fg">
     <div class="d-flex flex-column gap-2 py-2">
       <mat-form-field class="dense-1">
-        <mat-label>{{'account.form.firstName' | translate}}</mat-label>
-        <input matInput formControlName="firstName">
+        <mat-label>{{ 'account.form.firstName' | translate }}</mat-label>
+        <input formControlName="firstName" matInput>
       </mat-form-field>
 
       <mat-form-field class="dense-1">
-        <mat-label>{{'account.form.lastName' | translate}}</mat-label>
-        <input matInput formControlName="lastName">
+        <mat-label>{{ 'account.form.lastName' | translate }}</mat-label>
+        <input formControlName="lastName" matInput>
       </mat-form-field>
 
       <mat-form-field class="dense-1">
-        <mat-label>{{'account.form.email' | translate}}</mat-label>
-        <input matInput formControlName="email">
+        <mat-label>{{ 'account.form.email' | translate }}</mat-label>
+        <input formControlName="email" matInput>
       </mat-form-field>
 
     </div>
   </form>
 </div>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="submit()" [disabled]="!fg.valid">
+  <button (click)="submit()" [disabled]="!fg.valid" color="primary" mat-flat-button>
     <mat-icon>check</mat-icon>
-    {{"action.submit" | translate}}</button>
-  <button mat-flat-button color="warn" mat-dialog-close>
+    {{ "action.submit" | translate }}
+  </button>
+  <button color="warn" mat-dialog-close mat-flat-button>
     <mat-icon>cancel</mat-icon>
-    {{"action.cancel" | translate}}</button>
+    {{ "action.cancel" | translate }}
+  </button>
 </mat-dialog-actions>
 

@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.common
 
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 
 interface BusinessObjectChangeListener<T, O : BusinessObject<T>> {
     fun handleCreated(actor: Account, obj: O) {

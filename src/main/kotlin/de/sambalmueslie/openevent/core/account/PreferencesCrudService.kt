@@ -2,7 +2,7 @@ package de.sambalmueslie.openevent.core.account
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.*
+import de.sambalmueslie.openevent.core.account.api.*
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

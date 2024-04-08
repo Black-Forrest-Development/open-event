@@ -2,12 +2,12 @@ package de.sambalmueslie.openevent.core.notification
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplate
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplateChangeRequest
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
-import de.sambalmueslie.openevent.core.logic.notification.db.NotificationTypeStorage
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplate
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplateChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.notification.db.NotificationTypeStorage
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -40,11 +40,11 @@ class NotificationTypeCrudService(
         return templateService.findByType(type, pageable)
     }
 
-    fun findByKey(key: String): NotificationType {
+    fun findByKey(key: String): NotificationType? {
         return storage.findByKey(key)
     }
 
-    fun findByKeys(keys: Set<String>): List<NotificationType>{
+    fun findByKeys(keys: Set<String>): List<NotificationType> {
         return storage.findByKeys(keys)
     }
 }

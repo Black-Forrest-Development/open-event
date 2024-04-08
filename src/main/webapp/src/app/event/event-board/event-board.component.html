@@ -1,4 +1,4 @@
-<app-event-board-header [mobileView]="mobileView" (modeChanged)="this.mode = $event"
+<app-event-board-header (modeChanged)="this.mode = $event" [mobileView]="mobileView"
                         [mode]="mode"></app-event-board-header>
 <ng-container *ngIf="!mobileView;else eventList">
   <ng-container [ngSwitch]="mode">

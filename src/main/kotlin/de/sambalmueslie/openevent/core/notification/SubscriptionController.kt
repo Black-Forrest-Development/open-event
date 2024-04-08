@@ -5,8 +5,9 @@ import de.sambalmueslie.openevent.api.SubscriptionAPI
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
-import de.sambalmueslie.openevent.core.logic.notification.api.SubscriptionStatus
+import de.sambalmueslie.openevent.core.notification.api.SubscriptionStatus
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Delete
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Subscription API")
 class SubscriptionController(
     private val schemeService: NotificationSchemeCrudService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : SubscriptionAPI {
     private val logger = audit.getLogger("Subscription API")

@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.notification
 
 
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.infrastructure.mail.api.Attachment
 
 data class NotificationEvent<T>(

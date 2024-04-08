@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.registration
 
 import de.sambalmueslie.openevent.common.BusinessObjectChangeListener
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.core.registration.api.Registration

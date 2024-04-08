@@ -1,11 +1,12 @@
 package de.sambalmueslie.openevent.core.history.handler
 
 
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.history.HistoryCrudService
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryType
-import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory
 class RegistrationNotificationHandler(
     registrationService: RegistrationCrudService,
     private val service: HistoryCrudService,
-    private val eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    private val eventService: EventCrudService,
 ) : RegistrationChangeListener {
 
     companion object {

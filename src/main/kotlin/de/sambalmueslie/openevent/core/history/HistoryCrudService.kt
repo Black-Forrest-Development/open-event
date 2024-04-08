@@ -2,13 +2,14 @@ package de.sambalmueslie.openevent.core.history
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.history.api.HistoryEntry
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
 import de.sambalmueslie.openevent.core.history.api.HistoryEventInfo
 import de.sambalmueslie.openevent.core.history.db.HistoryEntryStorage
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 class HistoryCrudService(
-    private val eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    private val eventService: EventCrudService,
     private val storage: HistoryEntryStorage
 ) : BaseCrudService<Long, HistoryEntry, HistoryEntryChangeRequest, HistoryEntryChangeListener>(storage) {
 

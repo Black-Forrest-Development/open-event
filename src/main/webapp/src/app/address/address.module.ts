@@ -6,16 +6,17 @@ import {PreferencesModule} from "../preferences/preferences.module";
 
 
 @NgModule({
-    declarations: [
-        AddressBoardComponent
-    ],
-    exports: [
-        AddressBoardComponent
-    ],
+  declarations: [
+    AddressBoardComponent
+  ],
+  exports: [
+    AddressBoardComponent
+  ],
   imports: [
     CommonModule,
     MatCard,
     PreferencesModule
   ]
 })
-export class AddressModule { }
+export class AddressModule {
+}

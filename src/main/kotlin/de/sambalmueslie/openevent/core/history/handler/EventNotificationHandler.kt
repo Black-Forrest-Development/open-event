@@ -1,19 +1,20 @@
 package de.sambalmueslie.openevent.core.history.handler
 
 
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.history.HistoryCrudService
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryType
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import io.micronaut.context.annotation.Context
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Context
 class EventNotificationHandler(
-    eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    eventService: EventCrudService,
     private val service: HistoryCrudService,
 ) : de.sambalmueslie.openevent.core.event.EventChangeListener {
 

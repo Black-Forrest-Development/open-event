@@ -1,13 +1,13 @@
 package de.sambalmueslie.openevent.core.notification.handler
 
 
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.announcement.AnnouncementChangeListener
 import de.sambalmueslie.openevent.core.announcement.AnnouncementCrudService
 import de.sambalmueslie.openevent.core.announcement.api.Announcement
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
-import de.sambalmueslie.openevent.core.logic.notification.NotificationService
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.notification.NotificationService
+import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -41,7 +41,8 @@ class AnnouncementNotificationHandler(
                 KEY_ANNOUNCEMENT_CREATED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
 
@@ -51,7 +52,8 @@ class AnnouncementNotificationHandler(
                 KEY_ANNOUNCEMENT_UPDATED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
     override fun handleDeleted(actor: Account, obj: Announcement) {
@@ -60,7 +62,8 @@ class AnnouncementNotificationHandler(
                 KEY_ANNOUNCEMENT_DELETED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
 

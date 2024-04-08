@@ -3,9 +3,9 @@ package de.sambalmueslie.openevent.core.address.db
 
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.api.Account
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

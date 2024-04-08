@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.event.api
 
 import de.sambalmueslie.openevent.common.BusinessObject
-import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

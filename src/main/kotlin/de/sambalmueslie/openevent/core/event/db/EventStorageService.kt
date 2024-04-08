@@ -3,12 +3,12 @@ package de.sambalmueslie.openevent.core.event.db
 
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.announcement.api.Announcement
 import de.sambalmueslie.openevent.core.category.api.Category
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.history.db.HistoryStorageService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

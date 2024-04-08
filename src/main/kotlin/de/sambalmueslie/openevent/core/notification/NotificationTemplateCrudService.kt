@@ -2,11 +2,11 @@ package de.sambalmueslie.openevent.core.notification
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplate
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplateChangeRequest
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
-import de.sambalmueslie.openevent.core.logic.notification.db.NotificationTemplateStorage
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplate
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplateChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.notification.db.NotificationTemplateStorage
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -39,7 +39,7 @@ class NotificationTemplateCrudService(
         return storage.findByType(type, pageable)
     }
 
-    fun find(type: NotificationType, lang: Locale): NotificationTemplate {
+    fun find(type: NotificationType, lang: Locale): NotificationTemplate? {
         return storage.findByTypeAndLang(type, lang)
     }
 

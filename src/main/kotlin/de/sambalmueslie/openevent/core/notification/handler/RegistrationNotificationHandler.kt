@@ -5,11 +5,12 @@ import biweekly.Biweekly
 import biweekly.ICalendar
 import biweekly.component.VEvent
 import biweekly.property.Summary
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.notification.NotificationService
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.notification.NotificationService
+import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
@@ -27,7 +28,7 @@ import java.util.*
 @Singleton
 class RegistrationNotificationHandler(
     private val registrationService: RegistrationCrudService,
-    private val eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    private val eventService: EventCrudService,
     private val service: NotificationService,
 ) : NotificationHandler, RegistrationChangeListener {
 
@@ -69,7 +70,8 @@ class RegistrationNotificationHandler(
                 KEY_REGISTRATION_CREATED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
 
@@ -79,7 +81,8 @@ class RegistrationNotificationHandler(
                 KEY_REGISTRATION_UPDATED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
     override fun handleDeleted(actor: Account, obj: Registration) {
@@ -88,7 +91,8 @@ class RegistrationNotificationHandler(
                 KEY_REGISTRATION_DELETED,
                 actor,
                 obj
-            ), getRecipients(actor, obj))
+            ), getRecipients(actor, obj)
+        )
     }
 
 
@@ -178,7 +182,8 @@ class RegistrationNotificationHandler(
                 KEY_PARTICIPANT_REMOVED,
                 actor,
                 content
-            ), listOf(event.owner))
+            ), listOf(event.owner)
+        )
 
         service.process(
             de.sambalmueslie.openevent.core.notification.NotificationEvent(

@@ -14,24 +14,14 @@ import {HotToastService} from "@ngxpert/hot-toast";
   styleUrls: ['./event-menu.component.scss']
 })
 export class EventMenuComponent {
-  @Input()
-  set data(value: Event) {
-    this.event = value;
-    this.publishMenuItem.disabled = value.published;
-  }
-
   @Output() changed: EventEmitter<Event> = new EventEmitter();
-
   event: Event | undefined
-
   publishing: boolean = false
   exporting: boolean = false
-
   editMenuItem = new EventMenuItem('edit', 'event.action.edit', this.handleActionEdit.bind(this), false)
   copyMenuItem = new EventMenuItem('content_copy', 'event.action.copy', this.handleActionCopy.bind(this), false)
   deleteMenuItem = new EventMenuItem('delete', 'event.action.delete', this.handleActionDelete.bind(this), false)
   publishMenuItem = new EventMenuItem('publish', 'event.action.publish', this.handleActionPublish.bind(this), false)
-
   menuItems = [
     this.editMenuItem,
     this.copyMenuItem,
@@ -44,6 +34,12 @@ export class EventMenuComponent {
     private service: EventService,
     private toastService: HotToastService
   ) {
+  }
+
+  @Input()
+  set data(value: Event) {
+    this.event = value;
+    this.publishMenuItem.disabled = value.published;
   }
 
   private handleActionEdit() {

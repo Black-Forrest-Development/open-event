@@ -14,6 +14,7 @@ export class EventBoardHeaderComponent {
   @Input() mode: string = ''
 
   @Output() modeChanged = new EventEmitter<string>
+
   constructor(public service: EventBoardService) {
   }
 

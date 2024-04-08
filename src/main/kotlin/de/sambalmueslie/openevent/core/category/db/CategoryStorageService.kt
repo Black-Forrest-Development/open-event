@@ -47,7 +47,7 @@ class CategoryStorageService(
     }
 
     override fun getByIds(ids: Set<Long>): List<Category> {
-       return repository.findByIdIn(ids).map { it.convert() }
+        return repository.findByIdIn(ids).map { it.convert() }
     }
 
 }

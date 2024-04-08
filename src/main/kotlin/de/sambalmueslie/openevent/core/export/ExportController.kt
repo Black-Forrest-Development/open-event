@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.export
 
 import de.sambalmueslie.openevent.api.ExportAPI
 import de.sambalmueslie.openevent.api.ExportAPI.Companion.PERMISSION_EXPORT
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Export API")
 class ExportController(
     private val service: ExportService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
 ) : ExportAPI {
 
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
@@ -49,6 +50,7 @@ class ExportController(
             service.exportEventPdf(eventId, account)
         }
     }
+
     @Produces(value = [MediaType.APPLICATION_OCTET_STREAM])
     @Get("/event/summary")
     override fun exportEventSummaryExcel(auth: Authentication): SystemFile? {

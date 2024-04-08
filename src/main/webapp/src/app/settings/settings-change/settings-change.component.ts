@@ -38,6 +38,12 @@ export class SettingsChangeComponent {
   ) {
   }
 
+  private get request(): SettingChangeRequest | null {
+    this.form.controls['key'].enable()
+    this.form.controls['type'].enable()
+    return this.form.value
+  }
+
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -47,6 +53,25 @@ export class SettingsChangeComponent {
     } else {
       this.handleDataCreate()
     }
+  }
+
+  onSubmit() {
+    if (this.form.invalid) {
+      this.validateForm()
+      this.showFormInvalidError()
+      return
+    }
+
+    this.reloading = true;
+    if (this.data == null) {
+      this.create()
+    } else {
+      this.update(this.data)
+    }
+  }
+
+  cancel() {
+    this.location.back()
   }
 
   private loadData(settingId: number, callback: (e: Setting) => void) {
@@ -75,34 +100,8 @@ export class SettingsChangeComponent {
     this.form.get('type')?.setValue(data.type)
   }
 
-
   private validateForm() {
     this.form.markAllAsTouched()
-  }
-
-  onSubmit() {
-    if (this.form.invalid) {
-      this.validateForm()
-      this.showFormInvalidError()
-      return
-    }
-
-    this.reloading = true;
-    if (this.data == null) {
-      this.create()
-    } else {
-      this.update(this.data)
-    }
-  }
-
-  cancel() {
-    this.location.back()
-  }
-
-  private get request(): SettingChangeRequest | null {
-    this.form.controls['key'].enable()
-    this.form.controls['type'].enable()
-    return this.form.value
   }
 
   private create() {

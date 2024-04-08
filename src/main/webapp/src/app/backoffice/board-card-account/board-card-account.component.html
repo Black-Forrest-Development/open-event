@@ -1,15 +1,15 @@
 <mat-card>
   <mat-card-header class="px-2 py-2 gap-2 align-items-center">
     <mat-icon>manage_accounts</mat-icon>
-    <div class="header flex-fill">{{'backoffice.account.title' | translate}}</div>
+    <div class="header flex-fill">{{ 'backoffice.account.title' | translate }}</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
     <mat-list role="list">
       <mat-list-item role="listitem">
         <div class="d-flex flex-row justify-content-between align-items-center">
-          <span>{{'backoffice.account.action.search'| translate}}</span>
-          <button mat-mini-fab color="primary" (click)="showSearchAccountDialog()">
+          <span>{{ 'backoffice.account.action.search'| translate }}</span>
+          <button (click)="showSearchAccountDialog()" color="primary" mat-mini-fab>
             <mat-icon>search</mat-icon>
           </button>
         </div>
@@ -17,11 +17,11 @@
 
       <mat-list-item role="listitem">
         <div class="d-flex flex-row justify-content-between align-items-center">
-          <span>{{'backoffice.account.action.create'| translate}}</span>
-          <button mat-mini-fab color="primary" (click)="showCreateAccountDialog()">
+          <span>{{ 'backoffice.account.action.create'| translate }}</span>
+          <button (click)="showCreateAccountDialog()" color="primary" mat-mini-fab>
             <mat-icon *ngIf="!accountCreating">add</mat-icon>
             <mat-icon *ngIf="accountCreating">
-              <mat-spinner diameter="22" color="primary"></mat-spinner>
+              <mat-spinner color="primary" diameter="22"></mat-spinner>
             </mat-icon>
           </button>
         </div>

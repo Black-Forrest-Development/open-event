@@ -6,9 +6,9 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import com.jillesvangurp.searchdsls.querydsl.ESQuery
 import com.jillesvangurp.searchdsls.querydsl.SimpleQueryStringQuery
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.infrastructure.search.BaseSearchService
 import de.sambalmueslie.openevent.infrastructure.search.SearchService
 import io.micronaut.context.annotation.Context
@@ -58,7 +58,7 @@ open class EventSearchService(
     }
 
     override fun buildQuery(q: String): ESQuery {
-        return SimpleQueryStringQuery(q,  "title", "content")
+        return SimpleQueryStringQuery(q, "title", "content")
     }
 
 

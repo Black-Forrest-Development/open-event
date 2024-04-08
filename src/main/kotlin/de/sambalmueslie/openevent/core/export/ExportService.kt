@@ -2,8 +2,9 @@ package de.sambalmueslie.openevent.core.export
 
 
 import de.sambalmueslie.openevent.common.PageableSequence
-import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.infrastructure.mail.api.Attachment
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailParticipant
@@ -17,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 @Singleton
 open class ExportService(
-    private val eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    private val eventService: EventCrudService,
     private val profileService: ProfileCrudService,
     private val excelExporter: EventExcelExporter,
     private val pdfExporter: EventPdfExporter,

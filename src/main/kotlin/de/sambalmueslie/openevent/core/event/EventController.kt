@@ -7,14 +7,15 @@ import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.checkPermission
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
+import de.sambalmueslie.openevent.core.event.api.EventInfo
+import de.sambalmueslie.openevent.core.event.api.EventStats
 import de.sambalmueslie.openevent.core.getRealmRoles
 import de.sambalmueslie.openevent.core.location.api.Location
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
-import de.sambalmueslie.openevent.core.logic.event.api.EventStats
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
@@ -29,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class EventController(
     private val service: EventCrudService,
     private val search: EventSearchService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : EventAPI {
     private val logger = audit.getLogger("Event API")

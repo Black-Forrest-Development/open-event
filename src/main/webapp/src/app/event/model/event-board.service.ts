@@ -38,6 +38,16 @@ export class EventBoardService {
     }
   }
 
+  search(query: string) {
+    this.query = query
+    if (this.searching) return
+    this.reload(this.pageIndex, this.pageSize)
+  }
+
+  handlePageChange(event: PageEvent) {
+    this.reload(event.pageIndex, event.pageSize)
+  }
+
   private handleData(value: Page<EventInfo>) {
     this.infos = value.content
     this.pageSize = value.pageable.size
@@ -50,15 +60,5 @@ export class EventBoardService {
   private handleError(err: any) {
     // this.toast.error("Failed to load data")
     this.reloading.next(false)
-  }
-
-  search(query: string) {
-    this.query = query
-    if (this.searching) return
-    this.reload(this.pageIndex, this.pageSize)
-  }
-
-  handlePageChange(event: PageEvent) {
-    this.reload(event.pageIndex, event.pageSize)
   }
 }

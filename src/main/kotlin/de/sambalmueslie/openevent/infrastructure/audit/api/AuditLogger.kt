@@ -28,7 +28,7 @@ interface AuditLogger {
         function: () -> T?
     ): T?
 
-    fun <T, R: Any> traceAction(
+    fun <T, R : Any> traceAction(
         auth: Authentication,
         message: String,
         referenceId: String,

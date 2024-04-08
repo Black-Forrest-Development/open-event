@@ -25,14 +25,13 @@ export class MailBoardComponent {
 
   keyUp: EventEmitter<string> = new EventEmitter<string>()
   searching: boolean = false
+  private unsub = new Subject<void>();
 
   constructor(
     private service: MailService,
     private toastService: HotToastService
   ) {
   }
-
-  private unsub = new Subject<void>();
 
   ngOnInit(): void {
     timer(0, 15000).pipe(
@@ -56,6 +55,16 @@ export class MailBoardComponent {
     this.loadPage(this.pageNumber)
   }
 
+  handlePageChange(event: PageEvent) {
+    if (this.reloading) return
+    this.pageSize = event.pageSize
+    this.loadPage(event.pageIndex)
+  }
+
+  search(data: string) {
+    this.toastService.error("Sorry searching '" + data + "' is not supported yet")
+  }
+
   private loadPage(number: number) {
     if (this.reloading) return
     this.reloading = true
@@ -76,15 +85,5 @@ export class MailBoardComponent {
       this.totalElements = page.totalSize;
     }
     this.reloading = false;
-  }
-
-  handlePageChange(event: PageEvent) {
-    if (this.reloading) return
-    this.pageSize = event.pageSize
-    this.loadPage(event.pageIndex)
-  }
-
-  search(data: string) {
-    this.toastService.error("Sorry searching '" + data + "' is not supported yet")
   }
 }

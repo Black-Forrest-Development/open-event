@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.participant.db
 
 import de.sambalmueslie.openevent.common.Storage
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipantChangeRequest
 import de.sambalmueslie.openevent.core.registration.api.Registration

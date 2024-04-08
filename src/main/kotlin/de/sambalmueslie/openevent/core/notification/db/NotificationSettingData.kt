@@ -1,8 +1,8 @@
 package de.sambalmueslie.openevent.core.notification.db
 
 import de.sambalmueslie.openevent.common.SimpleDataObject
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSetting
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationSettingChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationSetting
+import de.sambalmueslie.openevent.core.notification.api.NotificationSettingChangeRequest
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

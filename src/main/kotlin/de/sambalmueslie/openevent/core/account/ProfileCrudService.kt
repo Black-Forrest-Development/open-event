@@ -2,9 +2,9 @@ package de.sambalmueslie.openevent.core.account
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.location.db
 
 import de.sambalmueslie.openevent.common.SimpleDataObject
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.location.api.LocationChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

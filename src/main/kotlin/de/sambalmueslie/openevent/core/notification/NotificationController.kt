@@ -6,8 +6,9 @@ import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
-import de.sambalmueslie.openevent.core.logic.notification.api.*
+import de.sambalmueslie.openevent.core.notification.api.*
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -22,7 +23,7 @@ class NotificationController(
     private val templateService: NotificationTemplateCrudService,
     private val settingService: NotificationSettingCrudService,
     private val typeService: NotificationTypeCrudService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : NotificationAPI {
     private val logger = audit.getLogger("Notification API")

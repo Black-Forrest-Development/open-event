@@ -15,13 +15,6 @@ import {AuthService} from "../../auth/auth.service";
 })
 export class EventDetailsHeaderComponent {
 
-  @Input()
-  set data(value: EventInfo | undefined) {
-    this.info = value
-    if (this.info && this.info.canEdit) this.isAdminOrCanEdit = true
-    if (value) this.menu.data = value.event
-  }
-
   info: EventInfo | undefined
   @Input() reloading: boolean = false
   isAdminOrCanEdit: boolean = false
@@ -37,6 +30,13 @@ export class EventDetailsHeaderComponent {
     private authService: AuthService
   ) {
     this.menu = new EventMenuComponent(router, dialog, service, toastService)
+  }
+
+  @Input()
+  set data(value: EventInfo | undefined) {
+    this.info = value
+    if (this.info && this.info.canEdit) this.isAdminOrCanEdit = true
+    if (value) this.menu.data = value.event
   }
 
   ngOnInit() {

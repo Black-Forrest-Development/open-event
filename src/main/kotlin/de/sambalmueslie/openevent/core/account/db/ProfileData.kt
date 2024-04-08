@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.account.db
 
 import de.sambalmueslie.openevent.common.SimpleDataObject
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

@@ -8,6 +8,12 @@ import {Participant} from "../../participant/model/participant-api";
   styleUrls: ['./registration-status.component.scss']
 })
 export class RegistrationStatusComponent {
+  spaceAvailable: boolean = false
+  space = {
+    remaining: 0,
+    available: 0
+  }
+
   @Input()
   set data(info: RegistrationInfo | undefined) {
     if (info) {
@@ -16,12 +22,6 @@ export class RegistrationStatusComponent {
       this.space.remaining = this.space.available - totalAmount
       this.spaceAvailable = this.space.remaining > 0
     }
-  }
-
-  spaceAvailable: boolean = false
-  space = {
-    remaining: 0,
-    available: 0
   }
 
 }

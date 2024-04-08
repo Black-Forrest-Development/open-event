@@ -5,10 +5,10 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.api.ProfileAPI
 import de.sambalmueslie.openevent.api.ProfileAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.getRealmRoles
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.error.InsufficientPermissionsException
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page

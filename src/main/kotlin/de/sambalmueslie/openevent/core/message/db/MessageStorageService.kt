@@ -2,7 +2,7 @@ package de.sambalmueslie.openevent.core.message.db
 
 
 import de.sambalmueslie.openevent.common.BaseStorageService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.message.api.Message
 import de.sambalmueslie.openevent.core.message.api.MessageChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException

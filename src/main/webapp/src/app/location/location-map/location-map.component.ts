@@ -25,6 +25,10 @@ Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./location-map.component.scss']
 })
 export class LocationMapComponent {
+  location: Location | undefined;
+  private map: Map | undefined
+  private marker: Marker | undefined
+
   @Input()
   set data(data: Location) {
     this.location = data;
@@ -33,11 +37,6 @@ export class LocationMapComponent {
     }
   }
 
-  location: Location | undefined;
-  private map: Map | undefined
-  private marker: Marker | undefined
-
-
   private updateMap() {
     if (this.marker) {
       this.marker.remove()
@@ -45,7 +44,7 @@ export class LocationMapComponent {
 
     if (!this.location) return
 
-    if(!this.map) this.initMap()
+    if (!this.map) this.initMap()
 
     let lat = this.location.lat
     let lon = this.location.lon

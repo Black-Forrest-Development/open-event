@@ -1,5 +1,6 @@
 package de.sambalmueslie.openevent.core.logic.export
 
+import de.sambalmueslie.openevent.core.export.HtmlConverter
 import org.apache.velocity.tools.generic.EscapeTool
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

@@ -1,12 +1,12 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
+import de.sambalmueslie.openevent.core.category.CategoryChangeListener
+import de.sambalmueslie.openevent.core.category.CategoryCrudService
+import de.sambalmueslie.openevent.core.category.api.Category
+import de.sambalmueslie.openevent.core.category.api.CategoryChangeRequest
 import de.sambalmueslie.openevent.core.logic.account.AccountStorage
 import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
-import de.sambalmueslie.openevent.core.logic.category.CategoryChangeListener
-import de.sambalmueslie.openevent.core.logic.category.CategoryCrudService
-import de.sambalmueslie.openevent.core.logic.category.api.Category
-import de.sambalmueslie.openevent.core.logic.category.api.CategoryChangeRequest
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*

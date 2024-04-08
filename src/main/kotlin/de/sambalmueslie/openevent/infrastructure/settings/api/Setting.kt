@@ -1,7 +1,6 @@
 package de.sambalmueslie.openevent.infrastructure.settings.api
 
-import de.sambalmueslie.openevent.core.BusinessObject
-import de.sambalmueslie.openevent.core.model.ValueType
+import de.sambalmueslie.openevent.common.BusinessObject
 
 data class Setting(
     override val id: Long,

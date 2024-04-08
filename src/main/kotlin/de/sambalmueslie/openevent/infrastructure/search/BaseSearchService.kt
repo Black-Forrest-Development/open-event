@@ -4,9 +4,9 @@ package de.sambalmueslie.openevent.infrastructure.search
 import com.jillesvangurp.ktsearch.*
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import com.jillesvangurp.searchdsls.querydsl.ESQuery
-import de.sambalmueslie.openevent.core.BusinessObject
-import de.sambalmueslie.openevent.core.CrudService
-import de.sambalmueslie.openevent.storage.util.PageableSequence
+import de.sambalmueslie.openevent.common.BusinessObject
+import de.sambalmueslie.openevent.common.CrudService
+import de.sambalmueslie.openevent.common.PageableSequence
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.scheduling.annotation.Async

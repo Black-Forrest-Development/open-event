@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.location.api.Location
-import de.sambalmueslie.openevent.core.logic.location.api.LocationChangeRequest
+import de.sambalmueslie.openevent.core.location.api.Location
+import de.sambalmueslie.openevent.core.location.api.LocationChangeRequest
 
 interface LocationAPI : CrudAPI<Long, Location, LocationChangeRequest> {
     companion object {

@@ -1,12 +1,12 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.participant.api.Participant
-import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantAddRequest
-import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateRequest
-import de.sambalmueslie.openevent.core.logic.participant.api.ParticipateResponse
-import de.sambalmueslie.openevent.core.logic.registration.api.Registration
-import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationChangeRequest
-import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationInfo
+import de.sambalmueslie.openevent.core.participant.api.Participant
+import de.sambalmueslie.openevent.core.participant.api.ParticipantAddRequest
+import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
+import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
+import de.sambalmueslie.openevent.core.registration.api.Registration
+import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import io.micronaut.security.authentication.Authentication
 
 interface RegistrationAPI : CrudAPI<Long, Registration, RegistrationChangeRequest> {

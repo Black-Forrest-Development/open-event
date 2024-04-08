@@ -1,13 +1,12 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
-import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.announcement.AnnouncementChangeListener
+import de.sambalmueslie.openevent.core.announcement.AnnouncementCrudService
+import de.sambalmueslie.openevent.core.announcement.api.Announcement
+import de.sambalmueslie.openevent.core.announcement.api.AnnouncementChangeRequest
 import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
 import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
-import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementChangeListener
-import de.sambalmueslie.openevent.core.logic.announcement.AnnouncementCrudService
-import de.sambalmueslie.openevent.core.logic.announcement.api.Announcement
-import de.sambalmueslie.openevent.core.logic.announcement.api.AnnouncementChangeRequest
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*
@@ -23,7 +22,7 @@ class AnnouncementCrudServiceTest : TimeBasedTest() {
     lateinit var accountStorage: AccountStorageService
 
     @Inject
-    lateinit var accountService: AccountCrudService
+    lateinit var accountService: de.sambalmueslie.openevent.core.account.AccountCrudService
 
     @Inject
     lateinit var service: AnnouncementCrudService

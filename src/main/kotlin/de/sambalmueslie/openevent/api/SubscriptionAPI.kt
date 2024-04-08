@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.model.SubscriptionStatus
+import de.sambalmueslie.openevent.core.logic.notification.api.SubscriptionStatus
 import io.micronaut.security.authentication.Authentication
 
 interface SubscriptionAPI {

@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.participant.api.Participant
-import de.sambalmueslie.openevent.core.logic.participant.api.ParticipantChangeRequest
+import de.sambalmueslie.openevent.core.participant.api.Participant
+import de.sambalmueslie.openevent.core.participant.api.ParticipantChangeRequest
 
 interface ParticipantAPI : CrudAPI<Long, Participant, ParticipantChangeRequest> {
     companion object {

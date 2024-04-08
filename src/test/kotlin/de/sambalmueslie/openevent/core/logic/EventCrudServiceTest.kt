@@ -1,21 +1,18 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
-import de.sambalmueslie.openevent.core.logic.account.AccountCrudService
+import de.sambalmueslie.openevent.core.location.LocationChangeListener
+import de.sambalmueslie.openevent.core.location.LocationCrudService
+import de.sambalmueslie.openevent.core.location.api.Location
+import de.sambalmueslie.openevent.core.location.api.LocationChangeRequest
 import de.sambalmueslie.openevent.core.logic.account.AccountStorage
 import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.EventChangeListener
-import de.sambalmueslie.openevent.core.logic.event.EventCrudService
 import de.sambalmueslie.openevent.core.logic.event.api.Event
 import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
-import de.sambalmueslie.openevent.core.logic.location.LocationChangeListener
-import de.sambalmueslie.openevent.core.logic.location.LocationCrudService
-import de.sambalmueslie.openevent.core.logic.location.api.Location
-import de.sambalmueslie.openevent.core.logic.location.api.LocationChangeRequest
-import de.sambalmueslie.openevent.core.logic.registration.RegistrationChangeListener
-import de.sambalmueslie.openevent.core.logic.registration.RegistrationCrudService
-import de.sambalmueslie.openevent.core.logic.registration.api.Registration
-import de.sambalmueslie.openevent.core.logic.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
+import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
+import de.sambalmueslie.openevent.core.registration.api.Registration
+import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.annotation.MockBean
@@ -34,10 +31,10 @@ class EventCrudServiceTest : TimeBasedTest() {
     lateinit var accountStorage: AccountStorage
 
     @Inject
-    lateinit var accountService: AccountCrudService
+    lateinit var accountService: de.sambalmueslie.openevent.core.account.AccountCrudService
 
     @Inject
-    lateinit var service: EventCrudService
+    lateinit var service: de.sambalmueslie.openevent.core.event.EventCrudService
 
     @Inject
     lateinit var locationService: LocationCrudService
@@ -48,7 +45,7 @@ class EventCrudServiceTest : TimeBasedTest() {
     @MockBean(TimeProvider::class)
     fun timeProvider() = provider
 
-    private val eventListener = mockk<EventChangeListener>()
+    private val eventListener = mockk<de.sambalmueslie.openevent.core.event.EventChangeListener>()
     private val locationListener = mockk<LocationChangeListener>()
     private val registrationListener = mockk<RegistrationChangeListener>()
 

@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.infrastructure.geo
 
 
-import de.sambalmueslie.openevent.core.logic.address.api.Address
-import de.sambalmueslie.openevent.core.logic.address.api.AddressChangeRequest
-import de.sambalmueslie.openevent.core.logic.location.api.Location
-import de.sambalmueslie.openevent.core.logic.location.api.LocationChangeRequest
+import de.sambalmueslie.openevent.core.address.api.Address
+import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
+import de.sambalmueslie.openevent.core.location.api.Location
+import de.sambalmueslie.openevent.core.location.api.LocationChangeRequest
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.address.api.Address
-import de.sambalmueslie.openevent.core.logic.address.api.AddressChangeRequest
+import de.sambalmueslie.openevent.core.address.api.Address
+import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 
 interface AddressAPI : CrudAPI<Long, Address, AddressChangeRequest> {
     companion object {

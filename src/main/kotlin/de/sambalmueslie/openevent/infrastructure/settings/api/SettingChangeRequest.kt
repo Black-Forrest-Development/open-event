@@ -1,7 +1,6 @@
 package de.sambalmueslie.openevent.infrastructure.settings.api
 
-import de.sambalmueslie.openevent.core.BusinessObjectChangeRequest
-import de.sambalmueslie.openevent.core.model.ValueType
+import de.sambalmueslie.openevent.common.BusinessObjectChangeRequest
 
 data class SettingChangeRequest(
     val key: String,

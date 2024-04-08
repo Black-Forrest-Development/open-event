@@ -36,6 +36,15 @@ export class ProfileChangeComponent {
     this.reload()
   }
 
+  save() {
+    if (this.fg.dirty && this.profile) {
+      let request = this.fg.value as ProfileChangeRequest
+      this.reloading = true
+      this.service.updateProfile(this.profile.id, request).subscribe(d => this.handleData(d))
+    }
+    this.editMode = false
+  }
+
   private reload() {
     if (this.reloading) return
     this.reloading = true
@@ -56,14 +65,5 @@ export class ProfileChangeComponent {
       website: d.website
     })
     this.reloading = false
-  }
-
-  save() {
-    if (this.fg.dirty && this.profile) {
-      let request = this.fg.value as ProfileChangeRequest
-      this.reloading = true
-      this.service.updateProfile(this.profile.id, request).subscribe(d => this.handleData(d))
-    }
-    this.editMode = false
   }
 }

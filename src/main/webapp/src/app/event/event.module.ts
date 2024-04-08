@@ -34,26 +34,26 @@ import {EventActionExportComponent} from './event-action-export/event-action-exp
 
 
 @NgModule({
-    declarations: [
-        EventBoardComponent,
-        EventBoardHeaderComponent,
-        EventChangeComponent,
-        EventDetailsComponent,
-        EventChangeFormEventComponent,
-        EventChangeFormLocationComponent,
-        EventChangeFormRegistrationComponent,
-        EventMenuComponent,
-        EventDeleteDialogComponent,
-        EventBoardListComponent,
-        EventBoardListEntryComponent,
-        EventBoardTableComponent,
-        EventDetailsHeaderComponent,
-        EventChangeHelpComponent,
-        EventBoardMapComponent,
-        EventBoardCalendarComponent,
-        EventBoardMapPopupComponent,
-        EventActionExportComponent
-    ],
+  declarations: [
+    EventBoardComponent,
+    EventBoardHeaderComponent,
+    EventChangeComponent,
+    EventDetailsComponent,
+    EventChangeFormEventComponent,
+    EventChangeFormLocationComponent,
+    EventChangeFormRegistrationComponent,
+    EventMenuComponent,
+    EventDeleteDialogComponent,
+    EventBoardListComponent,
+    EventBoardListEntryComponent,
+    EventBoardTableComponent,
+    EventDetailsHeaderComponent,
+    EventChangeHelpComponent,
+    EventBoardMapComponent,
+    EventBoardCalendarComponent,
+    EventBoardMapPopupComponent,
+    EventActionExportComponent
+  ],
   exports: [
     EventChangeFormEventComponent,
     EventChangeFormLocationComponent,

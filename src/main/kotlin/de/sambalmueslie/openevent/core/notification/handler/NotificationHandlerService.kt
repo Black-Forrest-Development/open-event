@@ -1,8 +1,9 @@
 package de.sambalmueslie.openevent.core.notification.handler
 
 
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.notification.NotificationTypeCrudService
+import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.notification.NotificationTypeCrudService
 import io.micronaut.context.annotation.Context
 import io.micronaut.context.event.ApplicationEventListener
 import io.micronaut.context.event.StartupEvent
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory
 class NotificationHandlerService(
     private val handler: List<NotificationHandler>,
     private val service: NotificationTypeCrudService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService
+    private val accountService: AccountCrudService
 ) : ApplicationEventListener<StartupEvent> {
 
     companion object {

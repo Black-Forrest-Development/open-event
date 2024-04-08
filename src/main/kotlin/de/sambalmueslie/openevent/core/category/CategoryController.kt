@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.CategoryAPI
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.category.api.CategoryChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
@@ -21,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class CategoryController(
     private val service: CategoryCrudService,
     private val search: CategorySearchService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
     audit: AuditService,
 ) : CategoryAPI {
     private val logger = audit.getLogger("Category API")

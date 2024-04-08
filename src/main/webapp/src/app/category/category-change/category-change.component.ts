@@ -40,37 +40,6 @@ export class CategoryChangeComponent {
     this.route.paramMap.subscribe(p => this.handleParams(p))
   }
 
-  private handleParams(p: ParamMap) {
-    let idParam = p.get('id')
-    let id = idParam !== null ? +idParam : null;
-
-    if (id == null) {
-      this.handleDataCreate()
-    } else {
-      this.loadData(id, (c) => this.handleDataEdit(c))
-    }
-  }
-
-  private loadData(id: number, callback: (c: Category) => void) {
-    this.reloading = true
-    this.service.getCategory(id).subscribe(data => callback(data));
-  }
-
-
-  private handleDataCreate() {
-    this.translationService.get("category.change.Create").subscribe(text => this.title = text);
-  }
-
-  private handleDataEdit(c: Category) {
-    this.category = c
-    this.fg.setValue({
-      name: c.name ?? "",
-      iconUrl: c.iconUrl ?? ""
-    })
-    this.translationService.get("category.change.Update").subscribe(text => this.title = text);
-    this.reloading = false
-  }
-
   cancel() {
     this.location.back()
   }
@@ -87,6 +56,36 @@ export class CategoryChangeComponent {
     } else {
       this.create()
     }
+  }
+
+  private handleParams(p: ParamMap) {
+    let idParam = p.get('id')
+    let id = idParam !== null ? +idParam : null;
+
+    if (id == null) {
+      this.handleDataCreate()
+    } else {
+      this.loadData(id, (c) => this.handleDataEdit(c))
+    }
+  }
+
+  private loadData(id: number, callback: (c: Category) => void) {
+    this.reloading = true
+    this.service.getCategory(id).subscribe(data => callback(data));
+  }
+
+  private handleDataCreate() {
+    this.translationService.get("category.change.Create").subscribe(text => this.title = text);
+  }
+
+  private handleDataEdit(c: Category) {
+    this.category = c
+    this.fg.setValue({
+      name: c.name ?? "",
+      iconUrl: c.iconUrl ?? ""
+    })
+    this.translationService.get("category.change.Update").subscribe(text => this.title = text);
+    this.reloading = false
   }
 
   private create() {
@@ -106,6 +105,7 @@ export class CategoryChangeComponent {
       )
     })
   }
+
   private update() {
     if (!this.category) return
     let request = this.createRequest()

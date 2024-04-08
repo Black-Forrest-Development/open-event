@@ -89,6 +89,28 @@ export class EventChangeComponent {
     if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
   }
 
+  cancel() {
+    this.location.back()
+  }
+
+  submit() {
+    if (!this.fg.valid) {
+      this.translationService.get("EVENT.MESSAGE.ERROR.FORM_INVALID").subscribe(msg => this.toastService.error(msg))
+      return
+    }
+    this.reloading = true
+
+    if (this.event) {
+      this.update()
+    } else {
+      this.create()
+    }
+  }
+
+  toggleHelp(step: string) {
+    this.helpVisible = !this.helpVisible
+  }
+
   private handleParams(p: ParamMap) {
     let idParam = p.get('id')
     let id = idParam !== null ? +idParam : null;
@@ -179,28 +201,9 @@ export class EventChangeComponent {
     }
   }
 
-  cancel() {
-    this.location.back()
-  }
-
-
-  submit() {
-    if (!this.fg.valid) {
-      this.translationService.get("EVENT.MESSAGE.ERROR.FORM_INVALID").subscribe(msg => this.toastService.error(msg))
-      return
-    }
-    this.reloading = true
-
-    if (this.event) {
-      this.update()
-    } else {
-      this.create()
-    }
-  }
-
   private update() {
     if (!this.event) return
-    let request = this.service.createRequest(this.fg.value,this.isEndHidden() )
+    let request = this.service.createRequest(this.fg.value, this.isEndHidden())
     if (!request) return
     this.service.updateEvent(this.event.event.id, request).subscribe({
       next: event => {
@@ -218,7 +221,7 @@ export class EventChangeComponent {
   }
 
   private create() {
-    let request = this.service.createRequest(this.fg.value,this.isEndHidden() )
+    let request = this.service.createRequest(this.fg.value, this.isEndHidden())
     if (!request) return
     this.service.createEvent(request).subscribe({
       next: event => {
@@ -237,9 +240,5 @@ export class EventChangeComponent {
 
   private isEndHidden() {
     return this.hiddenFields.find(f => f === 'endDate') != null
-  }
-
-  toggleHelp(step: string) {
-    this.helpVisible = !this.helpVisible
   }
 }

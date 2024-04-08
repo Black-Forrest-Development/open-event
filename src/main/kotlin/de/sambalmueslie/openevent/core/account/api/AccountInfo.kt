@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.account.api
 
 import de.sambalmueslie.openevent.common.BusinessObject
-import de.sambalmueslie.openevent.core.logic.account.db.AccountData
+import de.sambalmueslie.openevent.core.account.db.AccountData
 
 data class AccountInfo(
     override val id: Long,

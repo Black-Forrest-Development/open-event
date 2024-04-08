@@ -5,15 +5,16 @@ import {MatCard} from "@angular/material/card";
 
 
 @NgModule({
-    declarations: [
-        PreferencesBoardComponent
-    ],
-    exports: [
-        PreferencesBoardComponent
-    ],
+  declarations: [
+    PreferencesBoardComponent
+  ],
+  exports: [
+    PreferencesBoardComponent
+  ],
   imports: [
     CommonModule,
     MatCard
   ]
 })
-export class PreferencesModule { }
+export class PreferencesModule {
+}

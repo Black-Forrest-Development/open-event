@@ -1,12 +1,12 @@
 package de.sambalmueslie.openevent.core.history.db
 
 import de.sambalmueslie.openevent.common.DataObject
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.history.api.HistoryEntry
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryType
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

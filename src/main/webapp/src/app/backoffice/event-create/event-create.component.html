@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
   <div class="d-flex flex-row gap-2 flex-fill align-items-center">
-    <button mat-mini-fab (click)="back()">
+    <button (click)="back()" mat-mini-fab>
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h3>{{'backoffice.event.action.create' | translate}}</h3>
+    <h3>{{ 'backoffice.event.action.create' | translate }}</h3>
     <div class="flex-fill"></div>
   </div>
 </mat-toolbar>
-<mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
+<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 <div class="d-flex flex-row gap-2 justify-content-start align-content-stretch">
   <div class="d-flex flex-column gap-2 p-2 flex-fill">
     <mat-card>
@@ -24,9 +24,9 @@
         </app-event-change-form-registration>
       </div>
       <mat-card-actions>
-        <button mat-flat-button type="submit" color="accent" [disabled]="!fg.valid || !fg.touched || reloading"
-                (click)="submit()">
-          {{'action.submit' | translate}}
+        <button (click)="submit()" [disabled]="!fg.valid || !fg.touched || reloading" color="accent" mat-flat-button
+                type="submit">
+          {{ 'action.submit' | translate }}
           <mat-icon *ngIf="reloading">
             <mat-spinner diameter="18"></mat-spinner>
           </mat-icon>

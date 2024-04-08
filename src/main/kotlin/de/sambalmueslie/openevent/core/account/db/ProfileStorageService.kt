@@ -4,10 +4,10 @@ package de.sambalmueslie.openevent.core.account.db
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
 import de.sambalmueslie.openevent.common.findByIdOrNull
-import de.sambalmueslie.openevent.core.logic.account.ProfileStorage
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.account.ProfileStorage
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

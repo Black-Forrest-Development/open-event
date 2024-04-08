@@ -12,12 +12,12 @@ export interface Account {
 }
 
 export interface AccountInfo {
-   id: number,
-   name: string,
-   iconUrl: string,
-   email: string,
-   firstName: string,
-   lastName: string,
+  id: number,
+  name: string,
+  iconUrl: string,
+  email: string,
+  firstName: string,
+  lastName: string,
 }
 
 export interface AccountValidationResult {

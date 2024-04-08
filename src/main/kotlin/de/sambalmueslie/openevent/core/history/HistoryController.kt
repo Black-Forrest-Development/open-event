@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.history
 import de.sambalmueslie.openevent.api.HistoryAPI
 import de.sambalmueslie.openevent.api.HistoryAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.HistoryAPI.Companion.PERMISSION_READ
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.getRealmRoles
 import de.sambalmueslie.openevent.core.history.api.HistoryEntry
@@ -21,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class HistoryController(
     private val service: HistoryCrudService,
     private val migrationService: HistoryMigrationService,
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
+    private val accountService: AccountCrudService,
 ) : HistoryAPI {
 
     @Get("/{id}")

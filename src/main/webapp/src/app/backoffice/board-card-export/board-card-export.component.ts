@@ -27,17 +27,6 @@ export class BoardCardExportComponent {
     this.exportService.exportEvents().subscribe(r => this.handleExportResponse(r))
   }
 
-  private handleExportResponse(response: HttpResponse<Blob>) {
-    let contentDispositionHeader = response.headers.get("content-disposition")
-    if (contentDispositionHeader) {
-      let fileName = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '')
-      let content = response.body
-      if (content) FileSaver.saveAs(content, fileName)
-    }
-    this.exporting = false
-    this.summarizing = false
-  }
-
   exportMail() {
     this.exportService.exportEventsToEmail().subscribe(
       {
@@ -51,5 +40,16 @@ export class BoardCardExportComponent {
     if (this.summarizing) return
     this.summarizing = true
     this.exportService.exportSummary().subscribe(r => this.handleExportResponse(r))
+  }
+
+  private handleExportResponse(response: HttpResponse<Blob>) {
+    let contentDispositionHeader = response.headers.get("content-disposition")
+    if (contentDispositionHeader) {
+      let fileName = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '')
+      let content = response.body
+      if (content) FileSaver.saveAs(content, fileName)
+    }
+    this.exporting = false
+    this.summarizing = false
   }
 }

@@ -49,6 +49,16 @@ export class MailHistoryComponent {
     ).subscribe(data => this.search(data))
   }
 
+  handlePageChange(event: PageEvent) {
+    if (this.reloading) return
+    this.pageSize = event.pageSize
+    this.loadPage(event.pageIndex)
+  }
+
+  back() {
+    this.location.back()
+  }
+
   private loadPage(number: number) {
     if (!this.jobId) return
     if (this.reloading) return
@@ -72,17 +82,7 @@ export class MailHistoryComponent {
     this.reloading = false;
   }
 
-  handlePageChange(event: PageEvent) {
-    if (this.reloading) return
-    this.pageSize = event.pageSize
-    this.loadPage(event.pageIndex)
-  }
-
   private search(data: string) {
     this.toastService.error("Sorry searching '" + data + "' is not supported yet")
-  }
-
-  back() {
-    this.location.back()
   }
 }

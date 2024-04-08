@@ -11,5 +11,4 @@ interface ParticipantAPI : CrudAPI<Long, Participant, ParticipantChangeRequest> 
     }
 
 
-
 }

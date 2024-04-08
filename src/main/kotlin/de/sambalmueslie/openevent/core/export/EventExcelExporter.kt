@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.export
 
 
-import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
+import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.http.server.types.files.SystemFile
 import jakarta.inject.Singleton

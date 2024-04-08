@@ -5,10 +5,10 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.api.PreferencesAPI
 import de.sambalmueslie.openevent.api.PreferencesAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.core.account.api.Preferences
+import de.sambalmueslie.openevent.core.account.api.PreferencesChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.getRealmRoles
-import de.sambalmueslie.openevent.core.logic.account.api.Preferences
-import de.sambalmueslie.openevent.core.logic.account.api.PreferencesChangeRequest
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

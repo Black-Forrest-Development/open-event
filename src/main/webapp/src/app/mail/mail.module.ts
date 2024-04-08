@@ -24,4 +24,5 @@ import {NgxEchartsModule} from "ngx-echarts";
     NgxEchartsModule.forChild(),
   ]
 })
-export class MailModule { }
+export class MailModule {
+}

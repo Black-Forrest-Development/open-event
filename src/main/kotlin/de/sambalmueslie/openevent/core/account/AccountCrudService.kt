@@ -3,8 +3,7 @@ package de.sambalmueslie.openevent.core.account
 
 import de.sambalmueslie.openevent.common.BaseCrudService
 import de.sambalmueslie.openevent.core.*
-import de.sambalmueslie.openevent.core.auth.*
-import de.sambalmueslie.openevent.core.logic.account.api.*
+import de.sambalmueslie.openevent.core.account.api.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
@@ -79,7 +78,8 @@ class AccountCrudService(
         val existing = storage.findByExternalId(SYSTEM_ACCOUNT)
         if (existing != null) return existing
 
-        val request = AccountChangeRequest("system", "system",
+        val request = AccountChangeRequest(
+            "system", "system",
             SYSTEM_ACCOUNT
         )
         return storage.createServiceAccount(request)

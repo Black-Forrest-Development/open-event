@@ -2,8 +2,7 @@ package de.sambalmueslie.openevent.core.participant
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.participant.api.*
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.participant.api.*
 import de.sambalmueslie.openevent.core.participant.db.ParticipantStorage
 import de.sambalmueslie.openevent.core.registration.api.Registration

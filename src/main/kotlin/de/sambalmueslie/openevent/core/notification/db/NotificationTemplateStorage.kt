@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.notification.db
 
 import de.sambalmueslie.openevent.common.Storage
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplate
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplateChangeRequest
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplate
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplateChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationType
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import java.util.*

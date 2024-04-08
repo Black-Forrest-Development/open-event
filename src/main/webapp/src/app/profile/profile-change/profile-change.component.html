@@ -18,7 +18,7 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content class="mt-2">
-    <mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
+    <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
     @if (profile) {
       <div class="d-flex flex-row gap-2">
         <mat-list>
@@ -53,8 +53,8 @@
         </mat-list>
         @if (editMode) {
 
-            <mat-list class="flex-grow-1">
-              <form [formGroup]="fg">
+          <mat-list class="flex-grow-1">
+            <form [formGroup]="fg">
               <!-- email-->
               <mat-list-item class="py-2">
                 <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
@@ -109,8 +109,8 @@
                   <input matInput formControlName="website">
                 </mat-form-field>
               </mat-list-item>
-              </form>
-            </mat-list>
+            </form>
+          </mat-list>
 
         } @else {
           <mat-list class="flex-grow-1">

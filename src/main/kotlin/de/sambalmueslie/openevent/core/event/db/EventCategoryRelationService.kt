@@ -3,7 +3,7 @@ package de.sambalmueslie.openevent.core.event.db
 
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.category.db.CategoryStorageService
-import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.Event
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton

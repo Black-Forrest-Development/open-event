@@ -1,9 +1,9 @@
 package de.sambalmueslie.openevent.core.address.db
 
 import de.sambalmueslie.openevent.common.Storage
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.api.Account
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 

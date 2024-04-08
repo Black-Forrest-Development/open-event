@@ -10,7 +10,7 @@ describe('AddressBoardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AddressBoardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddressBoardComponent);
     component = fixture.componentInstance;

@@ -4,10 +4,10 @@ package de.sambalmueslie.openevent.core.notification
 import de.sambalmueslie.openevent.api.SettingsAPI
 import de.sambalmueslie.openevent.common.PageSequence
 import de.sambalmueslie.openevent.common.PageableSequence
-import de.sambalmueslie.openevent.core.logic.account.ProfileCrudService
-import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationScheme
+import de.sambalmueslie.openevent.core.account.ProfileCrudService
+import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.notification.api.NotificationScheme
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailParticipant
 import de.sambalmueslie.openevent.infrastructure.mail.api.MailSender
@@ -74,7 +74,7 @@ class NotificationService(
 }
 
 private fun AccountInfo.toParticipant(): MailParticipant {
-    return MailParticipant(getTitle(), email )
+    return MailParticipant(getTitle(), email)
 }
 
 private fun Profile.toParticipant(): MailParticipant {

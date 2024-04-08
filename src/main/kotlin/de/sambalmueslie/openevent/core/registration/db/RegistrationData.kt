@@ -2,7 +2,7 @@ package de.sambalmueslie.openevent.core.registration.db
 
 
 import de.sambalmueslie.openevent.common.SimpleDataObject
-import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
 import jakarta.persistence.*

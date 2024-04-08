@@ -1,14 +1,16 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
+import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.AccountStorage
+import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.location.LocationChangeListener
 import de.sambalmueslie.openevent.core.location.LocationCrudService
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.location.api.LocationChangeRequest
-import de.sambalmueslie.openevent.core.logic.account.AccountStorage
-import de.sambalmueslie.openevent.core.logic.account.api.AccountChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
@@ -31,10 +33,10 @@ class EventCrudServiceTest : TimeBasedTest() {
     lateinit var accountStorage: AccountStorage
 
     @Inject
-    lateinit var accountService: de.sambalmueslie.openevent.core.account.AccountCrudService
+    lateinit var accountService: AccountCrudService
 
     @Inject
-    lateinit var service: de.sambalmueslie.openevent.core.event.EventCrudService
+    lateinit var service: EventCrudService
 
     @Inject
     lateinit var locationService: LocationCrudService
@@ -104,7 +106,7 @@ class EventCrudServiceTest : TimeBasedTest() {
             "image-update",
             "icon-update",
             emptySet(),
-            locationUpdate, registrationUpdate,true
+            locationUpdate, registrationUpdate, true
         )
         return update
     }
@@ -121,7 +123,7 @@ class EventCrudServiceTest : TimeBasedTest() {
             "image",
             "icon",
             emptySet(),
-            locationRequest, registrationRequest,true
+            locationRequest, registrationRequest, true
         )
         return request
     }

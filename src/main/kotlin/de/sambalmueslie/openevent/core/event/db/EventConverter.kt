@@ -2,9 +2,9 @@ package de.sambalmueslie.openevent.core.event.db
 
 
 import de.sambalmueslie.openevent.common.DataObjectConverter
-import de.sambalmueslie.openevent.core.logic.account.api.AccountInfo
-import de.sambalmueslie.openevent.core.logic.account.db.AccountStorageService
-import de.sambalmueslie.openevent.core.logic.event.api.Event
+import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.account.db.AccountStorageService
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.error.InconsistentDataException
 import io.micronaut.data.model.Page
 import jakarta.inject.Singleton

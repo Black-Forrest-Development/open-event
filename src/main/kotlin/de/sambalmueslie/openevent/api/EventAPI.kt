@@ -2,11 +2,11 @@ package de.sambalmueslie.openevent.api
 
 import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.category.api.Category
+import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
+import de.sambalmueslie.openevent.core.event.api.EventInfo
+import de.sambalmueslie.openevent.core.event.api.EventStats
 import de.sambalmueslie.openevent.core.location.api.Location
-import de.sambalmueslie.openevent.core.logic.event.api.Event
-import de.sambalmueslie.openevent.core.logic.event.api.EventChangeRequest
-import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
-import de.sambalmueslie.openevent.core.logic.event.api.EventStats
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable

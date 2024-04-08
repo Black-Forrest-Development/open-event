@@ -3,8 +3,8 @@ package de.sambalmueslie.openevent.core.notification.db
 
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider

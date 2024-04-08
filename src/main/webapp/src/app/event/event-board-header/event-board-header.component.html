@@ -2,44 +2,44 @@
   <div class="d-flex flex-row gap-2 flex-fill align-items-center">
 
     <div class="d-flex flex-row gap-2 flex-fill align-items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
-      <mat-form-field subscriptSizing="dynamic" class="dense-1" style="flex: 1 1 calc(50%);">
-        <mat-label>{{'event.search' | translate}}</mat-label>
-        <input matInput placeholder="" value="" #input (keyup)="keyUp.emit(input.value)">
+      <mat-form-field class="dense-1" style="flex: 1 1 calc(50%);" subscriptSizing="dynamic">
+        <mat-label>{{ 'event.search' | translate }}</mat-label>
+        <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
         <mat-icon *ngIf="service.searching">
           <mat-spinner diameter="18"></mat-spinner>
         </mat-icon>
 
-        <button mat-icon-button matSuffix (click)="input.value = ''; search('')" *ngIf="input.value.length > 0">
+        <button (click)="input.value = ''; search('')" *ngIf="input.value.length > 0" mat-icon-button matSuffix>
           <mat-icon>clear</mat-icon>
         </button>
       </mat-form-field>
-      <button mat-mini-fab color="accent" (click)="search(input.value)">
+      <button (click)="search(input.value)" color="accent" mat-mini-fab>
         <mat-icon>search</mat-icon>
       </button>
 
     </div>
-    <div class="flex-fill" *ngIf="!mobileView"></div>
-    <button mat-fab color="accent" style="flex: 0 1 200px;" extended routerLink="./create" *ngIf="!mobileView">
+    <div *ngIf="!mobileView" class="flex-fill"></div>
+    <button *ngIf="!mobileView" color="accent" extended mat-fab routerLink="./create" style="flex: 0 1 200px;">
       <mat-icon>event</mat-icon>
-      {{'event.create' | translate}}
+      {{ 'event.create' | translate }}
     </button>
-    <div class="flex-fill" *ngIf="!mobileView"></div>
+    <div *ngIf="!mobileView" class="flex-fill"></div>
 
     <div class="d-flex flex-row gap-2">
-      <button mat-mini-fab [color]="mode == 'list' ? 'accent' : 'primary' " (click)="modeChanged.emit('list')">
+      <button (click)="modeChanged.emit('list')" [color]="mode == 'list' ? 'accent' : 'primary' " mat-mini-fab>
         <mat-icon>list</mat-icon>
       </button>
 
-      <button mat-mini-fab [color]="mode == 'map' ? 'accent' : 'primary' " (click)="modeChanged.emit('map')">
+      <button (click)="modeChanged.emit('map')" [color]="mode == 'map' ? 'accent' : 'primary' " mat-mini-fab>
         <mat-icon>map</mat-icon>
       </button>
 
-      <button mat-mini-fab [color]="mode == 'calendar' ? 'accent' : 'primary' " (click)="modeChanged.emit('calendar')">
+      <button (click)="modeChanged.emit('calendar')" [color]="mode == 'calendar' ? 'accent' : 'primary' " mat-mini-fab>
         <mat-icon>calendar_month</mat-icon>
       </button>
     </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="contextMenu">
+    <button [matMenuTriggerFor]="contextMenu" mat-icon-button>
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
@@ -48,6 +48,6 @@
 <mat-menu #contextMenu="matMenu">
   <button mat-menu-item routerLink="./create">
     <mat-icon>event</mat-icon>
-    {{'event.create' | translate}}
+    {{ 'event.create' | translate }}
   </button>
 </mat-menu>

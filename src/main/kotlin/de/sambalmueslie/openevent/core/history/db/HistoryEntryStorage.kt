@@ -1,11 +1,11 @@
 package de.sambalmueslie.openevent.core.history.db
 
 import de.sambalmueslie.openevent.common.Storage
+import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.history.api.HistoryEntry
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
-import de.sambalmueslie.openevent.core.logic.account.api.Account
-import de.sambalmueslie.openevent.core.logic.event.api.Event
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import java.time.LocalDateTime

@@ -72,6 +72,21 @@ export class SelectAccountComponent {
     }
   }
 
+  showCreateAccountDialog() {
+    let dialogRef = this.dialog.open(CreateAccountDialogComponent)
+    dialogRef.afterClosed().subscribe(request => {
+      if (request) this.createAccount(request)
+    })
+  }
+
+  select(event: MatOptionSelectionChange<string>, account: Account) {
+    if (!event.source.selected) return
+
+    if (this.form) this.form.setValue({owner: account.id})
+    this.partialText = account.name
+    console.log(this.form?.value)
+  }
+
   private handleData(value: Page<Account>) {
     this.accounts = value.content
     this.pageSize = value.pageable.size
@@ -83,14 +98,6 @@ export class SelectAccountComponent {
 
   private handleError(e: any) {
     this.reloading = false
-  }
-
-
-  showCreateAccountDialog() {
-    let dialogRef = this.dialog.open(CreateAccountDialogComponent)
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.createAccount(request)
-    })
   }
 
   private createAccount(request: AccountChangeRequest) {
@@ -105,13 +112,5 @@ export class SelectAccountComponent {
     this.accountCreating = false
     this.selectCtrl.setValue('')
     this.reload()
-  }
-
-  select(event: MatOptionSelectionChange<string>, account: Account) {
-    if (!event.source.selected) return
-
-    if (this.form) this.form.setValue({owner: account.id})
-    this.partialText = account.name
-    console.log(this.form?.value)
   }
 }

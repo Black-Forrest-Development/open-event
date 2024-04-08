@@ -1,8 +1,8 @@
 package de.sambalmueslie.openevent.core.notification.db
 
 import de.sambalmueslie.openevent.common.Storage
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationType
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.notification.api.NotificationType
+import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 
 interface NotificationTypeStorage : Storage<Long, NotificationType, NotificationTypeChangeRequest> {
     fun findByKey(key: String): NotificationType?

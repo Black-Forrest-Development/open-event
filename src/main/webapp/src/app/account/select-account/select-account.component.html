@@ -1,23 +1,23 @@
 <div class="d-flex flex-column">
   <div class="d-flex flex-row gap-2 align-content-stretch align-items-center">
-    <mat-form-field subscriptSizing="dynamic" class="dense-1 flex-fill">
+    <mat-form-field class="dense-1 flex-fill" subscriptSizing="dynamic">
       <mat-label>{{ 'event.form.owner' | translate }}</mat-label>
-      <input type="text" matInput #input (keyup)="keyUp.emit(input.value)" [matAutocomplete]="auto"
-             [disabled]="accountCreating">
+      <input #input (keyup)="keyUp.emit(input.value)" [disabled]="accountCreating" [matAutocomplete]="auto" matInput
+             type="text">
     </mat-form-field>
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let account of accounts" (onSelectionChange)="select($event, account)"
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+      <mat-option (onSelectionChange)="select($event, account)" *ngFor="let account of accounts"
                   [value]="account.name">
         <!--                  [value]="account.firstName + ' ' +account.lastName"-->
         <!--        {{account.firstName}} {{account.lastName}}-->
         {{ account.name }}
       </mat-option>
     </mat-autocomplete>
-    <button mat-flat-button color="primary" (click)="showCreateAccountDialog()">
+    <button (click)="showCreateAccountDialog()" color="primary" mat-flat-button>
       {{ 'backoffice.account.action.create'| translate }}
       <mat-icon *ngIf="!accountCreating">add</mat-icon>
       <mat-icon *ngIf="accountCreating">
-        <mat-spinner diameter="22" color="primary"></mat-spinner>
+        <mat-spinner color="primary" diameter="22"></mat-spinner>
       </mat-icon>
     </button>
   </div>

@@ -2,13 +2,15 @@ package de.sambalmueslie.openevent.core.history
 
 
 import de.sambalmueslie.openevent.common.PageableSequence
+import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryChangeRequest
 import de.sambalmueslie.openevent.core.history.api.HistoryEntrySource
 import de.sambalmueslie.openevent.core.history.api.HistoryEntryType
 import de.sambalmueslie.openevent.core.history.db.HistoryEntryStorage
 import de.sambalmueslie.openevent.core.history.handler.EventNotificationHandler
 import de.sambalmueslie.openevent.core.history.handler.RegistrationNotificationHandler
-import de.sambalmueslie.openevent.core.logic.event.api.EventInfo
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import jakarta.inject.Singleton
@@ -17,8 +19,8 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 class HistoryMigrationService(
-    private val accountService: de.sambalmueslie.openevent.core.account.AccountCrudService,
-    private val eventService: de.sambalmueslie.openevent.core.event.EventCrudService,
+    private val accountService: AccountCrudService,
+    private val eventService: EventCrudService,
     private val storage: HistoryEntryStorage
 ) {
 
@@ -54,6 +56,7 @@ class HistoryMigrationService(
         val owner = accountService.get(event.event.owner.id) ?: return
         storage.create(createRequest, event.event, owner, event.event.created)
     }
+
     private fun addEventChangedEntry(event: EventInfo) {
         val changeRequest = HistoryEntryChangeRequest(
             HistoryEntryType.EVENT_CHANGED, EventNotificationHandler.KEY_EVENT_UPDATED, HistoryEntrySource.EVENT, ""
@@ -76,7 +79,6 @@ class HistoryMigrationService(
         val author = accountService.get(it.author.id) ?: return
         storage.create(participantRequest, event.event, author, it.timestamp)
     }
-
 
 
 }

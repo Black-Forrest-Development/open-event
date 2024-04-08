@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.api
 
-import de.sambalmueslie.openevent.core.logic.account.api.Profile
-import de.sambalmueslie.openevent.core.logic.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.core.account.api.Profile
+import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 
 interface ProfileAPI : CrudAPI<Long, Profile, ProfileChangeRequest> {
     companion object {

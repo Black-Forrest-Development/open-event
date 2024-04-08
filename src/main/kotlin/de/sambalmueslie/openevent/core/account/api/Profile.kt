@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.account.api
 import de.sambalmueslie.openevent.common.BusinessObject
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDate
+
 @Serdeable
 data class Profile(
     override val id: Long,

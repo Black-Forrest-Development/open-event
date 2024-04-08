@@ -75,7 +75,7 @@ internal class AuditLoggerImpl(
         return result
     }
 
-    override fun <T, R: Any> traceAction(
+    override fun <T, R : Any> traceAction(
         auth: Authentication,
         message: String,
         referenceId: String,

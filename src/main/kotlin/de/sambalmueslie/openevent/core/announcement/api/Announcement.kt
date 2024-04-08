@@ -1,9 +1,10 @@
 package de.sambalmueslie.openevent.core.announcement.api
 
 import de.sambalmueslie.openevent.common.BusinessObject
-import de.sambalmueslie.openevent.core.logic.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.Account
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDateTime
+
 @Serdeable
 data class Announcement(
     override val id: Long,

@@ -10,7 +10,7 @@ describe('PreferencesBoardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PreferencesBoardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PreferencesBoardComponent);
     component = fixture.componentInstance;

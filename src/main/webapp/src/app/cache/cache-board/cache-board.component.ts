@@ -57,24 +57,8 @@ export class CacheBoardComponent {
     this.service.getAllCaches().subscribe(d => this.handleData(d))
   }
 
-  private handleData(d: CacheInfo[]) {
-    this.info = d
-    this.updateChart()
-    this.reloading = false
-  }
-
   reset(info: CacheInfo) {
     this.service.resetCache(info.key).subscribe(d => this.handleUpdate(d))
-  }
-
-  private handleUpdate(d: CacheInfo) {
-    let index = this.info.indexOf(d)
-    if (index < 0) {
-      this.info.push(d)
-    } else {
-      this.info[index] = d
-    }
-    this.updateChart()
   }
 
   updateChart() {
@@ -157,6 +141,22 @@ export class CacheBoardComponent {
         }
       ]
     };
+  }
+
+  private handleData(d: CacheInfo[]) {
+    this.info = d
+    this.updateChart()
+    this.reloading = false
+  }
+
+  private handleUpdate(d: CacheInfo) {
+    let index = this.info.indexOf(d)
+    if (index < 0) {
+      this.info.push(d)
+    } else {
+      this.info[index] = d
+    }
+    this.updateChart()
   }
 
 }

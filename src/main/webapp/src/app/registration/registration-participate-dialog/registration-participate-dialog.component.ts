@@ -22,7 +22,7 @@ export class RegistrationParticipateDialogComponent {
   }
 
   submit() {
-    if(!this.fg.valid) return
+    if (!this.fg.valid) return
     let value = this.fg.value
     this.dialogRef.close(new ParticipateRequest(value.size))
   }

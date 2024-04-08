@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
   <div class="d-flex flex-row gap-2 flex-fill align-items-center">
-    <h3>{{'backoffice.title' | translate}}</h3>
+    <h3>{{ 'backoffice.title' | translate }}</h3>
     <div class="flex-fill"></div>
   </div>
 </mat-toolbar>
-<mat-progress-bar mode="indeterminate" *ngIf="reloading"></mat-progress-bar>
+<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 <div class="d-flex flex-row gap-2 p-2 flex-fill align-content-stretch">
 
   <app-board-card-stats class="flex-fill"></app-board-card-stats>

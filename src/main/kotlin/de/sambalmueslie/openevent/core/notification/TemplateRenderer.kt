@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.core.notification
 
 
-import de.sambalmueslie.openevent.core.logic.notification.api.NotificationTemplate
+import de.sambalmueslie.openevent.core.notification.api.NotificationTemplate
 import de.sambalmueslie.openevent.infrastructure.mail.api.Mail
 import jakarta.inject.Singleton
 import org.apache.velocity.VelocityContext

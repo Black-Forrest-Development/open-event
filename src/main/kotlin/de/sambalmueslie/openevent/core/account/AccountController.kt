@@ -89,7 +89,7 @@ class AccountController(
             HttpResponse.created("")
         }
     }
-
+    @Get("/profile")
     override fun getProfile(auth: Authentication): Profile? {
         return auth.checkPermission(PERMISSION_READ) {
             val account = service.get(auth) ?: return@checkPermission null
@@ -97,6 +97,7 @@ class AccountController(
         }
     }
 
+    @Get("/preferences")
     override fun getPreferences(auth: Authentication): Preferences? {
         return auth.checkPermission(PERMISSION_READ) {
             val account = service.get(auth) ?: return@checkPermission null

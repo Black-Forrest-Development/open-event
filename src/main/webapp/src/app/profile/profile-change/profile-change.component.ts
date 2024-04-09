@@ -3,6 +3,7 @@ import {Profile, ProfileChangeRequest} from "../model/profile-api";
 import {ProfileService} from "../model/profile.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {AccountService} from "../../account/model/account.service";
 
 @Component({
   selector: 'app-profile-change',
@@ -17,7 +18,7 @@ export class ProfileChangeComponent {
 
   fg: FormGroup
 
-  constructor(private fb: FormBuilder, private service: ProfileService) {
+  constructor(private fb: FormBuilder, private service: ProfileService, private accountService: AccountService) {
     this.fg = this.fb.group({
       email: this.fb.control('', Validators.email),
       phone: this.fb.control(''),
@@ -48,7 +49,7 @@ export class ProfileChangeComponent {
   private reload() {
     if (this.reloading) return
     this.reloading = true
-    this.service.getOwnProfile().subscribe(d => this.handleData(d))
+    this.accountService.getProfile().subscribe(d => this.handleData(d))
   }
 
   private handleData(d: Profile) {

@@ -56,11 +56,7 @@
           <mat-list class="flex-grow-1">
             <form [formGroup]="fg">
               <!-- email-->
-              <mat-list-item class="py-2">
-                <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
-                  <input matInput formControlName="email">
-                </mat-form-field>
-              </mat-list-item>
+              <mat-list-item>{{ profile.email }}</mat-list-item>
               <!-- phone-->
               <mat-list-item class="py-2">
                 <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">

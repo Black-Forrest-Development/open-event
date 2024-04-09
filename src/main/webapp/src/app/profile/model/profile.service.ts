@@ -13,10 +13,6 @@ export class ProfileService extends BaseService {
     this.retryCount = 0
   }
 
-  getOwnProfile(): Observable<Profile> {
-    return this.get('own')
-  }
-
   updateProfile(id: number, request: ProfileChangeRequest): Observable<Profile> {
     return this.put('' + id, request)
   }

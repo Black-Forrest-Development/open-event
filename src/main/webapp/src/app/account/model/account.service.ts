@@ -4,6 +4,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Account, AccountChangeRequest, AccountValidationResult} from "./account-api";
 import {Page} from "../../shared/model/page";
+import {Profile} from "../../profile/model/profile-api";
+import {Preferences} from "../../preferences/model/preferences-api";
 
 @Injectable({
   providedIn: 'root'
@@ -39,4 +41,11 @@ export class AccountService extends BaseService {
     return this.post('search', {})
   }
 
+  getProfile(): Observable<Profile> {
+    return this.get('profile')
+  }
+
+  getPreferences(): Observable<Preferences> {
+    return this.get('preferences')
+  }
 }

@@ -44,10 +44,10 @@ const routes: Routes = [
     data: {roles: [AuthService.HISTORY_ADMIN]}
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
     canActivate: [AuthGuard],
-    data: {roles: [AuthService.PROFILE_READ]}
+    data: {roles: [AuthService.ACCOUNT_READ]}
   },
   {
     path: '**', component: PageNotFoundComponent

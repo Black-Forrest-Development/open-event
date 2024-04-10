@@ -64,5 +64,13 @@ class AddressController(
         }
     }
 
+    @Post("/import")
+    override fun importLocations(auth: Authentication): Page<Address> {
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            val account = accountService.get(auth) ?: return@checkPermission Page.empty()
+            service.importLocations(account)
+        }
+    }
+
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
 }

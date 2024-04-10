@@ -15,7 +15,9 @@
     "collapse": "Collapse",
     "close": "Close",
     "ok": "Ok",
-    "details": "Details"
+    "details": "Details",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "event": {
     "type": "Event",

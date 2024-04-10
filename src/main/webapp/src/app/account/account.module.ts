@@ -9,6 +9,11 @@ import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SelectAccountComponent} from './select-account/select-account.component';
+import {AccountBoardComponent} from './account-board/account-board.component';
+import {AccountRoutingModule} from "./account-routing.module";
+import {AccountProfileComponent} from './account-profile/account-profile.component';
+import {AccountAddressComponent} from './account-address/account-address.component';
+import {AccountPreferencesComponent} from './account-preferences/account-preferences.component';
 
 
 @NgModule({
@@ -17,7 +22,11 @@ import {SelectAccountComponent} from './select-account/select-account.component'
     AccountDisplayNamePipe,
     CreateAccountDialogComponent,
     SearchAccountDialogComponent,
-    SelectAccountComponent
+    SelectAccountComponent,
+    AccountBoardComponent,
+    AccountProfileComponent,
+    AccountAddressComponent,
+    AccountPreferencesComponent
   ],
   exports: [
     AccountComponent,
@@ -29,7 +38,8 @@ import {SelectAccountComponent} from './select-account/select-account.component'
     GravatarModule,
     MaterialModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AccountRoutingModule
   ]
 })
 export class AccountModule {

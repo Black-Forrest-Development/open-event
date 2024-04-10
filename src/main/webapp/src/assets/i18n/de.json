@@ -15,7 +15,9 @@
     "collapse": "Collapse",
     "close": "Schliesen",
     "ok": "Ok",
-    "details": "Details"
+    "details": "Details",
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
   },
   "event": {
     "type": "Veranstaltungen",

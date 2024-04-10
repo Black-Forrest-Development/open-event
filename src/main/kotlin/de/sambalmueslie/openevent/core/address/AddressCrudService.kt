@@ -2,10 +2,13 @@ package de.sambalmueslie.openevent.core.address
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
+import de.sambalmueslie.openevent.common.PageSequence
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 import de.sambalmueslie.openevent.core.address.db.AddressStorage
+import de.sambalmueslie.openevent.core.event.EventCrudService
+import de.sambalmueslie.openevent.core.location.LocationCrudService
 import de.sambalmueslie.openevent.infrastructure.geo.GeoLocationResolver
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -16,7 +19,9 @@ import org.slf4j.LoggerFactory
 @Singleton
 class AddressCrudService(
     private val storage: AddressStorage,
-    private val geoAddressResolver: GeoLocationResolver
+    private val geoAddressResolver: GeoLocationResolver,
+    private val eventService: EventCrudService,
+    private val locationService: LocationCrudService,
 ) : BaseCrudService<Long, Address, AddressChangeRequest, AddressChangeListener>(storage) {
 
     companion object {
@@ -46,6 +51,27 @@ class AddressCrudService(
 
     fun getAllForAccount(account: Account, pageable: Pageable): Page<Address> {
         return storage.findByAccount(account, pageable)
+    }
+
+    fun importLocations(account: Account): Page<Address> {
+        val data = PageSequence { eventService.getAllForAccount(account, it) }
+        data.forEach {
+            val eventIds = it.content.map { e -> e.id }.toSet()
+            val locations = locationService.findByEventIds(eventIds)
+            locations.map { l ->
+                AddressChangeRequest(
+                    l.street,
+                    l.streetNumber,
+                    l.zip,
+                    l.city,
+                    l.country,
+                    l.additionalInfo,
+                    l.lat,
+                    l.lon
+                )
+            }.forEach { create(account, account, it) }
+        }
+        return getAllForAccount(account, Pageable.from(0, 20))
     }
 
 

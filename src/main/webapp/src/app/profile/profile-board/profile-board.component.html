@@ -1,13 +1,51 @@
 <mat-toolbar color="primary">
   <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+    {{ 'profile.title' | translate }}
+
+    <div class="flex-fill"></div>
+
+    <div class="d-flex flex-row gap-2">
+      <a mat-mini-fab routerLink="">
+        <mat-icon>list</mat-icon>
+      </a>
+
+      <a (click)="modeChanged.emit('map')" [color]="mode == 'map' ? 'accent' : 'primary' " mat-mini-fab>
+        <mat-icon>map</mat-icon>
+      </a>
+
+      <a (click)="modeChanged.emit('calendar')" [color]="mode == 'calendar' ? 'accent' : 'primary' " mat-mini-fab>
+        <mat-icon>calendar_month</mat-icon>
+      </a>
+    </div>
+
   </div>
 </mat-toolbar>
 
-<div class="d-flex flex-column">
-  <div class="d-flex flex-row gap-2 p-2 align-content-stretch align-items-stretch">
-    <app-profile-change class="col-4 flex-fill"></app-profile-change>
-    <app-address-board class="col-4 flex-fill"></app-address-board>
-    <app-preferences-board class="col-4 flex-fill"></app-preferences-board>
-  </div>
+<div class="d-flex flex-column p-2">
+  <router-outlet></router-outlet>
+
+
+<!--  <mat-card>-->
+<!--    <mat-tab-group color="accent">-->
+<!--      <mat-tab label="{{'profile.title' | translate}}">-->
+<!--        <ng-template matTabContent>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <app-profile-change class="flex-fill"></app-profile-change>-->
+<!--        </ng-template>-->
+<!--      </mat-tab>-->
+<!--      <mat-tab label="{{'address.title' | translate}}">-->
+<!--        <ng-template matTabContent>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <app-address-board class="flex-fill"></app-address-board>-->
+<!--        </ng-template>-->
+<!--      </mat-tab>-->
+<!--      <mat-tab label="{{'preferences.title' | translate}}">-->
+<!--        <ng-template matTabContent>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <app-preferences-board class="flex-fill"></app-preferences-board>-->
+<!--        </ng-template>-->
+<!--      </mat-tab>-->
+<!--    </mat-tab-group>-->
+<!--  </mat-card>-->
 </div>
 

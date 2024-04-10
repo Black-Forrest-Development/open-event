@@ -1,0 +1,55 @@
+<div class="d-flex flex-column gap-2 p-2 justify-content-center">
+  <mat-card>
+    <mat-card-header class="pb-3">
+      <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
+        <div class="header">
+          {{ 'address.title' | translate }}
+        </div>
+        <div class="flex-fill"></div>
+        <button mat-mini-fab color="primary" (click)="import()" *ngIf="address.length <= 0">
+          <mat-icon>move_up</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary">
+          <mat-icon>domain_add</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+
+      <div class="d-flex flex-row flex-wrap gap-2 pt-3">
+        @for (a of address; track a) {
+          <mat-card class="address mat-elevation-z0">
+            <mat-card-content class="pb-3 pt-0">
+              <p>{{ a.street }} {{ a.streetNumber }}</p>
+              <p>{{ a.zip }} {{ a.city }}</p>
+              <p>{{ a.country }}</p>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+              <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
+                <div class="flex-fill"></div>
+                <button mat-icon-button color="primary" (click)="edit(a)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="delete(a)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card-actions>
+
+          </mat-card>
+        }
+
+        <mat-card class="address mat-elevation-z0" (click)="create()">
+          <mat-card-content class="h-100">
+            <div class="d-flex flex-column justify-content-center align-items-center flex-fill h-100">
+              <mat-icon style="color: darkgray; width: 72px; height: 72px; font-size: 72px;">domain_add</mat-icon>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

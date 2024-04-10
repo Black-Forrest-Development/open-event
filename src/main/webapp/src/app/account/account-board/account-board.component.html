@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+    {{ 'account.title' | translate }}
+
+    <div class="flex-fill"></div>
+
+    <div class="d-flex flex-row gap-2">
+      <a mat-mini-fab routerLink="./profile" routerLinkActive="active" #rlas="routerLinkActive"
+         [color]="rlas.isActive ? 'accent' : 'primary' ">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </a>
+
+      <a mat-mini-fab routerLink="./address" routerLinkActive="active" #rlaa="routerLinkActive"
+         [color]="rlaa.isActive ? 'accent' : 'primary' ">
+        <mat-icon>contact_mail</mat-icon>
+      </a>
+
+      <a mat-mini-fab routerLink="./preferences" routerLinkActive="active" #rlap="routerLinkActive"
+         [color]="rlap.isActive ? 'accent' : 'primary' ">
+        <mat-icon>settings</mat-icon>
+      </a>
+
+    </div>
+
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

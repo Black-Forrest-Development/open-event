@@ -7,8 +7,8 @@ plugins {
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
-    id("io.micronaut.application") version "4.3.5"
-    id("io.micronaut.aot") version "4.3.5"
+    id("io.micronaut.application") version "4.3.6"
+    id("io.micronaut.aot") version "4.3.6"
     jacoco
 }
 
@@ -80,7 +80,7 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-oauth2")
-    aotPlugins("io.micronaut.security:micronaut-security-aot:4.6.9")
+    aotPlugins("io.micronaut.security:micronaut-security-aot:4.7.0")
 
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
@@ -124,9 +124,9 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.5")
 
     // mail
-    implementation("org.simplejavamail:simple-java-mail:8.8.0")
-    implementation("org.simplejavamail:batch-module:8.8.0")
-    implementation("org.simplejavamail:authenticated-socks-module:8.8.0")
+    implementation("org.simplejavamail:simple-java-mail:8.8.2")
+    implementation("org.simplejavamail:batch-module:8.8.2")
+    implementation("org.simplejavamail:authenticated-socks-module:8.8.2")
 
     // test
     testImplementation("org.testcontainers:junit-jupiter")

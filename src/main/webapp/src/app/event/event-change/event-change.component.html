@@ -25,7 +25,8 @@
         <mat-step [stepControl]="locationForm" errorMessage="{{'event.step.incomplete' | translate}}"
                   label="{{'event.step.location' | translate}}">
           <app-event-change-form-location [form]="locationForm"
-                                          [hiddenFields]="hiddenFields"></app-event-change-form-location>
+                                          [hiddenFields]="hiddenFields">
+          </app-event-change-form-location>
           <div class="d-flex flex-row justify-content-end gap-2">
             <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
             <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>

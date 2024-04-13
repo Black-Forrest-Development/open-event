@@ -26,6 +26,10 @@ export class AddressService extends BaseService {
     return this.post('', request)
   }
 
+  updateAddress(id: number, request: AddressChangeRequest): Observable<Address> {
+    return this.put('' + id, request)
+  }
+
   importAddress(): Observable<Page<Address>> {
     return this.post('import', {})
   }

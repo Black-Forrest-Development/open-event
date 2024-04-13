@@ -99,7 +99,6 @@ export class EventChangeComponent {
       return
     }
     this.reloading = true
-
     if (this.event) {
       this.update()
     } else {
@@ -137,7 +136,7 @@ export class EventChangeComponent {
   }
 
   private handleDataCreate() {
-    this.translationService.get("event.change.create").subscribe(text => this.title = text);
+    this.translationService.get("event.change.create").subscribe(text => this.title = text)
   }
 
   private loadData(id: number, callback: (e: EventInfo) => void) {
@@ -241,4 +240,6 @@ export class EventChangeComponent {
   private isEndHidden() {
     return this.hiddenFields.find(f => f === 'endDate') != null
   }
+
+
 }

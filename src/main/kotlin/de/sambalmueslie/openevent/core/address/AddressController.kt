@@ -46,7 +46,10 @@ class AddressController(
     @Post()
     override fun create(auth: Authentication, @Body request: AddressChangeRequest): Address {
         return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
-            logger.traceCreate(auth, request) { service.create(accountService.find(auth), request) }
+            logger.traceCreate(auth, request) {
+                val account = accountService.find(auth)
+                service.create(account, account, request)
+            }
         }
     }
 

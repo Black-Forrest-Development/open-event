@@ -14,6 +14,7 @@ import {AccountRoutingModule} from "./account-routing.module";
 import {AccountProfileComponent} from './account-profile/account-profile.component';
 import {AccountAddressComponent} from './account-address/account-address.component';
 import {AccountPreferencesComponent} from './account-preferences/account-preferences.component';
+import {AddressModule} from "../address/address.module";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {AccountPreferencesComponent} from './account-preferences/account-prefere
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    AddressModule
   ]
 })
 export class AccountModule {

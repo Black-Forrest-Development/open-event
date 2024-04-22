@@ -3,7 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
-    id("org.jetbrains.kotlin.kapt") version "1.9.23"
+//    id("org.jetbrains.kotlin.kapt") version "1.9.23"
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
@@ -57,7 +58,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.10")
 
     // jackson
-    kapt("io.micronaut.serde:micronaut-serde-processor")
+    ksp("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut:micronaut-jackson-databind")
 //    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -68,15 +69,15 @@ dependencies {
 
     // validation
     implementation("jakarta.validation:jakarta.validation-api")
-    kapt("io.micronaut.validation:micronaut-validation-processor")
+    ksp("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut.validation:micronaut-validation")
 
     // openapi
-    kapt("io.micronaut.openapi:micronaut-openapi")
+    ksp("io.micronaut.openapi:micronaut-openapi")
     implementation("io.swagger.core.v3:swagger-annotations")
 
     // security
-    kapt("io.micronaut.security:micronaut-security-annotations")
+    ksp("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-oauth2")
@@ -99,7 +100,7 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     // data
-    kapt("io.micronaut.data:micronaut-data-processor")
+    ksp("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.flyway:micronaut-flyway")
     runtimeOnly("org.flywaydb:flyway-database-postgresql")

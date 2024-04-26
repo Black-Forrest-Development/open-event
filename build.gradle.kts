@@ -9,7 +9,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
     id("io.micronaut.application") version "4.3.6"
-    id("io.micronaut.aot") version "4.3.6"
+    id("io.micronaut.aot") version "4.3.7"
     jacoco
 }
 

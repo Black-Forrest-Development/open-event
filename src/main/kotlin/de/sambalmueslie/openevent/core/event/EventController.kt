@@ -137,6 +137,7 @@ class EventController(
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
 
     @Get("/search")
+    @Deprecated("replace with search service")
     override fun search(auth: Authentication, @QueryValue query: String, pageable: Pageable): Page<EventInfo> {
         return auth.checkPermission(PERMISSION_READ) { search.searchInfo(query, pageable) }
     }

@@ -4,6 +4,7 @@ import {CategoryService} from "../../category/model/category.service";
 import {EventService} from "../../event/model/event.service";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AuthService} from "../../auth/auth.service";
+import {SearchService} from "../../search/model/search.service";
 
 @Component({
   selector: 'app-board-card-solr',
@@ -21,6 +22,7 @@ export class BoardCardSolrComponent {
     private accountService: AccountService,
     private categoryService: CategoryService,
     private eventService: EventService,
+    private searchService: SearchService,
     private toastService: HotToastService,
     private authService: AuthService
   ) {
@@ -41,6 +43,6 @@ export class BoardCardSolrComponent {
   }
 
   buildEventIndex() {
-    this.eventService.buildIndex().subscribe(_ => this.toastService.success("Event index builder has been started"))
+    this.searchService.setupEvents().subscribe(_ => this.toastService.success("Event index builder has been started"))
   }
 }

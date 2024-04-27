@@ -18,6 +18,7 @@ import org.jsoup.Jsoup
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Deprecated("replace with search service")
 @Context
 open class EventSearchService(
     private val service: EventCrudService,

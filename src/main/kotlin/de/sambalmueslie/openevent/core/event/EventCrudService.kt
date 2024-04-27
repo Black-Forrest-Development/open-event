@@ -87,6 +87,10 @@ class EventCrudService(
 
     fun getInfo(id: Long, account: Account): EventInfo? {
         val event = get(id) ?: return null
+        return getInfo(event, account)
+    }
+
+    fun getInfo(event: Event, account: Account): EventInfo {
         val location = locationCrudService.findByEvent(event)
         val registration = registrationCrudService.findInfoByEvent(event)
         val categories = storage.getCategories(event)

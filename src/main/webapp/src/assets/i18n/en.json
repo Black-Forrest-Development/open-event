@@ -142,6 +142,7 @@
     }
   },
   "account": {
+    "title": "Account",
     "search": "Search for an account",
     "dialog": {
       "create": {
@@ -224,6 +225,26 @@
     }
   },
   "profile": {
-    "type": "Userprofile"
+    "title": "Userprofile",
+    "email": "E-Mail",
+    "phone": "Phone",
+    "mobile": "Mobile",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dateOfBirth": "Birthday",
+    "gender": "Gender",
+    "profilePicture": "Profile Picture",
+    "website": "Website"
+  },
+  "address": {
+    "title": "Address",
+    "dialog": {
+      "create": {
+        "title": "Create address"
+      },
+      "change": {
+        "title": "Change address"
+      }
+    }
   }
 }

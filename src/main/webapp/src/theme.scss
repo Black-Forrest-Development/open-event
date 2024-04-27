@@ -9,7 +9,9 @@ $open-event-theme: mat.define-light-theme((
     primary: $open-event-primary,
     accent: $open-event-accent,
     warn: $open-event-warn,
-  )
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
 ));
 
 @include mat.all-component-themes($open-event-theme);

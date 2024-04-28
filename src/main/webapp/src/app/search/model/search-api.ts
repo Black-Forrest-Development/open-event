@@ -3,11 +3,11 @@ import {AccountInfo} from "../../account/model/account-api";
 
 export class EventSearchRequest {
   public constructor(
-    fullTextSearch: string,
-    from: string,
-    to: string,
-    ownEvents: boolean,
-    participatingEvents: boolean
+    public fullTextSearch: string,
+    public from: string | undefined,
+    public to: string | undefined,
+    public ownEvents: boolean,
+    public participatingEvents: boolean
   ) {
   }
 }
@@ -32,6 +32,7 @@ export interface EventSearchEntry {
   owner: AccountInfo,
 
   // location data
+  hasLocation: boolean,
   street: string,
   streetNumber: string,
   zip: string,

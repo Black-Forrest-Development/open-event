@@ -5,7 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.jillesvangurp.ktsearch.SearchResponse
+import com.jillesvangurp.ktsearch.parseHit
+import com.jillesvangurp.ktsearch.total
 import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.event.EventChangeListener
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
@@ -21,6 +25,7 @@ import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.search.api.EventSearchEntry
 import de.sambalmueslie.openevent.core.search.api.EventSearchRequest
 import de.sambalmueslie.openevent.core.search.api.EventSearchResponse
+import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.infrastructure.search.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -33,6 +38,7 @@ open class EventSearchOperator(
     private val service: EventCrudService,
     private val registrationService: RegistrationCrudService,
     private val locationService: LocationCrudService,
+    private val accountService: AccountStorageService,
     openSearch: OpenSearchService
 ) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "oe.event", logger) {
 
@@ -109,7 +115,25 @@ open class EventSearchOperator(
     }
 
 
-    override fun search(actor: Account, request: EventSearchRequest, pageable: Pageable): EventSearchResponse {
-        TODO("Not yet implemented")
+    override fun buildQuery(actor: Account, request: EventSearchRequest) =
+        EventSearchEntryData.buildQuery(actor, request)
+
+    override fun toResult(
+        actor: Account,
+        request: SearchRequest,
+        pageable: Pageable,
+        result: SearchResponse
+    ): EventSearchResponse {
+        val data = result.hits?.hits?.map {
+            it.parseHit<EventSearchEntryData>()
+        } ?: emptyList()
+
+        val content = data.mapNotNull {
+            val owner = accountService.getInfo(it.owner) ?: return@mapNotNull null
+            it.convert(owner)
+        }
+
+        return EventSearchResponse(Page.of(content, pageable, result.total))
     }
+
 }

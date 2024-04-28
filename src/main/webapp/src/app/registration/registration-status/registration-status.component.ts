@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {RegistrationInfo} from "../model/registration-api";
 import {Participant} from "../../participant/model/participant-api";
+import {EventSearchEntry} from "../../search/model/search-api";
 
 @Component({
   selector: 'app-registration-status',
@@ -22,6 +23,13 @@ export class RegistrationStatusComponent {
       this.space.remaining = this.space.available - totalAmount
       this.spaceAvailable = this.space.remaining > 0
     }
+  }
+
+  @Input()
+  set entry(entry: EventSearchEntry) {
+    this.spaceAvailable = entry.hasSpaceLeft
+    this.space.remaining = entry.remainingSpace
+    this.space.available = entry.maxGuestAmount
   }
 
 }

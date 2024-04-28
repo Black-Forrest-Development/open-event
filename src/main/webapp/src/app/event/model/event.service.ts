@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/model/page";
 import {Event, EventChangeRequest, EventInfo, EventStats, PatchRequest} from "./event-api";
@@ -24,11 +24,6 @@ export class EventService extends BaseService {
 
   getEvent(id: number): Observable<Event> {
     return this.get('' + id)
-  }
-
-  searchEvents(query: string, page: number, size: number): Observable<Page<EventInfo>> {
-    let params = new HttpParams().set("query", query)
-    return this.getPaged('search', page, size, params)
   }
 
   getEventInfo(id: number): Observable<EventInfo> {
@@ -59,9 +54,6 @@ export class EventService extends BaseService {
     return this.delete('' + id)
   }
 
-  buildIndex(): Observable<any> {
-    return this.post('search', {})
-  }
 
   getStats(): Observable<EventStats[]> {
     return this.get('stats')

@@ -4,12 +4,12 @@
 <div class="d-flex flex-column gap-2 p-2 ">
   <mat-card>
 
-    <table [dataSource]="service.infos" mat-table>
+    <table [dataSource]="service.entries" mat-table>
 
       <!-- Account Column -->
       <ng-container matColumnDef="account">
         <td *matCellDef="let info" mat-cell>
-          <app-account [account]="info.event.owner"></app-account>
+          <app-account [account]="info.owner"></app-account>
         </td>
       </ng-container>
 
@@ -19,8 +19,8 @@
           <div class="d-flex flex-row gap-2 align-items-center flex-fill">
             <mat-icon>schedule</mat-icon>
             <div class="d-flex flex-column gap-1">
-              <div>{{ info.event.start | date:'fullDate' }}</div>
-              <div>{{ info.event.start | date:'shortTime' }} - {{ info.event.finish | date:'shortTime' }}</div>
+              <div>{{ info.start | date:'fullDate' }}</div>
+              <div>{{ info.start | date:'shortTime' }} - {{ info.finish | date:'shortTime' }}</div>
             </div>
           </div>
         </td>
@@ -29,11 +29,11 @@
       <!-- Location Column -->
       <ng-container matColumnDef="location">
         <td *matCellDef="let info" mat-cell>
-          <div *ngIf="info.location" class="d-flex flex-row gap-2 align-items-center flex-fill">
+          <div *ngIf="info.hasLocation" class="d-flex flex-row gap-2 align-items-center flex-fill">
             <mat-icon>location_pin</mat-icon>
             <div class="d-flex flex-column gap-1">
-              <div>{{ info.location.street }} {{ info.location.streetNumber }}</div>
-              <div>{{ info.location.zip }} {{ info.location.city }}</div>
+              <div>{{ info.street }} {{ info.streetNumber }}</div>
+              <div>{{ info.zip }} {{ info.city }}</div>
             </div>
           </div>
         </td>
@@ -44,7 +44,7 @@
         <td *matCellDef="let info" mat-cell>
           <div class="d-flex flex-row gap-2 align-items-center flex-fill">
             <mat-icon>description</mat-icon>
-            <div>{{ info.event.title }}</div>
+            <div>{{ info.title }}</div>
           </div>
         </td>
       </ng-container>
@@ -53,7 +53,7 @@
       <ng-container matColumnDef="status">
         <td *matCellDef="let info" mat-cell>
           <div class="d-flex flex-row gap-2 align-items-center flex-fill">
-            <app-registration-status [data]="info.registration"></app-registration-status>
+            <app-registration-status [entry]="info"></app-registration-status>
           </div>
         </td>
       </ng-container>
@@ -64,7 +64,7 @@
           <div class="d-flex flex-row flex-wrap gap-2 align-items-center flex-fill">
             <mat-chip-listbox>
               <ng-container *ngFor="let category of info.categories">
-                <mat-chip>{{ category.name }}</mat-chip>
+                <mat-chip>{{ category }}</mat-chip>
               </ng-container>
             </mat-chip-listbox>
           </div>
@@ -75,14 +75,14 @@
       <ng-container matColumnDef="publish">
         <td *matCellDef="let info" mat-cell>
           <div class="d-flex flex-row flex-wrap">
-            <button *ngIf="!info.event.published" class="action-fab" mat-mini-fab>
+            <button *ngIf="!info.published" class="action-fab" mat-mini-fab>
               <mat-icon>unpublished</mat-icon>
             </button>
           </div>
         </td>
       </ng-container>
 
-      <tr *matRowDef="let row; columns: displayedColumns;" class="row" mat-row routerLink="./details/{{row.event.id}}">
+      <tr *matRowDef="let row; columns: displayedColumns;" class="row" mat-row routerLink="./details/{{row.id}}">
       </tr>
     </table>
     <mat-divider></mat-divider>

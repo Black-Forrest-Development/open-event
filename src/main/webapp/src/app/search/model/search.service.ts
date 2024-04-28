@@ -21,6 +21,6 @@ export class SearchService extends BaseService {
     let params = new HttpParams()
       .set("page", page)
       .set("size", size)
-    return this.post('event', params)
+    return this.post('event', request, params)
   }
 }

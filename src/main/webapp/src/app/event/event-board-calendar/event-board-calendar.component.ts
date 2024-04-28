@@ -76,12 +76,12 @@ export class EventBoardCalendarComponent implements AfterViewInit {
     if (!this.calendarApi) return
 
     this.calendarApi.removeAllEvents()
-    this.service.infos.forEach(e => {
+    this.service.entries.forEach(e => {
       this.calendarApi?.addEvent({
-        id: e.event.id + '',
-        title: e.event.title,
-        start: e.event.start,
-        end: e.event.finish
+        id: e.id,
+        title: e.title,
+        start: e.start,
+        end: e.finish
       })
     })
   }

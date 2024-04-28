@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {EventInfo} from "../model/event-api";
+import {EventSearchEntry} from "../../search/model/search-api";
 
 @Component({
   selector: 'app-event-board-list-entry',
@@ -7,5 +7,5 @@ import {EventInfo} from "../model/event-api";
   styleUrls: ['./event-board-list-entry.component.scss']
 })
 export class EventBoardListEntryComponent {
-  @Input() info: EventInfo | undefined
+  @Input() info: EventSearchEntry | undefined
 }

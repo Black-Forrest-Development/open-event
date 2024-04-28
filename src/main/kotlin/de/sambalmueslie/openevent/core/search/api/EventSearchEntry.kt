@@ -17,6 +17,7 @@ data class EventSearchEntry(
     val owner: AccountInfo,
 
     // location data
+    val hasLocation: Boolean,
     val street: String,
     val streetNumber: String,
     val zip: String,
@@ -38,5 +39,5 @@ data class EventSearchEntry(
     val participatingEvent: Boolean,
 
     // categories
-    val categories: List<String>,
+    val categories: Set<String>,
 )

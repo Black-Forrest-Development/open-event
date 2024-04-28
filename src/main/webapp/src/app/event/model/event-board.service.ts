@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {EventService} from "./event.service";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {EventInfo} from "./event-api";
-import {Page} from "../../shared/model/page";
 import {BehaviorSubject} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
+import {EventSearchEntry, EventSearchRequest, EventSearchResponse} from "../../search/model/search-api";
+import {SearchService} from "../../search/model/search.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,26 +16,22 @@ export class EventBoardService {
   pageSize: number = 20
   pageIndex: number = 0
   totalSize: number = 0
-  infos: EventInfo[] = []
+  entries: EventSearchEntry[] = []
   query: string = ''
 
-  constructor(private service: EventService, private toast: HotToastService) {
+  constructor(private service: EventService, private searchService: SearchService, private toast: HotToastService) {
   }
 
   reload(page: number, size: number) {
     if (this.reloading.value) return
     this.reloading.next(true)
-    if (this.query.length <= 0) {
-      this.service.getEventInfos(page, size).subscribe({
+    let request = new EventSearchRequest(this.query, undefined, undefined, false, false)
+    this.searchService.searchEvents(request, page, size).subscribe(
+      {
         next: value => this.handleData(value),
         error: e => this.handleError(e)
-      })
-    } else {
-      this.service.searchEvents(this.query, page, size).subscribe({
-        next: value => this.handleData(value),
-        error: e => this.handleError(e)
-      })
-    }
+      }
+    )
   }
 
   search(query: string) {
@@ -48,8 +44,9 @@ export class EventBoardService {
     this.reload(event.pageIndex, event.pageSize)
   }
 
-  private handleData(value: Page<EventInfo>) {
-    this.infos = value.content
+  private handleData(response: EventSearchResponse) {
+    let value = response.result
+    this.entries = value.content
     this.pageSize = value.pageable.size
     this.pageIndex = value.pageable.number
     this.totalSize = value.totalSize

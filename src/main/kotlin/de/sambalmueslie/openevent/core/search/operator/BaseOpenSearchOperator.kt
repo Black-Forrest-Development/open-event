@@ -2,9 +2,7 @@ package de.sambalmueslie.openevent.core.search.operator
 
 import com.jillesvangurp.ktsearch.*
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
-import com.jillesvangurp.searchdsls.querydsl.ESQuery
 import de.sambalmueslie.openevent.common.PageSequence
-import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.api.SearchResponse
 import de.sambalmueslie.openevent.infrastructure.search.OpenSearchService
@@ -18,11 +16,11 @@ import kotlin.time.Duration.Companion.seconds
 
 abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T>>(
     openSearch: OpenSearchService,
-    private val name: String,
+    protected val name: String,
     private val logger: Logger
 ) : SearchOperator<T, R, S> {
 
-    private val client = openSearch.getClient()
+    protected val client = openSearch.getClient()
 
     @Async
     override fun setup() {
@@ -78,13 +76,20 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
         }
     }
 
+    protected fun createDocument(data: Pair<String, String>) {
+        indexDocument(data)
+    }
 
     protected fun updateDocument(data: Pair<String, String>) {
+        indexDocument(data)
+    }
+
+    private fun indexDocument(data: Pair<String, String>) {
         runBlocking {
             val id = data.first
+            val existing = client.getDocument(target = name, id = id)
+            val type = if (existing.found) OperationType.Index else OperationType.Create
             val duration = measureTimeMillis {
-                val existing = client.getDocument(target = name, id = id)
-                val type = if (existing.found) OperationType.Index else OperationType.Create
                 val input = data.second
                 client.indexDocument(
                     target = name,
@@ -107,27 +112,6 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     }
 
     protected abstract fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>>
-
-
-    override fun search(actor: Account, request: R, pageable: Pageable): S {
-        val result = runBlocking {
-            client.search(name) {
-                from = pageable.offset.toInt()
-                resultSize = pageable.size
-                trackTotalHits = "true"
-                query = buildQuery(actor, request)
-            }
-        }
-        return toResult(actor, request, pageable, result)
-    }
-
-    abstract fun buildQuery(actor: Account, request: R): ESQuery
-    abstract fun toResult(
-        actor: Account,
-        request: SearchRequest,
-        pageable: Pageable,
-        result: com.jillesvangurp.ktsearch.SearchResponse
-    ): S
 
 
 }

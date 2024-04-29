@@ -138,7 +138,7 @@ data class EventSearchEntryData(
         }
 
         fun buildQuery(actor: Account, request: EventSearchRequest): ESQuery {
-            return SearchDSL().bool {
+            val query = SearchDSL().bool {
                 if (request.fullTextSearch.isNotBlank()) must(
                     SearchDSL().simpleQueryString(
                         request.fullTextSearch,
@@ -170,7 +170,9 @@ data class EventSearchEntryData(
                         actor.id.toString()
                     )
                 )
+
             }
+            return query
         }
     }
 

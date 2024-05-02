@@ -1,12 +1,12 @@
 package de.sambalmueslie.openevent.core.search.api
 
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 
 data class EventSearchRequest(
     val fullTextSearch: String,
-    val from: LocalDateTime?,
-    val to: LocalDateTime?,
+    val from: LocalDate?,
+    val to: LocalDate?,
     val ownEvents: Boolean,
     val participatingEvents: Boolean
-): SearchRequest
+) : SearchRequest

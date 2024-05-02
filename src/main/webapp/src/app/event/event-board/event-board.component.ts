@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventBoardService} from "../model/event-board.service";
 import {BreakpointObserver, BreakpointState} from "@angular/cdk/layout";
 
@@ -7,7 +7,7 @@ import {BreakpointObserver, BreakpointState} from "@angular/cdk/layout";
   templateUrl: './event-board.component.html',
   styleUrls: ['./event-board.component.scss']
 })
-export class EventBoardComponent {
+export class EventBoardComponent implements OnInit {
 
   mobileView: boolean = false
   mode: string = 'list'
@@ -16,8 +16,6 @@ export class EventBoardComponent {
   }
 
   ngOnInit() {
-    this.service.reload(this.service.pageIndex, this.service.pageSize)
-
     this.responsive
       .observe(['(min-width: 1000px)'])
       .subscribe((state: BreakpointState) => {

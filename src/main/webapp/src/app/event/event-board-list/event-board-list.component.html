@@ -8,14 +8,19 @@
         <app-event-board-list-entry [info]="info"></app-event-board-list-entry>
       </ng-container>
     </div>
-    <mat-paginator (page)="service.handlePageChange($event)"
-                   [length]="service.totalSize"
-                   [pageIndex]="service.pageIndex"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
-                   [pageSize]="service.pageSize"
-                   class="mb-2"
-    >
-    </mat-paginator>
-  </mat-card>
+    <!--    <mat-paginator (page)="service.handlePageChange($event)"-->
+    <!--                   [length]="service.totalSize"-->
+    <!--                   [pageIndex]="service.pageIndex"-->
+    <!--                   [pageSizeOptions]="[5, 10, 25, 100]"-->
+    <!--                   [pageSize]="service.pageSize"-->
+    <!--                   class="mb-2"-->
+    <!--    >-->
+    <!--    </mat-paginator>-->
 
+    @if (this.service.hasMoreElements && !(this.service.reloading |async)) {
+      <button mat-flat-button color="accent" (click)="this.service.onScroll()" class="flex-fill">{{ 'ACTION.LoadMore' | translate }}
+      </button>
+    }
+  </mat-card>
+  <div #anchor></div>
 </div>

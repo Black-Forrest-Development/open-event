@@ -12,7 +12,7 @@ body {
 }
 
 .dense-1 {
-  @include mat.all-component-densities(-3);
+  @include mat.all-component-densities(-2);
 }
 
 .mat-mdc-mini-fab {
@@ -68,4 +68,15 @@ body {
   font-weight: 500;
   letter-spacing: 0.25px;
   line-height: 32px;
+}
+
+.mat-mdc-mini-fab {
+  border-radius: 5px !important;
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.mat-mdc-fab {
+  border-radius: 5px !important;
+  min-height: 48px;
 }

@@ -32,13 +32,10 @@ export class AccountService extends BaseService {
     return this.get('validate')
   }
 
+  // @Deprecated
   searchAccounts(query: string, page: number, size: number): Observable<Page<Account>> {
     let params = new HttpParams().set("query", query)
     return this.getPaged('search', page, size, params)
-  }
-
-  buildIndex(): Observable<any> {
-    return this.post('search', {})
   }
 
   getProfile(): Observable<Profile> {

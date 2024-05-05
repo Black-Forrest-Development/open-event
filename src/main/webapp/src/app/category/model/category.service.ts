@@ -34,8 +34,5 @@ export class CategoryService extends BaseService {
     return this.delete('' + id)
   }
 
-  buildIndex(): Observable<any> {
-    return this.post('search', {})
-  }
 
 }

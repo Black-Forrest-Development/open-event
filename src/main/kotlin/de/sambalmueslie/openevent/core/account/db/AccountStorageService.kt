@@ -69,14 +69,25 @@ class AccountStorageService(
 
     fun getInfo(id: Long): AccountInfo? {
         val account = get(id) ?: return null
-        val profile = profileStorage.get(account.id)
-        return AccountInfo.create(account, profile)
+        return getInfo(account)
     }
 
     fun getInfoByIds(ids: Set<Long>): List<AccountInfo> {
         val accounts = repository.findByIdIn(ids)
         val profiles = profileStorage.findByIdIn(ids).associateBy { it.id }
         return accounts.map { AccountInfo.create(it, profiles[it.id]) }
+    }
+
+    override fun getInfos(pageable: Pageable): Page<AccountInfo> {
+        val accounts = repository.findAll(pageable)
+        val ids = accounts.map { it.id }.toSet()
+        val profiles = profileStorage.findByIdIn(ids).associateBy { it.id }
+        return accounts.map { AccountInfo.create(it, profiles[it.id]) }
+    }
+
+    override fun getInfo(account: Account): AccountInfo {
+        val profile = profileStorage.get(account.id)
+        return AccountInfo.create(account, profile)
     }
 
 

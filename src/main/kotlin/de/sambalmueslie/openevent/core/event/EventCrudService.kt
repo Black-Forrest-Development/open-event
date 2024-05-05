@@ -34,14 +34,27 @@ class EventCrudService(
         private val logger: Logger = LoggerFactory.getLogger(EventCrudService::class.java)
     }
 
+    private var searchListener: EventSearchListener? = null
+
+    fun registerSearch(listener: EventSearchListener) {
+        this.searchListener = listener
+    }
+
     fun create(actor: Account, request: EventChangeRequest): Event {
         val result = storage.create(request, actor)
-        notifyCreated(actor, result)
         val categories = categoryCrudService.getByIds(request.categoryIds)
         if (categories.isNotEmpty()) storage.set(result, categories)
+        notifyCreated(actor, result)
         request.location?.let { locationCrudService.create(actor, result, it) }
         registrationCrudService.create(actor, result, request.registration)
+        updateSearch(actor, result)
         return result
+    }
+
+    private fun updateSearch(actor: Account, event: Event) {
+        if (this.searchListener == null) return
+        val info = getInfo(event, actor)
+        this.searchListener?.updateSearch(info)
     }
 
     override fun update(actor: Account, id: Long, request: EventChangeRequest): Event {
@@ -54,6 +67,7 @@ class EventCrudService(
             locationCrudService.updateByEvent(actor, result, request.location)
         }
         registrationCrudService.updateByEvent(actor, result, request.registration)
+        updateSearch(actor, result)
         return result
     }
 
@@ -61,12 +75,15 @@ class EventCrudService(
         val event = storage.get(id) ?: return null
         locationCrudService.deleteByEvent(actor, event)
         registrationCrudService.deleteByEvent(actor, event)
-        return super.delete(actor, id)
+        val result = super.delete(actor, id) ?: return null
+        updateSearch(actor, result)
+        return result
     }
 
     fun setPublished(actor: Account, id: Long, value: PatchRequest<Boolean>): Event? {
         val result = storage.setPublished(id, value) ?: return null
         notify { it.publishedChanged(actor, result) }
+        updateSearch(actor, result)
         return result
     }
 

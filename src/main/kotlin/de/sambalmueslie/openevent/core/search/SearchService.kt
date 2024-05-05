@@ -1,17 +1,20 @@
 package de.sambalmueslie.openevent.core.search
 
 import de.sambalmueslie.openevent.core.account.api.Account
-import de.sambalmueslie.openevent.core.search.api.EventSearchRequest
-import de.sambalmueslie.openevent.core.search.api.EventSearchResponse
+import de.sambalmueslie.openevent.core.search.api.*
+import de.sambalmueslie.openevent.core.search.operator.AccountSearchOperator
+import de.sambalmueslie.openevent.core.search.operator.CategorySearchOperator
 import de.sambalmueslie.openevent.core.search.operator.EventSearchOperator
+import io.micronaut.context.annotation.Context
 import io.micronaut.data.model.Pageable
-import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-@Singleton
+@Context
 class SearchService(
-    private val eventOperator: EventSearchOperator
+    private val eventOperator: EventSearchOperator,
+    private val accountOperator: AccountSearchOperator,
+    private val categoryOperator: CategorySearchOperator
 ) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(SearchService::class.java)
@@ -23,5 +26,21 @@ class SearchService(
 
     fun setupEvents() {
         return eventOperator.setup()
+    }
+
+    fun searchAccounts(actor: Account, request: AccountSearchRequest, pageable: Pageable): AccountSearchResponse {
+        return accountOperator.search(actor, request, pageable)
+    }
+
+    fun setupAccounts() {
+        return accountOperator.setup()
+    }
+
+    fun searchCategories(actor: Account, request: CategorySearchRequest, pageable: Pageable): CategorySearchResponse {
+        return categoryOperator.search(actor, request, pageable)
+    }
+
+    fun setupCategories() {
+        return categoryOperator.setup()
     }
 }

@@ -140,8 +140,6 @@ dependencies {
 
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
-//    // solr
-//    implementation("org.apache.solr:solr-solrj:9.5.0")
     // opensearch
     implementation("com.jillesvangurp:search-client:2.1.28")
 //    implementation("io.micronaut.opensearch:micronaut-opensearch-restclient")

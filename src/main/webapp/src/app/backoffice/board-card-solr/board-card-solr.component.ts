@@ -1,7 +1,4 @@
 import {Component} from '@angular/core';
-import {AccountService} from "../../account/model/account.service";
-import {CategoryService} from "../../category/model/category.service";
-import {EventService} from "../../event/model/event.service";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AuthService} from "../../auth/auth.service";
 import {SearchService} from "../../search/model/search.service";
@@ -19,9 +16,6 @@ export class BoardCardSolrComponent {
 
 
   constructor(
-    private accountService: AccountService,
-    private categoryService: CategoryService,
-    private eventService: EventService,
     private searchService: SearchService,
     private toastService: HotToastService,
     private authService: AuthService
@@ -35,11 +29,11 @@ export class BoardCardSolrComponent {
   }
 
   buildAccountIndex() {
-    this.accountService.buildIndex().subscribe(_ => this.toastService.success("Account index builder has been started"))
+    this.searchService.setupAccounts().subscribe(_ => this.toastService.success("Account index builder has been started"))
   }
 
   buildCategoryIndex() {
-    this.categoryService.buildIndex().subscribe(_ => this.toastService.success("Category index builder has been started"))
+    this.searchService.setupCategories().subscribe(_ => this.toastService.success("Category index builder has been started"))
   }
 
   buildEventIndex() {

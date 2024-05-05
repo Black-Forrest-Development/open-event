@@ -1,39 +1,21 @@
 package de.sambalmueslie.openevent.core.search.operator
 
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
-import com.jillesvangurp.searchdsls.querydsl.*
-import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.search.api.EventSearchEntry
-import de.sambalmueslie.openevent.core.search.api.EventSearchRequest
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import org.jsoup.Jsoup
+import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-@Serializer(forClass = LocalDateTime::class)
-object DateSerializer : KSerializer<LocalDateTime> {
-    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
-
-    override fun serialize(encoder: Encoder, value: LocalDateTime) {
-        encoder.encodeString(value.format(formatter))
-    }
-
-    override fun deserialize(decoder: Decoder): LocalDateTime {
-        return LocalDateTime.parse(decoder.decodeString(), formatter)
-    }
-}
 
 @Serializable
 data class EventSearchEntryData(
     var id: String,
-    @Serializable(with = DateSerializer::class) var start: LocalDateTime,
-    @Serializable(with = DateSerializer::class) var finish: LocalDateTime,
+    @Serializable(with = DateTimeSerializer::class) var start: LocalDateTime,
+    @Serializable(with = DateTimeSerializer::class) var finish: LocalDateTime,
+    @Serializable(with = DateSerializer::class) var date: LocalDate,
     var title: String,
     var shortText: String,
     var longText: String,
@@ -79,6 +61,7 @@ data class EventSearchEntryData(
                 e.id.toString(),
                 e.start,
                 e.finish,
+                e.start.toLocalDate(),
                 e.title,
                 Jsoup.parse(e.shortText).text(),
                 Jsoup.parse(e.longText).text(),
@@ -111,6 +94,7 @@ data class EventSearchEntryData(
                 number<Long>("id")
                 date("start")
                 date("finish")
+                date("date")
                 text("title")
                 text("shortText")
                 text("longText")
@@ -136,46 +120,7 @@ data class EventSearchEntryData(
                 text("categories")
             }
         }
-
-        fun buildQuery(actor: Account, request: EventSearchRequest): ESQuery {
-            val query = SearchDSL().bool {
-                if (request.fullTextSearch.isNotBlank()) must(
-                    SearchDSL().simpleQueryString(
-                        request.fullTextSearch,
-                        EventSearchEntryData::title,
-                        EventSearchEntryData::shortText,
-                        EventSearchEntryData::longText
-                    )
-                )
-
-                if (request.from != null) must(
-                    SearchDSL().range(EventSearchEntryData::start) {
-                        gte = request.from
-                    }
-                )
-
-                if (request.to != null) must(
-                    SearchDSL().range(EventSearchEntryData::start) {
-                        lte = request.to
-                    }
-                )
-
-                if (request.ownEvents) filter(
-                    SearchDSL().match(EventSearchEntryData::owner, actor.id.toString())
-                )
-
-                if (request.participatingEvents) filter(
-                    SearchDSL().match(
-                        EventSearchEntryData::participant,
-                        actor.id.toString()
-                    )
-                )
-
-            }
-            return query
-        }
     }
-
 
     fun convert(owner: AccountInfo): EventSearchEntry {
         return EventSearchEntry(

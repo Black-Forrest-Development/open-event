@@ -93,5 +93,12 @@ class AccountCrudService(
         return preferencesService.get(account.id)
     }
 
+    fun getInfos(pageable: Pageable): Page<AccountInfo> {
+        return storage.getInfos(pageable)
+    }
+
+    fun getInfo(account: Account): AccountInfo {
+        return storage.getInfo(account)
+    }
 
 }

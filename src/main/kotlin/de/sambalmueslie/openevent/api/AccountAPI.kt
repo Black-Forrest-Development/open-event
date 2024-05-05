@@ -16,7 +16,6 @@ interface AccountAPI : CrudAPI<Long, Account, AccountChangeRequest> {
     fun findByName(auth: Authentication, name: String, pageable: Pageable): Page<Account>
     fun findByEmail(auth: Authentication, email: String): Account?
     fun validate(auth: Authentication): AccountValidationResult
-    fun search(auth: Authentication, query: String, pageable: Pageable): Page<Account>
 
     fun getProfile(auth: Authentication): Profile?
     fun getPreferences(auth: Authentication): Preferences?

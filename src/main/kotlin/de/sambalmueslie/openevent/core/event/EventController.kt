@@ -20,7 +20,6 @@ import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -29,7 +28,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Event API")
 class EventController(
     private val service: EventCrudService,
-    private val search: EventSearchService,
     private val accountService: AccountCrudService,
     audit: AuditService,
 ) : EventAPI {
@@ -135,20 +133,6 @@ class EventController(
     }
 
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
-
-    @Get("/search")
-    @Deprecated("replace with search service")
-    override fun search(auth: Authentication, @QueryValue query: String, pageable: Pageable): Page<EventInfo> {
-        return auth.checkPermission(PERMISSION_READ) { search.searchInfo(query, pageable) }
-    }
-
-    @Post("/search")
-    fun buildIndex(auth: Authentication) {
-        return auth.checkPermission(PERMISSION_ADMIN) {
-            search.setup()
-            HttpResponse.created("")
-        }
-    }
 
     @Get("/stats")
     override fun getStats(auth: Authentication): List<EventStats> {

@@ -17,6 +17,14 @@ export class SearchService extends BaseService {
     return this.post('setup/event', {})
   }
 
+  setupAccounts(): Observable<any> {
+    return this.post('setup/account', {})
+  }
+
+  setupCategories(): Observable<any> {
+    return this.post('setup/category', {})
+  }
+
   searchEvents(request: EventSearchRequest, page: number, size: number): Observable<EventSearchResponse> {
     let params = new HttpParams()
       .set("page", page)

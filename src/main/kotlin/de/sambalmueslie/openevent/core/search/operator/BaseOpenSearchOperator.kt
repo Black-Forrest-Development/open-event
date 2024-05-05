@@ -1,11 +1,16 @@
 package de.sambalmueslie.openevent.core.search.operator
 
+
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.ktsearch.*
 import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import de.sambalmueslie.openevent.common.PageSequence
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.api.SearchResponse
-import de.sambalmueslie.openevent.infrastructure.search.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.scheduling.annotation.Async
@@ -14,6 +19,7 @@ import org.slf4j.Logger
 import kotlin.system.measureTimeMillis
 import kotlin.time.Duration.Companion.seconds
 
+
 abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T>>(
     openSearch: OpenSearchService,
     protected val name: String,
@@ -21,6 +27,13 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
 ) : SearchOperator<T, R, S> {
 
     protected val client = openSearch.getClient()
+
+    protected val mapper = ObjectMapper()
+        .registerKotlinModule()
+        .registerModule(JavaTimeModule())
+        .setSerializationInclusion(JsonInclude.Include.ALWAYS)
+        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
 
     @Async
     override fun setup() {
@@ -44,23 +57,6 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
             }
             mappings(dynamicEnabled = false, createMappings())
         }
-
-        // micronaut opensearch
-//        val exists = client.indices().exists(ExistsRequest.Builder().index(name).build()).value()
-//        if (exists) client.indices().delete(DeleteIndexRequest.Builder().index(name).build())
-//
-//        val settings = IndexSettings.Builder()
-//            .numberOfReplicas("0")
-//            .numberOfShards("3")
-//            .build()
-//
-//        val request: CreateIndexRequest = CreateIndexRequest.Builder()
-//            .index(name)
-//            .settings(settings)
-//            .mappings(createMappings())
-//            .build()
-//
-//        client.indices().create(request)
     }
 
     abstract fun createMappings(): FieldMappings.() -> Unit
@@ -68,7 +64,6 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
 
     private suspend fun initialLoad() {
         val data = PageSequence { initialLoadPage(it) }
-
         data.forEach { page ->
             client.bulk(target = name) {
                 page.forEach { (id, value) -> index(value, id = id) }
@@ -77,29 +72,42 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     }
 
     protected fun createDocument(data: Pair<String, String>) {
-        indexDocument(data)
+        runBlocking { indexDocument(data.first, data.second) }
     }
 
     protected fun updateDocument(data: Pair<String, String>) {
-        indexDocument(data)
+        runBlocking { indexDocument(data.first, data.second) }
     }
 
-    private fun indexDocument(data: Pair<String, String>) {
-        runBlocking {
-            val id = data.first
-            val existing = client.getDocument(target = name, id = id)
-            val type = if (existing.found) OperationType.Index else OperationType.Create
-            val duration = measureTimeMillis {
-                val input = data.second
-                client.indexDocument(
-                    target = name,
-                    serializedJson = input,
-                    id = id,
-                    opType = type
-                )
+    private suspend fun indexDocument(id: String, value: String) {
+        val duration = measureTimeMillis {
+            val existing = try {
+                client.getDocument(target = name, id = id).found
+            } catch (e: Exception) {
+                false
             }
-            logger.info("[$name] index document within $duration ms.")
+            val type = if (existing) OperationType.Index else OperationType.Create
+
+            client.indexDocument(
+                target = name,
+                serializedJson = value,
+                id = id,
+                opType = type
+            )
         }
+        logger.info("[$name] index document within $duration ms.")
+    }
+
+    private suspend fun indexDocument(id: String, value: String, type: OperationType) {
+        val duration = measureTimeMillis {
+            client.indexDocument(
+                target = name,
+                serializedJson = value,
+                id = id,
+                opType = type
+            )
+        }
+        logger.info("[$name] index document within $duration ms.")
     }
 
     protected fun deleteDocument(id: String) {

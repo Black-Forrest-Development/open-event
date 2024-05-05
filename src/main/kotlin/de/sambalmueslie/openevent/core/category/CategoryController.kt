@@ -2,7 +2,6 @@ package de.sambalmueslie.openevent.core.category
 
 
 import de.sambalmueslie.openevent.api.CategoryAPI
-import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.account.AccountCrudService
@@ -12,7 +11,6 @@ import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -21,7 +19,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "Category API")
 class CategoryController(
     private val service: CategoryCrudService,
-    private val search: CategorySearchService,
     private val accountService: AccountCrudService,
     audit: AuditService,
 ) : CategoryAPI {
@@ -63,17 +60,4 @@ class CategoryController(
         }
     }
 
-    @Get("/search")
-    override fun search(auth: Authentication, @QueryValue query: String, pageable: Pageable): Page<Category> {
-        return auth.checkPermission(PERMISSION_READ) { search.search(query, pageable) }
-    }
-
-    @Post("/search")
-    fun buildIndex(auth: Authentication) {
-        return auth.checkPermission(PERMISSION_ADMIN) {
-            search.setup()
-            HttpResponse.created("")
-        }
-
-    }
 }

@@ -21,7 +21,7 @@
 
 
     <button mat-mini-fab (click)="filterToolbarVisible = !filterToolbarVisible"
-            [color]="showHistory ? 'accent' :  undefined">
+            [color]="filterToolbarVisible ? 'accent' :  undefined">
       <mat-icon>filter_alt</mat-icon>
     </button>
 
@@ -67,7 +67,7 @@
         <h3>Filter</h3>
       </div>
 
-      <mat-button-toggle-group >
+      <mat-button-toggle-group>
         <mat-button-toggle value="list" (click)="selectToday()">
           <mat-icon>today</mat-icon>
         </mat-button-toggle>
@@ -114,19 +114,26 @@
         </div>
       }
 
-      <button mat-mini-fab (click)="showHistory = !showHistory" [color]="showHistory ? 'accent' : 'primary'">
+      <button mat-fab extended (click)="showHistory = !showHistory" [color]="showHistory ? 'accent' : 'primary'">
         <mat-icon>history</mat-icon>
+        {{ 'event.filter.history' | translate }}
       </button>
 
-
-      <button mat-mini-fab (click)="ownEvents = !ownEvents" [color]="ownEvents ? 'accent' : 'primary'">
+      <button mat-fab extended (click)="ownEvents = !ownEvents" [color]="ownEvents ? 'accent' : 'primary'">
         <mat-icon>copyright</mat-icon>
+        {{ 'event.filter.own' | translate }}
       </button>
 
+      <button mat-fab extended (click)="availableEvents = !availableEvents"
+              [color]="availableEvents ? 'accent' : 'primary'">
+        <mat-icon>event_available</mat-icon>
+        {{ 'event.filter.available' | translate }}
+      </button>
 
-      <button mat-mini-fab (click)="participatingEvents = !participatingEvents"
+      <button mat-fab extended (click)="participatingEvents = !participatingEvents"
               [color]="participatingEvents ? 'accent' : 'primary'">
         <mat-icon>3p</mat-icon>
+        {{ 'event.filter.participating' | translate }}
       </button>
 
     </div>

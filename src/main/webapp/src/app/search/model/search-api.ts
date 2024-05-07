@@ -7,7 +7,8 @@ export class EventSearchRequest {
     public from: string | undefined,
     public to: string | undefined,
     public ownEvents: boolean,
-    public participatingEvents: boolean
+    public participatingEvents: boolean,
+    public onlyAvailableEvents: boolean
   ) {
   }
 }

@@ -73,6 +73,12 @@
         "title": "Delete event",
         "question": "Do you really want to delete the event?"
       }
+    },
+    "filter": {
+      "history": "History",
+      "own": "Own",
+      "available": "Available",
+      "participating": "Participating"
     }
   },
   "registration": {

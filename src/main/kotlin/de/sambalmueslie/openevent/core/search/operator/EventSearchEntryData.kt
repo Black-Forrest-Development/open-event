@@ -83,7 +83,7 @@ data class EventSearchEntryData(
                 amountOnWaitingList,
                 remainingSpace,
 
-                p.map { it.id }.toSet(),
+                p.map { it.author.id }.toSet(),
                 c.map { it.name }.toSet()
             )
         }
@@ -99,7 +99,7 @@ data class EventSearchEntryData(
                 text("shortText")
                 text("longText")
                 bool("published")
-
+                number<Long>("owner")
 
                 text("street")
                 text("streetNumber")

@@ -16,7 +16,7 @@ export class EventBoardService {
   totalSize: number = 0
   hasMoreElements: boolean = false
   entries: EventSearchEntry[] = []
-  request: EventSearchRequest = new EventSearchRequest('', undefined, undefined, false, false)
+  request: EventSearchRequest = new EventSearchRequest('', undefined, undefined, false, false, false)
   infiniteScrollMode: boolean = false
 
   constructor(private searchService: SearchService) {

@@ -104,7 +104,7 @@ open class EventSearchOperator(
                 filter(term(EventSearchEntryData::owner, actor.id.toString()))
             }
             if (request.participatingEvents) {
-                filter(term(EventSearchEntryData::participant, actor.id.toString()))
+                filter(matchPhrase(EventSearchEntryData::participant, actor.id.toString()))
             }
             if (request.onlyAvailableEvents) {
                 filter(term(EventSearchEntryData::hasSpaceLeft, "true"))

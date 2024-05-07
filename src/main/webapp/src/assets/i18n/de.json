@@ -73,6 +73,12 @@
         "title": "Veranstaltung löschen",
         "question": "Soll die Veranstaltung wirklich gelöscht werden?"
       }
+    },
+    "filter": {
+      "history": "Historie",
+      "own": "Eigene",
+      "available": "Verfügbar",
+      "participating": "Teilnehmend"
     }
   },
   "registration": {

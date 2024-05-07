@@ -8,7 +8,7 @@ import {EventBoardHeaderComponent} from './event-board-header/event-board-header
 import {TranslateModule} from "@ngx-translate/core";
 import {EventChangeComponent} from './event-change/event-change.component';
 import {EventDetailsComponent} from './event-details/event-details.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EventChangeFormEventComponent} from './event-change-form-event/event-change-form-event.component';
 import {EventChangeFormLocationComponent} from './event-change-form-location/event-change-form-location.component';
 import {
@@ -60,20 +60,21 @@ import {EventActionExportComponent} from './event-action-export/event-action-exp
     EventChangeFormRegistrationComponent,
     EventActionExportComponent
   ],
-  imports: [
-    CommonModule,
-    EventRoutingModule,
-    MaterialModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    AccountModule,
-    LocationModule,
-    ChipSelectModule,
-    RegistrationModule,
-    QuillModule,
-    NgOptimizedImage,
-    FullCalendarModule
-  ]
+    imports: [
+        CommonModule,
+        EventRoutingModule,
+        MaterialModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        AccountModule,
+        LocationModule,
+        ChipSelectModule,
+        RegistrationModule,
+        QuillModule,
+        NgOptimizedImage,
+        FullCalendarModule,
+        FormsModule
+    ]
 })
 export class EventModule {
 }

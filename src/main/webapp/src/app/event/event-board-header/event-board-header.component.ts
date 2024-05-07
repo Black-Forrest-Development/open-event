@@ -63,6 +63,17 @@ export class EventBoardHeaderComponent implements OnInit {
     return this._ownEvents
   }
 
+  private _availableEvents: boolean = false
+  set availableEvents(val: boolean) {
+    if (this._availableEvents == val) return
+    this._availableEvents = val
+    this.search()
+  }
+
+  get availableEvents(): boolean {
+    return this._availableEvents
+  }
+
 
   private _participatingEvents: boolean = false
   set participatingEvents(val: boolean) {
@@ -114,7 +125,7 @@ export class EventBoardHeaderComponent implements OnInit {
     let from = startDate?.toISOString()
     let to = endDate?.toISOString()
 
-    let request = new EventSearchRequest(this.fullTextSearch, from, to, this.ownEvents, this.participatingEvents)
+    let request = new EventSearchRequest(this.fullTextSearch, from, to, this.ownEvents, this.participatingEvents, this.availableEvents)
     this.service.search(request)
   }
 

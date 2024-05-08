@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
-    id("org.jetbrains.kotlin.kapt") version "1.9.23"
+    id("org.jetbrains.kotlin.kapt") version "1.9.24"
     kotlin("plugin.serialization") version "1.9.23"
 //    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
     id("org.sonarqube") version "5.0.0.4638"

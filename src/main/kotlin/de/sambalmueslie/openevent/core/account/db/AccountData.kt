@@ -18,8 +18,8 @@ data class AccountData(
     @Column var serviceAccount: Boolean,
     @Column var idpLinked: Boolean,
 
-    @Column var lastSync: LocalDateTime = LocalDateTime.now(),
-    @Column var created: LocalDateTime = LocalDateTime.now(),
+    @Column var lastSync: LocalDateTime,
+    @Column var created: LocalDateTime,
     @Column var updated: LocalDateTime? = null
 ) : SimpleDataObject<Account> {
 
@@ -38,7 +38,8 @@ data class AccountData(
                 timestamp,
                 serviceAccount,
                 idpLinked,
-                timestamp
+                timestamp,
+                timestamp,
             )
         }
     }

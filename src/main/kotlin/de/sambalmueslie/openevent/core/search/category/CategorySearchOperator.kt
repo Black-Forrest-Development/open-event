@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.category
 
 import com.jillesvangurp.ktsearch.ids
 import com.jillesvangurp.ktsearch.search
@@ -11,6 +11,8 @@ import de.sambalmueslie.openevent.core.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.search.api.CategorySearchRequest
 import de.sambalmueslie.openevent.core.search.api.CategorySearchResponse
+import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
+import de.sambalmueslie.openevent.core.search.common.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -21,6 +23,9 @@ import org.slf4j.LoggerFactory
 @Singleton
 open class CategorySearchOperator(
     private val service: CategoryCrudService,
+
+    private val fieldMapping: CategoryFieldMappingProvider,
+
     openSearch: OpenSearchService
 ) : BaseOpenSearchOperator<Category, CategorySearchRequest, CategorySearchResponse>(openSearch, "oe.category", logger) {
     companion object {
@@ -49,7 +54,7 @@ open class CategorySearchOperator(
     }
 
 
-    override fun createMappings() = CategorySearchEntryData.createMappings()
+    override fun getFieldMappingProvider() = fieldMapping
 
     override fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>> {
         val page = service.getAll(pageable)

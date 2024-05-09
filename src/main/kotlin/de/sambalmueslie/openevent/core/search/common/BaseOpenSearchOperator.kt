@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.common
 
 
 import com.fasterxml.jackson.annotation.JsonInclude
@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.ktsearch.*
-import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import de.sambalmueslie.openevent.common.PageSequence
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.api.SearchResponse
@@ -55,12 +54,11 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
                 shards = 3
                 refreshInterval = 1.seconds
             }
-            mappings(dynamicEnabled = false, createMappings())
+            mappings(dynamicEnabled = false, getFieldMappingProvider().createMappings())
         }
     }
 
-    abstract fun createMappings(): FieldMappings.() -> Unit
-
+    abstract fun getFieldMappingProvider(): FieldMappingProvider
 
     private suspend fun initialLoad() {
         val data = PageSequence { initialLoadPage(it) }

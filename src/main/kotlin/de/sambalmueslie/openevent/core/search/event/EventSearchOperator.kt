@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.event
 
 import com.jillesvangurp.ktsearch.*
 import com.jillesvangurp.searchdsls.querydsl.*
@@ -10,6 +10,8 @@ import de.sambalmueslie.openevent.core.search.api.DateHistogramEntry
 import de.sambalmueslie.openevent.core.search.api.EventSearchEntry
 import de.sambalmueslie.openevent.core.search.api.EventSearchRequest
 import de.sambalmueslie.openevent.core.search.api.EventSearchResponse
+import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
+import de.sambalmueslie.openevent.core.search.common.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -23,6 +25,9 @@ import java.time.format.DateTimeFormatter
 open class EventSearchOperator(
     private val service: EventCrudService,
     private val accountService: AccountStorageService,
+
+    private val fieldMapping: EventFieldMappingProvider,
+
     openSearch: OpenSearchService
 ) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "oe.event", logger) {
 
@@ -34,7 +39,7 @@ open class EventSearchOperator(
         service.registerSearch { evt -> handleChanged(evt) }
     }
 
-    override fun createMappings() = EventSearchEntryData.createMappings()
+    override fun getFieldMappingProvider() = fieldMapping
 
     override fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>> {
         val page = service.getInfos(pageable)

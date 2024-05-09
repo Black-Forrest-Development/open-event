@@ -1,6 +1,5 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.account
 
-import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import kotlinx.serialization.Serializable
 
@@ -14,18 +13,6 @@ data class AccountSearchEntryData(
     var lastName: String,
 ) {
     companion object {
-        fun createMappings(): FieldMappings.() -> Unit {
-            return {
-                number<Long>("id")
-
-                text("name")
-                text("email")
-
-                text("firstName")
-                text("lastName")
-            }
-        }
-
         fun create(info: AccountInfo): AccountSearchEntryData {
             return AccountSearchEntryData(
                 info.id.toString(),

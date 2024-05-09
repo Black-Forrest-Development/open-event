@@ -1,6 +1,5 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.category
 
-import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import de.sambalmueslie.openevent.core.category.api.Category
 import kotlinx.serialization.Serializable
 
@@ -10,12 +9,7 @@ data class CategorySearchEntryData(
     var name: String,
 ) {
     companion object {
-        fun createMappings(): FieldMappings.() -> Unit {
-            return {
-                number<Long>("id")
-                text("name")
-            }
-        }
+
 
         fun create(obj: Category): CategorySearchEntryData {
             return CategorySearchEntryData(

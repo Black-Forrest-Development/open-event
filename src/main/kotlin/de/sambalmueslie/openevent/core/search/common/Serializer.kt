@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.common
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer

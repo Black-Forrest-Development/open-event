@@ -1,10 +1,10 @@
 package de.sambalmueslie.openevent.core.search
 
 import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.search.account.AccountSearchOperator
 import de.sambalmueslie.openevent.core.search.api.*
-import de.sambalmueslie.openevent.core.search.operator.AccountSearchOperator
-import de.sambalmueslie.openevent.core.search.operator.CategorySearchOperator
-import de.sambalmueslie.openevent.core.search.operator.EventSearchOperator
+import de.sambalmueslie.openevent.core.search.category.CategorySearchOperator
+import de.sambalmueslie.openevent.core.search.event.EventSearchOperator
 import io.micronaut.context.annotation.Context
 import io.micronaut.data.model.Pageable
 import org.slf4j.Logger

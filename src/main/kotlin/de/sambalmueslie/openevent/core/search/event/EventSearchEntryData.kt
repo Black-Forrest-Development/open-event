@@ -1,9 +1,10 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.event
 
-import com.jillesvangurp.searchdsls.mappingdsl.FieldMappings
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.search.api.EventSearchEntry
+import de.sambalmueslie.openevent.core.search.common.DateSerializer
+import de.sambalmueslie.openevent.core.search.common.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import java.time.LocalDate
@@ -87,40 +88,8 @@ data class EventSearchEntryData(
                 c.map { it.name }.toSet()
             )
         }
-
-
-        fun createMappings(): FieldMappings.() -> Unit {
-            return {
-                number<Long>("id")
-                date("start")
-                date("finish")
-                date("date")
-                text("title")
-                text("shortText")
-                text("longText")
-                bool("published")
-                number<Long>("owner")
-
-                text("street")
-                text("streetNumber")
-                text("zip")
-                text("city")
-                text("country")
-
-                geoPoint("geo")
-
-                bool("hasSpaceLeft")
-                number<Int>("maxGuestAmount")
-                number<Int>("amountAccepted")
-                number<Int>("amountOnWaitingList")
-                number<Int>("remainingSpace")
-
-                number<Long>("participant")
-
-                text("categories")
-            }
-        }
     }
+
 
     fun convert(owner: AccountInfo): EventSearchEntry {
         return EventSearchEntry(

@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.account
 
 import com.jillesvangurp.ktsearch.ids
 import com.jillesvangurp.ktsearch.search
@@ -10,6 +10,8 @@ import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.search.api.AccountSearchRequest
 import de.sambalmueslie.openevent.core.search.api.AccountSearchResponse
+import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
+import de.sambalmueslie.openevent.core.search.common.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -20,6 +22,9 @@ import org.slf4j.LoggerFactory
 @Singleton
 open class AccountSearchOperator(
     private val service: AccountCrudService,
+
+    private val fieldMapping: AccountFieldMappingProvider,
+
     openSearch: OpenSearchService
 ) : BaseOpenSearchOperator<Account, AccountSearchRequest, AccountSearchResponse>(openSearch, "oe.account", logger) {
     companion object {
@@ -48,7 +53,7 @@ open class AccountSearchOperator(
         updateDocument(data)
     }
 
-    override fun createMappings() = AccountSearchEntryData.createMappings()
+    override fun getFieldMappingProvider() = fieldMapping
 
     override fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>> {
         val page = service.getInfos(pageable)

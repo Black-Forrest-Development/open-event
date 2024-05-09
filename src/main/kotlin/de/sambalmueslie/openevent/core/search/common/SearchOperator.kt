@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.search.operator
+package de.sambalmueslie.openevent.core.search.common
 
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.search.api.SearchRequest

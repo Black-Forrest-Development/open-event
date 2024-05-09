@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.ktsearch.*
 import de.sambalmueslie.openevent.common.PageSequence
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.api.SearchResponse
 import io.micronaut.data.model.Page
@@ -118,6 +119,23 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     }
 
     protected abstract fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>>
+
+    override fun search(actor: Account, request: R, pageable: Pageable): S {
+        val response = runBlocking {
+            client.search(name, block = getSearchQueryBuilder().buildSearchQuery(pageable, request, actor))
+        }
+        return processSearchResponse(actor, request, response, pageable)
+    }
+    abstract fun getSearchQueryBuilder(): SearchQueryBuilder<R>
+
+    abstract fun processSearchResponse(
+        actor: Account,
+        request: SearchRequest,
+        response: com.jillesvangurp.ktsearch.SearchResponse,
+        pageable: Pageable
+    ): S
+
+
 
 
 }

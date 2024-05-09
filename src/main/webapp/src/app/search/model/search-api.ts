@@ -1,5 +1,6 @@
 import {Page} from "../../shared/model/page";
 import {AccountInfo} from "../../account/model/account-api";
+import {Category} from "../../category/model/category-api";
 
 export class EventSearchRequest {
   public constructor(
@@ -56,4 +57,34 @@ export interface EventSearchEntry {
 
   // categories
   categories: string[],
+}
+
+export class AccountSearchRequest {
+  public constructor(
+    public fullTextSearch: string,
+  ) {
+  }
+}
+
+export interface AccountSearchResponse {
+  result: Page<AccountSearchEntry>
+}
+
+export interface AccountSearchEntry {
+  id: string,
+  name: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+}
+
+export class CategorySearchRequest {
+  public constructor(
+    public fullTextSearch: string,
+  ) {
+  }
+}
+
+export interface CategorySearchResponse {
+  result: Page<Category>
 }

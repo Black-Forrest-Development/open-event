@@ -7,10 +7,10 @@
     </mat-form-field>
     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
       <mat-option (onSelectionChange)="select($event, account)" *ngFor="let account of accounts"
-                  [value]="account.name">
-        <!--                  [value]="account.firstName + ' ' +account.lastName"-->
-        <!--        {{account.firstName}} {{account.lastName}}-->
-        {{ account.name }}
+                  [value]="account.firstName + ' ' +account.lastName">
+        {{ account.firstName }} {{ account.lastName }} @if (account.email.length > 0) {
+        [{{ account.email }}]
+      }
       </mat-option>
     </mat-autocomplete>
     <button (click)="showCreateAccountDialog()" color="primary" mat-flat-button>

@@ -1,12 +1,13 @@
 package de.sambalmueslie.openevent.core.search.account
 
 import com.jillesvangurp.ktsearch.SearchResponse
-import com.jillesvangurp.ktsearch.ids
+import com.jillesvangurp.ktsearch.parseHit
 import com.jillesvangurp.ktsearch.total
 import de.sambalmueslie.openevent.core.account.AccountChangeListener
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.search.api.AccountSearchEntry
 import de.sambalmueslie.openevent.core.search.api.AccountSearchRequest
 import de.sambalmueslie.openevent.core.search.api.AccountSearchResponse
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
@@ -26,7 +27,11 @@ open class AccountSearchOperator(
     private val queryBuilder: AccountSearchQueryBuilder,
 
     openSearch: OpenSearchService
-) : BaseOpenSearchOperator<Account, AccountSearchRequest, AccountSearchResponse>(openSearch, "oe.account", logger) {
+) : BaseOpenSearchOperator<AccountSearchEntry, AccountSearchRequest, AccountSearchResponse>(
+    openSearch,
+    "oe.account",
+    logger
+) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(AccountSearchOperator::class.java)
     }
@@ -72,10 +77,10 @@ open class AccountSearchOperator(
         response: SearchResponse,
         pageable: Pageable
     ): AccountSearchResponse {
-        val ids = response.ids.map { it.toLong() }.toSet()
-        val result = service.getByIds(ids)
+        val data = response.hits?.hits?.map { it.parseHit<AccountSearchEntryData>() }
+            ?.map { it.convert() } ?: emptyList()
 
-        return AccountSearchResponse(Page.of(result, pageable, response.total))
+        return AccountSearchResponse(Page.of(data, pageable, response.total))
     }
 
 }

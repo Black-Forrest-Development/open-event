@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
-    id("org.jetbrains.kotlin.kapt") version "1.9.23"
-    kotlin("plugin.serialization") version "1.9.23"
-//    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
+    id("org.jetbrains.kotlin.jvm") version "1.9.24"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.24"
+    id("org.jetbrains.kotlin.kapt") version "1.9.24"
+    kotlin("plugin.serialization") version "1.9.24"
+//    id("com.google.devtools.ksp") version "1.9.24-1.0.20"
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
@@ -87,8 +87,8 @@ dependencies {
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.23")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.24")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
@@ -141,7 +141,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.1.28")
+    implementation("com.jillesvangurp:search-client:2.1.29")
 //    implementation("io.micronaut.opensearch:micronaut-opensearch-restclient")
 //    implementation("org.opensearch.client:opensearch-rest-client:2.12.0")
 //    implementation("org.opensearch.client:opensearch-java:2.6.0")

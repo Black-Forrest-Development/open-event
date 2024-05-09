@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Account, AccountChangeRequest, AccountValidationResult} from "./account-api";
 import {Page} from "../../shared/model/page";
@@ -30,12 +30,6 @@ export class AccountService extends BaseService {
 
   validate(): Observable<AccountValidationResult> {
     return this.get('validate')
-  }
-
-  // @Deprecated
-  searchAccounts(query: string, page: number, size: number): Observable<Page<Account>> {
-    let params = new HttpParams().set("query", query)
-    return this.getPaged('search', page, size, params)
   }
 
   getProfile(): Observable<Profile> {

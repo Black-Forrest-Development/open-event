@@ -2,7 +2,14 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {EventSearchRequest, EventSearchResponse} from "./search-api";
+import {
+  AccountSearchRequest,
+  AccountSearchResponse,
+  CategorySearchRequest,
+  CategorySearchResponse,
+  EventSearchRequest,
+  EventSearchResponse
+} from "./search-api";
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +33,21 @@ export class SearchService extends BaseService {
   }
 
   searchEvents(request: EventSearchRequest, page: number, size: number): Observable<EventSearchResponse> {
+    return this.search(request, 'event', page, size)
+  }
+
+  searchAccounts(request: AccountSearchRequest, page: number, size: number): Observable<AccountSearchResponse> {
+    return this.search(request, 'account', page, size)
+  }
+
+  searchCategories(request: CategorySearchRequest, page: number, size: number): Observable<CategorySearchResponse> {
+    return this.search(request, 'category', page, size)
+  }
+
+  private search<R, S>(request: R, suffix: string, page: number, size: number): Observable<S> {
     let params = new HttpParams()
       .set("page", page)
       .set("size", size)
-    return this.post('event', request, params)
+    return this.post(suffix, request, params)
   }
 }

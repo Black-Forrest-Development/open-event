@@ -18,17 +18,19 @@ class AccountSearchQueryBuilder : SearchQueryBuilder<AccountSearchRequest> {
         resultSize = pageable.size
         trackTotalHits = "true"
         query = bool {
-            filter(
-                multiMatch(
-                    request.fullTextSearch, AccountSearchEntryData::name,
+            if (request.fullTextSearch.isBlank()) {
+                filter(matchAll())
+            } else {
+                filter(multiMatch(
+                    request.fullTextSearch,
+                    AccountSearchEntryData::name,
                     AccountSearchEntryData::email,
                     AccountSearchEntryData::firstName,
                     AccountSearchEntryData::lastName
                 ) {
-                    type = MultiMatchType.best_fields
-                    lenient = true
-                }
-            )
+                    type = MultiMatchType.phrase_prefix
+                })
+            }
         }
         sort {
             add("_score", SortOrder.DESC)

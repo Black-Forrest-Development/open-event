@@ -1,22 +1,20 @@
 package de.sambalmueslie.openevent.core.search.category
 
+import com.jillesvangurp.ktsearch.SearchResponse
 import com.jillesvangurp.ktsearch.ids
-import com.jillesvangurp.ktsearch.search
 import com.jillesvangurp.ktsearch.total
-import com.jillesvangurp.searchdsls.querydsl.SearchDSL
-import com.jillesvangurp.searchdsls.querydsl.match
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.category.CategoryChangeListener
 import de.sambalmueslie.openevent.core.category.CategoryCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.search.api.CategorySearchRequest
 import de.sambalmueslie.openevent.core.search.api.CategorySearchResponse
+import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
 import de.sambalmueslie.openevent.core.search.common.OpenSearchService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
-import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -25,6 +23,7 @@ open class CategorySearchOperator(
     private val service: CategoryCrudService,
 
     private val fieldMapping: CategoryFieldMappingProvider,
+    private val queryBuilder: CategorySearchQueryBuilder,
 
     openSearch: OpenSearchService
 ) : BaseOpenSearchOperator<Category, CategorySearchRequest, CategorySearchResponse>(openSearch, "oe.category", logger) {
@@ -55,6 +54,7 @@ open class CategorySearchOperator(
 
 
     override fun getFieldMappingProvider() = fieldMapping
+    override fun getSearchQueryBuilder() = queryBuilder
 
     override fun initialLoadPage(pageable: Pageable): Page<Pair<String, String>> {
         val page = service.getAll(pageable)
@@ -66,31 +66,16 @@ open class CategorySearchOperator(
         return Pair(input.id, mapper.writeValueAsString(input))
     }
 
-
-    override fun search(actor: Account, request: CategorySearchRequest, pageable: Pageable): CategorySearchResponse {
-        val response = runBlocking {
-            client.search(name, block = buildSearchQuery(pageable, request, actor))
-        }
-
+    override fun processSearchResponse(
+        actor: Account,
+        request: SearchRequest,
+        response: SearchResponse,
+        pageable: Pageable
+    ): CategorySearchResponse {
         val ids = response.ids.map { it.toLong() }.toSet()
         val result = service.getByIds(ids)
 
         return CategorySearchResponse(Page.of(result, pageable, response.total))
-    }
-
-    private fun buildSearchQuery(
-        pageable: Pageable,
-        request: CategorySearchRequest,
-        actor: Account
-    ): (SearchDSL.() -> Unit) = {
-        from = pageable.offset.toInt()
-        resultSize = pageable.size
-        trackTotalHits = "true"
-        query = match(CategorySearchEntryData::name, request.fullTextSearch) {
-            boost = 2.0
-            lenient = true
-            autoGenerateSynonymsPhraseQuery = true
-        }
     }
 
 

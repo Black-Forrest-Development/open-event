@@ -75,10 +75,17 @@
       }
     },
     "filter": {
-      "history": "History",
-      "own": "Own",
-      "available": "Available",
-      "participating": "Participating"
+      "reset": "Reset filter",
+      "hide": "Close fitler",
+      "history": "Show history",
+      "own": "Show own",
+      "available": "Show available",
+      "participating": "Show participating",
+      "range": {
+        "today": "Only tody",
+        "week": "This week",
+        "next": "Next week"
+      }
     }
   },
   "registration": {

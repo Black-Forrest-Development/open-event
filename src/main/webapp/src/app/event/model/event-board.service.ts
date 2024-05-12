@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {EventSearchEntry, EventSearchRequest, EventSearchResponse} from "../../search/model/search-api";
 import {SearchService} from "../../search/model/search.service";
 import {PageEvent} from "@angular/material/paginator";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,29 @@ export class EventBoardService {
   infiniteScrollMode: boolean = false
   filterToolbarVisible: boolean = true
 
-  set range(val: RangeFilter) {
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  })
+
+
+  constructor(private searchService: SearchService) {
+    this.updateRange(null, null)
+  }
+
+  handleRangeChanged() {
+    let value = this.range.value
+    this.updateRange(value.start, value.end)
+  }
+
+  updateRange(start: Date | null | undefined, end: Date | null | undefined) {
+    this.range.setValue({
+      start: start ?? null,
+      end: end ?? null
+    })
     let startDate = null
-    if (val.start) {
-      startDate = new Date(val.start)
+    if (start) {
+      startDate = new Date(start)
       startDate.setUTCHours(0, 0, 0, 0)
     } else if (!this._showHistory) {
       startDate = new Date()
@@ -31,8 +51,8 @@ export class EventBoardService {
     }
 
     let endDate = null
-    if (val.end) {
-      endDate = new Date(val.end)
+    if (end) {
+      endDate = new Date(end)
       endDate.setUTCHours(23, 59, 59, 999)
     }
 
@@ -59,7 +79,7 @@ export class EventBoardService {
   set showHistory(val: boolean) {
     if (this._showHistory == val) return
     this._showHistory = val
-    this.search()
+    this.handleRangeChanged()
   }
 
   get showHistory(): boolean {
@@ -97,14 +117,10 @@ export class EventBoardService {
   }
 
 
-  constructor(private searchService: SearchService) {
-  }
-
-
   resetFilter() {
     this.request = new EventSearchRequest('', undefined, undefined, false, false, false)
     this._showHistory = false
-    this.search()
+    this.updateRange(null, null)
   }
 
 

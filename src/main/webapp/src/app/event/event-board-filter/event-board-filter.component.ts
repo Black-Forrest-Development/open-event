@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {EventBoardService} from "../model/event-board.service";
 import {ChipSelectEntry} from "../../shared/chip-select-pane/chip-select-entry";
 import {CategoryService} from "../../category/model/category.service";
@@ -11,11 +11,6 @@ import {CategoryService} from "../../category/model/category.service";
 })
 export class EventBoardFilterComponent {
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  })
-
 
   reloadingCategories: boolean = false
   categoryForm = new FormControl([])
@@ -25,8 +20,8 @@ export class EventBoardFilterComponent {
   }
 
   onDateRangePickerClosed() {
-    if (!this.range.valid) return
-    this.search()
+    if (!this.service.range.valid) return
+    this.service.handleRangeChanged()
   }
 
 
@@ -64,17 +59,7 @@ export class EventBoardFilterComponent {
   private selectRange(start: Date, end: Date) {
     start.setUTCHours(0, 0, 0, 0)
     end.setUTCHours(23, 59, 59, 999)
-    this.range.setValue(
-      {
-        start: start,
-        end: end,
-      }
-    )
-    this.search()
+    this.service.updateRange(start, end)
   }
 
-  private search() {
-    let value = this.range.value
-    this.service.range = {start: value.start, end: value.end}
-  }
 }

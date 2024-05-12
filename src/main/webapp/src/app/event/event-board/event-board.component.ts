@@ -21,6 +21,8 @@ export class EventBoardComponent implements OnInit {
       .subscribe((state: BreakpointState) => {
         this.mobileView = !state.matches
       })
+    this.service.filterToolbarVisible = !this.mobileView
+    this.service.search()
   }
 
 }

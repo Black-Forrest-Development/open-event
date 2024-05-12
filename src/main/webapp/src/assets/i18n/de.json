@@ -75,10 +75,17 @@
       }
     },
     "filter": {
-      "history": "Historie",
-      "own": "Eigene",
-      "available": "Verfügbar",
-      "participating": "Teilnehmend"
+      "reset": "Filter zurücksetzen",
+      "hide": "Filter schließen",
+      "history": "Vergangenheit anzeigen",
+      "own": "Eigene anzeigen",
+      "available": "Verfügbare anzeigen",
+      "participating": "Angemeldete anzeigen",
+      "range": {
+        "today": "Nur heute anzeigen",
+        "week": "Diese Woche anzeigen",
+        "next": "Nächste Woche anzeigen"
+      }
     }
   },
   "registration": {

@@ -18,15 +18,119 @@ export class EventBoardService {
   entries: EventSearchEntry[] = []
   request: EventSearchRequest = new EventSearchRequest('', undefined, undefined, false, false, false)
   infiniteScrollMode: boolean = false
+  filterToolbarVisible: boolean = true
+
+  set range(val: RangeFilter) {
+    let startDate = null
+    if (val.start) {
+      startDate = new Date(val.start)
+      startDate.setUTCHours(0, 0, 0, 0)
+    } else if (!this._showHistory) {
+      startDate = new Date()
+      startDate.setUTCHours(0, 0, 0, 0)
+    }
+
+    let endDate = null
+    if (val.end) {
+      endDate = new Date(val.end)
+      endDate.setUTCHours(23, 59, 59, 999)
+    }
+
+
+    let from = startDate?.toISOString()
+    let to = endDate?.toISOString()
+    if (this.request.from === from && this.request.to === to) return
+    this.request.from = from
+    this.request.to = to
+    this.search()
+  }
+
+  set fullTextSearch(val: string) {
+    if (this.request.fullTextSearch === val) return
+    this.request.fullTextSearch = val
+    this.search()
+  }
+
+  get fullTextSearch(): string {
+    return this.request.fullTextSearch
+  }
+
+  private _showHistory: boolean = false
+  set showHistory(val: boolean) {
+    if (this._showHistory == val) return
+    this._showHistory = val
+    this.search()
+  }
+
+  get showHistory(): boolean {
+    return this._showHistory
+  }
+
+  set ownEvents(val: boolean) {
+    if (this.request.ownEvents == val) return
+    this.request.ownEvents = val
+    this.search()
+  }
+
+  get ownEvents(): boolean {
+    return this.request.ownEvents
+  }
+
+  set availableEvents(val: boolean) {
+    if (this.request.onlyAvailableEvents == val) return
+    this.request.onlyAvailableEvents = val
+    this.search()
+  }
+
+  get availableEvents(): boolean {
+    return this.request.onlyAvailableEvents
+  }
+
+  set participatingEvents(val: boolean) {
+    if (this.request.participatingEvents == val) return
+    this.request.participatingEvents = val
+    this.search()
+  }
+
+  get participatingEvents(): boolean {
+    return this.request.participatingEvents
+  }
+
 
   constructor(private searchService: SearchService) {
   }
 
-  search(request: EventSearchRequest) {
-    this.request = request
-    if (this.searching) return
-    this.pageIndex = 0
-    this.reload(this.pageIndex, this.pageSize)
+
+  resetFilter() {
+    this.request = new EventSearchRequest('', undefined, undefined, false, false, false)
+    this._showHistory = false
+    this.search()
+  }
+
+
+  onScroll() {
+    if (this.reloading) return
+    if (!this.hasMoreElements) return
+    this.reload(this.pageIndex + 1, this.pageSize)
+  }
+
+  handlePageChange(event: PageEvent) {
+    this.reload(event.pageIndex, event.pageSize)
+  }
+
+  search() {
+    this.reload(0, this.pageSize)
+  }
+
+  private reload(page: number, size: number) {
+    if (this.reloading.value) return
+    this.reloading.next(true)
+    this.searchService.searchEvents(this.request, page, size).subscribe(
+      {
+        next: value => this.handleData(value),
+        error: e => this.handleError(e)
+      }
+    )
   }
 
   private handleData(response: EventSearchResponse) {
@@ -49,24 +153,9 @@ export class EventBoardService {
     this.reloading.next(false)
   }
 
-  onScroll() {
-    if (this.reloading) return
-    if (!this.hasMoreElements) return
-    this.reload(this.pageIndex + 1, this.pageSize)
-  }
+}
 
-  handlePageChange(event: PageEvent) {
-    this.reload(event.pageIndex, event.pageSize)
-  }
-
-  private reload(page: number, size: number) {
-    if (this.reloading.value) return
-    this.reloading.next(true)
-    this.searchService.searchEvents(this.request, page, size).subscribe(
-      {
-        next: value => this.handleData(value),
-        error: e => this.handleError(e)
-      }
-    )
-  }
+export interface RangeFilter {
+  start: Date | null | undefined
+  end: Date | null | undefined
 }

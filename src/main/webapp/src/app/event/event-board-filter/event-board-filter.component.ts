@@ -3,6 +3,7 @@ import {FormControl} from "@angular/forms";
 import {EventBoardService} from "../model/event-board.service";
 import {ChipSelectEntry} from "../../shared/chip-select-pane/chip-select-entry";
 import {CategoryService} from "../../category/model/category.service";
+import {MatChipSelectionChange} from "@angular/material/chips";
 
 @Component({
   selector: 'app-event-board-filter',
@@ -62,4 +63,16 @@ export class EventBoardFilterComponent {
     this.service.updateRange(start, end)
   }
 
+  handleDatePreselectionChange(event: MatChipSelectionChange) {
+    let selected = event.selected
+    if (!selected) {
+      this.service.updateRange(null, null)
+    } else if(event.source.value === 'today') {
+      this.selectToday()
+    } else if(event.source.value === 'this_week') {
+      this.selectThisWeek()
+    } else if(event.source.value === 'next_week') {
+      this.selectNextWeek()
+    }
+  }
 }

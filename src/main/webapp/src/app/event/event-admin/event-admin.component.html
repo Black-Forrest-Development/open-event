@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+    <button (click)="back()" mat-mini-fab>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="title ps-2">{{ info?.event?.title }}</span>
+    <div class="flex-fill"></div>
+
+
+    @if (!reloading) {
+      <app-event-action-export [event]="info?.event"></app-event-action-export>
+    }
+
+  </div>
+</mat-toolbar>
+
+<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="info" class="d-flex flex-column gap-2 align-content-stretch p-2">
+  <mat-card class="flex-fill">
+    <mat-card-header class="pb-2"><h5>{{ 'event.admin.registration' | translate }}</h5></mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-2">
+      <app-event-admin-registration [info]="info" class="flex-fill"></app-event-admin-registration>
+    </mat-card-content>
+  </mat-card>
+
+
+  <app-event-admin-share [info]="info" class="flex-fill"></app-event-admin-share>
+
+</div>

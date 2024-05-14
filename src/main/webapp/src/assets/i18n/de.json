@@ -135,6 +135,22 @@
       "firstName": "Vorname",
       "lastName": "Familienname",
       "email": "Email"
+    },
+    "table": {
+      "rank": "Platz",
+      "size": "Personen",
+      "status": "Status",
+      "waitlist": "Warteliste",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Telefon",
+      "mobile": "Mobil",
+      "timestamp": "Timestamp",
+      "enum": {
+        "ACCEPTED": "Bestätigt",
+        "INTERESTED": "Interesiert",
+        "CANCELED": "Abgesagt"
+      }
     }
   },
   "category": {

@@ -1,0 +1,21 @@
+<mat-card class="flex-fill">
+  <mat-card-header class="pb-2">
+    <div class="d-flex flex-row gap-2 align-items-stretch align-content-stretch justify-content-between flex-fill">
+      <h5 class="flex-fill">{{ 'event.admin.share' | translate }}</h5>
+      <div>
+        <mat-slide-toggle #sharing>{{ 'event.sharing' | translate }}</mat-slide-toggle>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="pt-2">
+    <share-buttons theme="modern-dark"
+                   [include]="['copy', 'facebook', 'email', 'messenger', 'line', 'print', 'sms', 'telegram', 'viber', 'whatsapp']"
+                   [showIcon]="true"
+                   [showText]="true"
+                   url="http://localhost"
+                   description="Angular Share Buttons"
+    >
+    </share-buttons>
+  </mat-card-content>
+</mat-card>

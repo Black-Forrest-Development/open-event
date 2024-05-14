@@ -36,6 +36,10 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap-utilities.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/ngx-sharebuttons/themes/circles.scss",
+              "node_modules/ngx-sharebuttons/themes/modern.scss",
               "src/theme.scss",
               "src/styles.scss",
               "node_modules/quill/dist/quill.core.css",

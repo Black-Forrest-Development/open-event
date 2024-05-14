@@ -10,19 +10,19 @@
     <mat-card-content class="pb-2">
       <div class="d-flex flex-column gap-2 align-items-center">
         <mat-chip-listbox class="mat-mdc-chip-set-stacked">
-          <mat-chip-option color="accent" (click)="selectToday()">
+          <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="today">
             <div class="d-flex flex-row gap-2 align-items-center">
               <mat-icon>today</mat-icon>
               {{ 'event.filter.range.today' | translate }}
             </div>
           </mat-chip-option>
-          <mat-chip-option color="accent" (click)="selectThisWeek()">
+          <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="this_week">
             <div class="d-flex flex-row gap-2 align-items-center">
               <mat-icon>date_range</mat-icon>
               {{ 'event.filter.range.week' | translate }}
             </div>
           </mat-chip-option>
-          <mat-chip-option color="accent" (click)="selectNextWeek()">
+          <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="next_week">
             <div class="d-flex flex-row gap-2 align-items-center">
               <mat-icon>next_week</mat-icon>
               {{ 'event.filter.range.next' | translate }}

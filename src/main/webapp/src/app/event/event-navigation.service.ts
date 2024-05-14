@@ -38,4 +38,8 @@ export class EventNavigationService {
   static navigateToEventCopy(router: Router, eventId: number) {
     router.navigate(["/event/copy/" + eventId])
   }
+
+  static navigateToEventAdministration(router: Router, eventId: number) {
+    router.navigate(["/event/admin/" + eventId])
+  }
 }

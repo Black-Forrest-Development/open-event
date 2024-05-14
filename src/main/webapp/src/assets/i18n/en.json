@@ -86,6 +86,10 @@
         "week": "This week",
         "next": "Next week"
       }
+    },
+    "admin": {
+      "registration": "Registration",
+      "share": "Share"
     }
   },
   "registration": {
@@ -135,6 +139,22 @@
       "firstName": "First Name",
       "lastName": "Last Name",
       "email": "Email"
+    },
+    "table": {
+      "rank": "Rank",
+      "size": "Size",
+      "status": "Status",
+      "waitlist": "Waitlist",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "mobile": "Mobile",
+      "timestamp": "Timestamp",
+      "enum": {
+        "ACCEPTED": "Accepted",
+        "INTERESTED": "Interested",
+        "CANCELED": "Canceled"
+      }
     }
   },
   "category": {

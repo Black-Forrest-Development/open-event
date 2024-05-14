@@ -6,7 +6,7 @@
     <span class="title ps-2">{{ info?.event?.title }}</span>
     <div class="flex-fill"></div>
 
-    <ng-container *ngIf="!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit">
+    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit) {
       <button (click)="menu.publishMenuItem.handleClick()" *ngIf="!info?.event?.published" class="action-fab"
               mat-mini-fab>
         <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
@@ -14,24 +14,24 @@
           <mat-spinner diameter="18"></mat-spinner>
         </mat-icon>
       </button>
-    </ng-container>
+    }
 
-    <ng-container *ngIf="!reloading">
+    @if (!reloading) {
       <app-event-action-export [event]="info?.event"></app-event-action-export>
-    </ng-container>
+    }
 
-
-    <ng-container *ngIf="isAdminOrCanEdit">
+    @if (isAdminOrCanEdit) {
       <ng-container *ngFor="let item of menu.menuItems">
         <button (click)="item.handleClick()" class="action-fab" mat-mini-fab>
           <mat-icon>{{ item.icon }}</mat-icon>
         </button>
       </ng-container>
-    </ng-container>
-
-    <button *ngIf="isAdminOrCanEdit" [matMenuTriggerFor]="contextMenu" mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
-    </button>
+    }
+    @if (isAdminOrCanEdit) {
+      <button [matMenuTriggerFor]="contextMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    }
   </div>
 </mat-toolbar>
 

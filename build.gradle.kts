@@ -134,6 +134,9 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.opensearch:opensearch-testcontainers:2.0.1")
+    testImplementation("io.micronaut.test:micronaut-test-rest-assured")
+    testImplementation("io.fusionauth:fusionauth-jwt:5.3.2")
 
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
@@ -142,9 +145,7 @@ dependencies {
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
     implementation("com.jillesvangurp:search-client:2.1.29")
-//    implementation("io.micronaut.opensearch:micronaut-opensearch-restclient")
-//    implementation("org.opensearch.client:opensearch-rest-client:2.12.0")
-//    implementation("org.opensearch.client:opensearch-java:2.6.0")
+
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")
     // biweekly

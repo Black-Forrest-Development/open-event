@@ -1,7 +1,6 @@
 package de.sambalmueslie.openevent.core.logic
 
 import de.sambalmueslie.openevent.TimeBasedTest
-import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.AccountStorage
 import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
 import de.sambalmueslie.openevent.core.event.EventCrudService
@@ -29,9 +28,6 @@ class EventCrudServiceTest : TimeBasedTest() {
 
     @Inject
     lateinit var accountStorage: AccountStorage
-
-    @Inject
-    lateinit var accountService: AccountCrudService
 
     @Inject
     lateinit var service: EventCrudService

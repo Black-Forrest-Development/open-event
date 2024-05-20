@@ -12,7 +12,7 @@ import de.sambalmueslie.openevent.core.search.api.AccountSearchRequest
 import de.sambalmueslie.openevent.core.search.api.AccountSearchResponse
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
-import de.sambalmueslie.openevent.core.search.common.OpenSearchService
+import de.sambalmueslie.openevent.core.search.common.SearchClientFactory
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -26,7 +26,7 @@ open class AccountSearchOperator(
     private val fieldMapping: AccountFieldMappingProvider,
     private val queryBuilder: AccountSearchQueryBuilder,
 
-    openSearch: OpenSearchService
+    openSearch: SearchClientFactory
 ) : BaseOpenSearchOperator<AccountSearchEntry, AccountSearchRequest, AccountSearchResponse>(
     openSearch,
     "oe.account",

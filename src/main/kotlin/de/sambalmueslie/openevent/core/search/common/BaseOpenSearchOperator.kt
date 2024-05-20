@@ -21,7 +21,7 @@ import kotlin.time.Duration.Companion.seconds
 
 
 abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T>>(
-    openSearch: OpenSearchService,
+    openSearch: SearchClientFactory,
     protected val name: String,
     private val logger: Logger
 ) : SearchOperator<T, R, S> {

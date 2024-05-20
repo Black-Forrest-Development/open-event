@@ -8,7 +8,7 @@ import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.search.api.*
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
-import de.sambalmueslie.openevent.core.search.common.OpenSearchService
+import de.sambalmueslie.openevent.core.search.common.SearchClientFactory
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -25,7 +25,7 @@ open class EventSearchOperator(
     private val fieldMapping: EventFieldMappingProvider,
     private val queryBuilder: EventSearchQueryBuilder,
 
-    openSearch: OpenSearchService
+    openSearch: SearchClientFactory
 ) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "oe.event", logger) {
 
     companion object {

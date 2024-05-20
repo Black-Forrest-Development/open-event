@@ -11,7 +11,7 @@ import de.sambalmueslie.openevent.core.search.api.CategorySearchRequest
 import de.sambalmueslie.openevent.core.search.api.CategorySearchResponse
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
-import de.sambalmueslie.openevent.core.search.common.OpenSearchService
+import de.sambalmueslie.openevent.core.search.common.SearchClientFactory
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -25,7 +25,7 @@ open class CategorySearchOperator(
     private val fieldMapping: CategoryFieldMappingProvider,
     private val queryBuilder: CategorySearchQueryBuilder,
 
-    openSearch: OpenSearchService
+    openSearch: SearchClientFactory
 ) : BaseOpenSearchOperator<Category, CategorySearchRequest, CategorySearchResponse>(openSearch, "oe.category", logger) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(CategorySearchOperator::class.java)

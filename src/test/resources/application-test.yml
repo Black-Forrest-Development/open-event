@@ -19,10 +19,6 @@ tracing:
   jaeger:
     enabled: false
 
-solr:
-  enabled: false
-  baseUrl: "http://localhost"
-
 opensearch:
   user: "user"
   password: "password"

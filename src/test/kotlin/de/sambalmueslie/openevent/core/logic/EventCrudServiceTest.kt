@@ -14,6 +14,7 @@ import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.search.event.EventSearchOperator
 import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*
@@ -38,12 +39,17 @@ class EventCrudServiceTest : TimeBasedTest() {
     @Inject
     lateinit var registrationService: RegistrationCrudService
 
+    @Inject
+    lateinit var searchService: EventSearchOperator
+
     private val eventListener = mockk<de.sambalmueslie.openevent.core.event.EventChangeListener>()
     private val locationListener = mockk<LocationChangeListener>()
     private val registrationListener = mockk<RegistrationChangeListener>()
 
     @Test
     fun eventCrud() {
+        searchService.setup()
+
         val actor = accountStorage.create(AccountChangeRequest("user", "", "actor-id"))
         setupListener()
 

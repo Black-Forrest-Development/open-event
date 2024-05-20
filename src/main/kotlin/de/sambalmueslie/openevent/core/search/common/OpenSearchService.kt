@@ -10,13 +10,13 @@ import org.slf4j.LoggerFactory
 @Singleton
 class OpenSearchService(
     private val config: OpenSearchConfig
-) {
+) : SearchClientFactory {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(OpenSearchService::class.java)
     }
 
-    fun getClient(): SearchClient {
+    override fun getClient(): SearchClient {
         return SearchClient(
             KtorRestClient(
                 host = config.host,

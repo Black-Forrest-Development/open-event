@@ -9,8 +9,8 @@ plugins {
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
-    id("io.micronaut.application") version "4.3.8"
-    id("io.micronaut.aot") version "4.3.8"
+    id("io.micronaut.application") version "4.4.0"
+    id("io.micronaut.aot") version "4.4.0"
     jacoco
 }
 
@@ -56,7 +56,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("io.mockk:mockk:1.13.11")
 
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
@@ -94,9 +94,9 @@ dependencies {
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.1")
     // reactor
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")

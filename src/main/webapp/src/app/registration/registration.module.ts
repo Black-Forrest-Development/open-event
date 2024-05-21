@@ -17,6 +17,7 @@ import {
   RegistrationParticipateManualDialogComponent
 } from './registration-participate-manual-dialog/registration-participate-manual-dialog.component';
 import {RegistrationStatusComponent} from './registration-status/registration-status.component';
+import {RegistrationModerationComponent} from './registration-moderation/registration-moderation.component';
 
 
 @NgModule({
@@ -27,11 +28,13 @@ import {RegistrationStatusComponent} from './registration-status/registration-st
     RegistrationCancelDialogComponent,
     RegistrationParticipateAccountDialogComponent,
     RegistrationParticipateManualDialogComponent,
-    RegistrationStatusComponent
+    RegistrationStatusComponent,
+    RegistrationModerationComponent
   ],
   exports: [
     RegistrationDetailsComponent,
-    RegistrationStatusComponent
+    RegistrationStatusComponent,
+    RegistrationModerationComponent
   ],
   imports: [
     CommonModule,

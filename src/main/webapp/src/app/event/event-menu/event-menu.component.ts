@@ -21,7 +21,7 @@ export class EventMenuComponent {
   editMenuItem = new EventMenuItem('edit', 'event.action.edit', this.handleActionEdit.bind(this), false)
   copyMenuItem = new EventMenuItem('content_copy', 'event.action.copy', this.handleActionCopy.bind(this), false)
   deleteMenuItem = new EventMenuItem('delete', 'event.action.delete', this.handleActionDelete.bind(this), false)
-  adminMenuItem = new EventMenuItem('settings', 'event.action.admin', this.handleActionAdmin.bind(this), false)
+  adminMenuItem = new EventMenuItem('admin_panel_settings', 'event.action.admin', this.handleActionAdmin.bind(this), false)
   publishMenuItem = new EventMenuItem('publish', 'event.action.publish', this.handleActionPublish.bind(this), false)
   menuItems = [
     this.editMenuItem,

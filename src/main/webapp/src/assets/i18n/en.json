@@ -101,7 +101,9 @@
       "participateAccount": "Add Account",
       "participateManual": "Add manual",
       "edit": "Change Participation",
-      "cancel": "Cancel Participation"
+      "cancel": "Cancel Participation",
+      "editParticipant": "Change",
+      "removeParticipant": "Remove"
     },
     "people": "people",
     "peopleAmount": "Amount of people",

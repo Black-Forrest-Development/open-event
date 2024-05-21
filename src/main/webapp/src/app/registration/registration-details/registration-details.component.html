@@ -39,15 +39,6 @@
         <mat-icon>person_remove</mat-icon>
         {{ 'registration.action.cancel' | translate }}
       </button>
-      <div class="flex-fill"></div>
-      <button (click)="participateAccount()" *ngIf="adminOrManager" color="primary" mat-flat-button>
-        <mat-icon>admin_panel_settings</mat-icon>
-        {{ 'registration.action.participateAccount' | translate }}
-      </button>
-      <button (click)="participateManual()" *ngIf="adminOrManager" color="primary" mat-flat-button>
-        <mat-icon>admin_panel_settings</mat-icon>
-        {{ 'registration.action.participateManual' | translate }}
-      </button>
     </div>
   </mat-card-actions>
 </mat-card>
@@ -55,14 +46,6 @@
 <ng-template #participant let-part='part'>
   <div class="d-flex flex-row gap-2 align-items-center justify-content-between">
     <app-account [account]="part.author" style="flex: 0 1 calc(25%);"></app-account>
-    <span *ngIf="part.size > 1">{{ part.size }} {{ 'registration.people' |translate }}</span>
-    <div *ngIf="adminOrManager" class="d-flex flex-row gap-2 align-items-center">
-      <button (click)="editParticipant(part)" color="primary" mat-mini-fab>
-        <mat-icon>manage_accounts</mat-icon>
-      </button>
-      <button (click)="removeParticipant(part)" color="primary" mat-mini-fab>
-        <mat-icon>person_remove</mat-icon>
-      </button>
-    </div>
+    <span>{{ part.size }} {{ 'registration.people' |translate }}</span>
   </div>
 </ng-template>

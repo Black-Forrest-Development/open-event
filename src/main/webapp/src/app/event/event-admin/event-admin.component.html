@@ -17,15 +17,5 @@
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 
 <div *ngIf="info" class="d-flex flex-column gap-2 align-content-stretch p-2">
-  <mat-card class="flex-fill">
-    <mat-card-header class="pb-2"><h5>{{ 'event.admin.registration' | translate }}</h5></mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content class="pt-2">
-      <app-event-admin-registration [info]="info" class="flex-fill"></app-event-admin-registration>
-    </mat-card-content>
-  </mat-card>
-
-
-  <app-event-admin-share [info]="info" class="flex-fill"></app-event-admin-share>
-
+  <app-registration-moderation *ngIf="info.registration" [data]="info.registration"></app-registration-moderation>
 </div>

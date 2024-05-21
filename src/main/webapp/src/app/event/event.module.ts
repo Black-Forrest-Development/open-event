@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-
 import {EventRoutingModule} from './event-routing.module';
 import {MaterialModule} from "../material/material.module";
 import {EventBoardComponent} from './event-board/event-board.component';
@@ -33,7 +32,6 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import {EventActionExportComponent} from './event-action-export/event-action-export.component';
 import {EventBoardFilterComponent} from "./event-board-filter/event-board-filter.component";
 import {EventAdminComponent} from './event-admin/event-admin.component';
-import {EventAdminRegistrationComponent} from './event-admin-registration/event-admin-registration.component';
 import {EventAdminShareComponent} from './event-admin-share/event-admin-share.component';
 import {ShareIconsModule} from "ngx-sharebuttons/icons";
 import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
@@ -61,7 +59,6 @@ import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
     EventActionExportComponent,
     EventBoardFilterComponent,
     EventAdminComponent,
-    EventAdminRegistrationComponent,
     EventAdminShareComponent
   ],
   exports: [

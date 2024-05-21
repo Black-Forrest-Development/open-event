@@ -13,6 +13,7 @@ interface ShareAPI : CrudAPI<String, Share, ShareChangeRequest> {
         const val PERMISSION_ADMIN = "openevent.share.admin"
     }
 
+    fun findByEvent(auth: Authentication, eventId: Long): Share?
     fun setPublished(auth: Authentication, id: String, value: PatchRequest<Boolean>): Share?
     fun getInfo(auth: Authentication?, id: String): SharedInfo?
 }

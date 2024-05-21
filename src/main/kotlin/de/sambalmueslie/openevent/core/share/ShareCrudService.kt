@@ -102,5 +102,10 @@ class ShareCrudService(
     private fun Participant.toSharedParticipant(): SharedParticipant {
         return SharedParticipant(size, status, rank, waitingList, timestamp)
     }
+
+    fun findByEvent(eventId: Long): Share? {
+        val event = eventService.get(eventId) ?: return null
+        return storage.findByEvent(event)
+    }
 }
 

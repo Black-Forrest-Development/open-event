@@ -4,51 +4,12 @@
 @if (info) {
   <div class="d-flex flex-lg-row flex-column gap-2 flex-fill p-2">
     <div class="d-flex flex-column gap-2 left-column">
-      <!-- INFO-->
-      <mat-card>
-        <mat-card-header>
-          <div class="d-flex flex-row gap-2 align-items-center pb-2">
-            <app-account [account]="info.event.owner"></app-account>
-            <div class="flex-fill"></div>
-            <div>{{ info.event.start | date:'fullDate' }}</div>
-            <div>{{ info.event.start | date:'shortTime' }} - {{ info.event.finish | date:'shortTime' }}</div>
-          </div>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <img *ngIf="info.event.imageUrl && info.event.imageUrl.length > 0" alt="" mat-card-image
-             src="{{info.event.imageUrl.length}}">
-        <mat-card-content>
-          <div [innerHTML]="info.event.longText" class="pt-3"></div>
-        </mat-card-content>
-        <ng-container *ngIf="info.categories.length > 0">
-          <div class="pt-3"></div>
-          <mat-divider></mat-divider>
-          <mat-card-actions>
-            <mat-chip-listbox>
-              <ng-container *ngFor="let category of info.categories">
-                <mat-chip>{{ category.name }}</mat-chip>
-              </ng-container>
-            </mat-chip-listbox>
-          </mat-card-actions>
-        </ng-container>
-      </mat-card>
-      <!-- Location -->
-      <ng-container *ngIf="info.location">
-        <mat-card>
-          <mat-card-header class="pb-2">
-            <mat-card-title>{{ info.location.street }} {{ info.location.streetNumber }} {{ info.location.additionalInfo }}</mat-card-title>
-            <mat-card-subtitle>{{ info.location.zip }} {{ info.location.city }} {{ info.location.country }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <app-location-map [data]="info.location" mat-card-image></app-location-map>
-        </mat-card>
-
-
-      </ng-container>
+      <app-event-details-info [info]="info"></app-event-details-info>
+      <app-event-details-location [info]="info"></app-event-details-location>
     </div>
     <div class="d-flex flex-column gap-2 right-column">
       <app-registration-details *ngIf="info.registration" [data]="info.registration"></app-registration-details>
-
+      <app-share-details [data]="info.event"></app-share-details>
     </div>
   </div>
 }

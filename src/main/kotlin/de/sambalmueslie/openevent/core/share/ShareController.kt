@@ -37,6 +37,19 @@ class ShareController(
         }
     }
 
+    @Get("/find/by/event/{eventId}")
+    override fun findByEvent(auth: Authentication, eventId: Long): Share? {
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            if (isAdmin(auth)) {
+                service.findByEvent(eventId)
+            } else {
+                val account = accountService.get(auth) ?: return@checkPermission null
+                val result = service.findByEvent(eventId) ?: return@checkPermission null
+                if (result.owner.id == account.id) result else null
+            }
+        }
+    }
+
 
     @Get("/{id}/info")
     @Secured(SecurityRule.IS_ANONYMOUS)

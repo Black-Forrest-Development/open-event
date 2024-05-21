@@ -9,3 +9,11 @@ export interface Share {
   created: string,
   changed: string | null
 }
+
+export class ShareChangeRequest {
+  constructor(
+    public eventId: number,
+    public published: boolean,
+  ) {
+  }
+}

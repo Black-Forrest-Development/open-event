@@ -23,7 +23,7 @@ export class DashboardComponent implements AfterViewInit {
 
 
   lang: string = 'de'
-  collapsed: boolean = true
+  collapsed: boolean = false
   @ViewChild('drawer') drawer: MatSidenav | undefined
   navItems: MainNavItem[] = [
     new MainNavItem('/event', 'event.type', 'event_note'),

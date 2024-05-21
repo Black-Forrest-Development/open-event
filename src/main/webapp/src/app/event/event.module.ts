@@ -35,6 +35,9 @@ import {EventAdminComponent} from './event-admin/event-admin.component';
 import {EventAdminShareComponent} from './event-admin-share/event-admin-share.component';
 import {ShareIconsModule} from "ngx-sharebuttons/icons";
 import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
+import {EventDetailsInfoComponent} from './event-details-info/event-details-info.component';
+import {EventDetailsLocationComponent} from './event-details-location/event-details-location.component';
+import {ShareModule} from "../share/share.module";
 
 
 @NgModule({
@@ -59,7 +62,9 @@ import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
     EventActionExportComponent,
     EventBoardFilterComponent,
     EventAdminComponent,
-    EventAdminShareComponent
+    EventAdminShareComponent,
+    EventDetailsInfoComponent,
+    EventDetailsLocationComponent
   ],
   exports: [
     EventChangeFormEventComponent,
@@ -83,6 +88,7 @@ import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
     FormsModule,
     ShareButtonsModule,
     ShareIconsModule,
+    ShareModule,
   ]
 })
 export class EventModule {

@@ -86,10 +86,6 @@
         "week": "This week",
         "next": "Next week"
       }
-    },
-    "admin": {
-      "registration": "Registration",
-      "share": "Share"
     }
   },
   "registration": {
@@ -280,6 +276,12 @@
       "change": {
         "title": "Change address"
       }
+    }
+  },
+  "share": {
+    "title": "Share",
+    "action": {
+      "enable": "Enable Sharing"
     }
   }
 }

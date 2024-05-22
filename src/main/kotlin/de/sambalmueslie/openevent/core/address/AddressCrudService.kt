@@ -2,7 +2,7 @@ package de.sambalmueslie.openevent.core.address
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
-import de.sambalmueslie.openevent.common.PageSequence
+import de.sambalmueslie.openevent.common.PageableSequence
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
@@ -54,23 +54,22 @@ class AddressCrudService(
     }
 
     fun importLocations(account: Account): Page<Address> {
-        val data = PageSequence { eventService.getAllForAccount(account, it) }
+        val data = PageableSequence { eventService.getOwned(account, it) }
         data.forEach {
-            val eventIds = it.content.map { e -> e.id }.toSet()
-            val locations = locationService.findByEventIds(eventIds)
-            locations.map { l ->
-                AddressChangeRequest(
-                    l.street,
-                    l.streetNumber,
-                    l.zip,
-                    l.city,
-                    l.country,
-                    l.additionalInfo,
-                    l.lat,
-                    l.lon
-                )
-            }.forEach { create(account, account, it) }
+            val l = locationService.findByEvent(it) ?: return@forEach
+            val request = AddressChangeRequest(
+                l.street,
+                l.streetNumber,
+                l.zip,
+                l.city,
+                l.country,
+                l.additionalInfo,
+                l.lat,
+                l.lon
+            )
+            create(account, account, request)
         }
+
         return getAllForAccount(account, Pageable.from(0, 20))
     }
 

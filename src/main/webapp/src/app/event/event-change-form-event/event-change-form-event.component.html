@@ -74,6 +74,30 @@
           <mat-hint align="start">{{ 'event.form.hint.endTime'| translate }}</mat-hint>
         </mat-form-field>
       </div>
+
+      <div class="d-flex flex-column flex-md-row flex-lg-row flex-xl-row flex-sm-column gap-3 align-items-stretch">
+        <mat-form-field class="dense-1" style="flex: 1 1 auto">
+          <mat-label>{{ 'event.form.tags' | translate }}</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags" formControlName="tags">
+            @for (tag of tags.value; track tag) {
+              <mat-chip-row (removed)="removeTag(tag)">
+                {{ tag }}
+                <button matChipRemove aria-label="'remove ' + keyword">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input placeholder="New tag..."
+                 [matChipInputFor]="chipGrid"
+                 (matChipInputTokenEnd)="addTag($event)"
+                 matChipInputAddOnBlur="true"
+          />
+          <mat-hint align="start">{{ 'event.form.hint.tags'| translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+
+
     </div>
   </form>
 </ng-container>

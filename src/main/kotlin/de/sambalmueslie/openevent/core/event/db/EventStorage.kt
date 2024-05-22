@@ -26,6 +26,7 @@ interface EventStorage : Storage<Long, Event, EventChangeRequest> {
 
     fun getAllForAccount(account: Account, pageable: Pageable): Page<Event>
     fun getCategoriesByEventIds(eventIds: Set<Long>): Map<Long, List<Category>>
+    fun getOwned(owner: Account, pageable: Pageable): Page<Event>
 
 
 }

@@ -18,6 +18,8 @@ export interface Event {
   hasLocation: boolean,
   hasRegistration: boolean,
   published: boolean,
+
+  tags: string[]
 }
 
 export interface EventInfo {
@@ -41,7 +43,8 @@ export class EventChangeRequest {
     public categoryIds: number[],
     public location: LocationChangeRequest,
     public registration: RegistrationChangeRequest,
-    public published: boolean
+    public published: boolean,
+    public tags: string[]
   ) {
   }
 }

@@ -42,7 +42,8 @@ export class EventCreateComponent {
       iconUrl: this.fb.control(''),
       longText: this.fb.control('', Validators.required),
       shortText: this.fb.control(''),
-      title: this.fb.control('', Validators.required)
+      title: this.fb.control('', Validators.required),
+      tags: this.fb.array([]),
     })
     this.locationForm = this.fb.group({
       city: ['', Validators.required],

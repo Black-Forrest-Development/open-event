@@ -54,13 +54,15 @@
       "country": "Country",
       "maxGuests": "Max guest amount",
       "category": "Categories",
+      "tags": "Hashtags",
       "hint": {
         "Title": "Short and powerfull description of the event (max 40 chars)",
         "LongDescr": "What is the event about, what is required to bring and some additonal information",
         "startDate": "The date of the event",
         "startTime": "The time the event begins",
         "endTime": "The time the event probably ends",
-        "maxGuest": "How many guests coult attend to the event"
+        "maxGuest": "How many guests coult attend to the event",
+        "tags": "Add some custom hashtags"
       },
       "error": {
         "title": "Please input some title",

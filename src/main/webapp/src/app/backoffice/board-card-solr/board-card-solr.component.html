@@ -1,13 +1,13 @@
 <mat-card>
-  <mat-card-header class="px-2 py-2 gap-2 align-items-center">
+  <mat-card-header class="!pb-2 gap-2 items-center">
     <mat-icon>manage_search</mat-icon>
-    <div class="header flex-fill">{{ 'backoffice.solr.title' | translate }}</div>
+    <div class="header flex-auto">{{ 'backoffice.solr.title' | translate }}</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
     <mat-list role="list">
       <mat-list-item *ngIf="isAccountAdmin" role="listitem">
-        <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="flex flex-row justify-between items-center">
           <span>{{ 'backoffice.solr.action.account'| translate }}</span>
           <button (click)="buildAccountIndex()" color="primary" mat-mini-fab>
             <mat-icon>person</mat-icon>
@@ -16,7 +16,7 @@
       </mat-list-item>
 
       <mat-list-item *ngIf="isCategoryAdmin" role="listitem">
-        <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="flex flex-row justify-between items-center">
           <span>{{ 'backoffice.solr.action.category'| translate }}</span>
           <button (click)="buildCategoryIndex()" color="primary" mat-mini-fab>
             <mat-icon>label</mat-icon>
@@ -25,7 +25,7 @@
       </mat-list-item>
 
       <mat-list-item *ngIf="isEventAdmin" role="listitem">
-        <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="flex flex-row justify-between items-center">
           <span>{{ 'backoffice.solr.action.event'| translate }}</span>
           <button (click)="buildEventIndex()" color="primary" mat-mini-fab>
             <mat-icon>event_note</mat-icon>

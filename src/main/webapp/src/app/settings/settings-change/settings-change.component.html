@@ -1,6 +1,6 @@
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <div class="d-flex flex-column p-2 mt-5 container">
+  <div class="flex flex-col p-2 mt-5 container">
 
     <mat-form-field appearance="outline">
       <mat-label>{{ 'SETTING.Field.Key' | translate }}</mat-label>
@@ -18,7 +18,7 @@
     </mat-form-field>
 
 
-    <div class="d-flex flex-row align-self-stretch">
+    <div class="flex flex-row align-self-stretch">
       <button class="flex-grow-1 me-3" color="primary" mat-raised-button type="submit">
         <mat-icon>save</mat-icon>
         {{ "ACTION.Save" | translate }}

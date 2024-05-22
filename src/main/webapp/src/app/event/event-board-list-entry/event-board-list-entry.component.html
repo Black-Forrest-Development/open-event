@@ -1,41 +1,41 @@
 <ng-container *ngIf="info">
-  <div class="d-flex flex-column gap-2 align-items-stretch align-content-stretch px-4 py-2 flex-fill list-entry"
+  <div class="flex flex-col gap-2 align-items-stretch content-stretch px-4 py-2 flex-auto list-entry"
        routerLink="./details/{{info.id}}">
 
     <app-account [account]="info.owner"></app-account>
 
-    <div class="d-flex flex-row flex-wrap flex-fill justify-content-between gap-2">
+    <div class="flex flex-row flex-wrap flex-auto justify-between gap-2">
 
-      <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <div class="flex flex-row gap-2 items-center flex-auto">
         <mat-icon>schedule</mat-icon>
-        <div class="d-flex flex-row flex-wrap gap-1">
+        <div class="flex flex-row flex-wrap gap-1">
           <div>{{ info.start | date:'fullDate' }}</div>
           <div>{{ info.start | date:'shortTime' }} - {{ info.finish | date:'shortTime' }}</div>
         </div>
       </div>
 
 
-      <div *ngIf="info.hasLocation" class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <div *ngIf="info.hasLocation" class="flex flex-row gap-2 items-center flex-auto">
         <mat-icon>location_pin</mat-icon>
-        <div class="d-flex flex-row flex-wrap gap-1">
+        <div class="flex flex-row flex-wrap gap-1">
           <div>{{ info.street }} {{ info.streetNumber }}</div>
           <div>{{ info.zip }} {{ info.city }}</div>
         </div>
       </div>
     </div>
 
-    <div class="d-flex flex-row flex-wrap flex-fill justify-content-between gap-2">
-      <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+    <div class="flex flex-row flex-wrap flex-auto justify-between gap-2">
+      <div class="flex flex-row gap-2 items-center flex-auto">
         <mat-icon>description</mat-icon>
         <div>{{ info.title }}</div>
       </div>
 
-      <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+      <div class="flex flex-row gap-2 items-center flex-auto">
         <app-registration-status [entry]="info"></app-registration-status>
       </div>
     </div>
 
-    <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+    <div class="flex flex-row gap-2 items-center flex-auto">
       <mat-chip-listbox>
         <ng-container *ngFor="let category of info.categories">
           <mat-chip>{{ category }}</mat-chip>

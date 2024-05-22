@@ -1,4 +1,4 @@
-<mat-form-field *ngIf="formCtrl" class="flex-fill dense-1 w-100">
+<mat-form-field *ngIf="formCtrl" class="flex-auto dense-1 w-full">
   <mat-label>{{ placeholder }}</mat-label>
   <mat-chip-grid #chipGrid aria-label="Entry selection">
     <mat-chip-row (removed)="handleRemoveEvent(entry)" *ngFor="let entry of selectedEntries" [removable]="removable">

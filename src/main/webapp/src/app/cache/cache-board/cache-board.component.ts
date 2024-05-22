@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {Location} from "@angular/common";
 import {CacheService} from "../model/cache.service";
-import {HotToastService} from "@ngxpert/hot-toast";
 import {CacheInfo} from "../model/cache-api";
 import {EChartsOption} from "echarts";
 
@@ -41,9 +39,7 @@ export class CacheBoardComponent {
   values: EChartsOption = {}
 
   constructor(
-    private location: Location,
     private service: CacheService,
-    private toast: HotToastService
   ) {
   }
 
@@ -150,7 +146,7 @@ export class CacheBoardComponent {
   }
 
   private handleUpdate(d: CacheInfo) {
-    let index = this.info.indexOf(d)
+    let index = this.info.findIndex(value => d.key === value.key)
     if (index < 0) {
       this.info.push(d)
     } else {

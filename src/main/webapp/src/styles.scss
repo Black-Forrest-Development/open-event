@@ -1,4 +1,7 @@
 @use '@angular/material' as mat;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @include mat.core();
 
@@ -81,3 +84,6 @@ body {
   min-height: 48px;
 }
 
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}

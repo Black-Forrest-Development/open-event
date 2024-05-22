@@ -1,36 +1,36 @@
-<div class="d-flex flex-column gap-2 h-100">
-  <mat-card class="h-100">
-    <mat-card-header class="p-2" style="height: 35px;">
-      <mat-card-title class="d-flex flex-row gap-2 align-items-center">
+<div class="flex flex-col gap-2 h-full">
+  <mat-card class="h-full">
+    <mat-card-header class="!p-2" style="height: 35px;">
+      <mat-card-title class="flex flex-row gap-2 items-center">
         <mat-icon>filter_list</mat-icon>
         Filter
       </mat-card-title>
     </mat-card-header>
-    <mat-divider class="pb-2"></mat-divider>
-    <mat-card-content class="pb-2">
-      <div class="d-flex flex-column gap-2 align-items-center">
+    <mat-divider class="!pb-2"></mat-divider>
+    <mat-card-content class="!pb-2">
+      <div class="flex flex-col gap-2 items-center">
         <mat-chip-listbox class="mat-mdc-chip-set-stacked">
           <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="today">
-            <div class="d-flex flex-row gap-2 align-items-center">
+            <div class="flex flex-row gap-2 items-center">
               <mat-icon>today</mat-icon>
               {{ 'event.filter.range.today' | translate }}
             </div>
           </mat-chip-option>
           <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="this_week">
-            <div class="d-flex flex-row gap-2 align-items-center">
+            <div class="flex flex-row gap-2 items-center">
               <mat-icon>date_range</mat-icon>
               {{ 'event.filter.range.week' | translate }}
             </div>
           </mat-chip-option>
           <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="next_week">
-            <div class="d-flex flex-row gap-2 align-items-center">
+            <div class="flex flex-row gap-2 items-center">
               <mat-icon>next_week</mat-icon>
               {{ 'event.filter.range.next' | translate }}
             </div>
           </mat-chip-option>
         </mat-chip-listbox>
 
-        <div class="flex-fill">
+        <div class="flex-auto">
           <mat-form-field class="dense-1" subscriptSizing="dynamic">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [formGroup]="service.range" [rangePicker]="picker">
@@ -52,10 +52,10 @@
       </div>
     </mat-card-content>
     @if (allCategories.length > 0) {
-      <mat-divider class="pb-2"></mat-divider>
-      <mat-card-content class="pb-2">
+      <mat-divider class="!pb-2"></mat-divider>
+      <mat-card-content class="!pb-2">
 
-        <div class="flex-fill">
+        <div class="flex-auto">
           @if (reloadingCategories) {
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
           } @else {
@@ -69,12 +69,12 @@
         </div>
       </mat-card-content>
     }
-    <mat-divider class="pb-2"></mat-divider>
-    <mat-card-content class="pb-2">
-      <div class="d-flex flex-column gap-2 align-content-stretch align-items-stretch">
+    <mat-divider class="!pb-2"></mat-divider>
+    <mat-card-content class="!pb-2">
+      <div class="flex flex-col gap-2 content-stretch align-items-stretch">
 
         <button mat-flat-button (click)="service.showHistory = !service.showHistory"
-                [color]="service.showHistory ? 'accent' : 'primary'" class="flex-fill">
+                [color]="service.showHistory ? 'accent' : 'primary'" class="flex-auto">
           <mat-icon>history</mat-icon>
           {{ 'event.filter.history' | translate }}
         </button>
@@ -98,10 +98,10 @@
         </button>
       </div>
     </mat-card-content>
-    <div class="flex-fill"></div>
-    <mat-divider class="pb-2"></mat-divider>
+    <div class="flex-auto"></div>
+    <mat-divider class="!pb-2"></mat-divider>
     <mat-card-content>
-      <div class="d-flex flex-column gap-2 align-content-stretch align-items-stretch">
+      <div class="flex flex-col gap-2 content-stretch align-items-stretch">
         <button mat-flat-button (click)="service.resetFilter()" color="warn">
           <mat-icon>cancel</mat-icon>
           {{ 'event.filter.reset' | translate }}

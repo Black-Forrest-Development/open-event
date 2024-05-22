@@ -1,9 +1,9 @@
 @if (info) {
   <mat-card>
     <mat-card-header>
-      <div class="d-flex flex-row gap-2 align-items-center pb-2">
+      <div class="flex flex-row gap-2 items-center pb-2">
         <app-account [account]="info.event.owner"></app-account>
-        <div class="flex-fill"></div>
+        <div class="flex-auto"></div>
         <div>{{ info.event.start | date:'fullDate' }}</div>
         <div>{{ info.event.start | date:'shortTime' }} - {{ info.event.finish | date:'shortTime' }}</div>
       </div>
@@ -17,7 +17,7 @@
     <ng-container *ngIf="info.categories.length > 0 || info.event.tags.length > 0">
       <div class="pt-3"></div>
       <mat-divider></mat-divider>
-      <mat-card-actions class="d-flex flex-row flex-wrap gap-2">
+      <mat-card-actions class="flex flex-row flex-wrap gap-2">
         <mat-chip-listbox>
           <ng-container *ngFor="let category of info.categories">
             <mat-chip color="primary">

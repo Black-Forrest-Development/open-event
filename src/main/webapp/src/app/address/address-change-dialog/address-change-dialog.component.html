@@ -7,10 +7,10 @@
 </h1>
 <div mat-dialog-content>
   <form [formGroup]="fg">
-    <div class="d-flex flex-column gap-2 py-2">
-      <div class="d-flex flex-column gap-2 align-items-stretch flex-fill pt-2">
+    <div class="flex flex-col gap-2 py-2">
+      <div class="flex flex-col gap-2 align-items-stretch flex-auto pt-2">
 
-        <div class="d-flex flex-row gap-3">
+        <div class="flex flex-row gap-3">
           <mat-form-field class="dense-1" style="flex: 1 1 auto">
             <mat-label>{{ 'event.form.street' | translate }}</mat-label>
             <input formControlName="street" matInput required>
@@ -24,7 +24,7 @@
           <mat-label>{{ 'event.form.info' | translate }}</mat-label>
           <input formControlName="additionalInfo" matInput>
         </mat-form-field>
-        <div class="d-flex flex-row gap-3">
+        <div class="flex flex-row gap-3">
           <mat-form-field class="dense-1" style="flex: 0 1 200px">
             <mat-label>{{ 'event.form.zip' | translate }}</mat-label>
             <input formControlName="zip" matInput required>

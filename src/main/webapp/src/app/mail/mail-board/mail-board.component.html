@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+  <div class="flex flex-row gap-2 flex-auto items-center">
     <h3>{{ 'mail.title' | translate }}</h3>
 
-    <div class="d-flex flex-row gap-2 flex-fill align-items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
+    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
       <mat-form-field class="dense-1" style="flex: 1 1 calc(50%);" subscriptSizing="dynamic">
         <mat-label>{{ 'mail.search' | translate }}</mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" [disabled]="reloading" matInput placeholder="" value="">
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="flex-fill"></div>
+    <div class="flex-auto"></div>
     <button (click)="reload()" color="primary" mat-mini-fab>
       <mat-icon>refresh</mat-icon>
     </button>

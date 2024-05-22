@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <div class="d-flex flex-row gap-4 flex-fill align-items-center">
+  <div class="flex flex-row gap-4 flex-auto items-center">
     <div><h3>{{ 'history.title' | translate }}</h3></div>
 
-    <!--    <div class="d-flex flex-row gap-2 flex-fill align-items-center">-->
+    <!--    <div class="flex flex-row gap-2 flex-auto items-center">-->
     <!--      <mat-form-field subscriptSizing="dynamic" class="dense-1" style="flex: 1 1 calc(50%);">-->
     <!--        <mat-label>{{"history.filter.range" | translate}}</mat-label>-->
     <!--        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">-->
@@ -17,7 +17,7 @@
     <!--      </mat-form-field>-->
     <!--    </div>-->
 
-    <div class="flex-fill"></div>
+    <div class="flex-auto"></div>
     <button (click)="reload()" color="primary" mat-mini-fab>
       <mat-icon>refresh</mat-icon>
     </button>
@@ -27,7 +27,7 @@
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 <div class="p-2">
 
-  <div class="d-flex flex-column gap-2">
+  <div class="flex flex-col gap-2">
     <ng-container *ngFor="let d of data ">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -40,8 +40,8 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="d-flex flex-column flex-fill">
-          <table [dataSource]="d.entries" class="flex-fill" mat-table>
+        <div class="flex flex-col flex-auto">
+          <table [dataSource]="d.entries" class="flex-auto" mat-table>
 
             <ng-container matColumnDef="timestamp">
               <th *matHeaderCellDef mat-header-cell> {{ 'history.table.timestamp' | translate }}</th>

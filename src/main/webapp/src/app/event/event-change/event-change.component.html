@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+  <div class="flex flex-row gap-2 flex-auto items-center">
     <button (click)="cancel()" mat-mini-fab>
       <mat-icon>arrow_back</mat-icon>
     </button>
@@ -7,14 +7,14 @@
   </div>
 </mat-toolbar>
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-<div class="d-flex flex-row gap-2 justify-content-start align-content-stretch">
-  <div class="d-flex flex-column gap-2 p-2 flex-fill">
+<div class="flex flex-row gap-2 justify-content-start content-stretch">
+  <div class="flex flex-col gap-2 p-2 flex-auto">
     <mat-card>
       <mat-stepper #stepper [orientation]="(stepperOrientation | async)!">
         <mat-step [stepControl]="eventForm" errorMessage="{{'event.step.incomplete' | translate}}"
                   label="{{'event.step.event' | translate}}">
           <app-event-change-form-event [form]="eventForm" [hiddenFields]="hiddenFields"></app-event-change-form-event>
-          <div class="d-flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-2">
             <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
             <button (click)="toggleHelp('event')" color="accent" mat-flat-button>
               <mat-icon>support</mat-icon>
@@ -27,7 +27,7 @@
           <app-event-change-form-location [form]="locationForm"
                                           [hiddenFields]="hiddenFields">
           </app-event-change-form-location>
-          <div class="d-flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-2">
             <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
             <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
             ,
@@ -41,7 +41,7 @@
                   label="{{'event.step.registration' | translate}}">
           <app-event-change-form-registration [form]="registrationForm" [hiddenFields]="hiddenFields">
           </app-event-change-form-registration>
-          <div class="d-flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-2">
             <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
             <button (click)="submit()" [disabled]="!fg.valid || !fg.touched || reloading" color="accent" mat-flat-button
                     type="submit">
@@ -59,7 +59,7 @@
       </mat-stepper>
     </mat-card>
   </div>
-  <div *ngIf="helpVisible" class="d-flex flex-column gap-2 p-2" style="flex: 1 1 250px;">
+  <div *ngIf="helpVisible" class="flex flex-col gap-2 p-2" style="flex: 1 1 250px;">
     <app-event-change-help [step]="stepper.selectedIndex"></app-event-change-help>
   </div>
 </div>

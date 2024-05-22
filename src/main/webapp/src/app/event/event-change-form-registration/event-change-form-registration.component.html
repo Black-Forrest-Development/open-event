@@ -1,6 +1,6 @@
 <ng-container *ngIf="fg">
   <form [formGroup]="fg">
-    <div class="d-flex flex-column gap-2 align-items-stretch flex-fill pt-2">
+    <div class="flex flex-col gap-2 align-items-stretch flex-auto pt-2">
       <mat-form-field class="dense-1" style="flex: 1 1 auto">
         <mat-label>{{ 'event.form.maxGuests' | translate }}</mat-label>
         <input formControlName="maxGuestAmount" matInput required type="number">

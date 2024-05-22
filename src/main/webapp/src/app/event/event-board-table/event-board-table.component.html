@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="service.reloading | async" mode="indeterminate"></mat-progress-bar>
 
 
-<div class="d-flex flex-column gap-2">
+<div class="flex flex-col gap-2">
   <mat-card>
 
     <table [dataSource]="service.entries" mat-table>
@@ -16,9 +16,9 @@
       <!-- Period Column -->
       <ng-container matColumnDef="period">
         <td *matCellDef="let info" mat-cell>
-          <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+          <div class="flex flex-row gap-2 items-center flex-auto">
             <mat-icon>schedule</mat-icon>
-            <div class="d-flex flex-column gap-1">
+            <div class="flex flex-col gap-1">
               <div>{{ info.start | date:'fullDate' }}</div>
               <div>{{ info.start | date:'shortTime' }} - {{ info.finish | date:'shortTime' }}</div>
             </div>
@@ -29,9 +29,9 @@
       <!-- Location Column -->
       <ng-container matColumnDef="location">
         <td *matCellDef="let info" mat-cell>
-          <div *ngIf="info.hasLocation" class="d-flex flex-row gap-2 align-items-center flex-fill">
+          <div *ngIf="info.hasLocation" class="flex flex-row gap-2 items-center flex-auto">
             <mat-icon>location_pin</mat-icon>
-            <div class="d-flex flex-column gap-1">
+            <div class="flex flex-col gap-1">
               <div>{{ info.street }} {{ info.streetNumber }}</div>
               <div>{{ info.zip }} {{ info.city }}</div>
             </div>
@@ -42,7 +42,7 @@
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <td *matCellDef="let info" mat-cell>
-          <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+          <div class="flex flex-row gap-2 items-center flex-auto">
             <mat-icon>description</mat-icon>
             <div>{{ info.title }}</div>
           </div>
@@ -52,7 +52,7 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <td *matCellDef="let info" mat-cell>
-          <div class="d-flex flex-row gap-2 align-items-center flex-fill">
+          <div class="flex flex-row gap-2 items-center flex-auto">
             <app-registration-status [entry]="info"></app-registration-status>
           </div>
         </td>
@@ -61,7 +61,7 @@
       <!-- Category Column -->
       <ng-container matColumnDef="category">
         <td *matCellDef="let info" mat-cell>
-          <div class="d-flex flex-row flex-wrap gap-2 align-items-center flex-fill">
+          <div class="flex flex-row flex-wrap gap-2 items-center flex-auto">
             <mat-chip-listbox>
               <ng-container *ngFor="let category of info.categories">
                 <mat-chip>{{ category }}</mat-chip>
@@ -74,7 +74,7 @@
       <!-- Publish Column -->
       <ng-container matColumnDef="publish">
         <td *matCellDef="let info" mat-cell>
-          <div class="d-flex flex-row flex-wrap">
+          <div class="flex flex-row flex-wrap">
             <button *ngIf="!info.published" class="action-fab" mat-mini-fab>
               <mat-icon>unpublished</mat-icon>
             </button>

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
-  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+  <div class="flex flex-row gap-2 flex-auto items-center">
 
-    <div class="d-flex flex-row gap-2 flex-fill align-items-center" style="flex: 0 1 calc(50% - .5rem - 100px)">
+    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 0 1 calc(50% - .5rem - 100px)">
       <mat-form-field class="dense-1" style="flex: 0 1 calc(50%);" subscriptSizing="dynamic">
         <mat-label>{{ 'setting.search' | translate }}</mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" [disabled]="reloading" matInput placeholder="" value="">
@@ -12,7 +12,7 @@
 
     </div>
 
-    <div class="flex-fill"></div>
+    <div class="flex-auto"></div>
 
     <button mat-icon-button>
       <mat-icon>more_vert</mat-icon>
@@ -23,7 +23,7 @@
 
 
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-<div class="d-flex flex-column gap-2 p-2 ">
+<div class="flex flex-col gap-2 p-2 ">
   <mat-card>
     <table [dataSource]="data" mat-table>
       <caption>Setting Entries</caption>

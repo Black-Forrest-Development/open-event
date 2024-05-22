@@ -54,13 +54,15 @@
       "country": "Land",
       "maxGuests": "Teilnehmer",
       "category": "Kategorien",
+      "tags": "Hashtags",
       "hint": {
         "Title": "Kurze und prägnante Bezeichnung der Veranstaltung (maximal 40 Zeichen)",
         "LongDescr": "Kurze Beschreibung, muss etwas mitgebracht werden, was ist sonst noch wichtig?",
         "startDate": "Datum der Veranstaltung",
         "startTime": "Beginn der Veranstaltung",
         "endTime": "Voraussichtliches Ende der Veranstaltung",
-        "maxGuest": "Wie viele Besucher/Gäste können an der Veranstaltung teilnehmen?"
+        "maxGuest": "Wie viele Besucher/Gäste können an der Veranstaltung teilnehmen?",
+        "tags": "Eigene Hashtags hinzufügen"
       },
       "error": {
         "title": "Bitte einen Titel angeben",

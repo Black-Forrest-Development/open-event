@@ -1,11 +1,11 @@
-<div class="d-flex flex-column gap-2 p-2 justify-content-center">
+<div class="flex flex-col gap-2 p-2 justify-center">
   <mat-card>
     <mat-card-header class="pb-3">
-      <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
+      <div class="flex flex-row gap-2 justify-between items-center flex-auto">
         <div class="header">
           {{ 'profile.title' | translate }}
         </div>
-        <div class="flex-fill"></div>
+        <div class="flex-auto"></div>
         @if (editMode) {
           <button mat-mini-fab color="primary" (click)="save()">
             <mat-icon>save</mat-icon>
@@ -21,7 +21,7 @@
     <mat-card-content class="mt-2">
       <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
       @if (profile) {
-        <div class="d-flex flex-row gap-2">
+        <div class="flex flex-row gap-2">
           <mat-list>
             <mat-list-item>
               <b>{{ 'profile.email' | translate }}</b>
@@ -62,55 +62,55 @@
                 <mat-list-item>{{ profile.email }}</mat-list-item>
                 <!-- phone-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="phone">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- mobile-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="mobile">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- firstName-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic" required>
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic" required>
                     <input matInput formControlName="firstName">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- lastName-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic" required>
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic" required>
                     <input matInput formControlName="lastName">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- dateOfBirth-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="dateOfBirth">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- gender-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="gender">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- profilePicture-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="profilePicture">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- website-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <input matInput formControlName="website">
                   </mat-form-field>
                 </mat-list-item>
                 <!-- language-->
                 <mat-list-item class="py-2">
-                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                  <mat-form-field class="dense-1 w-full" subscriptSizing="dynamic">
                     <mat-select formControlName="language">
                       <mat-option value="en">{{ 'lang.en' | translate }}</mat-option>
                       <mat-option value="de">{{ 'lang.de' | translate }}</mat-option>

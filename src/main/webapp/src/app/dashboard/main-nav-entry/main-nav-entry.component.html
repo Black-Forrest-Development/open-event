@@ -1,12 +1,12 @@
-<div *ngIf="item" class="d-flex flex-row gap-2 align-items-center">
+<div *ngIf="item" class="flex flex-row gap-2 items-center">
   <ng-container *ngIf="collapsed; then thenNavBlock else elseNavBlock"></ng-container>
   <ng-template #thenNavBlock>
-    <div class="d-flex flex-column align-items-center flex-fill">
+    <div class="flex flex-col items-center flex-auto">
       <mat-icon>{{ item.icon }}</mat-icon>
     </div>
   </ng-template>
   <ng-template #elseNavBlock>
     <mat-icon>{{ item.icon }}</mat-icon>
-    <span class="flex-fill">{{ item.text | translate }}</span>
+    <span class="flex-auto">{{ item.text | translate }}</span>
   </ng-template>
 </div>

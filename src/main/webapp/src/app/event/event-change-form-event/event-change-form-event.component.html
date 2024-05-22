@@ -1,6 +1,6 @@
 <ng-container *ngIf="form">
   <form [formGroup]="form">
-    <div class="d-flex flex-column gap-4 align-items-stretch flex-fill pt-2">
+    <div class="flex flex-col gap-4 align-items-stretch flex-auto pt-2">
       <!-- title-->
       <mat-form-field *ngIf="isVisible('title')" class="dense-1" hintLabel="{{'event.form.hint.Title' | translate}}">
         <mat-label>{{ 'event.form.title' | translate }}</mat-label>
@@ -20,7 +20,7 @@
         </mat-error>
       </mat-form-field>
       <!-- longText-->
-      <div class="d-flex flex-column pb-3">
+      <div class="flex flex-col pb-3">
         <quill-editor formControlName="longText" placeholder="{{'event.form.longText' | translate}}"></quill-editor>
         <mat-hint *ngIf="longText?.valid" align="end" class="ps-3">{{ 'event.form.hint.LongDescr' | translate }}
         </mat-hint>
@@ -41,7 +41,7 @@
         <mat-hint align="start">{{ 'event.form.hint.iconUrl'| translate }}</mat-hint>
       </mat-form-field>
 
-      <div class="d-flex flex-row gap-3 align-items-stretch">
+      <div class="flex flex-row gap-3 align-items-stretch">
         <!-- startDate-->
         <mat-form-field *ngIf="isVisible('startDate')" class="dense-1" style="flex: 1 1 auto">
           <mat-label>{{ 'event.form.startDate' | translate }}</mat-label>
@@ -60,7 +60,7 @@
         </mat-form-field>
 
       </div>
-      <div class="d-flex flex-column flex-md-row flex-lg-row flex-xl-row flex-sm-column gap-3 align-items-stretch">
+      <div class="flex flex-col md:flex-row lg:flex-row xl:flex-row sm:flex-col gap-3 align-items-stretch">
         <!-- startTime-->
         <mat-form-field *ngIf="isVisible('startTime')" class="dense-1" style="flex: 1 1 auto">
           <mat-label>{{ 'event.form.startTime' | translate }}</mat-label>
@@ -75,7 +75,7 @@
         </mat-form-field>
       </div>
 
-      <div class="d-flex flex-column flex-md-row flex-lg-row flex-xl-row flex-sm-column gap-3 align-items-stretch">
+      <div class="flex flex-col md:flex-row lg:flex-row xl:flex-row sm:flex-col gap-3 align-items-stretch">
         <mat-form-field class="dense-1" style="flex: 1 1 auto">
           <mat-label>{{ 'event.form.tags' | translate }}</mat-label>
           <mat-chip-grid #chipGrid aria-label="Enter tags" formControlName="tags">

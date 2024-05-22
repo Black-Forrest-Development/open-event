@@ -1,11 +1,11 @@
-<div class="d-flex flex-column gap-2 p-2 justify-content-center">
+<div class="flex flex-col gap-2 p-2 justify-center">
   <mat-card>
     <mat-card-header class="pb-3">
-      <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
+      <div class="flex flex-row gap-2 justify-between items-center flex-auto">
         <div class="header">
           {{ 'address.title' | translate }}
         </div>
-        <div class="flex-fill"></div>
+        <div class="flex-auto"></div>
         <button mat-mini-fab color="primary" (click)="import()" *ngIf="address.length <= 0">
           <mat-icon>move_up</mat-icon>
         </button>
@@ -18,7 +18,7 @@
     <mat-card-content>
       <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 
-      <div class="d-flex flex-row flex-wrap gap-2 pt-3">
+      <div class="flex flex-row flex-wrap gap-2 pt-3">
         @for (a of address; track a) {
           <mat-card class="address mat-elevation-z0">
             <mat-card-content class="pb-3 pt-0">
@@ -28,8 +28,8 @@
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-actions>
-              <div class="d-flex flex-row gap-2 justify-content-between align-items-center flex-fill">
-                <div class="flex-fill"></div>
+              <div class="flex flex-row gap-2 justify-between items-center flex-auto">
+                <div class="flex-auto"></div>
                 <button mat-icon-button color="primary" (click)="edit(a)">
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -43,8 +43,8 @@
         }
 
         <mat-card class="address mat-elevation-z0" (click)="create()">
-          <mat-card-content class="h-100">
-            <div class="d-flex flex-column justify-content-center align-items-center flex-fill h-100">
+          <mat-card-content class="h-full">
+            <div class="flex flex-col justify-center items-center flex-auto h-full">
               <mat-icon style="color: darkgray; width: 72px; height: 72px; font-size: 72px;">domain_add</mat-icon>
             </div>
           </mat-card-content>

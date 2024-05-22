@@ -1,8 +1,8 @@
-<div class="d-flex flex-column gap-0">
+<div class="flex flex-col gap-0">
   <app-event-board-header (modeChanged)="this.mode = $event" [mobileView]="mobileView"
                           [mode]="mode"></app-event-board-header>
-  <div class="d-flex flex-row gap-2 p-2">
-    <div class="flex-fill">
+  <div class="flex flex-row gap-2 p-2">
+    <div class="flex-auto">
       @if (mobileView) {
         <app-event-board-list></app-event-board-list>
       } @else {

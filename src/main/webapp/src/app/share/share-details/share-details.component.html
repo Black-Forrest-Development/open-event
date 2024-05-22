@@ -1,12 +1,12 @@
 @if (event) {
   <mat-card>
-    <mat-card-header class="px-2 py-2 ">
-      <div class="header flex-fill">{{ 'share.title' | translate }}</div>
+    <mat-card-header class="!p-2">
+      <div class="header flex-auto">{{ 'share.title' | translate }}</div>
       <mat-slide-toggle #sharing (change)="handleToggleChanged($event)"
                         [checked]="share?.published">{{ 'share.action.enable' | translate }}
       </mat-slide-toggle>
     </mat-card-header>
-    <mat-divider></mat-divider>
+    <mat-divider class="!pb-2"></mat-divider>
     <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
     <mat-card-content *ngIf="share && share.published">
       <share-buttons theme="modern-dark"

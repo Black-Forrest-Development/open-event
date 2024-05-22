@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="px-2">
-  <div class="d-flex flex-row gap-2 flex-fill align-items-center">
+  <div class="flex flex-row gap-2 flex-auto items-center">
 
-    <div class="d-flex flex-row gap-2 flex-fill align-items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
+    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
       <mat-form-field class="dense-1" style="flex: 1 1 calc(50%);" subscriptSizing="dynamic">
         <mat-label>{{ 'event.search' | translate }}</mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
@@ -29,15 +29,15 @@
       <mat-icon>cancel</mat-icon>
     </button>
 
-    <div *ngIf="!mobileView" class="flex-fill"></div>
+    <div *ngIf="!mobileView" class="flex-auto"></div>
     <button *ngIf="!mobileView" color="accent" extended mat-fab routerLink="./create" style="flex: 0 1 200px;"
             class="dense-1">
       <mat-icon>event</mat-icon>
       {{ 'event.create' | translate }}
     </button>
-    <div *ngIf="!mobileView" class="flex-fill"></div>
+    <div *ngIf="!mobileView" class="flex-auto"></div>
 
-    <div class="d-flex flex-row gap-2">
+    <div class="flex flex-row gap-2">
       <mat-button-toggle-group class="dense-1">
         <mat-button-toggle value="list" [checked]="mode == 'list'" (click)="modeChanged.emit('list')">
           <mat-icon>list</mat-icon>

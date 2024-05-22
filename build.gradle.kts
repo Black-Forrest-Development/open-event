@@ -139,7 +139,7 @@ dependencies {
     testImplementation("io.fusionauth:fusionauth-jwt:5.3.2")
 
     implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
 
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")

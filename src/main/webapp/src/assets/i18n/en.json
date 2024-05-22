@@ -265,7 +265,8 @@
     "dateOfBirth": "Birthday",
     "gender": "Gender",
     "profilePicture": "Profile Picture",
-    "website": "Website"
+    "website": "Website",
+    "language": "Language"
   },
   "address": {
     "title": "Address",
@@ -283,5 +284,9 @@
     "action": {
       "enable": "Enable Sharing"
     }
+  },
+  "lang": {
+    "en": "English",
+    "de": "Deutsch"
   }
 }

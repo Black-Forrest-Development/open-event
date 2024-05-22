@@ -6,7 +6,11 @@ import {PageNotFoundComponent} from "./dashboard/page-not-found/page-not-found.c
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'event'},
-  {path: 'event', loadChildren: () => import('./event/event.module').then(m => m.EventModule)},
+  {
+    path: 'event',
+    loadChildren: () => import('./event/event.module').then(m => m.EventModule),
+    canActivate: [AuthGuard],
+  },
   {
     path: 'category',
     loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
@@ -48,6 +52,11 @@ const routes: Routes = [
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
     canActivate: [AuthGuard],
     data: {roles: [AuthService.ACCOUNT_READ]}
+  },
+  {
+    path: 'share',
+    loadChildren: () => import('./share/share.module').then(m => m.ShareModule),
+    data: {public: true}
   },
   {
     path: '**', component: PageNotFoundComponent

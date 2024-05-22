@@ -69,8 +69,8 @@ class AccountController(
     }
 
     @Get("/validate")
-    override fun validate(auth: Authentication): AccountValidationResult {
-        return auth.checkPermission(PERMISSION_READ) { service.validate(auth) }
+    override fun validate(auth: Authentication, @QueryValue lang: String): AccountValidationResult {
+        return auth.checkPermission(PERMISSION_READ) { service.validate(auth, lang) }
     }
 
     @Get("/profile")

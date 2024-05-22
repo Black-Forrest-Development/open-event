@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.core.share.api.ShareChangeRequest
+import io.micronaut.http.uri.UriBuilder
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -56,7 +57,10 @@ data class ShareData(
         return this
     }
 
-    fun convert(owner: AccountInfo): Share {
-        return Share(id, eventId, published, owner, created, updated)
+    fun convert(owner: AccountInfo, baseUrl: String): Share {
+        val url = UriBuilder.of(baseUrl).path("share").path("info").path(id)
+            .queryParam("lang", "en")
+            .toString()
+        return Share(id, eventId, published, url, owner, created, updated)
     }
 }

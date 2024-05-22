@@ -10,6 +10,7 @@ data class Share(
     override val id: String,
     val eventId: Long,
     val published: Boolean,
+    val url: String,
 
     val owner: AccountInfo,
     val created: LocalDateTime,

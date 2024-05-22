@@ -17,6 +17,8 @@ data class ProfileChangeRequest(
     val dateOfBirth: LocalDate? = null,
     val gender: String? = null,
     val profilePicture: String? = null,
-    val website: String? = null
+    val website: String? = null,
+
+    val language: String
 
 ) : BusinessObjectChangeRequest

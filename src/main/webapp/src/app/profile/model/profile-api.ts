@@ -11,7 +11,9 @@ export interface Profile {
   dateOfBirth: string | undefined,
   gender: string | undefined,
   profilePicture: string | undefined,
-  website: string | undefined
+  website: string | undefined,
+
+  language: string
 }
 
 export class ProfileChangeRequest {
@@ -24,7 +26,8 @@ export class ProfileChangeRequest {
     public dateOfBirth: string | undefined,
     public gender: string | undefined,
     public profilePicture: string | undefined,
-    public website: string | undefined
+    public website: string | undefined,
+    public language: string
   ) {
   }
 }

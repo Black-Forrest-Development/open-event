@@ -16,7 +16,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
     LoadingScreenComponent,
     ConfirmLogoutDialogComponent,
     MainNavEntryComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   exports: [
     DashboardComponent

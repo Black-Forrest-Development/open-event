@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Location} from "../model/location-api";
 import * as L from "leaflet";
 import {icon, Map, Marker} from "leaflet";
+import {SharedLocation} from "../../share/model/share-api";
 
 
 const iconRetinaUrl = 'assets/marker/marker-icon-2x.png';
@@ -25,12 +26,12 @@ Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./location-map.component.scss']
 })
 export class LocationMapComponent {
-  location: Location | undefined;
+  location: Location | SharedLocation | undefined;
   private map: Map | undefined
   private marker: Marker | undefined
 
   @Input()
-  set data(data: Location) {
+  set data(data: Location | SharedLocation) {
     this.location = data;
     if (this.location != null) {
       this.updateMap()

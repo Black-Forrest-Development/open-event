@@ -5,13 +5,15 @@ import de.sambalmueslie.openevent.common.BaseCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.Profile
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Singleton
 class ProfileCrudService(
-    private val storage: ProfileStorage
+    private val storage: ProfileStorage,
+    private val settings: SettingsService,
 ) : BaseCrudService<Long, Profile, ProfileChangeRequest, ProfileChangeListener>(storage) {
 
     companion object {
@@ -46,6 +48,7 @@ class ProfileCrudService(
             null,
             null,
             null,
+            settings.getLanguage()
         )
 
         create(actor, account, request)
@@ -64,6 +67,7 @@ class ProfileCrudService(
             profile?.gender ?: request.gender,
             profile?.profilePicture ?: request.profilePicture,
             profile?.website ?: request.website,
+            (profile?.language ?: request.language).ifBlank { settings.getLanguage() }
         )
 
         return if (profile == null) {

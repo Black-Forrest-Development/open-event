@@ -18,9 +18,11 @@ data class Profile(
     val dateOfBirth: LocalDate?,
     val gender: String?,
     val profilePicture: String?,
-    val website: String?
+    val website: String?,
 
-) : BusinessObject<Long> {
+    val language: String,
+
+    ) : BusinessObject<Long> {
 
 
     fun getTitle(): String {

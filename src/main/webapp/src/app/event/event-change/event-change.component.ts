@@ -54,7 +54,8 @@ export class EventChangeComponent {
       iconUrl: this.fb.control(''),
       longText: this.fb.control(''),
       shortText: this.fb.control(''),
-      title: this.fb.control('', Validators.required)
+      title: this.fb.control('', Validators.required),
+      tags: this.fb.control([]),
     })
     this.locationForm = this.fb.group({
       city: ['', Validators.required],
@@ -175,6 +176,7 @@ export class EventChangeComponent {
       longText: e.event.longText ?? "",
       shortText: e.event.shortText ?? "",
       title: e.event.title ?? "",
+      tags: e.event.tags ?? [],
     })
     // init location form
     let location = e.location

@@ -123,6 +123,10 @@ class EventCrudService(
         return storage.getAllForAccount(account, pageable)
     }
 
+    fun getOwned(owner: Account, pageable: Pageable): Page<Event> {
+        return storage.getOwned(owner, pageable)
+    }
+
     fun getInfosForAccount(account: Account, pageable: Pageable): Page<EventInfo> {
         return convertInfo(getAllForAccount(account, pageable), account)
     }

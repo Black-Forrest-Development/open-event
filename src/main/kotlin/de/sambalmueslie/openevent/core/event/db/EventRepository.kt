@@ -22,4 +22,5 @@ interface EventRepository : DataObjectRepository<Long, EventData> {
 
     )
     fun findForUser(ownerId: Long, pageable: Pageable): Page<EventData>
+    fun findByOwnerId(id: Long, pageable: Pageable): Page<EventData>
 }

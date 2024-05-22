@@ -76,6 +76,14 @@ class SettingsService(
         return findByKey(SettingsAPI.SETTINGS_TEXT_TITLE)?.value as? String ?: ""
     }
 
+    fun getLanguage(): String {
+        return findByKey(SettingsAPI.SETTINGS_DEFAULT_LANGUAGE)?.value as? String ?: ""
+    }
+
+    fun getShareUrl(): String {
+        return findByKey(SettingsAPI.SETTINGS_URL_SHARE)?.value as? String ?: ""
+    }
+
     override fun getByIds(ids: Set<Long>): List<Setting> {
         return repository.findByIdIn(ids).map { it.convert() }
     }

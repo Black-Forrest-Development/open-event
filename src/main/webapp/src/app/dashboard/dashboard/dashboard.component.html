@@ -43,7 +43,7 @@
 
   </mat-sidenav>
   <mat-sidenav-content>
-    <div >
+    <div>
       <mat-toolbar>
         <div class="d-flex flex-row gap-3 flex-fill align-content-center align-items-center justify-content-center">
           <button
@@ -62,30 +62,9 @@
                 {{ this.authService.getPrincipal()?.given_name }} {{ this.authService.getPrincipal()?.family_name }}
               </mat-chip-option>
             </mat-chip-listbox>
-            <mat-form-field class="dense-1" subscriptSizing="dynamic">
-              <mat-select (selectionChange)="changeLang($event)" [value]="lang">
-                <mat-option value="en">English</mat-option>
-                <mat-option value="de">Deutsch</mat-option>
-              </mat-select>
-            </mat-form-field>
           </ng-container>
           <ng-template #mobileHeader>
             <div class="flex-fill"></div>
-            <div>
-              <button [matMenuTriggerFor]="appMenu" mat-icon-button>
-                <mat-icon>language</mat-icon>
-              </button>
-              <mat-menu #appMenu="matMenu">
-                <button (click)="selectLang('en')" mat-menu-item>
-                  <mat-icon *ngIf="lang == 'en'" style="margin-right: 0 !important;">check</mat-icon>
-                  English
-                </button>
-                <button (click)="selectLang('de')" mat-menu-item>
-                  <mat-icon *ngIf="lang == 'de'" style="margin-right: 0 !important;">check</mat-icon>
-                  Deutsch
-                </button>
-              </mat-menu>
-            </div>
           </ng-template>
         </div>
       </mat-toolbar>

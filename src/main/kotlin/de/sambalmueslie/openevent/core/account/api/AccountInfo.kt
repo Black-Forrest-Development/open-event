@@ -10,6 +10,7 @@ data class AccountInfo(
     val email: String,
     val firstName: String,
     val lastName: String,
+    val language: String,
 ) : BusinessObject<Long> {
     companion object {
         fun create(account: Account, profile: Profile?): AccountInfo {
@@ -20,6 +21,7 @@ data class AccountInfo(
                 profile?.email ?: "",
                 profile?.firstName ?: "",
                 profile?.lastName ?: "",
+                profile?.language ?: ""
             )
         }
 
@@ -31,6 +33,7 @@ data class AccountInfo(
                 profile?.email ?: "",
                 profile?.firstName ?: "",
                 profile?.lastName ?: "",
+                profile?.language ?: ""
             )
         }
     }

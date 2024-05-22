@@ -5,6 +5,9 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LoadingScreenComponent} from "./dashboard/loading-screen/loading-screen.component";
 import {environment} from './../environments/environment';
 import LogRocket from 'logrocket';
+import {TranslateService} from "@ngx-translate/core";
+import {AuthService} from "./auth/auth.service";
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -21,6 +24,9 @@ export class AppComponent {
 
   constructor(
     private accountService: AccountService,
+    private translate: TranslateService,
+    private location: Location,
+    private authService: AuthService,
     private dialog: MatDialog
   ) {
 
@@ -30,12 +36,19 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    let url = this.location.path()
+    if (url.includes("share/info")) return
+
     this.dialogRef = this.dialog.open(LoadingScreenComponent, {disableClose: true})
     this.accountService.validate().subscribe(d => this.handleValidationResult(d))
+
   }
 
   private handleValidationResult(d: AccountValidationResult) {
     this.account = d.account
+    this.translate.setDefaultLang('en')
+    this.translate.use(d.language)
+
     this.validated = true
     if (environment.logrocket) {
       LogRocket.identify(d.account.id + '')

@@ -1,7 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {AuthService} from "../../auth/auth.service";
-import {MatSelectChange} from "@angular/material/select";
-import {TranslateService} from "@ngx-translate/core";
 import {NavigationEnd, Router} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {filter, map, Observable, withLatestFrom} from "rxjs";
@@ -48,16 +46,12 @@ export class DashboardComponent implements AfterViewInit {
 
   constructor(
     public authService: AuthService,
-    private translate: TranslateService,
     router: Router,
     private breakpointObserver: BreakpointObserver,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
     public service: DashboardService
   ) {
-    translate.setDefaultLang('en')
-    translate.use(this.lang)
-
     router.events.pipe(
       withLatestFrom(this.isHandset$),
       filter(([a, b]) => b && a instanceof NavigationEnd)
@@ -70,16 +64,6 @@ export class DashboardComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.changeDetectorRef.detectChanges();
-  }
-
-  changeLang(event: MatSelectChange) {
-    let value = event.value;
-    this.translate.use(value)
-  }
-
-  selectLang(value: string) {
-    this.lang = value;
-    this.translate.use(this.lang)
   }
 
   logout() {

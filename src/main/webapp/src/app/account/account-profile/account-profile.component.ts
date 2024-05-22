@@ -27,7 +27,7 @@ export class AccountProfileComponent {
       gender: this.fb.control(''),
       profilePicture: this.fb.control(''),
       website: this.fb.control(''),
-
+      language: this.fb.control(''),
     })
   }
 
@@ -61,7 +61,8 @@ export class AccountProfileComponent {
       dateOfBirth: d.dateOfBirth,
       gender: d.gender,
       profilePicture: d.profilePicture,
-      website: d.website
+      website: d.website,
+      language: d.language
     })
     this.reloading = false
   }

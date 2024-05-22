@@ -22,7 +22,8 @@ export interface AccountInfo {
 
 export interface AccountValidationResult {
   created: boolean,
-  account: Account
+  account: Account,
+  language: string
 }
 
 export class AccountChangeRequest {

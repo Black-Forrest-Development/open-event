@@ -5,12 +5,14 @@ import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.error.InconsistentDataException
+import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import io.micronaut.data.model.Page
 import jakarta.inject.Singleton
 
 @Singleton
 class ShareConverter(
     private val accountService: AccountStorageService,
+    private val settings: SettingsService,
 ) : DataObjectConverter<Share, ShareData> {
     override fun convert(obj: ShareData): Share {
         return convert(obj, accountService.getInfo(obj.ownerId))
@@ -30,6 +32,6 @@ class ShareConverter(
 
     private fun convert(data: ShareData, owner: AccountInfo?): Share {
         if (owner == null) throw InconsistentDataException("Cannot find owner for share")
-        return data.convert(owner)
+        return data.convert(owner, settings.getShareUrl())
     }
 }

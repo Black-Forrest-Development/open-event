@@ -50,7 +50,9 @@
             <mat-list-item>
               <b>{{ 'profile.website' | translate }}</b>
             </mat-list-item>
-
+            <mat-list-item>
+              <b>{{ 'profile.language' | translate }}</b>
+            </mat-list-item>
           </mat-list>
           @if (editMode) {
 
@@ -106,6 +108,15 @@
                     <input matInput formControlName="website">
                   </mat-form-field>
                 </mat-list-item>
+                <!-- language-->
+                <mat-list-item class="py-2">
+                  <mat-form-field class="dense-1 w-100" subscriptSizing="dynamic">
+                    <mat-select formControlName="language">
+                      <mat-option value="en">{{ 'lang.en' | translate }}</mat-option>
+                      <mat-option value="de">{{ 'lang.de' | translate }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-list-item>
               </form>
             </mat-list>
 
@@ -120,6 +131,7 @@
               <mat-list-item>{{ profile.gender }}</mat-list-item>
               <mat-list-item>{{ profile.profilePicture }}</mat-list-item>
               <mat-list-item>{{ profile.website }}</mat-list-item>
+              <mat-list-item>{{ 'lang.' + profile.language | translate }}</mat-list-item>
             </mat-list>
           }
         </div>

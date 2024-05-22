@@ -1,9 +1,11 @@
 import {AccountInfo} from "../../account/model/account-api";
+import {Category} from "../../category/model/category-api";
 
 export interface Share {
   id: string,
   eventId: number,
   published: boolean,
+  url: string,
 
   owner: AccountInfo,
   created: string,
@@ -17,3 +19,64 @@ export class ShareChangeRequest {
   ) {
   }
 }
+
+export interface ShareInfo {
+  event: SharedEvent,
+  location: SharedLocation | null,
+  registration: SharedRegistration | null,
+  categories: Category[],
+}
+
+export interface SharedEvent {
+  id: number,
+
+  owner: SharedAccount,
+
+  start: string,
+  finish: string,
+
+  title: string,
+  shortText: string,
+  longText: string,
+  imageUrl: string,
+  iconUrl: string,
+
+  published: boolean,
+}
+
+export interface SharedAccount {
+  id: number,
+  name: string,
+}
+
+
+export interface SharedLocation {
+  street: string,
+  streetNumber: string,
+  zip: string,
+  city: string,
+  country: string,
+  additionalInfo: string,
+
+  lat: number,
+  lon: number,
+
+  size: number
+}
+
+export interface SharedRegistration {
+  maxGuestAmount: number,
+  interestedAllowed: Boolean,
+  ticketsEnabled: Boolean,
+
+  participants: SharedParticipant[],
+}
+
+export interface SharedParticipant {
+  size: number,
+  status: string,
+  rank: number,
+  waitingList: boolean,
+  timestamp: string,
+}
+

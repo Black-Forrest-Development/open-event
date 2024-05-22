@@ -1,5 +1,8 @@
 package de.sambalmueslie.openevent.core.event.db
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import de.sambalmueslie.openevent.common.DataObject
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
@@ -28,15 +31,19 @@ data class EventData(
     @Column var hasRegistration: Boolean,
     @Column var published: Boolean,
 
+    @Column(name = "tags") var tagsJson: String,
+
     @Column var created: LocalDateTime = LocalDateTime.now(),
     @Column var updated: LocalDateTime? = null
 ) : DataObject {
     companion object {
+        private val mapper = ObjectMapper().registerKotlinModule()
         fun create(
             account: Account,
             request: EventChangeRequest,
             timestamp: LocalDateTime
         ): EventData {
+            val t = mapper.writeValueAsString(request.tags)
             return EventData(
                 0,
                 account.id,
@@ -50,6 +57,7 @@ data class EventData(
                 request.location != null,
                 true,
                 request.published,
+                t,
                 timestamp
             )
         }
@@ -69,12 +77,28 @@ data class EventData(
             hasLocation,
             hasRegistration,
             published,
+            getTags(),
             created,
             updated
         )
     }
 
+    @Transient
+    private var tags: Set<String>? = null
+
+    @Transient
+    fun getTags(): Set<String> {
+        if (tags == null) {
+            tags = mapper.readValue<Set<String>>(tagsJson)
+        }
+        return tags!!
+    }
+
     fun update(request: EventChangeRequest, timestamp: LocalDateTime): EventData {
+        val t = mapper.writeValueAsString(request.tags)
+        tags = request.tags
+        tagsJson = t
+
         start = request.start
         finish = request.finish
         title = request.title

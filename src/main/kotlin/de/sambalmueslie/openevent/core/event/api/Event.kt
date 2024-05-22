@@ -26,6 +26,8 @@ data class Event(
     val hasRegistration: Boolean,
     val published: Boolean,
 
+    val tags: Set<String>,
+
     val created: LocalDateTime,
     val changed: LocalDateTime?
 ) : BusinessObject<Long> {

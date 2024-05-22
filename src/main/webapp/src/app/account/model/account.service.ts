@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Account, AccountChangeRequest, AccountValidationResult} from "./account-api";
 import {Page} from "../../shared/model/page";
 import {Profile} from "../../profile/model/profile-api";
 import {Preferences} from "../../preferences/model/preferences-api";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService extends BaseService {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private translate: TranslateService) {
     super(http, 'account')
     this.retryCount = 1
   }
@@ -29,7 +30,10 @@ export class AccountService extends BaseService {
   }
 
   validate(): Observable<AccountValidationResult> {
-    return this.get('validate')
+    let lang = this.translate.currentLang
+    let params = new HttpParams()
+      .set("lang", lang)
+    return this.get('validate', params)
   }
 
   getProfile(): Observable<Profile> {

@@ -45,6 +45,8 @@ CREATE TABLE profile
     profile_picture VARCHAR(255),
     website         VARCHAR(255),
 
+    language        VARCHAR(50),
+
     created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated         TIMESTAMP WITHOUT TIME ZONE
 );
@@ -115,6 +117,8 @@ CREATE TABLE event
     has_location     BOOLEAN                     NOT NULL,
     has_registration BOOLEAN                     NOT NULL,
     published        BOOLEAN                     NOT NULL,
+
+    tags             TEXT                        NOT NULL,
 
     created          TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated          TIMESTAMP WITHOUT TIME ZONE
@@ -250,6 +254,9 @@ INSERT INTO setting(key, value, type, created)
 VALUES ('url.terms-and-conditions', 'http://localhost', 'URL', now());
 
 INSERT INTO setting(key, value, type, created)
+VALUES ('url.share', 'http://localhost', 'URL', now());
+
+INSERT INTO setting(key, value, type, created)
 VALUES ('mail.from-address', 'mail@test.com', 'EMAIL', now());
 
 INSERT INTO setting(key, value, type, created)
@@ -260,6 +267,9 @@ VALUES ('mail.default-admin-address', 'mail@test.com', 'EMAIL', now());
 
 INSERT INTO setting(key, value, type, created)
 VALUES ('text.title', 'APP.Title', 'STRING', now());
+
+INSERT INTO setting(key, value, type, created)
+VALUES ('default.language', 'en', 'STRING', now());
 
 -- notification
 CREATE SEQUENCE notification_setting_seq;

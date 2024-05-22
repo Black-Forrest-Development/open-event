@@ -4,19 +4,19 @@ import {CommonModule} from '@angular/common';
 import {ShareRoutingModule} from './share-routing.module';
 import {ShareDetailsComponent} from './share-details/share-details.component';
 import {AccountModule} from "../account/account.module";
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardImage} from "@angular/material/card";
-import {MatChip, MatChipListbox} from "@angular/material/chips";
-import {MatDivider} from "@angular/material/divider";
 import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
 import {RegistrationModule} from "../registration/registration.module";
 import {TranslateModule} from "@ngx-translate/core";
-import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {MatProgressBar} from "@angular/material/progress-bar";
+import {ShareInfoComponent} from './share-info/share-info.component';
+import {LocationModule} from "../location/location.module";
+import {MaterialModule} from "../material/material.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    ShareDetailsComponent
+    ShareDetailsComponent,
+    ShareInfoComponent
   ],
   exports: [
     ShareDetailsComponent
@@ -25,19 +25,14 @@ import {MatProgressBar} from "@angular/material/progress-bar";
     CommonModule,
     ShareRoutingModule,
     AccountModule,
-    MatCard,
-    MatCardActions,
-    MatCardContent,
-    MatCardHeader,
-    MatCardImage,
-    MatChip,
-    MatChipListbox,
-    MatDivider,
+    MaterialModule,
+    TranslateModule,
+    ReactiveFormsModule,
     ShareButtonsModule,
     RegistrationModule,
     TranslateModule,
-    MatSlideToggle,
-    MatProgressBar
+    LocationModule,
   ]
 })
-export class ShareModule { }
+export class ShareModule {
+}

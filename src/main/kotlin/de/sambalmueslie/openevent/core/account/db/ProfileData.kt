@@ -28,6 +28,8 @@ data class ProfileData(
     @Column var profilePicture: String?,
     @Column var website: String?,
 
+    @Column var language: String,
+
     @Column var created: LocalDateTime = LocalDateTime.now(),
     @Column var updated: LocalDateTime? = null
 ) : SimpleDataObject<Profile> {
@@ -49,13 +51,26 @@ data class ProfileData(
                 request.gender,
                 request.profilePicture,
                 request.website,
+                request.language,
                 timestamp
             )
         }
     }
 
     override fun convert(): Profile {
-        return Profile(id, email, phone, mobile, firstName, lastName, dateOfBirth, gender, profilePicture, website)
+        return Profile(
+            id,
+            email,
+            phone,
+            mobile,
+            firstName,
+            lastName,
+            dateOfBirth,
+            gender,
+            profilePicture,
+            website,
+            language
+        )
     }
 
     fun update(request: ProfileChangeRequest, timestamp: LocalDateTime): ProfileData {
@@ -68,6 +83,7 @@ data class ProfileData(
         gender = request.gender
         profilePicture = request.profilePicture
         website = request.website
+        language = request.language
         updated = timestamp
         return this
     }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Share, ShareChangeRequest} from "./share-api";
+import {Share, ShareChangeRequest, ShareInfo} from "./share-api";
 import {PatchRequest} from "../../event/model/event-api";
 
 @Injectable({
@@ -32,5 +32,9 @@ export class ShareService extends BaseService {
 
   publish(id: string): Observable<Share> {
     return this.put('' + id + '/published', new PatchRequest(true))
+  }
+
+  getInfo(id: string): Observable<ShareInfo> {
+    return this.get('' + id + '/info')
   }
 }

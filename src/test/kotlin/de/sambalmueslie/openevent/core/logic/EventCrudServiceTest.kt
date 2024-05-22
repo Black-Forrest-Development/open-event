@@ -103,7 +103,7 @@ class EventCrudServiceTest : TimeBasedTest() {
             "image-update",
             "icon-update",
             emptySet(),
-            locationUpdate, registrationUpdate, true
+            locationUpdate, registrationUpdate, true, setOf("tag")
         )
         return update
     }
@@ -120,7 +120,7 @@ class EventCrudServiceTest : TimeBasedTest() {
             "image",
             "icon",
             emptySet(),
-            locationRequest, registrationRequest, true
+            locationRequest, registrationRequest, true, setOf("tag")
         )
         return request
     }

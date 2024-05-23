@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.24"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.24"
-    id("org.jetbrains.kotlin.kapt") version "1.9.24"
-    kotlin("plugin.serialization") version "1.9.24"
-//    id("com.google.devtools.ksp") version "1.9.24-1.0.20"
+    id("org.jetbrains.kotlin.jvm") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.0.0"
+    id("org.jetbrains.kotlin.kapt") version "2.0.0"
+    kotlin("plugin.serialization") version "2.0.0"
+//    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
     id("org.sonarqube") version "5.0.0.4638"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
@@ -87,8 +87,8 @@ dependencies {
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.24")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
@@ -139,12 +139,12 @@ dependencies {
     testImplementation("io.fusionauth:fusionauth-jwt:5.3.2")
 
     implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
 
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.1.29")
+    implementation("com.jillesvangurp:search-client:2.1.31")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")

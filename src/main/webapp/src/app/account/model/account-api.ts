@@ -1,3 +1,5 @@
+import {Profile} from "../../profile/model/profile-api";
+
 export interface Account {
   id: number,
   externalId: string | undefined,
@@ -23,7 +25,8 @@ export interface AccountInfo {
 export interface AccountValidationResult {
   created: boolean,
   account: Account,
-  language: string
+  profile: Profile,
+  info: AccountInfo
 }
 
 export class AccountChangeRequest {

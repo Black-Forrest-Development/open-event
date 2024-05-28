@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-0">
   <app-event-board-header (modeChanged)="this.mode = $event" [mobileView]="mobileView"
                           [mode]="mode"></app-event-board-header>
-  <div class="flex flex-row gap-2 p-2">
+  <div class="flex flex-row gap-3 p-2">
     <div class="flex-auto">
       @if (mobileView) {
         <app-event-board-list></app-event-board-list>
@@ -20,7 +20,7 @@
       }
     </div>
     @if (service.filterToolbarVisible) {
-      <div style="flex: 0 1 calc(300px)">
+      <div class="basis-72">
         <app-event-board-filter></app-event-board-filter>
       </div>
     }

@@ -1,9 +1,12 @@
-<mat-toolbar color="primary" class="px-2">
-  <div class="flex flex-row gap-2 flex-auto items-center">
+<mat-toolbar class="px-2">
+  <div class="flex flex-row gap-3 flex-auto items-center">
 
-    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
-      <mat-form-field class="dense-1" style="flex: 1 1 calc(50%);" subscriptSizing="dynamic">
-        <mat-label>{{ 'event.search' | translate }}</mat-label>
+    <div class="flex flex-row gap-2 items-center basis-1/4">
+      <mat-form-field class="dense-3 flex-auto" subscriptSizing="dynamic">
+        <mat-label class="flex flex-row gap-3">
+          <mat-icon>search</mat-icon>
+          {{ 'event.search' | translate }}
+        </mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
         <mat-icon *ngIf="service.searching">
           <mat-spinner diameter="18"></mat-spinner>
@@ -14,30 +17,17 @@
           <mat-icon>clear</mat-icon>
         </button>
       </mat-form-field>
-      <button (click)="service.fullTextSearch = input.value" color="accent" mat-mini-fab>
-        <mat-icon>search</mat-icon>
-      </button>
     </div>
 
+    @if (!mobileView) {
+      <div class="flex-auto"></div>
+      <button color="accent" mat-flat-button routerLink="./create" class="basis-72 min-h-10">
+        <mat-icon>event</mat-icon>
+        {{ 'event.create' | translate }}
+      </button>
+    }
 
-    <button mat-mini-fab (click)="service.filterToolbarVisible = !service.filterToolbarVisible"
-            [color]="service.filterToolbarVisible ? 'accent' :  undefined">
-      <mat-icon>filter_alt</mat-icon>
-    </button>
-
-    <button mat-mini-fab (click)="service.resetFilter()" [color]="undefined">
-      <mat-icon>cancel</mat-icon>
-    </button>
-
-    <div *ngIf="!mobileView" class="flex-auto"></div>
-    <button *ngIf="!mobileView" color="accent" extended mat-fab routerLink="./create" style="flex: 0 1 200px;"
-            class="dense-1">
-      <mat-icon>event</mat-icon>
-      {{ 'event.create' | translate }}
-    </button>
-    <div *ngIf="!mobileView" class="flex-auto"></div>
-
-    <div class="flex flex-row gap-2">
+    <div class="flex flex-row gap-2 basis-72 justify-end">
       <mat-button-toggle-group class="dense-1">
         <mat-button-toggle value="list" [checked]="mode == 'list'" (click)="modeChanged.emit('list')">
           <mat-icon>list</mat-icon>

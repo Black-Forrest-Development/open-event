@@ -88,6 +88,14 @@
         "week": "This week",
         "next": "Next week"
       }
+    },
+    "table": {
+      "account": "Account",
+      "period": "Period",
+      "location": "Location",
+      "description": "Description",
+      "status": "Status",
+      "category": "Category"
     }
   },
   "registration": {
@@ -176,6 +184,7 @@
   },
   "account": {
     "title": "Account",
+    "type": "Account",
     "search": "Search for an account",
     "dialog": {
       "create": {

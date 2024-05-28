@@ -1,0 +1,49 @@
+<mat-toolbar style="background-color:white;">
+  <div class="flex flex-row gap-3 flex-auto content-center items-center justify-center">
+    <button
+      (click)="toggleSidenavEvent.emit(true)"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      type="button">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    @if (mobileView) {
+      <div class="flex-auto"></div>
+    } @else {
+      <span class="header"> {{ title | translate }}</span>
+      <div class="flex-auto basis-24"></div>
+            <div class="flex flex-col content-center">
+                <mat-icon>notifications</mat-icon>
+              </div>
+      @if (account) {
+        <div class="flex flex-row gap-3 content-center items-center basis-44" [matMenuTriggerFor]="menu">
+          <div>
+            <img [email]="account.email ?? ''" alt="{{account | accountDisplayName}}" class="account-info-avatar"
+                 ngxGravatar
+                 src="{{account.iconUrl}}">
+          </div>
+          <div class="flex flex-col">
+            <div class="flex-auto font-bold text-base">{{ account.firstName }} {{ account.lastName }}</div>
+            <div class="flex-auto text-base"></div>
+          </div>
+
+        </div>
+      }
+    }
+  </div>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>

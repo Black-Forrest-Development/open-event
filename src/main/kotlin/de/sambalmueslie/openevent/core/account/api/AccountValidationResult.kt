@@ -6,5 +6,6 @@ import io.micronaut.serde.annotation.Serdeable
 data class AccountValidationResult(
     val created: Boolean,
     val account: Account,
-    val language: String
+    val profile: Profile,
+    val info: AccountInfo
 )

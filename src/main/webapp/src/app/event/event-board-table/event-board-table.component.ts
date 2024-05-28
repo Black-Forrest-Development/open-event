@@ -8,7 +8,8 @@ import {EventBoardService} from "../model/event-board.service";
 })
 export class EventBoardTableComponent {
 
-  displayedColumns: string[] = ['account', 'period', 'location', 'description', 'status', 'category', 'publish']
+  // displayedColumns: string[] = ['account', 'period', 'location', 'description', 'status', 'category', 'publish']
+  displayedColumns: string[] = ['account', 'period', 'location', 'description', 'status', 'category']
 
   constructor(public service: EventBoardService) {
   }

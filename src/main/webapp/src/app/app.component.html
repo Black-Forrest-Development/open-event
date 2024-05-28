@@ -1,5 +1,5 @@
 @if (validated) {
-  <app-dashboard></app-dashboard>
+  <app-dashboard [account]="info"></app-dashboard>
 } @else {
   <router-outlet></router-outlet>
 }

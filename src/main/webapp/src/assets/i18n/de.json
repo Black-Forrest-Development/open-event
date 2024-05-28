@@ -88,6 +88,14 @@
         "week": "Diese Woche anzeigen",
         "next": "Nächste Woche anzeigen"
       }
+    },
+    "table": {
+      "account": "Veranstalter",
+      "period": "Zeitram",
+      "location": "Ort",
+      "description": "Beschreibung",
+      "status": "Status",
+      "category": "Kategorien"
     }
   },
   "registration": {
@@ -174,6 +182,7 @@
   },
   "account": {
     "title": "Benutzer",
+    "type": "Benutzeraccount",
     "search": "Suche nach Benutzer",
     "dialog": {
       "create": {

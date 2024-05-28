@@ -37,16 +37,21 @@ class AccountCrudService(
 
     fun validate(auth: Authentication, lang: String): AccountValidationResult {
         val email = auth.getEmail()
-        val existing = storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(email)
+        val account = findExistingAccount(auth, email) ?: createNewAccount(auth)
+        val profile = profileService.getForAccount(account) ?: createNewProfile(auth, account, lang)
+        val info = AccountInfo.create(account, profile)
+        return AccountValidationResult(true, account, profile, info)
+    }
 
-        if (existing != null) {
-            val p = profileService.getForAccount(existing)
-            return AccountValidationResult(false, existing, p?.language ?: "")
-        }
+    private fun findExistingAccount(
+        auth: Authentication,
+        email: String
+    ) = storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(email)
 
-        val system = getSystemAccount()
-        val account = create(system, AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
+    private fun createNewAccount(auth: Authentication) =
+        create(getSystemAccount(), AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
 
+    private fun createNewProfile(auth: Authentication, account: Account, lang: String): Profile {
         val profileRequest = ProfileChangeRequest(
             auth.getEmail(),
             null, null,
@@ -54,9 +59,7 @@ class AccountCrudService(
             auth.getLastName(),
             null, null, null, null, lang
         )
-        val profile = profileService.merge(system, account, profileRequest)
-
-        return AccountValidationResult(true, account, profile.language)
+        return profileService.merge(getSystemAccount(), account, profileRequest)
     }
 
     override fun create(actor: Account, request: AccountChangeRequest, properties: Map<String, Any>): Account {

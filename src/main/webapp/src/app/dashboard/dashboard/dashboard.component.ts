@@ -1,13 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
 import {AuthService} from "../../auth/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {filter, map, Observable, withLatestFrom} from "rxjs";
 import {MatSidenav} from "@angular/material/sidenav";
 import {MainNavItem} from "./main-nav-item";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmLogoutDialogComponent} from "../confirm-logout-dialog/confirm-logout-dialog.component";
 import {DashboardService} from "../model/dashboard.service";
+import {AccountService} from "../../account/model/account.service";
+import {AccountInfo} from "../../account/model/account-api";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,13 +16,14 @@ import {DashboardService} from "../model/dashboard.service";
 })
 export class DashboardComponent implements AfterViewInit {
 
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
+  @Input() account: AccountInfo | undefined
 
-  lang: string = 'de'
-  collapsed: boolean = false
   @ViewChild('drawer') drawer: MatSidenav | undefined
+
   navItems: MainNavItem[] = [
     new MainNavItem('/event', 'event.type', 'event_note'),
     new MainNavItem('/category', 'category.type', 'label', [AuthService.CATEGORY_WRITE]),
@@ -39,18 +40,17 @@ export class DashboardComponent implements AfterViewInit {
     // new MainNavItem('/profile', 'MENU.Profile', 'person'),
     // new MainNavItem('/administration', 'MENU.Administration', 'settings_applications'),
     // new MainNavItem('/imprint', 'MENU.Imprint', 'contact_support'),
-  ];
+  ]
 
-
-  accessibleItems: MainNavItem[] = [];
+  accessibleItems: MainNavItem[] = []
 
   constructor(
     public authService: AuthService,
     router: Router,
     private breakpointObserver: BreakpointObserver,
     private changeDetectorRef: ChangeDetectorRef,
-    private dialog: MatDialog,
-    public service: DashboardService
+    public service: DashboardService,
+    private accountService: AccountService,
   ) {
     router.events.pipe(
       withLatestFrom(this.isHandset$),
@@ -58,25 +58,15 @@ export class DashboardComponent implements AfterViewInit {
     ).subscribe(_ => this.drawer?.close())
   }
 
+
   ngOnInit() {
     this.accessibleItems = this.navItems.filter(item => item.isAccessible(this.authService))
+
   }
 
   ngAfterViewInit() {
     this.changeDetectorRef.detectChanges();
   }
 
-  logout() {
-    const dialogRef = this.dialog.open(ConfirmLogoutDialogComponent, {
-      width: '250px',
-      data: ''
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) this.authService.logout()
-    })
-  }
 
-  toggleCollapsed() {
-    this.collapsed = !this.collapsed;
-  }
 }

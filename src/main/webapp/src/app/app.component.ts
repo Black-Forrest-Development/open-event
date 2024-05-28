@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AccountService} from "./account/model/account.service";
-import {Account, AccountValidationResult} from "./account/model/account-api";
+import {Account, AccountInfo, AccountValidationResult} from "./account/model/account-api";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LoadingScreenComponent} from "./dashboard/loading-screen/loading-screen.component";
 import {environment} from './../environments/environment';
@@ -8,6 +8,7 @@ import LogRocket from 'logrocket';
 import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "./auth/auth.service";
 import {Location} from '@angular/common';
+import {Profile} from "./profile/model/profile-api";
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AppComponent {
 
   validated: boolean = false
   account: Account | undefined
+  profile: Profile | undefined
+  info: AccountInfo | undefined
   dialogRef: MatDialogRef<any> | undefined
 
   constructor(
@@ -46,8 +49,10 @@ export class AppComponent {
 
   private handleValidationResult(d: AccountValidationResult) {
     this.account = d.account
+    this.profile = d.profile
+    this.info = d.info
     this.translate.setDefaultLang('en')
-    this.translate.use(d.language)
+    this.translate.use(d.profile.language)
 
     this.validated = true
     if (environment.logrocket) {

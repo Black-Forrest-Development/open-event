@@ -18,6 +18,10 @@ body {
   @include mat.all-component-densities(-2);
 }
 
+.dense-3 {
+  @include mat.all-component-densities(-4);
+}
+
 .mat-mdc-mini-fab {
   box-shadow: none !important;
 }

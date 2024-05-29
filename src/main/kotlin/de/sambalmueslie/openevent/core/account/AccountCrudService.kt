@@ -37,7 +37,7 @@ class AccountCrudService(
 
     fun validate(auth: Authentication, lang: String): AccountValidationResult {
         val email = auth.getEmail()
-        val account = findExistingAccount(auth, email) ?: createNewAccount(auth)
+        val account = findExistingAccount(auth, email) ?: createNewAccount(auth, lang)
         val profile = profileService.getForAccount(account) ?: createNewProfile(auth, account, lang)
         val info = AccountInfo.create(account, profile)
         return AccountValidationResult(true, account, profile, info)
@@ -48,8 +48,12 @@ class AccountCrudService(
         email: String
     ) = storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(email)
 
-    private fun createNewAccount(auth: Authentication) =
-        create(getSystemAccount(), AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
+    private fun createNewAccount(auth: Authentication, lang: String): Account {
+        val account = create(getSystemAccount(), AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
+        createNewProfile(auth, account, lang)
+        return account
+    }
+
 
     private fun createNewProfile(auth: Authentication, account: Account, lang: String): Profile {
         val profileRequest = ProfileChangeRequest(

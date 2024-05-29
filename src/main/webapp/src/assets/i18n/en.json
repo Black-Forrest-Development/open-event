@@ -95,7 +95,8 @@
       "location": "Location",
       "description": "Description",
       "status": "Status",
-      "category": "Category"
+      "category": "Category",
+      "label": "Label"
     }
   },
   "registration": {
@@ -141,7 +142,7 @@
     },
     "status": {
       "full": "Full",
-      "available": "{{remaining}} of {{available}} available seats"
+      "available": "{{remaining}} seats available"
     },
     "form": {
       "firstName": "First Name",

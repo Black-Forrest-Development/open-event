@@ -38,9 +38,10 @@ data class EventSearchEntryData(
     var amountOnWaitingList: Int,
     var remainingSpace: Int,
     var participant: Set<Long>,
-    var categories: Set<String>
+    var categories: Set<String>,
+    var tags: Set<String>,
 
-) {
+    ) {
 
     companion object {
 
@@ -85,7 +86,8 @@ data class EventSearchEntryData(
                 remainingSpace,
 
                 p.map { it.author.id }.toSet(),
-                c.map { it.name }.toSet()
+                c.map { it.name }.toSet(),
+                info.event.tags
             )
         }
     }
@@ -116,7 +118,8 @@ data class EventSearchEntryData(
             remainingSpace,
             this.owner == owner.id,
             participant.contains(owner.id),
-            categories
+            categories,
+            tags
         )
     }
 

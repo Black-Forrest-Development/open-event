@@ -95,7 +95,8 @@
       "location": "Ort",
       "description": "Beschreibung",
       "status": "Status",
-      "category": "Kategorien"
+      "category": "Kategorien",
+      "label": "Markierung"
     }
   },
   "registration": {
@@ -139,7 +140,7 @@
     },
     "status": {
       "full": "Ausgebucht",
-      "available": "{{remaining}} von {{available}} Plätzen frei"
+      "available": "{{remaining}} Plätze frei"
     },
     "form": {
       "firstName": "Vorname",

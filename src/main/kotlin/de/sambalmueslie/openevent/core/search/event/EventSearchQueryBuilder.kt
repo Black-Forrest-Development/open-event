@@ -25,7 +25,9 @@ class EventSearchQueryBuilder : SearchQueryBuilder<EventSearchRequest> {
                     match(EventSearchEntryData::title, request.fullTextSearch) { boost = 2.0 },
                     matchBoolPrefix(EventSearchEntryData::title, request.fullTextSearch),
                     match(EventSearchEntryData::shortText, request.fullTextSearch),
-                    match(EventSearchEntryData::longText, request.fullTextSearch)
+                    match(EventSearchEntryData::longText, request.fullTextSearch),
+                    match(EventSearchEntryData::categories, request.fullTextSearch),
+                    match(EventSearchEntryData::tags, request.fullTextSearch)
                 )
             }
             if (request.from != null) {

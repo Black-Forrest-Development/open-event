@@ -32,6 +32,11 @@ class RegistrationCrudService(
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(RegistrationCrudService::class.java)
     }
+    private var searchListener: RegistrationSearchListener? = null
+
+    fun registerSearch(listener: RegistrationSearchListener) {
+        this.searchListener = listener
+    }
 
     fun create(actor: Account, event: Event, request: RegistrationChangeRequest): Registration {
         val result = storage.create(request, event)
@@ -96,6 +101,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantRemoved(actor, registration, p) }
         }
+        updateSearch(registration)
         return result
     }
 
@@ -134,6 +140,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantChanged(actor, registration, p, result.status) }
         }
+        updateSearch(registration)
         return result
     }
 
@@ -148,6 +155,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantChanged(actor, registration, p, result.status) }
         }
+        updateSearch(registration)
         return result
     }
 
@@ -157,6 +165,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantRemoved(actor, registration, p) }
         }
+        updateSearch(registration)
         return result
     }
 
@@ -176,5 +185,10 @@ class RegistrationCrudService(
         val registrations = storage.findByEventIds(eventIds)
         val participants = participantCrudService.get(registrations)
         return participants.map { RegistrationInfo(it.key, it.value) }
+    }
+
+    private fun updateSearch(registration: Registration) {
+        if (this.searchListener == null) return
+        this.searchListener?.updateSearch(registration)
     }
 }

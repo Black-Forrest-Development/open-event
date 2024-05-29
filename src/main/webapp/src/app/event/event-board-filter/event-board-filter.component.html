@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-2 h-full">
-  <mat-card class="h-full">
-    <mat-card-header class="!p-2" style="height: 35px;">
+<div class="flex flex-col gap-2">
+  <mat-card>
+    <mat-card-header class="!p-2 filter-card-header h-14">
       <mat-card-title class="flex flex-row gap-2 items-center">
         <mat-icon>filter_list</mat-icon>
         Filter
@@ -9,6 +9,27 @@
     <mat-divider class="!pb-2"></mat-divider>
     <mat-card-content class="!pb-2">
       <div class="flex flex-col gap-2 items-center">
+        <div class="flex-auto">
+          <mat-form-field class="dense-1" subscriptSizing="dynamic">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="service.range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker (closed)="onDateRangePickerClosed()" #picker></mat-date-range-picker>
+
+            @if (service.range.controls.start.hasError('matStartDateInvalid')) {
+              <mat-error>Invalid start date</mat-error>
+            }
+            @if (service.range.controls.end.hasError('matEndDateInvalid')) {
+              <mat-error>Invalid end date</mat-error>
+            }
+
+          </mat-form-field>
+        </div>
+
+
         <mat-chip-listbox class="mat-mdc-chip-set-stacked">
           <mat-chip-option color="accent" (selectionChange)="handleDatePreselectionChange($event)" value="today">
             <div class="flex flex-row gap-2 items-center">
@@ -30,25 +51,7 @@
           </mat-chip-option>
         </mat-chip-listbox>
 
-        <div class="flex-auto">
-          <mat-form-field class="dense-1" subscriptSizing="dynamic">
-            <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [formGroup]="service.range" [rangePicker]="picker">
-              <input matStartDate formControlName="start" placeholder="Start date">
-              <input matEndDate formControlName="end" placeholder="End date">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker (closed)="onDateRangePickerClosed()" #picker></mat-date-range-picker>
 
-            @if (service.range.controls.start.hasError('matStartDateInvalid')) {
-              <mat-error>Invalid start date</mat-error>
-            }
-            @if (service.range.controls.end.hasError('matEndDateInvalid')) {
-              <mat-error>Invalid end date</mat-error>
-            }
-
-          </mat-form-field>
-        </div>
       </div>
     </mat-card-content>
     @if (allCategories.length > 0) {
@@ -73,26 +76,30 @@
     <mat-card-content class="!pb-2">
       <div class="flex flex-col gap-2 content-stretch align-items-stretch">
 
-        <button mat-flat-button (click)="service.showHistory = !service.showHistory"
-                [color]="service.showHistory ? 'accent' : 'primary'" class="flex-auto">
+        <button mat-stroked-button (click)="service.showHistory = !service.showHistory"
+                class="flex-auto" color="primary"
+                [ngClass]="service.showHistory ? 'mat-mdc-unelevated-button' : 'mdc-button--outlined mat-mdc-outlined-button'">
           <mat-icon>history</mat-icon>
           {{ 'event.filter.history' | translate }}
         </button>
 
-        <button mat-flat-button (click)="service.ownEvents = !service.ownEvents"
-                [color]="service.ownEvents ? 'accent' : 'primary'">
+        <button mat-stroked-button (click)="service.ownEvents = !service.ownEvents"
+                class="flex-auto" color="primary"
+                [ngClass]="service.ownEvents ? 'mat-mdc-unelevated-button' : 'mdc-button--outlined mat-mdc-outlined-button'">
           <mat-icon>copyright</mat-icon>
           {{ 'event.filter.own' | translate }}
         </button>
 
-        <button mat-flat-button (click)="service.availableEvents = !service.availableEvents"
-                [color]="service.availableEvents ? 'accent' : 'primary'">
+        <button mat-stroked-button (click)="service.availableEvents = !service.availableEvents"
+                class="flex-auto" color="primary"
+                [ngClass]="service.availableEvents ? 'mat-mdc-unelevated-button' : 'mdc-button--outlined mat-mdc-outlined-button'">
           <mat-icon>event_available</mat-icon>
           {{ 'event.filter.available' | translate }}
         </button>
 
-        <button mat-flat-button (click)="service.participatingEvents = !service.participatingEvents"
-                [color]="service.participatingEvents ? 'accent' : 'primary'">
+        <button mat-stroked-button (click)="service.participatingEvents = !service.participatingEvents"
+                class="flex-auto" color="primary"
+                [ngClass]="service.participatingEvents ? 'mat-mdc-unelevated-button' : 'mdc-button--outlined mat-mdc-outlined-button'">
           <mat-icon>3p</mat-icon>
           {{ 'event.filter.participating' | translate }}
         </button>
@@ -102,14 +109,9 @@
     <mat-divider class="!pb-2"></mat-divider>
     <mat-card-content>
       <div class="flex flex-col gap-2 content-stretch align-items-stretch">
-        <button mat-flat-button (click)="service.resetFilter()" color="warn">
+        <button mat-stroked-button (click)="service.resetFilter()" color="warn">
           <mat-icon>cancel</mat-icon>
           {{ 'event.filter.reset' | translate }}
-        </button>
-
-        <button mat-flat-button (click)="service.filterToolbarVisible = false" color="primary">
-          <mat-icon>filter_alt</mat-icon>
-          {{ 'event.filter.hide' | translate }}
         </button>
       </div>
     </mat-card-content>

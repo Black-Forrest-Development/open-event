@@ -40,4 +40,5 @@ data class EventSearchEntry(
 
     // categories
     val categories: Set<String>,
+    val tags: Set<String>,
 )

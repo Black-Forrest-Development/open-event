@@ -6,6 +6,8 @@ import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.EventInfo
+import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
+import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.search.api.*
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
 import de.sambalmueslie.openevent.core.search.common.SearchClientFactory
@@ -20,6 +22,7 @@ import java.time.format.DateTimeFormatter
 @Singleton
 open class EventSearchOperator(
     private val service: EventCrudService,
+    private val registrationService: RegistrationCrudService,
     private val accountService: AccountStorageService,
 
     private val fieldMapping: EventFieldMappingProvider,
@@ -34,6 +37,7 @@ open class EventSearchOperator(
 
     init {
         service.registerSearch { evt -> handleChanged(evt) }
+        registrationService.registerSearch { evt -> handleChanged(evt) }
     }
 
     override fun getFieldMappingProvider() = fieldMapping
@@ -52,6 +56,11 @@ open class EventSearchOperator(
     private fun handleChanged(obj: EventInfo) {
         val data = convert(obj)
         updateDocument(data)
+    }
+
+    private fun handleChanged(obj: Registration) {
+        val info = service.getInfo(obj.eventId, null) ?: return
+        handleChanged(info)
     }
 
     override fun processSearchResponse(

@@ -19,11 +19,11 @@ class EventFieldMappingProvider : FieldMappingProvider {
             bool("published")
             number<Long>("owner")
 
-            text("street")
-            text("streetNumber")
-            text("zip")
-            text("city")
-            text("country")
+            keyword("street")
+            keyword("streetNumber")
+            keyword("zip")
+            keyword("city")
+            keyword("country")
 
             geoPoint("geo")
 
@@ -35,7 +35,8 @@ class EventFieldMappingProvider : FieldMappingProvider {
 
             number<Long>("participant")
 
-            text("categories")
+            keyword("categories")
+            keyword("tags")
         }
     }
 }

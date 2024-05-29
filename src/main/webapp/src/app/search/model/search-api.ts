@@ -57,6 +57,7 @@ export interface EventSearchEntry {
 
   // categories
   categories: string[],
+  tags: string[],
 }
 
 export class AccountSearchRequest {

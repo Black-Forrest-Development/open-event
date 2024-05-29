@@ -18,6 +18,7 @@ import {AuthModule} from "./auth/auth.module";
 import {FALLBACK, GravatarModule, RATING} from "ngx-gravatar";
 import {FullCalendarModule} from "@fullcalendar/angular";
 import {provideHotToastConfig} from "@ngxpert/hot-toast";
+import {FullscreenOverlayContainer, OverlayContainer} from "@angular/cdk/overlay";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -89,7 +90,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
         autoClose: true,
         position: 'top-center'
       }
-    )
+    ),
+    {provide: OverlayContainer, useClass: FullscreenOverlayContainer}
   ],
   bootstrap: [AppComponent]
 })

@@ -7,5 +7,5 @@ import {EventSearchEntry} from "../../search/model/search-api";
   styleUrls: ['./event-board-list-entry.component.scss']
 })
 export class EventBoardListEntryComponent {
-  @Input() info: EventSearchEntry | undefined
+  @Input() info!: EventSearchEntry
 }

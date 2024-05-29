@@ -1,7 +1,7 @@
 <mat-toolbar class="px-2">
   <div class="flex flex-row gap-3 flex-auto items-center">
 
-    <div class="flex flex-row gap-2 items-center basis-1/4">
+    <div class="flex flex-row gap-2 items-center basis-full sm:basis-1/4">
       <mat-form-field class="dense-3 flex-auto" subscriptSizing="dynamic">
         <mat-label class="flex flex-row gap-3">
           <mat-icon>search</mat-icon>
@@ -25,23 +25,23 @@
         <mat-icon>event</mat-icon>
         {{ 'event.create' | translate }}
       </button>
-    }
 
-    <div class="flex flex-row gap-2 basis-72 justify-end">
-      <mat-button-toggle-group class="dense-1">
-        <mat-button-toggle value="list" [checked]="mode == 'list'" (click)="modeChanged.emit('list')">
-          <mat-icon>list</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle value="map" [checked]="mode == 'map'" (click)="modeChanged.emit('map')">
-          <mat-icon>map</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle value="calendar" [checked]="mode == 'calendar'" (click)="modeChanged.emit('calendar')">
-          <mat-icon>calendar_month</mat-icon>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
 
-    @if (mobileView) {
+      <div class="flex flex-row gap-2 basis-72 justify-end">
+        <mat-button-toggle-group class="dense-1">
+          <mat-button-toggle value="list" [checked]="mode == 'list'" (click)="modeChanged.emit('list')">
+            <mat-icon>list</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="map" [checked]="mode == 'map'" (click)="modeChanged.emit('map')">
+            <mat-icon>map</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="calendar" [checked]="mode == 'calendar'" (click)="modeChanged.emit('calendar')">
+            <mat-icon>calendar_month</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    } @else {
+      <div class="flex-auto"></div>
       <button [matMenuTriggerFor]="contextMenu" mat-icon-button>
         <mat-icon>more_vert</mat-icon>
       </button>

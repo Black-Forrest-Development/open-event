@@ -38,6 +38,7 @@ import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
 import {EventDetailsInfoComponent} from './event-details-info/event-details-info.component';
 import {EventDetailsLocationComponent} from './event-details-location/event-details-location.component';
 import {ShareModule} from "../share/share.module";
+import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 
 
 @NgModule({
@@ -89,6 +90,8 @@ import {ShareModule} from "../share/share.module";
     ShareButtonsModule,
     ShareIconsModule,
     ShareModule,
+    CdkConnectedOverlay,
+    CdkOverlayOrigin,
   ]
 })
 export class EventModule {

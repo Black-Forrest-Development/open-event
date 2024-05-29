@@ -12,7 +12,10 @@ export class EventBoardListComponent implements OnInit, OnDestroy {
   @ViewChild('anchor', {static: true}) anchor: ElementRef<HTMLElement> | undefined
   private observer: IntersectionObserver | undefined
 
+  filterOverlayOpen: boolean = false
+
   constructor(public service: EventBoardService, private host: ElementRef) {
+    this.filterOverlayOpen = service.filterToolbarVisible
   }
 
   get element() {
@@ -45,6 +48,5 @@ export class EventBoardListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.observer) this.observer.disconnect()
   }
-
 
 }

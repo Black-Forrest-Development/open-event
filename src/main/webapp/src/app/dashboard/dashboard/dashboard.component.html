@@ -12,7 +12,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <app-dashboard-toolbar [mobileView]="(isHandset$ | async) ?? false" [title]="service.title"
-                           (toggleSidenavEvent)="drawer.toggle()" [account]="account"
+                           (toggleSidenavEvent)="drawer.toggle()"
     >
     </app-dashboard-toolbar>
     <div>

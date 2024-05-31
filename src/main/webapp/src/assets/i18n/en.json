@@ -46,6 +46,7 @@
       "startDate": "Date",
       "startTime": "Start Time",
       "endTime": "End Time",
+      "address": "Select predefined address",
       "street": "Street",
       "nr": "Nr",
       "info": "Additonal Info",
@@ -289,6 +290,17 @@
       "change": {
         "title": "Change address"
       }
+    },
+    "table": {
+      "street": "Street",
+      "streetNumber": "Nr",
+      "zip": "Zip",
+      "city": "City",
+      "country": "Country"
+    },
+    "action": {
+      "add": "Create address",
+      "import": "Import addresses"
     }
   },
   "share": {
@@ -300,5 +312,8 @@
   "lang": {
     "en": "English",
     "de": "Deutsch"
+  },
+  "preferences": {
+    "title": "Preferences"
   }
 }

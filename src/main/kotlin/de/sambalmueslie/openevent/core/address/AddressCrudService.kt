@@ -54,21 +54,23 @@ class AddressCrudService(
     }
 
     fun importLocations(account: Account): Page<Address> {
-        val data = PageableSequence { eventService.getOwned(account, it) }
-        data.forEach {
-            val l = locationService.findByEvent(it) ?: return@forEach
-            val request = AddressChangeRequest(
-                l.street,
-                l.streetNumber,
-                l.zip,
-                l.city,
-                l.country,
-                l.additionalInfo,
-                l.lat,
-                l.lon
-            )
-            create(account, account, request)
-        }
+
+        PageableSequence { eventService.getOwned(account, it) }
+            .mapNotNull {
+                val l = locationService.findByEvent(it) ?: return@mapNotNull null
+                AddressChangeRequest(
+                    l.street,
+                    l.streetNumber,
+                    l.zip,
+                    l.city,
+                    l.country,
+                    l.additionalInfo,
+                    l.lat,
+                    l.lon
+                )
+            }
+            .distinctBy { "${it.street.trim()}${it.streetNumber.trim()}${it.zip.trim()}${it.city.trim()}${it.country.trim()}${it.additionalInfo.trim()}" }
+            .forEach { create(account, account, it) }
 
         return getAllForAccount(account, Pageable.from(0, 20))
     }

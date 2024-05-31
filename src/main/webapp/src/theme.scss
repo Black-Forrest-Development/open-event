@@ -101,7 +101,6 @@ $open-event-warn-palette: (
 );
 
 
-
 $open-event-primary: mat.define-palette($open-event-primary-palette);
 $open-event-accent: mat.define-palette($open-event-accent-palette);
 $open-event-warn: mat.define-palette($open-event-warn-palette);
@@ -114,7 +113,8 @@ $open-event-theme: mat.define-light-theme((
   ),
   typography: mat.define-typography-config(),
   density: 0,
-));
+)
+);
 
 @include mat.all-component-themes($open-event-theme);
 
@@ -128,4 +128,9 @@ $open-event-theme: mat.define-light-theme((
   //background: map-get($open-event-warn, default);
   //color: map-get($open-event-warn, default-contrast);
   color: map-get($open-event-warn, default);
+}
+
+.mat-button-toggle-checked button {
+  background-color: map-get($open-event-accent, default);
+  color: map-get($open-event-accent, default-contrast);
 }

@@ -75,5 +75,18 @@ class AddressController(
         }
     }
 
+    @Get("/for/account/{accountId}")
+    override fun getForAccount(auth: Authentication, accountId: Long, pageable: Pageable): Page<Address> {
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            if (isAdmin(auth)) {
+                val account = accountService.get(accountId) ?: return@checkPermission Page.empty()
+                service.getAllForAccount(account, pageable)
+            } else {
+                val account = accountService.get(auth) ?: return@checkPermission Page.empty()
+                service.getAllForAccount(account, pageable)
+            }
+        }
+    }
+
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
 }

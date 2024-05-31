@@ -4,12 +4,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/model/page";
 import {Address, AddressChangeRequest} from "./address-api";
+import {AppService} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddressService extends BaseService {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private appService: AppService) {
     super(http, 'address')
     this.retryCount = 0
   }
@@ -32,6 +33,15 @@ export class AddressService extends BaseService {
 
   importAddress(): Observable<Page<Address>> {
     return this.post('import', {})
+  }
+
+  getAllForCurrentAccount(page: number, size: number): Observable<Page<Address>> {
+    let accountId = this.appService.account?.id ?? -1
+    return this.getPaged('for/account/' + accountId, page, size)
+  }
+
+  getAllForAccount(accountId: number, page: number, size: number): Observable<Page<Address>> {
+    return this.getPaged('for/account/' + accountId, page, size)
   }
 
 }

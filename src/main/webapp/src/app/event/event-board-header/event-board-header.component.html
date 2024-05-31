@@ -28,7 +28,7 @@
 
 
       <div class="flex flex-row gap-2 basis-72 justify-end">
-        <mat-button-toggle-group class="dense-1">
+        <mat-button-toggle-group class="dense-1" [hideSingleSelectionIndicator]="true">
           <mat-button-toggle value="list" [checked]="mode == 'list'" (click)="modeChanged.emit('list')">
             <mat-icon>list</mat-icon>
           </mat-button-toggle>

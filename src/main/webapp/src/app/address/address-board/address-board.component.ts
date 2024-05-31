@@ -4,6 +4,7 @@ import {AddressService} from "../model/address.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Page} from "../../shared/model/page";
 import {AddressChangeDialogComponent} from "../address-change-dialog/address-change-dialog.component";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-address-board',
@@ -17,8 +18,9 @@ export class AddressBoardComponent {
   pageSize: number = 20
   pageIndex: number = 0
   totalSize: number = 0
+  displayedColumns: string[] = ['street', 'streetNumber', 'zip', 'city', 'country', 'cmd']
 
-  constructor(private service: AddressService, private dialog: MatDialog,) {
+  constructor(private service: AddressService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class AddressBoardComponent {
   private reload() {
     if (this.reloading) return
     this.reloading = true
-    this.service.getAllAddresses(this.pageIndex, this.pageSize).subscribe({
+    this.service.getAllForCurrentAccount(this.pageIndex, this.pageSize).subscribe({
       next: value => this.handleData(value),
       error: e => this.handleError(e)
     })
@@ -72,11 +74,15 @@ export class AddressBoardComponent {
       data: a
     })
     dialogRef.afterClosed().subscribe(result => {
-      if (result) this.service.updateAddress(a.id,result).subscribe(_ => this.reload())
+      if (result) this.service.updateAddress(a.id, result).subscribe(_ => this.reload())
     })
   }
 
   delete(a: Address) {
+
+  }
+
+  handlePageChange(event: PageEvent) {
 
   }
 }

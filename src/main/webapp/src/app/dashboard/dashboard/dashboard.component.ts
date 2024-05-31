@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {AuthService} from "../../auth/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
@@ -6,8 +6,6 @@ import {filter, map, Observable, withLatestFrom} from "rxjs";
 import {MatSidenav} from "@angular/material/sidenav";
 import {MainNavItem} from "./main-nav-item";
 import {DashboardService} from "../model/dashboard.service";
-import {AccountService} from "../../account/model/account.service";
-import {AccountInfo} from "../../account/model/account-api";
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +18,6 @@ export class DashboardComponent implements AfterViewInit {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(map(result => result.matches))
 
-
-  @Input() account: AccountInfo | undefined
 
   @ViewChild('drawer') drawer: MatSidenav | undefined
 
@@ -51,7 +47,6 @@ export class DashboardComponent implements AfterViewInit {
     private breakpointObserver: BreakpointObserver,
     private changeDetectorRef: ChangeDetectorRef,
     public service: DashboardService,
-    private accountService: AccountService,
   ) {
     router.events.pipe(
       withLatestFrom(this.isHandset$),

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AccountInfo} from "../../account/model/account-api";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -9,7 +9,14 @@ import {AccountInfo} from "../../account/model/account-api";
 export class DashboardToolbarComponent {
   @Input() mobileView: boolean = false
   @Input() title: string = ""
-  @Input() account: AccountInfo | undefined
   @Output() toggleSidenavEvent = new EventEmitter<boolean>()
 
+  constructor(
+    public service: AppService
+  ) {
+  }
+
+  logout() {
+    this.service.logout()
+  }
 }

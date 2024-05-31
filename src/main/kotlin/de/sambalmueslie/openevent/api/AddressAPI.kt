@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.api
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.security.authentication.Authentication
 
 interface AddressAPI : CrudAPI<Long, Address, AddressChangeRequest> {
@@ -13,4 +14,5 @@ interface AddressAPI : CrudAPI<Long, Address, AddressChangeRequest> {
     }
 
     fun importLocations(auth: Authentication): Page<Address>
+    fun getForAccount(auth: Authentication, accountId: Long, pageable: Pageable): Page<Address>
 }

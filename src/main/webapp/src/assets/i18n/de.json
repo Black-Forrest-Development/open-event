@@ -38,6 +38,7 @@
     "change": {
       "create": "Neue Veranstaltung erstellen",
       "update": "Bearbeiten der Veranstaltung: {{ event }}",
+      "update": "Bearbeiten der Veranstaltung: {{ event }}",
       "copy": "Kopieren der Veranstaltung: {{ event }}"
     },
     "form": {
@@ -46,6 +47,7 @@
       "startDate": "Datum",
       "startTime": "Begin",
       "endTime": "Ende",
+      "address": "Gespeicherte Adresse auswählen",
       "street": "Straße",
       "nr": "Nr",
       "info": "Addresszusatz",
@@ -80,9 +82,9 @@
       "reset": "Filter zurücksetzen",
       "hide": "Filter schließen",
       "history": "Vergangenheit anzeigen",
-      "own": "Eigene anzeigen",
+      "own": "Meine Angebote anzeigen",
       "available": "Verfügbare anzeigen",
-      "participating": "Angemeldete anzeigen",
+      "participating": "Meine Teilnahme anzeigen",
       "range": {
         "today": "Nur heute anzeigen",
         "week": "Diese Woche anzeigen",
@@ -286,6 +288,31 @@
       "change": {
         "title": "Bestehende Addresse ändern"
       }
+    },
+    "table": {
+      "street": "Straße",
+      "streetNumber": "Nr",
+      "info": "Addresszusatz",
+      "zip": "PLZ",
+      "city": "Wohnort",
+      "country": "Land"
+    },
+    "action": {
+      "add": "Neue Addresse anlegen",
+      "import": "Bestehende Addressen importieren"
     }
+  },
+  "share": {
+    "title": "Share",
+    "action": {
+      "enable": "Enable Sharing"
+    }
+  },
+  "lang": {
+    "en": "English",
+    "de": "Deutsch"
+  },
+  "preferences": {
+    "title": "Einstellungen"
   }
 }

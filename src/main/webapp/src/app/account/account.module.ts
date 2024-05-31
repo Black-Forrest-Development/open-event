@@ -15,6 +15,7 @@ import {AccountProfileComponent} from './account-profile/account-profile.compone
 import {AccountAddressComponent} from './account-address/account-address.component';
 import {AccountPreferencesComponent} from './account-preferences/account-preferences.component';
 import {AddressModule} from "../address/address.module";
+import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
 
 
 @NgModule({
@@ -34,15 +35,16 @@ import {AddressModule} from "../address/address.module";
     AccountDisplayNamePipe,
     SelectAccountComponent
   ],
-  imports: [
-    CommonModule,
-    GravatarModule,
-    MaterialModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    AccountRoutingModule,
-    AddressModule
-  ]
+    imports: [
+        CommonModule,
+        GravatarModule,
+        MaterialModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        AccountRoutingModule,
+        AddressModule,
+        CdkCopyToClipboard
+    ]
 })
 export class AccountModule {
 }

@@ -3,6 +3,7 @@ import {Profile, ProfileChangeRequest} from "../../profile/model/profile-api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../profile/model/profile.service";
 import {AccountService} from "../model/account.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-account-profile',
@@ -16,7 +17,7 @@ export class AccountProfileComponent {
 
   fg: FormGroup
 
-  constructor(private fb: FormBuilder, private service: ProfileService, private accountService: AccountService) {
+  constructor(private fb: FormBuilder, private service: ProfileService, private accountService: AccountService, public authService: AuthService) {
     this.fg = this.fb.group({
       email: this.fb.control('', Validators.email),
       phone: this.fb.control(''),

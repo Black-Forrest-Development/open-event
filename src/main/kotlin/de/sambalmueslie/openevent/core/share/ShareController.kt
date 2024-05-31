@@ -1,6 +1,5 @@
 package de.sambalmueslie.openevent.core.share
 
-import de.sambalmueslie.openevent.api.EventAPI
 import de.sambalmueslie.openevent.api.ShareAPI
 import de.sambalmueslie.openevent.api.ShareAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.ShareAPI.Companion.PERMISSION_READ
@@ -99,9 +98,18 @@ class ShareController(
 
     @Put("/{id}/published")
     override fun setPublished(auth: Authentication, id: String, @Body value: PatchRequest<Boolean>): Share? {
-        return auth.checkPermission(EventAPI.PERMISSION_WRITE, EventAPI.PERMISSION_ADMIN) {
-            logger.traceAction(auth, "PUBLISHED", id.toString(), value) {
-                service.setPublished(accountService.find(auth), id, value)
+        return auth.checkPermission(PERMISSION_WRITE, PERMISSION_ADMIN) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            if (isAdmin(auth)) {
+                logger.traceAction(auth, "PUBLISHED", id, value) {
+                    service.setPublished(account, id, value)
+                }
+            } else {
+                val share = service.get(id) ?: return@checkPermission null
+                if (share.owner.id != account.id) return@checkPermission null
+                logger.traceAction(auth, "PUBLISHED", id, value) {
+                    service.setPublished(account, id, value)
+                }
             }
         }
     }

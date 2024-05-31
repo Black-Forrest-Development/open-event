@@ -1,9 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Event} from "../../event/model/event-api";
 import {AuthService} from "../../auth/auth.service";
-import {MatDialog} from "@angular/material/dialog";
-import {HotToastService} from "@ngxpert/hot-toast";
-import {TranslateService} from "@ngx-translate/core";
 import {ShareService} from "../model/share.service";
 import {Share, ShareChangeRequest} from "../model/share-api";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
@@ -28,9 +25,6 @@ export class ShareDetailsComponent {
 
   constructor(
     private service: ShareService,
-    private dialog: MatDialog,
-    private hotToast: HotToastService,
-    private translation: TranslateService,
     private authService: AuthService
   ) {
   }

@@ -95,4 +95,8 @@ export class AuthService {
   }
 
 
+  getRoles(): string[] {
+    if (!this.principal) return []
+    return this.principal.roles.sort();
+  }
 }

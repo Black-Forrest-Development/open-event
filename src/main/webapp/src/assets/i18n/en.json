@@ -168,7 +168,28 @@
     }
   },
   "category": {
-    "type": "Category"
+    "type": "Category",
+    "search": "Category search",
+    "create": "Create Category",
+    "table": {
+      "name": "Name"
+    },
+    "dialog": {
+      "change": {
+        "title": "Change Category"
+      },
+      "create": {
+        "title": "Create new Category"
+      },
+      "delete": {
+        "title": "Delete Category",
+        "question": "Do you realy want to delete the category?"
+      }
+    },
+    "form": {
+      "name": "Name",
+      "iconUrl": "Icon URL"
+    }
   },
   "settings": {
     "type": "Settings"

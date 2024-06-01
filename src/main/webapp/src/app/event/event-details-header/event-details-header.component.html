@@ -22,13 +22,13 @@
 
     @if (isAdminOrCanEdit) {
       <ng-container *ngFor="let item of menu.menuItems">
-        <button (click)="item.handleClick()" class="action-fab" mat-mini-fab>
+        <button (click)="item.handleClick()" class="toolbar-action-fab" mat-mini-fab>
           <mat-icon>{{ item.icon }}</mat-icon>
         </button>
       </ng-container>
     }
     @if (isAdminOrCanEdit) {
-      <button [matMenuTriggerFor]="contextMenu" mat-icon-button>
+      <button [matMenuTriggerFor]="contextMenu" class="toolbar-action-fab" mat-mini-fab>
         <mat-icon>more_vert</mat-icon>
       </button>
     }

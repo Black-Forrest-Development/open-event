@@ -4,6 +4,7 @@ import {Address} from "../../address/model/address-api";
 import {MatSelectChange} from "@angular/material/select";
 import {AddressService} from "../../address/model/address.service";
 import {Page} from "../../shared/model/page";
+import {Account} from "../../account/model/account-api";
 
 @Component({
   selector: 'app-event-change-form-location',
@@ -13,6 +14,7 @@ import {Page} from "../../shared/model/page";
 export class EventChangeFormLocationComponent {
   @Input() form: FormGroup | undefined
   @Input() hiddenFields: string[] = []
+  @Input() account: Account | undefined
   reloading: boolean = false
   addresses: Address[] = []
 
@@ -23,7 +25,7 @@ export class EventChangeFormLocationComponent {
 
   ngOnInit() {
     this.reloading = true
-    this.addressService.getAllAddresses(0, 20).subscribe(d => this.handleAddresses(d))
+    this.addressService.getAllForAccount(this.account?.id ?? -1, 0, 20).subscribe(d => this.handleAddresses(d))
   }
 
   isVisible(ctrl: string): boolean {

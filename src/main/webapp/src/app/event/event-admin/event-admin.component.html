@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <div class="flex flex-row gap-2 flex-auto items-center">
     <button (click)="back()" mat-mini-fab>
       <mat-icon>arrow_back</mat-icon>
@@ -16,6 +16,6 @@
 
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 
-<div *ngIf="info" class="flex flex-col gap-2 content-stretch p-2">
+<div *ngIf="info" class="flex flex-col gap-2 content-stretch p-4">
   <app-registration-moderation *ngIf="info.registration" [data]="info.registration"></app-registration-moderation>
 </div>

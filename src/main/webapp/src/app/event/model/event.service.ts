@@ -95,7 +95,7 @@ export class EventService extends BaseService {
       location,
       registration,
       true,
-      value.event.tags
+      value.registration.tags
     )
   }
 

@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {MatChipInputEvent} from "@angular/material/chips";
+import {FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -41,29 +40,5 @@ export class EventChangeFormEventComponent {
     return this.hiddenFields.find(x => x == ctrl) == null
   }
 
-  addTag(event: MatChipInputEvent) {
-    const value = (event.value || '').trim()
-    if (value.length <= 0) return
-    const t = this.tags
-    if (value && t) {
-      let data = t.value as string[]
-      let index = data.indexOf(value)
-      if (index < 0) data.push(value)
-    }
-    event.chipInput!.clear();
-  }
 
-  get tags(): FormControl {
-    return this.form?.get('tags') as FormControl;
-  }
-
-  removeTag(tag: string) {
-    let t = this.tags
-    if (!t) return
-
-    let index = (t.value as string[]).indexOf(tag)
-    if (index >= 0) {
-      (t.value as string[]).splice(index, 1)
-    }
-  }
 }

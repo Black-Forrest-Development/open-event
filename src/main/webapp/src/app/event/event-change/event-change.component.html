@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <div class="flex flex-row gap-2 flex-auto items-center">
     <button (click)="cancel()" mat-mini-fab>
       <mat-icon>arrow_back</mat-icon>
@@ -14,46 +14,31 @@
         <mat-step [stepControl]="eventForm" errorMessage="{{'event.step.incomplete' | translate}}"
                   label="{{'event.step.event' | translate}}">
           <app-event-change-form-event [form]="eventForm" [hiddenFields]="hiddenFields"></app-event-change-form-event>
-          <div class="flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-3 pt-3">
             <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
-            <button (click)="toggleHelp('event')" color="accent" mat-flat-button>
-              <mat-icon>support</mat-icon>
-              {{ 'action.help' | translate }}
-            </button>
+            <ng-container *ngTemplateOutlet="submitButton"></ng-container>
+            <ng-container *ngTemplateOutlet="helpButton"></ng-container>
           </div>
         </mat-step>
         <mat-step [stepControl]="locationForm" errorMessage="{{'event.step.incomplete' | translate}}"
                   label="{{'event.step.location' | translate}}">
-          <app-event-change-form-location [form]="locationForm"
-                                          [hiddenFields]="hiddenFields">
+          <app-event-change-form-location [form]="locationForm" [hiddenFields]="hiddenFields" [account]="account">
           </app-event-change-form-location>
-          <div class="flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-3 pt-3">
             <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
             <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
-            ,
-            <button (click)="toggleHelp('location')" color="accent" mat-flat-button>
-              <mat-icon>support</mat-icon>
-              {{ 'action.help' | translate }}
-            </button>
+            <ng-container *ngTemplateOutlet="submitButton"></ng-container>
+            <ng-container *ngTemplateOutlet="helpButton"></ng-container>
           </div>
         </mat-step>
         <mat-step [stepControl]="registrationForm" errorMessage="{{'event.step.incomplete' | translate}}"
                   label="{{'event.step.registration' | translate}}">
           <app-event-change-form-registration [form]="registrationForm" [hiddenFields]="hiddenFields">
           </app-event-change-form-registration>
-          <div class="flex flex-row justify-content-end gap-2">
+          <div class="flex flex-row justify-content-end gap-3 pt-3">
             <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
-            <button (click)="submit()" [disabled]="!fg.valid || !fg.touched || reloading" color="accent" mat-flat-button
-                    type="submit">
-              {{ 'action.submit' | translate }}
-              <mat-icon *ngIf="reloading">
-                <mat-spinner diameter="18"></mat-spinner>
-              </mat-icon>
-            </button>
-            <button (click)="toggleHelp('registration')" color="accent" mat-flat-button>
-              <mat-icon>support</mat-icon>
-              {{ 'action.help' | translate }}
-            </button>
+            <ng-container *ngTemplateOutlet="submitButton"></ng-container>
+            <ng-container *ngTemplateOutlet="helpButton"></ng-container>
           </div>
         </mat-step>
       </mat-stepper>
@@ -63,3 +48,21 @@
     <app-event-change-help [step]="stepper.selectedIndex"></app-event-change-help>
   </div>
 </div>
+
+<ng-template #submitButton>
+  <button (click)="submit()" [disabled]="!fg.valid || !fg.touched || reloading" color="accent" mat-flat-button
+          type="submit">
+    <mat-icon>save</mat-icon>
+    {{ 'action.submit' | translate }}
+    <mat-icon *ngIf="reloading">
+      <mat-spinner diameter="18"></mat-spinner>
+    </mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #helpButton>
+  <button (click)="toggleHelp('registration')" color="accent" mat-flat-button>
+    <mat-icon>support</mat-icon>
+    {{ 'action.help' | translate }}
+  </button>
+</ng-template>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {EventService} from "../model/event.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -10,6 +10,8 @@ import * as moment from "moment";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
+import {Account} from "../../account/model/account-api";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-event-change',
@@ -28,6 +30,7 @@ export class EventChangeComponent {
   registrationForm: FormGroup
 
   event: EventInfo | undefined
+  @Input() account: Account | undefined
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
   helpVisible: boolean = false
@@ -37,6 +40,7 @@ export class EventChangeComponent {
   constructor(
     private fb: FormBuilder,
     private service: EventService,
+    private appService: AppService,
     private translationService: TranslateService,
     private toastService: HotToastService,
     private router: Router,
@@ -55,7 +59,6 @@ export class EventChangeComponent {
       longText: this.fb.control(''),
       shortText: this.fb.control(''),
       title: this.fb.control('', Validators.required),
-      tags: this.fb.control([]),
     })
     this.locationForm = this.fb.group({
       city: ['', Validators.required],
@@ -70,7 +73,8 @@ export class EventChangeComponent {
       maxGuestAmount: [4, Validators.required],
       interestedAllowed: [false, Validators.required],
       ticketsEnabled: [false, Validators.required],
-      categories: [[]]
+      categories: [[]],
+      tags: this.fb.control([]),
     })
 
     this.fg = this.fb.group({
@@ -88,6 +92,7 @@ export class EventChangeComponent {
     this.route.paramMap.subscribe(p => this.handleParams(p))
     let endDate = this.eventForm.get('endDate');
     if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
+    if (!this.account) this.account = this.appService.account
   }
 
   cancel() {
@@ -176,7 +181,6 @@ export class EventChangeComponent {
       longText: e.event.longText ?? "",
       shortText: e.event.shortText ?? "",
       title: e.event.title ?? "",
-      tags: e.event.tags ?? [],
     })
     // init location form
     let location = e.location
@@ -197,7 +201,8 @@ export class EventChangeComponent {
         ticketsEnabled: registration.registration.ticketsEnabled,
         maxGuestAmount: registration.registration.maxGuestAmount,
         interestedAllowed: registration.registration.interestedAllowed,
-        categories: e.categories.map(c => c.id)
+        categories: e.categories.map(c => c.id),
+        tags: e.event.tags ?? [],
       })
     }
   }

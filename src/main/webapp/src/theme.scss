@@ -134,3 +134,13 @@ $open-event-theme: mat.define-light-theme((
   background-color: map-get($open-event-accent, default);
   color: map-get($open-event-accent, default-contrast);
 }
+
+.toolbar-action-fab {
+  background-color: unset !important;
+  color: black !important;
+  border: map-get($open-event-primary, default) 1px solid !important;
+}
+
+.toolbar-action-fab:hover {
+  background-color: map-get($open-event-accent, default) !important;
+}

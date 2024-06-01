@@ -32,7 +32,6 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import {EventActionExportComponent} from './event-action-export/event-action-export.component';
 import {EventBoardFilterComponent} from "./event-board-filter/event-board-filter.component";
 import {EventAdminComponent} from './event-admin/event-admin.component';
-import {EventAdminShareComponent} from './event-admin-share/event-admin-share.component';
 import {ShareIconsModule} from "ngx-sharebuttons/icons";
 import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
 import {EventDetailsInfoComponent} from './event-details-info/event-details-info.component';
@@ -63,7 +62,6 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
     EventActionExportComponent,
     EventBoardFilterComponent,
     EventAdminComponent,
-    EventAdminShareComponent,
     EventDetailsInfoComponent,
     EventDetailsLocationComponent
   ],

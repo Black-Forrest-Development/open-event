@@ -1,25 +1,24 @@
-<mat-toolbar color="primary">
-  <div class="flex flex-row gap-2 flex-auto items-center">
+<mat-toolbar class="px-2">
+  <div class="flex flex-row gap-3 flex-auto items-center">
 
-    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 0 1 calc(50% - .5rem - 100px)">
-      <mat-form-field class="dense-1" style="flex: 0 1 calc(50%);" subscriptSizing="dynamic">
-        <mat-label>{{ 'category.search' | translate }}</mat-label>
-        <input matInput placeholder="" value="">
+    <div class="flex flex-row gap-2 items-center basis-full sm:basis-1/4">
+      <mat-form-field class="dense-3 flex-auto" subscriptSizing="dynamic">
+        <mat-label class="flex flex-row gap-3">
+          <mat-icon>search</mat-icon>
+          {{ 'category.search' | translate }}
+        </mat-label>
+        <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
+        <button (click)="input.value = ''; fullTextSearch = ''" *ngIf="input.value.length > 0" mat-icon-button
+                matSuffix>
+          <mat-icon>clear</mat-icon>
+        </button>
       </mat-form-field>
-      <button color="accent" mat-mini-fab>
-        <mat-icon>search</mat-icon>
-      </button>
-
     </div>
 
-    <button color="accent" extended mat-fab routerLink="./create" style="flex: 0 1 200px;">
+    <div class="flex-auto"></div>
+    <button color="accent" mat-flat-button (click)="create()" class="basis-72 min-h-10">
       <mat-icon>new_label</mat-icon>
       {{ 'category.create' | translate }}
-    </button>
-    <div class="flex-auto"></div>
-
-    <button mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
     </button>
 
   </div>
@@ -28,25 +27,44 @@
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
 
 
-<div class="flex flex-col gap-2 p-2 ">
+<div class="flex flex-col gap-2 p-4">
   <mat-card>
-    <div class="flex flex-col">
-      <ng-container *ngFor="let category of categories">
-        <div class="flex flex-row gap-5 items-center content-stretch px-4 py-2 flex-auto list-entry">
-          <div>{{ category.name }}</div>
-          <div class="flex-auto"></div>
+    <table [dataSource]="categories" mat-table>
+
+      <!-- name column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="flex flex-row gap-3 items-center">
+            <mat-icon>badge</mat-icon>
+            <span>{{ 'category.table.name' | translate }}</span>
+          </div>
+        </th>
+        <td *matCellDef="let entry" mat-cell>
+          {{ entry.name }}
+        </td>
+      </ng-container>
+
+      <!-- name cmd -->
+      <ng-container matColumnDef="cmd">
+        <th mat-header-cell *matHeaderCellDef>
+        </th>
+        <td *matCellDef="let entry" mat-cell>
           <div class="flex flex-row gap-2">
-            <a color="primary" mat-mini-fab routerLink="edit/{{category.id}}">
+            <a color="primary" mat-icon-button (click)="edit(entry)">
               <mat-icon>edit</mat-icon>
             </a>
-            <button color="primary" mat-mini-fab>
+            <button color="warn" mat-icon-button (click)="delete(entry)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-        </div>
-        <mat-divider></mat-divider>
+        </td>
       </ng-container>
-    </div>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" class="row" mat-row>
+      </tr>
+    </table>
+    <mat-divider></mat-divider>
     <mat-paginator [length]="totalSize"
                    [pageIndex]="pageIndex"
                    [pageSizeOptions]="[5, 10, 25, 100]"

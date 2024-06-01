@@ -167,7 +167,28 @@
     }
   },
   "category": {
-    "type": "Kategorien"
+    "type": "Kategorien",
+    "search": "Kategoriesuche",
+    "create": "Neue Kategorie anlegen",
+    "table": {
+      "name": "Name"
+    },
+    "dialog": {
+      "change": {
+        "title": "Kategorie bearbeiten"
+      },
+      "create": {
+        "title": "Kategorie erstellen"
+      },
+      "delete": {
+        "title": "Kategorie löschen",
+        "question": "Soll die Kategorie wirklich gelöscht werden?"
+      }
+    },
+    "form": {
+      "name": "Name",
+      "iconUrl": "Icon URL"
+    }
   },
   "settings": {
     "type": "Einstellungen"

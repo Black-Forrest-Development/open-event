@@ -144,7 +144,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.1.31")
+    implementation("com.jillesvangurp:search-client:2.2.0")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.17.2")

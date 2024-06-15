@@ -1,30 +1,16 @@
-<mat-toolbar color="primary">
-  <div class="flex flex-row gap-2 flex-auto items-center">
+<mat-toolbar class="px-2">
+  <div class="flex flex-row gap-3 flex-auto items-center">
     <h3>{{ 'mail.title' | translate }}</h3>
-
-    <div class="flex flex-row gap-2 flex-auto items-center" style="flex: 1 1 calc(50% - .5rem - 100px)">
-      <mat-form-field class="dense-1" style="flex: 1 1 calc(50%);" subscriptSizing="dynamic">
-        <mat-label>{{ 'mail.search' | translate }}</mat-label>
-        <input #input (keyup)="keyUp.emit(input.value)" [disabled]="reloading" matInput placeholder="" value="">
-        <mat-icon *ngIf="searching">
-          <mat-spinner diameter="18"></mat-spinner>
-        </mat-icon>
-      </mat-form-field>
-      <button (click)="search(input.value)" color="accent" mat-mini-fab>
-        <mat-icon>search</mat-icon>
-      </button>
-
-    </div>
-
     <div class="flex-auto"></div>
-    <button (click)="reload()" color="primary" mat-mini-fab>
+    <button (click)="reload()" class="toolbar-action-fab" mat-mini-fab>
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
 </mat-toolbar>
 
+
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-<div class="p-2">
+<div class="flex flex-col gap-2 p-4">
   <mat-card>
     <table [dataSource]="data" mat-table>
       <ng-container matColumnDef="timestamp">

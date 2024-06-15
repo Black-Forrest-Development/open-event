@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Account, AccountChangeRequest, AccountValidationResult} from "./account-api";
+import {Account, AccountChangeRequest, AccountInfo, AccountSetupRequest, AccountValidationResult} from "./account-api";
 import {Page} from "../../shared/model/page";
 import {Profile} from "../../profile/model/profile-api";
 import {Preferences} from "../../preferences/model/preferences-api";
@@ -43,4 +43,13 @@ export class AccountService extends BaseService {
   getPreferences(): Observable<Preferences> {
     return this.get('preferences')
   }
+
+  setupAccount(request: AccountSetupRequest): Observable<AccountInfo> {
+    return this.post('setup', request)
+  }
+
+  updateAccount(id: number, request: AccountSetupRequest): Observable<AccountInfo> {
+    return this.put('setup/' + id, request)
+  }
+
 }

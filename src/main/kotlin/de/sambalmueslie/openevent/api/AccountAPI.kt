@@ -10,6 +10,7 @@ interface AccountAPI : CrudAPI<Long, Account, AccountChangeRequest> {
         const val PERMISSION_READ = "openevent.account.read"
         const val PERMISSION_WRITE = "openevent.account.write"
         const val PERMISSION_ADMIN = "openevent.account.admin"
+        const val PERMISSION_MODERATOR = "openevent.account.mod"
     }
 
     fun findByExternalId(auth: Authentication, externalId: String): Account?
@@ -19,4 +20,7 @@ interface AccountAPI : CrudAPI<Long, Account, AccountChangeRequest> {
 
     fun getProfile(auth: Authentication): Profile?
     fun getPreferences(auth: Authentication): Preferences?
+
+    fun setup(auth: Authentication, request: AccountSetupRequest): AccountInfo?
+    fun update(auth: Authentication, id: Long, request: AccountSetupRequest): AccountInfo?
 }

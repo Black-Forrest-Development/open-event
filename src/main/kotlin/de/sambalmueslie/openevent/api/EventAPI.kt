@@ -17,6 +17,7 @@ interface EventAPI : CrudAPI<Long, Event, EventChangeRequest> {
         const val PERMISSION_READ = "openevent.event.read"
         const val PERMISSION_WRITE = "openevent.event.write"
         const val PERMISSION_ADMIN = "openevent.event.admin"
+        const val PERMISSION_MODERATOR = "openevent.event.mod"
     }
 
     fun setPublished(auth: Authentication, id: Long, value: PatchRequest<Boolean>): Event?

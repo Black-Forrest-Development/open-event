@@ -1,6 +1,8 @@
 package de.sambalmueslie.openevent.core.account
 
 import de.sambalmueslie.openevent.api.AccountAPI
+import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_MODERATOR
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.core.account.api.*
@@ -63,7 +65,7 @@ class AccountController(
 
     @Delete("/{id}")
     override fun delete(auth: Authentication, id: Long): Account? {
-        return auth.checkPermission(PERMISSION_WRITE) {
+        return auth.checkPermission(PERMISSION_ADMIN) {
             logger.traceDelete(auth) { service.delete(service.find(auth), id) }
         }
     }
@@ -86,6 +88,22 @@ class AccountController(
         return auth.checkPermission(PERMISSION_READ) {
             val account = service.get(auth) ?: return@checkPermission null
             service.getPreferences(account)
+        }
+    }
+
+    @Post("/setup")
+    override fun setup(auth: Authentication, @Body request: AccountSetupRequest): AccountInfo? {
+        return auth.checkPermission(PERMISSION_ADMIN, PERMISSION_MODERATOR) {
+            val account = service.get(auth) ?: return@checkPermission null
+            service.setup(account, request)
+        }
+    }
+
+    @Put("/setup/{id}")
+    override fun update(auth: Authentication, id: Long, @Body request: AccountSetupRequest): AccountInfo? {
+        return auth.checkPermission(PERMISSION_ADMIN, PERMISSION_MODERATOR) {
+            val account = service.get(auth) ?: return@checkPermission null
+            service.update(account, id, request)
         }
     }
 

@@ -3,7 +3,6 @@ import {HistoryService} from "../model/history.service";
 import {Page} from "../../shared/model/page";
 import {PageEvent} from "@angular/material/paginator";
 import {HistoryEventInfo} from "../model/history-api";
-import {HotToastService} from "@ngxpert/hot-toast";
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -20,9 +19,9 @@ export class HistoryBoardComponent {
   displayedColumns: string[] = ['timestamp', 'actor', 'type', 'message', 'source', 'info']
 
   keyUp: EventEmitter<string> = new EventEmitter<string>()
-  searching: boolean = false
 
   data: HistoryEventInfo[] = []
+  selected: HistoryEventInfo | undefined
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -30,8 +29,7 @@ export class HistoryBoardComponent {
   });
 
   constructor(
-    private service: HistoryService,
-    private toastService: HotToastService
+    private service: HistoryService
   ) {
   }
 
@@ -50,9 +48,6 @@ export class HistoryBoardComponent {
     this.loadPage(event.pageIndex)
   }
 
-  search(data: string) {
-    this.toastService.error("Sorry searching '" + data + "' is not supported yet")
-  }
 
   private loadPage(number: number) {
     if (this.reloading) return
@@ -63,16 +58,18 @@ export class HistoryBoardComponent {
 
   private handleData(page: Page<HistoryEventInfo>) {
     if (page == null) {
-      this.data = [];
-      this.pageNumber = 0;
-      this.pageSize = 20;
-      this.totalElements = 0;
+      this.data = []
+      this.pageNumber = 0
+      this.pageSize = 20
+      this.totalElements = 0
+      this.selected = undefined
     } else {
-      this.data = page.content.filter(d => d != null);
-      this.pageNumber = page.pageable.number;
-      this.pageSize = page.pageable.size;
-      this.totalElements = page.totalSize;
+      this.data = page.content.filter(d => d != null)
+      this.pageNumber = page.pageable.number
+      this.pageSize = page.pageable.size
+      this.totalElements = page.totalSize
+      this.selected = this.data[0]
     }
-    this.reloading = false;
+    this.reloading = false
   }
 }

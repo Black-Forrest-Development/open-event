@@ -192,7 +192,18 @@
     }
   },
   "settings": {
-    "type": "Settings"
+    "type": "Settings",
+    "create": "Create new Setting",
+    "table": {
+      "key": "Key",
+      "value": "Value",
+      "type": "Type"
+    },
+    "form": {
+      "key": "Key",
+      "value": "Value",
+      "type": "Type"
+    }
   },
   "cache": {
     "type": "Cache"
@@ -209,6 +220,7 @@
     "title": "Account",
     "type": "Account",
     "search": "Search for an account",
+    "create": "Create new account",
     "dialog": {
       "create": {
         "title": "Create new manual account"
@@ -225,6 +237,12 @@
     },
     "message": {
       "created": "Account created successfully"
+    },
+    "table": {
+      "name": "Username",
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "email": "E-Mail"
     }
   },
   "backoffice": {

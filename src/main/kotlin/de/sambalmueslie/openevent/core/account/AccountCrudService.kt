@@ -111,4 +111,37 @@ class AccountCrudService(
         return storage.getInfo(account)
     }
 
+    fun setup(actor: Account, request: AccountSetupRequest): AccountInfo? {
+        val existing = findExisting(request)
+        if (existing != null) return update(actor, existing, request)
+
+        val account = storage.create(request.account, emptyMap())
+        val profile = profileService.create(actor, account, request.profile)
+        preferencesService.handleAccountCreated(actor, account)
+
+        notifyCreated(actor, account)
+
+        return AccountInfo.create(account, profile)
+    }
+
+    private fun findExisting(request: AccountSetupRequest): Account? {
+        if (!request.profile.email.isNullOrBlank()) return storage.findByEmail(request.profile.email)
+        // TODO check that a little more in detail
+        return null
+    }
+
+    fun update(actor: Account, id: Long, request: AccountSetupRequest): AccountInfo? {
+        val existing = storage.get(id) ?: return setup(actor, request)
+
+        return update(actor, existing, request)
+    }
+
+    private fun update(actor: Account, account: Account, request: AccountSetupRequest): AccountInfo {
+        val result = storage.update(account.id, request.account)
+        val profile = profileService.update(actor, account.id, request.profile)
+
+        notifyUpdated(actor, result)
+
+        return AccountInfo.create(result, profile)
+    }
 }

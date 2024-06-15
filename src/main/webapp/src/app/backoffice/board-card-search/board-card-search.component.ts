@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
+import {SearchService} from "../../search/model/search.service";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AuthService} from "../../auth/auth.service";
-import {SearchService} from "../../search/model/search.service";
 
 @Component({
-  selector: 'app-board-card-solr',
-  templateUrl: './board-card-solr.component.html',
-  styleUrls: ['./board-card-solr.component.scss']
+  selector: 'app-board-card-search',
+  templateUrl: './board-card-search.component.html',
+  styleUrl: './board-card-search.component.scss'
 })
-export class BoardCardSolrComponent {
+export class BoardCardSearchComponent {
 
   isAccountAdmin: boolean = false
   isCategoryAdmin: boolean = false

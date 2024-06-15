@@ -4,6 +4,7 @@ import de.sambalmueslie.openevent.common.SimpleDataObject
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.Profile
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
+import de.sambalmueslie.openevent.nullIfBlank
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -42,15 +43,15 @@ data class ProfileData(
         ): ProfileData {
             return ProfileData(
                 account.id,
-                request.email,
-                request.phone,
-                request.mobile,
+                request.email.nullIfBlank(),
+                request.phone.nullIfBlank(),
+                request.mobile.nullIfBlank(),
                 request.firstName,
                 request.lastName,
                 request.dateOfBirth,
-                request.gender,
-                request.profilePicture,
-                request.website,
+                request.gender.nullIfBlank(),
+                request.profilePicture.nullIfBlank(),
+                request.website.nullIfBlank(),
                 request.language,
                 timestamp
             )
@@ -74,15 +75,15 @@ data class ProfileData(
     }
 
     fun update(request: ProfileChangeRequest, timestamp: LocalDateTime): ProfileData {
-        email = request.email
-        phone = request.phone
-        mobile = request.mobile
+        email = request.email.nullIfBlank()
+        phone = request.phone.nullIfBlank()
+        mobile = request.mobile.nullIfBlank()
         firstName = request.firstName
         lastName = request.lastName
         dateOfBirth = request.dateOfBirth
-        gender = request.gender
-        profilePicture = request.profilePicture
-        website = request.website
+        gender = request.gender.nullIfBlank()
+        profilePicture = request.profilePicture.nullIfBlank()
+        website = request.website.nullIfBlank()
         language = request.language
         updated = timestamp
         return this

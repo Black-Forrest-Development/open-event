@@ -38,6 +38,7 @@ import {EventDetailsInfoComponent} from './event-details-info/event-details-info
 import {EventDetailsLocationComponent} from './event-details-location/event-details-location.component';
 import {ShareModule} from "../share/share.module";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
+import {EventCreateDialogComponent} from './event-create-dialog/event-create-dialog.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
     EventBoardFilterComponent,
     EventAdminComponent,
     EventDetailsInfoComponent,
-    EventDetailsLocationComponent
+    EventDetailsLocationComponent,
+    EventCreateDialogComponent
   ],
   exports: [
     EventChangeFormEventComponent,

@@ -12,3 +12,8 @@ inline fun <T> Iterable<T>.forEachWithTryCatch(action: (T) -> Unit) {
         }
     }
 }
+
+
+fun String?.nullIfBlank(): String? {
+    return if (isNullOrBlank()) null else this
+}

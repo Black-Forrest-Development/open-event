@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.event
 import de.sambalmueslie.openevent.api.CategoryAPI
 import de.sambalmueslie.openevent.api.EventAPI
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_MODERATOR
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
@@ -82,7 +83,7 @@ class EventController(
 
     @Post("/{ownerId}")
     override fun create(auth: Authentication, ownerId: Long, @Body request: EventChangeRequest): Event {
-        return auth.checkPermission(PERMISSION_ADMIN) {
+        return auth.checkPermission(PERMISSION_ADMIN, PERMISSION_MODERATOR) {
             logger.traceCreate(auth, request) {
                 val owner = accountService.get(ownerId)
                 require(owner != null) { "Cannot find account for user" }

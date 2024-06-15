@@ -72,9 +72,11 @@ export interface AccountSearchResponse {
 }
 
 export interface AccountSearchEntry {
-  id: string,
+  id: number,
   name: string,
   email: string,
+  phone: string,
+  mobile: string,
   firstName: string,
   lastName: string,
 }

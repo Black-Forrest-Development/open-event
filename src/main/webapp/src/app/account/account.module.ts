@@ -16,6 +16,7 @@ import {AccountAddressComponent} from './account-address/account-address.compone
 import {AccountPreferencesComponent} from './account-preferences/account-preferences.component';
 import {AddressModule} from "../address/address.module";
 import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
+import {AccountChangeDialogComponent} from './account-change-dialog/account-change-dialog.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
     AccountBoardComponent,
     AccountProfileComponent,
     AccountAddressComponent,
-    AccountPreferencesComponent
+    AccountPreferencesComponent,
+    AccountChangeDialogComponent
   ],
   exports: [
     AccountComponent,

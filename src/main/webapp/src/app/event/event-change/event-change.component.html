@@ -1,9 +1,13 @@
 <mat-toolbar>
   <div class="flex flex-row gap-2 flex-auto items-center">
-    <button (click)="cancel()" mat-mini-fab>
+    <button (click)="cancel()" mat-mini-fab *ngIf="showBackButton">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <span class="title ps-2">{{ title | translate }}</span>
+    <div class="flex-auto"></div>
+    <div class="text-sm border border-gray-400 rounded px-3 py-2" *ngIf="account && isAdminOrModerator">
+      {{ account?.name }}
+    </div>
   </div>
 </mat-toolbar>
 <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>

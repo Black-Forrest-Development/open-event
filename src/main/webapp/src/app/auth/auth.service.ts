@@ -27,6 +27,7 @@ export class AuthService {
   public static EVENT_READ = "openevent.event.read"
   public static EVENT_WRITE = "openevent.event.write"
   public static EVENT_ADMIN = "openevent.event.admin"
+  public static EVENT_MODERATOR = "openevent.event.mod"
 
   public static ACCOUNT_READ = "openevent.account.read"
   public static ACCOUNT_WRITE = "openevent.account.write"

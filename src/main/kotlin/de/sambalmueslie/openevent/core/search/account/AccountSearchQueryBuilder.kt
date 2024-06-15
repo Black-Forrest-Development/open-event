@@ -25,6 +25,8 @@ class AccountSearchQueryBuilder : SearchQueryBuilder<AccountSearchRequest> {
                     request.fullTextSearch,
                     AccountSearchEntryData::name,
                     AccountSearchEntryData::email,
+                    AccountSearchEntryData::mobile,
+                    AccountSearchEntryData::phone,
                     AccountSearchEntryData::firstName,
                     AccountSearchEntryData::lastName
                 ) {

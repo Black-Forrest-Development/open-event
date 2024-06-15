@@ -1,4 +1,4 @@
-import {Profile} from "../../profile/model/profile-api";
+import {Profile, ProfileChangeRequest} from "../../profile/model/profile-api";
 
 export interface Account {
   id: number,
@@ -34,6 +34,14 @@ export class AccountChangeRequest {
     public name: string,
     public iconUrl: string,
     public externalId: string | undefined
+  ) {
+  }
+}
+
+export class AccountSetupRequest {
+  constructor(
+    public account: AccountChangeRequest,
+    public profile: ProfileChangeRequest
   ) {
   }
 }

@@ -136,6 +136,7 @@
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    [pageSize]="pageSize"
                    class="mb-2"
+                   (page)="handlePageEvent($event)"
     >
     </mat-paginator>
   </mat-card>

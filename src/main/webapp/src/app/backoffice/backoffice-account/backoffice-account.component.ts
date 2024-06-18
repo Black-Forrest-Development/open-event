@@ -8,6 +8,7 @@ import {AccountChangeDialogComponent} from "../../account/account-change-dialog/
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {EventCreateDialogComponent} from "../../event/event-create-dialog/event-create-dialog.component";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-backoffice-account',
@@ -110,5 +111,9 @@ export class BackofficeAccountComponent {
       data: entry.id,
     })
     dialogRef.afterClosed().subscribe()
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.reload(event.pageIndex, event.pageSize)
   }
 }

@@ -27,7 +27,8 @@
       "edit": "Veranstaltung Bearbeiten",
       "copy": "Veranstaltung Kopieren",
       "delete": "Veranstaltung Löschen",
-      "publish": "Veranstaltung Veröffentlichen"
+      "publish": "Veranstaltung Veröffentlichen",
+      "admin": "Teilnehmer anzeigen"
     },
     "step": {
       "event": "Veranstaltung",
@@ -37,7 +38,6 @@
     },
     "change": {
       "create": "Neue Veranstaltung erstellen",
-      "update": "Bearbeiten der Veranstaltung: {{ event }}",
       "update": "Bearbeiten der Veranstaltung: {{ event }}",
       "copy": "Kopieren der Veranstaltung: {{ event }}"
     },
@@ -99,6 +99,9 @@
       "status": "Status",
       "category": "Kategorien",
       "label": "Markierung"
+    },
+    "admin": {
+      "registration": "Teilnehmerliste"
     }
   },
   "registration": {

@@ -27,7 +27,8 @@
       "edit": "Edit Event",
       "copy": "Copy Event",
       "delete": "Delete Event",
-      "publish": "Publish Event"
+      "publish": "Publish Event",
+      "admin": "Event Administration"
     },
     "step": {
       "event": "Event",
@@ -69,6 +70,9 @@
         "title": "Please input some title",
         "shortText": "Please input some short description",
         "longText": "Please input some long description"
+      },
+      "admin": {
+        "registration": "Event Participants"
       }
     },
     "dialog": {

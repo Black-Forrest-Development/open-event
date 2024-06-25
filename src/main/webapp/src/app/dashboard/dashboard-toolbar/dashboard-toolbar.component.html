@@ -12,13 +12,11 @@
     } @else {
       <span class="header"> {{ title | translate }}</span>
       <div class="flex-auto basis-24"></div>
-      <div class="flex flex-col content-center">
-        <mat-icon>notifications</mat-icon>
-      </div>
+      <app-activity-button></app-activity-button>
       @if (service.info) {
         <div class="flex flex-row gap-3 content-center items-center basis-44" [matMenuTriggerFor]="menu">
           <div>
-            <img [email]="service.info.email ?? ''" alt="{{service.info | accountDisplayName}}"
+            <img [email]="service.info.email" alt="{{service.info | accountDisplayName}}"
                  class="account-info-avatar"
                  ngxGravatar
                  src="{{service.info.iconUrl}}">

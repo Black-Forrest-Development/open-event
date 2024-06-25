@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.account.db
 
 
 import de.sambalmueslie.openevent.common.BaseStorageService
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
 import de.sambalmueslie.openevent.core.account.AccountStorage
 import de.sambalmueslie.openevent.core.account.ProfileStorage
@@ -88,6 +89,10 @@ class AccountStorageService(
     override fun getInfo(account: Account): AccountInfo {
         val profile = profileStorage.get(account.id)
         return AccountInfo.create(account, profile)
+    }
+
+    override fun setExternalId(id: Long, value: PatchRequest<String>): Account? {
+        return patchData(id) { it.setExternalId(value.value, timeProvider.now()) }
     }
 
 

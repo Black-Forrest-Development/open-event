@@ -3,8 +3,10 @@ package de.sambalmueslie.openevent.core.notification.handler
 
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.event.EventChangeListener
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
@@ -17,7 +19,7 @@ class EventNotificationHandler(
     eventService: EventCrudService,
     private val registrationService: RegistrationCrudService,
     private val service: NotificationService,
-) : NotificationHandler, de.sambalmueslie.openevent.core.event.EventChangeListener {
+) : NotificationHandler, EventChangeListener {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(EventNotificationHandler::class.java)
@@ -46,21 +48,21 @@ class EventNotificationHandler(
 
     override fun handleCreated(actor: Account, obj: Event) {
         service.process(
-            de.sambalmueslie.openevent.core.notification.NotificationEvent(KEY_EVENT_CREATED, actor, obj),
+            NotificationEvent(KEY_EVENT_CREATED, actor, obj),
             getRecipients(actor, obj)
         )
     }
 
     override fun handleUpdated(actor: Account, obj: Event) {
         service.process(
-            de.sambalmueslie.openevent.core.notification.NotificationEvent(KEY_EVENT_UPDATED, actor, obj),
+            NotificationEvent(KEY_EVENT_UPDATED, actor, obj),
             getRecipients(actor, obj)
         )
     }
 
     override fun handleDeleted(actor: Account, obj: Event) {
         service.process(
-            de.sambalmueslie.openevent.core.notification.NotificationEvent(KEY_EVENT_DELETED, actor, obj),
+            NotificationEvent(KEY_EVENT_DELETED, actor, obj),
             getRecipients(actor, obj)
         )
     }
@@ -68,7 +70,7 @@ class EventNotificationHandler(
     override fun publishedChanged(actor: Account, event: Event) {
         if (event.published) {
             service.process(
-                de.sambalmueslie.openevent.core.notification.NotificationEvent(
+                NotificationEvent(
                     KEY_EVENT_PUBLISHED,
                     actor,
                     event
@@ -76,7 +78,7 @@ class EventNotificationHandler(
             )
         } else {
             service.process(
-                de.sambalmueslie.openevent.core.notification.NotificationEvent(
+                NotificationEvent(
                     KEY_EVENT_UNPUBLISHED,
                     actor,
                     event

@@ -67,7 +67,7 @@ const MATERIAL_IMPORTS = [
   MatBadgeModule,
   MatTooltipModule,
   MatRadioModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
 ];
 
 @NgModule({

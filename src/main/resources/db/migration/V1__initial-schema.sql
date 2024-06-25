@@ -382,4 +382,31 @@ CREATE TABLE share
 
     created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated   TIMESTAMP WITHOUT TIME ZONE
-)
+);
+
+-- activity
+CREATE SEQUENCE activity_seq;
+CREATE TABLE activity
+(
+    id        BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_seq'::regclass),
+    title     VARCHAR(255)                NOT NULL,
+    actor_id  BIGINT                      NOT NULL references account (id),
+
+    source    VARCHAR(255)                NOT NULL,
+    source_id BIGINT                      NOT NULL,
+    type      VARCHAR(255)                NOT NULL,
+
+
+    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated   TIMESTAMP WITHOUT TIME ZONE
+);
+
+CREATE TABLE activity_subscriber
+(
+    activity_id BIGINT                      NOT NULL references activity (id),
+    account_id  BIGINT                      NOT NULL references account (id),
+    read        BOOLEAN                     NOT NULL,
+    timestamp   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+
+    PRIMARY KEY (activity_id, account_id)
+);

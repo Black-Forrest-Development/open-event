@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.account
 
 
 import de.sambalmueslie.openevent.common.BaseCrudService
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.*
 import de.sambalmueslie.openevent.core.account.api.*
 import io.micronaut.data.model.Page
@@ -36,17 +37,14 @@ class AccountCrudService(
     }
 
     fun validate(auth: Authentication, lang: String): AccountValidationResult {
-        val email = auth.getEmail()
-        val account = findExistingAccount(auth, email) ?: createNewAccount(auth, lang)
+        val account = findExistingAccount(auth) ?: createNewAccount(auth, lang)
         val profile = profileService.getForAccount(account) ?: createNewProfile(auth, account, lang)
         val info = AccountInfo.create(account, profile)
         return AccountValidationResult(true, account, profile, info)
     }
 
-    private fun findExistingAccount(
-        auth: Authentication,
-        email: String
-    ) = storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(email)
+    private fun findExistingAccount(auth: Authentication) =
+        storage.findByExternalId(auth.getExternalId()) ?: storage.findByEmail(auth.getEmail())
 
     private fun createNewAccount(auth: Authentication, lang: String): Account {
         val account = create(getSystemAccount(), AccountChangeRequest(auth.getUsername(), "", auth.getExternalId()))
@@ -75,7 +73,14 @@ class AccountCrudService(
 
 
     fun get(auth: Authentication): Account? {
-        return findByEmail(auth.getEmail())
+        var account = findByExternalId(auth.getExternalId())
+        if (account != null) return account
+
+        account = storage.findByEmail(auth.getEmail()) ?: return null
+        if (account.externalId == null) {
+            account = storage.setExternalId(account.id, PatchRequest(auth.getExternalId()))
+        }
+        return account
     }
 
     fun find(auth: Authentication): Account {
@@ -111,7 +116,7 @@ class AccountCrudService(
         return storage.getInfo(account)
     }
 
-    fun setup(actor: Account, request: AccountSetupRequest): AccountInfo? {
+    fun setup(actor: Account, request: AccountSetupRequest): AccountInfo {
         val existing = findExisting(request)
         if (existing != null) return update(actor, existing, request)
 

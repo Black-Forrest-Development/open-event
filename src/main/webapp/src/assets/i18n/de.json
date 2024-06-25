@@ -338,5 +338,11 @@
   },
   "preferences": {
     "title": "Einstellungen"
+  },
+  "activity": {
+    "type": {
+      "EVENT_CREATED": "Veranstaltung erstellt",
+      "EVENT_CHANGED": "Veranstaltung geändert"
+    }
   }
 }

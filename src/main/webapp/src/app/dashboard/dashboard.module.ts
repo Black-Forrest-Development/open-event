@@ -11,6 +11,7 @@ import {MainMenuComponent} from './main-menu/main-menu.component';
 import {DashboardToolbarComponent} from './dashboard-toolbar/dashboard-toolbar.component';
 import {AccountModule} from "../account/account.module";
 import {GravatarModule} from "ngx-gravatar";
+import {ActivityModule} from "../activity/activity.module";
 
 
 @NgModule({
@@ -25,14 +26,15 @@ import {GravatarModule} from "ngx-gravatar";
   exports: [
     DashboardComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    AppRoutingModule,
-    TranslateModule,
-    AccountModule,
-    GravatarModule
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AppRoutingModule,
+        TranslateModule,
+        AccountModule,
+        GravatarModule,
+        ActivityModule
+    ]
 })
 export class DashboardModule {
 }

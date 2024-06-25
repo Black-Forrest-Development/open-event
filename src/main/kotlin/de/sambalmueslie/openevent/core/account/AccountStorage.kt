@@ -1,5 +1,6 @@
 package de.sambalmueslie.openevent.core.account
 
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.common.Storage
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
@@ -15,4 +16,6 @@ interface AccountStorage : Storage<Long, Account, AccountChangeRequest> {
 
     fun getInfos(pageable: Pageable): Page<AccountInfo>
     fun getInfo(account: Account): AccountInfo
+
+    fun setExternalId(id: Long, value: PatchRequest<String>): Account?
 }

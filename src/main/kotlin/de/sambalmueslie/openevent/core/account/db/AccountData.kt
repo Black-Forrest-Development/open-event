@@ -59,4 +59,10 @@ data class AccountData(
         lastLoginDate = timestamp
         return this
     }
+
+    fun setExternalId(externalId: String, timestamp: LocalDateTime): AccountData {
+        this.externalId = externalId
+        this.updated = timestamp
+        return this
+    }
 }

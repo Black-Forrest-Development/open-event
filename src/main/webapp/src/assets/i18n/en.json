@@ -358,5 +358,11 @@
   },
   "preferences": {
     "title": "Preferences"
+  },
+  "activity": {
+    "type": {
+      "EVENT_CREATED": "Event created",
+      "EVENT_CHANGED": "Event changed"
+    }
   }
 }

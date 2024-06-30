@@ -26,4 +26,9 @@ export class ActivityService extends BaseService {
   markRead(id: number): Observable<Activity> {
     return this.put(id + '/read', {})
   }
+
+
+  markAllRead(): Observable<ActivityInfo[]> {
+    return this.put('read', {})
+  }
 }

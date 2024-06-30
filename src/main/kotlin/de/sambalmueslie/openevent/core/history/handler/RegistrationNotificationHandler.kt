@@ -33,6 +33,23 @@ class RegistrationNotificationHandler(
         registrationService.register(this)
     }
 
+    override fun participantCreated(
+        actor: Account,
+        registration: Registration,
+        participant: Participant,
+        status: ParticipateStatus
+    ) {
+        val event = eventService.get(registration.eventId)
+            ?: return logger.error("Cannot find event for registration ${registration.id}")
+
+        val request = HistoryEntryChangeRequest(
+            HistoryEntryType.PARTICIPANT_STATUS_CHANGED,
+            KEY_PARTICIPANT_UPDATED,
+            HistoryEntrySource.REGISTRATION,
+            status.toString()
+        )
+        service.create(actor, event, request)
+    }
 
     override fun participantChanged(
         actor: Account,

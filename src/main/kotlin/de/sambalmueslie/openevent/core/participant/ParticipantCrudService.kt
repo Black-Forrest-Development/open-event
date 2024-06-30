@@ -59,19 +59,20 @@ class ParticipantCrudService(
         notifyCreated(actor, result)
 
         val status: ParticipateStatus = if (waitingList) ParticipateStatus.WAITING_LIST else ParticipateStatus.ACCEPTED
-        return getResponse(registration, status, result)
+        return getResponse(registration, status, true, result)
     }
 
     fun remove(actor: Account, registration: Registration, account: Account): ParticipateResponse {
         val participants = storage.get(registration)
         val status = ParticipateStatus.DECLINED
-        val existing = participants.find { it.author.id == account.id } ?: return getResponse(registration, status)
+        val existing = participants.find { it.author.id == account.id }
+            ?: return getResponse(registration, status, false)
 
         storage.delete(existing.id)
         notifyDeleted(actor, existing)
 
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, existing, result, status)
+        return ParticipateResponse(registration, existing, result, status, false)
     }
 
     fun change(
@@ -81,7 +82,7 @@ class ParticipantCrudService(
         request: ParticipateRequest
     ): ParticipateResponse {
         val status = ParticipateStatus.DECLINED
-        val participant = storage.get(participantId) ?: return getResponse(registration, status)
+        val participant = storage.get(participantId) ?: return getResponse(registration, status, false)
         return change(actor, registration, participant, request)
     }
 
@@ -91,7 +92,7 @@ class ParticipantCrudService(
         participant: Participant,
         request: ParticipateRequest
     ): ParticipateResponse {
-        val status = ParticipateStatus.DECLINED
+
         val sizeChanged = participant.size != request.size
 
         var waitingList = if (sizeChanged) participant.waitingList else true
@@ -111,6 +112,8 @@ class ParticipantCrudService(
             }
         }
 
+        val status = if (waitingList) ParticipateStatus.WAITING_LIST else ParticipateStatus.ACCEPTED
+
         val changeRequest = ParticipantChangeRequest(
             request.size,
             ParticipantStatus.ACCEPTED,
@@ -119,17 +122,17 @@ class ParticipantCrudService(
         )
         val p = storage.update(participant.id, changeRequest)
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, p, result, status)
+        return ParticipateResponse(registration, p, result, status, false)
     }
 
     fun remove(actor: Account, registration: Registration, participantId: Long): ParticipateResponse {
         val status = ParticipateStatus.DECLINED
-        val participant = storage.get(participantId) ?: return getResponse(registration, status)
+        val participant = storage.get(participantId) ?: return getResponse(registration, status, false)
         storage.delete(participant.id)
         notifyDeleted(actor, participant)
 
         val result = updateWaitList(actor, registration)
-        return ParticipateResponse(registration, participant, result, status)
+        return ParticipateResponse(registration, participant, result, status, false)
     }
 
     private fun updateWaitList(actor: Account, registration: Registration): List<Participant> {
@@ -186,13 +189,15 @@ class ParticipantCrudService(
     private fun getResponse(
         registration: Registration,
         status: ParticipateStatus,
+        created: Boolean,
         participant: Participant? = null,
     ): ParticipateResponse {
         return ParticipateResponse(
             registration,
             participant,
             storage.get(registration),
-            status
+            status,
+            created
         )
     }
 

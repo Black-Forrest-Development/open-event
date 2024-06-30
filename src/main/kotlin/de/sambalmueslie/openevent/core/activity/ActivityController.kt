@@ -73,5 +73,13 @@ class ActivityController(
         }
     }
 
+    @Put("read")
+    override fun markReadAll(auth: Authentication): List<ActivityInfo> {
+        return auth.checkPermission(PERMISSION_USER, PERMISSION_ADMIN) {
+            val account = accountService.get(auth) ?: return@checkPermission emptyList()
+            service.markReadAll(account)
+        }
+    }
+
     private fun isAdmin(auth: Authentication) = auth.getRealmRoles().contains(PERMISSION_ADMIN)
 }

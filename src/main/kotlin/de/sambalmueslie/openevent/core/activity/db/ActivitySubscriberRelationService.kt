@@ -19,8 +19,16 @@ class ActivitySubscriberRelationService(
         private val logger: Logger = LoggerFactory.getLogger(ActivitySubscriberRelationService::class.java)
     }
 
+    fun addAccountInfoSubscriber(activity: Activity, subscriber: AccountInfo) {
+        return addSubscriber(activity, setOf(subscriber.id))
+    }
+
     fun addAccountInfoSubscriber(activity: Activity, subscribers: Collection<AccountInfo>) {
         return addSubscriber(activity, subscribers.map { it.id }.toSet())
+    }
+
+    fun addAccountSubscriber(activity: Activity, subscriber: Account) {
+        return addSubscriber(activity, setOf(subscriber.id))
     }
 
     fun addAccountSubscriber(activity: Activity, subscribers: Collection<Account>) {
@@ -45,6 +53,10 @@ class ActivitySubscriberRelationService(
         relation.read = true
         repository.updateByActivityIdAndAccountId(id, account.id, true)
         return relation
+    }
+
+    fun markReadAll(account: Account) {
+        repository.updateByAccountId(account.id, true)
     }
 
     fun getUnreadInfosForAccount(accountId: Long): List<ActivitySubscriberRelation> {

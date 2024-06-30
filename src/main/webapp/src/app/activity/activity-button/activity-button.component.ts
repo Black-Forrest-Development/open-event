@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivityService} from "../model/activity.service";
 import {interval, Subscription} from "rxjs";
-import {ActivityInfo} from "../model/activity-api";
+import {Activity, ActivityInfo} from "../model/activity-api";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-activity-button',
@@ -18,7 +19,7 @@ export class ActivityButtonComponent {
 
   private subscription: Subscription | undefined
 
-  constructor(private service: ActivityService) {
+  constructor(private service: ActivityService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class ActivityButtonComponent {
   }
 
   ngOnDestroy() {
+    debugger
     if (this.subscription) this.subscription.unsubscribe()
   }
 
@@ -35,11 +37,46 @@ export class ActivityButtonComponent {
     this.refresh()
   }
 
+
+  handleActivityClick(a: ActivityInfo) {
+    this.service.markRead(a.activity.id).subscribe({
+      next: value => this.navigateToSource(value),
+      error: err => this.handleError(err)
+    })
+  }
+
+  private navigateToSource(activity: Activity) {
+    if (activity.source === 'EVENT' || activity.source === 'REGISTRATION') {
+      this.router.navigate(['event', 'details', activity.sourceId]).then()
+      this.refresh()
+    } else {
+      this.refresh()
+    }
+  }
+
+  private refresh() {
+    if(this.reloading) return
+    this.reloading = true
+    this.service.getUnreadActivityInfos().subscribe({
+      next: value => this.handleData(value),
+      error: err => this.handleError(err)
+    })
+  }
+
+  handleMarkAllReadClick() {
+    this.reloading = true
+    this.service.markAllRead().subscribe({
+      next: value => this.handleData(value),
+      error: err => this.handleError(err)
+    })
+  }
+
+
   private handleData(value: ActivityInfo[]) {
     this.data = value
     this.unreadInfos = this.data.filter(d => !d.read).length
     this.reloading = false
-    if (this.menuTrigger && this.data.length == 0) this.menuTrigger.closeMenu()
+    if (this.menuTrigger && this.unreadInfos == 0) this.menuTrigger.closeMenu()
   }
 
   private handleError(err: any) {
@@ -47,18 +84,5 @@ export class ActivityButtonComponent {
     this.unreadInfos = 0
     this.reloading = false
     if (this.menuTrigger) this.menuTrigger.closeMenu()
-  }
-
-  handleActivityClick(a: ActivityInfo) {
-    this.reloading = true
-    this.service.markRead(a.activity.id).subscribe(d => this.refresh())
-  }
-
-  private refresh() {
-    this.reloading = true
-    this.service.getUnreadActivityInfos().subscribe({
-      next: value => this.handleData(value),
-      error: err => this.handleError(err)
-    })
   }
 }

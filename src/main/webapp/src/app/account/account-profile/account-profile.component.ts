@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../profile/model/profile.service";
 import {AccountService} from "../model/account.service";
 import {AuthService} from "../../auth/auth.service";
+import {TranslateService} from "@ngx-translate/core";
+import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
   selector: 'app-account-profile',
@@ -17,7 +19,14 @@ export class AccountProfileComponent {
 
   fg: FormGroup
 
-  constructor(private fb: FormBuilder, private service: ProfileService, private accountService: AccountService, public authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private service: ProfileService,
+    private accountService: AccountService,
+    public authService: AuthService,
+    private translate: TranslateService,
+    private toast: HotToastService
+  ) {
     this.fg = this.fb.group({
       email: this.fb.control('', Validators.email),
       phone: this.fb.control(''),
@@ -40,7 +49,13 @@ export class AccountProfileComponent {
     if (this.fg.dirty && this.profile) {
       let request = this.fg.value as ProfileChangeRequest
       this.reloading = true
-      this.service.updateProfile(this.profile.id, request).subscribe(d => this.handleData(d))
+      this.service.updateProfile(this.profile.id, request).subscribe({
+        next: d => {
+          this.translate.use(d.language)
+          this.handleData(d)
+        },
+        error: err => this.handleError(err)
+      })
     }
     this.editMode = false
   }
@@ -66,5 +81,9 @@ export class AccountProfileComponent {
       language: d.language
     })
     this.reloading = false
+  }
+
+  private handleError(err: any) {
+    this.toast.error("Somethong went wrong")
   }
 }

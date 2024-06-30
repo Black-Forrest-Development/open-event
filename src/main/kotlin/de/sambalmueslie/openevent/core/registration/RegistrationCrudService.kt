@@ -32,6 +32,7 @@ class RegistrationCrudService(
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(RegistrationCrudService::class.java)
     }
+
     private var searchListener: RegistrationSearchListener? = null
 
     fun registerSearch(listener: RegistrationSearchListener) {
@@ -137,11 +138,7 @@ class RegistrationCrudService(
         request: ParticipateRequest
     ): ParticipateResponse {
         val result = participantCrudService.change(actor, registration, account, request)
-        result.participant?.let { p ->
-            notify { it.participantChanged(actor, registration, p, result.status) }
-        }
-        updateSearch(registration)
-        return result
+        return processResponse(actor, registration, result)
     }
 
     fun changeParticipant(
@@ -152,12 +149,21 @@ class RegistrationCrudService(
     ): ParticipateResponse? {
         val registration = get(id) ?: return null
         val result = participantCrudService.change(actor, registration, participantId, request)
+        return processResponse(actor, registration, result)
+    }
+
+    private fun processResponse(actor: Account, registration: Registration, result: ParticipateResponse): ParticipateResponse {
         result.participant?.let { p ->
-            notify { it.participantChanged(actor, registration, p, result.status) }
+            if (result.created) {
+                notify { it.participantCreated(actor, registration, p, result.status) }
+            } else {
+                notify { it.participantChanged(actor, registration, p, result.status) }
+            }
         }
         updateSearch(registration)
         return result
     }
+
 
     fun removeParticipant(actor: Account, id: Long, participantId: Long): ParticipateResponse? {
         val registration = get(id) ?: return null

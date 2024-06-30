@@ -15,4 +15,5 @@ interface ActivityAPI : ReadAPI<Long, Activity> {
     fun getRecentInfos(auth: Authentication, pageable: Pageable): Page<ActivityInfo>
     fun getUnreadInfos(auth: Authentication): List<ActivityInfo>
     fun markRead(auth: Authentication, id: Long): Activity?
+    fun markReadAll(auth: Authentication): List<ActivityInfo>
 }

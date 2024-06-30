@@ -223,7 +223,9 @@
       "name": "Name",
       "firstName": "Vorname",
       "lastName": "Familienname",
-      "email": "Email"
+      "email": "Email",
+      "phone": "Telefon",
+      "mobile": "Mobilfunk"
     },
     "message": {
       "created": "Benutzer erfolgreich erstellt"
@@ -342,7 +344,10 @@
   "activity": {
     "type": {
       "EVENT_CREATED": "Veranstaltung erstellt",
-      "EVENT_CHANGED": "Veranstaltung geändert"
+      "EVENT_CHANGED": "Veranstaltung geändert",
+      "PARTICIPANT_ACCEPTED": "Neuer Teilnehmer",
+      "PARTICIPANT_DECLINED": "Teilnahme abgesagt",
+      "PARTICIPANT_CHANGED": "Teilnehmer geändert"
     }
   }
 }

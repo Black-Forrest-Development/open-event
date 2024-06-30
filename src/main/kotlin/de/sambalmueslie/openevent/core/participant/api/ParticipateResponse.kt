@@ -6,5 +6,6 @@ data class ParticipateResponse(
     val registration: Registration,
     val participant: Participant?,
     val participants: List<Participant>,
-    val status: ParticipateStatus
+    val status: ParticipateStatus,
+    val created: Boolean
 )

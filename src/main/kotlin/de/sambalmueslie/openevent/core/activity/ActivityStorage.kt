@@ -14,4 +14,5 @@ interface ActivityStorage : Storage<Long, Activity, ActivityChangeRequest> {
     fun getRecentInfosForAccount(account: Account, pageable: Pageable): Page<ActivityInfo>
     fun markRead(account: Account, id: Long): Activity?
     fun getUnreadInfosForAccount(account: Account): List<ActivityInfo>
+    fun markReadAll(account: Account): List<ActivityInfo>
 }

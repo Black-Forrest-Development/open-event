@@ -107,6 +107,15 @@ class RegistrationNotificationHandler(
         return recipients
     }
 
+    override fun participantCreated(
+        actor: Account,
+        registration: Registration,
+        participant: Participant,
+        status: ParticipateStatus
+    ) {
+        participantChanged(actor, registration, participant, status)
+    }
+
     override fun participantChanged(
         actor: Account,
         registration: Registration,

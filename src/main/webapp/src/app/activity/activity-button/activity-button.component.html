@@ -1,21 +1,16 @@
 <div class="flex flex-col content-center px-5">
-  @if (reloading) {
-    <mat-spinner diameter="8" mode="indeterminate"></mat-spinner>
-  } @else {
-
-    <button mat-icon-button [disabled]="data.length == 0" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
-      @if (data.length == 0) {
-        <mat-icon>notifications</mat-icon>
-      } @else {
-        <mat-icon matBadge="{{unreadInfos}}" matBadgeSize="small" matBadgeColor="accent">notifications</mat-icon>
-      }
-    </button>
-  }
+  <button mat-icon-button [disabled]="data.length == 0" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
+    @if (data.length == 0) {
+      <mat-icon>notifications</mat-icon>
+    } @else {
+      <mat-icon matBadge="{{unreadInfos}}" matBadgeSize="small" matBadgeColor="accent">notifications</mat-icon>
+    }
+  </button>
 </div>
 
 <mat-menu #menu="matMenu">
   @for (a of data; track a; let last = $last) {
-    <div class="flex flex-row gap-2 px-3 py-2 items-center hover:bg-gray-200"
+    <div class="flex flex-row gap-2 px-3 py-2 items-center hover:bg-gray-100"
          (click)="$event.stopPropagation(); handleActivityClick(a)">
       <div class="flex flex-col items-center">
         <mat-icon [color]="a.read ? 'primary' : 'accent'">event_note</mat-icon>
@@ -29,6 +24,12 @@
         </div>
       </div>
     </div>
-    <mat-divider *ngIf="!last"></mat-divider>
+    <mat-divider></mat-divider>
   }
+  <div class="flex flex-col gap-2 px-3 py-2 items-center">
+    <button mat-flat-button (click)="handleMarkAllReadClick()">
+      <mat-icon>mark_chat_read</mat-icon>
+      {{ 'activity.markAllRead' | translate }}
+    </button>
+  </div>
 </mat-menu>

@@ -84,6 +84,12 @@ class ActivityStorageService(
         return get(id)
     }
 
+    override fun markReadAll(account: Account): List<ActivityInfo> {
+        subscriberRelationService.markReadAll(account)
+        unreadInfosCache.invalidate(account.id)
+        return getUnreadInfosForAccount(account)
+    }
+
     override fun getUnreadInfosForAccount(account: Account): List<ActivityInfo> {
         return unreadInfosCache[account.id]
     }

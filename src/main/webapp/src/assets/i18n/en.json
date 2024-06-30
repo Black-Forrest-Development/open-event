@@ -237,7 +237,9 @@
       "name": "Name",
       "firstName": "First Name",
       "lastName": "Last Name",
-      "email": "Email"
+      "email": "Email",
+      "phone": "Phone",
+      "mobile": "Mobile"
     },
     "message": {
       "created": "Account created successfully"
@@ -362,7 +364,10 @@
   "activity": {
     "type": {
       "EVENT_CREATED": "Event created",
-      "EVENT_CHANGED": "Event changed"
+      "EVENT_CHANGED": "Event changed",
+      "PARTICIPANT_ACCEPTED": "Participant added",
+      "PARTICIPANT_DECLINED": "Participant declined",
+      "PARTICIPANT_CHANGED": "Participant changed"
     }
   }
 }

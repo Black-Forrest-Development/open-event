@@ -46,4 +46,8 @@ class ActivityCrudService(
     fun getUnreadInfosForAccount(account: Account): List<ActivityInfo> {
         return storage.getUnreadInfosForAccount(account)
     }
+
+    fun markReadAll(account: Account): List<ActivityInfo> {
+        return storage.markReadAll(account)
+    }
 }

@@ -123,7 +123,7 @@ dependencies {
 
     // POI
     implementation("org.apache.poi:poi:5.2.5")
-    implementation("org.apache.poi:poi-ooxml:5.2.5")
+    implementation("org.apache.poi:poi-ooxml:5.3.0")
 
     // mail
     implementation("org.simplejavamail:simple-java-mail:8.11.2")

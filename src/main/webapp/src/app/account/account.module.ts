@@ -17,6 +17,8 @@ import {AccountPreferencesComponent} from './account-preferences/account-prefere
 import {AddressModule} from "../address/address.module";
 import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
 import {AccountChangeDialogComponent} from './account-change-dialog/account-change-dialog.component';
+import {AccountActivityComponent} from './account-activity/account-activity.component';
+import {ActivityModule} from "../activity/activity.module";
 
 
 @NgModule({
@@ -30,23 +32,25 @@ import {AccountChangeDialogComponent} from './account-change-dialog/account-chan
     AccountProfileComponent,
     AccountAddressComponent,
     AccountPreferencesComponent,
-    AccountChangeDialogComponent
+    AccountChangeDialogComponent,
+    AccountActivityComponent
   ],
   exports: [
     AccountComponent,
     AccountDisplayNamePipe,
     SelectAccountComponent
   ],
-    imports: [
-        CommonModule,
-        GravatarModule,
-        MaterialModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        AccountRoutingModule,
-        AddressModule,
-        CdkCopyToClipboard
-    ]
+  imports: [
+    CommonModule,
+    GravatarModule,
+    MaterialModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    AccountRoutingModule,
+    AddressModule,
+    CdkCopyToClipboard,
+    ActivityModule
+  ]
 })
 export class AccountModule {
 }

@@ -21,6 +21,13 @@
         {{ 'preferences.title' | translate }}
       </div>
     </a>
+    <a mat-tab-link routerLink="./activity" routerLinkActive="active" #rlac="routerLinkActive"
+       [active]="rlac.isActive">
+      <div class="flex flex-row gap-3 items-center">
+        <mat-icon>notifications</mat-icon>
+        {{ 'activity.title' | translate }}
+      </div>
+    </a>
   </nav>
 </mat-toolbar>
 <router-outlet></router-outlet>

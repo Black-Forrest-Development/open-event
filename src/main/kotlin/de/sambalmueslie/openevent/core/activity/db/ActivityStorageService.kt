@@ -64,18 +64,14 @@ class ActivityStorageService(
     }
 
     override fun getRecentForAccount(account: Account, pageable: Pageable): Page<Activity> {
-        val page = subscriberRelationService.getRecentForAccount(account, pageable)
-        val recentSubscriptions = page.associateBy { it.activityId }
-        val activities = repository.findByIdIn(recentSubscriptions.keys)
-        return converter.convert(Page.of(activities, page.pageable, page.totalSize))
+        val activities = repository.findRecentForAccount(account.id, pageable)
+        return converter.convert(activities)
     }
 
     override fun getRecentInfosForAccount(account: Account, pageable: Pageable): Page<ActivityInfo> {
-        val page = subscriberRelationService.getRecentForAccount(account.id, pageable)
-        val recentSubscriptions = page.associateBy { it.activityId }
-        val activities = converter.convert(repository.findByIdIn(recentSubscriptions.keys))
-        val infos = activities.map { ActivityInfo(it, recentSubscriptions[it.id]?.read ?: true) }
-        return Page.of(infos, page.pageable, page.totalSize)
+        val activities = converter.convert(repository.findRecentForAccount(account.id, pageable))
+        val subscriptions = subscriberRelationService.getByActivityIds(activities.map { it.id }.toSet()).associateBy { it.activityId }
+        return activities.map { ActivityInfo(it, subscriptions[it.id]?.read ?: true) }
     }
 
     override fun markRead(account: Account, id: Long): Activity? {

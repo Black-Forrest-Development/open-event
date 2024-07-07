@@ -62,4 +62,8 @@ class ActivitySubscriberRelationService(
     fun getUnreadInfosForAccount(accountId: Long): List<ActivitySubscriberRelation> {
         return repository.findByAccountIdAndReadFalseOrderByTimestamp(accountId, Pageable.from(0, 20)).content
     }
+
+    fun getByActivityIds(activityIds: Set<Long>): List<ActivitySubscriberRelation> {
+        return repository.findByActivityIdIn(activityIds)
+    }
 }

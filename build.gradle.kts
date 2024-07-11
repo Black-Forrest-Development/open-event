@@ -147,7 +147,7 @@ dependencies {
     implementation("com.jillesvangurp:search-client:2.2.1")
 
     // jsoup
-    implementation("org.jsoup:jsoup:1.17.2")
+    implementation("org.jsoup:jsoup:1.18.1")
     // biweekly
     implementation("net.sf.biweekly:biweekly:0.6.8")
 }

@@ -136,7 +136,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers")
     testImplementation("org.opensearch:opensearch-testcontainers:2.1.0")
     testImplementation("io.micronaut.test:micronaut-test-rest-assured")
-    testImplementation("io.fusionauth:fusionauth-jwt:5.3.2")
+    testImplementation("io.fusionauth:fusionauth-jwt:5.3.3")
 
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")

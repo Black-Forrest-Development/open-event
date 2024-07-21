@@ -122,7 +122,7 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.2.5")
+    implementation("org.apache.poi:poi:5.3.0")
     implementation("org.apache.poi:poi-ooxml:5.3.0")
 
     // mail

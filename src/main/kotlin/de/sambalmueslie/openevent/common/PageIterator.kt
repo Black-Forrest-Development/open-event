@@ -18,7 +18,7 @@ class PageIterator<T>(private val pageSize: Int = 500, private val provider: (pa
 
     override fun hasNext(): Boolean {
         if (hasNextPage()) {
-            currentPage = provider.invoke(currentPageable)
+            loadNextPage()
             return true
         }
         return false
@@ -31,8 +31,10 @@ class PageIterator<T>(private val pageSize: Int = 500, private val provider: (pa
     }
 
     private fun loadNextPage() {
-        currentPageable = currentPageable.next()
-        logger.debug("Load next page $currentPageable")
+        if (currentPage != null) {
+            currentPageable = currentPageable.next()
+        }
+        logger.debug("Load next page {}", currentPageable)
         currentPage = provider.invoke(currentPageable)
     }
 

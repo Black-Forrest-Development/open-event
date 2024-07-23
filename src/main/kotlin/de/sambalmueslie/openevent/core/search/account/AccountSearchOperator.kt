@@ -5,6 +5,7 @@ import com.jillesvangurp.ktsearch.parseHit
 import com.jillesvangurp.ktsearch.total
 import de.sambalmueslie.openevent.core.account.AccountChangeListener
 import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.ProfileChangeListener
 import de.sambalmueslie.openevent.core.account.ProfileCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.Profile
@@ -52,10 +53,27 @@ open class AccountSearchOperator(
                 deleteDocument(obj.id.toString())
             }
         })
+
+        profileService.register(object : ProfileChangeListener {
+            override fun handleCreated(actor: Account, obj: Profile) {
+                handleChanged(obj)
+            }
+
+            override fun handleUpdated(actor: Account, obj: Profile) {
+                handleChanged(obj)
+            }
+        })
+
     }
 
     private fun handleChanged(account: Account) {
         val profile = profileService.getForAccount(account)
+        val data = convert(account, profile)
+        updateDocument(data)
+    }
+
+    private fun handleChanged(profile: Profile) {
+        val account = service.get(profile.id) ?: return
         val data = convert(account, profile)
         updateDocument(data)
     }

@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "2.0.0"
     kotlin("plugin.serialization") version "2.0.0"
 //    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
-    id("org.sonarqube") version "5.0.0.4638"
+    id("org.sonarqube") version "5.1.0.4882"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
     id("io.micronaut.application") version "4.4.0"
@@ -54,9 +54,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.5.6")
     runtimeOnly("org.yaml:snakeyaml")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-    testImplementation("io.mockk:mockk:1.13.11")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.3")
+    testImplementation("io.mockk:mockk:1.13.12")
 
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
@@ -122,8 +122,8 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.2.5")
-    implementation("org.apache.poi:poi-ooxml:5.2.5")
+    implementation("org.apache.poi:poi:5.3.0")
+    implementation("org.apache.poi:poi-ooxml:5.3.0")
 
     // mail
     implementation("org.simplejavamail:simple-java-mail:8.11.2")
@@ -134,9 +134,9 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
-    testImplementation("org.opensearch:opensearch-testcontainers:2.0.1")
+    testImplementation("org.opensearch:opensearch-testcontainers:2.1.0")
     testImplementation("io.micronaut.test:micronaut-test-rest-assured")
-    testImplementation("io.fusionauth:fusionauth-jwt:5.3.2")
+    testImplementation("io.fusionauth:fusionauth-jwt:5.3.3")
 
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
@@ -147,7 +147,7 @@ dependencies {
     implementation("com.jillesvangurp:search-client:2.2.1")
 
     // jsoup
-    implementation("org.jsoup:jsoup:1.17.2")
+    implementation("org.jsoup:jsoup:1.18.1")
     // biweekly
     implementation("net.sf.biweekly:biweekly:0.6.8")
 }

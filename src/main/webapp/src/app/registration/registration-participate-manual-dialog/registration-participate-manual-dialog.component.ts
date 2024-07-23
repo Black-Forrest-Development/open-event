@@ -19,7 +19,9 @@ export class RegistrationParticipateManualDialogComponent {
     this.fg = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email: ['', Validators.email],
+      phone: [''],
+      mobile: [''],
       size: [0, Validators.compose([Validators.required, Validators.min(1)])]
     });
   }
@@ -27,6 +29,6 @@ export class RegistrationParticipateManualDialogComponent {
   submit() {
     if (!this.fg.valid) return
     let value = this.fg.value
-    this.dialogRef.close(new ParticipantAddRequest(value.firstName, value.lastName, value.email, value.size))
+    this.dialogRef.close(new ParticipantAddRequest(value.firstName, value.lastName, value.email, value.phone, value.mobile, value.size))
   }
 }

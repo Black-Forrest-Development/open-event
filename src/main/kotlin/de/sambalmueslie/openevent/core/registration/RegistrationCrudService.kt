@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.ProfileCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.account.api.AccountSetupRequest
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.participant.ParticipantCrudService
@@ -109,25 +110,23 @@ class RegistrationCrudService(
 
     fun addParticipant(actor: Account, id: Long, request: ParticipantAddRequest): ParticipateResponse? {
         val registration = get(id) ?: return null
-        val account = accountCrudService.create(
-            actor,
+
+        val info = accountCrudService.setup(actor, AccountSetupRequest(
             AccountChangeRequest(
                 "${request.firstName} ${request.lastName}",
                 "",
                 null
+            ),
+            ProfileChangeRequest(
+                request.email,
+                request.phone,
+                request.mobile,
+                request.firstName,
+                request.lastName,
+                null, null, null, null, ""
             )
-        )
-
-        val profileRequest = ProfileChangeRequest(
-            request.email,
-            request.phone,
-            request.mobile,
-            request.firstName,
-            request.lastName,
-            null, null, null, null, ""
-        )
-        profileCrudService.merge(account, account, profileRequest)
-
+        ))
+        val account = accountCrudService.get(info.id) ?: return null
         return changeParticipant(actor, registration, account, ParticipateRequest(request.size))
     }
 

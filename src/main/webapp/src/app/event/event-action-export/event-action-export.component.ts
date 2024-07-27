@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Event} from "../model/event-api";
 import {AuthService} from "../../auth/auth.service";
 import {ExportService} from "../../backoffice/model/export.service";
-import {HttpResponse} from "@angular/common/http";
+import { HttpResponse } from "@angular/common/http";
 import FileSaver from "file-saver";
 
 @Component({

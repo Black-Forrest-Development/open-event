@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
 import {Observable} from "rxjs";
 import {retry} from "rxjs/operators";
 import {Page} from "./page";

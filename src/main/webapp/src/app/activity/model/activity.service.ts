@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {AppService} from "../../app.service";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/model/page";

@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {QuillModule} from "ngx-quill";
@@ -27,73 +27,61 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    GravatarModule.forRoot({
-      fallback: FALLBACK.mp,
-      rating: RATING.x,
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      borderColor: 'rgba(0, 0, 0, 0.1)',
-      hasBorder: true,
-      preferGravatar: false
-    }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    QuillModule.forRoot(
-      {
-        modules: {
-          syntax: false,
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            // ['blockquote', 'code-block'],
-            // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            // [{ 'indent': '-1'}, { 'indent': '+1' }],
-            [{'direction': 'rtl'}],
-            [{'size': ['small', false, 'large', 'huge']}],
-            [{'header': [1, 2, 3, 4, 5, 6, false]}],
-
-            // [{ 'color': [] }, { 'background': [] }],
-            // [{ 'font': [] }],
-            [{'align': []}],
-
-            ['clean'],
-          ]
-        }
-      }
-    ),
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
-    FullCalendarModule,
-    // my modules
-    DashboardModule,
-    AuthModule,
-  ],
-  providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
-    {provide: LOCALE_ID, useValue: 'de-DE'},
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-    provideHotToastConfig(
-      {
-        autoClose: true,
-        position: 'top-center'
-      }
-    ),
-    {provide: OverlayContainer, useClass: FullscreenOverlayContainer}
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        GravatarModule.forRoot({
+            fallback: FALLBACK.mp,
+            rating: RATING.x,
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.1)',
+            hasBorder: true,
+            preferGravatar: false
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        QuillModule.forRoot({
+            modules: {
+                syntax: false,
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    // ['blockquote', 'code-block'],
+                    // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    // [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'direction': 'rtl' }],
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    // [{ 'color': [] }, { 'background': [] }],
+                    // [{ 'font': [] }],
+                    [{ 'align': [] }],
+                    ['clean'],
+                ]
+            }
+        }),
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts'),
+        }),
+        FullCalendarModule,
+        // my modules
+        DashboardModule,
+        AuthModule], providers: [
+        { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
+        { provide: LOCALE_ID, useValue: 'de-DE' },
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+        provideHotToastConfig({
+            autoClose: true,
+            position: 'top-center'
+        }),
+        { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 }

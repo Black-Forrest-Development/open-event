@@ -16,6 +16,7 @@ import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.registration.api.RegistrationDetails
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.registration.db.RegistrationStorage
 import jakarta.inject.Singleton
@@ -111,21 +112,23 @@ class RegistrationCrudService(
     fun addParticipant(actor: Account, id: Long, request: ParticipantAddRequest): ParticipateResponse? {
         val registration = get(id) ?: return null
 
-        val info = accountCrudService.setup(actor, AccountSetupRequest(
-            AccountChangeRequest(
-                "${request.firstName} ${request.lastName}",
-                "",
-                null
-            ),
-            ProfileChangeRequest(
-                request.email,
-                request.phone,
-                request.mobile,
-                request.firstName,
-                request.lastName,
-                null, null, null, null, ""
+        val info = accountCrudService.setup(
+            actor, AccountSetupRequest(
+                AccountChangeRequest(
+                    "${request.firstName} ${request.lastName}",
+                    "",
+                    null
+                ),
+                ProfileChangeRequest(
+                    request.email,
+                    request.phone,
+                    request.mobile,
+                    request.firstName,
+                    request.lastName,
+                    null, null, null, null, ""
+                )
             )
-        ))
+        )
         val account = accountCrudService.get(info.id) ?: return null
         return changeParticipant(actor, registration, account, ParticipateRequest(request.size))
     }
@@ -151,7 +154,11 @@ class RegistrationCrudService(
         return processResponse(actor, registration, result)
     }
 
-    private fun processResponse(actor: Account, registration: Registration, result: ParticipateResponse): ParticipateResponse {
+    private fun processResponse(
+        actor: Account,
+        registration: Registration,
+        result: ParticipateResponse
+    ): ParticipateResponse {
         result.participant?.let { p ->
             if (result.created) {
                 notify { it.participantCreated(actor, registration, p, result.status) }
@@ -180,6 +187,13 @@ class RegistrationCrudService(
         return RegistrationInfo(registration, participants)
     }
 
+    fun getDetails(id: Long): RegistrationDetails? {
+        val registration = get(id) ?: return null
+        val participants = participantCrudService.getDetails(registration)
+        return RegistrationDetails(registration, participants)
+    }
+
+
     fun findInfoByEvent(event: Event): RegistrationInfo? {
         val registration = storage.findByEvent(event) ?: return null
         val participants = participantCrudService.get(registration)
@@ -196,4 +210,6 @@ class RegistrationCrudService(
         if (this.searchListener == null) return
         this.searchListener?.updateSearch(registration)
     }
+
+
 }

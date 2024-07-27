@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipantChangeRequest
+import de.sambalmueslie.openevent.core.participant.api.ParticipantDetails
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory
 class ParticipantStorageService(
     private val repository: ParticipantRepository,
     private val converter: ParticipantConverter,
+    private val detailsConverter: ParticipantDetailsConverter,
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
 ) : BaseStorageService<Long, Participant, ParticipantChangeRequest, ParticipantData>(
@@ -71,6 +73,10 @@ class ParticipantStorageService(
             .groupBy { it.registrationId }
             .mapValues { converter.convert(it.value).sortedBy { p -> p.rank } }
         return registration.associateWith { participants[it.id] ?: emptyList() }
+    }
+
+    override fun getDetails(registration: Registration): List<ParticipantDetails> {
+        return repository.findByRegistrationId(registration.id).let { detailsConverter.convert(it) }
     }
 
 

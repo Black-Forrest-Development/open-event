@@ -8,6 +8,7 @@ import de.sambalmueslie.openevent.core.account.AccountStorage
 import de.sambalmueslie.openevent.core.account.ProfileStorage
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountChangeRequest
+import de.sambalmueslie.openevent.core.account.api.AccountDetails
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
@@ -93,6 +94,22 @@ class AccountStorageService(
 
     override fun setExternalId(id: Long, value: PatchRequest<String>): Account? {
         return patchData(id) { it.setExternalId(value.value, timeProvider.now()) }
+    }
+
+    fun getDetails(id: Long): AccountDetails? {
+        val account = get(id) ?: return null
+        return getDetails(account)
+    }
+
+    fun getDetails(account: Account): AccountDetails {
+        val profile = profileStorage.get(account.id)
+        return AccountDetails.create(account, profile)
+    }
+
+    fun getDetailsByIds(ids: Set<Long>): List<AccountDetails> {
+        val accounts = repository.findByIdIn(ids)
+        val profiles = profileStorage.findByIdIn(ids).associateBy { it.id }
+        return accounts.map { AccountDetails.create(it, profiles[it.id]) }
     }
 
 

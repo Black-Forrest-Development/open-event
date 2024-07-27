@@ -28,6 +28,10 @@ class ParticipantCrudService(
         return storage.get(registration)
     }
 
+    fun getDetails(registration: Registration): List<ParticipantDetails> {
+        return storage.getDetails(registration)
+    }
+
     fun change(
         actor: Account,
         registration: Registration,
@@ -207,5 +211,7 @@ class ParticipantCrudService(
             notifyDeleted(actor, it)
         }
     }
+
+
 
 }

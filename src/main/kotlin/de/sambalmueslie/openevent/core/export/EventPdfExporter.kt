@@ -13,6 +13,8 @@ import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
+import de.sambalmueslie.openevent.logTimeMillis
+import de.sambalmueslie.openevent.logTimeMillisWithValue
 import io.micronaut.core.io.ResourceLoader
 import io.micronaut.http.server.types.files.SystemFile
 import jakarta.inject.Singleton
@@ -99,7 +101,8 @@ class EventPdfExporter(
     }
 
     private fun renderPdf(infos: List<EventInfo>): SystemFile? {
-        val content = infos.mapNotNull { getContent(it) }
+        logger.info("Start pdf rendering for ${infos.size} events")
+        val content = logger.logTimeMillisWithValue("Determine content") { infos.mapNotNull { getContent(it) } }
 
         val escapeTool = EscapeTool()
         val properties = mapOf(
@@ -113,30 +116,37 @@ class EventPdfExporter(
         val context = VelocityContext(properties)
         val writer = StringWriter()
 
-        ve.evaluate(
-            context,
-            writer,
-            "PDF Export",
-            InputStreamReader(loader.getResourceAsStream("classpath:fop/event1.vm").getOrNull()!!)
-        )
+        logger.logTimeMillis("Run template engine") {
+            ve.evaluate(
+                context,
+                writer,
+                "PDF Export",
+                InputStreamReader(loader.getResourceAsStream("classpath:fop/event2.vm").getOrNull()!!)
+            )
+        }
+        logger.info("Template result size ${writer.buffer.length} bytes")
 
         val out = ByteArrayOutputStream()
-        val fop = fopFactory.newFop(MimeConstants.MIME_PDF, out)
-        val factory = TransformerFactory.newInstance()
-        val transformer = factory.newTransformer()
-        val src = StreamSource(writer.toString().byteInputStream())
-        val res = SAXResult(fop.defaultHandler)
-        transformer.transform(src, res)
+        logger.logTimeMillis("Render PDF") {
+            val fop = fopFactory.newFop(MimeConstants.MIME_PDF, out)
+            val factory = TransformerFactory.newInstance()
+            val transformer = factory.newTransformer()
+            val src = StreamSource(writer.toString().byteInputStream())
+            val res = SAXResult(fop.defaultHandler)
+            transformer.transform(src, res)
+        }
 
-        val file = File.createTempFile(
-            HEADER_PDF_FILE_SUFIX,
-            HEADER_PDF_FILE_PREFIX
-        )
-        file.writeBytes(out.toByteArray())
-        val date = timeProvider.now().toLocalDate()
-        val filename = "${date}-event-export.pdf"
-        return SystemFile(file).attach(filename)
 
+        return logger.logTimeMillisWithValue("Write result to file with ${out.size()} bytes") {
+            val file = File.createTempFile(
+                HEADER_PDF_FILE_SUFIX,
+                HEADER_PDF_FILE_PREFIX
+            )
+            file.writeBytes(out.toByteArray())
+            val date = timeProvider.now().toLocalDate()
+            val filename = "${date}-event-export.pdf"
+            SystemFile(file).attach(filename)
+        }
     }
 
 

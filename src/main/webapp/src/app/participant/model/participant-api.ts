@@ -1,4 +1,4 @@
-import {AccountInfo} from "../../account/model/account-api";
+import {AccountDetails, AccountInfo} from "../../account/model/account-api";
 
 export interface Participant {
   id: number,
@@ -16,4 +16,14 @@ export class ParticipantChangeRequest {
     public status: string,
   ) {
   }
+}
+
+export interface ParticipantDetails {
+  id: number,
+  size: number,
+  status: string,
+  rank: number,
+  waitingList: boolean,
+  author: AccountDetails,
+  timestamp: string,
 }

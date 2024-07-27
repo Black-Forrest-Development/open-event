@@ -101,17 +101,17 @@ $open-event-warn-palette: (
 );
 
 
-$open-event-primary: mat.define-palette($open-event-primary-palette);
-$open-event-accent: mat.define-palette($open-event-accent-palette);
-$open-event-warn: mat.define-palette($open-event-warn-palette);
+$open-event-primary: mat.m2-define-palette($open-event-primary-palette);
+$open-event-accent: mat.m2-define-palette($open-event-accent-palette);
+$open-event-warn: mat.m2-define-palette($open-event-warn-palette);
 
-$open-event-theme: mat.define-light-theme((
+$open-event-theme: mat.m2-define-light-theme((
   color: (
     primary: $open-event-primary,
     accent: $open-event-accent,
     warn: $open-event-warn,
   ),
-  typography: mat.define-typography-config(),
+  typography: mat.m2-define-typography-config(),
   density: 0,
 )
 );

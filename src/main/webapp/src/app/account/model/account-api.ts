@@ -47,3 +47,13 @@ export class AccountSetupRequest {
 }
 
 
+export interface AccountDetails {
+  id: number,
+  name: string,
+  iconUrl: string,
+  email: string,
+  phone: string,
+  mobile: string,
+  firstName: string,
+  lastName: string,
+}

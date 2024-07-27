@@ -14,6 +14,7 @@ import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.registration.api.RegistrationDetails
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
@@ -40,6 +41,11 @@ class RegistrationController(
     @Get("/{id}/info")
     override fun getInfo(auth: Authentication, id: Long): RegistrationInfo? {
         return auth.checkPermission(PERMISSION_READ) { service.getInfo(id) }
+    }
+
+    @Get("{id}/details")
+    override fun getDetails(auth: Authentication, id: Long): RegistrationDetails? {
+        return auth.checkPermission(PERMISSION_MANAGE, PERMISSION_ADMIN) { service.getDetails(id) }
     }
 
     @Get()
@@ -167,5 +173,6 @@ class RegistrationController(
             }
         }
     }
+
 
 }

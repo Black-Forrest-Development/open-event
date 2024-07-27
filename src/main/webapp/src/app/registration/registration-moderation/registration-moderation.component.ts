@@ -1,11 +1,12 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {Participant} from "../../participant/model/participant-api";
+import {Participant, ParticipantDetails} from "../../participant/model/participant-api";
 import {
   ParticipantAddRequest,
   ParticipateRequest,
   ParticipateResponse,
+  RegistrationDetails,
   RegistrationInfo
 } from "../model/registration-api";
 import {RegistrationEditDialogComponent} from "../registration-edit-dialog/registration-edit-dialog.component";
@@ -30,12 +31,10 @@ import {
 export class RegistrationModerationComponent {
 
 
-
   @Input()
   set data(value: RegistrationInfo) {
-    this.dataSource.data = value.participants
     this.registration = value
-    // this.updateData()
+    this.handleRegistrationChanged()
   }
 
   registration: RegistrationInfo | undefined
@@ -45,7 +44,7 @@ export class RegistrationModerationComponent {
   waitList: Participant[] = []
   userParticipant: Participant | undefined
   displayedColumns: string[] = ['rank', 'size', 'status', 'waitinglist', 'name', 'email', 'phone', 'mobile', 'timestamp', 'action']
-  dataSource = new MatTableDataSource<Participant>([])
+  dataSource = new MatTableDataSource<ParticipantDetails>([])
 
   constructor(
     private service: RegistrationService,
@@ -100,7 +99,6 @@ export class RegistrationModerationComponent {
   }
 
   private handleParticipateResponse(response: ParticipateResponse) {
-    this.updateParticipants(response.participants)
     switch (response.status) {
       case 'ACCEPTED':
         this.translation.get('registration.message.accepted').subscribe(msg => this.hotToast.success(msg))
@@ -116,7 +114,7 @@ export class RegistrationModerationComponent {
         this.translation.get('registration.message.failed').subscribe(msg => this.hotToast.error(msg))
         break;
     }
-    this.reloading = false
+    this.reloadDetails()
   }
 
   private updateParticipants(participants: Participant[]) {
@@ -161,5 +159,28 @@ export class RegistrationModerationComponent {
     if (this.reloading) return
     this.reloading = true
     this.service.participateManual(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
+  }
+
+  private handleRegistrationChanged() {
+    this.reloadDetails()
+  }
+
+  private reloadDetails() {
+    if (!this.registration) return
+    this.reloading = true
+    this.service.getDetails(this.registration.registration.id).subscribe({
+      next: value => this.handleDetailsData(value),
+      error: err => this.handleError(err)
+    })
+  }
+
+  private handleDetailsData(value: RegistrationDetails) {
+    this.dataSource.data = value.participants
+    this.reloading = false
+  }
+
+  private handleError(err: any) {
+    this.hotToast.error("Something went wrong")
+    this.reloading = false
   }
 }

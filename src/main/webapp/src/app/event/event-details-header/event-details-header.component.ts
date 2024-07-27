@@ -41,6 +41,7 @@ export class EventDetailsHeaderComponent {
 
   ngOnInit() {
     if (this.authService.hasRole(AuthService.EVENT_ADMIN)) this.isAdminOrCanEdit = true
+    if (this.authService.hasRole(AuthService.EVENT_MODERATOR)) this.isAdminOrCanEdit = true
     this.menu.changed.subscribe(e => this.changed.emit(e))
   }
 

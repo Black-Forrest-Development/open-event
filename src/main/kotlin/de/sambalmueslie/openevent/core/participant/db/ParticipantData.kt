@@ -2,9 +2,11 @@ package de.sambalmueslie.openevent.core.participant.db
 
 import de.sambalmueslie.openevent.common.DataObject
 import de.sambalmueslie.openevent.core.account.api.Account
+import de.sambalmueslie.openevent.core.account.api.AccountDetails
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.participant.api.Participant
 import de.sambalmueslie.openevent.core.participant.api.ParticipantChangeRequest
+import de.sambalmueslie.openevent.core.participant.api.ParticipantDetails
 import de.sambalmueslie.openevent.core.participant.api.ParticipantStatus
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import jakarta.persistence.*
@@ -48,6 +50,10 @@ data class ParticipantData(
 
     fun convert(account: AccountInfo): Participant {
         return Participant(id, size, status, rank, waitingList, account, updated ?: created)
+    }
+
+    fun convert(account: AccountDetails): ParticipantDetails {
+        return ParticipantDetails(id, size, status, rank, waitingList, account, updated ?: created)
     }
 
     fun update(request: ParticipantChangeRequest, timestamp: LocalDateTime): ParticipantData {

@@ -15,11 +15,6 @@
         </mat-icon>
       </button>
     }
-
-<!--    @if (!reloading) {-->
-<!--      <app-event-action-export [event]="info?.event"></app-event-action-export>-->
-<!--    }-->
-
     @if (isAdminOrCanEdit) {
       <ng-container *ngFor="let item of menu.menuItems">
         <button (click)="item.handleClick()" class="toolbar-action-fab" mat-mini-fab>

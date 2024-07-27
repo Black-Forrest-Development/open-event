@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
+import de.sambalmueslie.openevent.core.registration.api.RegistrationDetails
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import io.micronaut.security.authentication.Authentication
 
@@ -42,4 +43,7 @@ interface RegistrationAPI : CrudAPI<Long, Registration, RegistrationChangeReques
     fun removeParticipant(auth: Authentication, id: Long): ParticipateResponse?
 
     fun getInfo(auth: Authentication, id: Long): RegistrationInfo?
+
+    fun getDetails(auth: Authentication, id: Long): RegistrationDetails?
+
 }

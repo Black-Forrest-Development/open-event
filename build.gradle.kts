@@ -9,8 +9,8 @@ plugins {
     id("org.sonarqube") version "5.1.0.4882"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.2"
-    id("io.micronaut.application") version "4.4.0"
-    id("io.micronaut.aot") version "4.4.0"
+    id("io.micronaut.application") version "4.4.1"
+    id("io.micronaut.aot") version "4.4.1"
     jacoco
 }
 
@@ -82,7 +82,7 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-oauth2")
-    aotPlugins("io.micronaut.security:micronaut-security-aot:4.9.0")
+    aotPlugins("io.micronaut.security:micronaut-security-aot:4.9.1")
 
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")

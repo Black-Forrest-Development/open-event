@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ShareRoutingModule} from './share-routing.module';
 import {ShareDetailsComponent} from './share-details/share-details.component';
 import {AccountModule} from "../account/account.module";
-import {ShareButtonsModule} from "ngx-sharebuttons/buttons";
+import {ShareButtons} from "ngx-sharebuttons/buttons";
 import {RegistrationModule} from "../registration/registration.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ShareInfoComponent} from './share-info/share-info.component';
@@ -28,7 +28,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    ShareButtonsModule,
+    ShareButtons,
     RegistrationModule,
     TranslateModule,
     LocationModule,

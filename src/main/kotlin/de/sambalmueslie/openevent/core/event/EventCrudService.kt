@@ -16,6 +16,7 @@ import de.sambalmueslie.openevent.core.location.LocationCrudService
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
+import de.sambalmueslie.openevent.logTimeMillisWithValue
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -103,8 +104,9 @@ class EventCrudService(
     }
 
     fun getInfo(id: Long, account: Account?): EventInfo? {
-        val event = get(id) ?: return null
-        return getInfo(event, account)
+        return logger.logTimeMillisWithValue("[$id] get event info") {
+            get(id)?.let { getInfo(it, account) }
+        }
     }
 
     fun getInfo(event: Event, account: Account?): EventInfo {

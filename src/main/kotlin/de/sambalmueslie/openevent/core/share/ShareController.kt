@@ -8,9 +8,11 @@ import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.getRealmRoles
+import de.sambalmueslie.openevent.core.participant.api.ParticipantAddRequest
 import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.core.share.api.ShareChangeRequest
 import de.sambalmueslie.openevent.core.share.api.SharedInfo
+import de.sambalmueslie.openevent.core.share.api.SharedParticipateResponse
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -111,6 +113,20 @@ class ShareController(
                     service.setPublished(account, id, value)
                 }
             }
+        }
+    }
+
+    @Post("/{id}/participant/manual")
+    @Secured(SecurityRule.IS_ANONYMOUS)
+    override fun addParticipant(
+        auth: Authentication?,
+        id: String,
+        @Body request: ParticipantAddRequest
+    ): SharedParticipateResponse? {
+        if (auth == null) return service.addParticipant(id, null, request)
+        return auth.checkPermission(PERMISSION_READ, PERMISSION_ADMIN) {
+            val account = accountService.get(auth)
+            service.addParticipant(id, account, request)
         }
     }
 

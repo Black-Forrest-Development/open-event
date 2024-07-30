@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Share, ShareChangeRequest, ShareInfo} from "./share-api";
+import {Share, ShareChangeRequest, SharedParticipateResponse, ShareInfo} from "./share-api";
 import {PatchRequest} from "../../event/model/event-api";
+import {ParticipantAddRequest} from "../../registration/model/registration-api";
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class ShareService extends BaseService {
 
   getInfo(id: string): Observable<ShareInfo> {
     return this.get('' + id + '/info')
+  }
+
+  addParticipant(id: string, request: ParticipantAddRequest): Observable<SharedParticipateResponse> {
+    return this.post(id + '/participant/manual', request)
   }
 }

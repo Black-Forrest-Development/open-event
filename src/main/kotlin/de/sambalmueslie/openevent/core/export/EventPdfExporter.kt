@@ -121,7 +121,7 @@ class EventPdfExporter(
                 context,
                 writer,
                 "PDF Export",
-                InputStreamReader(loader.getResourceAsStream("classpath:fop/event2.vm").getOrNull()!!)
+                InputStreamReader(loader.getResourceAsStream("classpath:fop/event1.vm").getOrNull()!!)
             )
         }
         logger.info("Template result size ${writer.buffer.length} bytes")

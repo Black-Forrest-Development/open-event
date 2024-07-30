@@ -351,7 +351,8 @@
   "share": {
     "title": "Share",
     "action": {
-      "enable": "Enable Sharing"
+      "enable": "Enable Sharing",
+      "participate": "Participate (without login)"
     }
   },
   "lang": {

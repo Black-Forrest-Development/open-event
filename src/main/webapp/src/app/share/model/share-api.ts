@@ -1,5 +1,6 @@
 import {AccountInfo} from "../../account/model/account-api";
 import {Category} from "../../category/model/category-api";
+import {Participant} from "../../participant/model/participant-api";
 
 export interface Share {
   id: string,
@@ -80,3 +81,9 @@ export interface SharedParticipant {
   timestamp: string,
 }
 
+export interface SharedParticipateResponse {
+  registration: SharedRegistration
+  participant: Participant | null
+  status: string
+  created: boolean
+}

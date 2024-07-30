@@ -56,6 +56,16 @@
             <div class="flex flex-row gap-2 items-center">
               <app-registration-status [shared]="info.registration"></app-registration-status>
               <div class="flex-auto"></div>
+              <button mat-flat-button color="primary" (click)="participate()" *ngIf="!participated">
+                @if (processing) {
+                  <mat-icon>
+                    <mat-spinner diameter="18" mode="indeterminate"></mat-spinner>
+                  </mat-icon>
+                } @else {
+                  <mat-icon>person_add</mat-icon>
+                }
+                {{ 'share.action.participate' | translate }}
+              </button>
               <a routerLink="/event/details/{{info.event.id}}" color="primary" mat-flat-button>
                 <mat-icon>person_add</mat-icon>
                 {{ 'registration.action.participate' | translate }}

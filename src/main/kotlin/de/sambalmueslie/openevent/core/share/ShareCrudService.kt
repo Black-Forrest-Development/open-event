@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.share
 
 import de.sambalmueslie.openevent.common.BaseCrudService
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.event.EventChangeListener
@@ -10,6 +11,9 @@ import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.participant.api.Participant
+import de.sambalmueslie.openevent.core.participant.api.ParticipantAddRequest
+import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
+import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.share.api.*
 import de.sambalmueslie.openevent.core.share.db.ShareStorage
@@ -23,7 +27,9 @@ import org.slf4j.LoggerFactory
 @Singleton
 class ShareCrudService(
     private val storage: ShareStorage,
+    private val accountService: AccountCrudService,
     private val eventService: EventCrudService,
+    private val registrationService: RegistrationCrudService,
 ) : BaseCrudService<String, Share, ShareChangeRequest, ShareChangeListener>(storage) {
 
     companion object {
@@ -106,6 +112,24 @@ class ShareCrudService(
     fun findByEvent(eventId: Long): Share? {
         val event = eventService.get(eventId) ?: return null
         return storage.findByEvent(event)
+    }
+
+    fun addParticipant(id: String, account: Account?, request: ParticipantAddRequest): SharedParticipateResponse? {
+        val share = storage.get(id) ?: return null
+        if (!share.published) return null
+
+        val event = eventService.get(share.eventId) ?: return null
+        val actor = account ?: accountService.getSystemAccount()
+        val registration = registrationService.findInfoByEvent(event) ?: return null
+        val response = registrationService.addParticipant(actor, registration.registration.id, request) ?: return null
+        return response.toSharedParticipateResponse(registration)
+    }
+
+    private fun ParticipateResponse.toSharedParticipateResponse(registration: RegistrationInfo): SharedParticipateResponse {
+        return SharedParticipateResponse(
+            registration.toSharedRegistration(),
+            participant, status, created
+        )
     }
 }
 

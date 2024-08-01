@@ -47,14 +47,7 @@ export class ShareInfoComponent {
     this.reload()
   }
 
-  private reload() {
-    if (!this.id) return
-    this.reloading = true
-    this.service.getInfo(this.id).subscribe({
-      next: value => this.handleData(value),
-      error: err => this.handleError(err)
-    })
-  }
+
 
   private handleData(value: ShareInfo) {
     this.info = value
@@ -70,7 +63,7 @@ export class ShareInfoComponent {
   participate() {
     if (this.processing) return
     this.processing = true
-    let dialogRef = this.dialog.open(RegistrationParticipateManualDialogComponent)
+    let dialogRef = this.dialog.open(RegistrationParticipateManualDialogComponent, {disableClose: true})
     dialogRef.afterClosed().subscribe(request => {
       if (request) this.requestParticipateManual(request)
     })
@@ -111,5 +104,14 @@ export class ShareInfoComponent {
 
     this.processing = false
     this.reload()
+  }
+
+  private reload() {
+    if (!this.id) return
+    this.reloading = true
+    this.service.getInfo(this.id).subscribe({
+      next: value => this.handleData(value),
+      error: err => this.handleError(err)
+    })
   }
 }

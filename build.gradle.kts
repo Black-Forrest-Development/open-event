@@ -88,7 +88,7 @@ dependencies {
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.20")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")

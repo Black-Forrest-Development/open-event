@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.0.10"
-    id("org.jetbrains.kotlin.plugin.allopen") version "2.0.10"
-    id("org.jetbrains.kotlin.kapt") version "2.0.10"
-    kotlin("plugin.serialization") version "2.0.10"
+    id("org.jetbrains.kotlin.jvm") version "2.0.20"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.0.20"
+    id("org.jetbrains.kotlin.kapt") version "2.0.20"
+    kotlin("plugin.serialization") version "2.0.20"
 //    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
     id("org.sonarqube") version "5.1.0.4882"
     id("com.github.johnrengelman.shadow") version "8.1.1"
@@ -87,8 +87,8 @@ dependencies {
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.20")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")

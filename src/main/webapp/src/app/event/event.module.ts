@@ -38,6 +38,7 @@ import {ShareModule} from "../share/share.module";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import {EventCreateDialogComponent} from './event-create-dialog/event-create-dialog.component';
 import {ShareButtons} from "ngx-sharebuttons/buttons";
+import {ScrollNearEndDirective} from "../shared/scroll-near-end.directive";
 
 
 @NgModule({
@@ -72,25 +73,26 @@ import {ShareButtons} from "ngx-sharebuttons/buttons";
     EventChangeFormRegistrationComponent,
     EventActionExportComponent
   ],
-  imports: [
-    CommonModule,
-    EventRoutingModule,
-    MaterialModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    AccountModule,
-    LocationModule,
-    ChipSelectModule,
-    RegistrationModule,
-    QuillModule,
-    NgOptimizedImage,
-    FullCalendarModule,
-    FormsModule,
-    ShareButtons,
-    ShareModule,
-    CdkConnectedOverlay,
-    CdkOverlayOrigin,
-  ]
+    imports: [
+        CommonModule,
+        EventRoutingModule,
+        MaterialModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        AccountModule,
+        LocationModule,
+        ChipSelectModule,
+        RegistrationModule,
+        QuillModule,
+        NgOptimizedImage,
+        FullCalendarModule,
+        FormsModule,
+        ShareButtons,
+        ShareModule,
+        CdkConnectedOverlay,
+        CdkOverlayOrigin,
+        ScrollNearEndDirective,
+    ]
 })
 export class EventModule {
 }

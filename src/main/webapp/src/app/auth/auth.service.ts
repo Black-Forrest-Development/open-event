@@ -83,7 +83,7 @@ export class AuthService {
   }
 
   private setPrincipal(token: any) {
-    console.info(JSON.stringify(token));
+    // console.info(JSON.stringify(token));
     const id = token["sub"];
     const email = token["email"];
     const username = token["preferred_username"];
@@ -92,7 +92,7 @@ export class AuthService {
     const roles = token["realm_access"]["roles"];
 
     this.principal = new Principal(id, email, username, given_name, family_name, roles);
-    console.log('Set principal to ' + JSON.stringify(this.principal));
+    // console.log('Set principal to ' + JSON.stringify(this.principal));
   }
 
 

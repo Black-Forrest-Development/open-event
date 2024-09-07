@@ -112,7 +112,7 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     protected fun deleteDocument(id: String) {
         runBlocking {
             val duration = measureTimeMillis {
-                client.deleteDocument(name, id)
+                client.deleteDocument(name, id, refresh = Refresh.True)
             }
             logger.info("[$name] delete document within $duration ms.")
         }
@@ -126,6 +126,7 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
         }
         return processSearchResponse(actor, request, response, pageable)
     }
+
     abstract fun getSearchQueryBuilder(): SearchQueryBuilder<R>
 
     abstract fun processSearchResponse(
@@ -134,8 +135,6 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
         response: com.jillesvangurp.ktsearch.SearchResponse,
         pageable: Pageable
     ): S
-
-
 
 
 }

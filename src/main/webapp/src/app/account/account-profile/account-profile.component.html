@@ -6,11 +6,7 @@
           {{ 'profile.title' | translate }}
         </div>
         <div class="flex-auto"></div>
-        @if (editMode) {
-          <button mat-mini-fab color="primary" (click)="save()">
-            <mat-icon>save</mat-icon>
-          </button>
-        } @else {
+        @if (!editMode) {
           <button mat-mini-fab color="primary" (click)="editMode = true">
             <mat-icon>edit</mat-icon>
           </button>
@@ -55,7 +51,6 @@
             </mat-list-item>
           </mat-list>
           @if (editMode) {
-
             <mat-list class="flex-grow-1">
               <form [formGroup]="fg">
                 <!-- email-->
@@ -119,7 +114,6 @@
                 </mat-list-item>
               </form>
             </mat-list>
-
           } @else {
             <mat-list class="flex-grow-1">
               <mat-list-item>{{ profile.email }}</mat-list-item>
@@ -135,29 +129,18 @@
             </mat-list>
           }
         </div>
+
+        <div class="flex flex-row gap-3 px-2 pb-2" *ngIf="editMode">
+          <button mat-flat-button color="primary" (click)="save()">
+            <mat-icon>save</mat-icon>
+            {{ 'action.save' | translate }}
+          </button>
+          <button mat-flat-button color="primary" (click)="save()">
+            <mat-icon>cancel</mat-icon>
+            {{ 'action.cancel' | translate }}
+          </button>
+        </div>
       }
     </div>
   </mat-card>
-
-<!--  <mat-card style="flex: 0 0 400px">-->
-<!--    <div class="flex flex-col gap-3">-->
-<!--      <div class="flex flex-row gap-2 justify-between items-center flex-auto px-3 pt-3">-->
-<!--        <div class="header">-->
-<!--          {{ 'account.roles' | translate }}-->
-<!--        </div>-->
-<!--        <button mat-mini-fab color="primary" [cdkCopyToClipboard]="authService.getRoles().join(',')">-->
-<!--          <mat-icon>content_copy</mat-icon>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <div class="flex flex-col gap-3 px-2 pb-3">-->
-<!--        @for (role of authService.getRoles(); track role) {-->
-<!--          <div class="flex flex-row gap-2 content-baseline flex-auto ps-4">-->
-<!--            <mat-icon>chevron_right</mat-icon>-->
-<!--            {{ role }}-->
-<!--          </div>-->
-<!--        }-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-card>-->
 </div>

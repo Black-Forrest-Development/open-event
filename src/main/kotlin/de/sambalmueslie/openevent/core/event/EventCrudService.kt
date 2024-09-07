@@ -16,6 +16,8 @@ import de.sambalmueslie.openevent.core.location.LocationCrudService
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
+import de.sambalmueslie.openevent.core.search.common.ChangeType
+import de.sambalmueslie.openevent.core.search.common.SearchUpdateEvent
 import de.sambalmueslie.openevent.logTimeMillisWithValue
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
@@ -48,14 +50,14 @@ class EventCrudService(
         notifyCreated(actor, result)
         request.location?.let { locationCrudService.create(actor, result, it) }
         registrationCrudService.create(actor, result, request.registration)
-        updateSearch(actor, result)
+        updateSearch(actor, result, ChangeType.CREATED)
         return result
     }
 
-    private fun updateSearch(actor: Account, event: Event) {
+    private fun updateSearch(actor: Account, event: Event, type: ChangeType) {
         if (this.searchListener == null) return
         val info = getInfo(event, actor)
-        this.searchListener?.updateSearch(info)
+        this.searchListener?.updateSearch(SearchUpdateEvent(info, type))
     }
 
     override fun update(actor: Account, id: Long, request: EventChangeRequest): Event {
@@ -68,7 +70,7 @@ class EventCrudService(
             locationCrudService.updateByEvent(actor, result, request.location)
         }
         registrationCrudService.updateByEvent(actor, result, request.registration)
-        updateSearch(actor, result)
+        updateSearch(actor, result, ChangeType.UPDATED)
         return result
     }
 
@@ -77,14 +79,14 @@ class EventCrudService(
         locationCrudService.deleteByEvent(actor, event)
         registrationCrudService.deleteByEvent(actor, event)
         val result = super.delete(actor, id) ?: return null
-        updateSearch(actor, result)
+        updateSearch(actor, result, ChangeType.DELETED)
         return result
     }
 
     fun setPublished(actor: Account, id: Long, value: PatchRequest<Boolean>): Event? {
         val result = storage.setPublished(id, value) ?: return null
         notify { it.publishedChanged(actor, result) }
-        updateSearch(actor, result)
+        updateSearch(actor, result, ChangeType.UPDATED)
         return result
     }
 

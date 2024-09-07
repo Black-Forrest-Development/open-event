@@ -19,6 +19,8 @@ import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeReques
 import de.sambalmueslie.openevent.core.registration.api.RegistrationDetails
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.registration.db.RegistrationStorage
+import de.sambalmueslie.openevent.core.search.common.ChangeType
+import de.sambalmueslie.openevent.core.search.common.SearchUpdateEvent
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -104,7 +106,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantRemoved(actor, registration, p) }
         }
-        updateSearch(registration)
+        updateSearch(registration, ChangeType.UPDATED)
         return result
     }
 
@@ -166,7 +168,7 @@ class RegistrationCrudService(
                 notify { it.participantChanged(actor, registration, p, result.status) }
             }
         }
-        updateSearch(registration)
+        updateSearch(registration, ChangeType.UPDATED)
         return result
     }
 
@@ -177,7 +179,7 @@ class RegistrationCrudService(
         result.participant?.let { p ->
             notify { it.participantRemoved(actor, registration, p) }
         }
-        updateSearch(registration)
+        updateSearch(registration, ChangeType.UPDATED)
         return result
     }
 
@@ -206,9 +208,9 @@ class RegistrationCrudService(
         return participants.map { RegistrationInfo(it.key, it.value) }
     }
 
-    private fun updateSearch(registration: Registration) {
+    private fun updateSearch(registration: Registration, type: ChangeType) {
         if (this.searchListener == null) return
-        this.searchListener?.updateSearch(registration)
+        this.searchListener?.updateSearch(SearchUpdateEvent(registration, type))
     }
 
 

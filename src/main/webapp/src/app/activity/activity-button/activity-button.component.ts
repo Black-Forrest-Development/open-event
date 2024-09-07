@@ -28,7 +28,6 @@ export class ActivityButtonComponent {
   }
 
   ngOnDestroy() {
-    debugger
     if (this.subscription) this.subscription.unsubscribe()
   }
 

@@ -10,7 +10,9 @@ import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.search.api.*
 import de.sambalmueslie.openevent.core.search.common.BaseOpenSearchOperator
+import de.sambalmueslie.openevent.core.search.common.ChangeType
 import de.sambalmueslie.openevent.core.search.common.SearchClientFactory
+import de.sambalmueslie.openevent.core.search.common.SearchUpdateEvent
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -36,8 +38,8 @@ open class EventSearchOperator(
     }
 
     init {
-        service.registerSearch { evt -> handleChanged(evt) }
-        registrationService.registerSearch { evt -> handleChanged(evt) }
+        service.registerSearch { evt -> handleEventInfoChanged(evt) }
+        registrationService.registerSearch { evt -> handleRegistrationChanged(evt) }
     }
 
     override fun getFieldMappingProvider() = fieldMapping
@@ -53,14 +55,18 @@ open class EventSearchOperator(
         return Pair(input.id, mapper.writeValueAsString(input))
     }
 
-    private fun handleChanged(obj: EventInfo) {
-        val data = convert(obj)
-        updateDocument(data)
+    private fun handleEventInfoChanged(event: SearchUpdateEvent<EventInfo>) {
+        if (event.type == ChangeType.DELETED) {
+            deleteDocument(event.data.event.id.toString())
+        } else {
+            val data = convert(event.data)
+            updateDocument(data)
+        }
     }
 
-    private fun handleChanged(obj: Registration) {
-        val info = service.getInfo(obj.eventId, null) ?: return
-        handleChanged(info)
+    private fun handleRegistrationChanged(event: SearchUpdateEvent<Registration>) {
+        val info = service.getInfo(event.data.eventId, null) ?: return
+        handleEventInfoChanged(SearchUpdateEvent(info, event.type))
     }
 
     override fun processSearchResponse(

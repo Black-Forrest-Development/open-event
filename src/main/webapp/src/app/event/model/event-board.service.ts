@@ -12,7 +12,7 @@ export class EventBoardService {
 
   reloading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   searching: boolean = false
-  pageSize: number = 20
+  pageSize: number = 10
   pageIndex: number = 0
   totalSize: number = 0
   hasMoreElements: boolean = false
@@ -125,7 +125,7 @@ export class EventBoardService {
 
 
   onScroll() {
-    if (this.reloading) return
+    if (this.reloading.value) return
     if (!this.hasMoreElements) return
     this.reload(this.pageIndex + 1, this.pageSize)
   }
@@ -139,7 +139,7 @@ export class EventBoardService {
   }
 
   private reload(page: number, size: number) {
-    if (this.reloading.value) return
+    if (this.reloading.value) return console.log("Ignore reload " + page + ":" + size + " cause reloading ongoing")
     this.reloading.next(true)
     this.searchService.searchEvents(this.request, page, size).subscribe(
       {
@@ -165,7 +165,7 @@ export class EventBoardService {
   }
 
   private handleError(err: any) {
-    // this.toast.error("Failed to load data")
+    console.error("Failed to load data", err)
     this.reloading.next(false)
   }
 

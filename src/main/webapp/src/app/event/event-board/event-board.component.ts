@@ -22,6 +22,7 @@ export class EventBoardComponent implements OnInit {
         this.mobileView = !state.matches
       })
     this.service.filterToolbarVisible = !this.mobileView
+    this.service.infiniteScrollMode = this.mobileView
     this.service.search()
   }
 

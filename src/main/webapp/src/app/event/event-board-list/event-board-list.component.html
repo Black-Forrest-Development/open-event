@@ -1,6 +1,12 @@
-@if (service.reloading | async) {
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+@if (filterOverlayOpen) {
+  <app-event-board-filter></app-event-board-filter>
+  <div class="pb-2"></div>
 }
+
+@if (service.reloading | async) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
 <div class="flex flex-col gap-2" appScrollNearEnd (nearEnd)="this.service.onScroll()">
 
   @for (info of service.entries; track info) {
@@ -19,8 +25,3 @@
     <mat-icon>filter_alt</mat-icon>
   </button>
 </div>
-
-
-<ng-template cdkConnectedOverlay [cdkConnectedOverlayOpen]="filterOverlayOpen">
-  <app-event-board-filter></app-event-board-filter>
-</ng-template>

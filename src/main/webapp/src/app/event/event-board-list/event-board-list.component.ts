@@ -7,6 +7,7 @@ import {EventBoardService} from "../model/event-board.service";
   styleUrls: ['./event-board-list.component.scss']
 })
 export class EventBoardListComponent {
+
   filterOverlayOpen: boolean = false
 
   constructor(public service: EventBoardService) {

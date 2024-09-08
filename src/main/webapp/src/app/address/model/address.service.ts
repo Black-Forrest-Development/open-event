@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from "../../shared/model/base-service";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/model/page";
 import {Address, AddressChangeRequest} from "./address-api";
@@ -30,6 +30,12 @@ export class AddressService extends BaseService {
   updateAddress(id: number, request: AddressChangeRequest): Observable<Address> {
     return this.put('' + id, request)
   }
+
+
+  deleteAddress(id: number): Observable<Address> {
+    return this.delete('' + id)
+  }
+
 
   importAddress(): Observable<Page<Address>> {
     return this.post('import', {})

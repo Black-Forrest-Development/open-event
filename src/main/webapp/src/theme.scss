@@ -144,3 +144,18 @@ $open-event-theme: mat.m2-define-light-theme((
 .toolbar-action-fab:hover {
   background-color: map-get($open-event-accent, default) !important;
 }
+
+.bg-accent-default {
+  background-color: map-get($open-event-accent, default) !important;
+  color: map-get($open-event-accent, default-contrast) !important;
+}
+
+.bg-primary-default {
+  background-color: map-get($open-event-primary, default) !important;
+  color: map-get($open-event-primary, default-contrast) !important;
+}
+
+.bg-warn-default {
+  background-color: map-get($open-event-warn, default) !important;
+  color: map-get($open-event-warn, default-contrast) !important;
+}

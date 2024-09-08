@@ -314,6 +314,10 @@
       },
       "change": {
         "title": "Bestehende Addresse ändern"
+      },
+      "delete": {
+        "title": "Addresse löschen",
+        "question": "Soll die Addresse wirklich gelöscht werden?"
       }
     },
     "table": {

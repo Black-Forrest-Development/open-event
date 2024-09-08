@@ -7,13 +7,15 @@ import {AddressChangeDialogComponent} from './address-change-dialog/address-chan
 import {MaterialModule} from "../material/material.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AddressDeleteDialogComponent} from './address-delete-dialog/address-delete-dialog.component';
 
 
 @NgModule({
   declarations: [
     AddressBoardComponent,
     AddressChangeComponent,
-    AddressChangeDialogComponent
+    AddressChangeDialogComponent,
+    AddressDeleteDialogComponent
   ],
   exports: [
     AddressBoardComponent

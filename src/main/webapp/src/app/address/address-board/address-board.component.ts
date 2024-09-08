@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {Page} from "../../shared/model/page";
 import {AddressChangeDialogComponent} from "../address-change-dialog/address-change-dialog.component";
 import {PageEvent} from "@angular/material/paginator";
+import {AddressDeleteDialogComponent} from "../address-delete-dialog/address-delete-dialog.component";
 
 @Component({
   selector: 'app-address-board',
@@ -79,7 +80,12 @@ export class AddressBoardComponent {
   }
 
   delete(a: Address) {
-
+    const dialogRef = this.dialog.open(AddressDeleteDialogComponent, {
+      data: a
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.service.deleteAddress(a.id).subscribe(_ => this.reload())
+    })
   }
 
   handlePageChange(event: PageEvent) {

@@ -335,6 +335,10 @@
       },
       "change": {
         "title": "Change address"
+      },
+      "delete": {
+        "title": "Delete address",
+        "question": "Do you really want to delete the address?"
       }
     },
     "table": {

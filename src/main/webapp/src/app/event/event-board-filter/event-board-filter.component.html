@@ -78,7 +78,7 @@
 
         <button mat-stroked-button (click)="service.showHistory = !service.showHistory"
                 class="flex-auto" color="primary"
-                [ngClass]="service.showHistory ? 'mat-mdc-unelevated-button' : 'mdc-button--outlined mat-mdc-outlined-button'">
+                [ngClass]="{'bg-primary-default' : service.showHistory}">
           <mat-icon>history</mat-icon>
           {{ 'event.filter.history' | translate }}
         </button>

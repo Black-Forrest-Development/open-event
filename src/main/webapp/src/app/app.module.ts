@@ -21,6 +21,8 @@ import {provideHotToastConfig} from "@ngxpert/hot-toast";
 import {FullscreenOverlayContainer, OverlayContainer} from "@angular/cdk/overlay";
 import {provideShareButtonsOptions} from "ngx-sharebuttons";
 import {shareIcons} from "ngx-sharebuttons/icons";
+import {MatPaginatorIntl} from "@angular/material/paginator";
+import {MatPaginatorI18nService} from "./shared/mat-paginator-i18n.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -85,7 +87,11 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     }),
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
     provideHttpClient(withInterceptorsFromDi()),
-    provideShareButtonsOptions(shareIcons())
+    provideShareButtonsOptions(shareIcons()),
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorI18nService,
+    },
   ]
 })
 export class AppModule {

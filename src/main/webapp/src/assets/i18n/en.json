@@ -90,6 +90,7 @@
       "available": "Show available",
       "participating": "Show participating",
       "range": {
+        "label": "Enter a date range",
         "today": "Only tody",
         "week": "This week",
         "next": "Next week"
@@ -387,5 +388,12 @@
       "read": "Read",
       "readAll": "All read"
     }
+  },
+  "paginator": {
+    "items": "Items per page",
+    "next": "Next page",
+    "prev": "Previous page",
+    "first": "First page",
+    "last": "Last page"
   }
 }

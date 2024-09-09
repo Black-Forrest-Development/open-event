@@ -13,8 +13,8 @@
           <mat-form-field class="dense-1" subscriptSizing="dynamic">
             <mat-label>{{ 'event.filter.range.label' | translate }}</mat-label>
             <mat-date-range-input [formGroup]="service.range" [rangePicker]="picker">
-              <input matStartDate formControlName="start" placeholder="Start date">
-              <input matEndDate formControlName="end" placeholder="End date">
+              <input matStartDate formControlName="start" placeholder="{{ 'event.filter.range.start' | translate }}">
+              <input matEndDate formControlName="end" placeholder="{{ 'event.filter.range.end' | translate }}">
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker (closed)="onDateRangePickerClosed()" #picker></mat-date-range-picker>

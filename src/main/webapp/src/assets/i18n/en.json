@@ -93,7 +93,9 @@
         "label": "Enter a date range",
         "today": "Only tody",
         "week": "This week",
-        "next": "Next week"
+        "next": "Next week",
+        "start": "Start date",
+        "end" : "End date"
       }
     },
     "table": {

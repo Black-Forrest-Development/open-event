@@ -90,7 +90,9 @@
         "label": "Zeitraum wählen",
         "today": "Nur heute anzeigen",
         "week": "Diese Woche anzeigen",
-        "next": "Nächste Woche anzeigen"
+        "next": "Nächste Woche anzeigen",
+        "start": "Startdatum ",
+        "end": "Enddatum"
       }
     },
     "table": {

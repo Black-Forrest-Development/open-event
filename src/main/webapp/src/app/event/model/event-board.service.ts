@@ -12,7 +12,7 @@ export class EventBoardService {
 
   reloading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   searching: boolean = false
-  pageSize: number = 10
+  pageSize: number = 50
   pageIndex: number = 0
   totalSize: number = 0
   hasMoreElements: boolean = false

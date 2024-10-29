@@ -114,7 +114,7 @@ dependencies {
 
     // FOP
     implementation("org.apache.xmlgraphics:fop:2.10")
-    implementation("org.apache.xmlgraphics:xmlgraphics-commons:2.9")
+    implementation("org.apache.xmlgraphics:xmlgraphics-commons:2.10")
 
 
     // qrcode

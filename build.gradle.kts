@@ -51,12 +51,12 @@ micronaut {
 
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.5.9")
+    implementation("ch.qos.logback:logback-classic:1.5.12")
     runtimeOnly("org.yaml:snakeyaml")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
-    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.3")
+    testImplementation("io.mockk:mockk:1.13.13")
 
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
@@ -109,11 +109,11 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     // velocity
-    implementation("org.apache.velocity:velocity-engine-core:2.4")
+    implementation("org.apache.velocity:velocity-engine-core:2.4.1")
     implementation("org.apache.velocity.tools:velocity-tools-generic:3.1")
 
     // FOP
-    implementation("org.apache.xmlgraphics:fop:2.9")
+    implementation("org.apache.xmlgraphics:fop:2.10")
     implementation("org.apache.xmlgraphics:xmlgraphics-commons:2.9")
 
 
@@ -144,7 +144,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.2.2")
+    implementation("com.jillesvangurp:search-client:2.3.1")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.18.1")

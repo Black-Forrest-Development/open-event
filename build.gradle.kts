@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "2.0.21"
     kotlin("plugin.serialization") version "2.0.21"
 //    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
-    id("org.sonarqube") version "5.1.0.4882"
+    id("org.sonarqube") version "6.0.0.5145"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.4"
     id("io.micronaut.application") version "4.4.4"
@@ -82,7 +82,7 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-oauth2")
-    aotPlugins("io.micronaut.security:micronaut-security-aot:4.11.0")
+    aotPlugins("io.micronaut.security:micronaut-security-aot:4.11.1")
 
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")

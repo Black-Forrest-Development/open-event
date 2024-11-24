@@ -6,9 +6,10 @@ import {ProfileChangeRequest} from "../../profile/model/profile-api";
 import {AccountService} from "../model/account.service";
 
 @Component({
-  selector: 'app-create-account-dialog',
-  templateUrl: './create-account-dialog.component.html',
-  styleUrls: ['./create-account-dialog.component.scss']
+    selector: 'app-create-account-dialog',
+    templateUrl: './create-account-dialog.component.html',
+    styleUrls: ['./create-account-dialog.component.scss'],
+    standalone: false
 })
 export class CreateAccountDialogComponent {
 

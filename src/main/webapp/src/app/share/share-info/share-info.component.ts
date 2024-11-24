@@ -11,9 +11,10 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {ParticipantAddRequest} from "../../registration/model/registration-api";
 
 @Component({
-  selector: 'app-share-info',
-  templateUrl: './share-info.component.html',
-  styleUrl: './share-info.component.scss'
+    selector: 'app-share-info',
+    templateUrl: './share-info.component.html',
+    styleUrl: './share-info.component.scss',
+    standalone: false
 })
 export class ShareInfoComponent {
   reloading: boolean = false

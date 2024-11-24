@@ -4,9 +4,10 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {ParticipantAddRequest} from "../model/registration-api";
 
 @Component({
-  selector: 'app-registration-participate-manual-dialog',
-  templateUrl: './registration-participate-manual-dialog.component.html',
-  styleUrls: ['./registration-participate-manual-dialog.component.scss']
+    selector: 'app-registration-participate-manual-dialog',
+    templateUrl: './registration-participate-manual-dialog.component.html',
+    styleUrls: ['./registration-participate-manual-dialog.component.scss'],
+    standalone: false
 })
 export class RegistrationParticipateManualDialogComponent {
 

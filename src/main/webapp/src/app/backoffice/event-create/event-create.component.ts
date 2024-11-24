@@ -7,9 +7,10 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-event-create',
-  templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.scss']
+    selector: 'app-event-create',
+    templateUrl: './event-create.component.html',
+    styleUrls: ['./event-create.component.scss'],
+    standalone: false
 })
 export class EventCreateComponent {
 

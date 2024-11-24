@@ -7,9 +7,10 @@ import {Page} from "../../shared/model/page";
 import {MatChipInputEvent} from "@angular/material/chips";
 
 @Component({
-  selector: 'app-event-change-form-registration',
-  templateUrl: './event-change-form-registration.component.html',
-  styleUrls: ['./event-change-form-registration.component.scss']
+    selector: 'app-event-change-form-registration',
+    templateUrl: './event-change-form-registration.component.html',
+    styleUrls: ['./event-change-form-registration.component.scss'],
+    standalone: false
 })
 export class EventChangeFormRegistrationComponent {
   fg: FormGroup | undefined

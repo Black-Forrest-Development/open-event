@@ -12,9 +12,10 @@ import {AccountSearchEntry, AccountSearchRequest, AccountSearchResponse} from ".
 import {SearchService} from "../../search/model/search.service";
 
 @Component({
-  selector: 'app-select-account',
-  templateUrl: './select-account.component.html',
-  styleUrls: ['./select-account.component.scss']
+    selector: 'app-select-account',
+    templateUrl: './select-account.component.html',
+    styleUrls: ['./select-account.component.scss'],
+    standalone: false
 })
 export class SelectAccountComponent {
 

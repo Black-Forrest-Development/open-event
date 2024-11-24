@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AppService} from "../../app.service";
 
 @Component({
-  selector: 'app-dashboard-toolbar',
-  templateUrl: './dashboard-toolbar.component.html',
-  styleUrl: './dashboard-toolbar.component.scss'
+    selector: 'app-dashboard-toolbar',
+    templateUrl: './dashboard-toolbar.component.html',
+    styleUrl: './dashboard-toolbar.component.scss',
+    standalone: false
 })
 export class DashboardToolbarComponent {
   @Input() mobileView: boolean = false

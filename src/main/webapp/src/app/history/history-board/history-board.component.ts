@@ -6,9 +6,10 @@ import {HistoryEventInfo} from "../model/history-api";
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-history-board',
-  templateUrl: './history-board.component.html',
-  styleUrls: ['./history-board.component.scss']
+    selector: 'app-history-board',
+    templateUrl: './history-board.component.html',
+    styleUrls: ['./history-board.component.scss'],
+    standalone: false
 })
 export class HistoryBoardComponent {
   reloading: boolean = false

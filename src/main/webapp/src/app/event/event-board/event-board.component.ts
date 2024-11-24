@@ -3,9 +3,10 @@ import {EventBoardService} from "../model/event-board.service";
 import {BreakpointObserver, BreakpointState} from "@angular/cdk/layout";
 
 @Component({
-  selector: 'app-event-board',
-  templateUrl: './event-board.component.html',
-  styleUrls: ['./event-board.component.scss']
+    selector: 'app-event-board',
+    templateUrl: './event-board.component.html',
+    styleUrls: ['./event-board.component.scss'],
+    standalone: false
 })
 export class EventBoardComponent implements OnInit {
 

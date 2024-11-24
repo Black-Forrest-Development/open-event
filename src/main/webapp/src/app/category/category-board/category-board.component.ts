@@ -9,9 +9,10 @@ import {CategoryDeleteDialogComponent} from "../category-delete-dialog/category-
 import {CategoryChangeDialogComponent} from "../category-change-dialog/category-change-dialog.component";
 
 @Component({
-  selector: 'app-category-board',
-  templateUrl: './category-board.component.html',
-  styleUrls: ['./category-board.component.scss']
+    selector: 'app-category-board',
+    templateUrl: './category-board.component.html',
+    styleUrls: ['./category-board.component.scss'],
+    standalone: false
 })
 export class CategoryBoardComponent {
 

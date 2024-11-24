@@ -6,9 +6,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {Location} from "@angular/common";
 
 @Component({
-  selector: 'app-event-admin',
-  templateUrl: './event-admin.component.html',
-  styleUrl: './event-admin.component.scss'
+    selector: 'app-event-admin',
+    templateUrl: './event-admin.component.html',
+    styleUrl: './event-admin.component.scss',
+    standalone: false
 })
 export class EventAdminComponent {
 

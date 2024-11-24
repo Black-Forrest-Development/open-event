@@ -25,9 +25,10 @@ Marker.prototype.options.icon = iconDefault;
 
 
 @Component({
-  selector: 'app-event-board-map',
-  templateUrl: './event-board-map.component.html',
-  styleUrls: ['./event-board-map.component.scss']
+    selector: 'app-event-board-map',
+    templateUrl: './event-board-map.component.html',
+    styleUrls: ['./event-board-map.component.scss'],
+    standalone: false
 })
 export class EventBoardMapComponent implements AfterViewInit {
 

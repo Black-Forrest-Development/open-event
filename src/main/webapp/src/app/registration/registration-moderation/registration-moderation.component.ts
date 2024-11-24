@@ -24,9 +24,10 @@ import {
 } from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
 
 @Component({
-  selector: 'app-registration-moderation',
-  templateUrl: './registration-moderation.component.html',
-  styleUrl: './registration-moderation.component.scss'
+    selector: 'app-registration-moderation',
+    templateUrl: './registration-moderation.component.html',
+    styleUrl: './registration-moderation.component.scss',
+    standalone: false
 })
 export class RegistrationModerationComponent {
 

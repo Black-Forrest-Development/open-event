@@ -4,9 +4,10 @@ import {AccountService} from "../../account/model/account.service";
 import {Account} from "../../account/model/account-api";
 
 @Component({
-  selector: 'app-event-create-dialog',
-  templateUrl: './event-create-dialog.component.html',
-  styleUrl: './event-create-dialog.component.scss'
+    selector: 'app-event-create-dialog',
+    templateUrl: './event-create-dialog.component.html',
+    styleUrl: './event-create-dialog.component.scss',
+    standalone: false
 })
 export class EventCreateDialogComponent {
 

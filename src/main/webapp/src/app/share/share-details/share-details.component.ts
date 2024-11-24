@@ -6,9 +6,10 @@ import {Share, ShareChangeRequest} from "../model/share-api";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
-  selector: 'app-share-details',
-  templateUrl: './share-details.component.html',
-  styleUrl: './share-details.component.scss'
+    selector: 'app-share-details',
+    templateUrl: './share-details.component.html',
+    styleUrl: './share-details.component.scss',
+    standalone: false
 })
 export class ShareDetailsComponent {
 

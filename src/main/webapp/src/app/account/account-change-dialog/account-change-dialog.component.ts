@@ -7,9 +7,10 @@ import {ProfileChangeRequest} from "../../profile/model/profile-api";
 import {AccountSearchEntry} from "../../search/model/search-api";
 
 @Component({
-  selector: 'app-account-change-dialog',
-  templateUrl: './account-change-dialog.component.html',
-  styleUrl: './account-change-dialog.component.scss'
+    selector: 'app-account-change-dialog',
+    templateUrl: './account-change-dialog.component.html',
+    styleUrl: './account-change-dialog.component.scss',
+    standalone: false
 })
 export class AccountChangeDialogComponent {
 

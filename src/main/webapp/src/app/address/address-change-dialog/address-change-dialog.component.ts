@@ -4,9 +4,10 @@ import {Address, AddressChangeRequest} from "../model/address-api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-address-change-dialog',
-  templateUrl: './address-change-dialog.component.html',
-  styleUrl: './address-change-dialog.component.scss'
+    selector: 'app-address-change-dialog',
+    templateUrl: './address-change-dialog.component.html',
+    styleUrl: './address-change-dialog.component.scss',
+    standalone: false
 })
 export class AddressChangeDialogComponent {
 

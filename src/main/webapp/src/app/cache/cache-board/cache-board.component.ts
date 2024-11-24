@@ -4,9 +4,10 @@ import {CacheInfo} from "../model/cache-api";
 import {EChartsOption} from "echarts";
 
 @Component({
-  selector: 'app-cache-board',
-  templateUrl: './cache-board.component.html',
-  styleUrls: ['./cache-board.component.scss']
+    selector: 'app-cache-board',
+    templateUrl: './cache-board.component.html',
+    styleUrls: ['./cache-board.component.scss'],
+    standalone: false
 })
 export class CacheBoardComponent {
 

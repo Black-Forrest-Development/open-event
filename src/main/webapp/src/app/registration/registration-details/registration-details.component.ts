@@ -24,9 +24,10 @@ import {
 import {AuthService} from "../../auth/auth.service";
 
 @Component({
-  selector: 'app-registration-details',
-  templateUrl: './registration-details.component.html',
-  styleUrls: ['./registration-details.component.scss']
+    selector: 'app-registration-details',
+    templateUrl: './registration-details.component.html',
+    styleUrls: ['./registration-details.component.scss'],
+    standalone: false
 })
 export class RegistrationDetailsComponent {
   registration: RegistrationInfo | undefined

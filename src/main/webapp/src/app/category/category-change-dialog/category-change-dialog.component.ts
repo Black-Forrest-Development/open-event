@@ -5,9 +5,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../model/category.service";
 
 @Component({
-  selector: 'app-category-change-dialog',
-  templateUrl: './category-change-dialog.component.html',
-  styleUrl: './category-change-dialog.component.scss'
+    selector: 'app-category-change-dialog',
+    templateUrl: './category-change-dialog.component.html',
+    styleUrl: './category-change-dialog.component.scss',
+    standalone: false
 })
 export class CategoryChangeDialogComponent {
 

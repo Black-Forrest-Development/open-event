@@ -7,9 +7,10 @@ import {Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";
 
 @Component({
-  selector: 'app-mail-board',
-  templateUrl: './mail-board.component.html',
-  styleUrls: ['./mail-board.component.scss']
+    selector: 'app-mail-board',
+    templateUrl: './mail-board.component.html',
+    styleUrls: ['./mail-board.component.scss'],
+    standalone: false
 })
 export class MailBoardComponent {
 

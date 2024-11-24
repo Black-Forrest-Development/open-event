@@ -4,9 +4,10 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {AuthService} from "../../auth/auth.service";
 
 @Component({
-  selector: 'app-board-card-search',
-  templateUrl: './board-card-search.component.html',
-  styleUrl: './board-card-search.component.scss'
+    selector: 'app-board-card-search',
+    templateUrl: './board-card-search.component.html',
+    styleUrl: './board-card-search.component.scss',
+    standalone: false
 })
 export class BoardCardSearchComponent {
 

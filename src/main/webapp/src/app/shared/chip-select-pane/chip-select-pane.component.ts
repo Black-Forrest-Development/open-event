@@ -5,9 +5,10 @@ import {FormControl} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @Component({
-  selector: 'app-chip-select-pane',
-  templateUrl: './chip-select-pane.component.html',
-  styleUrls: ['./chip-select-pane.component.scss']
+    selector: 'app-chip-select-pane',
+    templateUrl: './chip-select-pane.component.html',
+    styleUrls: ['./chip-select-pane.component.scss'],
+    standalone: false
 })
 export class ChipSelectPaneComponent {
 

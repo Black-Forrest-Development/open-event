@@ -3,9 +3,10 @@ import {FormGroup} from "@angular/forms";
 
 
 @Component({
-  selector: 'app-event-change-form-event',
-  templateUrl: './event-change-form-event.component.html',
-  styleUrls: ['./event-change-form-event.component.scss']
+    selector: 'app-event-change-form-event',
+    templateUrl: './event-change-form-event.component.html',
+    styleUrls: ['./event-change-form-event.component.scss'],
+    standalone: false
 })
 export class EventChangeFormEventComponent {
   @Input() form: FormGroup | undefined

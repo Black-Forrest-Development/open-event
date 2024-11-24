@@ -6,9 +6,10 @@ import {MatMenuTrigger} from "@angular/material/menu";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-activity-button',
-  templateUrl: './activity-button.component.html',
-  styleUrl: './activity-button.component.scss'
+    selector: 'app-activity-button',
+    templateUrl: './activity-button.component.html',
+    styleUrl: './activity-button.component.scss',
+    standalone: false
 })
 export class ActivityButtonComponent {
 

@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {AccountInfo} from "./model/account-api";
 
 @Pipe({
-  name: 'accountDisplayName'
+    name: 'accountDisplayName',
+    standalone: false
 })
 export class AccountDisplayNamePipe implements PipeTransform {
 

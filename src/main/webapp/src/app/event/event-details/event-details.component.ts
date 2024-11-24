@@ -6,9 +6,10 @@ import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
-  selector: 'app-event-details',
-  templateUrl: './event-details.component.html',
-  styleUrls: ['./event-details.component.scss']
+    selector: 'app-event-details',
+    templateUrl: './event-details.component.html',
+    styleUrls: ['./event-details.component.scss'],
+    standalone: false
 })
 export class EventDetailsComponent {
 

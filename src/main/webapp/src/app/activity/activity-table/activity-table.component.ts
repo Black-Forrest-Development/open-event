@@ -7,9 +7,10 @@ import {Page} from "../../shared/model/page";
 import {PageEvent} from "@angular/material/paginator";
 
 @Component({
-  selector: 'app-activity-table',
-  templateUrl: './activity-table.component.html',
-  styleUrl: './activity-table.component.scss'
+    selector: 'app-activity-table',
+    templateUrl: './activity-table.component.html',
+    styleUrl: './activity-table.component.scss',
+    standalone: false
 })
 export class ActivityTableComponent {
   reloading: boolean = false

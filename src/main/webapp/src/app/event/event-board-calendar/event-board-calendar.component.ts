@@ -8,9 +8,10 @@ import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-event-board-calendar',
-  templateUrl: './event-board-calendar.component.html',
-  styleUrls: ['./event-board-calendar.component.scss']
+    selector: 'app-event-board-calendar',
+    templateUrl: './event-board-calendar.component.html',
+    styleUrls: ['./event-board-calendar.component.scss'],
+    standalone: false
 })
 export class EventBoardCalendarComponent implements AfterViewInit {
 

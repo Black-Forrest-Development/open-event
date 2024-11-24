@@ -8,9 +8,10 @@ import {PageEvent} from "@angular/material/paginator";
 import {AddressDeleteDialogComponent} from "../address-delete-dialog/address-delete-dialog.component";
 
 @Component({
-  selector: 'app-address-board',
-  templateUrl: './address-board.component.html',
-  styleUrl: './address-board.component.scss'
+    selector: 'app-address-board',
+    templateUrl: './address-board.component.html',
+    styleUrl: './address-board.component.scss',
+    standalone: false
 })
 export class AddressBoardComponent {
 

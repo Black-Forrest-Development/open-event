@@ -9,9 +9,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../auth/auth.service";
 
 @Component({
-  selector: 'app-event-details-header',
-  templateUrl: './event-details-header.component.html',
-  styleUrls: ['./event-details-header.component.scss']
+    selector: 'app-event-details-header',
+    templateUrl: './event-details-header.component.html',
+    styleUrls: ['./event-details-header.component.scss'],
+    standalone: false
 })
 export class EventDetailsHeaderComponent {
 

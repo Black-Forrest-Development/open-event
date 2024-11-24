@@ -21,9 +21,10 @@ const iconDefault = icon({
 Marker.prototype.options.icon = iconDefault;
 
 @Component({
-  selector: 'app-location-map',
-  templateUrl: './location-map.component.html',
-  styleUrls: ['./location-map.component.scss']
+    selector: 'app-location-map',
+    templateUrl: './location-map.component.html',
+    styleUrls: ['./location-map.component.scss'],
+    standalone: false
 })
 export class LocationMapComponent {
   location: Location | SharedLocation | undefined;

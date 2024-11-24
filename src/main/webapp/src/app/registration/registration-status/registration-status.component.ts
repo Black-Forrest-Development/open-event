@@ -5,9 +5,10 @@ import {EventSearchEntry} from "../../search/model/search-api";
 import {SharedParticipant, SharedRegistration} from "../../share/model/share-api";
 
 @Component({
-  selector: 'app-registration-status',
-  templateUrl: './registration-status.component.html',
-  styleUrls: ['./registration-status.component.scss']
+    selector: 'app-registration-status',
+    templateUrl: './registration-status.component.html',
+    styleUrls: ['./registration-status.component.scss'],
+    standalone: false
 })
 export class RegistrationStatusComponent {
   spaceAvailable: boolean = false

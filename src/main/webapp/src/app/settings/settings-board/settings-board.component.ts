@@ -8,9 +8,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {SettingsChangeDialogComponent} from "../settings-change-dialog/settings-change-dialog.component";
 
 @Component({
-  selector: 'app-settings-board',
-  templateUrl: './settings-board.component.html',
-  styleUrls: ['./settings-board.component.scss']
+    selector: 'app-settings-board',
+    templateUrl: './settings-board.component.html',
+    styleUrls: ['./settings-board.component.scss'],
+    standalone: false
 })
 export class SettingsBoardComponent {
   reloading: boolean = false

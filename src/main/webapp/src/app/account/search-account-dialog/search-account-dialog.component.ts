@@ -6,9 +6,10 @@ import {SearchService} from "../../search/model/search.service";
 import {AccountSearchEntry, AccountSearchRequest, AccountSearchResponse} from "../../search/model/search-api";
 
 @Component({
-  selector: 'app-search-account-dialog',
-  templateUrl: './search-account-dialog.component.html',
-  styleUrls: ['./search-account-dialog.component.scss']
+    selector: 'app-search-account-dialog',
+    templateUrl: './search-account-dialog.component.html',
+    styleUrls: ['./search-account-dialog.component.scss'],
+    standalone: false
 })
 export class SearchAccountDialogComponent {
 

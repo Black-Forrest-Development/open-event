@@ -11,9 +11,10 @@ import {EventCreateDialogComponent} from "../../event/event-create-dialog/event-
 import {PageEvent} from "@angular/material/paginator";
 
 @Component({
-  selector: 'app-backoffice-account',
-  templateUrl: './backoffice-account.component.html',
-  styleUrl: './backoffice-account.component.scss'
+    selector: 'app-backoffice-account',
+    templateUrl: './backoffice-account.component.html',
+    styleUrl: './backoffice-account.component.scss',
+    standalone: false
 })
 export class BackofficeAccountComponent {
 

@@ -15,10 +15,11 @@ import {AppService} from "../../app.service";
 import {AuthService} from "../../auth/auth.service";
 
 @Component({
-  selector: 'app-event-change',
-  templateUrl: './event-change.component.html',
-  styleUrls: ['./event-change.component.scss'],
-  providers: [{provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true},},],
+    selector: 'app-event-change',
+    templateUrl: './event-change.component.html',
+    styleUrls: ['./event-change.component.scss'],
+    providers: [{ provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }, },],
+    standalone: false
 })
 export class EventChangeComponent {
 

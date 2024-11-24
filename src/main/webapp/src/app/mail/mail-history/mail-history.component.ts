@@ -9,9 +9,10 @@ import {Location} from "@angular/common";
 import {Page} from "../../shared/model/page";
 
 @Component({
-  selector: 'app-mail-history',
-  templateUrl: './mail-history.component.html',
-  styleUrls: ['./mail-history.component.scss']
+    selector: 'app-mail-history',
+    templateUrl: './mail-history.component.html',
+    styleUrls: ['./mail-history.component.scss'],
+    standalone: false
 })
 export class MailHistoryComponent {
   reloading: boolean = false

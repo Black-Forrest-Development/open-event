@@ -3,9 +3,10 @@ import {Activity, ActivityInfo} from "../model/activity-api";
 import {ActivityService} from "../model/activity.service";
 
 @Component({
-  selector: 'app-activity-read',
-  templateUrl: './activity-read.component.html',
-  styleUrl: './activity-read.component.scss'
+    selector: 'app-activity-read',
+    templateUrl: './activity-read.component.html',
+    styleUrl: './activity-read.component.scss',
+    standalone: false
 })
 export class ActivityReadComponent {
   @Input() info!: ActivityInfo

@@ -8,9 +8,10 @@ import {MainNavItem} from "./main-nav-item";
 import {DashboardService} from "../model/dashboard.service";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent implements AfterViewInit {
 

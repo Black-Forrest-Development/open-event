@@ -4,9 +4,10 @@ import {Category} from "../model/category-api";
 import {CategoryService} from "../model/category.service";
 
 @Component({
-  selector: 'app-category-delete-dialog',
-  templateUrl: './category-delete-dialog.component.html',
-  styleUrl: './category-delete-dialog.component.scss'
+    selector: 'app-category-delete-dialog',
+    templateUrl: './category-delete-dialog.component.html',
+    styleUrl: './category-delete-dialog.component.scss',
+    standalone: false
 })
 export class CategoryDeleteDialogComponent {
   constructor(

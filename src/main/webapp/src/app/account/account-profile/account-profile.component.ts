@@ -8,9 +8,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
-  selector: 'app-account-profile',
-  templateUrl: './account-profile.component.html',
-  styleUrl: './account-profile.component.scss'
+    selector: 'app-account-profile',
+    templateUrl: './account-profile.component.html',
+    styleUrl: './account-profile.component.scss',
+    standalone: false
 })
 export class AccountProfileComponent {
   profile: Profile | undefined

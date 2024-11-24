@@ -6,9 +6,10 @@ import {CategoryService} from "../../category/model/category.service";
 import {MatChipSelectionChange} from "@angular/material/chips";
 
 @Component({
-  selector: 'app-event-board-filter',
-  templateUrl: './event-board-filter.component.html',
-  styleUrl: './event-board-filter.component.scss'
+    selector: 'app-event-board-filter',
+    templateUrl: './event-board-filter.component.html',
+    styleUrl: './event-board-filter.component.scss',
+    standalone: false
 })
 export class EventBoardFilterComponent {
 

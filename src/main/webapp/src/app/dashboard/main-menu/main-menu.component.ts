@@ -5,9 +5,10 @@ import {ConfirmLogoutDialogComponent} from "../confirm-logout-dialog/confirm-log
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrl: './main-menu.component.scss'
+    selector: 'app-main-menu',
+    templateUrl: './main-menu.component.html',
+    styleUrl: './main-menu.component.scss',
+    standalone: false
 })
 export class MainMenuComponent {
 

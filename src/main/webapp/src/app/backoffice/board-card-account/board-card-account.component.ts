@@ -8,9 +8,10 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-board-card-account',
-  templateUrl: './board-card-account.component.html',
-  styleUrls: ['./board-card-account.component.scss']
+    selector: 'app-board-card-account',
+    templateUrl: './board-card-account.component.html',
+    styleUrls: ['./board-card-account.component.scss'],
+    standalone: false
 })
 export class BoardCardAccountComponent {
 

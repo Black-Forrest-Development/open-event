@@ -5,9 +5,10 @@ import {Setting, SettingChangeRequest} from "../model/settings-api";
 import {SettingService} from "../model/setting.service";
 
 @Component({
-  selector: 'app-settings-change-dialog',
-  templateUrl: './settings-change-dialog.component.html',
-  styleUrl: './settings-change-dialog.component.scss'
+    selector: 'app-settings-change-dialog',
+    templateUrl: './settings-change-dialog.component.html',
+    styleUrl: './settings-change-dialog.component.scss',
+    standalone: false
 })
 export class SettingsChangeDialogComponent {
   fg: FormGroup

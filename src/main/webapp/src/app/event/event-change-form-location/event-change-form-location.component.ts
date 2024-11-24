@@ -7,9 +7,10 @@ import {Page} from "../../shared/model/page";
 import {Account} from "../../account/model/account-api";
 
 @Component({
-  selector: 'app-event-change-form-location',
-  templateUrl: './event-change-form-location.component.html',
-  styleUrls: ['./event-change-form-location.component.scss']
+    selector: 'app-event-change-form-location',
+    templateUrl: './event-change-form-location.component.html',
+    styleUrls: ['./event-change-form-location.component.scss'],
+    standalone: false
 })
 export class EventChangeFormLocationComponent {
   @Input() form: FormGroup | undefined

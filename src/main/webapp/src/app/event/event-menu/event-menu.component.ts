@@ -9,9 +9,10 @@ import {EventMenuItem} from "../model/event-menu-item";
 import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
-  selector: 'app-event-menu',
-  templateUrl: './event-menu.component.html',
-  styleUrls: ['./event-menu.component.scss']
+    selector: 'app-event-menu',
+    templateUrl: './event-menu.component.html',
+    styleUrls: ['./event-menu.component.scss'],
+    standalone: false
 })
 export class EventMenuComponent {
   @Output() changed: EventEmitter<Event> = new EventEmitter();

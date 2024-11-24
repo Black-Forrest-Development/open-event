@@ -3,9 +3,10 @@ import {EventBoardService} from "../model/event-board.service";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
-  selector: 'app-event-board-header',
-  templateUrl: './event-board-header.component.html',
-  styleUrls: ['./event-board-header.component.scss']
+    selector: 'app-event-board-header',
+    templateUrl: './event-board-header.component.html',
+    styleUrls: ['./event-board-header.component.scss'],
+    standalone: false
 })
 export class EventBoardHeaderComponent implements OnInit {
 

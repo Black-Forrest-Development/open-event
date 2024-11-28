@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "2.0.21"
     kotlin("plugin.serialization") version "2.0.21"
 //    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
-    id("org.sonarqube") version "6.0.0.5145"
+    id("org.sonarqube") version "6.0.1.5171"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.4"
     id("io.micronaut.application") version "4.4.4"

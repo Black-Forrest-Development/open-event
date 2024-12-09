@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.0.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "2.0.21"
-    id("org.jetbrains.kotlin.kapt") version "2.0.21"
-    kotlin("plugin.serialization") version "2.0.21"
+    id("org.jetbrains.kotlin.jvm") version "2.1.0"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.1.0"
+    id("org.jetbrains.kotlin.kapt") version "2.1.0"
+    kotlin("plugin.serialization") version "2.1.0"
 //    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
-    id("org.sonarqube") version "6.0.0.5145"
+    id("org.sonarqube") version "6.0.1.5171"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.google.cloud.tools.jib") version "3.4.4"
     id("io.micronaut.application") version "4.4.4"
@@ -82,13 +82,13 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-oauth2")
-    aotPlugins("io.micronaut.security:micronaut-security-aot:4.11.1")
+    aotPlugins("io.micronaut.security:micronaut-security-aot:4.11.2")
 
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.1.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
@@ -126,9 +126,9 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.3.0")
 
     // mail
-    implementation("org.simplejavamail:simple-java-mail:8.12.2")
-    implementation("org.simplejavamail:batch-module:8.12.2")
-    implementation("org.simplejavamail:authenticated-socks-module:8.12.2")
+    implementation("org.simplejavamail:simple-java-mail:8.12.3")
+    implementation("org.simplejavamail:batch-module:8.12.3")
+    implementation("org.simplejavamail:authenticated-socks-module:8.12.3")
 
     // test
     testImplementation("org.testcontainers:junit-jupiter")
@@ -144,10 +144,10 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.3.1")
+    implementation("com.jillesvangurp:search-client:2.3.2")
 
     // jsoup
-    implementation("org.jsoup:jsoup:1.18.1")
+    implementation("org.jsoup:jsoup:1.18.3")
     // biweekly
     implementation("net.sf.biweekly:biweekly:0.6.8")
 }

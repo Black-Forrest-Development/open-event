@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
 
 @include mat.elevation-classes();
 @include mat.app-background();

@@ -6,20 +6,20 @@ import {TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {Location} from "@angular/common";
 import {Event, EventInfo} from "../model/event-api";
-import * as moment from "moment";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
 import {Account} from "../../account/model/account-api";
 import {AppService} from "../../app.service";
 import {AuthService} from "../../auth/auth.service";
+import {DateTime} from 'luxon';
 
 @Component({
-    selector: 'app-event-change',
-    templateUrl: './event-change.component.html',
-    styleUrls: ['./event-change.component.scss'],
-    providers: [{ provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }, },],
-    standalone: false
+  selector: 'app-event-change',
+  templateUrl: './event-change.component.html',
+  styleUrls: ['./event-change.component.scss'],
+  providers: [{provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true},},],
+  standalone: false
 })
 export class EventChangeComponent {
 
@@ -174,10 +174,10 @@ export class EventChangeComponent {
 
   private initValues(e: EventInfo) {
     // init event form
-    let start = moment(e.event.start)
-    let startTime = start.format("HH:mm")
-    let finish = moment(e.event.finish)
-    let finishTime = finish.format("HH:mm")
+    let start = DateTime.fromISO(e.event.start)
+    let startTime = start.toFormat("HH:mm")
+    let finish = DateTime.fromISO(e.event.finish)
+    let finishTime = finish.toFormat("HH:mm")
 
     this.eventForm.setValue({
       startTime: startTime,

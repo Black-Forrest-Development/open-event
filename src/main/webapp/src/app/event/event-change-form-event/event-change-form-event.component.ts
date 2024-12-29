@@ -1,17 +1,15 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
-
 @Component({
-    selector: 'app-event-change-form-event',
-    templateUrl: './event-change-form-event.component.html',
-    styleUrls: ['./event-change-form-event.component.scss'],
-    standalone: false
+  selector: 'app-event-change-form-event',
+  templateUrl: './event-change-form-event.component.html',
+  styleUrls: ['./event-change-form-event.component.scss'],
+  standalone: false
 })
 export class EventChangeFormEventComponent {
   @Input() form: FormGroup | undefined
   @Input() hiddenFields: string[] = []
-
 
   constructor() {
   }
@@ -40,6 +38,5 @@ export class EventChangeFormEventComponent {
   isVisible(ctrl: string): boolean {
     return this.hiddenFields.find(x => x == ctrl) == null
   }
-
 
 }

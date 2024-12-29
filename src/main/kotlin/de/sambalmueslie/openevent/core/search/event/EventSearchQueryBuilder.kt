@@ -58,7 +58,7 @@ class EventSearchQueryBuilder : SearchQueryBuilder<EventSearchRequest> {
 
         }
         sort {
-            add(EventSearchEntryData::date, SortOrder.ASC)
+            add(EventSearchEntryData::start, SortOrder.ASC)
         }
     }
 

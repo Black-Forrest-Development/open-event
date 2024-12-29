@@ -20,14 +20,13 @@
         </mat-error>
       </mat-form-field>
       <!-- longText-->
-      <div class="flex flex-col pb-3">
-        <quill-editor formControlName="longText" placeholder="{{'event.form.longText' | translate}}"></quill-editor>
-        <mat-hint *ngIf="longText?.valid" align="end" class="ps-3">{{ 'event.form.hint.LongDescr' | translate }}
-        </mat-hint>
+      <mat-form-field *ngIf="isVisible('longText')" class="dense-1">
+        <textarea matInput placeholder="{{'event.form.longText' | translate}}"></textarea>
+        <mat-hint align="start">{{ 'event.form.hint.LongDescr' | translate }}</mat-hint>
         <mat-error *ngIf="!longText?.valid && longText?.touched" class="ps-3">
           {{ 'event.form.error.longText' | translate }}
         </mat-error>
-      </div>
+      </mat-form-field>
       <!-- imageUrl-->
       <mat-form-field *ngIf="isVisible('imageUrl')" class="dense-1">
         <mat-label>{{ 'event.form.imageUrl' | translate }}</mat-label>

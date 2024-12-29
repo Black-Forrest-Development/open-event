@@ -4,6 +4,7 @@ import {EventSearchEntry, EventSearchRequest, EventSearchResponse} from "../../s
 import {SearchService} from "../../search/model/search.service";
 import {PageEvent} from "@angular/material/paginator";
 import {FormControl, FormGroup} from "@angular/forms";
+import {DateTime} from "luxon";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class EventBoardService {
 
   reloading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   searching: boolean = false
-  pageSize: number = 50
+  pageSize: number = 200
   pageIndex: number = 0
   totalSize: number = 0
   hasMoreElements: boolean = false
@@ -33,32 +34,31 @@ export class EventBoardService {
 
   handleRangeChanged() {
     let value = this.range.value
-    this.updateRange(value.start, value.end)
+    let start = value.start ? DateTime.fromJSDate(value.start) : null
+    let end = value.end ? DateTime.fromJSDate(value.end) : null
+    this.updateRange(start, end)
   }
 
-  updateRange(start: Date | null | undefined, end: Date | null | undefined) {
+  updateRange(start: DateTime | null | undefined, end: DateTime | null | undefined) {
     this.range.setValue({
-      start: start ?? null,
-      end: end ?? null
+      start: start?.toJSDate() ?? null,
+      end: end?.toJSDate() ?? null
     })
     let startDate = null
     if (start) {
-      startDate = new Date(start)
-      startDate.setUTCHours(0, 0, 0, 0)
+      startDate = start.startOf('day')
     } else if (!this._showHistory) {
-      startDate = new Date()
-      startDate.setUTCHours(0, 0, 0, 0)
+      startDate = DateTime.now().startOf('day')
     }
 
     let endDate = null
     if (end) {
-      endDate = new Date(end)
-      endDate.setUTCHours(23, 59, 59, 999)
+      endDate = end.endOf('day')
     }
 
 
-    let from = startDate?.toISOString()
-    let to = endDate?.toISOString()
+    let from = startDate?.toISODate() ?? undefined
+    let to = endDate?.toISODate() ?? undefined
     if (this.request.from === from && this.request.to === to) return
     this.request.from = from
     this.request.to = to

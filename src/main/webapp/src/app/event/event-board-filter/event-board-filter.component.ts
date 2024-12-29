@@ -4,6 +4,7 @@ import {EventBoardService} from "../model/event-board.service";
 import {ChipSelectEntry} from "../../shared/chip-select-pane/chip-select-entry";
 import {CategoryService} from "../../category/model/category.service";
 import {MatChipSelectionChange} from "@angular/material/chips";
+import {DateTime} from "luxon";
 
 @Component({
     selector: 'app-event-board-filter',
@@ -28,40 +29,28 @@ export class EventBoardFilterComponent {
 
 
   selectToday() {
-    let now = new Date()
-    let start = new Date(now)
-    let end = new Date(now)
-    this.selectRange(start, end)
+    let now = DateTime.now()
+    this.selectRange(now, now)
   }
 
   selectThisWeek() {
-    let now = new Date()
-    let currentDay = now.getDay()
-
-    let start = new Date(now)
-    start.setDate(now.getDate() - currentDay)
-
-    let end = new Date(now)
-    end.setDate(now.getDate() + (6 - currentDay))
+    let now = DateTime.now()
+    let start = now.startOf('week')
+    let end = now.endOf('week')
     this.selectRange(start, end)
   }
 
   selectNextWeek() {
-    let now = new Date()
-    let currentDay = now.getDay()
+    let now = DateTime.now()
 
-    let start = new Date(now)
-    start.setDate(now.getDate() - currentDay + 7)
+    let start = now.plus({ weeks: 1 }).startOf('week')
 
-    let end = new Date(now)
-    end.setDate(now.getDate() + (6 - currentDay) + 7)
+    let end = now.plus({ weeks: 1 }).endOf('week')
     this.selectRange(start, end)
   }
 
-  private selectRange(start: Date, end: Date) {
-    start.setUTCHours(0, 0, 0, 0)
-    end.setUTCHours(23, 59, 59, 999)
-    this.service.updateRange(start, end)
+  private selectRange(start: DateTime, end: DateTime) {
+    this.service.updateRange(start,end)
   }
 
   handleDatePreselectionChange(event: MatChipSelectionChange) {

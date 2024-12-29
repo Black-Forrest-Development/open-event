@@ -56,19 +56,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     QuillModule.forRoot({
       modules: {
         syntax: false,
-        toolbar: [
-          ['bold', 'italic', 'underline', 'strike'],
-          // ['blockquote', 'code-block'],
-          // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          // [{ 'indent': '-1'}, { 'indent': '+1' }],
-          [{'direction': 'rtl'}],
-          [{'size': ['small', false, 'large', 'huge']}],
-          [{'header': [1, 2, 3, 4, 5, 6, false]}],
-          // [{ 'color': [] }, { 'background': [] }],
-          // [{ 'font': [] }],
-          [{'align': []}],
-          ['clean'],
-        ]
+        toolbar: false,
       }
     }),
     NgxEchartsModule.forRoot({

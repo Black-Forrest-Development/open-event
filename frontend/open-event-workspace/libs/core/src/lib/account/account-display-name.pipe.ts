@@ -1,9 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {AccountInfo} from "./model/account-api";
+import {AccountInfo} from "@open-event-workspace/core";
 
 @Pipe({
-    name: 'accountDisplayName',
-    standalone: false
+  name: 'accountDisplayName',
+  standalone: true
 })
 export class AccountDisplayNamePipe implements PipeTransform {
 

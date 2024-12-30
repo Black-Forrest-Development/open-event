@@ -1,6 +1,6 @@
-import {Page} from "../../shared/model/page";
-import {AccountInfo} from "../../account/model/account-api";
-import {Category} from "../../category/model/category-api";
+import {Page} from "../page";
+import {AccountInfo} from "../account/account-api";
+import {Category} from "../category/category-api";
 
 export class EventSearchRequest {
   public constructor(

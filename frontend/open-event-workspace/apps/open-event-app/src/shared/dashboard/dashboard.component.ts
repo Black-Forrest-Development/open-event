@@ -2,7 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/c
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {filter, map, Observable, withLatestFrom} from "rxjs";
-import {MatSidenav, MatSidenavContainer} from "@angular/material/sidenav";
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MainNavItem} from "./main-nav-item";
 import {AuthService} from "../auth/auth.service";
 import {DashboardService} from "./dashboard.service";
@@ -18,6 +18,7 @@ import {DashboardToolbarComponent} from "../dashboard-toolbar/dashboard-toolbar.
     MatSidenavContainer,
     AsyncPipe,
     MatSidenav,
+    MatSidenavContent,
     RouterLink,
     MainMenuComponent,
     RouterOutlet,

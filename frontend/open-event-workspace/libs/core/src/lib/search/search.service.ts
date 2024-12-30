@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../../shared/model/base-service";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {
   AccountSearchRequest,
@@ -10,6 +9,7 @@ import {
   EventSearchRequest,
   EventSearchResponse
 } from "./search-api";
+import {BaseService} from "../base-service";
 
 @Injectable({
   providedIn: 'root'

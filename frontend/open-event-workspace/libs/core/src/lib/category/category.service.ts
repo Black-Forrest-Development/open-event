@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Category, CategoryChangeRequest} from "./category-api";
-import {Page} from "../../shared/model/page";
-import {BaseService} from "../../shared/model/base-service";
+import {Page} from "../page";
+import {BaseService} from "../base-service";
 
 @Injectable({
   providedIn: 'root'

@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../../shared/model/base-service";
-import { HttpClient } from "@angular/common/http";
-import {AppService} from "../../app.service";
+import {BaseService} from "../base-service";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Page} from "../../shared/model/page";
+import {Page} from "../page";
 import {Activity, ActivityInfo} from "./activity-api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService extends BaseService {
-  constructor(http: HttpClient, private appService: AppService) {
+  constructor(http: HttpClient) {
     super(http, 'activity')
     this.retryCount = 0
   }

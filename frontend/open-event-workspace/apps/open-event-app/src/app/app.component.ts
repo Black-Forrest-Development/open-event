@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Subscription} from 'rxjs';
@@ -15,7 +15,7 @@ import {DashboardComponent} from "../shared/dashboard/dashboard.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'open-event-app';
 
   dialogRef: MatDialogRef<any> | undefined

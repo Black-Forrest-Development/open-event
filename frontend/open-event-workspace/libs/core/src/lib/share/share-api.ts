@@ -1,6 +1,6 @@
-import {AccountInfo} from "../../account/model/account-api";
-import {Category} from "../../category/model/category-api";
-import {Participant} from "../../participant/model/participant-api";
+import {AccountInfo} from "../account/account-api";
+import {Category} from "../category/category-api";
+import {Participant} from "../participant/participant-api";
 
 export interface Share {
   id: string,

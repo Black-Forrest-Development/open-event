@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-confirm-logout-dialog',
@@ -13,7 +14,8 @@ import {MatButton} from "@angular/material/button";
     MatDialogClose,
     MatDialogTitle,
     MatDialogContent,
-    MatButton
+    MatButton,
+    MatIcon
   ],
   standalone: true
 })

@@ -7,10 +7,10 @@
       type="button">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    @if (mobileView) {
+    @if (mobileView()) {
       <div class="flex-auto"></div>
     } @else {
-      <span class="header"> {{ title | translate }}</span>
+      <span class="header"> {{ title() | translate }}</span>
       <div class="flex-auto basis-24"></div>
       <app-activity-button></app-activity-button>
       @if (service.info) {

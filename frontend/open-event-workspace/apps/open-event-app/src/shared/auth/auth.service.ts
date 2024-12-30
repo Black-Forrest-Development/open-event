@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {KeycloakService} from "keycloak-angular";
+import {effect, inject, Injectable} from '@angular/core';
+import {KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, ReadyArgs, typeEventArgs} from "keycloak-angular";
 import {Principal} from "./principal";
 import {environment} from "../../environments/environment";
+import Keycloak from "keycloak-js";
 
 // @deprecated due to deprecated keycloak service
 @Injectable({
@@ -47,26 +48,35 @@ export class AuthService {
   public static PROFILE_WRITE = "openevent.profile.write"
   public static PROFILE_ADMIN = "openevent.profile.admin"
 
-  private principal: Principal | undefined;
+  private principal: Principal | undefined
+  private authenticated = false
 
+  constructor(private readonly keycloak: Keycloak) {
+    const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL)
 
-  constructor(private keycloak: KeycloakService) {
-    try {
-      let token = this.keycloak.getKeycloakInstance().tokenParsed;
-      if (token == null) {
-        this.clearPrincipal();
-      } else {
-        this.setPrincipal(token);
+    effect(() => {
+      const keycloakEvent = keycloakSignal();
+
+      if (keycloakEvent.type === KeycloakEventType.Ready) {
+        this.authenticated = typeEventArgs<ReadyArgs>(keycloakEvent.args)
+        let token = this.keycloak.tokenParsed
+        if(token){
+          this.setPrincipal(token)
+        } else {
+          this.clearPrincipal()
+        }
       }
-    } catch (e) {
-      console.log('Failed to load user details', e);
-      this.clearPrincipal();
-    }
+
+      if (keycloakEvent.type === KeycloakEventType.AuthLogout) {
+        this.authenticated = false
+        this.clearPrincipal()
+      }
+    });
   }
 
 
   public logout() {
-    this.keycloak.logout(environment.logoutUrl).then()
+    this.keycloak.logout({redirectUri: environment.logoutUrl}).then()
   }
 
   public getPrincipal(): Principal | undefined {

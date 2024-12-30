@@ -1,4 +1,4 @@
-import {Profile, ProfileChangeRequest} from "../../profile/model/profile-api";
+import {Profile, ProfileChangeRequest} from "../profile/profile-api";
 
 export interface Account {
   id: number,

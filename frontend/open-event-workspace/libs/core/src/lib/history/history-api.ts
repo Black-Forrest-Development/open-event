@@ -1,5 +1,6 @@
-import {Account} from "../../account/model/account-api";
-import {Event} from "../../event/model/event-api";
+import {Account} from "../account/account-api";
+import {Event} from "../event/event-api";
+
 
 export interface HistoryEntry {
   id: number,

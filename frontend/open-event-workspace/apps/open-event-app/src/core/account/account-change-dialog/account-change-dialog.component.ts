@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslatePipe} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -24,7 +24,7 @@ import {
 
 @Component({
   selector: 'app-account-change-dialog',
-  imports: [CommonModule, TranslatePipe, ReactiveFormsModule, MatFormField, MatDialogActions, MatIcon, MatInput, MatDialogClose, MatButton, MatDialogTitle, MatDialogContent],
+  imports: [CommonModule, TranslatePipe, ReactiveFormsModule, MatFormField, MatDialogActions, MatIcon, MatInput, MatLabel, MatDialogClose, MatButton, MatDialogTitle, MatDialogContent],
   templateUrl: './account-change-dialog.component.html',
   styleUrl: './account-change-dialog.component.scss',
 })

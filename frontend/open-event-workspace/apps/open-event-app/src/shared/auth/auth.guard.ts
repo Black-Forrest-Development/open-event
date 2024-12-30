@@ -10,7 +10,7 @@ const isAccessAllowed = async (
 ): Promise<boolean | UrlTree> => {
   const { authenticated, grantedRoles } = authData;
 
-  const requiredRole = route.data['role'];
+  const requiredRole = route.data['roles'];
   if (!requiredRole) {
     return false;
   }

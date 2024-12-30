@@ -1,4 +1,4 @@
-import {AccountDetails, AccountInfo} from "../../account/model/account-api";
+import {AccountDetails, AccountInfo} from "../account/account-api";
 
 export interface Participant {
   id: number,

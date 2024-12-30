@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../../shared/model/base-service";
-import { HttpClient } from "@angular/common/http";
+import {BaseService} from "../base-service";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Page} from "../../shared/model/page";
+import {Page} from "../page";
 import {HistoryEntry, HistoryEventInfo} from "./history-api";
 
 @Injectable({

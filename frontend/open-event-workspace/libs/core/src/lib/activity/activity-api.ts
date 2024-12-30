@@ -1,4 +1,4 @@
-import {AccountInfo} from "../../account/model/account-api";
+import {AccountInfo} from "../account/account-api";
 
 export interface ActivityInfo {
   activity: Activity,

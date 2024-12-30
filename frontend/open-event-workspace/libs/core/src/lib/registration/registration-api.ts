@@ -1,4 +1,4 @@
-import {Participant, ParticipantDetails} from "../../participant/model/participant-api";
+import {Participant, ParticipantDetails} from "../participant/participant-api";
 
 export interface Registration {
   id: number,

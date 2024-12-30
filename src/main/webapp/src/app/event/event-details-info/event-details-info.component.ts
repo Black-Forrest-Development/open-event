@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {EventInfo} from "../model/event-api";
+import {EventInfo} from "@open-event-workspace/core";
 
 @Component({
     selector: 'app-event-details-info',

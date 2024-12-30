@@ -17,6 +17,8 @@ export * from './lib/category/category.service';
 export * from './lib/event/event-api';
 export * from './lib/event/event.service';
 
+export * from './lib/export/export.service';
+
 export * from './lib/history/history-api';
 export * from './lib/history/history.service';
 
@@ -47,3 +49,6 @@ export * from './lib/setting/setting.service';
 export * from './lib/share/share-api';
 export * from './lib/share/share.service';
 
+export * from './lib/page'
+export * from './lib/pageable'
+export * from './lib/patch-request'

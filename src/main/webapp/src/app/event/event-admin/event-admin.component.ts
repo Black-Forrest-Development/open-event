@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {EventInfo} from "../model/event-api";
+import {EventInfo, EventService} from "@open-event-workspace/core";
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {EventService} from "../model/event.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Location} from "@angular/common";
 

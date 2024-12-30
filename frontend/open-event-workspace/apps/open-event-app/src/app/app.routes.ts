@@ -36,12 +36,12 @@ export const appRoutes: Route[] = [
     canActivate: [canActivateAuthRole],
     data: {roles: [AuthService.MAIL_READ, AuthService.MAIL_WRITE]}
   },
-  {
-    path: 'backoffice',
-    loadChildren: () => import('../core/backoffice/backoffice.routes').then(m => m.routes),
-    canActivate: [canActivateAuthRole],
-    data: {roles: [AuthService.BACKOFFICE_ACCESS]}
-  },
+  // {
+  //   path: 'backoffice',
+  //   loadChildren: () => import('../core/backoffice/backoffice.routes').then(m => m.routes),
+  //   canActivate: [canActivateAuthRole],
+  //   data: {roles: [AuthService.BACKOFFICE_ACCESS]}
+  // },
   {
     path: 'history',
     loadChildren: () => import('../core/history/history.routes').then(m => m.routes),

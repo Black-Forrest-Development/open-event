@@ -1,7 +1,7 @@
 import {RegistrationChangeRequest, RegistrationInfo} from "../registration/registration-api";
 import {Category} from "../category/category-api";
 import {LocationChangeRequest} from "../location/location-api";
-import {AccountInfo} from "@open-event-workspace/core";
+import {AccountInfo, Location} from "@open-event-workspace/core";
 
 export interface Event {
   id: number,

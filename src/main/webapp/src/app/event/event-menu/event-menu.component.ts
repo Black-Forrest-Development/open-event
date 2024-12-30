@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Event} from "../model/event-api";
+import {Event, EventService} from "@open-event-workspace/core";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {EventService} from "../model/event.service";
 import {EventNavigationService} from "../event-navigation.service";
 import {EventDeleteDialogComponent} from "../event-delete-dialog/event-delete-dialog.component";
 import {EventMenuItem} from "../model/event-menu-item";

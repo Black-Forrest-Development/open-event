@@ -5,7 +5,9 @@
       <div class="flex-auto"></div>
     </div>
   </mat-toolbar>
-  <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+  @if (reloading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
   @if (info) {
     <div class="flex flex-col gap-2" style="max-width: 1000px; width: 100%;">
       <mat-card class="mx-2 flex-auto">
@@ -19,24 +21,24 @@
           <div>{{ info.event.start | date:'fullDate' }}</div>
           <div>{{ info.event.start | date:'shortTime' }} - {{ info.event.finish | date:'shortTime' }}</div>
         </mat-card-content>
-
-        <img *ngIf="info.event.imageUrl && info.event.imageUrl.length > 0" alt="" mat-card-image
-             src="{{info.event.imageUrl.length}}">
+        @if (info.event.imageUrl && info.event.imageUrl.length > 0) {
+          <img alt="" mat-card-image src="{{info.event.imageUrl.length}}">
+        }
         <mat-divider></mat-divider>
         <mat-card-content>
           <div [innerHTML]="info.event.longText" class="pt-3"></div>
         </mat-card-content>
-        <ng-container *ngIf="info.categories.length > 0">
+        @if (info.categories.length > 0) {
           <div class="pt-3"></div>
           <mat-divider></mat-divider>
           <mat-card-actions>
             <mat-chip-listbox>
-              <ng-container *ngFor="let category of info.categories">
+              @for (category of info.categories; track category) {
                 <mat-chip>{{ category.name }}</mat-chip>
-              </ng-container>
+              }
             </mat-chip-listbox>
           </mat-card-actions>
-        </ng-container>
+        }
       </mat-card>
 
       @if (info.location) {
@@ -56,16 +58,18 @@
             <div class="flex flex-row gap-2 items-center">
               <app-registration-status [shared]="info.registration"></app-registration-status>
               <div class="flex-auto"></div>
-              <button mat-flat-button color="primary" (click)="participate()" *ngIf="!participated">
-                @if (processing) {
-                  <mat-icon>
-                    <mat-spinner diameter="18" mode="indeterminate"></mat-spinner>
-                  </mat-icon>
-                } @else {
-                  <mat-icon>person_add</mat-icon>
-                }
-                {{ 'share.action.participate' | translate }}
-              </button>
+              @if (!participated) {
+                <button mat-flat-button color="primary" (click)="participate()">
+                  @if (processing) {
+                    <mat-icon>
+                      <mat-spinner diameter="18" mode="indeterminate"></mat-spinner>
+                    </mat-icon>
+                  } @else {
+                    <mat-icon>person_add</mat-icon>
+                  }
+                  {{ 'share.action.participate' | translate }}
+                </button>
+              }
               <a routerLink="/event/details/{{info.event.id}}" color="primary" mat-flat-button>
                 <mat-icon>person_add</mat-icon>
                 {{ 'registration.action.participate' | translate }}

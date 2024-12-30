@@ -10,6 +10,7 @@ import {MatCard} from "@angular/material/card";
 import {DatePipe, NgClass, NgIf} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-history-board',
@@ -32,6 +33,7 @@ import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} fr
     AccountDisplayNamePipe,
     MatHeaderRow,
     MatRow,
+    MatIcon,
     NgIf
   ],
   standalone: true

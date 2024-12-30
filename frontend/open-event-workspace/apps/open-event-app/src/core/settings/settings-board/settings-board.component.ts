@@ -10,6 +10,7 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {NgIf} from "@angular/common";
 import {MatCard} from "@angular/material/card";
 import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-settings-board',
@@ -29,7 +30,8 @@ import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} fr
     MatMiniFabButton,
     MatHeaderRow,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatIcon
   ],
   standalone: true
 })

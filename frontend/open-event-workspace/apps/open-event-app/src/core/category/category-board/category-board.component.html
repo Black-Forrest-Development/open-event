@@ -7,10 +7,12 @@
           {{ 'category.search' | translate }}
         </mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
-        <button (click)="input.value = ''; fullTextSearch = ''" *ngIf="input.value.length > 0" mat-icon-button
-                matSuffix>
-          <mat-icon>clear</mat-icon>
-        </button>
+        @if (input.value.length > 0) {
+          <button (click)="input.value = ''; fullTextSearch = ''" mat-icon-button
+                  matSuffix>
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
       </mat-form-field>
     </div>
 
@@ -22,9 +24,9 @@
 
   </div>
 </mat-toolbar>
-
-<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-
+@if (reloading) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 
 <div class="flex flex-col gap-2 p-4">
   <mat-card>

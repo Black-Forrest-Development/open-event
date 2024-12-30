@@ -5,7 +5,7 @@ import {CategoryDeleteDialogComponent} from "../category-delete-dialog/category-
 import {CategoryChangeDialogComponent} from "../category-change-dialog/category-change-dialog.component";
 import {Category, CategorySearchRequest, CategorySearchResponse, SearchService} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatInput} from "@angular/material/input";
@@ -38,7 +38,8 @@ import {MatPaginator} from "@angular/material/paginator";
     MatDivider,
     MatHeaderRow,
     MatPaginator,
-    MatRow
+    MatRow,
+    MatLabel
   ],
   standalone: true
 })

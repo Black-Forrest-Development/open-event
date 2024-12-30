@@ -9,9 +9,17 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {ParticipantAddRequest, SharedParticipateResponse, ShareInfo, ShareService} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardImage} from "@angular/material/card";
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardImage,
+  MatCardSubtitle,
+  MatCardTitle
+} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {MatChip, MatChipListbox} from "@angular/material/chips";
 import {LocationMapComponent} from "../../location/location-map/location-map.component";
@@ -29,10 +37,11 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     MatProgressBar,
     MatCard,
     MatCardHeader,
+    MatCardSubtitle,
+    MatCardTitle,
     MatIcon,
     DatePipe,
     MatCardImage,
-    NgIf,
     MatDivider,
     MatCardContent,
     MatCardActions,

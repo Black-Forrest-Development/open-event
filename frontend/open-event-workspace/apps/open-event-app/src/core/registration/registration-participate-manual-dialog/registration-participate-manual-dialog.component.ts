@@ -11,6 +11,8 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {ParticipantAddRequest} from "@open-event-workspace/core";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {MatLabel} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-registration-participate-manual-dialog',
@@ -25,7 +27,9 @@ import {MatButton} from "@angular/material/button";
     MatFormField,
     MatButton,
     MatDialogClose,
-    MatDialogActions
+    MatDialogActions,
+    MatIcon,
+    MatLabel
   ],
   standalone: true
 })

@@ -7,7 +7,7 @@ import {
   MatDialogTitle
 } from "@angular/material/dialog";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatInput} from "@angular/material/input";
@@ -27,7 +27,9 @@ import {Category, CategoryChangeRequest, CategoryService} from "@open-event-work
     ReactiveFormsModule,
     MatDialogContent,
     MatDialogTitle,
-    MatDialogActions
+    MatDialogActions,
+    MatLabel,
+    MatHint,
   ],
   standalone: true
 })

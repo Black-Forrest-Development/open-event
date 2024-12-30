@@ -22,11 +22,11 @@ import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 
 @Component({
   selector: 'app-search-account-dialog',
-  imports: [CommonModule, MatDialogTitle, MatDialogContent, TranslatePipe, MatFormField, MatInput, MatIcon, MatProgressSpinner, MatIconButton, MatMiniFabButton, MatProgressBar, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatHeaderRow, MatRow, MatDialogActions, MatButton, MatDialogClose],
+  imports: [CommonModule, MatDialogTitle, MatDialogContent, TranslatePipe, MatFormField, MatInput, MatIcon, MatProgressSpinner, MatIconButton, MatMiniFabButton, MatProgressBar, MatTableModule, MatDialogActions, MatButton, MatDialogClose],
   templateUrl: './search-account-dialog.component.html',
   styleUrl: './search-account-dialog.component.scss',
 })

@@ -11,7 +11,7 @@ import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 
 @Component({
   selector: 'app-mail-history',
@@ -25,13 +25,8 @@ import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} fr
     TranslatePipe,
     MatProgressBar,
     MatCard,
-    MatTable,
-    MatHeaderCell,
+    MatTableModule,
     DatePipe,
-    MatCell,
-    MatColumnDef,
-    MatHeaderRow,
-    MatRow,
     MatPaginator
   ],
   standalone: true

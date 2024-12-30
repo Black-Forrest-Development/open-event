@@ -1,14 +1,6 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {MatSort, MatSortHeader} from "@angular/material/sort";
-import {
-  MatCell,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderRow,
-  MatRow,
-  MatTable,
-  MatTableDataSource
-} from "@angular/material/table";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {RegistrationEditDialogComponent} from "../registration-edit-dialog/registration-edit-dialog.component";
 import {RegistrationCancelDialogComponent} from "../registration-cancel-dialog/registration-cancel-dialog.component";
 import {AuthService} from "../../../shared/auth/auth.service";
@@ -48,13 +40,8 @@ import {MatDivider} from "@angular/material/divider";
     TranslatePipe,
     MatProgressBar,
     MatCard,
-    MatTable,
-    MatHeaderCell,
+    MatTableModule,
     DatePipe,
-    MatCell,
-    MatColumnDef,
-    MatHeaderRow,
-    MatRow,
     MatCardHeader,
     MatDivider,
     MatCardContent,

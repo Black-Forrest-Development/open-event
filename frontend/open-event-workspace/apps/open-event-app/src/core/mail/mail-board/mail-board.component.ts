@@ -10,7 +10,7 @@ import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatChip} from "@angular/material/chips";
 import {RouterLink} from "@angular/router";
 
@@ -26,16 +26,11 @@ import {RouterLink} from "@angular/router";
     TranslatePipe,
     MatProgressBar,
     MatCard,
-    MatTable,
-    MatHeaderCell,
+    MatTableModule,
     DatePipe,
-    MatCell,
-    MatColumnDef,
     MatChip,
     MatIconButton,
     RouterLink,
-    MatHeaderRow,
-    MatRow,
     MatPaginator
   ],
   standalone: true

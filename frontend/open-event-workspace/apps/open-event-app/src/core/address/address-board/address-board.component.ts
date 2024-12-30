@@ -3,15 +3,14 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddressChangeDialogComponent} from "../address-change-dialog/address-change-dialog.component";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {AddressDeleteDialogComponent} from "../address-delete-dialog/address-delete-dialog.component";
-import {Address, AddressService} from "@open-event-workspace/core";
-import {Page} from "../../../../../../libs/core/src/lib/page";
+import {Address, AddressService, Page} from "@open-event-workspace/core";
 import {AppService} from "../../../shared/app.service";
 import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -24,15 +23,10 @@ import {MatIcon} from "@angular/material/icon";
     MatButton,
     MatDivider,
     MatProgressBar,
-    MatTable,
-    MatHeaderCell,
-    MatCell,
-    MatColumnDef,
+    MatTableModule,
     MatIconButton,
     MatIcon,
     MatPaginator,
-    MatHeaderRow,
-    MatRow
   ],
   standalone: true
 })

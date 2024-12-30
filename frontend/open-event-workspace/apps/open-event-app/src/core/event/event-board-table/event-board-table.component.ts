@@ -3,7 +3,7 @@ import {EventBoardService} from "../event-board.service";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {MatCard} from "@angular/material/card";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {AccountComponent} from "../../account/account/account.component";
@@ -21,21 +21,16 @@ import {MatPaginator} from "@angular/material/paginator";
     MatProgressBar,
     AsyncPipe,
     MatCard,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
     MatIcon,
     TranslatePipe,
     AccountComponent,
-    MatCell,
     DatePipe,
     RegistrationStatusComponent,
     MatDivider,
     MatMiniFabButton,
-    MatRow,
-    MatHeaderRow,
     RouterLink,
-    MatPaginator
+    MatPaginator,
+    MatTableModule
   ],
   standalone: true
 })

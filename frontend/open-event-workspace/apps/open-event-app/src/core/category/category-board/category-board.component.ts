@@ -12,7 +12,7 @@ import {MatInput} from "@angular/material/input";
 import {MatButton, MatIconAnchor, MatIconButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatDivider} from "@angular/material/divider";
 import {MatPaginator} from "@angular/material/paginator";
 
@@ -30,15 +30,10 @@ import {MatPaginator} from "@angular/material/paginator";
     MatButton,
     MatProgressBar,
     MatCard,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
+    MatTableModule,
     MatIconAnchor,
     MatDivider,
-    MatHeaderRow,
     MatPaginator,
-    MatRow,
     MatLabel
   ],
   standalone: true

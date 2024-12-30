@@ -9,7 +9,7 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {DatePipe, NgClass, NgIf} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -25,14 +25,9 @@ import {MatIcon} from "@angular/material/icon";
     NgClass,
     MatDivider,
     MatPaginator,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
+    MatTableModule,
     DatePipe,
     AccountDisplayNamePipe,
-    MatHeaderRow,
-    MatRow,
     MatIcon,
     NgIf
   ],

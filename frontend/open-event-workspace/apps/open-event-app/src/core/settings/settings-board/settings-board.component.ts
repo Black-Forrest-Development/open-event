@@ -9,7 +9,7 @@ import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {NgIf} from "@angular/common";
 import {MatCard} from "@angular/material/card";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -23,13 +23,8 @@ import {MatIcon} from "@angular/material/icon";
     MatProgressBar,
     NgIf,
     MatCard,
-    MatTable,
-    MatHeaderCell,
-    MatCell,
-    MatColumnDef,
+    MatTableModule,
     MatMiniFabButton,
-    MatHeaderRow,
-    MatRow,
     MatPaginator,
     MatIcon
   ],

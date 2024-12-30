@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   MatCell,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderRow,
   MatRow,
-  MatTable,
-  MatTableDataSource
+  MatTableDataSource,
+  MatTableModule
 } from "@angular/material/table";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
@@ -17,9 +17,8 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
-import {Page} from "../../../../../../libs/core/src/lib/page";
+import {ActivityInfo, ActivityService, Page} from "@open-event-workspace/core";
 import {ActivityReadComponent} from "../activity-read/activity-read.component";
-import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
 
 @Component({
   selector: 'app-activity-table',
@@ -28,7 +27,7 @@ import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
   imports: [
     MatCard,
     MatProgressBar,
-    MatTable,
+    MatTableModule,
     MatColumnDef,
     MatHeaderCell,
     MatCell,
@@ -45,7 +44,7 @@ import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
   ],
   standalone: true
 })
-export class ActivityTableComponent {
+export class ActivityTableComponent implements OnInit {
   reloading: boolean = false
   pageSize: number = 25
   pageIndex: number = 0

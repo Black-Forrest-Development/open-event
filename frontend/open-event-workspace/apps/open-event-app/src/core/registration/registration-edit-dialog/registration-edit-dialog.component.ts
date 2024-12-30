@@ -11,7 +11,7 @@ import {
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {Participant, ParticipateRequest} from "@open-event-workspace/core";
 
@@ -29,7 +29,8 @@ import {Participant, ParticipateRequest} from "@open-event-workspace/core";
     MatDialogClose,
     ReactiveFormsModule,
     MatFormField,
-    MatInput
+    MatInput,
+    MatLabel
   ],
   standalone: true
 })

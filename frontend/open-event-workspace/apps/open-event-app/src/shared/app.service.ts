@@ -30,7 +30,7 @@ export class AppService {
   }
 
   validate() {
-    let l = this.lang() ?? this.translate.currentLang
+    let l = this.lang() ?? this.translate.currentLang ?? "de"
     this.accountService.validate(l).subscribe(d => this.handleValidationResult(d))
   }
 

@@ -1,15 +1,13 @@
 import {
-  AutoRefreshTokenService,
   createInterceptorCondition,
   INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
   IncludeBearerTokenCondition,
-  provideKeycloak,
-  UserActivityService
+  provideKeycloak
 } from 'keycloak-angular';
 import {environment} from "../environments/environment";
 
 const localhostCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
-  urlPattern: /^(\/.*)?$/i,
+  urlPattern:  /^.*$/,
   bearerPrefix: 'Bearer'
 });
 
@@ -18,6 +16,7 @@ export const provideKeycloakAngular = () =>
     config: environment.keycloak,
     initOptions: {
       onLoad: 'login-required',
+      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
     },
     features: [
       // withAutoRefreshToken({
@@ -26,8 +25,8 @@ export const provideKeycloakAngular = () =>
       // })
     ],
     providers: [
-      AutoRefreshTokenService,
-      UserActivityService,
+      // AutoRefreshTokenService,
+      // UserActivityService,
       {
         provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
         useValue: [localhostCondition]

@@ -2,16 +2,26 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {CalendarApi, CalendarOptions, EventClickArg} from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {Subscription} from "rxjs";
-import {FullCalendarComponent} from '@fullcalendar/angular';
+import {FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
 import {EventBoardService} from "../event-board.service";
+import {MatProgressBar} from "@angular/material/progress-bar";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {MatCard} from "@angular/material/card";
 
 @Component({
-    selector: 'app-event-board-calendar',
-    templateUrl: './event-board-calendar.component.html',
-    styleUrls: ['./event-board-calendar.component.scss'],
-    standalone: true
+  selector: 'app-event-board-calendar',
+  templateUrl: './event-board-calendar.component.html',
+  styleUrls: ['./event-board-calendar.component.scss'],
+  imports: [
+    MatProgressBar,
+    AsyncPipe,
+    NgIf,
+    MatCard,
+    FullCalendarModule
+  ],
+  standalone: true
 })
 export class EventBoardCalendarComponent implements AfterViewInit {
 

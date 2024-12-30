@@ -1,6 +1,6 @@
 import {Component, input} from '@angular/core';
 import {EventInfo} from "@open-event-workspace/core";
-import {MatCard, MatCardHeader, MatCardImage} from "@angular/material/card";
+import {MatCard, MatCardHeader, MatCardImage, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {LocationMapComponent} from "../../location/location-map/location-map.component";
 
@@ -13,7 +13,9 @@ import {LocationMapComponent} from "../../location/location-map/location-map.com
     MatCardHeader,
     MatDivider,
     LocationMapComponent,
-    MatCardImage
+    MatCardImage,
+    MatCardTitle,
+    MatCardSubtitle,
   ],
   standalone: true
 })

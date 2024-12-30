@@ -2,7 +2,7 @@ import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {EventBoardService} from "../event-board.service";
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatInput} from "@angular/material/input";
@@ -32,7 +32,8 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
     MatButtonToggle,
     MatMenuTrigger,
     MatMenuItem,
-    MatMenu
+    MatMenu,
+    MatLabel
   ],
   standalone: true
 })

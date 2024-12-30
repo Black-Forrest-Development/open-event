@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NgOptimizedImage, NgSwitch} from "@angular/common";
+import {NgOptimizedImage, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
@@ -15,7 +15,9 @@ import {MatDivider} from "@angular/material/divider";
     MatIcon,
     MatDivider,
     MatCardContent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgSwitchCase,
+    NgSwitchDefault
   ],
   standalone: true
 })

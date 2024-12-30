@@ -5,12 +5,11 @@ import {canActivateAuthRole} from "../shared/auth/auth.guard";
 import {ForbiddenComponent} from "../shared/forbidden/forbidden.component";
 
 export const appRoutes: Route[] = [
-
   {path: '', pathMatch: 'full', redirectTo: 'event'},
   {
     path: 'event',
     loadChildren: () => import('../core/event/event.routes').then(m => m.routes),
-    canActivate: [canActivateAuthRole],
+    // canActivate: [canActivateAuthRole],
   },
   {
     path: 'category',

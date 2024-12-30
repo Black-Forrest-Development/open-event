@@ -7,6 +7,7 @@ import {EventBoardListEntryComponent} from "../event-board-list-entry/event-boar
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ScrollNearEndDirective} from "../../../shared/scroll-near-end.directive";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-event-board-list',
@@ -21,6 +22,7 @@ import {ScrollNearEndDirective} from "../../../shared/scroll-near-end.directive"
     TranslatePipe,
     MatMiniFabButton,
     ScrollNearEndDirective,
+    MatIcon,
   ],
   standalone: true
 })

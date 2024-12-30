@@ -27,7 +27,15 @@
           }
         ],
         "styles": [
-          "apps/open-event-app/src/styles.scss"
+          "node_modules/ngx-sharebuttons/themes/circles.scss",
+          "node_modules/ngx-sharebuttons/themes/modern.scss",
+          "apps/open-event-app/src/theme.scss",
+          "apps/open-event-app/src/styles.scss",
+          "node_modules/quill/dist/quill.core.css",
+          "node_modules/quill/dist/quill.bubble.css",
+          "node_modules/quill/dist/quill.snow.css",
+          "node_modules/@ngxpert/hot-toast/src/styles/styles.css",
+          "node_modules/leaflet/dist/leaflet.css"
         ],
         "scripts": []
       },
@@ -51,6 +59,7 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true,
+          "namedChunks": true,
           "fileReplacements": [
             {
               "replace": "apps/open-event-app/src/environments/environment.ts",

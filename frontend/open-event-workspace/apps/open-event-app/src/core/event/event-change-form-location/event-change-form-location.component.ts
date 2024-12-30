@@ -3,7 +3,7 @@ import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatOption, MatSelect, MatSelectChange} from "@angular/material/select";
 import {NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {Account, Address, AddressService, Page} from "@open-event-workspace/core";
 import {MatDivider} from "@angular/material/divider";
@@ -20,7 +20,8 @@ import {MatDivider} from "@angular/material/divider";
     MatInput,
     MatSelect,
     MatOption,
-    MatDivider
+    MatDivider,
+    MatLabel,
   ],
   standalone: true
 })

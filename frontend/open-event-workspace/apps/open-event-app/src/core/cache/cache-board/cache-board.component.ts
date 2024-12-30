@@ -8,6 +8,7 @@ import {MatCard} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {NgxEchartsDirective} from "ngx-echarts";
 import type {EChartsCoreOption} from "echarts/core";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-cache-board',
@@ -20,6 +21,7 @@ import type {EChartsCoreOption} from "echarts/core";
     MatProgressBar,
     MatCard,
     MatDivider,
+    MatIcon,
     NgxEchartsDirective
   ],
   standalone: true

@@ -1,15 +1,19 @@
 import {Component} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatChipListbox, MatChipOption, MatChipSelectionChange} from "@angular/material/chips";
 import {DateTime} from "luxon";
 import {EventBoardService} from "../event-board.service";
 import {ChipSelectEntry} from "../../../shared/chip-select-pane/chip-select-entry";
-import {CategoryService} from "@open-event-workspace/core";
-import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
-import {MatFormField} from "@angular/material/form-field";
-import {MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from "@angular/material/datepicker";
+import {MatError, MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {
+  MatDatepickerModule,
+  MatDatepickerToggle,
+  MatDateRangeInput,
+  MatDateRangePicker
+} from "@angular/material/datepicker";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatOption, MatSelect} from "@angular/material/select";
@@ -39,7 +43,11 @@ import {MatButton} from "@angular/material/button";
     MatOption,
     NgForOf,
     MatButton,
-    NgClass
+    NgClass,
+    MatLabel,
+    MatError,
+    MatCardTitle,
+    MatFormFieldModule, MatDatepickerModule, FormsModule
   ],
   standalone: true
 })
@@ -50,7 +58,7 @@ export class EventBoardFilterComponent {
   categoryForm = new FormControl([])
   allCategories: ChipSelectEntry[] = []
 
-  constructor(public service: EventBoardService, private categoryService: CategoryService) {
+  constructor(public service: EventBoardService) {
   }
 
   onDateRangePickerClosed() {

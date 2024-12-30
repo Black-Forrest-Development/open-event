@@ -1,28 +1,48 @@
-import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {appRoutes} from './app.routes';
-import {HttpClient, provideHttpClient, withInterceptors} from "@angular/common/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {includeBearerTokenInterceptor} from "keycloak-angular";
 import {provideKeycloakAngular} from "./keycloak.config";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {FullscreenOverlayContainer, OverlayContainer} from "@angular/cdk/overlay";
+import {provideShareButtonsOptions} from "ngx-sharebuttons";
+import {shareIcons} from "ngx-sharebuttons/icons";
+import {MatPaginatorIntl} from "@angular/material/paginator";
+import {MatPaginatorI18nService} from "../shared/mat-paginator-i18n.service";
+import {registerLocaleData} from "@angular/common";
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
+import {provideTranslateConfig} from "./translate.config";
+import {provideToastConfig} from "./hot-toast.config";
+import {provideQuill} from "./quill.config";
+import {provideEchartsConfig} from "./echarts.config";
 
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
-  new TranslateHttpLoader(http, './i18n/', '.json');
 
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+    {provide: LOCALE_ID, useValue: 'de-DE'},
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    provideNativeDateAdapter(),
+    provideToastConfig(),
+    provideQuill(),
+    provideEchartsConfig(),
+    {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
     provideKeycloakAngular(),
     provideZoneChangeDetection({eventCoalescing: true}),
-    provideRouter(appRoutes),
     provideHttpClient(withInterceptors([includeBearerTokenInterceptor])),
-    importProvidersFrom([TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    })])
+    provideTranslateConfig(),
+    provideShareButtonsOptions(shareIcons()),
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorI18nService,
+    },
+    provideRouter(appRoutes),
   ],
 };

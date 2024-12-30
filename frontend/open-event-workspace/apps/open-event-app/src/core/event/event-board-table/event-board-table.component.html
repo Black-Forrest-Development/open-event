@@ -1,5 +1,6 @@
-<mat-progress-bar *ngIf="service.reloading | async" mode="indeterminate"></mat-progress-bar>
-
+@if (service.reloading | async) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 
 <div class="flex flex-col gap-2">
   <mat-card>
@@ -47,12 +48,14 @@
           </div>
         </th>
         <td *matCellDef="let info" mat-cell>
-          <div *ngIf="info.hasLocation" class="flex flex-row gap-2 items-center flex-auto">
-            <div class="flex flex-col gap-1">
-              <div>{{ info.street }} {{ info.streetNumber }}</div>
-              <div style="color: #707070">{{ info.zip }} {{ info.city }}</div>
+          @if (info.hasLocation) {
+            <div class="flex flex-row gap-2 items-center flex-auto">
+              <div class="flex flex-col gap-1">
+                <div>{{ info.street }} {{ info.streetNumber }}</div>
+                <div style="color: #707070">{{ info.zip }} {{ info.city }}</div>
+              </div>
             </div>
-          </div>
+          }
         </td>
       </ng-container>
 
@@ -118,14 +121,16 @@
         </th>
         <td *matCellDef="let info" mat-cell>
           <div class="flex flex-row flex-wrap">
-            <button *ngIf="!info.published" class="action-fab" mat-mini-fab>
-              <mat-icon>unpublished</mat-icon>
-            </button>
+            @if (!info.published) {
+              <button class="action-fab" mat-mini-fab>
+                <mat-icon>unpublished</mat-icon>
+              </button>
+            }
           </div>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header" ></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
       <tr *matRowDef="let row; columns: displayedColumns;" class="row" mat-row routerLink="./details/{{row.id}}">
       </tr>
     </table>

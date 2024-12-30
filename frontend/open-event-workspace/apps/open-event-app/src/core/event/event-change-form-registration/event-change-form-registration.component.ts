@@ -6,7 +6,7 @@ import {Category, CategoryService, Page} from "@open-event-workspace/core";
 import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatProgressBar} from "@angular/material/progress-bar";
@@ -29,7 +29,9 @@ import {ChipSelectPaneComponent} from "../../../shared/chip-select-pane/chip-sel
     ChipSelectPaneComponent,
     MatChipInput,
     MatChipGrid,
-    MatChipRow
+    MatChipRow,
+    MatHint,
+    MatLabel
   ],
   standalone: true
 })

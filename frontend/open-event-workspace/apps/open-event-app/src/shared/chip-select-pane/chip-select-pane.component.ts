@@ -8,7 +8,7 @@ import {
 import {ChipSelectEntry} from "./chip-select-entry";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatChipGrid, MatChipInput, MatChipRow} from "@angular/material/chips";
 import {MatIcon} from "@angular/material/icon";
 
@@ -25,7 +25,8 @@ import {MatIcon} from "@angular/material/icon";
     MatAutocompleteTrigger,
     MatChipInput,
     MatAutocomplete,
-    MatOption
+    MatOption,
+    MatLabel
   ],
   standalone: true
 })

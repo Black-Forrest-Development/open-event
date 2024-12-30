@@ -30,7 +30,8 @@ export class AppService {
   }
 
   validate() {
-    this.accountService.validate(this.lang()).subscribe(d => this.handleValidationResult(d))
+    let l = this.lang() ?? this.translate.currentLang
+    this.accountService.validate(l).subscribe(d => this.handleValidationResult(d))
   }
 
   private handleValidationResult(d: AccountValidationResult) {

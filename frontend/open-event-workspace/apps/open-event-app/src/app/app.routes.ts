@@ -2,6 +2,7 @@ import {Route} from '@angular/router';
 import {PageNotFoundComponent} from "../shared/page-not-found/page-not-found.component";
 import {AuthService} from "../shared/auth/auth.service";
 import {canActivateAuthRole} from "../shared/auth/auth.guard";
+import {ForbiddenComponent} from "../shared/forbidden/forbidden.component";
 
 export const appRoutes: Route[] = [
 
@@ -58,7 +59,6 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('../core/share/share.routes').then(m => m.routes),
     data: {public: true}
   },
-  {
-    path: '**', component: PageNotFoundComponent
-  }
+  {path: 'forbidden', component: ForbiddenComponent},
+  {path: '**', component: PageNotFoundComponent}
 ]

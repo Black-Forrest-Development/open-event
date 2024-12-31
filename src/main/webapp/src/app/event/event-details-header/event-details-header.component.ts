@@ -3,7 +3,7 @@ import {Event, EventInfo} from "../model/event-api";
 import {Location} from "@angular/common";
 import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {Router} from "@angular/router";
-import {EventService} from "../model/event.service";
+import {EventService} from "@open-event-workspace/core";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../auth/auth.service";

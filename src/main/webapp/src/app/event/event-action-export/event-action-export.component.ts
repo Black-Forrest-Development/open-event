@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Event} from "../model/event-api";
+import {Event} from "@open-event-workspace/core";
 import {AuthService} from "../../auth/auth.service";
 import {ExportService} from "../../backoffice/model/export.service";
 import {HttpResponse} from "@angular/common/http";

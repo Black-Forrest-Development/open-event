@@ -70,7 +70,19 @@ import {ScrollNearEndDirective} from "../shared/scroll-near-end.directive";
     EventChangeFormEventComponent,
     EventChangeFormLocationComponent,
     EventChangeFormRegistrationComponent,
-    EventActionExportComponent
+    EventActionExportComponent,
+    EventDetailsHeaderComponent,
+    EventDetailsInfoComponent,
+    EventDetailsLocationComponent,
+    EventChangeComponent,
+    EventChangeHelpComponent,
+    EventBoardFilterComponent,
+    EventBoardListEntryComponent,
+    EventBoardListComponent,
+    EventBoardCalendarComponent,
+    EventBoardTableComponent,
+    EventBoardMapComponent,
+    EventBoardHeaderComponent
   ],
   imports: [
     CommonModule,

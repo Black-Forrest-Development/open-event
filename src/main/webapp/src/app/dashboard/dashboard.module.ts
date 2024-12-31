@@ -24,7 +24,9 @@ import {ActivityModule} from "../activity/activity.module";
     DashboardToolbarComponent,
   ],
   exports: [
-    DashboardComponent
+    DashboardComponent,
+    MainMenuComponent,
+    DashboardToolbarComponent
   ],
     imports: [
         CommonModule,

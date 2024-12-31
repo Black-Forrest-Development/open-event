@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Event} from "../model/event-api";
+import {Event} from "@open-event-workspace/core";
 
 @Component({
     selector: 'app-event-delete-dialog',

@@ -1,6 +1,8 @@
 import {Routes} from "@angular/router";
-import {ShareInfoComponent} from "./share-info/share-info.component";
 
 export const routes: Routes = [
-  {path: 'info/:id', component: ShareInfoComponent},
+  {
+    path: 'info/:id',
+    loadComponent: () => import('./share-info/share-info.component').then(m => m.ShareInfoComponent),
+  },
 ];

@@ -19,7 +19,7 @@ COPY . .
 #RUN sed -i "s|http://localhost:8080/api|${BACKEND_URL}|g" apps/open-event-app/src/app/service.config.ts
 
 # Build the Angular app
-RUN npx nx build open-event-app --configuration=production
+RUN npx nx build open-event-app --configuration=development
 
 # Stage 2: Serve the Angular app with a lightweight web server
 FROM nginx:1.23-alpine

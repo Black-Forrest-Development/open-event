@@ -1,8 +1,12 @@
 import {Routes} from "@angular/router";
-import {MailBoardComponent} from "./mail-board/mail-board.component";
-import {MailHistoryComponent} from "./mail-history/mail-history.component";
 
 export const routes: Routes = [
-  {path: '', component: MailBoardComponent},
-  {path: 'history/:id', component: MailHistoryComponent},
+  {
+    path: '',
+    loadComponent: () => import('./mail-board/mail-board.component').then(m => m.MailBoardComponent),
+  },
+  {
+    path: 'history/:id',
+    loadComponent: () => import('./mail-history/mail-history.component').then(m => m.MailHistoryComponent),
+  },
 ];

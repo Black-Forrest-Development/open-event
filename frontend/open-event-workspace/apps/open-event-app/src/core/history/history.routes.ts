@@ -1,6 +1,8 @@
 import {Routes} from "@angular/router";
-import {HistoryBoardComponent} from "./history-board/history-board.component";
 
 export const routes: Routes = [
-  {path: '', component: HistoryBoardComponent},
+  {
+    path: '',
+    loadComponent: () => import('./history-board/history-board.component').then(m => m.HistoryBoardComponent),
+  },
 ];

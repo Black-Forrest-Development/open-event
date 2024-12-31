@@ -1,14 +1,28 @@
 import {Routes} from "@angular/router";
-import {EventBoardComponent} from "./event-board/event-board.component";
-import {EventChangeComponent} from "./event-change/event-change.component";
-import {EventDetailsComponent} from "./event-details/event-details.component";
-import {EventAdminComponent} from "./event-admin/event-admin.component";
 
 export const routes: Routes = [
-  {path: '', component: EventBoardComponent},
-  {path: 'create', component: EventChangeComponent},
-  {path: 'details/:id', component: EventDetailsComponent},
-  {path: 'edit/:id', component: EventChangeComponent},
-  {path: 'copy/:id', component: EventChangeComponent},
-  {path: 'admin/:id', component: EventAdminComponent},
+  {
+    path: '',
+    loadComponent: () => import('./event-board/event-board.component').then(m => m.EventBoardComponent),
+  },
+  {
+    path: 'create',
+    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+  },
+  {
+    path: 'details/:id',
+    loadComponent: () => import('./event-details/event-details.component').then(m => m.EventDetailsComponent),
+  },
+  {
+    path: 'edit/:id',
+    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+  },
+  {
+    path: 'copy/:id',
+    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+  },
+  {
+    path: 'admin/:id',
+    loadComponent: () => import('./event-admin/event-admin.component').then(m => m.EventAdminComponent),
+  },
 ];

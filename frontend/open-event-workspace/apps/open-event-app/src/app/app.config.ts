@@ -19,6 +19,7 @@ import {provideTranslateConfig} from "./translate.config";
 import {provideToastConfig} from "./hot-toast.config";
 import {provideQuill} from "./quill.config";
 import {provideEchartsConfig} from "./echarts.config";
+import {provideServiceConfig} from "./service.config";
 
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideToastConfig(),
     provideQuill(),
     provideEchartsConfig(),
+    provideServiceConfig(),
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
     provideKeycloakAngular(),
     provideZoneChangeDetection({eventCoalescing: true}),

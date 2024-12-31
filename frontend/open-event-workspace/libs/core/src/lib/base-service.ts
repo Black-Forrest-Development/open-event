@@ -1,11 +1,14 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {retry} from "rxjs/operators";
 import {Page} from "./page";
+import {inject, InjectionToken} from "@angular/core";
 
+// Define an InjectionToken for the API URL
+export const BASE_API_URL = new InjectionToken<string>('BASE_API_URL')
 
 export abstract class BaseService {
-  api = 'api/';
+  api =  inject(BASE_API_URL) ?? 'api/'
   protected retryCount: number = 3;
 
 

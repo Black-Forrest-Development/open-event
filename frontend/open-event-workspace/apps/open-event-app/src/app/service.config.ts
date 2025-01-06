@@ -1,5 +1,5 @@
 import {Provider} from "@angular/core";
-import {BASE_API_URL} from "../../../../libs/core/src/lib/base-service";
+import {BASE_API_URL} from "../../../../libs/shared/src/lib/base-service";
 
 
 export const BASE_URL_PROVIDER: Provider = {

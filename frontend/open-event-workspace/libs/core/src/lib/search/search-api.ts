@@ -1,4 +1,4 @@
-import {Page} from "../page";
+import {Page} from "../../../../shared/src/lib/page";
 import {AccountInfo} from "../account/account-api";
 import {Category} from "../category/category-api";
 

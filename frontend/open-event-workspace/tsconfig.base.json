@@ -15,8 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@open-event-workspace/app": ["libs/gateway/app/src/index.ts"],
       "@open-event-workspace/core": ["libs/core/src/index.ts"],
-      "@open-event-workspace/events": ["libs/events/src/index.ts"]
+      "@open-event-workspace/events": ["libs/events/src/index.ts"],
+      "@open-event-workspace/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

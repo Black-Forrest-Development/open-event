@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {BaseService} from "../base-service";
+import {BaseService} from "@open-event-workspace/shared";
 
 @Injectable({
   providedIn: 'root'

@@ -2,10 +2,11 @@ import {Injectable, Signal} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {map, Subject} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
-import {Account, AccountInfo, AccountService, AccountValidationResult, Profile} from "@open-event-workspace/core";
+import {Account, AccountInfo, AccountValidationResult, Profile} from "@open-event-workspace/core";
 import {AuthService} from "./auth/auth.service";
 import {toSignal} from "@angular/core/rxjs-interop";
-import {ConfirmLogoutDialogComponent} from "./confirm-logout-dialog/confirm-logout-dialog.component";
+import {AccountService} from "@open-event-workspace/app";
+import {ConfirmDialogComponent} from "@open-event-workspace/shared";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class AppService {
     private accountService: AccountService,
     private translate: TranslateService,
     public authService: AuthService,
-
     private dialog: MatDialog
   ) {
     this.lang = toSignal(this.translate.onLangChange.asObservable().pipe(map(value => value.lang)), {initialValue: translate.currentLang})
@@ -45,9 +45,12 @@ export class AppService {
   }
 
   logout() {
-    const dialogRef = this.dialog.open(ConfirmLogoutDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
-      data: ''
+      data: {
+        title: "user.logout.confirm.Title",
+        text: "user.logout.confirm.Text"
+      }
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) this.authService.logout()

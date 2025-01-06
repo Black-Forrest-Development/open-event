@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../base-service";
+import {BaseService, Page, PatchRequest} from "@open-event-workspace/shared";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Page} from "../page";
 import {Event, EventChangeRequest, EventInfo, EventStats} from "./event-api";
 import {DateTime} from 'luxon';
-import {PatchRequest} from "../patch-request";
 import {LocationChangeRequest} from "../location/location-api";
 import {RegistrationChangeRequest} from "../registration/registration-api";
 
@@ -103,7 +101,7 @@ export class EventService extends BaseService {
     let mDate = DateTime.fromISO(date)
     let time = timeStr.split(":");
     if (time.length == 2 && mDate.isValid) {
-      mDate = mDate.set({ hour: parseInt(time[0]), minute: parseInt(time[1]) });
+      mDate = mDate.set({hour: parseInt(time[0]), minute: parseInt(time[1])});
       return mDate
     }
     return undefined;

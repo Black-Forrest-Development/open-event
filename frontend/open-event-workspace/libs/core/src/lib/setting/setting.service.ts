@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Setting, SettingChangeRequest, TextResponse} from "./settings-api";
-import {BaseService} from "../base-service";
-import {Page} from "../page";
+import {BaseService, Page} from "@open-event-workspace/shared";
 
 
 @Injectable({

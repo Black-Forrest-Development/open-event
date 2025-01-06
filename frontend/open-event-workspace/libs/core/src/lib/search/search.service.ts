@@ -9,7 +9,7 @@ import {
   EventSearchRequest,
   EventSearchResponse
 } from "./search-api";
-import {BaseService} from "../base-service";
+import {BaseService} from "@open-event-workspace/shared";
 
 @Injectable({
   providedIn: 'root'

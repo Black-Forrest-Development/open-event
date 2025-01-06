@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Share, ShareChangeRequest, SharedParticipateResponse, ShareInfo} from "./share-api";
-import {BaseService} from "../base-service";
+import {BaseService, PatchRequest} from "@open-event-workspace/shared";
 import {ParticipantAddRequest} from "../registration/registration-api";
-import {PatchRequest} from "../patch-request";
 
 
 @Injectable({

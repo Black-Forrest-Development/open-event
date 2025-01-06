@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../base-service";
+import {BaseService, Page} from "@open-event-workspace/shared";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Page} from "../page";
 import {Activity, ActivityInfo} from "./activity-api";
 
 @Injectable({

@@ -48,7 +48,3 @@ export * from './lib/setting/setting.service';
 
 export * from './lib/share/share-api';
 export * from './lib/share/share.service';
-
-export * from './lib/page'
-export * from './lib/pageable'
-export * from './lib/patch-request'

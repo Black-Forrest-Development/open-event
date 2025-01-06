@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Account, AccountChangeRequest, AccountInfo, AccountSetupRequest, AccountValidationResult} from "./account-api";
-import {BaseService} from "../base-service";
-import {Page} from "../page";
+import {BaseService, Page} from "@open-event-workspace/shared";
 import {Profile} from "../profile/profile-api";
 import {Preferences} from "../preferences/preferences-api";
 

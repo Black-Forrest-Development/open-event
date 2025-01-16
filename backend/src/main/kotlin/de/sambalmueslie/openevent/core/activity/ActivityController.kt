@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.activity
 import de.sambalmueslie.openevent.api.ActivityAPI
 import de.sambalmueslie.openevent.api.ActivityAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.ActivityAPI.Companion.PERMISSION_USER
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.activity.api.Activity
 import de.sambalmueslie.openevent.core.activity.api.ActivityInfo
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/activity")
 @Tag(name = "Activity API")
+@CoreAPI
 class ActivityController(
     private val service: ActivityCrudService,
     private val accountService: AccountCrudService,
@@ -69,7 +71,8 @@ class ActivityController(
     override fun markRead(auth: Authentication, id: Long): Activity? {
         return auth.checkPermission(PERMISSION_USER, PERMISSION_ADMIN) {
             val account = accountService.get(auth) ?: return@checkPermission null
-            service.markRead(account, id)
+            service.markReadSingle(account, id)
+            service.getForAccount(account, id)
         }
     }
 
@@ -78,6 +81,7 @@ class ActivityController(
         return auth.checkPermission(PERMISSION_USER, PERMISSION_ADMIN) {
             val account = accountService.get(auth) ?: return@checkPermission emptyList()
             service.markReadAll(account)
+            service.getUnreadInfosForAccount(account)
         }
     }
 

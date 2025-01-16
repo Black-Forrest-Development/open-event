@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.ShareAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.ShareAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.ShareAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.getRealmRoles
@@ -24,6 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/share")
 @Tag(name = "Share API")
+@CoreAPI
 class ShareController(
     private val service: ShareCrudService,
     private val accountService: AccountCrudService,

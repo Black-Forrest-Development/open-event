@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.search
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.SearchAPI
 import de.sambalmueslie.openevent.api.SearchAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.search.api.*
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/search")
 @Tag(name = "Search API")
+@CoreAPI
 class SearchController(
     private val service: SearchService,
     private val accountService: AccountCrudService

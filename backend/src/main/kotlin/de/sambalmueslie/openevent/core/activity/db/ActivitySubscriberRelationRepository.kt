@@ -19,6 +19,7 @@ interface ActivitySubscriberRelationRepository :
         accountId: Long,
         pageable: Pageable
     ): Page<ActivitySubscriberRelation>
+    fun countByAccountIdAndReadFalse(accountId: Long): Long
 
     fun findByActivityIdAndAccountId(activityId: Long, accountId: Long): ActivitySubscriberRelation?
     fun updateByActivityIdAndAccountId(activityId: Long, accountId: Long, read: Boolean)

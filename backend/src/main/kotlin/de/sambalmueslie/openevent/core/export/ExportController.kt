@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.export
 
 import de.sambalmueslie.openevent.api.ExportAPI
 import de.sambalmueslie.openevent.api.ExportAPI.Companion.PERMISSION_EXPORT
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import io.micronaut.http.HttpStatus
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/export")
 @Tag(name = "Export API")
+@CoreAPI
 class ExportController(
     private val service: ExportService,
     private val accountService: AccountCrudService,

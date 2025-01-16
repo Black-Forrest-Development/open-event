@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_MANAGE
 import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.RegistrationAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.participant.api.Participant
@@ -26,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/registration")
 @Tag(name = "Registration API")
+@CoreAPI
 class RegistrationController(
     private val service: RegistrationCrudService,
     private val accountService: AccountCrudService,

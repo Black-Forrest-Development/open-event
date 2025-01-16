@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.category
 import de.sambalmueslie.openevent.api.CategoryAPI
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CategoryAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.category.api.CategoryChangeRequest
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/category")
 @Tag(name = "Category API")
+@CoreAPI
 class CategoryController(
     private val service: CategoryCrudService,
     private val accountService: AccountCrudService,

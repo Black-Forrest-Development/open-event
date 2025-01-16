@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.api.PreferencesAPI
 import de.sambalmueslie.openevent.api.PreferencesAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.api.Preferences
 import de.sambalmueslie.openevent.core.account.api.PreferencesChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/preferences")
 @Tag(name = "Preferences API")
+@CoreAPI
 class PreferencesController(
     private val service: PreferencesCrudService,
     private val accountService: AccountCrudService,

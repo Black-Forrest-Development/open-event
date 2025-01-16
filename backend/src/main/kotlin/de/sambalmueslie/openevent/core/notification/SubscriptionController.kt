@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.SubscriptionAPI
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.SubscriptionAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.notification.api.SubscriptionStatus
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/subscription")
 @Tag(name = "Subscription API")
+@CoreAPI
 class SubscriptionController(
     private val schemeService: NotificationSchemeCrudService,
     private val accountService: AccountCrudService,

@@ -1,31 +1,19 @@
 import {Component, ViewChild} from '@angular/core';
-import {interval, Subscription} from "rxjs";
-import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
-import {Router, RouterLink} from "@angular/router";
-import {MatButton, MatIconAnchor, MatIconButton} from "@angular/material/button";
-import {MatIcon} from "@angular/material/icon";
-import {MatDivider} from "@angular/material/divider";
-import {TranslatePipe} from "@ngx-translate/core";
-import {DatePipe} from "@angular/common";
-import {MatBadge} from "@angular/material/badge";
+import {Subscription} from "rxjs";
+import {MatMenuTrigger} from "@angular/material/menu";
+import {Router} from "@angular/router";
 import {Activity, ActivityInfo, ActivityService} from "@open-event-workspace/core";
+import {ActivityIndicatorComponent} from "../activity-indicator/activity-indicator.component";
+import {ActivityMenuComponent} from "../activity-menu/activity-menu.component";
+
 
 @Component({
   selector: 'app-activity-button',
   templateUrl: './activity-button.component.html',
   styleUrl: './activity-button.component.scss',
   imports: [
-    MatIconAnchor,
-    RouterLink,
-    MatIcon,
-    MatMenuTrigger,
-    MatMenu,
-    MatDivider,
-    TranslatePipe,
-    MatButton,
-    DatePipe,
-    MatBadge,
-    MatIconButton
+    ActivityIndicatorComponent,
+    ActivityMenuComponent
   ],
   standalone: true
 })
@@ -42,8 +30,8 @@ export class ActivityButtonComponent {
   }
 
   ngOnInit() {
-    this.reload()
-    this.subscription = interval(10000).subscribe(value => this.reload())
+    // this.reload()
+    // this.subscription = interval(10000).subscribe(value => this.reload())
   }
 
   ngOnDestroy() {

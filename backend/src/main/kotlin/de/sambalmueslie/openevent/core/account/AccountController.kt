@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_MODERATOR
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AccountAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.api.*
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/account")
 @Tag(name = "Account API")
+@CoreAPI
 class AccountController(
     private val service: AccountCrudService,
     audit: AuditService,

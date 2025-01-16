@@ -55,12 +55,20 @@ class ActivitySubscriberRelationService(
         return relation
     }
 
+    fun markReadSingle(account: Account, id: Long) {
+        repository.updateByActivityIdAndAccountId(id, account.id, true)
+    }
+
     fun markReadAll(account: Account) {
         repository.updateByAccountId(account.id, true)
     }
 
     fun getUnreadInfosForAccount(accountId: Long): List<ActivitySubscriberRelation> {
         return repository.findByAccountIdAndReadFalseOrderByTimestamp(accountId, Pageable.from(0, 20)).content
+    }
+
+    fun countUnreadInfosForAccount(accountId: Long): Long {
+        return repository.countByAccountIdAndReadFalse(accountId)
     }
 
     fun getByActivityIds(activityIds: Set<Long>): List<ActivitySubscriberRelation> {

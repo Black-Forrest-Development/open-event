@@ -1,6 +1,6 @@
 import {Component, EventEmitter} from '@angular/core';
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MailJob, MailService, Page} from '@open-event-workspace/core';
+import {MailJob, MailService} from '@open-event-workspace/core';
 import {Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";
 import {MatToolbar} from "@angular/material/toolbar";
@@ -13,6 +13,7 @@ import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatChip} from "@angular/material/chips";
 import {RouterLink} from "@angular/router";
+import {Page} from "@open-event-workspace/shared";
 
 @Component({
   selector: 'app-mail-board',

@@ -39,15 +39,19 @@ class ActivityCrudService(
         return storage.getRecentInfosForAccount(account, pageable)
     }
 
-    fun markRead(account: Account, id: Long): Activity? {
-        return storage.markRead(account, id)
-    }
-
     fun getUnreadInfosForAccount(account: Account): List<ActivityInfo> {
         return storage.getUnreadInfosForAccount(account)
     }
 
-    fun markReadAll(account: Account): List<ActivityInfo> {
-        return storage.markReadAll(account)
+    fun countUnreadForAccount(account: Account): Long {
+        return storage.countUnreadForAccount(account)
+    }
+
+    fun markReadSingle(account: Account, id: Long) {
+        storage.markReadSingle(account, id)
+    }
+
+    fun markReadAll(account: Account) {
+        storage.markReadAll(account)
     }
 }

@@ -1,7 +1,8 @@
 import {Component, EventEmitter} from '@angular/core';
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {FormControl, FormGroup} from '@angular/forms';
-import {AccountDisplayNamePipe, HistoryEventInfo, HistoryService, Page} from "@open-event-workspace/core";
+import {AccountDisplayNamePipe, HistoryEventInfo, HistoryService} from "@open-event-workspace/core";
+import {Page} from "@open-event-workspace/shared";
 import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatMiniFabButton} from "@angular/material/button";

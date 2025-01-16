@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.participant
 import de.sambalmueslie.openevent.api.ParticipantAPI
 import de.sambalmueslie.openevent.api.ParticipantAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.ParticipantAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.participant.api.Participant
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/participant")
 @Tag(name = "Participant API")
+@CoreAPI
 class ParticipantController(
     private val service: ParticipantCrudService,
     private val accountService: AccountCrudService,

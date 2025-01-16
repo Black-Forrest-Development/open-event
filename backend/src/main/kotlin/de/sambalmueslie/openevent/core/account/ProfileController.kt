@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.api.ProfileAPI
 import de.sambalmueslie.openevent.api.ProfileAPI.Companion.PERMISSION_ADMIN
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.api.Profile
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/profile")
 @Tag(name = "Profile API")
+@CoreAPI
 class ProfileController(
     private val service: ProfileCrudService,
     private val accountService: AccountCrudService,

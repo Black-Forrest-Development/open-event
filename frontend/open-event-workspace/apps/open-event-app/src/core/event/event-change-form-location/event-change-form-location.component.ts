@@ -5,7 +5,8 @@ import {NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {Account, Address, AddressService, Page} from "@open-event-workspace/core";
+import {Account, Address, AddressService} from "@open-event-workspace/core";
+import {Page} from "@open-event-workspace/shared";
 import {MatDivider} from "@angular/material/divider";
 
 @Component({

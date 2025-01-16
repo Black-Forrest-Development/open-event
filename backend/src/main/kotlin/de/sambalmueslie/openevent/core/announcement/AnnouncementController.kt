@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.announcement
 import de.sambalmueslie.openevent.api.AnnouncementAPI
 import de.sambalmueslie.openevent.api.AnnouncementAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.AnnouncementAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.announcement.api.Announcement
 import de.sambalmueslie.openevent.core.announcement.api.AnnouncementChangeRequest
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/announcement")
 @Tag(name = "Announcement API")
+@CoreAPI
 class AnnouncementController(
     private val service: AnnouncementCrudService,
     private val accountService: AccountCrudService,

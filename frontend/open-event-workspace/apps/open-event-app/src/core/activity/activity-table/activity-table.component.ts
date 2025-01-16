@@ -1,13 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  MatCell,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderRow,
-  MatRow,
-  MatTableDataSource,
-  MatTableModule
-} from "@angular/material/table";
+import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatCard} from "@angular/material/card";
@@ -17,7 +9,8 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
-import {ActivityInfo, ActivityService, Page} from "@open-event-workspace/core";
+import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
+import {Page} from "@open-event-workspace/shared";
 import {ActivityReadComponent} from "../activity-read/activity-read.component";
 
 @Component({

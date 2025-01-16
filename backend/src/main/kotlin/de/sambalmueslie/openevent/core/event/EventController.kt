@@ -8,6 +8,7 @@ import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_MODERATOR
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.EventAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.checkPermission
@@ -27,6 +28,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/event")
 @Tag(name = "Event API")
+@CoreAPI
 class EventController(
     private val service: EventCrudService,
     private val accountService: AccountCrudService,

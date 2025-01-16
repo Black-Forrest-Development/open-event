@@ -70,7 +70,8 @@ class ActivityStorageService(
 
     override fun getRecentInfosForAccount(account: Account, pageable: Pageable): Page<ActivityInfo> {
         val activities = converter.convert(repository.findRecentForAccount(account.id, pageable))
-        val subscriptions = subscriberRelationService.getByActivityIds(activities.map { it.id }.toSet()).associateBy { it.activityId }
+        val subscriptions =
+            subscriberRelationService.getByActivityIds(activities.map { it.id }.toSet()).associateBy { it.activityId }
         return activities.map { ActivityInfo(it, subscriptions[it.id]?.read ?: true) }
     }
 
@@ -80,10 +81,14 @@ class ActivityStorageService(
         return get(id)
     }
 
-    override fun markReadAll(account: Account): List<ActivityInfo> {
+    override fun markReadSingle(account: Account, id: Long) {
+        subscriberRelationService.markReadSingle(account, id)
+        unreadInfosCache.invalidate(account.id)
+    }
+
+    override fun markReadAll(account: Account) {
         subscriberRelationService.markReadAll(account)
         unreadInfosCache.invalidate(account.id)
-        return getUnreadInfosForAccount(account)
     }
 
     override fun getUnreadInfosForAccount(account: Account): List<ActivityInfo> {
@@ -104,6 +109,10 @@ class ActivityStorageService(
         val recentSubscriptions = page.associateBy { it.activityId }
         val activities = converter.convert(repository.findByIdIn(recentSubscriptions.keys))
         return activities.map { ActivityInfo(it, recentSubscriptions[it.id]?.read ?: true) }
+    }
+
+    override fun countUnreadForAccount(account: Account): Long {
+        return subscriberRelationService.countUnreadInfosForAccount(account.id)
     }
 
 

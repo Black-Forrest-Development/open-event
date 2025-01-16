@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_ADMIN
 import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.NotificationAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.notification.api.*
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/notification")
 @Tag(name = "Notification API")
+@CoreAPI
 class NotificationController(
     private val schemeService: NotificationSchemeCrudService,
     private val templateService: NotificationTemplateCrudService,

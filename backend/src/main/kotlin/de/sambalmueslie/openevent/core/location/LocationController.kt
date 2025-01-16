@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.core.location
 import de.sambalmueslie.openevent.api.LocationAPI
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.LocationAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.location.api.Location
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/location")
 @Tag(name = "Location API")
+@CoreAPI
 class LocationController(
     private val service: LocationCrudService,
     private val accountService: AccountCrudService,

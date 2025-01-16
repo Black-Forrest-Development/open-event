@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class AccountController(
     private val service: AccountCrudService,
     audit: AuditService,
-    private val accountCrudService: AccountCrudService,
 ) {
     companion object {
         private const val PERMISSION_READ = "account.read"

@@ -27,6 +27,8 @@
           }
         ],
         "styles": [
+          "node_modules/leaflet/dist/leaflet.css",
+          "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
           "node_modules/ngx-sharebuttons/themes/circles.scss",
           "node_modules/ngx-sharebuttons/themes/modern.scss",
           "apps/open-event-app/src/theme.scss",
@@ -34,9 +36,7 @@
           "node_modules/quill/dist/quill.core.css",
           "node_modules/quill/dist/quill.bubble.css",
           "node_modules/quill/dist/quill.snow.css",
-          "node_modules/@ngxpert/hot-toast/src/styles/styles.css",
-          "node_modules/leaflet/dist/leaflet.css"
-        ],
+          "node_modules/@ngxpert/hot-toast/src/styles/styles.css"],
         "scripts": []
       },
       "configurations": {

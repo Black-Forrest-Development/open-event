@@ -3,7 +3,8 @@ import {BehaviorSubject} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {FormControl, FormGroup} from "@angular/forms";
 import {DateTime} from "luxon";
-import {EventSearchEntry, EventSearchRequest, EventSearchResponse, SearchService} from "@open-event-workspace/core";
+import {EventSearchEntry, EventSearchRequest, EventSearchResponse} from "@open-event-workspace/core";
+import {EventService} from "@open-event-workspace/app";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class EventBoardService {
   })
 
 
-  constructor(private searchService: SearchService) {
+  constructor(private service: EventService) {
     this.updateRange(null, null)
   }
 
@@ -140,7 +141,7 @@ export class EventBoardService {
   private reload(page: number, size: number) {
     if (this.reloading.value) return console.log("Ignore reload " + page + ":" + size + " cause reloading ongoing")
     this.reloading.next(true)
-    this.searchService.searchEvents(this.request, page, size).subscribe(
+    this.service.search(this.request, page, size).subscribe(
       {
         next: value => this.handleData(value),
         error: e => this.handleError(e)

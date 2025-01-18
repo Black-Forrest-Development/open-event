@@ -160,3 +160,37 @@ $open-event-theme: mat.m2-define-light-theme((
   background-color: map.get($open-event-warn, default) !important;
   color: map.get($open-event-warn, default-contrast) !important;
 }
+
+
+.marker-cluster-small {
+  //background-color: rgba(181, 226, 140, 0.6);
+  background-color: map.get($open-event-primary, lighter) !important;
+  color: map.get($open-event-primary, default-contrast) !important;
+}
+.marker-cluster-small div {
+  //background-color: rgba(110, 204, 57, 0.6);
+  background-color: map.get($open-event-primary, default) !important;
+  color: map.get($open-event-primary, default-contrast) !important;
+}
+
+.marker-cluster-medium {
+  //background-color: rgba(241, 211, 87, 0.6);
+  background-color: map.get($open-event-accent, lighter) !important;
+  color: map.get($open-event-accent, default-contrast) !important;
+}
+.marker-cluster-medium div {
+  //background-color: rgba(240, 194, 12, 0.6);
+  background-color: map.get($open-event-accent, default) !important;
+  color: map.get($open-event-accent, default-contrast) !important;
+}
+
+.marker-cluster-large {
+  //background-color: rgba(253, 156, 115, 0.6);
+  background-color: map.get($open-event-warn, lighter) !important;
+  color: map.get($open-event-warn, default-contrast) !important;
+}
+.marker-cluster-large div {
+  //background-color: rgba(241, 128, 23, 0.6);
+  background-color: map.get($open-event-warn, default) !important;
+  color: map.get($open-event-warn, default-contrast) !important;
+}

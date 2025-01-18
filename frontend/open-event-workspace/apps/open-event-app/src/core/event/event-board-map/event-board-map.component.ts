@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, Injector} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit} from '@angular/core';
 import * as L from 'leaflet';
-import {icon, layerGroup, Map, Marker} from 'leaflet';
+import {icon, layerGroup, Map, Marker, MarkerClusterGroup} from 'leaflet';
 import {Subscription} from "rxjs";
 import {EventBoardMapPopupComponent} from "../event-board-map-popup/event-board-map-popup.component";
 import {EventNavigationService} from "../event-navigation.service";
@@ -10,10 +10,11 @@ import {EventSearchEntry} from "@open-event-workspace/core";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {AsyncPipe, NgIf} from "@angular/common";
+import "leaflet.markercluster";
 
-const iconRetinaUrl = 'assets/marker/marker-icon-2x.png';
-const iconUrl = 'assets/marker/marker-icon.png';
-const shadowUrl = 'assets/marker/marker-shadow.png';
+const iconRetinaUrl = 'marker/marker-icon-2x.png';
+const iconUrl = 'marker/marker-icon.png';
+const shadowUrl = 'marker/marker-shadow.png';
 const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,
@@ -39,7 +40,7 @@ Marker.prototype.options.icon = iconDefault;
   ],
   standalone: true
 })
-export class EventBoardMapComponent implements AfterViewInit {
+export class EventBoardMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private map: Map | undefined
   private markerLayer = layerGroup()
@@ -87,19 +88,44 @@ export class EventBoardMapComponent implements AfterViewInit {
       this.map.removeLayer(this.markerLayer)
     }
 
-    this.service.entries.forEach(i => this.addEventMarker(i))
+    let entries = this.service.entries.filter(e => this.isValid(e))
 
-    this.map.addLayer(this.markerLayer)
+    let group = L.markerClusterGroup()
+    entries.forEach(e => this.addGroupEventMarker(group, e))
+    this.map.addLayer(group)
+  }
+
+  private isValid(e: EventSearchEntry): boolean {
+    if (!e.hasLocation) return false
+
+    let lat = e.lat
+    let lon = e.lon
+    return (lat != 0 && lon != 0)
+
+  }
+
+
+  private addGroupEventMarker(g: MarkerClusterGroup, e: EventSearchEntry) {
+    let marker = this.createEventMarker(e)
+
+    let component = this.resolver
+      .resolveComponentFactory(EventBoardMapPopupComponent)
+      .create(this.injector);
+    component.instance.data = e
+    component.instance.close.asObservable().subscribe(res => {
+        marker.closePopup()
+        if (res) {
+          EventNavigationService.navigateToEventDetails(this.router, +e.id)
+        }
+      }
+    )
+    component.changeDetectorRef.detectChanges()
+
+    g.addLayer(marker).bindPopup(component.location.nativeElement)
   }
 
   private addEventMarker(i: EventSearchEntry) {
-    if (!i.hasLocation) return
-
-    let lat = i.lat
-    let lon = i.lon
-    if (lat == 0 && lon == 0) return
-
-    let marker = L.marker([lat, lon]);
+    let marker = this.createEventMarker(i)
     let component = this.resolver
       .resolveComponentFactory(EventBoardMapPopupComponent)
       .create(this.injector);
@@ -112,7 +138,14 @@ export class EventBoardMapComponent implements AfterViewInit {
       }
     )
     component.changeDetectorRef.detectChanges()
-
     marker.addTo(this.markerLayer).bindPopup(component.location.nativeElement);
   }
+
+  private createEventMarker(i: EventSearchEntry): Marker {
+    let lat = i.lat
+    let lon = i.lon
+
+    return L.marker([lat, lon])
+  }
+
 }

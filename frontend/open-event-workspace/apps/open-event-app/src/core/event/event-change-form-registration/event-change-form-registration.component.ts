@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRow} from "@angular/material/chips";
 import {ChipSelectEntry} from "../../../shared/chip-select-pane/chip-select-entry";
-import {Category, CategoryService} from "@open-event-workspace/core";
+import {Category} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
@@ -12,6 +12,7 @@ import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {ChipSelectPaneComponent} from "../../../shared/chip-select-pane/chip-select-pane.component";
+import {CategoryService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-event-change-form-registration',
@@ -59,7 +60,7 @@ export class EventChangeFormRegistrationComponent {
 
   ngOnInit() {
     this.categoriesLoading = true
-    this.categoryService.getAllCategories(0, 100).subscribe(d => this.handleCategoryData(d))
+    this.categoryService.getCategories(0, 100).subscribe(d => this.handleCategoryData(d))
   }
 
   isVisible(ctrl: string): boolean {

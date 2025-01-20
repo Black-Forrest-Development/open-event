@@ -26,11 +26,12 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter(appRoutes),
     provideAnimationsAsync(),
+    provideNativeDateAdapter(),
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
     {provide: LOCALE_ID, useValue: 'de-DE'},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-    provideNativeDateAdapter(),
     provideToastConfig(),
     provideQuill(),
     provideEchartsConfig(),
@@ -45,6 +46,5 @@ export const appConfig: ApplicationConfig = {
       provide: MatPaginatorIntl,
       useClass: MatPaginatorI18nService,
     },
-    provideRouter(appRoutes),
   ],
 };

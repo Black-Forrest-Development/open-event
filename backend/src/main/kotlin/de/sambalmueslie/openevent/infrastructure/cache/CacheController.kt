@@ -4,6 +4,7 @@ package de.sambalmueslie.openevent.infrastructure.cache
 import de.sambalmueslie.openevent.api.CacheAPI
 import de.sambalmueslie.openevent.api.CacheAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.CacheAPI.Companion.PERMISSION_WRITE
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.checkPermission
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Delete
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/cache")
 @Tag(name = "Cache API")
+@CoreAPI
 class CacheController(private val service: CacheService) : CacheAPI {
     @Get("/{key}")
     override fun get(auth: Authentication, key: String): CacheInfo? {

@@ -1,4 +1,4 @@
-<ng-container *ngIf="form">
+@if (form) {
   <form [formGroup]="form">
     <div class="flex flex-col gap-4 align-items-stretch flex-auto pt-2">
       <!-- title-->
@@ -42,18 +42,18 @@
 
       <div class="flex flex-row gap-3 align-items-stretch">
         <!-- startDate-->
-        <mat-form-field *ngIf="isVisible('startDate')" class="dense-1" style="flex: 1 1 auto">
+        <mat-form-field *ngIf="isVisible('startDate')" class="dense-1 flex-auto">
           <mat-label>{{ 'event.form.startDate' | translate }}</mat-label>
           <input [matDatepicker]="startPicker" formControlName="startDate" matInput>
-          <mat-datepicker-toggle [for]="startPicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker-toggle [for]="startPicker" matIconSuffix></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
           <mat-hint>{{ 'event.form.hint.startDate'| translate }}</mat-hint>
         </mat-form-field>
         <!-- endDate-->
-        <mat-form-field *ngIf="isVisible('endDate')" class="dense-1" style="flex: 1 1 auto">
+        <mat-form-field *ngIf="isVisible('endDate')" class="dense-1 flex-auto">
           <mat-label>{{ 'event.form.endDate' | translate }}</mat-label>
           <input [matDatepicker]="endPicker" formControlName="endDate" matInput>
-          <mat-datepicker-toggle [for]="endPicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker-toggle [for]="endPicker" matIconSuffix></mat-datepicker-toggle>
           <mat-datepicker #endPicker></mat-datepicker>
           <mat-hint>{{ 'event.form.hint.endDate'| translate }}</mat-hint>
         </mat-form-field>
@@ -61,13 +61,13 @@
       </div>
       <div class="flex flex-col md:flex-row lg:flex-row xl:flex-row sm:flex-col gap-3 align-items-stretch">
         <!-- startTime-->
-        <mat-form-field *ngIf="isVisible('startTime')" class="dense-1" style="flex: 1 1 auto">
+        <mat-form-field *ngIf="isVisible('startTime')" class="dense-1 flex-auto">
           <mat-label>{{ 'event.form.startTime' | translate }}</mat-label>
           <input formControlName="startTime" matInput type="time">
           <mat-hint>{{ 'event.form.hint.startTime'| translate }}</mat-hint>
         </mat-form-field>
         <!-- endTime-->
-        <mat-form-field *ngIf="isVisible('endTime')" class="dense-1" style="flex: 1 1 auto">
+        <mat-form-field *ngIf="isVisible('endTime')" class="dense-1 flex-auto">
           <mat-label>{{ 'event.form.endTime' | translate }}</mat-label>
           <input formControlName="endTime" matInput type="time">
           <mat-hint>{{ 'event.form.hint.endTime'| translate }}</mat-hint>
@@ -76,4 +76,4 @@
 
     </div>
   </form>
-</ng-container>
+}

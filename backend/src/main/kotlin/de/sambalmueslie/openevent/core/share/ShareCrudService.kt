@@ -53,6 +53,10 @@ class ShareCrudService(
 
     fun create(actor: Account, request: ShareChangeRequest): Share {
         val event = eventService.get(request.eventId) ?: throw InvalidRequestException("Cannot find event for share")
+        return create(actor, request, event)
+    }
+
+    fun create(actor: Account, request: ShareChangeRequest, event: Event): Share {
         val result = storage.create(request, event, actor)
         notifyCreated(actor, result)
         return result

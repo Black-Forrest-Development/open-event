@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {AuthService} from "../../../shared/auth/auth.service";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
-import {Event, Share, ShareChangeRequest, ShareService} from "@open-event-workspace/core";
+import {Event, Share, ShareChangeRequest} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatDivider} from "@angular/material/divider";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {ShareButtons} from "ngx-sharebuttons/buttons";
+import {ShareService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-share-details',
@@ -50,7 +51,7 @@ export class ShareDetailsComponent {
   private updateData() {
     if (!this.event) return
     this.reloading = true
-    this.service.findByEvent(this.event.id).subscribe({
+    this.service.getShareForEvent(this.event).subscribe({
       next: value => this.handleData(value),
       error: err => this.handleError(err)
     })

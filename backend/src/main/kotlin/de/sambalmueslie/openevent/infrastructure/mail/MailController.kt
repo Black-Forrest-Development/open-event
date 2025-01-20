@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.infrastructure.mail
 
 import de.sambalmueslie.openevent.api.MailAPI
 import de.sambalmueslie.openevent.api.MailAPI.Companion.PERMISSION_READ
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.checkPermission
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.Controller
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/mail")
 @Tag(name = "Mail API")
+@CoreAPI
 class MailController(private val service: MailService) : MailAPI {
 
     @Get()

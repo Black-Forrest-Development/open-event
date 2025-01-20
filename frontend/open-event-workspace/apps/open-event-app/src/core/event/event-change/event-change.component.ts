@@ -3,13 +3,13 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {AsyncPipe, Location, NgIf} from "@angular/common";
+import {AsyncPipe, Location, NgIf, NgTemplateOutlet} from "@angular/common";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
 import {AuthService} from "../../../shared/auth/auth.service";
 import {DateTime} from 'luxon';
-import {Account, Event, EventInfo, EventService} from "@open-event-workspace/core";
+import {Account, Event, EventChangeRequest, EventInfo, LocationChangeRequest, RegistrationChangeRequest} from "@open-event-workspace/core";
 import {AppService} from "../../../shared/app.service";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
@@ -20,10 +20,9 @@ import {MatCard} from "@angular/material/card";
 import {MatStep, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {EventChangeFormEventComponent} from "../event-change-form-event/event-change-form-event.component";
 import {EventChangeFormLocationComponent} from "../event-change-form-location/event-change-form-location.component";
-import {
-  EventChangeFormRegistrationComponent
-} from "../event-change-form-registration/event-change-form-registration.component";
+import {EventChangeFormRegistrationComponent} from "../event-change-form-registration/event-change-form-registration.component";
 import {EventChangeHelpComponent} from "../event-change-help/event-change-help.component";
+import {EventService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-event-change',
@@ -48,7 +47,8 @@ import {EventChangeHelpComponent} from "../event-change-help/event-change-help.c
     EventChangeFormLocationComponent,
     MatStepperPrevious,
     EventChangeFormRegistrationComponent,
-    EventChangeHelpComponent
+    EventChangeHelpComponent,
+    NgTemplateOutlet
   ],
   standalone: true
 })
@@ -187,7 +187,7 @@ export class EventChangeComponent {
 
   private loadData(id: number, callback: (e: EventInfo) => void) {
     this.reloading = true
-    this.service.getEventInfo(id).subscribe(data => callback(data));
+    this.service.getInfo(id).subscribe(data => callback(data));
   }
 
   private handleDataCopy(e: EventInfo) {
@@ -249,9 +249,9 @@ export class EventChangeComponent {
 
   private update() {
     if (!this.event) return
-    let request = this.service.createRequest(this.fg.value, this.isEndHidden())
+    let request = this.createRequest(this.fg.value, this.isEndHidden())
     if (!request) return
-    this.service.updateEvent(this.event.event.id, request).subscribe({
+    this.service.update(this.event.event.id, request).subscribe({
       next: event => {
         this.changed.emit(event)
         this.translationService.get("event.message.update.succeed").subscribe(
@@ -268,11 +268,11 @@ export class EventChangeComponent {
   }
 
   private create() {
-    let request = this.service.createRequest(this.fg.value, this.isEndHidden())
+    let request = this.createRequest(this.fg.value, this.isEndHidden())
     if (!request) return
 
-    let observable = (this.isAdminOrModerator && this.account) ? this.service.createBackofficeEvent(this.account.id, request) : this.service.createEvent(request)
-    observable.subscribe({
+    // let observable = (this.isAdminOrModerator && this.account) ? this.service.createBackofficeEvent(this.account.id, request) : this.service.create(request)
+    this.service.create(request).subscribe({
       next: event => {
         this.changed.emit(event)
         this.translationService.get("event.message.create.succeed").subscribe(
@@ -292,5 +292,53 @@ export class EventChangeComponent {
     return this.hiddenFields.find(f => f === 'endDate') != null
   }
 
+  private createRequest(value: any, endHidden: boolean): EventChangeRequest | undefined {
+    let start = this.createDateTime(value.event.startTime, value.event.startDate);
+    let end = endHidden ? this.createDateTime(value.event.endTime, value.event.startDate) : this.createDateTime(value.event.endTime, value.event.endDate);
+    if (!start || !end) return undefined
+
+    let location = new LocationChangeRequest(
+      value.location.street,
+      value.location.streetNumber,
+      value.location.zip,
+      value.location.city,
+      value.location.country,
+      value.location.additionalInfo,
+      0.0,
+      0.0,
+      -1
+    )
+    let registration = new RegistrationChangeRequest(
+      value.registration.maxGuestAmount,
+      value.registration.interestedAllowed,
+      value.registration.ticketsEnabled
+    )
+
+
+    return new EventChangeRequest(
+      start.toFormat("yyyy-MM-dd'T'hh:mm:ss"),
+      end.toFormat("yyyy-MM-dd'T'hh:mm:ss"),
+      value.event.title,
+      value.event.shortText,
+      value.event.longText,
+      value.event.imageUrl,
+      value.event.iconUrl,
+      value.registration.categories,
+      location,
+      registration,
+      true,
+      value.registration.tags
+    )
+  }
+
+  private createDateTime(timeStr: string, date: any): DateTime | undefined {
+    let mDate = DateTime.fromISO(date)
+    let time = timeStr.split(":");
+    if (time.length == 2 && mDate.isValid) {
+      mDate = mDate.set({hour: parseInt(time[0]), minute: parseInt(time[1])});
+      return mDate
+    }
+    return undefined;
+  }
 
 }

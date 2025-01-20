@@ -5,6 +5,7 @@ import de.sambalmueslie.openevent.api.SettingsAPI
 import de.sambalmueslie.openevent.api.SettingsAPI.Companion.PERMISSION_READ
 import de.sambalmueslie.openevent.api.SettingsAPI.Companion.PERMISSION_WRITE
 import de.sambalmueslie.openevent.common.PatchRequest
+import de.sambalmueslie.openevent.core.CoreAPI
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.infrastructure.settings.api.SettingChangeRequest
 import de.sambalmueslie.openevent.infrastructure.settings.api.TextResponse
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 
 @Controller("/api/settings")
 @Tag(name = "Settings API")
+@CoreAPI
 class SettingsController(private val service: SettingsService) : SettingsAPI {
 
     @Get("/{id}")

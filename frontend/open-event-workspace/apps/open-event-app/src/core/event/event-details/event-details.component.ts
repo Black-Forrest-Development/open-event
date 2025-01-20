@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {EventInfo, EventService} from "@open-event-workspace/core";
+import {EventInfo} from "@open-event-workspace/core";
 import {MatDialog} from "@angular/material/dialog";
 import {NgIf} from "@angular/common";
 import {EventDetailsHeaderComponent} from "../event-details-header/event-details-header.component";
@@ -9,6 +9,7 @@ import {EventDetailsInfoComponent} from "../event-details-info/event-details-inf
 import {EventDetailsLocationComponent} from "../event-details-location/event-details-location.component";
 import {RegistrationDetailsComponent} from "../../registration/registration-details/registration-details.component";
 import {ShareDetailsComponent} from "../../share/share-details/share-details.component";
+import {EventService} from "@open-event-workspace/app";
 
 
 @Component({
@@ -47,7 +48,7 @@ export class EventDetailsComponent {
     if (!this.eventId) return
     if (this.reloading) return
     this.reloading = true
-    this.service.getEventInfo(this.eventId).subscribe(d => this.handleData(d))
+    this.service.getInfo(this.eventId).subscribe(d => this.handleData(d))
   }
 
   private handleParams(p: ParamMap) {

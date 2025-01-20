@@ -5,9 +5,10 @@ import {NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {Account, Address, AddressService} from "@open-event-workspace/core";
+import {Account, Address} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {MatDivider} from "@angular/material/divider";
+import {AddressService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-event-change-form-location',
@@ -40,7 +41,7 @@ export class EventChangeFormLocationComponent {
 
   ngOnInit() {
     this.reloading = true
-    this.addressService.getAllForAccount(this.account?.id ?? -1, 0, 20).subscribe(d => this.handleAddresses(d))
+    this.addressService.getAddress(0, 20).subscribe(d => this.handleAddresses(d))
   }
 
   isVisible(ctrl: string): boolean {

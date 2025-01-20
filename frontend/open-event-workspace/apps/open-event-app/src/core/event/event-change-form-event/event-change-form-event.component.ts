@@ -1,27 +1,31 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CommonModule, NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatError, MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatDatepickerInput, MatDatepickerModule, MatDatepickerToggle} from "@angular/material/datepicker";
+import {provideLuxonDateAdapter} from "@angular/material-luxon-adapter";
 
 @Component({
   selector: 'app-event-change-form-event',
   templateUrl: './event-change-form-event.component.html',
+  providers: [provideLuxonDateAdapter()],
   styleUrls: ['./event-change-form-event.component.scss'],
   imports: [
     NgIf,
+    CommonModule,
     TranslatePipe,
     ReactiveFormsModule,
     MatFormField,
     MatInput,
     MatDatepickerInput,
     MatDatepickerToggle,
-    MatDatepicker,
+    MatDatepickerModule,
     MatLabel,
     MatHint,
     MatError,
+    MatFormFieldModule, MatDatepickerModule, FormsModule
   ],
   standalone: true
 })

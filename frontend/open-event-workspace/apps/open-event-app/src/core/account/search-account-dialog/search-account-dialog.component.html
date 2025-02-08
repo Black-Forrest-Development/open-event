@@ -18,7 +18,7 @@
         <mat-icon>search</mat-icon>
       </button>
     </div>
-    <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+    <app-loading-bar [reloading]="reloading"></app-loading-bar>
     <table [dataSource]="accounts" mat-table class="w-full">
       <!-- Name Column -->
       <ng-container matColumnDef="name">

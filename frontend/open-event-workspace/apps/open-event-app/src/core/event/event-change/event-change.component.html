@@ -1,8 +1,10 @@
 <mat-toolbar>
   <div class="flex flex-row gap-2 flex-auto items-center">
-    <button (click)="cancel()" mat-mini-fab *ngIf="showBackButton">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
+    @if (showBackButton) {
+      <button (click)="cancel()" mat-mini-fab>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    }
     <span class="title ps-2">{{ title | translate }}</span>
     <div class="flex-auto"></div>
     <div class="text-sm border border-gray-400 rounded px-3 py-2" *ngIf="account && isAdminOrModerator">
@@ -10,7 +12,7 @@
     </div>
   </div>
 </mat-toolbar>
-<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+<app-loading-bar [reloading]="reloading"></app-loading-bar>
 <div class="flex flex-row gap-2 justify-content-start content-stretch">
   <div class="flex flex-col gap-2 p-2 flex-auto">
     <mat-card>
@@ -48,9 +50,11 @@
       </mat-stepper>
     </mat-card>
   </div>
-  <div *ngIf="helpVisible" class="flex flex-col gap-2 p-2" style="flex: 1 1 250px;">
-    <app-event-change-help [step]="stepper.selectedIndex"></app-event-change-help>
-  </div>
+  @if (helpVisible) {
+    <div class="flex flex-col gap-2 p-2" style="flex: 1 1 250px;">
+      <app-event-change-help [step]="stepper.selectedIndex"></app-event-change-help>
+    </div>
+  }
 </div>
 
 <ng-template #submitButton>
@@ -58,9 +62,11 @@
           type="submit">
     <mat-icon>save</mat-icon>
     {{ 'action.submit' | translate }}
-    <mat-icon *ngIf="reloading">
-      <mat-spinner diameter="18"></mat-spinner>
-    </mat-icon>
+    @if (reloading) {
+      <mat-icon>
+        <mat-spinner diameter="18"></mat-spinner>
+      </mat-icon>
+    }
   </button>
 </ng-template>
 

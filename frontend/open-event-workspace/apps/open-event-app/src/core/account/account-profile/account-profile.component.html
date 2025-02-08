@@ -13,8 +13,7 @@
         }
       </div>
       <mat-divider></mat-divider>
-      <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-
+      <app-loading-bar [reloading]="reloading"></app-loading-bar>
 
       @if (profile) {
         <div class="flex flex-row gap-3">
@@ -129,17 +128,18 @@
             </mat-list>
           }
         </div>
-
-        <div class="flex flex-row gap-3 px-2 pb-2" *ngIf="editMode">
-          <button mat-flat-button color="primary" (click)="save()">
-            <mat-icon>save</mat-icon>
-            {{ 'action.save' | translate }}
-          </button>
-          <button mat-flat-button color="primary" (click)="save()">
-            <mat-icon>cancel</mat-icon>
-            {{ 'action.cancel' | translate }}
-          </button>
-        </div>
+        @if (editMode) {
+          <div class="flex flex-row gap-3 px-2 pb-2">
+            <button mat-flat-button color="primary" (click)="save()">
+              <mat-icon>save</mat-icon>
+              {{ 'action.save' | translate }}
+            </button>
+            <button mat-flat-button color="primary" (click)="save()">
+              <mat-icon>cancel</mat-icon>
+              {{ 'action.cancel' | translate }}
+            </button>
+          </div>
+        }
       }
     </div>
   </mat-card>

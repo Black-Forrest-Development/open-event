@@ -5,15 +5,15 @@ import {Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatChip} from "@angular/material/chips";
 import {RouterLink} from "@angular/router";
 import {Page} from "@open-event-workspace/shared";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-mail-board',
@@ -22,17 +22,16 @@ import {Page} from "@open-event-workspace/shared";
   imports: [
     MatToolbar,
     MatMiniFabButton,
-    NgIf,
     MatIcon,
     TranslatePipe,
-    MatProgressBar,
     MatCard,
     MatTableModule,
     DatePipe,
     MatChip,
     MatIconButton,
     RouterLink,
-    MatPaginator
+    MatPaginator,
+    LoadingBarComponent
   ],
   standalone: true
 })

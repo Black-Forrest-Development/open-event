@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+<app-loading-bar [reloading]="reloading"></app-loading-bar>
 <mat-card>
   <mat-card-header class="!p-2">
     <div class="header flex-auto">{{ 'event.admin.registration' | translate }}</div>
@@ -112,14 +112,16 @@
   <mat-divider></mat-divider>
   <mat-card-actions>
     <div class="flex flex-row gap-2 flex-auto">
-      <button (click)="participateAccount()" *ngIf="adminOrManager" color="primary" mat-flat-button>
-        <mat-icon>admin_panel_settings</mat-icon>
-        {{ 'registration.action.participateAccount' | translate }}
-      </button>
-      <button (click)="participateManual()" *ngIf="adminOrManager" color="primary" mat-flat-button>
-        <mat-icon>admin_panel_settings</mat-icon>
-        {{ 'registration.action.participateManual' | translate }}
-      </button>
+      @if (adminOrManager) {
+        <button (click)="participateAccount()" color="primary" mat-flat-button>
+          <mat-icon>admin_panel_settings</mat-icon>
+          {{ 'registration.action.participateAccount' | translate }}
+        </button>
+        <button (click)="participateManual()" color="primary" mat-flat-button>
+          <mat-icon>admin_panel_settings</mat-icon>
+          {{ 'registration.action.participateManual' | translate }}
+        </button>
+      }
     </div>
   </mat-card-actions>
 </mat-card>

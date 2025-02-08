@@ -8,14 +8,17 @@
           {{ 'event.search' | translate }}
         </mat-label>
         <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
-        <mat-icon *ngIf="service.searching">
-          <mat-spinner diameter="18"></mat-spinner>
-        </mat-icon>
-
-        <button (click)="input.value = ''; service.fullTextSearch = ''" *ngIf="input.value.length > 0" mat-icon-button
-                matSuffix>
-          <mat-icon>clear</mat-icon>
-        </button>
+        @if (service.searching) {
+          <mat-icon>
+            <mat-spinner diameter="18"></mat-spinner>
+          </mat-icon>
+        }
+        @if (input.value.length > 0) {
+          <button (click)="input.value = ''; service.fullTextSearch = ''" mat-icon-button
+                  matSuffix>
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
       </mat-form-field>
     </div>
 

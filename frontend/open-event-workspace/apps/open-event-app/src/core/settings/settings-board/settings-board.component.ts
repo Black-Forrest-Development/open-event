@@ -7,11 +7,10 @@ import {Page} from "@open-event-workspace/shared";
 import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
-import {MatProgressBar} from "@angular/material/progress-bar";
-import {NgIf} from "@angular/common";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-settings-board',
@@ -21,13 +20,12 @@ import {MatIcon} from "@angular/material/icon";
     MatToolbar,
     TranslatePipe,
     MatButton,
-    MatProgressBar,
-    NgIf,
     MatCard,
     MatTableModule,
     MatMiniFabButton,
     MatPaginator,
-    MatIcon
+    MatIcon,
+    LoadingBarComponent
   ],
   standalone: true
 })

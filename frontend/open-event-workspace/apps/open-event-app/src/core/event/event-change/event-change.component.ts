@@ -15,7 +15,6 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatIcon} from "@angular/material/icon";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {MatStep, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {EventChangeFormEventComponent} from "../event-change-form-event/event-change-form-event.component";
@@ -23,6 +22,7 @@ import {EventChangeFormLocationComponent} from "../event-change-form-location/ev
 import {EventChangeFormRegistrationComponent} from "../event-change-form-registration/event-change-form-registration.component";
 import {EventChangeHelpComponent} from "../event-change-help/event-change-help.component";
 import {EventService} from "@open-event-workspace/app";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-change',
@@ -36,7 +36,6 @@ import {EventService} from "@open-event-workspace/app";
     NgIf,
     MatIcon,
     TranslatePipe,
-    MatProgressBar,
     MatCard,
     MatStepper,
     AsyncPipe,
@@ -48,7 +47,8 @@ import {EventService} from "@open-event-workspace/app";
     MatStepperPrevious,
     EventChangeFormRegistrationComponent,
     EventChangeHelpComponent,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    LoadingBarComponent
   ],
   standalone: true
 })

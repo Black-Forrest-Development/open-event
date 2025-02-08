@@ -5,9 +5,9 @@ import {Event, Share, ShareChangeRequest} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatDivider} from "@angular/material/divider";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {ShareButtons} from "ngx-sharebuttons/buttons";
 import {ShareService} from "@open-event-workspace/app";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-share-details',
@@ -18,8 +18,8 @@ import {ShareService} from "@open-event-workspace/app";
     TranslatePipe,
     MatSlideToggle,
     MatDivider,
-    MatProgressBar,
-    ShareButtons
+    ShareButtons,
+    LoadingBarComponent
   ],
   standalone: true
 })

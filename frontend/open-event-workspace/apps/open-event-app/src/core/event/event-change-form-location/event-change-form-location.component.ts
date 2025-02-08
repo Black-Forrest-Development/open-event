@@ -1,7 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, Input} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatOption, MatSelect, MatSelectChange} from "@angular/material/select";
-import {NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
@@ -15,7 +14,6 @@ import {AddressService} from "@open-event-workspace/app";
   templateUrl: './event-change-form-location.component.html',
   styleUrls: ['./event-change-form-location.component.scss'],
   imports: [
-    NgIf,
     TranslatePipe,
     ReactiveFormsModule,
     MatFormField,
@@ -28,8 +26,8 @@ import {AddressService} from "@open-event-workspace/app";
   standalone: true
 })
 export class EventChangeFormLocationComponent {
-  @Input() form: FormGroup | undefined
-  @Input() hiddenFields: string[] = []
+  form = input.required<FormGroup>()
+  hiddenFields = input<string[]>([])
   @Input() account: Account | undefined
   reloading: boolean = false
   addresses: Address[] = []
@@ -45,7 +43,7 @@ export class EventChangeFormLocationComponent {
   }
 
   isVisible(ctrl: string): boolean {
-    return this.hiddenFields.find(x => x == ctrl) == null
+    return this.hiddenFields().find(x => x == ctrl) == null
   }
 
   handleAddressSelected(event: MatSelectChange) {
@@ -55,7 +53,7 @@ export class EventChangeFormLocationComponent {
 
   private handleAddresses(d: Page<Address>) {
     this.addresses = d.content
-    if (this.addresses.length > 0 && !this.form?.dirty && !this.form?.valid) {
+    if (this.addresses.length > 0 && !this.form().dirty && !this.form().valid) {
       this.setAddress(this.addresses[0])
     }
     this.reloading = false
@@ -63,7 +61,7 @@ export class EventChangeFormLocationComponent {
 
   private setAddress(address: Address) {
     if (!this.form) return
-    this.form.setValue(
+    this.form().setValue(
       {
         'street': address.street,
         'streetNumber': address.streetNumber,

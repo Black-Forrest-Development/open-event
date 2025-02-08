@@ -3,7 +3,6 @@ import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTableData
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatCard} from "@angular/material/card";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
@@ -12,6 +11,7 @@ import {MatDivider} from "@angular/material/divider";
 import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {ActivityReadComponent} from "../activity-read/activity-read.component";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-activity-table',
@@ -19,7 +19,6 @@ import {ActivityReadComponent} from "../activity-read/activity-read.component";
   styleUrl: './activity-table.component.scss',
   imports: [
     MatCard,
-    MatProgressBar,
     MatTableModule,
     MatColumnDef,
     MatHeaderCell,
@@ -33,7 +32,8 @@ import {ActivityReadComponent} from "../activity-read/activity-read.component";
     ActivityReadComponent,
     DatePipe,
     MatRow,
-    MatHeaderRow
+    MatHeaderRow,
+    LoadingBarComponent
   ],
   standalone: true
 })

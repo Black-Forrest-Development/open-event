@@ -10,9 +10,9 @@ import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-address-board',
@@ -23,11 +23,11 @@ import {MatIcon} from "@angular/material/icon";
     TranslatePipe,
     MatButton,
     MatDivider,
-    MatProgressBar,
     MatTableModule,
     MatIconButton,
     MatIcon,
     MatPaginator,
+    LoadingBarComponent,
   ],
   standalone: true
 })

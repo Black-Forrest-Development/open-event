@@ -2,14 +2,13 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {EventInfo} from "@open-event-workspace/core";
 import {MatDialog} from "@angular/material/dialog";
-import {NgIf} from "@angular/common";
 import {EventDetailsHeaderComponent} from "../event-details-header/event-details-header.component";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {EventDetailsInfoComponent} from "../event-details-info/event-details-info.component";
 import {EventDetailsLocationComponent} from "../event-details-location/event-details-location.component";
 import {RegistrationDetailsComponent} from "../../registration/registration-details/registration-details.component";
 import {ShareDetailsComponent} from "../../share/share-details/share-details.component";
 import {EventService} from "@open-event-workspace/app";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 
 @Component({
@@ -17,13 +16,12 @@ import {EventService} from "@open-event-workspace/app";
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.scss'],
   imports: [
-    NgIf,
     EventDetailsHeaderComponent,
-    MatProgressBar,
     EventDetailsInfoComponent,
     EventDetailsLocationComponent,
     RegistrationDetailsComponent,
-    ShareDetailsComponent
+    ShareDetailsComponent,
+    LoadingBarComponent
   ],
   standalone: true
 })

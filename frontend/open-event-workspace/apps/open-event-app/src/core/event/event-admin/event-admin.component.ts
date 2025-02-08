@@ -1,16 +1,14 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {Location, NgIf} from "@angular/common";
+import {Location} from "@angular/common";
 import {EventInfo, EventService} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {EventActionExportComponent} from "../event-action-export/event-action-export.component";
-import {MatProgressBar} from "@angular/material/progress-bar";
-import {
-  RegistrationModerationComponent
-} from "../../registration/registration-moderation/registration-moderation.component";
+import {RegistrationModerationComponent} from "../../registration/registration-moderation/registration-moderation.component";
 import {MatMiniFabButton} from "@angular/material/button";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-admin',
@@ -20,10 +18,9 @@ import {MatMiniFabButton} from "@angular/material/button";
     MatToolbar,
     MatIcon,
     EventActionExportComponent,
-    MatProgressBar,
     RegistrationModerationComponent,
     MatMiniFabButton,
-    NgIf
+    LoadingBarComponent
   ],
   standalone: true
 })

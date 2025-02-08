@@ -3,16 +3,16 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DatePipe, Location, NgIf} from "@angular/common";
+import {DatePipe, Location} from "@angular/common";
 import {MailJobHistoryEntry, MailService} from '@open-event-workspace/core';
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatMiniFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {Page} from "@open-event-workspace/shared";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-mail-history',
@@ -21,14 +21,13 @@ import {Page} from "@open-event-workspace/shared";
   imports: [
     MatToolbar,
     MatMiniFabButton,
-    NgIf,
     MatIcon,
     TranslatePipe,
-    MatProgressBar,
     MatCard,
     MatTableModule,
     DatePipe,
-    MatPaginator
+    MatPaginator,
+    LoadingBarComponent
   ],
   standalone: true
 })

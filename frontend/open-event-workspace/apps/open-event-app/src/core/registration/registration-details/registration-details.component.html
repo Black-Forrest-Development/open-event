@@ -5,40 +5,43 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+    <app-loading-bar [reloading]="reloading"></app-loading-bar>
     <div class="flex flex-col gap-2 py-2">
-      <ng-container *ngIf="accepted.length > 0">
-        <ng-container *ngFor="let part of accepted; index as i">
+      @if (accepted.length > 0) {
+        @for (part of accepted; track part.id; let i = $index) {
           <ng-container [ngTemplateOutletContext]="{part:part}" [ngTemplateOutlet]="participant"></ng-container>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngIf="waitList.length > 0">
+        }
+      }
+      @if (waitList.length > 0) {
         <div class="flex flex-row flex-auto gap-2 items-center">
           <mat-divider class="flex-auto"></mat-divider>
           <div>{{ 'registration.waitlist' | translate }}</div>
           <mat-divider class="flex-auto"></mat-divider>
         </div>
-        <ng-container *ngFor="let part of waitList; index as i">
+        @for (part of waitList; track part.id; let i = $index) {
           <ng-container [ngTemplateOutletContext]="{part:part}" [ngTemplateOutlet]="participant"></ng-container>
-        </ng-container>
-      </ng-container>
+        }
+      }
     </div>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>
     <div class="flex flex-row gap-2 flex-auto">
-      <button (click)="participateSelf()" *ngIf="!userParticipant" color="primary" mat-flat-button>
-        <mat-icon>person_add</mat-icon>
-        {{ 'registration.action.participate' | translate }}
-      </button>
-      <button (click)="editSelf()" *ngIf="userParticipant" color="accent" mat-flat-button>
-        <mat-icon>manage_accounts</mat-icon>
-        {{ 'registration.action.edit' | translate }}
-      </button>
-      <button (click)="cancelSelf()" *ngIf="userParticipant" color="warn" mat-flat-button>
-        <mat-icon>person_remove</mat-icon>
-        {{ 'registration.action.cancel' | translate }}
-      </button>
+      @if (userParticipant) {
+        <button (click)="editSelf()" color="accent" mat-flat-button>
+          <mat-icon>manage_accounts</mat-icon>
+          {{ 'registration.action.edit' | translate }}
+        </button>
+        <button (click)="cancelSelf()" color="warn" mat-flat-button>
+          <mat-icon>person_remove</mat-icon>
+          {{ 'registration.action.cancel' | translate }}
+        </button>
+      } @else {
+        <button (click)="participateSelf()" color="primary" mat-flat-button>
+          <mat-icon>person_add</mat-icon>
+          {{ 'registration.action.participate' | translate }}
+        </button>
+      }
     </div>
   </mat-card-actions>
 </mat-card>

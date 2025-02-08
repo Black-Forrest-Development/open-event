@@ -1,19 +1,7 @@
 import {Component, EventEmitter} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-  AccountSearchEntry,
-  AccountSearchRequest,
-  AccountSearchResponse,
-  AccountService,
-  SearchService
-} from "@open-event-workspace/core";
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
-} from "@angular/material/dialog";
+import {AccountSearchEntry, AccountSearchRequest, AccountSearchResponse, AccountService, SearchService} from "@open-event-workspace/core";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatFormField} from "@angular/material/form-field";
@@ -21,12 +9,12 @@ import {MatInput} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatTableModule} from "@angular/material/table";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-search-account-dialog',
-  imports: [CommonModule, MatDialogTitle, MatDialogContent, TranslatePipe, MatFormField, MatInput, MatIcon, MatProgressSpinner, MatIconButton, MatMiniFabButton, MatProgressBar, MatTableModule, MatDialogActions, MatButton, MatDialogClose],
+  imports: [CommonModule, MatDialogTitle, MatDialogContent, TranslatePipe, MatFormField, MatInput, MatIcon, MatProgressSpinner, MatIconButton, MatMiniFabButton, MatTableModule, MatDialogActions, MatButton, MatDialogClose, LoadingBarComponent],
   templateUrl: './search-account-dialog.component.html',
   styleUrl: './search-account-dialog.component.scss',
 })

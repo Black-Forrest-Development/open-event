@@ -8,7 +8,7 @@
         </mat-slide-toggle>
       </div>
       <mat-divider class="p-0"></mat-divider>
-      <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+      <app-loading-bar [reloading]="reloading"></app-loading-bar>
       @if (share && share.published) {
         <div class="flex flex-row justify-center px-3 pb-3">
           <share-buttons theme="modern-dark"

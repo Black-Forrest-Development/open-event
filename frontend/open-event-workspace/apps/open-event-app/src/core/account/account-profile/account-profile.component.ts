@@ -7,15 +7,15 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {MatIcon} from "@angular/material/icon";
 import {MatCard} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-account-profile',
-  imports: [CommonModule, TranslatePipe, MatIcon, MatCard, MatDivider, MatProgressBar, MatListItem, MatList, ReactiveFormsModule, MatInput, MatFormField, MatSelect, MatOption, MatButton, MatMiniFabButton],
+  imports: [CommonModule, TranslatePipe, MatIcon, MatCard, MatDivider, MatListItem, MatList, ReactiveFormsModule, MatInput, MatFormField, MatSelect, MatOption, MatButton, MatMiniFabButton, LoadingBarComponent],
   templateUrl: './account-profile.component.html',
   styleUrl: './account-profile.component.scss',
 })

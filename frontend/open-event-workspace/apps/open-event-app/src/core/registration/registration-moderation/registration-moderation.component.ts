@@ -7,38 +7,23 @@ import {AuthService} from "../../../shared/auth/auth.service";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
-import {
-  RegistrationParticipateAccountDialogComponent
-} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
-import {
-  RegistrationParticipateManualDialogComponent
-} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
-import {
-  Participant,
-  ParticipantAddRequest,
-  ParticipantDetails,
-  ParticipateRequest,
-  ParticipateResponse,
-  RegistrationDetails,
-  RegistrationInfo,
-  RegistrationService
-} from "@open-event-workspace/core";
+import {RegistrationParticipateAccountDialogComponent} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
+import {RegistrationParticipateManualDialogComponent} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
+import {Participant, ParticipantAddRequest, ParticipantDetails, ParticipateRequest, ParticipateResponse, RegistrationDetails, RegistrationInfo, RegistrationService} from "@open-event-workspace/core";
 import {MatButton} from "@angular/material/button";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-registration-moderation',
   templateUrl: './registration-moderation.component.html',
   styleUrl: './registration-moderation.component.scss',
   imports: [
-    NgIf,
     MatIcon,
     TranslatePipe,
-    MatProgressBar,
     MatCard,
     MatTableModule,
     DatePipe,
@@ -48,7 +33,8 @@ import {MatDivider} from "@angular/material/divider";
     MatSort,
     MatSortHeader,
     MatButton,
-    MatCardActions
+    MatCardActions,
+    LoadingBarComponent
   ],
   standalone: true
 })

@@ -6,12 +6,12 @@ import {Page} from "@open-event-workspace/shared";
 import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatMiniFabButton} from "@angular/material/button";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
-import {DatePipe, NgClass, NgIf} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-history-board',
@@ -21,7 +21,6 @@ import {MatIcon} from "@angular/material/icon";
     MatToolbar,
     TranslatePipe,
     MatMiniFabButton,
-    MatProgressBar,
     MatCard,
     NgClass,
     MatDivider,
@@ -30,7 +29,7 @@ import {MatIcon} from "@angular/material/icon";
     DatePipe,
     AccountDisplayNamePipe,
     MatIcon,
-    NgIf
+    LoadingBarComponent
   ],
   standalone: true
 })

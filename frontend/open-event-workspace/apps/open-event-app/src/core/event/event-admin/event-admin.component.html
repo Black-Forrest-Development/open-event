@@ -14,10 +14,11 @@
   </div>
 </mat-toolbar>
 
-<mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
-
-<div *ngIf="info" class="flex flex-col gap-2 content-stretch p-4">
-  @if (info.registration) {
-    <app-registration-moderation [data]="info.registration"></app-registration-moderation>
-  }
-</div>
+<app-loading-bar [reloading]="reloading"></app-loading-bar>
+@if (info) {
+  <div class="flex flex-col gap-2 content-stretch p-4">
+    @if (info.registration) {
+      <app-registration-moderation [data]="info.registration"></app-registration-moderation>
+    }
+  </div>
+}

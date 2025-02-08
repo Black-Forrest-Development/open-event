@@ -15,10 +15,13 @@
     </mat-autocomplete>
     <button (click)="showCreateAccountDialog()" color="primary" mat-flat-button>
       {{ 'backoffice.account.action.create'| translate }}
-      <mat-icon *ngIf="!accountCreating">add</mat-icon>
-      <mat-icon *ngIf="accountCreating">
-        <mat-spinner color="primary" diameter="22"></mat-spinner>
-      </mat-icon>
+      @if (accountCreating) {
+        <mat-icon>
+          <mat-spinner color="primary" diameter="22"></mat-spinner>
+        </mat-icon>
+      } @else {
+        <mat-icon>add</mat-icon>
+      }
     </button>
   </div>
 </div>

@@ -6,13 +6,16 @@
     <span class="title ps-2">{{ info?.event?.title }}</span>
     <div class="flex-auto"></div>
 
-    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit) {
-      <button (click)="menu.publishMenuItem.handleClick()" *ngIf="!info?.event?.published" class="action-fab"
-              mat-mini-fab>
-        <mat-icon *ngIf="!menu.publishing">publish</mat-icon>
-        <mat-icon *ngIf="menu.publishing">
-          <mat-spinner diameter="18"></mat-spinner>
-        </mat-icon>
+    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit && !info?.event.published) {
+      <button (click)="menu.publishMenuItem.handleClick()" class="action-fab" mat-mini-fab>
+        @if (menu.publishing) {
+          <mat-icon>
+            <mat-spinner diameter="18"></mat-spinner>
+          </mat-icon>
+        } @else {
+          <mat-icon>publish</mat-icon>
+        }
+
       </button>
     }
     @if (isAdminOrCanEdit) {

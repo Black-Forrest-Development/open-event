@@ -7,5 +7,7 @@
        [fallback]=FALLBACK.mp
        [rating]=RATING.x
        src="{{account().iconUrl}}">
-  <div *ngIf="showUserName" class="flex-auto">{{ account() | accountDisplayName }}</div>
+  @if (showUserName()) {
+    <div class="flex-auto">{{ account() | accountDisplayName }}</div>
+  }
 </div>

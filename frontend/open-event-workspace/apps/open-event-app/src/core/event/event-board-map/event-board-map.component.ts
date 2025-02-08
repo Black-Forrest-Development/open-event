@@ -7,10 +7,9 @@ import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
 import {EventBoardService} from "../event-board.service";
 import {EventSearchEntry} from "@open-event-workspace/core";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
-import {AsyncPipe, NgIf} from "@angular/common";
 import "leaflet.markercluster";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 const iconRetinaUrl = 'marker/marker-icon-2x.png';
 const iconUrl = 'marker/marker-icon.png';
@@ -33,10 +32,8 @@ Marker.prototype.options.icon = iconDefault;
   templateUrl: './event-board-map.component.html',
   styleUrls: ['./event-board-map.component.scss'],
   imports: [
-    MatProgressBar,
     MatCard,
-    AsyncPipe,
-    NgIf
+    LoadingBarComponent
   ],
   standalone: true
 })

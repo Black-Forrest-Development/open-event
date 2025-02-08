@@ -1,55 +1,40 @@
 import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {
-  RegistrationParticipateDialogComponent
-} from "../registration-participate-dialog/registration-participate-dialog.component";
+import {RegistrationParticipateDialogComponent} from "../registration-participate-dialog/registration-participate-dialog.component";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {RegistrationEditDialogComponent} from "../registration-edit-dialog/registration-edit-dialog.component";
 import {RegistrationCancelDialogComponent} from "../registration-cancel-dialog/registration-cancel-dialog.component";
-import {
-  RegistrationParticipateAccountDialogComponent
-} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
-import {
-  RegistrationParticipateManualDialogComponent
-} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
+import {RegistrationParticipateAccountDialogComponent} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
+import {RegistrationParticipateManualDialogComponent} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
 import {AuthService} from "../../../shared/auth/auth.service";
-import {
-  Participant,
-  ParticipantAddRequest,
-  ParticipateRequest,
-  ParticipateResponse,
-  RegistrationInfo,
-  RegistrationService
-} from '@open-event-workspace/core';
+import {Participant, ParticipantAddRequest, ParticipateRequest, ParticipateResponse, RegistrationInfo, RegistrationService} from '@open-event-workspace/core';
 import {MatButton} from "@angular/material/button";
-import {NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
+import {NgTemplateOutlet} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {RegistrationStatusComponent} from "../registration-status/registration-status.component";
 import {MatDivider} from "@angular/material/divider";
 import {AccountComponent} from "../../account/account/account.component";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-registration-details',
   templateUrl: './registration-details.component.html',
   styleUrls: ['./registration-details.component.scss'],
   imports: [
-    NgIf,
     MatIcon,
     TranslatePipe,
-    MatProgressBar,
     MatCard,
     MatCardHeader,
     RegistrationStatusComponent,
     MatDivider,
     MatCardContent,
     NgTemplateOutlet,
-    NgForOf,
     MatButton,
     MatCardActions,
-    AccountComponent
+    AccountComponent,
+    LoadingBarComponent
   ],
   standalone: true
 })

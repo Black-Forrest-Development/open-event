@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {Injectable, signal} from '@angular/core';
 import {PageEvent} from "@angular/material/paginator";
 import {FormControl, FormGroup} from "@angular/forms";
 import {DateTime} from "luxon";
@@ -11,7 +10,7 @@ import {EventService} from "@open-event-workspace/app";
 })
 export class EventBoardService {
 
-  reloading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  reloading = signal(false)
   searching: boolean = false
   pageSize: number = 200
   pageIndex: number = 0
@@ -125,7 +124,7 @@ export class EventBoardService {
 
 
   onScroll() {
-    if (this.reloading.value) return
+    if (this.reloading()) return
     if (!this.hasMoreElements) return
     this.reload(this.pageIndex + 1, this.pageSize)
   }
@@ -139,8 +138,8 @@ export class EventBoardService {
   }
 
   private reload(page: number, size: number) {
-    if (this.reloading.value) return console.log("Ignore reload " + page + ":" + size + " cause reloading ongoing")
-    this.reloading.next(true)
+    if (this.reloading()) return console.log("Ignore reload " + page + ":" + size + " cause reloading ongoing")
+    this.reloading.set(true)
     this.service.search(this.request, page, size).subscribe(
       {
         next: value => this.handleData(value),
@@ -160,13 +159,13 @@ export class EventBoardService {
     this.pageIndex = value.pageable.number
     this.totalSize = value.totalSize
     this.hasMoreElements = value.content.length != 0 && this.pageIndex != (value.totalPages - 1)
-    this.reloading.next(false)
+    this.reloading.set(false)
     this.searching = false
   }
 
   private handleError(err: any) {
     console.error("Failed to load data", err)
-    this.reloading.next(false)
+    this.reloading.set(false)
   }
 
 }

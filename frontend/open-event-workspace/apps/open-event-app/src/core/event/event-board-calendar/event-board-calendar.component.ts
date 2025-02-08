@@ -6,20 +6,17 @@ import {FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
 import {EventBoardService} from "../event-board.service";
-import {MatProgressBar} from "@angular/material/progress-bar";
-import {AsyncPipe, NgIf} from "@angular/common";
 import {MatCard} from "@angular/material/card";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-board-calendar',
   templateUrl: './event-board-calendar.component.html',
   styleUrls: ['./event-board-calendar.component.scss'],
   imports: [
-    MatProgressBar,
-    AsyncPipe,
-    NgIf,
     MatCard,
-    FullCalendarModule
+    FullCalendarModule,
+    LoadingBarComponent
   ],
   standalone: true
 })

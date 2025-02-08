@@ -6,17 +6,19 @@
           {{ 'address.title' | translate }}
         </div>
         <div class="flex-auto"></div>
-        <button mat-flat-button color="primary" (click)="import()" *ngIf="address.length <= 0">
-          <mat-icon>move_up</mat-icon>
-          {{ 'address.action.import' | translate }}
-        </button>
+        @if (address.length <= 0) {
+          <button mat-flat-button color="primary" (click)="import()">
+            <mat-icon>move_up</mat-icon>
+            {{ 'address.action.import' | translate }}
+          </button>
+        }
         <button mat-flat-button color="primary" (click)="create()">
           <mat-icon>domain_add</mat-icon>
           {{ 'address.action.add' | translate }}
         </button>
       </div>
       <mat-divider></mat-divider>
-      <mat-progress-bar *ngIf="reloading" mode="indeterminate"></mat-progress-bar>
+      <app-loading-bar [reloading]="reloading"></app-loading-bar>
 
       <div class="flex flex-col gap-0">
         <table [dataSource]="address" mat-table>

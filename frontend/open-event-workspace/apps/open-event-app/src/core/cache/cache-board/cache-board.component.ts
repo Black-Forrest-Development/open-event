@@ -3,12 +3,12 @@ import {CacheInfo, CacheService} from "@open-event-workspace/core";
 import {MatMiniFabButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatCard} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {NgxEchartsDirective} from "ngx-echarts";
 import type {EChartsCoreOption} from "echarts/core";
 import {MatIcon} from "@angular/material/icon";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-cache-board',
@@ -18,11 +18,11 @@ import {MatIcon} from "@angular/material/icon";
     MatMiniFabButton,
     TranslatePipe,
     MatToolbar,
-    MatProgressBar,
     MatCard,
     MatDivider,
     MatIcon,
-    NgxEchartsDirective
+    NgxEchartsDirective,
+    LoadingBarComponent
   ],
   standalone: true
 })

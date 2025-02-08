@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AccountService, Profile, ProfileChangeRequest, ProfileService} from "@open-event-workspace/core";
+import {Profile, ProfileChangeRequest, ProfileService} from "@open-event-workspace/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngxpert/hot-toast";
@@ -12,6 +12,7 @@ import {MatFormField, MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {AccountService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-account-profile',

@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.address.db
 
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
+import de.sambalmueslie.openevent.common.findByIdOrNull
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
@@ -53,5 +54,8 @@ class AddressStorageService(
         return repository.findByAccountId(account.id, pageable).map { it.convert() }
     }
 
+    override fun getData(id: Long): AddressData? {
+        return repository.findByIdOrNull(id)
+    }
 
 }

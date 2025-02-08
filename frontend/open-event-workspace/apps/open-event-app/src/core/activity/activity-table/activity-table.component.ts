@@ -8,10 +8,11 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
-import {ActivityInfo, ActivityService} from "@open-event-workspace/core";
+import {ActivityInfo} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {ActivityReadComponent} from "../activity-read/activity-read.component";
 import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {ActivityService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-activity-table',
@@ -92,7 +93,7 @@ export class ActivityTableComponent implements OnInit {
 
   handleMarkAllReadClick() {
     this.reloading = true
-    this.service.markAllRead().subscribe({
+    this.service.markReadAll().subscribe({
       next: value => this.loadData(0, this.pageSize),
       error: err => this.handleError(err)
     })

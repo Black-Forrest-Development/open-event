@@ -9,15 +9,15 @@ const isAccessAllowed = async (
   authData: AuthGuardData
 ): Promise<boolean | UrlTree> => {
   const {authenticated, grantedRoles} = authData;
-  const requiredRole = route.data['roles'];
-  if (!requiredRole) {
-    return false;
+  const requiredRoles = route.data['roles'];
+  if (authenticated && (!Array.isArray(requiredRoles) || requiredRoles.length === 0)) {
+    return true;
   }
 
   const hasRequiredRole = (role: string): boolean =>
-    Object.values(grantedRoles.resourceRoles).some((roles) => roles.includes(role));
+    Object.values(grantedRoles.realmRoles).some((roles) => roles.includes(role));
 
-  if (authenticated && hasRequiredRole(requiredRole)) {
+  if (authenticated && hasRequiredRole(requiredRoles)) {
     return true;
   }
 

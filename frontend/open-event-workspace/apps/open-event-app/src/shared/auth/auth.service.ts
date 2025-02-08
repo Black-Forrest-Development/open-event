@@ -31,8 +31,8 @@ export class AuthService {
   public static EVENT_ADMIN = "openevent.event.admin"
   public static EVENT_MODERATOR = "openevent.event.mod"
 
-  public static ACCOUNT_READ = "openevent.account.read"
-  public static ACCOUNT_WRITE = "openevent.account.write"
+  public static ACCOUNT_READ = "account.read"
+  public static ACCOUNT_WRITE = "account.write"
   public static ACCOUNT_ADMIN = "openevent.account.admin"
 
   public static MAIL_READ = "openevent.mail.read"
@@ -47,6 +47,10 @@ export class AuthService {
   public static PROFILE_READ = "openevent.profile.read"
   public static PROFILE_WRITE = "openevent.profile.write"
   public static PROFILE_ADMIN = "openevent.profile.admin"
+
+  public static ADDRESS_READ = "address.read"
+
+  public static ACTIVITY_READ = "activity.read"
 
   private principal: Principal | undefined
   private authenticated = false

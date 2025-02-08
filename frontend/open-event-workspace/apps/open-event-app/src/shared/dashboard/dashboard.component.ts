@@ -36,13 +36,15 @@ export class DashboardComponent implements AfterViewInit {
 
   navItems: MainNavItem[] = [
     new MainNavItem('/event', 'event.type', 'event_note'),
+    new MainNavItem('/account', 'account.type', 'person', [AuthService.ACCOUNT_READ]),
+    new MainNavItem('/address', 'address.title', 'contact_mail', [AuthService.ADDRESS_READ]),
+    new MainNavItem('/activity', 'activity.title', 'notifications', [AuthService.ACTIVITY_READ]),
     new MainNavItem('/category', 'category.type', 'label', [AuthService.CATEGORY_WRITE]),
     new MainNavItem('/settings', 'settings.type', 'settings_applications', [AuthService.SETTINGS_READ, AuthService.SETTINGS_WRITE]),
     new MainNavItem('/mail', 'mail.type', 'email', [AuthService.MAIL_READ, AuthService.MAIL_WRITE]),
     new MainNavItem('/cache', 'cache.type', 'memory', [AuthService.CACHE_READ, AuthService.CACHE_WRITE]),
     new MainNavItem('/backoffice', 'backoffice.type', 'admin_panel_settings', [AuthService.BACKOFFICE_ACCESS]),
     new MainNavItem('/history', 'history.type', 'history', [AuthService.HISTORY_ADMIN]),
-    new MainNavItem('/account', 'account.type', 'person', [AuthService.ACCOUNT_READ, AuthService.ACCOUNT_ADMIN]),
 
 
     // new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),

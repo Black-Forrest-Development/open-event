@@ -311,6 +311,7 @@
     "language": "Sprache"
   },
   "address": {
+    "type": "Adressen",
     "title": "Adressen",
     "dialog": {
       "create": {

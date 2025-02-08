@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {MainNavItem} from "../dashboard/main-nav-item";
 import {MatDialog} from "@angular/material/dialog";
 import {AppService} from "../app.service";
@@ -20,7 +20,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 })
 export class MainMenuComponent {
 
-  @Input() accessibleItems: MainNavItem[] = []
+  accessibleItems = input<MainNavItem[]>([])
 
   constructor(public service: AppService, private dialog: MatDialog,) {
   }

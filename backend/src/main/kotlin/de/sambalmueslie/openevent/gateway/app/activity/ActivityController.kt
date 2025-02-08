@@ -5,6 +5,8 @@ import de.sambalmueslie.openevent.core.activity.ActivityCrudService
 import de.sambalmueslie.openevent.core.activity.api.ActivityInfo
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Put
@@ -42,6 +44,13 @@ class ActivityController(
         }
     }
 
+    @Get("recent")
+    fun getRecentInfos(auth: Authentication, pageable: Pageable): Page<ActivityInfo> {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = accountService.get(auth) ?: return@checkPermission Page.empty()
+            service.getRecentInfosForAccount(account, pageable)
+        }
+    }
 
     @Put("read/{id}")
     fun markReadSingle(auth: Authentication, id: Long) {

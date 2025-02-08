@@ -9,8 +9,27 @@ export const appRoutes: Route[] = [
   {
     path: 'event',
     loadChildren: () => import('../core/event/event.routes').then(m => m.routes),
-    // canActivate: [canActivateAuthRole],
+    canActivate: [canActivateAuthRole],
   },
+  {
+    path: 'account',
+    loadChildren: () => import('../core/account/account.routes').then(m => m.routes),
+    canActivate: [canActivateAuthRole],
+    data: {roles: [AuthService.ACCOUNT_READ]}
+  },
+  {
+    path: 'address',
+    loadChildren: () => import('../core/address/address.routes').then(m => m.routes),
+    canActivate: [canActivateAuthRole],
+    data: {roles: [AuthService.ADDRESS_READ]}
+  },
+  {
+    path: 'activity',
+    loadChildren: () => import('../core/activity/activity.routes').then(m => m.routes),
+    canActivate: [canActivateAuthRole],
+    data: {roles: [AuthService.ACTIVITY_READ]}
+  },
+
   {
     path: 'category',
     loadChildren: () => import('../core/category/category.routes').then(m => m.routes),
@@ -47,12 +66,7 @@ export const appRoutes: Route[] = [
     canActivate: [canActivateAuthRole],
     data: {roles: [AuthService.HISTORY_ADMIN]}
   },
-  {
-    path: 'account',
-    loadChildren: () => import('../core/account/account.routes').then(m => m.routes),
-    canActivate: [canActivateAuthRole],
-    data: {roles: [AuthService.ACCOUNT_READ]}
-  },
+
   {
     path: 'share',
     loadChildren: () => import('../core/share/share.routes').then(m => m.routes),

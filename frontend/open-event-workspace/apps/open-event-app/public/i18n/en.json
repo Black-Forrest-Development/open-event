@@ -331,6 +331,7 @@
     "language": "Language"
   },
   "address": {
+    "type": "Address",
     "title": "Address",
     "dialog": {
       "create": {

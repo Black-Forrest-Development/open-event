@@ -6,6 +6,7 @@ import de.sambalmueslie.openevent.common.PageableSequence
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.address.api.Address
 import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
+import de.sambalmueslie.openevent.core.address.db.AddressData
 import de.sambalmueslie.openevent.core.address.db.AddressStorage
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.location.LocationCrudService
@@ -75,5 +76,8 @@ class AddressCrudService(
         return getAllForAccount(account, Pageable.from(0, 20))
     }
 
+    fun getData(id: Long): AddressData? {
+        return storage.getData(id)
+    }
 
 }

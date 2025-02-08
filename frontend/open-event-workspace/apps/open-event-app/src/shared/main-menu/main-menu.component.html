@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-3">
-  @for (item of accessibleItems; track item) {
+  @for (item of accessibleItems(); track item.text) {
     <a routerLink="{{item.url}}" routerLinkActive="active" class="flex flex-col main-menu-item h-10 justify-center p-3 rounded-md">
       <div class="flex flex-row gap-3 items-center ">
         <mat-icon>{{ item.icon }}</mat-icon>

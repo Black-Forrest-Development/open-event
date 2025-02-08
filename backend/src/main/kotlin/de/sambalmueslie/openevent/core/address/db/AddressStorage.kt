@@ -10,4 +10,5 @@ import io.micronaut.data.model.Pageable
 interface AddressStorage : Storage<Long, Address, AddressChangeRequest> {
     fun create(request: AddressChangeRequest, account: Account): Address
     fun findByAccount(account: Account, pageable: Pageable): Page<Address>
+    fun getData(id: Long): AddressData?
 }

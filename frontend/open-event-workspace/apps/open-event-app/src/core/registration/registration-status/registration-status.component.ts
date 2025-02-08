@@ -1,12 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {
-  EventSearchEntry,
-  Participant,
-  RegistrationInfo,
-  SharedParticipant,
-  SharedRegistration
-} from "@open-event-workspace/core";
-import {NgIf} from "@angular/common";
+import {EventSearchEntry, Participant, RegistrationInfo, SharedParticipant, SharedRegistration} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 
 
@@ -15,7 +8,6 @@ import {TranslatePipe} from "@ngx-translate/core";
   templateUrl: './registration-status.component.html',
   styleUrls: ['./registration-status.component.scss'],
   imports: [
-    NgIf,
     TranslatePipe
   ],
   standalone: true
@@ -28,7 +20,7 @@ export class RegistrationStatusComponent {
   }
 
   @Input()
-  set data(info: RegistrationInfo  | undefined) {
+  set data(info: RegistrationInfo | undefined) {
     if (info) {
       let totalAmount = info.participants.filter(p => !p.waitingList).reduce((sum: number, p: Participant) => sum + p.size, 0)
       this.space.available = info.registration.maxGuestAmount

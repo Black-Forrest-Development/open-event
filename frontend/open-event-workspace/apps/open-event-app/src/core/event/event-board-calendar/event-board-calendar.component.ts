@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, ViewChild} from '@angular/core';
 import {CalendarApi, CalendarOptions, EventClickArg} from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
-import {Subscription} from "rxjs";
 import {FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
@@ -48,24 +47,15 @@ export class EventBoardCalendarComponent implements AfterViewInit {
     eventClick: this.handleEventClick.bind(this)
   }
 
-  private subscription: Subscription | undefined
   private calendarApi: CalendarApi | undefined
 
   constructor(
     public service: EventBoardService,
     private router: Router,
   ) {
-  }
-
-  ngOnInit() {
-    this.subscription = this.service.reloading.subscribe(_ => this.updateCalendar())
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-      this.subscription = undefined
-    }
+    effect(() => {
+      if (this.service.reloading()) this.updateCalendar()
+    });
   }
 
   ngAfterViewInit() {

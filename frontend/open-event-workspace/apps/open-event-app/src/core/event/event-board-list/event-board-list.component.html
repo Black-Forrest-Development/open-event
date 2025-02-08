@@ -3,9 +3,7 @@
   <div class="pb-2"></div>
 }
 
-@if (service.reloading | async) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
+<app-loading-bar [reloading]="service.reloading()"></app-loading-bar>
 
 <div class="flex flex-col gap-2" appScrollNearEnd (nearEnd)="this.service.onScroll()">
 
@@ -13,7 +11,7 @@
     <app-event-board-list-entry [info]="info"></app-event-board-list-entry>
   }
 
-  @if (this.service.hasMoreElements && !(this.service.reloading |async)) {
+  @if (this.service.hasMoreElements && !(this.service.reloading())) {
     <button mat-flat-button color="accent" (click)="this.service.onScroll()"
             class="flex-auto">{{ 'ACTION.LoadMore' | translate }}
     </button>

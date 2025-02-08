@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, effect, Injector} from '@angular/core';
 import * as L from 'leaflet';
 import {icon, layerGroup, Map, Marker, MarkerClusterGroup} from 'leaflet';
-import {Subscription} from "rxjs";
 import {EventBoardMapPopupComponent} from "../event-board-map-popup/event-board-map-popup.component";
 import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
@@ -37,11 +36,10 @@ Marker.prototype.options.icon = iconDefault;
   ],
   standalone: true
 })
-export class EventBoardMapComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EventBoardMapComponent implements AfterViewInit {
 
   private map: Map | undefined
   private markerLayer = layerGroup()
-  private subscription: Subscription | undefined
 
   constructor(
     public service: EventBoardService,
@@ -49,17 +47,9 @@ export class EventBoardMapComponent implements OnInit, OnDestroy, AfterViewInit 
     private injector: Injector,
     private router: Router,
   ) {
-  }
-
-  ngOnInit() {
-    this.subscription = this.service.reloading.subscribe(_ => this.updateMarker())
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-      this.subscription = undefined
-    }
+    effect(() => {
+      if (this.service.reloading()) this.updateMarker()
+    });
   }
 
   ngAfterViewInit(): void {

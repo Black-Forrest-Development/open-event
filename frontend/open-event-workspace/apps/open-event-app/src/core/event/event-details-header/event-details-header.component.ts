@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Location, NgForOf, NgIf} from "@angular/common";
+import {Location, NgForOf} from "@angular/common";
 import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngxpert/hot-toast";
@@ -21,7 +21,6 @@ import {TranslatePipe} from "@ngx-translate/core";
     MatToolbar,
     MatMiniFabButton,
     MatProgressSpinner,
-    NgIf,
     MatMenuTrigger,
     MatMenu,
     MatIcon,

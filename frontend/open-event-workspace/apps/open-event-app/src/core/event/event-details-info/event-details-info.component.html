@@ -13,10 +13,12 @@
   @if (info().event.imageUrl && info().event.imageUrl.length > 0) {
     <img alt="" mat-card-image src="{{info().event.imageUrl.length}}">
   }
-  <mat-card-content *ngIf="info().event.longText.length > 0">
-    <div [innerHTML]="info().event.longText" class="pt-3"></div>
-  </mat-card-content>
-  <ng-container *ngIf="info().categories.length > 0 || info().event.tags.length > 0">
+  @if (info().event.longText.length > 0) {
+    <mat-card-content>
+      <div [innerHTML]="info().event.longText" class="pt-3"></div>
+    </mat-card-content>
+  }
+  @if (info().categories.length > 0 || info().event.tags.length > 0) {
     <div class="pt-3"></div>
     <mat-divider></mat-divider>
     <mat-card-actions class="flex flex-row flex-wrap gap-2">
@@ -38,5 +40,5 @@
         }
       </mat-chip-listbox>
     </mat-card-actions>
-  </ng-container>
+  }
 </mat-card>

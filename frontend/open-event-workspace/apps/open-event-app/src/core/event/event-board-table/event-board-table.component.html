@@ -1,6 +1,4 @@
-@if (service.reloading | async) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
+<app-loading-bar [reloading]="service.reloading()"></app-loading-bar>
 
 <div class="flex flex-col gap-2">
   <mat-card>

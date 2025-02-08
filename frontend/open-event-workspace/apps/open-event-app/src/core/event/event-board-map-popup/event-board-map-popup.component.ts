@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {AccountComponent} from "../../account/account/account.component";
 import {AccountDisplayNamePipe, EventSearchEntry} from "@open-event-workspace/core";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatButton} from "@angular/material/button";
@@ -21,7 +21,6 @@ import {MatButton} from "@angular/material/button";
     MatIcon,
     TranslatePipe,
     MatButton,
-    NgIf
   ],
   standalone: true
 })

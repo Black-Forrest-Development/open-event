@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {EventBoardService} from "../event-board.service";
-import {MatProgressBar} from "@angular/material/progress-bar";
-import {AsyncPipe, DatePipe} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
@@ -12,14 +11,13 @@ import {MatDivider} from "@angular/material/divider";
 import {MatMiniFabButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
+import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-board-table',
   templateUrl: './event-board-table.component.html',
   styleUrls: ['./event-board-table.component.scss'],
   imports: [
-    MatProgressBar,
-    AsyncPipe,
     MatCard,
     MatIcon,
     TranslatePipe,
@@ -30,7 +28,8 @@ import {MatPaginator} from "@angular/material/paginator";
     MatMiniFabButton,
     RouterLink,
     MatPaginator,
-    MatTableModule
+    MatTableModule,
+    LoadingBarComponent
   ],
   standalone: true
 })

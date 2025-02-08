@@ -6,7 +6,7 @@
     <span class="title ps-2">{{ info?.event?.title }}</span>
     <div class="flex-auto"></div>
 
-    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit && !info?.event.published) {
+    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit && !info?.event?.published) {
       <button (click)="menu.publishMenuItem.handleClick()" class="action-fab" mat-mini-fab>
         @if (menu.publishing) {
           <mat-icon>

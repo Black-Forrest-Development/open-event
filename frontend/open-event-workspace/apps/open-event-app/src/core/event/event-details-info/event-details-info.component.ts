@@ -2,7 +2,7 @@ import {Component, input} from '@angular/core';
 import {EventInfo} from "@open-event-workspace/core";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardImage} from "@angular/material/card";
 import {AccountComponent} from "../../account/account/account.component";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {MatChip, MatChipListbox} from "@angular/material/chips";
 import {MatIcon} from "@angular/material/icon";
@@ -23,8 +23,6 @@ import {MatIcon} from "@angular/material/icon";
     MatChipListbox,
     MatChip,
     MatIcon,
-    NgIf,
-    NgForOf
   ],
   standalone: true
 })

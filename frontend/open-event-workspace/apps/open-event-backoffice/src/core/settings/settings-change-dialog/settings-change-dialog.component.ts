@@ -10,7 +10,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 
 @Component({
-  selector: 'app-settings-change-dialog',
+  selector: 'boffice-settings-change-dialog',
   templateUrl: './settings-change-dialog.component.html',
   styleUrl: './settings-change-dialog.component.scss',
   imports: [

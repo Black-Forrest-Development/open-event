@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
-  selector: 'app-mail-history',
+  selector: 'boffice-mail-history',
   imports: [
     DatePipe,
     LoadingBarComponent,

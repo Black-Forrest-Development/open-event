@@ -16,7 +16,7 @@ import {tap} from "rxjs/operators";
 import {MailService} from "@open-event-workspace/backoffice";
 
 @Component({
-  selector: 'app-mail',
+  selector: 'boffice-mail',
   imports: [MatToolbar,
     MatMiniFabButton,
     MatIcon,

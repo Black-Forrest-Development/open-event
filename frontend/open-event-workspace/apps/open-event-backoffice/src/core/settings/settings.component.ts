@@ -14,7 +14,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 
 @Component({
-  selector: 'app-settings',
+  selector: 'boffice-settings',
   imports: [
     CommonModule,
     TranslatePipe,

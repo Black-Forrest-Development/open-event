@@ -8,7 +8,7 @@ import {EventBoardService} from "../event-board.service";
 import {EventSearchEntry} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
 import "leaflet.markercluster";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 const iconRetinaUrl = 'marker/marker-icon-2x.png';
 const iconUrl = 'marker/marker-icon.png';

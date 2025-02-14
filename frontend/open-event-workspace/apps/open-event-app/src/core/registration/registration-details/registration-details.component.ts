@@ -7,7 +7,7 @@ import {RegistrationEditDialogComponent} from "../registration-edit-dialog/regis
 import {RegistrationCancelDialogComponent} from "../registration-cancel-dialog/registration-cancel-dialog.component";
 import {RegistrationParticipateAccountDialogComponent} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
 import {RegistrationParticipateManualDialogComponent} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
-import {AuthService} from "../../../shared/auth/auth.service";
+import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
 import {Participant, ParticipantAddRequest, ParticipateRequest, ParticipateResponse, RegistrationInfo, RegistrationService} from '@open-event-workspace/core';
 import {MatButton} from "@angular/material/button";
 import {NgTemplateOutlet} from "@angular/common";
@@ -16,7 +16,8 @@ import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/m
 import {RegistrationStatusComponent} from "../registration-status/registration-status.component";
 import {MatDivider} from "@angular/material/divider";
 import {AccountComponent} from "../../account/account/account.component";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-registration-details',
@@ -62,9 +63,9 @@ export class RegistrationDetailsComponent {
   }
 
   ngOnInit() {
-    this.adminOrManager = this.authService.hasRole(AuthService.REGISTRATION_MANAGE, AuthService.REGISTRATION_ADMIN)
+    this.adminOrManager = this.authService.hasRole(Roles.REGISTRATION_MANAGE, Roles.REGISTRATION_ADMIN)
     let principal = this.authService.getPrincipal()
-    if (principal) this.adminOrManager = principal.roles.find(r => r === 'openevent.registration.manage' || r === 'openevent.registration.admin') != null
+    if (principal) this.adminOrManager = principal.roles.find(r => r === Roles.REGISTRATION_MANAGE || r === Roles.REGISTRATION_ADMIN) != null
   }
 
   participateSelf() {

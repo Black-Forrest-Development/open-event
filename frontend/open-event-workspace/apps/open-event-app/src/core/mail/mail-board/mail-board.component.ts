@@ -13,7 +13,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatChip} from "@angular/material/chips";
 import {RouterLink} from "@angular/router";
 import {Page} from "@open-event-workspace/shared";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-mail-board',

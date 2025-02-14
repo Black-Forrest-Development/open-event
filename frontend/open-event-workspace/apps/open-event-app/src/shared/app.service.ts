@@ -3,7 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {map, Subject} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {Account, AccountInfo, AccountValidationResult, Profile} from "@open-event-workspace/core";
-import {AuthService} from "./auth/auth.service";
+import {AuthService} from "../../../../libs/shared/src/lib/auth/auth.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {AccountService} from "@open-event-workspace/app";
 import {ConfirmDialogComponent} from "@open-event-workspace/shared";

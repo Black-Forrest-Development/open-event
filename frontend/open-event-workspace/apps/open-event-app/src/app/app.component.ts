@@ -6,7 +6,7 @@ import {AppService} from "../shared/app.service";
 import {environment} from "../environments/environment";
 import {AsyncPipe, Location} from '@angular/common';
 import LogRocket from "logrocket";
-import {LoadingScreenComponent} from "../shared/loading-screen/loading-screen.component";
+import {LoadingScreenComponent} from "../../../../libs/shared/src/lib/loading-screen/loading-screen.component";
 import {DashboardComponent} from "../shared/dashboard/dashboard.component";
 
 @Component({

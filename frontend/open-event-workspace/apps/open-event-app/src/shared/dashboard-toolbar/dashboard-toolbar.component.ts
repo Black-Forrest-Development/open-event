@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {AppService} from "../app.service";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
@@ -34,7 +34,7 @@ import {ActivityButtonComponent} from "../../core/activity/activity-button/activ
 export class DashboardToolbarComponent {
   mobileView = input<boolean>(false)
   title = input<string>("")
-  @Output() toggleSidenavEvent = new EventEmitter<boolean>()
+  toggleSidenavEvent = output<boolean>()
 
   constructor(
     public service: AppService

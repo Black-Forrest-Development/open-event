@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {HttpResponse} from "@angular/common/http";
 import FileSaver from "file-saver";
-import {AuthService} from "../../../shared/auth/auth.service";
+import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
 import {Event, ExportService} from "@open-event-workspace/core";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatMiniFabButton} from "@angular/material/button";
+import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-event-action-export',
@@ -35,7 +36,7 @@ export class EventActionExportComponent {
   }
 
   ngOnInit() {
-    this.accessible = this.authService.hasRole(AuthService.PERMISSION_EXPORT)
+    this.accessible = this.authService.hasRole(Roles.PERMISSION_EXPORT)
   }
 
 

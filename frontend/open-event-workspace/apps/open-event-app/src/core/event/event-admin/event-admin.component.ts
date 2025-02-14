@@ -8,7 +8,7 @@ import {MatIcon} from "@angular/material/icon";
 import {EventActionExportComponent} from "../event-action-export/event-action-export.component";
 import {RegistrationModerationComponent} from "../../registration/registration-moderation/registration-moderation.component";
 import {MatMiniFabButton} from "@angular/material/button";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-admin',

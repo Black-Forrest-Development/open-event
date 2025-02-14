@@ -7,7 +7,7 @@ import {AsyncPipe, Location, NgIf, NgTemplateOutlet} from "@angular/common";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
-import {AuthService} from "../../../shared/auth/auth.service";
+import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
 import {DateTime} from 'luxon';
 import {Account, Event, EventChangeRequest, EventInfo, LocationChangeRequest, RegistrationChangeRequest} from "@open-event-workspace/core";
 import {AppService} from "../../../shared/app.service";
@@ -22,7 +22,8 @@ import {EventChangeFormLocationComponent} from "../event-change-form-location/ev
 import {EventChangeFormRegistrationComponent} from "../event-change-form-registration/event-change-form-registration.component";
 import {EventChangeHelpComponent} from "../event-change-help/event-change-help.component";
 import {EventService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-event-change',
@@ -129,8 +130,8 @@ export class EventChangeComponent {
     this.route.paramMap.subscribe(p => this.handleParams(p))
     let endDate = this.eventForm.get('endDate');
     if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
-    if (this.authService.hasRole(AuthService.EVENT_ADMIN)) this.isAdminOrModerator = true
-    if (this.authService.hasRole(AuthService.EVENT_MODERATOR)) this.isAdminOrModerator = true
+    if (this.authService.hasRole(Roles.EVENT_ADMIN)) this.isAdminOrModerator = true
+    if (this.authService.hasRole(Roles.EVENT_MODERATOR)) this.isAdminOrModerator = true
     if (!this.account || !this.isAdminOrModerator) this.account = this.appService.account
 
   }

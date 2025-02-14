@@ -11,7 +11,7 @@ import {FullscreenOverlayContainer, OverlayContainer} from "@angular/cdk/overlay
 import {provideShareButtonsOptions} from "ngx-sharebuttons";
 import {shareIcons} from "ngx-sharebuttons/icons";
 import {MatPaginatorIntl} from "@angular/material/paginator";
-import {MatPaginatorI18nService} from "../shared/mat-paginator-i18n.service";
+import {MatPaginatorI18nService} from "@open-event-workspace/shared";
 import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';

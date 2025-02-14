@@ -4,9 +4,9 @@ import {EventBoardFilterComponent} from "../event-board-filter/event-board-filte
 import {EventBoardListEntryComponent} from "../event-board-list-entry/event-board-list-entry.component";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
-import {ScrollNearEndDirective} from "../../../shared/scroll-near-end.directive";
+import {ScrollNearEndDirective} from "../../../../../../libs/shared/src/lib/scroll-near-end.directive";
 import {MatIcon} from "@angular/material/icon";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-event-board-list',

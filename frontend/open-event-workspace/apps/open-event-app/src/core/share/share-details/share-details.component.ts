@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {AuthService} from "../../../shared/auth/auth.service";
+import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {Event, Share, ShareChangeRequest} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
@@ -7,7 +7,8 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {MatDivider} from "@angular/material/divider";
 import {ShareButtons} from "ngx-sharebuttons/buttons";
 import {ShareService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-share-details',
@@ -43,7 +44,7 @@ export class ShareDetailsComponent {
   }
 
   ngOnInit() {
-    this.adminOrManager = this.authService.hasRole(AuthService.REGISTRATION_MANAGE, AuthService.REGISTRATION_ADMIN)
+    this.adminOrManager = this.authService.hasRole(Roles.REGISTRATION_MANAGE, Roles.REGISTRATION_ADMIN)
     let principal = this.authService.getPrincipal()
     if (principal) this.adminOrManager = principal.roles.find(r => r === 'openevent.registration.manage' || r === 'openevent.registration.admin') != null
   }

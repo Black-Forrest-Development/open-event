@@ -11,7 +11,7 @@ import {MatList, MatListItem} from "@angular/material/list";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {AccountService} from "@open-event-workspace/app";
 
 @Component({

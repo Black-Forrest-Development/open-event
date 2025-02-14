@@ -1,2 +1,5 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+@if (service.validated | async) {
+  <boffice-dashboard></boffice-dashboard>
+} @else {
+  <router-outlet></router-outlet>
+}

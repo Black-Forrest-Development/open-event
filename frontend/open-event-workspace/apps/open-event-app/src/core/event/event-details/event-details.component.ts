@@ -8,7 +8,7 @@ import {EventDetailsLocationComponent} from "../event-details-location/event-det
 import {RegistrationDetailsComponent} from "../../registration/registration-details/registration-details.component";
 import {ShareDetailsComponent} from "../../share/share-details/share-details.component";
 import {EventService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 
 @Component({

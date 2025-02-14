@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRow} from "@angular/material/chips";
-import {ChipSelectEntry} from "../../../shared/chip-select-pane/chip-select-entry";
+import {ChipSelectEntry} from "../../../../../../libs/shared/src/lib/chip-select-pane/chip-select-entry";
 import {Category} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {NgIf} from "@angular/common";
@@ -11,7 +11,7 @@ import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {ChipSelectPaneComponent} from "../../../shared/chip-select-pane/chip-select-pane.component";
+import {ChipSelectPaneComponent} from "../../../../../../libs/shared/src/lib/chip-select-pane/chip-select-pane.component";
 import {CategoryService} from "@open-event-workspace/app";
 
 @Component({

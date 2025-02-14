@@ -12,7 +12,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {Page} from "@open-event-workspace/shared";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-mail-history',

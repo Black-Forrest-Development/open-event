@@ -8,7 +8,7 @@ import {MatDivider} from "@angular/material/divider";
 import {NgxEchartsDirective} from "ngx-echarts";
 import type {EChartsCoreOption} from "echarts/core";
 import {MatIcon} from "@angular/material/icon";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-cache-board',

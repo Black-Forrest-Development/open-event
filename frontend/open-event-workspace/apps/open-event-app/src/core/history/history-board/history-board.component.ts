@@ -11,7 +11,7 @@ import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-history-board',

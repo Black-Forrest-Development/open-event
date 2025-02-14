@@ -10,7 +10,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
-import {LoadingBarComponent} from "../../../shared/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 
 @Component({
   selector: 'app-search-account-dialog',

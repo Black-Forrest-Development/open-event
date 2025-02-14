@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/open-event-backoffice",
         "index": "apps/open-event-backoffice/src/index.html",
         "browser": "apps/open-event-backoffice/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/open-event-backoffice/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,18 @@
             "input": "apps/open-event-backoffice/public"
           }
         ],
-        "styles": ["apps/open-event-backoffice/src/styles.scss"],
+        "styles": [
+          "node_modules/leaflet/dist/leaflet.css",
+          "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+          "node_modules/ngx-sharebuttons/themes/circles.scss",
+          "node_modules/ngx-sharebuttons/themes/modern.scss",
+          "apps/open-event-backoffice/src/theme.scss",
+          "apps/open-event-backoffice/src/styles.scss",
+          "node_modules/quill/dist/quill.core.css",
+          "node_modules/quill/dist/quill.bubble.css",
+          "node_modules/quill/dist/quill.snow.css",
+          "node_modules/@ngxpert/hot-toast/src/styles/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -44,7 +59,14 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/open-event-backoffice/src/environments/environment.ts",
+              "with": "apps/open-event-backoffice/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -59,7 +81,11 @@
           "buildTarget": "open-event-backoffice:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "proxy.conf.json",
+        "port": 4201
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -72,7 +98,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/open-event-backoffice/jest.config.ts"
       }

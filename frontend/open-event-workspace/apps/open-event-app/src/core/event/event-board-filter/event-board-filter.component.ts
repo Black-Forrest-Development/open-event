@@ -3,17 +3,12 @@ import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatChipListbox, MatChipOption, MatChipSelectionChange} from "@angular/material/chips";
 import {DateTime} from "luxon";
 import {EventBoardService} from "../event-board.service";
-import {ChipSelectEntry} from "../../../shared/chip-select-pane/chip-select-entry";
+import {ChipSelectEntry} from "../../../../../../libs/shared/src/lib/chip-select-pane/chip-select-entry";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
 import {MatError, MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
-import {
-  MatDatepickerModule,
-  MatDatepickerToggle,
-  MatDateRangeInput,
-  MatDateRangePicker
-} from "@angular/material/datepicker";
+import {MatDatepickerModule, MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from "@angular/material/datepicker";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatOption, MatSelect} from "@angular/material/select";

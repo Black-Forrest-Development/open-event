@@ -4,11 +4,11 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {filter, map, Observable, withLatestFrom} from "rxjs";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MainNavItem} from "./main-nav-item";
-import {AuthService} from "../auth/auth.service";
+import {AuthService, MainMenuComponent} from "@open-event-workspace/shared";
 import {DashboardService} from "./dashboard.service";
 import {AsyncPipe} from "@angular/common";
-import {MainMenuComponent} from "../main-menu/main-menu.component";
 import {DashboardToolbarComponent} from "../dashboard-toolbar/dashboard-toolbar.component";
+import {Roles} from "../roles";
 
 @Component({
   selector: 'app-dashboard',
@@ -36,15 +36,15 @@ export class DashboardComponent implements AfterViewInit {
 
   navItems: MainNavItem[] = [
     new MainNavItem('/event', 'event.type', 'event_note'),
-    new MainNavItem('/account', 'account.type', 'person', [AuthService.ACCOUNT_READ]),
-    new MainNavItem('/address', 'address.title', 'contact_mail', [AuthService.ADDRESS_READ]),
-    new MainNavItem('/activity', 'activity.title', 'notifications', [AuthService.ACTIVITY_READ]),
-    new MainNavItem('/category', 'category.type', 'label', [AuthService.CATEGORY_WRITE]),
-    new MainNavItem('/settings', 'settings.type', 'settings_applications', [AuthService.SETTINGS_READ, AuthService.SETTINGS_WRITE]),
-    new MainNavItem('/mail', 'mail.type', 'email', [AuthService.MAIL_READ, AuthService.MAIL_WRITE]),
-    new MainNavItem('/cache', 'cache.type', 'memory', [AuthService.CACHE_READ, AuthService.CACHE_WRITE]),
-    new MainNavItem('/backoffice', 'backoffice.type', 'admin_panel_settings', [AuthService.BACKOFFICE_ACCESS]),
-    new MainNavItem('/history', 'history.type', 'history', [AuthService.HISTORY_ADMIN]),
+    new MainNavItem('/account', 'account.type', 'person', [Roles.ACCOUNT_READ]),
+    new MainNavItem('/address', 'address.title', 'contact_mail', [Roles.ADDRESS_READ]),
+    new MainNavItem('/activity', 'activity.title', 'notifications', [Roles.ACTIVITY_READ]),
+    new MainNavItem('/category', 'category.type', 'label', [Roles.CATEGORY_WRITE]),
+    new MainNavItem('/settings', 'settings.type', 'settings_applications', [Roles.SETTINGS_READ, Roles.SETTINGS_WRITE]),
+    new MainNavItem('/mail', 'mail.type', 'email', [Roles.MAIL_READ, Roles.MAIL_WRITE]),
+    new MainNavItem('/cache', 'cache.type', 'memory', [Roles.CACHE_READ, Roles.CACHE_WRITE]),
+    new MainNavItem('/backoffice', 'backoffice.type', 'admin_panel_settings', [Roles.BACKOFFICE_ACCESS]),
+    new MainNavItem('/history', 'history.type', 'history', [Roles.HISTORY_ADMIN]),
 
 
     // new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),

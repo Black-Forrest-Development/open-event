@@ -4,7 +4,7 @@ import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
-import {AuthService} from "../../../shared/auth/auth.service";
+import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
 import {Event, EventInfo, EventService} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatMiniFabButton} from "@angular/material/button";
@@ -12,6 +12,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
+import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-event-details-header',
@@ -57,8 +58,8 @@ export class EventDetailsHeaderComponent {
   }
 
   ngOnInit() {
-    if (this.authService.hasRole(AuthService.EVENT_ADMIN)) this.isAdminOrCanEdit = true
-    if (this.authService.hasRole(AuthService.EVENT_MODERATOR)) this.isAdminOrCanEdit = true
+    if (this.authService.hasRole(Roles.EVENT_ADMIN)) this.isAdminOrCanEdit = true
+    if (this.authService.hasRole(Roles.EVENT_MODERATOR)) this.isAdminOrCanEdit = true
     this.menu.changed.subscribe(e => this.changed.emit(e))
   }
 

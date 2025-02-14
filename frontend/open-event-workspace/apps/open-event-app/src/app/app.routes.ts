@@ -27,16 +27,6 @@ export const appRoutes: Route[] = [
     canActivate: [canActivateAuthRole],
     data: {roles: [Roles.ACTIVITY_READ]}
   },
-
-
-  // {
-  //   path: 'backoffice',
-  //   loadChildren: () => import('../core/backoffice/backoffice.routes').then(m => m.routes),
-  //   canActivate: [canActivateAuthRole],
-  //   data: {roles: [AuthService.BACKOFFICE_ACCESS]}
-  // },
-
-
   {
     path: 'share',
     loadChildren: () => import('../core/share/share.routes').then(m => m.routes),

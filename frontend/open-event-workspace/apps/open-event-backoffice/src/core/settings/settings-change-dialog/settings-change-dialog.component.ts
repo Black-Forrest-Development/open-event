@@ -1,34 +1,26 @@
 import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
-} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {Setting, SettingChangeRequest} from "@open-event-workspace/core";
+import {SettingsService} from "@open-event-workspace/backoffice";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatButton} from "@angular/material/button";
-import {MatIcon} from "@angular/material/icon";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {Setting, SettingChangeRequest, SettingService} from "@open-event-workspace/core";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-settings-change-dialog',
   templateUrl: './settings-change-dialog.component.html',
   styleUrl: './settings-change-dialog.component.scss',
   imports: [
-    MatDialogTitle,
-    MatDialogContent,
     TranslatePipe,
-    MatDialogActions,
-    MatButton,
-    MatIcon,
     ReactiveFormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInput
   ],
   standalone: true
 })
@@ -37,7 +29,7 @@ export class SettingsChangeDialogComponent {
 
   constructor(
     private fb: FormBuilder,
-    private service: SettingService,
+    private service: SettingsService,
     public dialogRef: MatDialogRef<SettingsChangeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Setting | null
   ) {

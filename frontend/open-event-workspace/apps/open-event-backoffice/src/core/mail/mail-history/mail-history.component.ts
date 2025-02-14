@@ -1,35 +1,41 @@
 import {Component, EventEmitter} from '@angular/core';
-import {HotToastService} from "@ngxpert/hot-toast";
-import {debounceTime, distinctUntilChanged} from "rxjs";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {ActivatedRoute, Router} from "@angular/router";
 import {DatePipe, Location} from "@angular/common";
-import {MailJobHistoryEntry, MailService} from '@open-event-workspace/core';
-import {MatToolbar} from "@angular/material/toolbar";
-import {MatMiniFabButton} from "@angular/material/button";
-import {MatIcon} from "@angular/material/icon";
-import {TranslatePipe} from "@ngx-translate/core";
+import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
 import {MatCard} from "@angular/material/card";
-import {MatTableModule} from "@angular/material/table";
-import {Page} from "@open-event-workspace/shared";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from "@angular/material/table";
+import {MatIcon} from "@angular/material/icon";
+import {MatMiniFabButton} from "@angular/material/button";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MatToolbar} from "@angular/material/toolbar";
+import {TranslatePipe} from "@ngx-translate/core";
+import {MailJobHistoryEntry, MailService} from "@open-event-workspace/core";
+import {HotToastService} from "@ngxpert/hot-toast";
+import {ActivatedRoute, Router} from "@angular/router";
+import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
   selector: 'app-mail-history',
-  templateUrl: './mail-history.component.html',
-  styleUrls: ['./mail-history.component.scss'],
   imports: [
-    MatToolbar,
-    MatMiniFabButton,
-    MatIcon,
-    TranslatePipe,
-    MatCard,
-    MatTableModule,
     DatePipe,
+    LoadingBarComponent,
+    MatCard,
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatIcon,
+    MatMiniFabButton,
     MatPaginator,
-    LoadingBarComponent
+    MatRow,
+    MatRowDef,
+    MatTable,
+    MatToolbar,
+    TranslatePipe
   ],
-  standalone: true
+  templateUrl: './mail-history.component.html',
+  styleUrl: './mail-history.component.scss'
 })
 export class MailHistoryComponent {
   reloading: boolean = false

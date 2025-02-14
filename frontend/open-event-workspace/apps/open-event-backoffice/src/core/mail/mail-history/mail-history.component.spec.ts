@@ -6,10 +6,12 @@ describe('MailHistoryComponent', () => {
   let component: MailHistoryComponent;
   let fixture: ComponentFixture<MailHistoryComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [MailHistoryComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [MailHistoryComponent]
+    })
+    .compileComponents();
+
     fixture = TestBed.createComponent(MailHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

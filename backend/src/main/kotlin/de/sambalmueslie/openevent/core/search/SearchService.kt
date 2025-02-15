@@ -4,6 +4,7 @@ import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.search.account.AccountSearchOperator
 import de.sambalmueslie.openevent.core.search.api.*
 import de.sambalmueslie.openevent.core.search.category.CategorySearchOperator
+import de.sambalmueslie.openevent.core.search.common.SearchOperatorInfo
 import de.sambalmueslie.openevent.core.search.event.EventSearchOperator
 import io.micronaut.context.annotation.Context
 import io.micronaut.data.model.Pageable
@@ -19,6 +20,8 @@ class SearchService(
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(SearchService::class.java)
     }
+
+    private val operators = listOf(eventOperator, accountOperator, categoryOperator).associateBy { it.key() }
 
     fun searchEvents(actor: Account, request: EventSearchRequest, pageable: Pageable): EventSearchResponse {
         return eventOperator.search(actor, request, pageable)
@@ -42,5 +45,14 @@ class SearchService(
 
     fun setupCategories() {
         return categoryOperator.setup()
+    }
+
+    fun getInfo() = operators.values.map { it.info() }
+    fun getInfo(key: String) = operators[key]?.info()
+
+    fun setup(key: String): SearchOperatorInfo? {
+        val operator = operators[key] ?: return null
+        operator.setup()
+        return operator.info()
     }
 }

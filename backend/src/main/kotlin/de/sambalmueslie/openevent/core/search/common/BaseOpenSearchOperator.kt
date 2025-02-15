@@ -26,6 +26,16 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     private val logger: Logger
 ) : SearchOperator<T, R, S> {
 
+    override fun key(): String {
+        return name
+    }
+
+
+    private var status: SearchOperatorStatus = SearchOperatorStatus.UNKNOWN
+    private var statsTotal: Long = 0
+    private var statsSuccessful: Long = 0
+    private var statsFailed: Long = 0
+
     protected val client = openSearch.getClient()
 
     protected val mapper = ObjectMapper()
@@ -35,13 +45,36 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
 
+
+    init {
+        runBlocking {
+            try {
+                val index = client.getIndex(name)
+                status = SearchOperatorStatus.READY
+            } catch (e: Exception) {
+                status = SearchOperatorStatus.UNKNOWN
+            }
+        }
+    }
+
+    override fun info(): SearchOperatorInfo {
+        return SearchOperatorInfo(
+            name,
+            status,
+            SearchOperatorStats(statsTotal, statsSuccessful, statsFailed)
+        )
+    }
+
     @Async
     override fun setup() {
         runBlocking {
+            status = SearchOperatorStatus.CREATE_INDEX
             var duration = measureTimeMillis { createIndex() }
             logger.info("[$name] Create index within $duration ms.")
+            status = SearchOperatorStatus.INITIAL_LOAD
             duration = measureTimeMillis { initialLoad() }
             logger.info("[$name] Initial load within $duration ms.")
+            status = SearchOperatorStatus.READY
         }
     }
 
@@ -62,10 +95,20 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
     abstract fun getFieldMappingProvider(): FieldMappingProvider
 
     private suspend fun initialLoad() {
+        statsTotal = 0
+        statsSuccessful = 0
+        statsFailed = 0
+
         val data = PageSequence { initialLoadPage(it) }
         data.forEach { page ->
-            client.bulk(target = name) {
-                page.forEach { (id, value) -> index(value, id = id) }
+            statsTotal = page.totalSize
+            try {
+                client.bulk(target = name) {
+                    page.forEach { (id, value) -> index(value, id = id) }
+                }
+                statsSuccessful += page.content.size
+            } catch (e: Exception) {
+                statsFailed += page.content.size
             }
         }
     }
@@ -93,6 +136,8 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
                 id = id,
                 opType = type
             )
+            statsTotal++
+            statsSuccessful++
         }
         logger.info("[$name] index document within $duration ms.")
     }
@@ -105,6 +150,8 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
                 id = id,
                 opType = type
             )
+            statsTotal++
+            statsSuccessful++
         }
         logger.info("[$name] index document within $duration ms.")
     }

@@ -95,7 +95,7 @@
         "week": "This week",
         "next": "Next week",
         "start": "Start date",
-        "end" : "End date"
+        "end": "End date"
       }
     },
     "table": {
@@ -398,5 +398,29 @@
     "prev": "Previous page",
     "first": "First page",
     "last": "Last page"
+  },
+  "search": {
+    "type": "Search Index",
+    "title": "Search Index Administration",
+    "key": {
+      "oe.event": "Events",
+      "oe.account": "Accounts",
+      "oe.category": "Categories"
+    },
+    "status": {
+      "UNKNOWN": "Unknown",
+      "CREATE_INDEX": "Create index",
+      "INITIAL_LOAD": "Initial load",
+      "READY": "Ready",
+      "IDLE": "Idle"
+    },
+    "statistics": {
+      "total": "Total entries",
+      "successfull": "Successfull",
+      "failed": "Failed"
+    },
+    "action": {
+      "setup": "Setup"
+    }
   }
 }

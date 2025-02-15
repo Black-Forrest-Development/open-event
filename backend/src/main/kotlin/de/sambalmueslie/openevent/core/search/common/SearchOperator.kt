@@ -6,6 +6,8 @@ import de.sambalmueslie.openevent.core.search.api.SearchResponse
 import io.micronaut.data.model.Pageable
 
 interface SearchOperator<T, R : SearchRequest, S : SearchResponse<T>> {
+    fun key(): String
+    fun info(): SearchOperatorInfo
     fun setup()
     fun search(actor: Account, request: R, pageable: Pageable): S
 }

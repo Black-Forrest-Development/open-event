@@ -378,5 +378,29 @@
     "prev": "Vorherige Seite",
     "first": "Erste Seite",
     "last": "Letzte Seite"
+  },
+  "search": {
+    "type": "Suchindex",
+    "title": "Suchindex-Verwaltung",
+    "key": {
+      "oe.event": "Ereignisse",
+      "oe.account": "Konten",
+      "oe.category": "Kategorien"
+    },
+    "status": {
+      "UNKNOWN": "Unbekannt",
+      "CREATE_INDEX": "Index erstellen",
+      "INITIAL_LOAD": "Erstmalige Ladung",
+      "READY": "Bereit",
+      "IDLE": "Inaktiv"
+    },
+    "statistics": {
+      "total": "Gesamte Einträge",
+      "successfull": "Erfolgreich",
+      "failed": "Fehlgeschlagen"
+    },
+    "action": {
+      "setup": "Neu erstellen"
+    }
   }
 }

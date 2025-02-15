@@ -91,3 +91,15 @@ export class CategorySearchRequest {
 export interface CategorySearchResponse {
   result: Page<Category>
 }
+
+export interface SearchOperatorInfo {
+  key: string,
+  status: string,
+  statistics: SearchOperatorStats
+}
+
+export interface SearchOperatorStats {
+  total: number,
+  successful: number,
+  failed: number,
+}

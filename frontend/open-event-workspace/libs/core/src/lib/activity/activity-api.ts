@@ -14,3 +14,10 @@ export interface Activity {
   type: string,
   timestamp: string
 }
+
+export class ActivityCleanupRequest {
+  constructor(
+    public timestamp: string
+  ) {
+  }
+}

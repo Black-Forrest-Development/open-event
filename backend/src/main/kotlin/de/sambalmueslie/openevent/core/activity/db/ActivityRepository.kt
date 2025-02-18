@@ -7,6 +7,7 @@ import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.data.model.query.builder.sql.Dialect
+import java.time.LocalDateTime
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
@@ -18,4 +19,6 @@ interface ActivityRepository : DataObjectRepository<Long, ActivityData> {
     )
     fun findRecentForAccount(accountId: Long, pageable: Pageable): Page<ActivityData>
 
+    fun findByCreatedLessThan(timestamp: LocalDateTime, pageable: Pageable): Page<ActivityData>
+    fun deleteByIdIn(ids: Set<Long>)
 }

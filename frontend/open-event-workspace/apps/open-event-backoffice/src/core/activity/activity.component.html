@@ -1,1 +1,21 @@
-<p>activity works!</p>
+<mat-toolbar class="px-2" color="primary">
+  <div class="flex flex-row gap-3 flex-auto items-center">
+    <h3>{{ 'activity.title' | translate }}</h3>
+    <div class="flex-auto"></div>
+    <button (click)="cleanup()" class="toolbar-action-fab" mat-mini-fab color="accent">
+      <mat-icon>auto_delete</mat-icon>
+    </button>
+    <button (click)="reload()" class="toolbar-action-fab" mat-mini-fab color="accent">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+
+<app-loading-bar [reloading]="reloading"></app-loading-bar>
+<div class="flex flex-col gap-2 p-4">
+  <mat-card>
+    <app-activity-table [data]="data" [reloading]="reloading" [pageSize]="pageSize" [pageNumber]="pageNumber" [totalElements]="totalElements"
+                        (pageEvent)="handlePageChange($event)"></app-activity-table>
+  </mat-card>
+</div>

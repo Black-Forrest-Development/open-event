@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Account, AccountValidationResult} from "@open-event-workspace/core";
+import {Account, AccountSearchRequest, AccountSearchResponse, AccountValidationResult} from "@open-event-workspace/core";
 import {Observable} from "rxjs";
 import {BaseService} from "@open-event-workspace/shared";
 
@@ -24,5 +24,11 @@ export class AccountService extends BaseService {
     return this.get('validate', params)
   }
 
+  search(request: AccountSearchRequest, page: number, size: number): Observable<AccountSearchResponse> {
+    let params = new HttpParams()
+      .set("page", page)
+      .set("size", size)
+    return this.post('search', request, params)
+  }
 
 }

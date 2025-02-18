@@ -74,4 +74,8 @@ class ActivitySubscriberRelationService(
     fun getByActivityIds(activityIds: Set<Long>): List<ActivitySubscriberRelation> {
         return repository.findByActivityIdIn(activityIds)
     }
+
+    fun deleteByActivityId(activityIds: Set<Long>) {
+        repository.deleteByActivityIdIn(activityIds)
+    }
 }

@@ -7,6 +7,7 @@ import de.sambalmueslie.openevent.core.activity.api.ActivityChangeRequest
 import de.sambalmueslie.openevent.core.activity.api.ActivityInfo
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
+import java.time.LocalDateTime
 
 interface ActivityStorage : Storage<Long, Activity, ActivityChangeRequest> {
     fun create(request: ActivityChangeRequest, actor: Account): Activity
@@ -18,5 +19,8 @@ interface ActivityStorage : Storage<Long, Activity, ActivityChangeRequest> {
 
     fun markReadSingle(account: Account, id: Long)
     fun markReadAll(account: Account)
+
+    fun findBefore(timestamp: LocalDateTime, pageable: Pageable): Page<Activity>
+    fun deleteAll(activities: List<Activity>)
 
 }

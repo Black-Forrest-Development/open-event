@@ -6,10 +6,12 @@ import de.sambalmueslie.openevent.core.account.api.AccountValidationResult
 import de.sambalmueslie.openevent.core.account.api.Preferences
 import de.sambalmueslie.openevent.core.account.api.Profile
 import de.sambalmueslie.openevent.core.checkPermission
+import de.sambalmueslie.openevent.core.search.SearchService
+import de.sambalmueslie.openevent.core.search.api.AccountSearchRequest
+import de.sambalmueslie.openevent.core.search.api.AccountSearchResponse
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.QueryValue
+import io.micronaut.data.model.Pageable
+import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.tags.Tag
 
@@ -17,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "BACKOFFICE Account API")
 class AccountController(
     private val service: AccountCrudService,
+    private val searchService: SearchService,
     audit: AuditService,
 ) {
     companion object {
@@ -50,6 +53,14 @@ class AccountController(
         return auth.checkPermission(PERMISSION_ADMIN) {
             val account = service.get(auth) ?: return@checkPermission null
             service.getPreferences(account)
+        }
+    }
+
+    @Post("/search")
+    fun search(auth: Authentication, @Body request: AccountSearchRequest, pageable: Pageable): AccountSearchResponse {
+        return auth.checkPermission(PERMISSION_ADMIN) {
+            val system = service.getSystemAccount()
+            searchService.searchAccounts(system, request, pageable)
         }
     }
 }

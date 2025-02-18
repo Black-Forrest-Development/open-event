@@ -25,5 +25,6 @@ interface ActivitySubscriberRelationRepository :
     fun updateByActivityIdAndAccountId(activityId: Long, accountId: Long, read: Boolean)
     fun updateByAccountId(accountId: Long, read: Boolean)
     fun findByActivityIdIn(activityIds: Set<Long>): List<ActivitySubscriberRelation>
+    fun deleteByActivityIdIn(activityIds: Set<Long>)
 
 }

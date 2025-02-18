@@ -16,6 +16,7 @@ import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 @Singleton
@@ -55,6 +56,7 @@ class ActivityStorageService(
     }
 
     override fun deleteDependencies(data: ActivityData) {
+        subscriberRelationService.deleteByActivityId(setOf(data.id))
         unreadInfosCache.invalidateAll()
     }
 
@@ -115,5 +117,16 @@ class ActivityStorageService(
         return subscriberRelationService.countUnreadInfosForAccount(account.id)
     }
 
+
+    override fun findBefore(timestamp: LocalDateTime, pageable: Pageable): Page<Activity> {
+        return converter.convert(repository.findByCreatedLessThan(timestamp, pageable))
+    }
+
+    override fun deleteAll(activities: List<Activity>) {
+        val activityIds = activities.map { it.id }.toSet()
+        subscriberRelationService.deleteByActivityId(activityIds)
+        repository.deleteByIdIn(activityIds)
+        unreadInfosCache.invalidateAll()
+    }
 
 }

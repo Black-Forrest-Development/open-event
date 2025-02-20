@@ -175,6 +175,7 @@
   },
   "category": {
     "type": "Kategorien",
+    "title": "Kategorien",
     "search": "Kategoriesuche",
     "create": "Neue Kategorie anlegen",
     "table": {

@@ -1,1 +1,37 @@
-<p>category works!</p>
+<mat-toolbar class="px-2" color="primary">
+  <div class="flex flex-row gap-3 flex-auto items-center">
+    <h3>{{ 'category.title' | translate }}</h3>
+    <div class="flex-auto"></div>
+    <div class="flex flex-row gap-2 items-center basis-full sm:basis-1/4">
+      <mat-form-field class="dense-3 flex-auto bg-accent-default rounded" subscriptSizing="dynamic">
+        <mat-label class="flex flex-row gap-3">
+          <mat-icon>search</mat-icon>
+          {{ 'category.search' | translate }}
+        </mat-label>
+        <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
+        <button (click)="input.value = ''; fullTextSearch = ''" *ngIf="input.value.length > 0" mat-icon-button
+                matSuffix>
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="flex-auto"></div>
+    <button (click)="create()" mat-flat-button color="accent">
+      <mat-icon>new_label</mat-icon>
+      {{ 'category.create' | translate }}
+    </button>
+    <button (click)="reload()" class="toolbar-action-fab" mat-mini-fab color="accent">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<app-loading-bar [reloading]="reloading"></app-loading-bar>
+<div class="flex flex-col gap-2 p-4">
+  <mat-card>
+    <app-category-table [data]="data" [reloading]="reloading" [pageSize]="pageSize" [pageNumber]="pageNumber" [totalElements]="totalElements"
+                        (pageEvent)="handlePageChange($event)"
+                        (editEvent)="edit($event)"
+                        (deleteEvent)="delete($event)"
+    ></app-category-table>
+  </mat-card>
+</div>

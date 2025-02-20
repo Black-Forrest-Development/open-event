@@ -177,6 +177,7 @@
   },
   "category": {
     "type": "Category",
+    "title": "Category",
     "search": "Category search",
     "create": "Create Category",
     "table": {

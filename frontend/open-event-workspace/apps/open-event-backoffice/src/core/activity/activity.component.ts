@@ -28,8 +28,6 @@ export class ActivityComponent implements OnInit {
   pageSize = 25
   totalElements = 0
 
-  displayedColumns: string[] = ['title', 'actor', 'source', 'type', 'timestamp', 'cmd']
-
   data: Activity[] = []
 
   constructor(private service: ActivityService, private toast: HotToastService, private dialog: MatDialog) {

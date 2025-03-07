@@ -1,3 +1,6 @@
+import {Observable} from "rxjs";
+import {Page} from "@open-event-workspace/shared";
+
 export interface Address {
   id: number,
 
@@ -25,4 +28,10 @@ export class AddressChangeRequest {
     public lon: number,
   ) {
   }
+}
+
+export interface AddressReadAPI {
+  getAllAddresses(page: number, size: number): Observable<Page<Address>>
+
+  getAddress(id: number): Observable<Address>
 }

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category, CategoryChangeRequest} from "./category-api";
+import {Category, CategoryChangeRequest, CategoryReadAPI} from "./category-api";
 import {BaseService, Page} from "@open-event-workspace/shared";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends BaseService {
+export class CategoryService extends BaseService implements CategoryReadAPI {
   constructor(http: HttpClient) {
     super(http, 'category')
     this.retryCount = 1

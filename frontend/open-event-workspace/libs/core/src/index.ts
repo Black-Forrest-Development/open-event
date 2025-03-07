@@ -20,6 +20,9 @@ export * from './lib/category/category-change/category-change.component';
 export * from './lib/event/event-api';
 export * from './lib/event/event.service';
 export * from './lib/event/event-change/event-change.component';
+export * from './lib/event/event-change-general/event-change-general.component';
+export * from './lib/event/event-change-location/event-change-location.component';
+export * from './lib/event/event-change-registration/event-change-registration.component';
 
 export * from './lib/export/export.service';
 

@@ -28,15 +28,18 @@ export class CategoryChangeComponent {
 
   constructor(private fb: FormBuilder) {
     this.fg = this.fb.group({
-      name: this.fb.control(this.data()?.name ?? '', Validators.required),
-      iconUrl: this.fb.control(this.data()?.iconUrl ?? ''),
+      name: this.fb.control('', Validators.required),
+      iconUrl: this.fb.control(''),
     })
+
 
     effect(() => {
       let category = this.data()
       if(category) this.handleDataChanged(category)
     });
   }
+
+
 
   private handleDataChanged(category: Category) {
     this.fg.get('name')?.setValue(category.name)

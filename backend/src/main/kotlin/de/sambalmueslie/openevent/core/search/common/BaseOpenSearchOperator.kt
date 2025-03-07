@@ -113,16 +113,19 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
         }
     }
 
-    protected fun createDocument(data: Pair<String, String>) {
-        runBlocking { indexDocument(data.first, data.second) }
+    protected fun createDocument(data: Pair<String, String>, blocking: Boolean = true) {
+        runBlocking {
+            indexDocument(data.first, data.second, blocking)
+        }
     }
 
-    protected fun updateDocument(data: Pair<String, String>) {
-        runBlocking { indexDocument(data.first, data.second) }
+    protected fun updateDocument(data: Pair<String, String>, blocking: Boolean = true) {
+        runBlocking { indexDocument(data.first, data.second, blocking) }
     }
 
-    private suspend fun indexDocument(id: String, value: String) {
+    private suspend fun indexDocument(id: String, value: String, blocking: Boolean) {
         val duration = measureTimeMillis {
+            val refresh = if(blocking) Refresh.WaitFor else null
             val existing = try {
                 client.getDocument(target = name, id = id).found
             } catch (e: Exception) {
@@ -134,7 +137,8 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
                 target = name,
                 serializedJson = value,
                 id = id,
-                opType = type
+                opType = type,
+                refresh = refresh
             )
             statsTotal++
             statsSuccessful++

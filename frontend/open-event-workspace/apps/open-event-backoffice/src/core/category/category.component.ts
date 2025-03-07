@@ -34,7 +34,6 @@ export class CategoryComponent {
 
   keyUp: EventEmitter<string> = new EventEmitter<string>()
   request = new CategorySearchRequest('')
-  displayedColumns: string[] = ['name', 'cmd']
 
   constructor(private service: CategoryService, private toast: HotToastService, private dialog: MatDialog) {
   }

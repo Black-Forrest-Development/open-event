@@ -1,0 +1,70 @@
+<div class="flex flex-col py-4 gap-3">
+  <div class="flex flex-row gap-4 justify-between">
+    <div class="text-xl px-4">{{ 'account.details.address' | translate }}</div>
+    <div class="flex-auto"></div>
+    <div></div>
+  </div>
+  <mat-divider></mat-divider>
+  <app-loading-bar [reloading]="loading()"></app-loading-bar>
+  <div class="flex flex-col gap-2 content-between px-4">
+    <table [dataSource]="address()" mat-table>
+
+      <ng-container matColumnDef="street">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.street' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.street }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="streetNumber">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.streetNumber' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.streetNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="zip">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.zip' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.zip }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.city' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.city }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="country">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.country' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.country }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="additionalInfo">
+        <th *matHeaderCellDef mat-header-cell>{{ 'address.property.additionalInfo' | translate }}</th>
+        <td *matCellDef="let address" mat-cell>{{ address.additionalInfo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cmd">
+        <th *matHeaderCellDef class="col-1" mat-header-cell></th>
+        <td *matCellDef="let address" mat-cell>
+          <button color="primary" mat-icon-button (click)="editAddress(address)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button color="warn" mat-icon-button (click)="deleteAddress(address)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+    </table>
+    @if (totalSize() > size()) {
+      <mat-paginator
+        (page)="handlePageChange($event)"
+        [disabled]="loading()"
+        [length]="totalSize()"
+        [pageIndex]="page()"
+        [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="size()"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    }
+  </div>
+</div>

@@ -36,6 +36,10 @@ class AccountCrudService(
         return storage.findByEmail(email)
     }
 
+    fun getById(id: Long): Account? {
+        return storage.get(id)
+    }
+
     fun validate(auth: Authentication, lang: String): AccountValidationResult {
         val account = findExistingAccount(auth) ?: createNewAccount(auth, lang)
         val profile = profileService.getForAccount(account) ?: createNewProfile(auth, account, lang)
@@ -135,7 +139,7 @@ class AccountCrudService(
         return null
     }
 
-    fun update(actor: Account, id: Long, request: AccountSetupRequest): AccountInfo? {
+    fun update(actor: Account, id: Long, request: AccountSetupRequest): AccountInfo {
         val existing = storage.get(id) ?: return setup(actor, request)
 
         return update(actor, existing, request)

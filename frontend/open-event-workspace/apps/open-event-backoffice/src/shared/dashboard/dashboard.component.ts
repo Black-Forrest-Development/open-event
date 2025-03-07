@@ -36,8 +36,8 @@ export class DashboardComponent implements AfterViewInit {
 
   navItems: MainNavItem[] = [
     new MainNavItem('/event', 'event.type', 'event_note', [Roles.EVENT_ADMIN]),
-    new MainNavItem('/account', 'account.type', 'person', [Roles.ACCOUNT_ADMIN]),
-    new MainNavItem('/address', 'address.title', 'contact_mail', [Roles.ADDRESS_ADMIN]),
+    new MainNavItem('/account', 'account.admin', 'manage_accounts', [Roles.ACCOUNT_ADMIN]),
+    // new MainNavItem('/address', 'address.title', 'contact_mail', [Roles.ADDRESS_ADMIN]),
     new MainNavItem('/activity', 'activity.title', 'notifications', [Roles.ACTIVITY_ADMIN]),
     new MainNavItem('/category', 'category.type', 'label', [Roles.CATEGORY_ADMIN]),
     new MainNavItem('/settings', 'settings.type', 'settings_applications', [Roles.SETTINGS_ADMIN]),

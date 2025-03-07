@@ -228,6 +228,7 @@
   "account": {
     "title": "Account",
     "type": "Account",
+    "admin": "Accounts",
     "search": "Search for an account",
     "create": "Create new account",
     "dialog": {

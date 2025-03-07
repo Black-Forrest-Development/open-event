@@ -1,0 +1,37 @@
+<mat-toolbar class="px-2" color="primary">
+  <div class="flex flex-row gap-3 flex-auto items-center">
+    <button (click)="back()" mat-mini-fab>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3>{{ 'account.title' | translate }}</h3>
+    <div class="flex-auto"></div>
+  </div>
+</mat-toolbar>
+<app-loading-bar [reloading]="loading()"></app-loading-bar>
+<div class="flex flex-col gap-4 p-4 content-stretch ">
+  @if (account()) {
+    <div class="flex flex-row gap-4 content-stretch">
+
+      <mat-card class="flex-auto">
+        <app-account-details-title [data]="account()!!"></app-account-details-title>
+      </mat-card>
+
+      <mat-card class="flex-auto">
+        <app-account-details-profile [data]="account()!!"></app-account-details-profile>
+      </mat-card>
+
+      <mat-card class="flex-auto">
+        <app-account-details-preferences [data]="account()!!"></app-account-details-preferences>
+      </mat-card>
+
+    </div>
+
+      <mat-card class="flex-auto">
+        <app-account-details-address [data]="account()!!"></app-account-details-address>
+      </mat-card>
+
+      <mat-card class="flex-auto">
+        <app-account-details-events [data]="account()!!"></app-account-details-events>
+      </mat-card>
+  }
+</div>

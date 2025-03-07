@@ -215,6 +215,7 @@
   "account": {
     "title": "Benutzer",
     "type": "Benutzerprofil",
+    "admin": "Benutzerverwaltung",
     "search": "Suche nach Benutzer",
     "dialog": {
       "create": {

@@ -209,8 +209,16 @@ $open-event-theme: mat.m2-define-light-theme((
   color: map.get($open-event-primary, default-contrast) !important;
 }
 
-.active {
+.menu-active {
   background-color: map.get($open-event-accent, default) !important;
   color: map.get($open-event-accent, default-contrast) !important;
   border-style: solid;
+  opacity: 1.0;
 }
+
+.menu-unselected {
+  background-color: map.get($open-event-accent, lighter);
+  color: map.get($open-event-accent, lighter-contrast) !important;
+  border-style: solid;
+}
+

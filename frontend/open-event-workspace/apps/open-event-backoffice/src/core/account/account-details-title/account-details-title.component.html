@@ -1,0 +1,38 @@
+<div class="flex flex-col py-4 gap-3">
+  <div class="text-xl px-4">{{ 'account.details.title' | translate }}</div>
+  <mat-divider></mat-divider>
+  <div class="flex flex-col gap-2 content-between px-4">
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.id' | translate }}</div>
+      <div>{{ data().id }}</div>
+    </div>
+
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.externalId' | translate }}</div>
+      <div>{{ data().externalId }}</div>
+    </div>
+
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.name' | translate }}</div>
+      <div>{{ data().name }}</div>
+    </div>
+
+
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.registered' | translate }}</div>
+      <div class="rounded bg-gray-200 px-2 py-1 text-sm">{{ data().registrationDate | date:'medium' }}</div>
+    </div>
+
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.login' | translate }}</div>
+      <div class="rounded bg-gray-200 px-2 py-1 text-sm">{{ data().lastLoginDate | date:'medium' }}</div>
+    </div>
+
+    <div class="flex flex-row gap-2 justify-between content-center">
+      <div>{{ 'account.property.linked' | translate }}</div>
+      <div>{{ data().idpLinked }}</div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import {Component, computed, input, resource, signal} from '@angular/core';
-import {Account, AccountDisplayNamePipe, Address} from "@open-event-workspace/core";
+import {Account, AccountDisplayNamePipe, Event} from "@open-event-workspace/core";
 import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
 import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
@@ -63,11 +63,17 @@ export class AccountDetailsEventsComponent {
     this.size.set($event.pageSize)
   }
 
-  editEvent(address: Address) {
+  createEvent() {
 
   }
 
-  deleteEvent(address: Address) {
+  editEvent(event: Event) {
 
   }
+
+  deleteEvent(event: Event) {
+
+  }
+
+
 }

@@ -1,21 +1,25 @@
 export * from './lib/account/account-api';
 export * from './lib/account/account.service';
 export * from './lib/account/account-display-name.pipe';
+export * from './lib/account/account-change/account-change.component';
 
 export * from './lib/activity/activity-api';
 export * from './lib/activity/activity.service';
 
 export * from './lib/address/address-api';
 export * from './lib/address/address.service';
+export * from './lib/address/address-change/address-change.component';
 
 export * from './lib/cache/cache-api';
 export * from './lib/cache/cache.service';
 
 export * from './lib/category/category-api';
 export * from './lib/category/category.service';
+export * from './lib/category/category-change/category-change.component';
 
 export * from './lib/event/event-api';
 export * from './lib/event/event.service';
+export * from './lib/event/event-change/event-change.component';
 
 export * from './lib/export/export.service';
 

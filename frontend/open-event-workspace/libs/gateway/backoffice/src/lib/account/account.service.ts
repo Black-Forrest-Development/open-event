@@ -9,6 +9,7 @@ import {
   AccountSetupRequest,
   AccountValidationResult,
   Address,
+  AddressChangeRequest,
   Event,
   Preferences,
   Profile
@@ -53,6 +54,9 @@ export class AccountService extends BaseService {
     return this.get(id + '/address', params)
   }
 
+  createAddress(id: number, request: AddressChangeRequest): Observable<Address> {
+    return this.post(id + '/address', request)
+  }
 
   getEvents(id: number, page: number, size: number): Observable<Page<Event>> {
     let params = new HttpParams()

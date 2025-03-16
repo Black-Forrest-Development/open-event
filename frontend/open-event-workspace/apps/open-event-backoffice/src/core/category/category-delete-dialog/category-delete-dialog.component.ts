@@ -17,6 +17,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   styleUrl: './category-delete-dialog.component.scss'
 })
 export class CategoryDeleteDialogComponent {
+
   constructor(
     private service: CategoryService,
     public dialogRef: MatDialogRef<CategoryDeleteDialogComponent>,

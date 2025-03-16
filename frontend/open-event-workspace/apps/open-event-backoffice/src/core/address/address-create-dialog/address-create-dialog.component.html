@@ -1,12 +1,9 @@
-<h1 mat-dialog-title class="bg-primary-default">
-  @if (data) {
-    {{ "category.dialog.change.title" | translate }}
-  } @else {
-    {{ "category.dialog.create.title" | translate }}
-  }
-</h1>
+<div class="bg-primary-default flex flex-row justify-between items-center p-4">
+  <div class="text-2xl font-bold">{{ "address.dialog.create.title" | translate }}</div>
+  <div class="bg-accent-default rounded px-4 py-1">{{ data.name }}</div>
+</div>
 <div mat-dialog-content>
-  <lib-category-change [data]="this.data" (request)="handleRequest($event)" #change></lib-category-change>
+  <lib-address-change (request)="handleRequest($event)" #change></lib-address-change>
 </div>
 <mat-dialog-actions align="end">
   <div class="flex flex-row gap-2">

@@ -8,6 +8,10 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatDialog} from "@angular/material/dialog";
+import {AddressChangeDialogComponent} from "../../address/address-change-dialog/address-change-dialog.component";
+import {AddressDeleteDialogComponent} from "../../address/address-delete-dialog/address-delete-dialog.component";
+import {AddressCreateDialogComponent} from "../../address/address-create-dialog/address-create-dialog.component";
 
 @Component({
   selector: 'app-account-details-address',
@@ -51,7 +55,7 @@ export class AccountDetailsAddressComponent {
 
   displayedColumns: string[] = ['street', 'streetNumber', 'zip', 'city', 'country', 'additionalInfo', 'cmd']
 
-  constructor(private service: AccountService) {
+  constructor(private service: AccountService, private dialog: MatDialog) {
   }
 
   handlePageChange($event: PageEvent) {
@@ -59,11 +63,17 @@ export class AccountDetailsAddressComponent {
     this.size.set($event.pageSize)
   }
 
-  editAddress(address: Address) {
+  createAddress() {
+    this.dialog.open(AddressCreateDialogComponent, {data: this.data()}).afterClosed().subscribe(value => this.addressResource.reload())
+  }
 
+  editAddress(address: Address) {
+    this.dialog.open(AddressChangeDialogComponent, {data: address}).afterClosed().subscribe(value => this.addressResource.reload())
   }
 
   deleteAddress(address: Address) {
-
+    this.dialog.open(AddressDeleteDialogComponent, {data: address}).afterClosed().subscribe(value => this.addressResource.reload())
   }
+
+
 }

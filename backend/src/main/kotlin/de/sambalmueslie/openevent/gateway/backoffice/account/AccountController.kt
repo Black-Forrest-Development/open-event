@@ -4,6 +4,7 @@ import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.api.*
 import de.sambalmueslie.openevent.core.address.AddressCrudService
 import de.sambalmueslie.openevent.core.address.api.Address
+import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
@@ -70,6 +71,17 @@ class AccountController(
         }
     }
 
+    @Post("/{id}/address")
+    fun createAddress(auth: Authentication, id: Long, @Body request: AddressChangeRequest): Address? {
+        return auth.checkPermission(PERMISSION_ADMIN) {
+            val account = service.get(id) ?: return@checkPermission null
+            logger.traceCreate(auth, request) {
+                addressCrudService.create(account, account, request)
+            }
+        }
+    }
+
+
     @Get("/{id}/event")
     fun getEvent(auth: Authentication, id: Long, pageable: Pageable): Page<Event>? {
         return auth.checkPermission(PERMISSION_ADMIN) {
@@ -115,7 +127,7 @@ class AccountController(
     }
 
     @Put("/setup/{id}")
-    fun update(auth: Authentication, id: Long, @Body request: AccountSetupRequest): AccountInfo? {
+    fun update(auth: Authentication, id: Long, @Body request: AccountSetupRequest): AccountInfo {
         return auth.checkPermission(PERMISSION_ADMIN) {
             service.update(service.find(auth), id, request)
         }

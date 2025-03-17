@@ -9,6 +9,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {DatePipe} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
+import {EventCreateDialogComponent} from "../../event/event-create-dialog/event-create-dialog.component";
+import {EventChangeDialogComponent} from "../../event/event-change-dialog/event-change-dialog.component";
+import {EventDeleteDialogComponent} from "../../event/event-delete-dialog/event-delete-dialog.component";
+import {EventPublishDialogComponent} from "../../event/event-publish-dialog/event-publish-dialog.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-account-details-events',
@@ -23,6 +29,7 @@ import {DatePipe} from "@angular/common";
     MatButtonModule,
     AccountDisplayNamePipe,
     DatePipe,
+    RouterLink,
   ],
   templateUrl: './account-details-events.component.html',
   styleUrl: './account-details-events.component.scss'
@@ -55,7 +62,7 @@ export class AccountDetailsEventsComponent {
 
   displayedColumns: string[] = ['id', 'owner', 'title', 'start', 'finish', 'published', 'tags', 'cmd']
 
-  constructor(private service: AccountService) {
+  constructor(private service: AccountService, private dialog: MatDialog) {
   }
 
   handlePageChange($event: PageEvent) {
@@ -64,16 +71,26 @@ export class AccountDetailsEventsComponent {
   }
 
   createEvent() {
-
+    this.dialog.open(EventCreateDialogComponent, {data: this.data()}).afterClosed().subscribe(value => {
+      if (value) this.eventsResource.reload()
+    })
   }
 
   editEvent(event: Event) {
-
+    this.dialog.open(EventChangeDialogComponent, {data: event}).afterClosed().subscribe(value => {
+      if (value) this.eventsResource.reload()
+    })
   }
 
   deleteEvent(event: Event) {
-
+    this.dialog.open(EventDeleteDialogComponent, {data: event}).afterClosed().subscribe(value => {
+      if (value) this.eventsResource.reload()
+    })
   }
 
-
+  publishEvent(event: Event) {
+    this.dialog.open(EventPublishDialogComponent, {data: event}).afterClosed().subscribe(value => {
+      if (value) this.eventsResource.reload()
+    })
+  }
 }

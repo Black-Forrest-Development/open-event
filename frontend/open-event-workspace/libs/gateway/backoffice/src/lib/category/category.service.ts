@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {BaseService, Page} from '@open-event-workspace/shared';
-import {Category, CategoryChangeRequest, CategorySearchRequest, CategorySearchResponse} from "@open-event-workspace/core";
+import {Category, CategoryChangeRequest, CategoryReadAPI, CategorySearchRequest, CategorySearchResponse} from "@open-event-workspace/core";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends BaseService {
+export class CategoryService extends BaseService implements CategoryReadAPI {
   constructor(http: HttpClient) {
     super(http, 'backoffice/category')
     this.retryCount = 0

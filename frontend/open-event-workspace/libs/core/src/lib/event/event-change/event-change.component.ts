@@ -6,8 +6,6 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {EventChangeRequest, EventInfo} from "../event-api";
 import {map, Observable} from "rxjs";
-import {HotToastService} from "@ngxpert/hot-toast";
-import {ActivatedRoute, Router} from "@angular/router";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -50,10 +48,6 @@ export class EventChangeComponent implements AfterViewInit {
 
   constructor(
     fb: FormBuilder,
-    private toastService: HotToastService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private location: Location,
     breakpointObserver: BreakpointObserver
   ) {
 
@@ -63,6 +57,7 @@ export class EventChangeComponent implements AfterViewInit {
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')))
   }
+
 
   ngAfterViewInit() {
     let generalForm = this.generalComp?.fg
@@ -88,14 +83,15 @@ export class EventChangeComponent implements AfterViewInit {
     if (!this.fg.valid) return
 
     let request = this.createRequest(this.fg.value, this.isEndHidden())
+    debugger
     if (!request) return
 
     this.request.emit(request)
   }
 
   private createRequest(value: any, endHidden: boolean): EventChangeRequest | undefined {
-    let start = this.createDateTime(value.event.startTime, value.event.startDate);
-    let end = endHidden ? this.createDateTime(value.event.endTime, value.event.startDate) : this.createDateTime(value.event.endTime, value.event.endDate);
+    let start = this.createDateTime(value.general.startTime, value.general.startDate)
+    let end = endHidden ? this.createDateTime(value.general.endTime, value.general.startDate) : this.createDateTime(value.general.endTime, value.general.endDate)
     if (!start || !end) return undefined
 
     let location = new LocationChangeRequest(
@@ -117,13 +113,13 @@ export class EventChangeComponent implements AfterViewInit {
 
 
     return new EventChangeRequest(
-      start.toFormat("YYYY-MM-DD[T]HH:mm:ss"),
-      end.toFormat("YYYY-MM-DD[T]HH:mm:ss"),
-      value.event.title,
-      value.event.shortText,
-      value.event.longText,
-      value.event.imageUrl,
-      value.event.iconUrl,
+      start.toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+      end.toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+      value.general.title,
+      value.general.shortText,
+      value.general.longText,
+      value.general.imageUrl,
+      value.general.iconUrl,
       value.registration.categories,
       location,
       registration,
@@ -133,7 +129,7 @@ export class EventChangeComponent implements AfterViewInit {
   }
 
   private createDateTime(timeStr: string, date: any): DateTime | undefined {
-    let mDate = DateTime.fromISO(date)
+    let mDate = DateTime.fromJSDate(date)
     let time = timeStr.split(":");
     if (time.length == 2 && mDate.isValid) {
       mDate = mDate.set({hour: parseInt(time[0]), minute: parseInt(time[1])});

@@ -1,4 +1,4 @@
-import {Component, computed, input, resource, signal} from '@angular/core';
+import {Component, computed, effect, input, resource, signal} from '@angular/core';
 import {Account, Address} from "@open-event-workspace/core";
 import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
@@ -12,6 +12,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddressChangeDialogComponent} from "../../address/address-change-dialog/address-change-dialog.component";
 import {AddressDeleteDialogComponent} from "../../address/address-delete-dialog/address-delete-dialog.component";
 import {AddressCreateDialogComponent} from "../../address/address-create-dialog/address-create-dialog.component";
+import {HotToastService} from "@ngxpert/hot-toast";
 
 @Component({
   selector: 'app-account-details-address',
@@ -55,7 +56,10 @@ export class AccountDetailsAddressComponent {
 
   displayedColumns: string[] = ['street', 'streetNumber', 'zip', 'city', 'country', 'additionalInfo', 'cmd']
 
-  constructor(private service: AccountService, private dialog: MatDialog) {
+  constructor(private service: AccountService, private toast: HotToastService, private dialog: MatDialog) {
+    effect(() => {
+      this.handleError(this.error())
+    });
   }
 
   handlePageChange($event: PageEvent) {
@@ -76,4 +80,14 @@ export class AccountDetailsAddressComponent {
   }
 
 
+  importAddress() {
+    this.service.importAddress(this.data().id).subscribe({
+      next: value => this.addressResource.reload(),
+      error: e => this.handleError(e)
+    })
+  }
+
+  private handleError(e: any) {
+    if (e) this.toast.error(e)
+  }
 }

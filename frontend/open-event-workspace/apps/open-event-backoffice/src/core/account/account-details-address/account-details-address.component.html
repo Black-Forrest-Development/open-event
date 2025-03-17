@@ -2,7 +2,13 @@
   <div class="flex flex-row gap-4 justify-between">
     <div class="text-xl px-4">{{ 'account.details.address' | translate }}</div>
     <div class="flex-auto"></div>
-    <div>
+    <div class="flex gap-2">
+      @if (address().length == 0 && !loading()) {
+        <button mat-flat-button color="primary" (click)="importAddress()">
+          <mat-icon>import_contacts</mat-icon>
+          {{ 'address.action.import' | translate }}
+        </button>
+      }
       <button mat-flat-button color="primary" (click)="createAddress()">
         <mat-icon>add_circle</mat-icon>
         {{ 'address.action.create' | translate }}

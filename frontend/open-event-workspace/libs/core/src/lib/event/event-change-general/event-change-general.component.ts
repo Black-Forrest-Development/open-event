@@ -1,4 +1,4 @@
-import {Component, effect, input} from '@angular/core';
+import {Component, effect, input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EventInfo} from "../event-api";
 import {DateTime} from 'luxon';
@@ -14,7 +14,7 @@ import {MatInputModule} from "@angular/material/input";
   templateUrl: './event-change-general.component.html',
   styleUrl: './event-change-general.component.scss'
 })
-export class EventChangeGeneralComponent {
+export class EventChangeGeneralComponent implements OnInit{
 
   data = input<EventInfo>()
   hiddenFields = input<string[]>([])
@@ -40,7 +40,11 @@ export class EventChangeGeneralComponent {
     });
   }
 
+  ngOnInit() {
 
+    let endDate = this.fg.get('endDate');
+    if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
+  }
   private handleDataChanged(info: EventInfo) {
     let start = DateTime.fromISO(info.event.start)
     let startTime = start.toFormat("HH:mm")
@@ -85,5 +89,9 @@ export class EventChangeGeneralComponent {
 
   isVisible(ctrl: string): boolean {
     return this.hiddenFields().find(x => x == ctrl) == null
+  }
+
+  private isEndHidden() {
+    return this.hiddenFields().find(f => f === 'endDate') != null
   }
 }

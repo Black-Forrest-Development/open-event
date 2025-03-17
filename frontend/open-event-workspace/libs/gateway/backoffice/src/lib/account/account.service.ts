@@ -11,6 +11,7 @@ import {
   Address,
   AddressChangeRequest,
   Event,
+  EventChangeRequest,
   Preferences,
   Profile
 } from "@open-event-workspace/core";
@@ -58,11 +59,19 @@ export class AccountService extends BaseService {
     return this.post(id + '/address', request)
   }
 
+  importAddress(id: number): Observable<Page<Address>> {
+    return this.post(id + '/address/import', {})
+  }
+
   getEvents(id: number, page: number, size: number): Observable<Page<Event>> {
     let params = new HttpParams()
       .set("page", page)
       .set("size", size)
     return this.get(id + '/event', params)
+  }
+
+  createEvent(id: number, request: EventChangeRequest): Observable<Event> {
+    return this.post(id + '/event', request)
   }
 
   search(request: AccountSearchRequest, page: number, size: number): Observable<AccountSearchResponse> {

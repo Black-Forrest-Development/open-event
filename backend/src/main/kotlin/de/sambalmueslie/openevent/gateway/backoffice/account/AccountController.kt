@@ -8,6 +8,7 @@ import de.sambalmueslie.openevent.core.address.api.AddressChangeRequest
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
+import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.search.SearchService
 import de.sambalmueslie.openevent.core.search.api.AccountSearchRequest
 import de.sambalmueslie.openevent.core.search.api.AccountSearchResponse
@@ -81,12 +82,29 @@ class AccountController(
         }
     }
 
+    @Post("/{id}/address/import")
+    fun importLocations(auth: Authentication, id: Long): Page<Address> {
+        return auth.checkPermission(PERMISSION_ADMIN) {
+            val account = service.get(id) ?: return@checkPermission Page.empty()
+            addressCrudService.importLocations(account)
+        }
+    }
 
     @Get("/{id}/event")
     fun getEvent(auth: Authentication, id: Long, pageable: Pageable): Page<Event>? {
         return auth.checkPermission(PERMISSION_ADMIN) {
             val account = service.get(id) ?: return@checkPermission null
             eventCrudService.getAllForAccount(account, pageable)
+        }
+    }
+
+    @Post("/{id}/event")
+    fun createEvent(auth: Authentication, id: Long, @Body request: EventChangeRequest): Event? {
+        return auth.checkPermission(PERMISSION_ADMIN) {
+            val account = service.get(id) ?: return@checkPermission null
+            logger.traceCreate(auth, request) {
+                eventCrudService.create(account, request)
+            }
         }
     }
 

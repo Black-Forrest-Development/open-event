@@ -1,0 +1,14 @@
+<mat-toolbar class="px-2" color="primary">
+  <div class="flex flex-row gap-3 flex-auto items-center">
+    <button (click)="back()" mat-mini-fab>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3>{{ 'event.title' | translate }}</h3>
+    <div class="flex-auto"></div>
+  </div>
+</mat-toolbar>
+<app-loading-bar [reloading]="loading()"></app-loading-bar>
+<div class="flex flex-col gap-4 p-4 content-stretch ">
+
+  <p>event-details works!</p>
+</div>

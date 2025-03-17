@@ -1,4 +1,4 @@
-import {Component, computed, effect, input, resource} from '@angular/core';
+import {Component, computed, effect, input, OnInit, resource} from '@angular/core';
 import {EventInfo} from "../event-api";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
@@ -17,7 +17,7 @@ import {toPromise} from "@open-event-workspace/shared";
   templateUrl: './event-change-location.component.html',
   styleUrl: './event-change-location.component.scss'
 })
-export class EventChangeLocationComponent {
+export class EventChangeLocationComponent implements OnInit {
 
   data = input<EventInfo>()
   hiddenFields = input<string[]>([])
@@ -25,7 +25,6 @@ export class EventChangeLocationComponent {
 
   addressReadAPI = input.required<AddressReadAPI>()
   addressResource = resource({
-    request: this.data,
     loader: (param) => {
       return toPromise(this.addressReadAPI().getAllAddresses(0, 100))
     }
@@ -55,6 +54,10 @@ export class EventChangeLocationComponent {
         this.setAddress(addresses[0])
       }
     });
+  }
+
+  ngOnInit() {
+    this.addressResource.reload()
   }
 
   handleAddressSelected(event: MatSelectChange) {

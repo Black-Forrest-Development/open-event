@@ -28,7 +28,6 @@ export class EventChangeRegistrationComponent {
   categoryReadAPI = input.required<CategoryReadAPI>()
 
   categoryResource = resource({
-    request: this.data,
     loader: (param) => {
       return toPromise(this.categoryReadAPI().getAllCategories(0, 100))
     }

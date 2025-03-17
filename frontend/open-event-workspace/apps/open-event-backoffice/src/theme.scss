@@ -3,26 +3,60 @@
 
 
 $open-event-primary-palette: (
-  50 : #edeff2,
-  100 : #d3d7dd,
-  200 : #b5bdc7,
-  300 : #97a2b1,
-  400 : #818ea0,
-  500 : #6b7a8f,
-  600 : #637287,
-  700 : #58677c,
-  800 : #4e5d72,
-  900 : #3c4a60,
-  A100 : #d6edff,
-  A200 : #a3d6ff,
-  A400 : #70c0ff,
-  A700 : #57b5ff,
+  50 : #e5e5e5,
+  100 : #bebebf,
+  200 : #939395,
+  300 : #68686a,
+  400 : #47474a,
+  500 : #27272a,
+  600 : #232325,
+  700 : #1d1d1f,
+  800 : #171719,
+  900 : #0e0e0f,
+  A100 : #6767ee,
+  A200 : #3a3ae9,
+  A400 : #0000ef,
+  A700 : #0000d5,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+
+$open-event-accent-palette: (
+  50 : #e6ebf3,
+  100 : #bfcee1,
+  200 : #95adce,
+  300 : #6b8cba,
+  400 : #4b73ab,
+  500 : #2b5a9c,
+  600 : #265294,
+  700 : #20488a,
+  800 : #1a3f80,
+  900 : #102e6e,
+  A100 : #b1d7ff,
+  A200 : #7ebdff,
+  A400 : #4ba4ff,
+  A700 : #3297ff,
   contrast: (
     50 : #000000,
     100 : #000000,
     200 : #000000,
     300 : #000000,
-    400 : #000000,
+    400 : #ffffff,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
@@ -35,65 +69,31 @@ $open-event-primary-palette: (
   )
 );
 
-
-$open-event-accent-palette: (
-  50 : #fbf8f5,
-  100 : #f5eee6,
-  200 : #eee3d5,
-  300 : #e7d8c4,
-  400 : #e1cfb7,
-  500 : #dcc7aa,
-  600 : #d8c1a3,
-  700 : #d3ba99,
-  800 : #ceb390,
-  900 : #c5a67f,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #ffffff,
-  A700 : #ffffff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
-    900 : #000000,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
 $open-event-warn-palette: (
-  50 : #fef1e6,
-  100 : #fddbc1,
-  200 : #fbc497,
-  300 : #f9ac6d,
-  400 : #f89a4e,
-  500 : #f7882f,
-  600 : #f6802a,
-  700 : #f57523,
-  800 : #f36b1d,
-  900 : #f15812,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #ffffff,
-  A700 : #ffeae7,
+  50 : #f7e4e4,
+  100 : #eababa,
+  200 : #dd8d8d,
+  300 : #cf5f5f,
+  400 : #c43c3c,
+  500 : #ba1a1a,
+  600 : #b31717,
+  700 : #ab1313,
+  800 : #a30f0f,
+  900 : #940808,
+  A100 : #ffd5dd,
+  A200 : #ffa2b4,
+  A400 : #ff6f8a,
+  A700 : #ff5576,
   contrast: (
     50 : #000000,
     100 : #000000,
     200 : #000000,
     300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
     900 : #ffffff,
     A100 : #000000,
     A200 : #000000,
@@ -145,6 +145,7 @@ $open-event-theme: mat.m2-define-light-theme((
 
 .toolbar-action-fab:hover {
   background-color: map.get($open-event-accent, default) !important;
+  color: map.get($open-event-accent, default-contrast) !important;
 }
 
 .bg-accent-default {
@@ -202,23 +203,22 @@ $open-event-theme: mat.m2-define-light-theme((
   min-width: 280px;
   max-width: 280px;
   background-color: map.get($open-event-primary, default) !important;
-  color: map.get($open-event-primary, default-contrast) !important;
+  //color: map.get($open-event-primary, default-contrast) !important;
 }
 
 .main-menu-item {
-  color: map.get($open-event-primary, default-contrast) !important;
+  //color: map.get($open-event-primary, default-contrast) !important;
 }
 
 .menu-active {
   background-color: map.get($open-event-accent, default) !important;
   color: map.get($open-event-accent, default-contrast) !important;
   border-style: solid;
-  opacity: 1.0;
 }
 
 .menu-unselected {
   background-color: map.get($open-event-accent, lighter);
-  color: map.get($open-event-accent, lighter-contrast) !important;
+  color: map.get($open-event-accent, lighter-contrast);
   border-style: solid;
 }
 

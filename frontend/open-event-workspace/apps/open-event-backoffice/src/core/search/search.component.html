@@ -11,7 +11,7 @@
   @for (info of data; track info.key) {
     <mat-card class="p-2">
       <div class="flex flex-row gap-4 items-center">
-        <div class="text-lg font-bold basis-36 flex-grow-0">{{ 'search.key.' + info.key | translate }}</div>
+        <div class="text-lg font-bold basis-36 flex-grow-0">{{ 'search.key.' + info.name | translate }}</div>
         <div class="flex flex-row basis-36 justify-end">
           <div class="flex flex-row gap-2 justify-between items-center rounded bg-gray-200 px-2 py-1">
             <div class="rounded-md min-w-3 min-h-3" [ngClass]="{

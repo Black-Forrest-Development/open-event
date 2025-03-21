@@ -45,6 +45,7 @@ export class EventChangeGeneralComponent implements OnInit{
     let endDate = this.fg.get('endDate');
     if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
   }
+
   private handleDataChanged(info: EventInfo) {
     let start = DateTime.fromISO(info.event.start)
     let startTime = start.toFormat("HH:mm")
@@ -54,9 +55,9 @@ export class EventChangeGeneralComponent implements OnInit{
     this.fg.setValue(
       {
         startTime: startTime,
-        startDate: start,
+        startDate: start.toJSDate(),
         endTime: finishTime,
-        endDate: finish,
+        endDate: finish.toJSDate(),
 
         imageUrl: info.event.imageUrl ?? "",
         iconUrl: info.event.iconUrl ?? "",

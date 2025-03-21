@@ -2,6 +2,7 @@ import {RegistrationChangeRequest, RegistrationInfo} from "../registration/regis
 import {Category} from "../category/category-api";
 import {LocationChangeRequest} from "../location/location-api";
 import {AccountInfo, Location} from "@open-event-workspace/core";
+import {Observable} from "rxjs";
 
 export interface Event {
   id: number,
@@ -58,4 +59,10 @@ export interface EventStats {
   participantsAmount: number,
   waitingListSize: number,
   waitingListAmount: number
+}
+
+export interface EventReadAPI {
+  getEvent(id: number): Observable<Event>
+
+  getEventInfo(id: number): Observable<EventInfo>
 }

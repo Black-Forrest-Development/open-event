@@ -94,6 +94,7 @@ export interface CategorySearchResponse {
 
 export interface SearchOperatorInfo {
   key: string,
+  name: string,
   status: string,
   statistics: SearchOperatorStats
 }

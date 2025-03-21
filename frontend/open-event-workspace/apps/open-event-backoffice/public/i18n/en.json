@@ -405,9 +405,9 @@
     "type": "Search Index",
     "title": "Search Index Administration",
     "key": {
-      "oe.event": "Events",
-      "oe.account": "Accounts",
-      "oe.category": "Categories"
+      "event": "Events",
+      "account": "Accounts",
+      "category": "Categories"
     },
     "status": {
       "UNKNOWN": "Unknown",

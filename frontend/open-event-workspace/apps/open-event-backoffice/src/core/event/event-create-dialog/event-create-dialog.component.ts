@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
-import {AccountService, AddressService, CategoryService} from "@open-event-workspace/backoffice";
+import {AccountService, AddressService, CategoryService, EventService} from "@open-event-workspace/backoffice";
 import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
-import {Account, Address, AddressReadAPI, Category, CategoryReadAPI, EventChangeComponent, EventChangeRequest} from "@open-event-workspace/core";
+import {Account, Address, AddressReadAPI, Category, CategoryReadAPI, Event, EventChangeComponent, EventChangeRequest, EventInfo, EventReadAPI} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Observable} from "rxjs";
 import {Page} from "@open-event-workspace/shared";
@@ -16,10 +16,11 @@ import {Page} from "@open-event-workspace/shared";
   templateUrl: './event-create-dialog.component.html',
   styleUrl: './event-create-dialog.component.scss'
 })
-export class EventCreateDialogComponent implements AddressReadAPI, CategoryReadAPI {
+export class EventCreateDialogComponent implements AddressReadAPI, CategoryReadAPI, EventReadAPI {
 
   constructor(
     private service: AccountService,
+    private eventService: EventService,
     private addressService: AddressService,
     private categoryService: CategoryService,
     public dialogRef: MatDialogRef<EventCreateDialogComponent>,
@@ -42,6 +43,14 @@ export class EventCreateDialogComponent implements AddressReadAPI, CategoryReadA
 
   getCategory(id: number): Observable<Category> {
     return this.categoryService.getCategory(id)
+  }
+
+  getEvent(id: number): Observable<Event> {
+    return this.eventService.getEvent(id)
+  }
+
+  getEventInfo(id: number): Observable<EventInfo> {
+    return this.eventService.getEventInfo(id)
   }
 
   onCancelClick(): void {

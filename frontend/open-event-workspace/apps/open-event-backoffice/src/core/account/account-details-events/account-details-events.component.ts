@@ -3,7 +3,7 @@ import {Account, AccountDisplayNamePipe, Event} from "@open-event-workspace/core
 import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
 import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
-import {AccountService} from "@open-event-workspace/backoffice";
+import {AccountService, EventService} from "@open-event-workspace/backoffice";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -62,7 +62,7 @@ export class AccountDetailsEventsComponent {
 
   displayedColumns: string[] = ['id', 'owner', 'title', 'start', 'finish', 'published', 'tags', 'cmd']
 
-  constructor(private service: AccountService, private dialog: MatDialog) {
+  constructor(private service: AccountService,private eventService: EventService, private dialog: MatDialog) {
   }
 
   handlePageChange($event: PageEvent) {

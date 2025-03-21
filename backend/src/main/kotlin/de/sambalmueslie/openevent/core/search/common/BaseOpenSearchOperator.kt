@@ -24,12 +24,14 @@ import kotlin.time.Duration.Companion.seconds
 abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T>>(
     openSearch: SearchClientFactory,
     protected val name: String,
-    private val config: OpenSearchConfig,
+    config: OpenSearchConfig,
     private val logger: Logger
 ) : SearchOperator<T, R, S> {
 
+    private val key = "${config.prefix}.$name"
+
     override fun key(): String {
-        return "${config.prefix}.$name"
+        return key
     }
 
 
@@ -61,6 +63,7 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
 
     override fun info(): SearchOperatorInfo {
         return SearchOperatorInfo(
+            key,
             name,
             status,
             SearchOperatorStats(statsTotal, statsSuccessful, statsFailed)

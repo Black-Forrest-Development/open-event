@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, input, output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, input, output, signal, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule, StepperOrientation} from "@angular/material/stepper";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
-import {EventChangeRequest, EventInfo} from "../event-api";
+import {Event, EventChangeRequest, EventInfo, EventReadAPI} from "../event-api";
 import {map, Observable} from "rxjs";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {MatIconModule} from "@angular/material/icon";
@@ -18,25 +18,29 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LocationChangeRequest} from "../../location/location-api";
 import {RegistrationChangeRequest} from "../../registration/registration-api";
 import {DateTime} from 'luxon';
+import {LoadingBarComponent} from "@open-event-workspace/shared";
 
 @Component({
   selector: 'lib-event-change',
-  imports: [CommonModule, MatCardModule, MatStepperModule, MatIconModule, MatButtonModule, MatProgressSpinnerModule, ReactiveFormsModule, TranslateModule, EventChangeGeneralComponent, EventChangeLocationComponent, EventChangeRegistrationComponent],
+  imports: [CommonModule, MatCardModule, MatStepperModule, MatIconModule, MatButtonModule, MatProgressSpinnerModule, ReactiveFormsModule, TranslateModule, EventChangeGeneralComponent, EventChangeLocationComponent, EventChangeRegistrationComponent, LoadingBarComponent],
   templateUrl: './event-change.component.html',
   styleUrl: './event-change.component.scss'
 })
 export class EventChangeComponent implements AfterViewInit {
 
   title = input.required<string>()
-  event = input<EventInfo>()
+  event = input<Event>()
+  info = signal<EventInfo | undefined>(undefined)
   request = output<EventChangeRequest>()
 
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
   helpVisible: boolean = false
+  loading: boolean = false
 
   addressReadAPI = input.required<AddressReadAPI>()
   categoryReadAPI = input.required<CategoryReadAPI>()
+  eventReadAPI = input.required<EventReadAPI>()
 
   stepperOrientation: Observable<StepperOrientation>
 
@@ -56,6 +60,11 @@ export class EventChangeComponent implements AfterViewInit {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')))
+
+    effect(() => {
+      let event = this.event()
+      if (event) this.loadEventInfo(event)
+    })
   }
 
 
@@ -81,9 +90,8 @@ export class EventChangeComponent implements AfterViewInit {
 
   submit() {
     if (!this.fg.valid) return
-
-    let request = this.createRequest(this.fg.value, this.isEndHidden())
-    debugger
+    let value = this.fg.value
+    let request = this.createRequest(value, this.isEndHidden())
     if (!request) return
 
     this.request.emit(request)
@@ -136,5 +144,13 @@ export class EventChangeComponent implements AfterViewInit {
       return mDate
     }
     return undefined;
+  }
+
+  private loadEventInfo(event: Event) {
+    this.loading = true
+    this.eventReadAPI().getEventInfo(event.id).subscribe({
+      next: value => this.info.set(value),
+      complete: () => this.loading = false
+    })
   }
 }

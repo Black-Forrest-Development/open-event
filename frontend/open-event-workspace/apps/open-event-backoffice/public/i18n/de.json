@@ -385,9 +385,9 @@
     "type": "Suchindex",
     "title": "Suchindex-Verwaltung",
     "key": {
-      "oe.event": "Ereignisse",
-      "oe.account": "Konten",
-      "oe.category": "Kategorien"
+      "event": "Ereignisse",
+      "account": "Konten",
+      "category": "Kategorien"
     },
     "status": {
       "UNKNOWN": "Unbekannt",

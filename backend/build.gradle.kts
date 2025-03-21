@@ -38,12 +38,12 @@ micronaut {
 
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.5.15")
+    implementation("ch.qos.logback:logback-classic:1.5.17")
     runtimeOnly("org.yaml:snakeyaml")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
-    testImplementation("io.mockk:mockk:1.13.14")
+    testImplementation("io.mockk:mockk:1.13.17")
 
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
@@ -109,8 +109,8 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.3.0")
-    implementation("org.apache.poi:poi-ooxml:5.3.0")
+    implementation("org.apache.poi:poi:5.4.0")
+    implementation("org.apache.poi:poi-ooxml:5.4.0")
 
     // mail
     implementation("org.simplejavamail:simple-java-mail:8.12.4")
@@ -131,7 +131,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.3.12")
+    implementation("com.jillesvangurp:search-client:2.3.13")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.18.3")

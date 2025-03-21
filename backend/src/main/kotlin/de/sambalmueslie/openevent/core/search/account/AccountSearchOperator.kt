@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.search.account
 import com.jillesvangurp.ktsearch.SearchResponse
 import com.jillesvangurp.ktsearch.parseHit
 import com.jillesvangurp.ktsearch.total
+import de.sambalmueslie.openevent.config.OpenSearchConfig
 import de.sambalmueslie.openevent.core.account.AccountChangeListener
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.ProfileChangeListener
@@ -28,11 +29,12 @@ open class AccountSearchOperator(
 
     private val fieldMapping: AccountFieldMappingProvider,
     private val queryBuilder: AccountSearchQueryBuilder,
-
+    private val config: OpenSearchConfig,
     openSearch: SearchClientFactory
 ) : BaseOpenSearchOperator<AccountSearchEntry, AccountSearchRequest, AccountSearchResponse>(
     openSearch,
-    "oe.account",
+    "account",
+    config,
     logger
 ) {
     companion object {

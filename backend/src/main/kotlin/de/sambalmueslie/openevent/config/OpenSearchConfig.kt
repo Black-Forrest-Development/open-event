@@ -50,4 +50,10 @@ class OpenSearchConfig {
             field = value
         }
 
+    @NotBlank
+    var prefix: String = ""
+        set(value) {
+            logger.info("Set prefix from '$field' to '$value'")
+            field = value
+        }
 }

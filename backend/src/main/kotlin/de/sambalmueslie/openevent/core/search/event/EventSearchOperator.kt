@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.search.event
 
 import com.jillesvangurp.ktsearch.*
 import com.jillesvangurp.ktsearch.SearchResponse
+import de.sambalmueslie.openevent.config.OpenSearchConfig
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.db.AccountStorageService
 import de.sambalmueslie.openevent.core.event.EventCrudService
@@ -29,9 +30,9 @@ open class EventSearchOperator(
 
     private val fieldMapping: EventFieldMappingProvider,
     private val queryBuilder: EventSearchQueryBuilder,
-
+    private val config: OpenSearchConfig,
     openSearch: SearchClientFactory
-) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "oe.event", logger) {
+) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "event", config, logger) {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(EventSearchOperator::class.java)

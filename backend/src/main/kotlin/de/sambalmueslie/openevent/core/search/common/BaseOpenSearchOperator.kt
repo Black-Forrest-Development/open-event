@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.jillesvangurp.ktsearch.*
 import de.sambalmueslie.openevent.common.PageSequence
+import de.sambalmueslie.openevent.config.OpenSearchConfig
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.search.api.SearchRequest
 import de.sambalmueslie.openevent.core.search.api.SearchResponse
@@ -23,11 +24,12 @@ import kotlin.time.Duration.Companion.seconds
 abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T>>(
     openSearch: SearchClientFactory,
     protected val name: String,
+    private val config: OpenSearchConfig,
     private val logger: Logger
 ) : SearchOperator<T, R, S> {
 
     override fun key(): String {
-        return name
+        return "${config.prefix}.$name"
     }
 
 
@@ -125,7 +127,7 @@ abstract class BaseOpenSearchOperator<T, R : SearchRequest, S : SearchResponse<T
 
     private suspend fun indexDocument(id: String, value: String, blocking: Boolean) {
         val duration = measureTimeMillis {
-            val refresh = if(blocking) Refresh.WaitFor else null
+            val refresh = if (blocking) Refresh.WaitFor else null
             val existing = try {
                 client.getDocument(target = name, id = id).found
             } catch (e: Exception) {

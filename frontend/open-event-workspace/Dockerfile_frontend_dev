@@ -1,5 +1,5 @@
 # Stage 1: Build the Angular app
-FROM node:22-alpine AS build
+FROM node:23-alpine AS build
 
 # Set the working directory
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY . .
 RUN npx nx build open-event-app --configuration=development
 
 # Stage 2: Serve the Angular app with a lightweight web server
-FROM nginx:1.23-alpine
+FROM nginx:1.27-alpine
 
 # Remove the default Nginx static content
 RUN rm -rf /usr/share/nginx/html/*

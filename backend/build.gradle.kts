@@ -182,7 +182,7 @@ application {
 jib {
     from.image = "eclipse-temurin:21-jre-alpine"
     to {
-        image = "iee1394/open-event"
+        image = "open-event-backend"
         tags = setOf(version.toString(), "latest")
     }
     container.creationTime.set("USE_CURRENT_TIMESTAMP")

@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.search.category
 import com.jillesvangurp.ktsearch.SearchResponse
 import com.jillesvangurp.ktsearch.ids
 import com.jillesvangurp.ktsearch.total
+import de.sambalmueslie.openevent.config.OpenSearchConfig
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.category.CategoryChangeListener
 import de.sambalmueslie.openevent.core.category.CategoryCrudService
@@ -24,9 +25,9 @@ open class CategorySearchOperator(
 
     private val fieldMapping: CategoryFieldMappingProvider,
     private val queryBuilder: CategorySearchQueryBuilder,
-
+    private val config: OpenSearchConfig,
     openSearch: SearchClientFactory
-) : BaseOpenSearchOperator<Category, CategorySearchRequest, CategorySearchResponse>(openSearch, "oe.category", logger) {
+) : BaseOpenSearchOperator<Category, CategorySearchRequest, CategorySearchResponse>(openSearch, "category", config, logger) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(CategorySearchOperator::class.java)
     }

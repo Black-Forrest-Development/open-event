@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.serialization")
 //    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
     id("org.sonarqube")
-    id("com.github.johnrengelman.shadow")
+    id("com.gradleup.shadow")
     id("com.google.cloud.tools.jib")
     id("io.micronaut.application")
     id("io.micronaut.test-resources")

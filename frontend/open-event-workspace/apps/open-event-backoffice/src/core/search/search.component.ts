@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatMiniFabButton} from "@angular/material/button";
-import {MatToolbar} from "@angular/material/toolbar";
+import {MatButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";
@@ -11,10 +10,11 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {SearchOperatorInfo} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
 import {MatProgressBar} from "@angular/material/progress-bar";
+import {BoardComponent} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-search',
-  imports: [CommonModule, MatIcon, MatMiniFabButton, MatToolbar, TranslatePipe, MatCard, MatButton, MatProgressBar],
+  imports: [CommonModule, MatIcon, TranslatePipe, MatCard, MatButton, MatProgressBar, BoardComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })

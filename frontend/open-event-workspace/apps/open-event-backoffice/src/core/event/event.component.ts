@@ -8,19 +8,13 @@ import {debounceTime, distinctUntilChanged} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {EventChangeDialogComponent} from "./event-change-dialog/event-change-dialog.component";
 import {EventDeleteDialogComponent} from "./event-delete-dialog/event-delete-dialog.component";
-import {LoadingBarComponent} from "@open-event-workspace/shared";
-import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatCard} from "@angular/material/card";
-import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
-import {MatToolbar} from "@angular/material/toolbar";
-import {TranslatePipe} from "@ngx-translate/core";
 import {EventTableComponent} from "./event-table/event-table.component";
+import {BoardComponent} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-event',
-  imports: [CommonModule, LoadingBarComponent, MatCard, MatFormField, MatIcon, MatIconButton, MatInput, MatLabel, MatMiniFabButton, MatSuffix, MatToolbar, TranslatePipe, EventTableComponent],
+  imports: [CommonModule, MatCard, EventTableComponent, BoardComponent],
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss',
 })

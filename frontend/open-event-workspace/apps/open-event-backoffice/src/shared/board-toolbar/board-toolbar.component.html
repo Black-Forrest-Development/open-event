@@ -1,0 +1,16 @@
+<mat-toolbar class="px-2 second-toolbar">
+  <div class="flex flex-row gap-3 flex-auto items-center">
+    <h3>{{ title() | translate }}</h3>
+    @if (showSearch()) {
+      <div class="flex-auto"></div>
+      <app-board-toolbar-search [placeholder]="searchPlaceholder()" (fullTextSearch)="fullTextSearch.emit($event)" class="flex flex-row gap-2 items-center basis-full sm:basis-1/4"/>
+    }
+    <div class="flex-auto"></div>
+    <ng-content select="toolbar-actions"></ng-content>
+    @if (showReload()) {
+      <button (click)="reload.emit(true)" mat-flat-button color="accent">
+        <mat-icon class="!m-0">refresh</mat-icon>
+      </button>
+    }
+  </div>
+</mat-toolbar>

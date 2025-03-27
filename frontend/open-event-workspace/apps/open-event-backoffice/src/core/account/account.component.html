@@ -1,32 +1,10 @@
-<mat-toolbar class="px-2" color="primary">
-  <div class="flex flex-row gap-3 flex-auto items-center">
-    <h3>{{ 'account.title' | translate }}</h3>
-    <div class="flex-auto"></div>
-    <div class="flex flex-row gap-2 items-center basis-full sm:basis-1/4">
-      <mat-form-field class="dense-3 flex-auto bg-accent-default rounded" subscriptSizing="dynamic">
-        <mat-label class="flex flex-row gap-3">
-          <mat-icon>search</mat-icon>
-          {{ 'account.search' | translate }}
-        </mat-label>
-        <input #input (keyup)="keyUp.emit(input.value)" matInput placeholder="" value="">
-        <button (click)="input.value = ''; fullTextSearch = ''" *ngIf="input.value.length > 0" mat-icon-button
-                matSuffix>
-          <mat-icon>clear</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-    <div class="flex-auto"></div>
+<app-board [reloading]="reloading" (fullTextSearch)="fullTextSearch = $event" (reload)="reload()" title="account.title" searchPlaceholder="account.search">
+  <board-toolbar-actions>
     <button (click)="create()" mat-flat-button color="accent">
       <mat-icon>new_label</mat-icon>
       {{ 'account.create' | translate }}
     </button>
-    <button (click)="reload()" class="toolbar-action-fab" mat-mini-fab color="accent">
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
-<app-loading-bar [reloading]="reloading"></app-loading-bar>
-<div class="flex flex-col gap-2 p-4">
+  </board-toolbar-actions>
   <mat-card>
     <app-account-table [data]="data" [reloading]="reloading" [pageSize]="pageSize" [pageNumber]="pageNumber" [totalElements]="totalElements"
                        (pageEvent)="handlePageChange($event)"
@@ -34,4 +12,4 @@
                        (deleteEvent)="delete($event)"
     ></app-account-table>
   </mat-card>
-</div>
+</app-board>

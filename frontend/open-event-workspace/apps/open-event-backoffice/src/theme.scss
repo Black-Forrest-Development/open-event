@@ -141,6 +141,8 @@ $open-event-theme: mat.m2-define-light-theme((
   background-color: unset !important;
   color: black !important;
   border: map.get($open-event-primary, default) 1px solid !important;
+  max-height: 32px !important;
+  max-width: 32px !important;
 }
 
 .toolbar-action-fab:hover {
@@ -222,3 +224,7 @@ $open-event-theme: mat.m2-define-light-theme((
   border-style: solid;
 }
 
+.second-toolbar {
+  background-color: map.get($open-event-accent, lighter) !important;
+  color: map.get($open-event-accent, lighter-contrast) !important;
+}

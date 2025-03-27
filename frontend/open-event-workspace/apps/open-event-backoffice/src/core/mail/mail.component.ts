@@ -1,25 +1,23 @@
 import {Component, EventEmitter} from '@angular/core';
 import {DatePipe} from '@angular/common';
-import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
+import {Page} from "@open-event-workspace/shared";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatChip} from "@angular/material/chips";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatIconButton} from "@angular/material/button";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatToolbar} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MailJob} from "@open-event-workspace/core";
 import {Subject, switchMap, takeUntil, timer} from "rxjs";
 import {tap} from "rxjs/operators";
 import {MailService} from "@open-event-workspace/backoffice";
+import {BoardComponent} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-mail',
-  imports: [MatToolbar,
-    MatMiniFabButton,
-    MatIcon,
+  imports: [MatIcon,
     TranslatePipe,
     MatCard,
     MatTableModule,
@@ -28,7 +26,7 @@ import {MailService} from "@open-event-workspace/backoffice";
     MatIconButton,
     RouterLink,
     MatPaginator,
-    LoadingBarComponent],
+    BoardComponent],
   templateUrl: './mail.component.html',
   styleUrl: './mail.component.scss',
 })

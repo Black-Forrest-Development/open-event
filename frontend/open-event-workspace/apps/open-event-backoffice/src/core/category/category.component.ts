@@ -1,6 +1,5 @@
 import {Component, EventEmitter} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoadingBarComponent} from "@open-event-workspace/shared";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -17,10 +16,11 @@ import {MatInputModule} from "@angular/material/input";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {PageEvent} from "@angular/material/paginator";
 import {CategoryTableComponent} from "./category-table/category-table.component";
+import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-category',
-  imports: [CommonModule, LoadingBarComponent, MatCardModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatButtonModule, MatInputModule, TranslatePipe, CategoryTableComponent],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatToolbarModule, MatFormFieldModule, MatButtonModule, MatInputModule, TranslatePipe, CategoryTableComponent, BoardComponent, BoardToolbarActions],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss',
 })

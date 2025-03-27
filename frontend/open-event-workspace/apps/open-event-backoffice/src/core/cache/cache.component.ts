@@ -1,27 +1,23 @@
 import {Component} from '@angular/core';
-import {LoadingBarComponent} from "@open-event-workspace/shared";
 import {MatCard} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {MatIcon} from "@angular/material/icon";
 import {MatMiniFabButton} from "@angular/material/button";
-import {MatToolbar} from "@angular/material/toolbar";
 import {NgxEchartsDirective} from "ngx-echarts";
-import {TranslatePipe} from "@ngx-translate/core";
 import {CacheInfo} from "@open-event-workspace/core";
 import type {EChartsCoreOption} from "echarts/core";
 import {CacheService} from "@open-event-workspace/backoffice";
+import {BoardComponent} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-cache',
   imports: [
     MatMiniFabButton,
-    TranslatePipe,
-    MatToolbar,
     MatCard,
     MatDivider,
     MatIcon,
     NgxEchartsDirective,
-    LoadingBarComponent
+    BoardComponent
   ],
   templateUrl: './cache.component.html',
   styleUrl: './cache.component.scss',

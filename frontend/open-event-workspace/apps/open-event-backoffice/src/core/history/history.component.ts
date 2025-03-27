@@ -1,24 +1,20 @@
 import {Component, EventEmitter} from '@angular/core';
 import {DatePipe, NgClass} from '@angular/common';
 import {AccountDisplayNamePipe, HistoryEventInfo} from "@open-event-workspace/core";
-import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
+import {Page} from "@open-event-workspace/shared";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatDivider} from "@angular/material/divider";
-import {MatIcon} from "@angular/material/icon";
-import {MatMiniFabButton} from "@angular/material/button";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {HistoryService} from "@open-event-workspace/backoffice";
+import {BoardComponent} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-history',
   imports: [
-    MatToolbar,
     TranslatePipe,
-    MatMiniFabButton,
     MatCard,
     NgClass,
     MatDivider,
@@ -26,8 +22,7 @@ import {HistoryService} from "@open-event-workspace/backoffice";
     MatTableModule,
     DatePipe,
     AccountDisplayNamePipe,
-    MatIcon,
-    LoadingBarComponent
+    BoardComponent
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',

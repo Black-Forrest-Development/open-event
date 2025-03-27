@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {Setting} from "@open-event-workspace/core";
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
-import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
+import {Page} from "@open-event-workspace/shared";
 import {SettingsService} from "@open-event-workspace/backoffice";
 import {SettingsChangeDialogComponent} from "./settings-change-dialog/settings-change-dialog.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -12,6 +12,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatTableModule} from "@angular/material/table";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-settings',
@@ -23,9 +24,10 @@ import {MatButton, MatMiniFabButton} from "@angular/material/button";
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    LoadingBarComponent,
     MatMiniFabButton,
     MatButton,
+    BoardComponent,
+    BoardToolbarActions,
 
   ],
   templateUrl: './settings.component.html',

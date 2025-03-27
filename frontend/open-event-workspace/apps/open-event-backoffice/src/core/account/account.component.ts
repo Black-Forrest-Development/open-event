@@ -1,26 +1,22 @@
-import {Component, EventEmitter} from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoadingBarComponent} from "@open-event-workspace/shared";
-import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatButton} from "@angular/material/button";
 import {MatCard} from "@angular/material/card";
-import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
-import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
 import {AccountSearchEntry, AccountSearchRequest, AccountSearchResponse} from "@open-event-workspace/core";
 import {AccountService} from "@open-event-workspace/backoffice";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
-import {debounceTime, distinctUntilChanged} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {AccountChangeDialogComponent} from "./account-change-dialog/account-change-dialog.component";
 import {AccountDeleteDialogComponent} from "./account-delete-dialog/account-delete-dialog.component";
 import {AccountTableComponent} from "./account-table/account-table.component";
+import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-account',
-  imports: [CommonModule, LoadingBarComponent, MatButton, MatCard, MatFormField, MatIcon, MatIconButton, MatInput, MatLabel, MatMiniFabButton, MatSuffix, MatToolbar, TranslatePipe, AccountTableComponent],
+  imports: [CommonModule, MatButton, MatCard, MatIcon, TranslatePipe, AccountTableComponent, BoardComponent, BoardToolbarActions],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
 })
@@ -32,7 +28,6 @@ export class AccountComponent {
   totalElements: number = 0
   data: AccountSearchEntry[] = []
 
-  keyUp: EventEmitter<string> = new EventEmitter<string>()
   request = new AccountSearchRequest('')
 
   constructor(private service: AccountService, private toast: HotToastService, private dialog: MatDialog) {
@@ -41,10 +36,6 @@ export class AccountComponent {
 
   ngOnInit() {
     this.search()
-    this.keyUp.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(query => this.fullTextSearch = query)
   }
 
 

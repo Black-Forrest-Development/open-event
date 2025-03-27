@@ -5,6 +5,7 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@angular-architects/ngrx-toolkit": "^19.1.0",
     "@angular/animations": "~19.2.4",
     "@angular/cdk": "^19.2.7",
     "@angular/common": "~19.2.4",
@@ -24,6 +25,7 @@
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
     "@ngneat/overview": "^6.1.1",
+    "@ngrx/store": "^19.0.1",
     "@ngx-translate/core": "^16.0.4",
     "@ngx-translate/http-loader": "^16.0.1",
     "@ngxpert/hot-toast": "^4.1.2",

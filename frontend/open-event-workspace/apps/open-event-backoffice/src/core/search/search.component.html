@@ -1,13 +1,5 @@
-<mat-toolbar class="px-2" color="primary">
-  <div class="flex flex-row gap-3 flex-auto items-center">
-    <h3>{{ 'search.title' | translate }}</h3>
-    <div class="flex-auto"></div>
-    <button (click)="reload()" class="toolbar-action-fab" mat-mini-fab color="accent">
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
-<div class="flex flex-col gap-2 p-4">
+<app-board [showSearch]="false" [showReload]="false" title="search.title">
+
   @for (info of data; track info.key) {
     <mat-card class="p-2">
       <div class="flex flex-row gap-4 items-center">
@@ -21,7 +13,7 @@
               'bg-green-500': info.status === 'READY'
               }">
             </div>
-            <div >{{ 'search.status.' + info.status | translate }}</div>
+            <div>{{ 'search.status.' + info.status | translate }}</div>
           </div>
         </div>
         <div class="flex-auto flex flex-col gap-2">
@@ -53,4 +45,4 @@
       </div>
     </mat-card>
   }
-</div>
+</app-board>

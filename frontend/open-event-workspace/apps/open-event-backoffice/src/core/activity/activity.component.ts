@@ -2,22 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivityService} from "@open-event-workspace/backoffice";
 import {Activity, ActivityCleanupRequest} from "@open-event-workspace/core";
-import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
+import {Page} from "@open-event-workspace/shared";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatCard} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {MatMiniFabButton} from "@angular/material/button";
-import {MatToolbar} from "@angular/material/toolbar";
-import {TranslatePipe} from "@ngx-translate/core";
+import {MatButton} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {PageEvent} from "@angular/material/paginator";
 import {ActivityTableComponent} from "./activity-table/activity-table.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivityCleanupDialogComponent} from "./activity-cleanup-dialog/activity-cleanup-dialog.component";
+import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
 
 @Component({
   selector: 'boffice-activity',
-  imports: [CommonModule, LoadingBarComponent, MatCard, MatIcon, MatTableModule, MatMiniFabButton, MatToolbar, TranslatePipe, ActivityTableComponent],
+  imports: [CommonModule, MatCard, MatIcon, MatTableModule, ActivityTableComponent, BoardComponent, BoardToolbarActions, MatButton],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss',
 })

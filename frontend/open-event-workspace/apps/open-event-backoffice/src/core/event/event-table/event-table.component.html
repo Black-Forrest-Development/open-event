@@ -40,14 +40,14 @@
     <td *matCellDef="let event" mat-cell>
       <div class="flex flex-row gap-2 justify-end">
         @if (!event.published) {
-          <button color="primary" mat-icon-button (click)="publishEvent.emit(event)">
+          <button color="primary" mat-icon-button (click)="publishEvent.emit(event); $event.stopPropagation()">
             <mat-icon>publish</mat-icon>
           </button>
         }
-        <button color="primary" mat-icon-button (click)="editEvent.emit(event)">
+        <button color="primary" mat-icon-button (click)="editEvent.emit(event); $event.stopPropagation()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button color="warn" mat-icon-button (click)="deleteEvent.emit(event)">
+        <button color="warn" mat-icon-button (click)="deleteEvent.emit(event); $event.stopPropagation()">
           <mat-icon>delete</mat-icon>
         </button>
         <button color="accent" mat-icon-button routerLink="/event/details/{{event.id}}">
@@ -57,8 +57,8 @@
     </td>
   </ng-container>
 
-  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row class="bg-primary-default"></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="hover:bg-gray-200 cursor-pointer" routerLink="/event/details/{{row.id}}"></tr>
 
 </table>
 @if (totalElements() > data().length) {

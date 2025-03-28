@@ -15,6 +15,8 @@ import {EventChangeDialogComponent} from "../../event/event-change-dialog/event-
 import {EventDeleteDialogComponent} from "../../event/event-delete-dialog/event-delete-dialog.component";
 import {EventPublishDialogComponent} from "../../event/event-publish-dialog/event-publish-dialog.component";
 import {RouterLink} from "@angular/router";
+import {EventTableComponent} from "../../event/event-table/event-table.component";
+import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board-card/board-card.component";
 
 @Component({
   selector: 'app-account-details-events',
@@ -30,6 +32,9 @@ import {RouterLink} from "@angular/router";
     AccountDisplayNamePipe,
     DatePipe,
     RouterLink,
+    EventTableComponent,
+    BoardCardComponent,
+    BoardCardToolbarActions,
   ],
   templateUrl: './account-details-events.component.html',
   styleUrl: './account-details-events.component.scss'

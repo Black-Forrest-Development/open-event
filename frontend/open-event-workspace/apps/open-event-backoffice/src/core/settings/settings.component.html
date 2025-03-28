@@ -25,14 +25,14 @@
       <ng-container matColumnDef="cmd">
         <th *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let setting" class="cmd-cell" mat-cell>
-          <button color="primary" mat-mini-fab (click)="edit(setting)">
+          <button color="primary" mat-icon-button (click)="edit(setting)">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <tr *matHeaderRowDef="displayedColumns" mat-header-row class="bg-primary-default"></tr>
-      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="hover:bg-gray-200"></tr>
     </table>
 
     <mat-paginator

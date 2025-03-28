@@ -14,6 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {Location} from "@angular/common";
 import {MatTabsModule} from "@angular/material/tabs";
+import {BoardComponent, BoardToolbarActions} from "../../../shared/board/board.component";
 
 @Component({
   selector: 'app-account-details',
@@ -29,7 +30,9 @@ import {MatTabsModule} from "@angular/material/tabs";
     AccountDetailsProfileComponent,
     AccountDetailsAddressComponent,
     AccountDetailsEventsComponent,
-    MatTabsModule
+    MatTabsModule,
+    BoardComponent,
+    BoardToolbarActions
   ],
   templateUrl: './account-details.component.html',
   styleUrl: './account-details.component.scss'

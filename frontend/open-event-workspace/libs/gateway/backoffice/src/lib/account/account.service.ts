@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams, httpResource, HttpResourceRef} from "@angular/common/http";
 import {
   Account,
   AccountChangeRequest,
@@ -34,11 +34,9 @@ export class AccountService extends BaseService {
     return this.get('validate', params)
   }
 
-
   getAccount(id: number): Observable<Account> {
     return this.get(id + '')
   }
-
 
   getProfile(id: number): Observable<Profile> {
     return this.get(id + '/profile')

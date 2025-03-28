@@ -31,6 +31,7 @@ export * from './lib/history/history.service';
 
 export * from './lib/location/location-api';
 export * from './lib/location/location.service';
+export * from './lib/location/location-map/location-map.component';
 
 export * from './lib/mail/mail-api';
 export * from './lib/mail/mail.service';

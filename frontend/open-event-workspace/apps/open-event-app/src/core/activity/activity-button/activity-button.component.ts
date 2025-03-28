@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, viewChild} from '@angular/core';
 import {Subscription} from "rxjs";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {Router} from "@angular/router";
@@ -22,7 +22,7 @@ export class ActivityButtonComponent {
   reloading: boolean = false
   data: ActivityInfo[] = []
   unreadInfos = 0
-  @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger | undefined
+  menuTrigger = viewChild.required<MatMenuTrigger>('menuTrigger')
 
   private subscription: Subscription | undefined
 
@@ -82,13 +82,13 @@ export class ActivityButtonComponent {
     this.data = value
     this.unreadInfos = this.data.filter(d => !d.read).length
     this.reloading = false
-    if (this.menuTrigger && this.unreadInfos == 0) this.menuTrigger.closeMenu()
+    if (this.unreadInfos == 0) this.menuTrigger().closeMenu()
   }
 
   private handleError(err: any) {
     this.data = []
     this.unreadInfos = 0
     this.reloading = false
-    if (this.menuTrigger) this.menuTrigger.closeMenu()
+    this.menuTrigger().closeMenu()
   }
 }

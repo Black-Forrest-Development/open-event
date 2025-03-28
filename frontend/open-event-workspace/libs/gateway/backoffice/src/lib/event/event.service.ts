@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BaseService} from "@open-event-workspace/shared";
+import {BaseService, PatchRequest} from "@open-event-workspace/shared";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Category, Event, EventChangeRequest, EventInfo, EventReadAPI, EventSearchRequest, EventSearchResponse, EventStats, Location, Registration} from "@open-event-workspace/core";
@@ -53,5 +53,10 @@ export class EventService extends BaseService implements EventReadAPI {
   deleteEvent(id: number): Observable<Event> {
     return this.delete('' + id)
   }
+
+  publish(id: number): Observable<Event> {
+    return this.put('' + id + '/published', new PatchRequest(true))
+  }
+
 
 }

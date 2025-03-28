@@ -97,7 +97,7 @@ export class EventComponent {
 
   edit(entry: EventSearchEntry) {
     const dialogRef = this.dialog.open(EventChangeDialogComponent, {
-      width: '350px',
+      width: '650px',
       data: entry
     })
     dialogRef.afterClosed().subscribe(d => this.search())
@@ -105,7 +105,7 @@ export class EventComponent {
 
   delete(entry: EventSearchEntry) {
     const dialogRef = this.dialog.open(EventDeleteDialogComponent, {
-      width: '350px',
+      width: '650px',
       data: entry
     })
     dialogRef.afterClosed().subscribe(d => this.search())

@@ -1,6 +1,5 @@
 import {Component, computed, effect, input, resource, signal} from '@angular/core';
 import {Account, Address} from "@open-event-workspace/core";
-import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
 import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
 import {AccountService} from "@open-event-workspace/backoffice";
@@ -13,17 +12,21 @@ import {AddressChangeDialogComponent} from "../../address/address-change-dialog/
 import {AddressDeleteDialogComponent} from "../../address/address-delete-dialog/address-delete-dialog.component";
 import {AddressCreateDialogComponent} from "../../address/address-create-dialog/address-create-dialog.component";
 import {HotToastService} from "@ngxpert/hot-toast";
+import {MatToolbar} from "@angular/material/toolbar";
+import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board-card/board-card.component";
 
 @Component({
   selector: 'app-account-details-address',
   imports: [
-    MatDivider,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
     TranslatePipe,
-    LoadingBarComponent
+    LoadingBarComponent,
+    MatToolbar,
+    BoardCardComponent,
+    BoardCardToolbarActions
   ],
   templateUrl: './account-details-address.component.html',
   styleUrl: './account-details-address.component.scss'

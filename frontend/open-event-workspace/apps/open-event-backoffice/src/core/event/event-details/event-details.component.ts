@@ -1,21 +1,33 @@
-import {Component, computed, resource, signal} from '@angular/core';
-import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
-import {MatIcon} from "@angular/material/icon";
-import {MatMiniFabButton} from "@angular/material/button";
-import {MatToolbar} from "@angular/material/toolbar";
-import {TranslatePipe} from "@ngx-translate/core";
+import {Component, computed, resource, signal, viewChild} from '@angular/core';
+import {toPromise} from "@open-event-workspace/shared";
 import {EventService} from "@open-event-workspace/backoffice";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
+import {BoardComponent, BoardToolbarActions} from "../../../shared/board/board.component";
+import {EventMenuComponent} from "../event-menu/event-menu.component";
+import {EventPublishButtonComponent} from "../event-publish-button/event-publish-button.component";
+import {MatIcon} from "@angular/material/icon";
+import {MatMiniFabButton} from "@angular/material/button";
+import {EventDetailsOverviewComponent} from "../event-details-overview/event-details-overview.component";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {TranslatePipe} from "@ngx-translate/core";
+import {EventDetailsRegistrationComponent} from "../event-details-registration/event-details-registration.component";
 
 @Component({
   selector: 'app-event-details',
   imports: [
-    LoadingBarComponent,
+    BoardComponent,
+    BoardToolbarActions,
+    EventMenuComponent,
+    EventPublishButtonComponent,
     MatIcon,
     MatMiniFabButton,
-    MatToolbar,
-    TranslatePipe
+    MatMiniFabButton,
+    EventDetailsOverviewComponent,
+    MatTabGroup,
+    MatTab,
+    TranslatePipe,
+    EventDetailsRegistrationComponent
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'
@@ -26,7 +38,7 @@ export class EventDetailsComponent {
   eventResource = resource({
     request: this.id,
     loader: (param) => {
-      return toPromise(this.service.getEvent(param.request))
+      return toPromise(this.service.getEventInfo(param.request))
     }
   })
 
@@ -34,6 +46,9 @@ export class EventDetailsComponent {
   event = computed(this.eventResource.value ?? undefined)
   loading = this.eventResource.isLoading
   error = this.eventResource.error
+
+  menu = viewChild.required<EventMenuComponent>('menu')
+
 
   constructor(private service: EventService, private route: ActivatedRoute, private location: Location) {
 

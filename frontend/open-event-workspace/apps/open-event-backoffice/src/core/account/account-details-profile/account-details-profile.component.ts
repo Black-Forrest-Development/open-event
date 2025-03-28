@@ -4,14 +4,16 @@ import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
 import {AccountService} from "@open-event-workspace/backoffice";
 import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
+import {BoardCardComponent} from "../../../shared/board-card/board-card.component";
 
 @Component({
   selector: 'app-account-details-profile',
-  imports: [
-    MatDivider,
-    TranslatePipe,
-    LoadingBarComponent
-  ],
+    imports: [
+        MatDivider,
+        TranslatePipe,
+        LoadingBarComponent,
+        BoardCardComponent
+    ],
   templateUrl: './account-details-profile.component.html',
   styleUrl: './account-details-profile.component.scss'
 })

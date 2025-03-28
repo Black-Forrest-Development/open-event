@@ -1,8 +1,5 @@
-<div class="flex flex-col py-4 gap-3">
-  <div class="text-xl px-4">{{ 'account.details.profile' | translate }}</div>
-  <mat-divider></mat-divider>
-  <app-loading-bar [reloading]="loading()"></app-loading-bar>
-  <div class="flex flex-col gap-2 content-between px-4">
+<app-board-card title="account.details.title">
+  <div class="flex flex-col gap-3 p-4">
     @if (profile()) {
       <div class="flex flex-row gap-2 justify-between content-center">
         <div>{{ 'profile.property.email' | translate }}</div>
@@ -31,4 +28,4 @@
       </div>
     }
   </div>
-</div>
+</app-board-card>

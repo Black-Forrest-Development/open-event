@@ -81,7 +81,7 @@ export abstract class BaseService {
   }
 
 
-  private createUrl(suffix: string): string {
+  protected createUrl(suffix: string): string {
     if (suffix.length === 0) {
       return (this.urlPrefix.length === 0) ? `${this.api}` : `${this.api}${this.urlPrefix}`
     } else {

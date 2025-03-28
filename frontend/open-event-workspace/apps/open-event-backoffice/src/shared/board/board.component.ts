@@ -2,7 +2,10 @@ import {Component, Directive, input, output} from '@angular/core';
 import {LoadingBarComponent} from "@open-event-workspace/shared";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {BoardToolbarComponent, ToolbarActions} from "../board-toolbar/board-toolbar.component";
+import {BoardToolbarSearchComponent} from "../board-toolbar-search/board-toolbar-search.component";
+import {MatToolbar} from "@angular/material/toolbar";
+import {TranslatePipe} from "@ngx-translate/core";
+import {MatCard} from "@angular/material/card";
 
 @Component({
   selector: 'app-board',
@@ -10,8 +13,10 @@ import {BoardToolbarComponent, ToolbarActions} from "../board-toolbar/board-tool
     LoadingBarComponent,
     MatButtonModule,
     MatIconModule,
-    BoardToolbarComponent,
-    ToolbarActions
+    BoardToolbarSearchComponent,
+    MatToolbar,
+    TranslatePipe,
+    MatCard
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
@@ -20,11 +25,13 @@ export class BoardComponent {
   reloading = input(false)
   title = input('')
   searchPlaceholder = input('')
+  showBack = input(false)
   showReload = input(true)
   showSearch = input(true)
 
   fullTextSearch = output<string>()
   reload = output<boolean>()
+  back = output<boolean>()
 }
 
 @Directive({

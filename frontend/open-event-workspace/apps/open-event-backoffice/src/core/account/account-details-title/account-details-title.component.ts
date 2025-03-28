@@ -3,14 +3,16 @@ import {Account} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {DatePipe} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
+import {BoardCardComponent} from "../../../shared/board-card/board-card.component";
 
 @Component({
   selector: 'app-account-details-title',
-  imports: [
-    TranslatePipe,
-    DatePipe,
-    MatDivider
-  ],
+    imports: [
+        TranslatePipe,
+        DatePipe,
+        MatDivider,
+        BoardCardComponent
+    ],
   templateUrl: './account-details-title.component.html',
   styleUrl: './account-details-title.component.scss'
 })

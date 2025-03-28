@@ -1,14 +1,30 @@
-<mat-toolbar class="px-2" color="primary">
-  <div class="flex flex-row gap-3 flex-auto items-center">
-    <button (click)="back()" mat-mini-fab>
-      <mat-icon>arrow_back</mat-icon>
+<app-board [reloading]="loading()" (reload)="eventResource.reload()" [showSearch]="false" title="event.title" [showBack]="true" (back)="back()">
+  <board-toolbar-actions class="flex flex-row gap-2">
+    @if (!loading() && !menu.publishMenuItem.disabled) {
+      <app-event-publish-button [data]="event()!!.event"></app-event-publish-button>
+    }
+    @for (item of menu.menuItems; track item) {
+      <button (click)="item.handleClick()" class="action-fab" mat-mini-fab>
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </button>
+    }
+    <button (click)="menu.trigger()" class="action-fab" mat-mini-fab>
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <h3>{{ 'event.title' | translate }}</h3>
-    <div class="flex-auto"></div>
-  </div>
-</mat-toolbar>
-<app-loading-bar [reloading]="loading()"></app-loading-bar>
-<div class="flex flex-col gap-4 p-4 content-stretch ">
+  </board-toolbar-actions>
+  @if (event()) {
+    <mat-tab-group>
+      <mat-tab label="{{'event.details.overview' | translate }}">
+        <app-event-details-overview [event]="event()!!"></app-event-details-overview>
+      </mat-tab>
+      <mat-tab label="{{'event.details.registration' | translate }}">
+        <app-event-details-registration [event]="event()!!"></app-event-details-registration>
+      </mat-tab>
+    </mat-tab-group>
 
-  <p>event-details works!</p>
-</div>
+  }
+</app-board>
+
+<app-event-menu [event]="event()" #menu></app-event-menu>
+
+

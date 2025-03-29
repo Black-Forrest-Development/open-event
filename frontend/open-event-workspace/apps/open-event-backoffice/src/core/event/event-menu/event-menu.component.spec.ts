@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventMenuComponent } from './event-menu.component';
+import {EventMenuComponent} from './event-menu.component';
 
 describe('EventMenuComponent', () => {
   let component: EventMenuComponent;

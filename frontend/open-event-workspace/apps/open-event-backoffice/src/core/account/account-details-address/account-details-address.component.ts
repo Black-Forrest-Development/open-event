@@ -1,7 +1,7 @@
 import {Component, computed, effect, input, resource, signal} from '@angular/core';
 import {Account, Address} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
-import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
+import {toPromise} from "@open-event-workspace/shared";
 import {AccountService} from "@open-event-workspace/backoffice";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
@@ -12,7 +12,6 @@ import {AddressChangeDialogComponent} from "../../address/address-change-dialog/
 import {AddressDeleteDialogComponent} from "../../address/address-delete-dialog/address-delete-dialog.component";
 import {AddressCreateDialogComponent} from "../../address/address-create-dialog/address-create-dialog.component";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {MatToolbar} from "@angular/material/toolbar";
 import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board-card/board-card.component";
 
 @Component({
@@ -23,8 +22,6 @@ import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board
     MatIconModule,
     MatButtonModule,
     TranslatePipe,
-    LoadingBarComponent,
-    MatToolbar,
     BoardCardComponent,
     BoardCardToolbarActions
   ],

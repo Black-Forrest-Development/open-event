@@ -5,28 +5,26 @@ import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatH
 import {MatIcon} from "@angular/material/icon";
 import {MatIconAnchor, MatIconButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
-import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-category-table',
-    imports: [
-        MatCell,
-        MatCellDef,
-        MatColumnDef,
-        MatHeaderCell,
-        MatHeaderRow,
-        MatHeaderRowDef,
-        MatIcon,
-        MatIconButton,
-        MatPaginator,
-        MatRow,
-        MatRowDef,
-        MatTable,
-        TranslatePipe,
-        MatIconAnchor,
-        MatHeaderCellDef,
-        RouterLink
-    ],
+  imports: [
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatIcon,
+    MatIconButton,
+    MatPaginator,
+    MatRow,
+    MatRowDef,
+    MatTable,
+    TranslatePipe,
+    MatIconAnchor,
+    MatHeaderCellDef
+  ],
   templateUrl: './category-table.component.html',
   styleUrl: './category-table.component.scss'
 })

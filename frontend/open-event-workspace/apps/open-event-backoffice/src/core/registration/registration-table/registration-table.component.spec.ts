@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RegistrationTableComponent } from './registration-table.component';
+import {RegistrationTableComponent} from './registration-table.component';
 
 describe('RegistrationTableComponent', () => {
   let component: RegistrationTableComponent;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventPublishButtonComponent } from './event-publish-button.component';
+import {EventPublishButtonComponent} from './event-publish-button.component';
 
 describe('EventPublishButtonComponent', () => {
   let component: EventPublishButtonComponent;

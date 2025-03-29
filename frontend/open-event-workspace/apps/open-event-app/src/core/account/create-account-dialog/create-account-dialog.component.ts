@@ -1,19 +1,8 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
-} from '@angular/material/dialog';
-import {
-  AccountChangeRequest,
-  AccountService,
-  AccountSetupRequest,
-  ProfileChangeRequest
-} from '@open-event-workspace/core';
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {AccountChangeRequest, AccountService, AccountSetupRequest, ProfileChangeRequest} from '@open-event-workspace/core';
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";

@@ -50,7 +50,7 @@
             </mat-list-item>
           </mat-list>
           @if (editMode) {
-            <mat-list class="flex-grow-1">
+            <mat-list class="grow-1">
               <form [formGroup]="fg">
                 <!-- email-->
                 <mat-list-item>{{ profile.email }}</mat-list-item>
@@ -114,7 +114,7 @@
               </form>
             </mat-list>
           } @else {
-            <mat-list class="flex-grow-1">
+            <mat-list class="grow-1">
               <mat-list-item>{{ profile.email }}</mat-list-item>
               <mat-list-item>{{ profile.phone }}</mat-list-item>
               <mat-list-item>{{ profile.mobile }}</mat-list-item>

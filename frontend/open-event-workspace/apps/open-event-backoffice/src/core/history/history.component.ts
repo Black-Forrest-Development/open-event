@@ -1,28 +1,27 @@
 import {Component, EventEmitter} from '@angular/core';
 import {DatePipe, NgClass} from '@angular/common';
-import {AccountDisplayNamePipe, HistoryEventInfo} from "@open-event-workspace/core";
+import {HistoryEventInfo} from "@open-event-workspace/core";
 import {Page} from "@open-event-workspace/shared";
 import {MatCard} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatDivider} from "@angular/material/divider";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {TranslatePipe} from "@ngx-translate/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {HistoryService} from "@open-event-workspace/backoffice";
 import {BoardComponent} from "../../shared/board/board.component";
+import {HistoryTableComponent} from "./history-table/history-table.component";
 
 @Component({
   selector: 'boffice-history',
   imports: [
-    TranslatePipe,
     MatCard,
     NgClass,
     MatDivider,
     MatPaginator,
     MatTableModule,
     DatePipe,
-    AccountDisplayNamePipe,
-    BoardComponent
+    BoardComponent,
+    HistoryTableComponent
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',

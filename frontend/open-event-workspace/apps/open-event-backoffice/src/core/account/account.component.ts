@@ -13,6 +13,7 @@ import {AccountChangeDialogComponent} from "./account-change-dialog/account-chan
 import {AccountDeleteDialogComponent} from "./account-delete-dialog/account-delete-dialog.component";
 import {AccountTableComponent} from "./account-table/account-table.component";
 import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
+import {EventCreateDialogComponent} from "../event/event-create-dialog/event-create-dialog.component";
 
 @Component({
   selector: 'boffice-account',
@@ -114,4 +115,9 @@ export class AccountComponent {
     dialogRef.afterClosed().subscribe(d => this.search())
   }
 
+  createEvent(entry: AccountSearchEntry) {
+    this.dialog.open(EventCreateDialogComponent, {data: entry}).afterClosed().subscribe(value => {
+      if (value) this.search()
+    })
+  }
 }

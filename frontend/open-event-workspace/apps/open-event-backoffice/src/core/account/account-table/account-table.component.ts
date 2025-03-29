@@ -28,6 +28,7 @@ export class AccountTableComponent {
   totalElements = input.required<number>()
 
   pageEvent = output<PageEvent>()
+  createEvent = output<AccountSearchEntry>()
   editEvent = output<AccountSearchEntry>()
   deleteEvent = output<AccountSearchEntry>()
   displayedColumns: string[] = ['name', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'cmd']

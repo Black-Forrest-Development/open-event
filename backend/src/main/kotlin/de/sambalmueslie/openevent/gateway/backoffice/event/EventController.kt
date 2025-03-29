@@ -9,12 +9,15 @@ import de.sambalmueslie.openevent.core.event.api.Event
 import de.sambalmueslie.openevent.core.event.api.EventChangeRequest
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.event.api.EventStats
+import de.sambalmueslie.openevent.core.history.HistoryCrudService
+import de.sambalmueslie.openevent.core.history.api.HistoryEntry
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.search.SearchService
 import de.sambalmueslie.openevent.core.search.api.EventSearchRequest
 import de.sambalmueslie.openevent.core.search.api.EventSearchResponse
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
+import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
@@ -24,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "BACKOFFICE Event API")
 class EventController(
     private val service: EventCrudService,
+    private val historyService: HistoryCrudService,
     private val accountService: AccountCrudService,
     private val searchService: SearchService,
     audit: AuditService,
@@ -43,6 +47,7 @@ class EventController(
             service.get(id)
         }
     }
+
     @Get("/{id}/info")
     fun getInfo(auth: Authentication, id: Long): EventInfo? {
         return auth.checkPermission(PERMISSION_ADMIN) {
@@ -75,6 +80,10 @@ class EventController(
         return auth.checkPermission(PERMISSION_ADMIN) { service.getCategories(id) }
     }
 
+    @Get("/{id}/history")
+    fun getHistory(auth: Authentication, id: Long, pageable: Pageable): Page<HistoryEntry> {
+        return auth.checkPermission(PERMISSION_ADMIN) { historyService.getForEvent(id, pageable) }
+    }
 
     @Get("/stats")
     fun getStats(auth: Authentication): List<EventStats> {

@@ -12,6 +12,7 @@ import {EventDetailsOverviewComponent} from "../event-details-overview/event-det
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {TranslatePipe} from "@ngx-translate/core";
 import {EventDetailsRegistrationComponent} from "../event-details-registration/event-details-registration.component";
+import {EventDetailsHistoryComponent} from "../event-details-history/event-details-history.component";
 
 @Component({
   selector: 'app-event-details',
@@ -27,7 +28,8 @@ import {EventDetailsRegistrationComponent} from "../event-details-registration/e
     MatTabGroup,
     MatTab,
     TranslatePipe,
-    EventDetailsRegistrationComponent
+    EventDetailsRegistrationComponent,
+    EventDetailsHistoryComponent
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'

@@ -1,23 +1,13 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
-import {
-  RegistrationParticipateManualDialogComponent
-} from "../../registration/registration-participate-manual-dialog/registration-participate-manual-dialog.component";
+import {RegistrationParticipateManualDialogComponent} from "../../registration/registration-participate-manual-dialog/registration-participate-manual-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {ParticipantAddRequest, SharedParticipateResponse, ShareInfo, ShareService} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardImage,
-  MatCardSubtitle,
-  MatCardTitle
-} from "@angular/material/card";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardImage, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";

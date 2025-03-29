@@ -1,7 +1,6 @@
 import {Component, input} from '@angular/core';
 import {EventInfo} from "@open-event-workspace/core";
 import {BoardCardComponent} from "../../../shared/board-card/board-card.component";
-import {DatePipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatIcon} from "@angular/material/icon";
 
@@ -9,7 +8,6 @@ import {MatIcon} from "@angular/material/icon";
   selector: 'app-event-details-info',
   imports: [
     BoardCardComponent,
-    DatePipe,
     TranslatePipe,
     MatIcon
   ],

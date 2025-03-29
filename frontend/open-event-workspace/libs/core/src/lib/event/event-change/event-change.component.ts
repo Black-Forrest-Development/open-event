@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, input, output, signal, ViewChild} from '@angular/core';
+import {Component, effect, input, output, signal, viewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule, StepperOrientation} from "@angular/material/stepper";
@@ -26,7 +26,7 @@ import {LoadingBarComponent} from "@open-event-workspace/shared";
   templateUrl: './event-change.component.html',
   styleUrl: './event-change.component.scss'
 })
-export class EventChangeComponent implements AfterViewInit {
+export class EventChangeComponent {
 
   title = input.required<string>()
   event = input<Event>()
@@ -44,9 +44,9 @@ export class EventChangeComponent implements AfterViewInit {
 
   stepperOrientation: Observable<StepperOrientation>
 
-  @ViewChild(EventChangeGeneralComponent) generalComp: EventChangeGeneralComponent | undefined
-  @ViewChild(EventChangeLocationComponent) locationComp: EventChangeLocationComponent | undefined
-  @ViewChild(EventChangeRegistrationComponent) registrationComp: EventChangeRegistrationComponent | undefined
+  generalComp = viewChild<EventChangeGeneralComponent>(EventChangeGeneralComponent)
+  locationComp = viewChild<EventChangeLocationComponent>(EventChangeLocationComponent)
+  registrationComp = viewChild<EventChangeGeneralComponent>(EventChangeGeneralComponent)
 
   fg: FormGroup
 
@@ -65,18 +65,16 @@ export class EventChangeComponent implements AfterViewInit {
       let event = this.event()
       if (event) this.loadEventInfo(event)
     })
-  }
 
-
-  ngAfterViewInit() {
-    let generalForm = this.generalComp?.fg
-    if (generalForm) this.fg.addControl("general", generalForm)
-
-    let locationForm = this.locationComp?.fg
-    if (locationForm) this.fg.addControl("location", locationForm)
-
-    let registrationForm = this.registrationComp?.fg
-    if (registrationForm) this.fg.addControl("registration", registrationForm)
+    effect(() => {
+      this.fg.addControl("general", this.generalComp()!!.fg)
+    });
+    effect(() => {
+      this.fg.addControl("location", this.locationComp()!!.fg)
+    });
+    effect(() => {
+      this.fg.addControl("registration", this.registrationComp()!!.fg)
+    });
   }
 
 

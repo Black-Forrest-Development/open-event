@@ -1,14 +1,6 @@
 import {Component, EventEmitter, input} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-  Account,
-  AccountChangeRequest,
-  AccountSearchEntry,
-  AccountSearchRequest,
-  AccountSearchResponse,
-  AccountService,
-  SearchService
-} from "@open-event-workspace/core";
+import {Account, AccountChangeRequest, AccountSearchEntry, AccountSearchRequest, AccountSearchResponse, AccountService, SearchService} from "@open-event-workspace/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {debounceTime, distinctUntilChanged} from "rxjs";

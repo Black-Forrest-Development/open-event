@@ -85,25 +85,25 @@
     </th>
     <td *matCellDef="let entry" mat-cell>
       <div class="flex flex-row gap-2 justify-end">
-        <!--        <button color="accent" mat-icon-button (click)="createEvent(entry)">-->
-        <!--          <mat-icon>event</mat-icon>-->
-        <!--        </button>-->
-        <button color="primary" mat-icon-button (click)="editEvent.emit(entry)">
+        <button color="accent" mat-icon-button (click)="createEvent.emit(entry); $event.stopPropagation()">
+          <mat-icon>event</mat-icon>
+        </button>
+        <button color="primary" mat-icon-button (click)="editEvent.emit(entry); $event.stopPropagation()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button color="warn" mat-icon-button (click)="deleteEvent.emit(entry)">
+        <button color="warn" mat-icon-button (click)="deleteEvent.emit(entry); $event.stopPropagation()">
           <mat-icon>delete</mat-icon>
         </button>
 
-        <a color="primary" mat-icon-button routerLink="./details/{{entry.id}}">
-          <mat-icon>more_horiz</mat-icon>
+        <a color="accent" mat-icon-button routerLink="./details/{{entry.id}}">
+          <mat-icon>arrow_circle_right</mat-icon>
         </a>
       </div>
     </td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row class="bg-primary-default"></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="hover:bg-gray-200 cursor-pointer" routerLink="./details/{{row.id}}"></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="table-content-row cursor-pointer" routerLink="./details/{{row.id}}"></tr>
 </table>
 
 

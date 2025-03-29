@@ -11,9 +11,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatTableModule} from "@angular/material/table";
-import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
-import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'boffice-settings',
@@ -25,11 +24,9 @@ import {RouterLink} from "@angular/router";
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatMiniFabButton,
     MatButton,
     BoardComponent,
     BoardToolbarActions,
-    RouterLink,
     MatIconButton,
 
   ],

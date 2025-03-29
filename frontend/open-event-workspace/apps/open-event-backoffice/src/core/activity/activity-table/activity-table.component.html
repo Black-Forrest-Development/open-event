@@ -38,14 +38,14 @@
   <ng-container matColumnDef="cmd">
     <th *matHeaderCellDef class="col-1" mat-header-cell></th>
     <td *matCellDef="let activity" mat-cell>
-      <button mat-icon-button routerLink="./details/{{activity.id}}">
-        <mat-icon>more_horiz</mat-icon>
+      <button color="accent" mat-icon-button routerLink="./details/{{activity.id}}">
+        <mat-icon>arrow_circle_right</mat-icon>
       </button>
     </td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row class="bg-primary-default"></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="hover:bg-gray-200 cursor-pointer" routerLink="./details/{{row.id}}"></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="table-content-row cursor-pointer" routerLink="./details/{{row.id}}"></tr>
 </table>
 
 

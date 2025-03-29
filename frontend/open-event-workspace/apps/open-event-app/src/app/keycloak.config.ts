@@ -1,9 +1,4 @@
-import {
-  createInterceptorCondition,
-  INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
-  IncludeBearerTokenCondition,
-  provideKeycloak
-} from 'keycloak-angular';
+import {createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, provideKeycloak} from 'keycloak-angular';
 import {environment} from "../environments/environment";
 
 const localhostCondition = createInterceptorCondition<IncludeBearerTokenCondition>({

@@ -1,8 +1,7 @@
 import {Component, computed, input, resource, signal} from '@angular/core';
 import {Account, AccountDisplayNamePipe, Event} from "@open-event-workspace/core";
-import {MatDivider} from "@angular/material/divider";
 import {TranslatePipe} from "@ngx-translate/core";
-import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
+import {toPromise} from "@open-event-workspace/shared";
 import {AccountService, EventService} from "@open-event-workspace/backoffice";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
@@ -15,16 +14,12 @@ import {EventChangeDialogComponent} from "../../event/event-change-dialog/event-
 import {EventDeleteDialogComponent} from "../../event/event-delete-dialog/event-delete-dialog.component";
 import {EventPublishDialogComponent} from "../../event/event-publish-dialog/event-publish-dialog.component";
 import {RouterLink} from "@angular/router";
-import {EventTableComponent} from "../../event/event-table/event-table.component";
 import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board-card/board-card.component";
 
 @Component({
   selector: 'app-account-details-events',
   imports: [
-    MatDivider,
     TranslatePipe,
-    LoadingBarComponent,
-    MatDivider,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
@@ -32,7 +27,6 @@ import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board
     AccountDisplayNamePipe,
     DatePipe,
     RouterLink,
-    EventTableComponent,
     BoardCardComponent,
     BoardCardToolbarActions,
   ],

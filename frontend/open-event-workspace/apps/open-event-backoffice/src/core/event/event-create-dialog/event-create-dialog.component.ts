@@ -1,7 +1,7 @@
-import {Component, Inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {AccountService, AddressService, CategoryService, EventService} from "@open-event-workspace/backoffice";
 import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
-import {Account, Address, AddressReadAPI, Category, CategoryReadAPI, Event, EventChangeComponent, EventChangeRequest, EventInfo, EventReadAPI} from "@open-event-workspace/core";
+import {Account, AccountSearchEntry, Address, AddressReadAPI, Category, CategoryReadAPI, Event, EventChangeComponent, EventChangeRequest, EventInfo, EventReadAPI} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Observable} from "rxjs";
 import {Page} from "@open-event-workspace/shared";
@@ -18,13 +18,14 @@ import {Page} from "@open-event-workspace/shared";
 })
 export class EventCreateDialogComponent implements AddressReadAPI, CategoryReadAPI, EventReadAPI {
 
+  data: Account | AccountSearchEntry = inject(MAT_DIALOG_DATA)
+
   constructor(
     private service: AccountService,
     private eventService: EventService,
     private addressService: AddressService,
     private categoryService: CategoryService,
-    public dialogRef: MatDialogRef<EventCreateDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Account
+    public dialogRef: MatDialogRef<EventCreateDialogComponent>
   ) {
   }
 

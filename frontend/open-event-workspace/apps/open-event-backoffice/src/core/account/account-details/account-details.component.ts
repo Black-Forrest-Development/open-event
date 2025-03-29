@@ -1,10 +1,9 @@
 import {Component, computed, resource, signal} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AccountService} from "@open-event-workspace/backoffice";
-import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
+import {toPromise} from "@open-event-workspace/shared";
 import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {TranslatePipe} from "@ngx-translate/core";
 import {AccountDetailsTitleComponent} from "../account-details-title/account-details-title.component";
 import {AccountDetailsPreferencesComponent} from "../account-details-preferences/account-details-preferences.component";
 import {AccountDetailsProfileComponent} from "../account-details-profile/account-details-profile.component";
@@ -14,15 +13,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {Location} from "@angular/common";
 import {MatTabsModule} from "@angular/material/tabs";
-import {BoardComponent, BoardToolbarActions} from "../../../shared/board/board.component";
+import {BoardComponent} from "../../../shared/board/board.component";
 
 @Component({
   selector: 'app-account-details',
   imports: [
-    LoadingBarComponent,
     MatCardModule,
     MatToolbarModule,
-    TranslatePipe,
     MatIconModule,
     MatButtonModule,
     AccountDetailsTitleComponent,
@@ -31,8 +28,7 @@ import {BoardComponent, BoardToolbarActions} from "../../../shared/board/board.c
     AccountDetailsAddressComponent,
     AccountDetailsEventsComponent,
     MatTabsModule,
-    BoardComponent,
-    BoardToolbarActions
+    BoardComponent
   ],
   templateUrl: './account-details.component.html',
   styleUrl: './account-details.component.scss'

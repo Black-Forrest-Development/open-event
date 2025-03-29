@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {BaseService, PatchRequest} from "@open-event-workspace/shared";
+import {BaseService, Page, PatchRequest} from "@open-event-workspace/shared";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category, Event, EventChangeRequest, EventInfo, EventReadAPI, EventSearchRequest, EventSearchResponse, EventStats, Location, Registration} from "@open-event-workspace/core";
+import {Category, Event, EventChangeRequest, EventInfo, EventReadAPI, EventSearchRequest, EventSearchResponse, EventStats, HistoryEntry, Location, Registration} from "@open-event-workspace/core";
 
 
 @Injectable({
@@ -40,6 +40,13 @@ export class EventService extends BaseService implements EventReadAPI {
 
   getEventCategories(id: number): Observable<Category[]> {
     return this.get('' + id + '/category')
+  }
+
+  getEventHistory(id: number, page: number, size: number): Observable<Page<HistoryEntry>> {
+    let params = new HttpParams()
+      .set("page", page)
+      .set("size", size)
+    return this.get('' + id + '/history', params)
   }
 
   getEventStats(id: number): Observable<EventStats> {

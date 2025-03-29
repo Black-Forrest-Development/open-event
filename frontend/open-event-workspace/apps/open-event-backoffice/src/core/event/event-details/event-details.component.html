@@ -8,9 +8,6 @@
         <mat-icon>{{ item.icon }}</mat-icon>
       </button>
     }
-    <button (click)="menu.trigger()" class="action-fab" mat-mini-fab>
-      <mat-icon>more_vert</mat-icon>
-    </button>
   </board-toolbar-actions>
   @if (event()) {
     <mat-tab-group>
@@ -19,6 +16,9 @@
       </mat-tab>
       <mat-tab label="{{'event.details.registration' | translate }}">
         <app-event-details-registration [event]="event()!!"></app-event-details-registration>
+      </mat-tab>
+      <mat-tab label="{{'event.details.history' | translate }}">
+        <app-event-details-history [event]="event()!!"></app-event-details-history>
       </mat-tab>
     </mat-tab-group>
 

@@ -23,11 +23,7 @@
     <div class="flex flex-row gap-2 justify-between content-center">
       <div>{{ 'account.property.published' | translate }}</div>
       <div>
-        @if (event().event.published) {
-          <mat-icon>check</mat-icon>
-        } @else {
-          <mat-icon>block</mat-icon>
-        }
+        <lib-event-published-icon [event]="event().event"></lib-event-published-icon>
       </div>
     </div>
 

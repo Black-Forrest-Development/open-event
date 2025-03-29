@@ -8,11 +8,12 @@ import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {EventPublishButtonComponent} from "../event-publish-button/event-publish-button.component";
 import {MatIcon} from "@angular/material/icon";
 import {MatMiniFabButton} from "@angular/material/button";
-import {EventDetailsOverviewComponent} from "../event-details-overview/event-details-overview.component";
-import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {MatTab, MatTabGroup, MatTabLabel} from "@angular/material/tabs";
 import {TranslatePipe} from "@ngx-translate/core";
 import {EventDetailsRegistrationComponent} from "../event-details-registration/event-details-registration.component";
 import {EventDetailsHistoryComponent} from "../event-details-history/event-details-history.component";
+import {EventDetailsLocationComponent} from "../event-details-location/event-details-location.component";
+import {EventDetailsInfoComponent} from "../event-details-info/event-details-info.component";
 
 @Component({
   selector: 'app-event-details',
@@ -24,12 +25,14 @@ import {EventDetailsHistoryComponent} from "../event-details-history/event-detai
     MatIcon,
     MatMiniFabButton,
     MatMiniFabButton,
-    EventDetailsOverviewComponent,
     MatTabGroup,
     MatTab,
     TranslatePipe,
     EventDetailsRegistrationComponent,
-    EventDetailsHistoryComponent
+    EventDetailsHistoryComponent,
+    MatTabLabel,
+    EventDetailsLocationComponent,
+    EventDetailsInfoComponent
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'

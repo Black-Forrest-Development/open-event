@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {Location} from "@angular/common";
 import {MatTabsModule} from "@angular/material/tabs";
 import {BoardComponent} from "../../../shared/board/board.component";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-account-details',
@@ -28,7 +29,8 @@ import {BoardComponent} from "../../../shared/board/board.component";
     AccountDetailsAddressComponent,
     AccountDetailsEventsComponent,
     MatTabsModule,
-    BoardComponent
+    BoardComponent,
+    TranslatePipe
   ],
   templateUrl: './account-details.component.html',
   styleUrl: './account-details.component.scss'

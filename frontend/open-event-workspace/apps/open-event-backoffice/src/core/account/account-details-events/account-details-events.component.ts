@@ -1,5 +1,5 @@
 import {Component, computed, input, resource, signal} from '@angular/core';
-import {Account, AccountDisplayNamePipe, Event} from "@open-event-workspace/core";
+import {Account, AccountDisplayNamePipe, Event, EventPublishedIconComponent} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {toPromise} from "@open-event-workspace/shared";
 import {AccountService, EventService} from "@open-event-workspace/backoffice";
@@ -29,6 +29,7 @@ import {BoardCardComponent, BoardCardToolbarActions} from "../../../shared/board
     RouterLink,
     BoardCardComponent,
     BoardCardToolbarActions,
+    EventPublishedIconComponent,
   ],
   templateUrl: './account-details-events.component.html',
   styleUrl: './account-details-events.component.scss'
@@ -59,7 +60,7 @@ export class AccountDetailsEventsComponent {
   loading = this.eventsResource.isLoading
   error = this.eventsResource.error
 
-  displayedColumns: string[] = ['id', 'owner', 'title', 'start', 'finish', 'published', 'tags', 'cmd']
+  displayedColumns: string[] = ['id', 'owner', 'title', 'date', 'published',  'cmd']
 
   constructor(private service: AccountService,private eventService: EventService, private dialog: MatDialog) {
   }

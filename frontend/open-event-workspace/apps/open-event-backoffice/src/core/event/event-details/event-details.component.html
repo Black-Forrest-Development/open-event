@@ -9,20 +9,40 @@
       </button>
     }
   </board-toolbar-actions>
-  @if (event()) {
-    <mat-tab-group>
-      <mat-tab label="{{'event.details.overview' | translate }}">
-        <app-event-details-overview [event]="event()!!"></app-event-details-overview>
-      </mat-tab>
-      <mat-tab label="{{'event.details.registration' | translate }}">
-        <app-event-details-registration [event]="event()!!"></app-event-details-registration>
-      </mat-tab>
-      <mat-tab label="{{'event.details.history' | translate }}">
-        <app-event-details-history [event]="event()!!"></app-event-details-history>
-      </mat-tab>
-    </mat-tab-group>
-
-  }
+  <div class="flex flex-col gap-4 p-4 content-stretch ">
+    @if (event()) {
+      <div class="flex flex-row gap-6">
+        <div class="flex flex-col gap-4 content-stretch basis-1/4">
+          <app-event-details-info [event]="event()!!"></app-event-details-info>
+        </div>
+        <div class="rounded-lg border-gray-500 border flex-auto">
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon>map</mat-icon>
+                {{ 'event.details.location' | translate }}
+              </ng-template>
+              <app-event-details-location [event]="event()!!"></app-event-details-location>
+            </mat-tab>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon>map</mat-icon>
+                {{ 'event.details.registration' | translate }}
+              </ng-template>
+              <app-event-details-registration [event]="event()!!"></app-event-details-registration>
+            </mat-tab>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon>map</mat-icon>
+                {{ 'event.details.history' | translate }}
+              </ng-template>
+              <app-event-details-history [event]="event()!!"></app-event-details-history>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    }
+  </div>
 </app-board>
 
 <app-event-menu [event]="event()" #menu></app-event-menu>

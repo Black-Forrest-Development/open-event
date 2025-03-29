@@ -67,6 +67,18 @@
               "with": "apps/open-event-backoffice/src/environments/environment.development.ts"
             }
           ]
+        },
+        "local": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/open-event-backoffice/src/environments/environment.ts",
+              "with": "apps/open-event-backoffice/src/environments/environment.local.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -79,6 +91,9 @@
         },
         "development": {
           "buildTarget": "open-event-backoffice:build:development"
+        },
+        "local": {
+          "buildTarget": "open-event-backoffice:build:local"
         }
       },
       "defaultConfiguration": "development",

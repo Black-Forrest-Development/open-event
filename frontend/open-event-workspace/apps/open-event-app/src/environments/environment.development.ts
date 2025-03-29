@@ -3,7 +3,7 @@ export const environment = {
   logrocketAppId: '0euwfq/open-event',
   logoutUrl: 'https://open.psm.church/',
   keycloak: {
-    url: 'http://localhost:8081/',
+    url: 'https://auth.psm.church/auth',
     realm: 'open-church',
     clientId: 'open-church-frontend',
   },

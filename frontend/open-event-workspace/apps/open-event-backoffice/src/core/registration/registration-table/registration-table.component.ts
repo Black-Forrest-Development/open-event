@@ -1,6 +1,6 @@
-import {Component, computed, effect, input, resource} from '@angular/core';
+import {Component, computed, effect, input, resource, signal} from '@angular/core';
 import {RegistrationService} from '@open-event-workspace/backoffice';
-import {Participant, ParticipantDetails, ParticipateRequest, ParticipateResponse, RegistrationInfo} from "@open-event-workspace/core";
+import {Participant, ParticipantDetails, ParticipateResponse, RegistrationInfo} from "@open-event-workspace/core";
 import {AuthService, toPromise} from "@open-event-workspace/shared";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
@@ -30,9 +30,10 @@ export class RegistrationTableComponent {
       return toPromise(this.service.getRegistrationDetails(param.request.registration.id))
     }
   })
-
   registration = computed(this.registrationResource.value ?? undefined)
-  loading = this.registrationResource.isLoading
+
+  updating = signal(false)
+  loading = computed(() => this.registrationResource.isLoading() || this.updating())
   error = this.registrationResource.error
 
   displayedColumns: string[] = ['rank', 'size', 'status', 'waitinglist', 'name', 'email', 'phone', 'mobile', 'timestamp', 'action']
@@ -52,26 +53,16 @@ export class RegistrationTableComponent {
 
   editParticipant(part: Participant) {
     let dialogRef = this.dialog.open(RegistrationParticipantEditDialogComponent, {data: part})
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestEditParticipant(part, request)
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) this.handleParticipateResponse(response)
     })
   }
 
   removeParticipant(part: Participant) {
     let dialogRef = this.dialog.open(RegistrationParticipantRemoveDialogComponent, {data: part})
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestRemoveParticipant(part)
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) this.handleParticipateResponse(response)
     })
-  }
-
-  private requestEditParticipant(participant: Participant, request: ParticipateRequest) {
-    this.reloading = true
-    this.service.changeParticipant(this.data().registration.id, participant.id, request).subscribe(r => this.handleParticipateResponse(r))
-  }
-
-  private requestRemoveParticipant(participant: Participant) {
-    this.reloading = true
-    this.service.removeParticipant(this.data().registration.id, participant.id).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private handleParticipateResponse(response: ParticipateResponse) {
@@ -90,6 +81,7 @@ export class RegistrationTableComponent {
         this.translation.get('registration.message.failed').subscribe(msg => this.hotToast.error(msg))
         break;
     }
-    this.reloadDetails()
+    this.registrationResource.reload()
+    this.updating.set(false)
   }
 }

@@ -32,10 +32,10 @@ export class EventChangeComponent {
   event = input<Event>()
   info = signal<EventInfo | undefined>(undefined)
   request = output<EventChangeRequest>()
+  cancel = output<boolean>()
 
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
-  helpVisible: boolean = false
   loading: boolean = false
 
   addressReadAPI = input.required<AddressReadAPI>()
@@ -64,10 +64,6 @@ export class EventChangeComponent {
   }
 
 
-  toggleHelp(step: string) {
-    this.helpVisible = !this.helpVisible
-  }
-
   private isEndHidden() {
     return this.hiddenFields.find(f => f === 'endDate') != null
   }
@@ -81,9 +77,11 @@ export class EventChangeComponent {
     this.request.emit(request)
   }
 
+
   private createRequest(value: any, endHidden: boolean): EventChangeRequest | undefined {
     let start = this.createDateTime(value.general.startTime, value.general.startDate)
     let end = endHidden ? this.createDateTime(value.general.endTime, value.general.startDate) : this.createDateTime(value.general.endTime, value.general.endDate)
+    debugger
     if (!start || !end) return undefined
 
     let location = new LocationChangeRequest(
@@ -120,12 +118,11 @@ export class EventChangeComponent {
     )
   }
 
-  private createDateTime(timeStr: string, date: any): DateTime | undefined {
-    let mDate = DateTime.fromJSDate(date)
+  private createDateTime(timeStr: string, date: DateTime): DateTime | undefined {
     let time = timeStr.split(":");
-    if (time.length == 2 && mDate.isValid) {
-      mDate = mDate.set({hour: parseInt(time[0]), minute: parseInt(time[1])});
-      return mDate
+    if (time.length == 2 && date.isValid) {
+      date = date.set({hour: parseInt(time[0]), minute: parseInt(time[1])});
+      return date
     }
     return undefined;
   }
@@ -137,4 +134,5 @@ export class EventChangeComponent {
       complete: () => this.loading = false
     })
   }
+
 }

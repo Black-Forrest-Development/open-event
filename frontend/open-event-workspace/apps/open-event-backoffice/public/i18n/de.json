@@ -22,9 +22,11 @@
   },
   "event": {
     "type": "Veranstaltungen",
+    "title": "Veranstaltung",
     "search": "Suche nach einer Veranstaltung",
     "create": "Neue Veranstaltung erstellen",
     "action": {
+      "create": "Veranstaltung erstellen",
       "edit": "Veranstaltung Bearbeiten",
       "copy": "Veranstaltung Kopieren",
       "delete": "Veranstaltung Löschen",
@@ -106,6 +108,24 @@
     },
     "admin": {
       "registration": "Teilnehmerliste"
+    },
+    "property": {
+      "id": "ID",
+      "title": "Titel",
+      "shortText": "Kurztext",
+      "longText": "Beschreibung",
+      "published": "Veröffentlicht",
+      "tags": "Hashtags",
+      "categories": "Kategorien",
+      "owner": "Ersteller",
+      "date": "Datum",
+      "participants": "Teilnehmerinfo"
+    },
+    "details": {
+      "info": "Allgemein",
+      "location": "Ort",
+      "registration": "Anmeldungen",
+      "history": "Protokoll"
     }
   },
   "registration": {
@@ -199,7 +219,24 @@
     }
   },
   "settings": {
-    "type": "Einstellungen"
+    "type": "Einstellungen",
+    "title": "Einstellungen",
+    "create": "Neuen Parameter anlegen",
+    "table": {
+      "key": "Key",
+      "value": "Value",
+      "type": "Typ"
+    },
+    "form": {
+      "key": "Key",
+      "value": "Value",
+      "type": "Typ"
+    },
+    "dialog": {
+      "create": {
+        "title": "Neuen Parameter anlegen"
+      }
+    }
   },
   "cache": {
     "type": "Cache"
@@ -217,6 +254,7 @@
     "type": "Benutzerprofil",
     "admin": "Benutzerverwaltung",
     "search": "Suche nach Benutzer",
+    "create": "Benutzer anlegen",
     "dialog": {
       "create": {
         "title": "Neuen Benutzer erstellen"
@@ -235,6 +273,29 @@
     },
     "message": {
       "created": "Benutzer erfolgreich erstellt"
+    },
+    "table": {
+      "name": "Benutzername",
+      "firstname": "Vorname",
+      "lastname": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "mobile": "Mobil"
+    },
+    "property": {
+      "id": "ID",
+      "externalId": "External ID",
+      "name": "Name",
+      "registered": "Registrierungsdatum",
+      "login": "Letzter Login",
+      "linked": "IDP verbunden"
+    },
+    "details": {
+      "events": "Veranstaltungen",
+      "address": "Addressen",
+      "title": "Allgemein",
+      "profile": "Profil",
+      "preferences": "Einstellungen"
     }
   },
   "backoffice": {
@@ -310,7 +371,15 @@
     "gender": "Geschlecht",
     "profilePicture": "Profil-Bild",
     "website": "Webseite",
-    "language": "Sprache"
+    "language": "Sprache",
+    "property": {
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "mobile": "Mobil",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "language": "Sprache"
+    }
   },
   "address": {
     "type": "Adressen",
@@ -337,7 +406,17 @@
     },
     "action": {
       "add": "Neue Adresse anlegen",
+      "create": "Neue Adresse anlegen",
       "import": "Bestehende Adressen importieren"
+    },
+    "property": {
+      "street": "Straße",
+      "streetNumber": "Nr",
+      "info": "Addresszusatz",
+      "zip": "PLZ",
+      "city": "Wohnort",
+      "country": "Land",
+      "additionalInfo": "Zusätzliche Angaben"
     }
   },
   "share": {
@@ -367,7 +446,8 @@
       "title": "Titel",
       "actor": "Benutzer",
       "timestamp": "Datum",
-      "read": "Gelesen"
+      "read": "Gelesen",
+      "source": "Quelle"
     },
     "action": {
       "read": "Gelesen",
@@ -403,6 +483,15 @@
     },
     "action": {
       "setup": "Neu erstellen"
+    }
+  },
+  "location": {
+    "property": {
+      "street": "Straße",
+      "additionalInfo": "Zusatzinfo",
+      "city": "Ort",
+      "country": "Land",
+      "size": "Maximale Teilnehmer"
     }
   }
 }

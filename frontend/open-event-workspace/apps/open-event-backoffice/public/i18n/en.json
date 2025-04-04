@@ -22,9 +22,11 @@
   },
   "event": {
     "type": "Event",
+    "title": "Event",
     "search": "Search for event",
     "create": "Create new event",
     "action": {
+      "create": "Create Event",
       "edit": "Edit Event",
       "copy": "Copy Event",
       "delete": "Delete Event",
@@ -106,6 +108,24 @@
       "status": "Status",
       "category": "Category",
       "label": "Label"
+    },
+    "property": {
+      "id": "Event ID",
+      "title": "Title",
+      "shortText": "Short Text",
+      "longText": "Description",
+      "published": "Published",
+      "tags": "Tags",
+      "categories": "Categories",
+      "owner": "Owner",
+      "date": "Date",
+      "participants": "Participants"
+    },
+    "details": {
+      "info": "Common",
+      "location": "Location",
+      "registration": "Registration",
+      "history": "History"
     }
   },
   "registration": {
@@ -206,6 +226,7 @@
   },
   "settings": {
     "type": "Settings",
+    "title": "Settings",
     "create": "Create new Setting",
     "table": {
       "key": "Key",
@@ -216,6 +237,11 @@
       "key": "Key",
       "value": "Value",
       "type": "Type"
+    },
+    "dialog": {
+      "create": {
+        "title": "Create new setting"
+      }
     }
   },
   "cache": {
@@ -258,7 +284,24 @@
       "name": "Username",
       "firstname": "First Name",
       "lastname": "Last Name",
-      "email": "E-Mail"
+      "email": "E-Mail",
+      "phone": "Phone",
+      "mobile": "Mobile"
+    },
+    "property": {
+      "id": "Account ID",
+      "externalId": "External ID",
+      "name": "Name",
+      "registered": "Registered",
+      "login": "Last Login",
+      "linked": "IDP Linked"
+    },
+    "details": {
+      "events": "Events",
+      "address": "Locations",
+      "title": "Common",
+      "profile": "Profile",
+      "preferences": "Preferences"
     }
   },
   "backoffice": {
@@ -334,7 +377,15 @@
     "gender": "Gender",
     "profilePicture": "Profile Picture",
     "website": "Website",
-    "language": "Language"
+    "language": "Language",
+    "property": {
+      "email": "E-Mail",
+      "phone": "Phone",
+      "mobile": "Mobile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "language": "Language"
+    }
   },
   "address": {
     "type": "Address",
@@ -360,7 +411,16 @@
     },
     "action": {
       "add": "Create address",
+      "create": "Create address",
       "import": "Import addresses"
+    },
+    "property": {
+      "street": "Street",
+      "streetNumber": "Nr",
+      "zip": "Zip",
+      "city": "City",
+      "country": "Country",
+      "additionalInfo": "Additional Info"
     }
   },
   "share": {
@@ -391,7 +451,8 @@
       "title": "Title",
       "actor": "Actor",
       "timestamp": "Timestamp",
-      "read": "Read"
+      "read": "Read",
+      "source": "Source"
     },
     "action": {
       "read": "Read",
@@ -427,6 +488,15 @@
     },
     "action": {
       "setup": "Setup"
+    }
+  },
+  "location": {
+    "property": {
+      "street": "Street",
+      "additionalInfo": "Additional info",
+      "city": "City",
+      "country": "Country",
+      "size": "Max Size"
     }
   }
 }

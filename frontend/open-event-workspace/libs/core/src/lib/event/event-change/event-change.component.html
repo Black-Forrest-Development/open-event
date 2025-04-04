@@ -7,7 +7,6 @@
       <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
       <ng-container *ngTemplateOutlet="submitButton"></ng-container>
       <ng-container *ngTemplateOutlet="cancelButton"></ng-container>
-      <!--        <ng-container *ngTemplateOutlet="helpButton"></ng-container>-->
     </div>
   </mat-step>
   <mat-step [stepControl]="location.fg" errorMessage="{{'event.step.incomplete' | translate}}"
@@ -18,7 +17,6 @@
       <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
       <ng-container *ngTemplateOutlet="submitButton"></ng-container>
       <ng-container *ngTemplateOutlet="cancelButton"></ng-container>
-      <!--        <ng-container *ngTemplateOutlet="helpButton"></ng-container>-->
     </div>
   </mat-step>
   <mat-step [stepControl]="registration.fg" errorMessage="{{'event.step.incomplete' | translate}}"
@@ -28,28 +26,20 @@
       <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
       <ng-container *ngTemplateOutlet="submitButton"></ng-container>
       <ng-container *ngTemplateOutlet="cancelButton"></ng-container>
-      <!--        <ng-container *ngTemplateOutlet="helpButton"></ng-container>-->
     </div>
   </mat-step>
 </mat-stepper>
 
 <ng-template #submitButton>
-  <button (click)="submit()" color="accent" mat-flat-button type="submit">
+  <button (click)="submit()" color="accent" mat-flat-button type="submit" [disabled]="!fg.valid">
     <mat-icon>save</mat-icon>
     {{ 'action.submit' | translate }}
   </button>
 </ng-template>
 
 <ng-template #cancelButton>
-  <button (click)="submit()" color="warn" mat-flat-button>
+  <button (click)="cancel.emit(true)" color="warn" mat-flat-button>
     <mat-icon>close</mat-icon>
     {{ 'action.cancel' | translate }}
-  </button>
-</ng-template>
-
-<ng-template #helpButton>
-  <button (click)="toggleHelp('registration')" color="accent" mat-flat-button>
-    <mat-icon>support</mat-icon>
-    {{ 'action.help' | translate }}
   </button>
 </ng-template>

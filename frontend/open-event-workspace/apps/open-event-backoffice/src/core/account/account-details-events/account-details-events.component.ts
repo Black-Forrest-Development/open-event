@@ -71,7 +71,7 @@ export class AccountDetailsEventsComponent {
   }
 
   createEvent() {
-    this.dialog.open(EventCreateDialogComponent, {data: this.data()}).afterClosed().subscribe(value => {
+    this.dialog.open(EventCreateDialogComponent, {data: this.data(), minWidth: '800px'}).afterClosed().subscribe(value => {
       if (value) this.eventsResource.reload()
     })
   }

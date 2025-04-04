@@ -3,5 +3,13 @@
   <div class="bg-accent-default rounded-sm px-4 py-1">{{ data.owner.name }}</div>
 </div>
 <div mat-dialog-content>
-  <lib-event-change title="event.dialog.create.title" [event]="data" [addressReadAPI]="this" [categoryReadAPI]="this" [eventReadAPI]="this" (request)="handleRequest($event)" #change></lib-event-change>
+  <lib-event-change title="event.dialog.create.title"
+                    [event]="data"
+                    [addressReadAPI]="this"
+                    [categoryReadAPI]="this"
+                    [eventReadAPI]="this"
+                    (request)="handleRequest($event)"
+                    (cancel)="onCancelClick()"
+  >
+  </lib-event-change>
 </div>

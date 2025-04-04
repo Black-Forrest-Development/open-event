@@ -141,6 +141,10 @@
       "manual": {
         "title": "Add manual participant",
         "question": "Add the data of the participant please"
+      },
+      "account": {
+        "title": "Add participant",
+        "question": "Add the data of the participant please"
       }
     },
     "message": {

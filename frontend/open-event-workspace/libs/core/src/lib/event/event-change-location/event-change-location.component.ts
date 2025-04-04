@@ -21,6 +21,7 @@ export class EventChangeLocationComponent implements OnInit {
 
   data = input<EventInfo>()
   hiddenFields = input<string[]>([])
+  parent = input.required<FormGroup>()
   fg: FormGroup
 
   addressReadAPI = input.required<AddressReadAPI>()
@@ -53,6 +54,11 @@ export class EventChangeLocationComponent implements OnInit {
       if (addresses.length > 0 && !this.fg?.dirty && !this.fg?.valid) {
         this.setAddress(addresses[0])
       }
+    });
+
+    effect(() => {
+      let parent = this.parent()
+      parent.addControl("location", this.fg)
     });
   }
 

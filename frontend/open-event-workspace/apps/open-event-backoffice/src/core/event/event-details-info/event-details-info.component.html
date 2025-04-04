@@ -6,29 +6,29 @@
     </div>
 
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.title' | translate }}</div>
+      <div>{{ 'event.property.title' | translate }}</div>
       <div>{{ event().event.title }}</div>
     </div>
 
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.shortText' | translate }}</div>
+      <div>{{ 'event.property.shortText' | translate }}</div>
       <div>{{ event().event.shortText }}</div>
     </div>
 
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.longText' | translate }}</div>
+      <div>{{ 'event.property.longText' | translate }}</div>
       <div [innerHtml]=" event().event.longText "></div>
     </div>
 
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.published' | translate }}</div>
+      <div>{{ 'event.property.published' | translate }}</div>
       <div>
         <lib-event-published-icon [event]="event().event"></lib-event-published-icon>
       </div>
     </div>
 
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.tags' | translate }}</div>
+      <div>{{ 'event.property.tags' | translate }}</div>
       <div class="flex flex-row gap-2 flex-wrap">
         @for (tag of event().event.tags; track tag) {
           <div class="px-3 py-1 rounded-xl bg-gray-300">{{ tag }}</div>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="flex flex-row gap-2 justify-between content-center">
-      <div>{{ 'account.property.categories' | translate }}</div>
+      <div>{{ 'event.property.categories' | translate }}</div>
       <div class="flex flex-row gap-2 flex-wrap">
         @for (category of event().categories; track category.id) {
           <div class="px-3 py-1 rounded-xl bg-gray-300">{{ category.name }}</div>

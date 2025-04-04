@@ -53,9 +53,10 @@ class RegistrationController(
         @Body request: ParticipateRequest
     ): ParticipateResponse? {
         return auth.checkPermission(PERMISSION_ADMIN) {
-            val account = accountService.get(auth) ?: throw InvalidRequestException("Cannot find account")
+            val actor = accountService.get(auth) ?: throw InvalidRequestException("Cannot find user account")
+            val account = accountService.get(accountId) ?: throw InvalidRequestException("Cannot find account [$accountId]")
             logger.traceAction(auth, "removeParticipant", id.toString()) {
-                service.addParticipant(account, id, account, request)
+                service.addParticipant(actor, id, account, request)
             }
         }
     }

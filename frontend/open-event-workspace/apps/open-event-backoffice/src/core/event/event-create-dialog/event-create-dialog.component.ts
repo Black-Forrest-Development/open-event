@@ -59,6 +59,7 @@ export class EventCreateDialogComponent implements AddressReadAPI, CategoryReadA
   }
 
   handleRequest(request: EventChangeRequest) {
+    debugger
     this.service.createEvent(this.data.id, request).subscribe({
       next: val => this.dialogRef.close(true),
       error: err => this.dialogRef.close(true),

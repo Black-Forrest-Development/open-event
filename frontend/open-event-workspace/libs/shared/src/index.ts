@@ -24,3 +24,5 @@ export * from './lib/loading-screen/loading-screen.component'
 export * from './lib/main-menu/main-menu.component'
 
 export * from './lib/page-not-found/page-not-found.component'
+
+export * from './lib/validator/validator'

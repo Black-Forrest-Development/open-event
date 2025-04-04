@@ -1,5 +1,5 @@
 import {Component, input, output} from '@angular/core';
-import {AccountDisplayNamePipe, EventSearchEntry} from "@open-event-workspace/core";
+import {AccountDisplayNamePipe, EventPublishedIconComponent, EventSearchEntry} from "@open-event-workspace/core";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -18,7 +18,8 @@ import {DatePipe} from "@angular/common";
     TranslatePipe,
     RouterLink,
     AccountDisplayNamePipe,
-    DatePipe
+    DatePipe,
+    EventPublishedIconComponent
   ],
   templateUrl: './event-table.component.html',
   styleUrl: './event-table.component.scss'
@@ -34,5 +35,5 @@ export class EventTableComponent {
   editEvent = output<EventSearchEntry>()
   deleteEvent = output<EventSearchEntry>()
   publishEvent = output<EventSearchEntry>()
-  displayedColumns: string[] = ['id', 'owner', 'title', 'start', 'finish', 'published', 'tags', 'cmd']
+  displayedColumns: string[] = ['id', 'owner', 'title', 'date', 'published', 'participants', 'tags', 'cmd']
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {EventSearchEntry, EventSearchRequest, EventSearchResponse} from "@open-event-workspace/core";
+import {defaultEventSearchRequest, EventRangePickerComponent, EventRangeSelection, EventSearchEntry, EventSearchResponse} from "@open-event-workspace/core";
 import {EventService} from "@open-event-workspace/backoffice";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
@@ -10,11 +10,15 @@ import {EventChangeDialogComponent} from "./event-change-dialog/event-change-dia
 import {EventDeleteDialogComponent} from "./event-delete-dialog/event-delete-dialog.component";
 import {MatCard} from "@angular/material/card";
 import {EventTableComponent} from "./event-table/event-table.component";
-import {BoardComponent} from "../../shared/board/board.component";
+import {BoardComponent, BoardToolbarActions} from "../../shared/board/board.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatMiniFabButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {DateTime} from "luxon";
 
 @Component({
   selector: 'boffice-event',
-  imports: [CommonModule, MatCard, EventTableComponent, BoardComponent],
+  imports: [CommonModule, MatCard, EventTableComponent, BoardComponent, BoardToolbarActions, ReactiveFormsModule, EventRangePickerComponent, MatIcon, MatMiniFabButton, MatMiniFabButton],
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss',
 })
@@ -25,17 +29,18 @@ export class EventComponent {
   pageSize: number = 20
   pageNumber: number = 0
   totalElements: number = 0
+  showHistory: boolean = false
   data: EventSearchEntry[] = []
 
   keyUp: EventEmitter<string> = new EventEmitter<string>()
-  request = new EventSearchRequest('', undefined, undefined, false, false, false)
+  request = defaultEventSearchRequest()
 
   constructor(private service: EventService, private toast: HotToastService, private dialog: MatDialog) {
   }
 
 
   ngOnInit() {
-    this.search()
+    this.resetFilter()
     this.keyUp.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -54,11 +59,6 @@ export class EventComponent {
   }
 
   search() {
-    this.load(0, this.pageSize)
-  }
-
-
-  reload() {
     this.load(0, this.pageSize)
   }
 
@@ -111,4 +111,26 @@ export class EventComponent {
     dialogRef.afterClosed().subscribe(d => this.search())
   }
 
+  handleRangeChanged(event: EventRangeSelection) {
+    this.request.from = event.from.toISODate() ?? ''
+    this.request.to = event.to.toISODate() ?? ''
+    this.search()
+  }
+
+  resetFilter() {
+    this.request = defaultEventSearchRequest()
+    this.showHistory = false
+    this.request.from = DateTime.now().startOf('day').toISODate() ?? ''
+    this.search()
+  }
+
+  toggleHistory() {
+    this.showHistory = !this.showHistory
+    if (this.showHistory) {
+      this.request.from = ''
+    } else {
+      this.request.from = DateTime.now().startOf('day').toISODate() ?? ''
+    }
+    this.search()
+  }
 }

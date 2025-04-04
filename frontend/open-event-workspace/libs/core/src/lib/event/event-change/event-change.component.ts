@@ -1,4 +1,4 @@
-import {Component, effect, input, output, signal, viewChild} from '@angular/core';
+import {Component, effect, input, output, signal} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule, StepperOrientation} from "@angular/material/stepper";
@@ -44,10 +44,6 @@ export class EventChangeComponent {
 
   stepperOrientation: Observable<StepperOrientation>
 
-  generalComp = viewChild<EventChangeGeneralComponent>(EventChangeGeneralComponent)
-  locationComp = viewChild<EventChangeLocationComponent>(EventChangeLocationComponent)
-  registrationComp = viewChild<EventChangeGeneralComponent>(EventChangeGeneralComponent)
-
   fg: FormGroup
 
   constructor(
@@ -65,16 +61,6 @@ export class EventChangeComponent {
       let event = this.event()
       if (event) this.loadEventInfo(event)
     })
-
-    effect(() => {
-      this.fg.addControl("general", this.generalComp()!!.fg)
-    });
-    effect(() => {
-      this.fg.addControl("location", this.locationComp()!!.fg)
-    });
-    effect(() => {
-      this.fg.addControl("registration", this.registrationComp()!!.fg)
-    });
   }
 
 
@@ -126,11 +112,11 @@ export class EventChangeComponent {
       value.general.longText,
       value.general.imageUrl,
       value.general.iconUrl,
-      value.registration.categories,
+      value.registration.categories ?? [],
       location,
       registration,
       true,
-      value.registration.tags
+      value.registration.tags ?? []
     )
   }
 

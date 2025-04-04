@@ -23,6 +23,7 @@ export class EventChangeRegistrationComponent {
 
   data = input<EventInfo>()
   hiddenFields = input<string[]>([])
+  parent = input.required<FormGroup>()
   fg: FormGroup
 
   categoryReadAPI = input.required<CategoryReadAPI>()
@@ -50,6 +51,11 @@ export class EventChangeRegistrationComponent {
     effect(() => {
       let event = this.data()
       if (event) this.handleDataChanged(event)
+    })
+
+    effect(() => {
+      let parent = this.parent()
+      parent.addControl("registration", this.fg)
     });
   }
 
@@ -61,7 +67,7 @@ export class EventChangeRegistrationComponent {
         ticketsEnabled: registration.registration.ticketsEnabled,
         maxGuestAmount: registration.registration.maxGuestAmount,
         interestedAllowed: registration.registration.interestedAllowed,
-        categories: info.categories.map(c => c.id),
+        categories: info.categories.map(c => c.id) ?? [],
         tags: info.event.tags ?? [],
       })
     }

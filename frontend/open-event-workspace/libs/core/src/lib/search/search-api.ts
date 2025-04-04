@@ -14,6 +14,10 @@ export class EventSearchRequest {
   }
 }
 
+export function defaultEventSearchRequest() {
+  return new EventSearchRequest('', undefined, undefined, false, false, false)
+}
+
 
 export interface EventSearchResponse {
   result: Page<EventSearchEntry>

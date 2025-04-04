@@ -1,20 +1,20 @@
-<h1 mat-dialog-title class="bg-primary-default">{{ "registration.dialog.cancel.title" | translate }}</h1>
+<h1 mat-dialog-title class="bg-primary-default">{{ "registration.dialog.account.title" | translate }}</h1>
 <div mat-dialog-content>
-  <div class="flex flex-col gap-3 pt-4">
-    <form [formGroup]="fg">
+  <form [formGroup]="fg">
+    <div class="flex flex-col gap-2 pt-4">
       <div class="flex flex-col gap-2">
-        <p>{{ "registration.dialog.edit.question" | translate }}</p>
+        <app-account-select (selectionChanged)="handleAccountSelectionChanged($event)" class="flex-auto items-stretch"/>
         <mat-form-field class="dense-1">
           <mat-label>{{ "registration.peopleAmount" | translate }}</mat-label>
           <input formControlName="size" matInput min="1" required type="number">
         </mat-form-field>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 <mat-dialog-actions align="end">
   <div class="flex flex-row gap-2">
-    <button cdkFocusInitial color="primary" mat-stroked-button (click)="onSaveClick()">
+    <button cdkFocusInitial color="primary" mat-stroked-button (click)="onSaveClick()" [disabled]="!fg.valid || !account">
       <mat-icon>save</mat-icon>
       {{ "action.submit" | translate }}
     </button>

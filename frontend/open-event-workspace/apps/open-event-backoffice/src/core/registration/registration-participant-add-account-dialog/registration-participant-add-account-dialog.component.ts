@@ -1,16 +1,17 @@
 import {Component, inject} from '@angular/core';
-import {Participant, Registration} from "@open-event-workspace/core";
+import {AccountSearchEntry, Participant, Registration} from "@open-event-workspace/core";
 import {MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
 import {RegistrationService} from "@open-event-workspace/backoffice";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AccountSelectComponent} from "../../account/account-select/account-select.component";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatLabel} from "@angular/material/form-field";
 
 @Component({
-  selector: 'app-registration-participant-edit-dialog',
+  selector: 'app-registration-participant-add-account-dialog',
   imports: [
     MatButton,
     MatDialogActions,
@@ -19,25 +20,28 @@ import {MatLabel} from "@angular/material/form-field";
     MatIcon,
     TranslatePipe,
     ReactiveFormsModule,
+    AccountSelectComponent,
     MatFormField,
     MatInput,
     MatFormField,
     MatLabel
   ],
-  templateUrl: './registration-participant-edit-dialog.component.html',
-  styleUrl: './registration-participant-edit-dialog.component.scss'
+  templateUrl: './registration-participant-add-account-dialog.component.html',
+  styleUrl: './registration-participant-add-account-dialog.component.scss'
 })
-export class RegistrationParticipantEditDialogComponent {
+export class RegistrationParticipantAddAccountDialogComponent {
+
   data: { registration: Registration, participant: Participant } = inject(MAT_DIALOG_DATA)
+  account: AccountSearchEntry | undefined
   fg: FormGroup
 
   constructor(
     fb: FormBuilder,
     private service: RegistrationService,
-    public dialogRef: MatDialogRef<RegistrationParticipantEditDialogComponent>
+    public dialogRef: MatDialogRef<RegistrationParticipantAddAccountDialogComponent>
   ) {
     this.fg = fb.group({
-      size: [this.data.participant.size, Validators.compose([Validators.required, Validators.min(1)])]
+      size: [0, Validators.compose([Validators.required, Validators.min(1)])]
     })
   }
 
@@ -46,13 +50,19 @@ export class RegistrationParticipantEditDialogComponent {
   }
 
   onSaveClick() {
-    if (!this.fg.valid) return
+    if (!this.fg.valid || !this.account) return
     let request = this.fg.value
-    this.service.changeParticipant(this.data.registration.id, this.data.participant.id, request).subscribe(
+    let accountId = this.account.id
+
+    this.service.addParticipantAccount(this.data.registration.id, accountId, request).subscribe(
       {
         next: val => this.dialogRef.close(val),
         error: err => this.dialogRef.close(null),
       }
     )
+  }
+
+  handleAccountSelectionChanged(entry: AccountSearchEntry) {
+    this.account = entry
   }
 }

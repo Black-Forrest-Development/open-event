@@ -24,6 +24,8 @@ export * from './lib/event/event-change-general/event-change-general.component';
 export * from './lib/event/event-change-location/event-change-location.component';
 export * from './lib/event/event-change-registration/event-change-registration.component';
 export * from './lib/event/event-published-icon/event-published-icon.component';
+export * from './lib/event/event-range-picker/event-range-picker.component';
+export * from './lib/event/event-range-picker/event-range-selection';
 
 export * from './lib/export/export.service';
 

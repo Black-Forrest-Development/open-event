@@ -28,7 +28,7 @@ export class RegistrationService extends BaseService {
   }
 
   addParticipantAccount(id: number, accountId: number, request: ParticipateRequest): Observable<ParticipateResponse> {
-    return this.put('' + id + '/participant/account/' + accountId, request)
+    return this.post('' + id + '/participant/account/' + accountId, request)
   }
 
   addParticipantManual(id: number, request: ParticipantAddRequest): Observable<ParticipateResponse> {

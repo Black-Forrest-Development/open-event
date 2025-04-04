@@ -14,10 +14,11 @@ import {MatInputModule} from "@angular/material/input";
   templateUrl: './event-change-general.component.html',
   styleUrl: './event-change-general.component.scss'
 })
-export class EventChangeGeneralComponent implements OnInit{
+export class EventChangeGeneralComponent implements OnInit {
 
   data = input<EventInfo>()
   hiddenFields = input<string[]>([])
+  parent = input.required<FormGroup>()
   fg: FormGroup
 
   constructor(fb: FormBuilder) {
@@ -37,7 +38,11 @@ export class EventChangeGeneralComponent implements OnInit{
     effect(() => {
       let event = this.data()
       if (event) this.handleDataChanged(event)
-    });
+    })
+    effect(() => {
+      let parent = this.parent()
+      parent.addControl("general", this.fg)
+    })
   }
 
   ngOnInit() {

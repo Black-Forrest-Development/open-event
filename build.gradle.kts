@@ -1,16 +1,16 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.1.10"
-    id("org.jetbrains.kotlin.kapt") version "2.1.10"
+    id("org.jetbrains.kotlin.jvm") version "2.1.20"
+    id("org.jetbrains.kotlin.kapt") version "2.1.20"
 //    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
-    id("org.jetbrains.kotlin.plugin.allopen") version "2.1.10"
-    id("org.jetbrains.kotlin.plugin.jpa") version "2.1.10"
-    kotlin("plugin.serialization") version "2.1.10"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.1.20"
+    id("org.jetbrains.kotlin.plugin.jpa") version "2.1.20"
+    kotlin("plugin.serialization") version "2.1.20"
     id("org.sonarqube") version "6.0.1.5171"
     id("com.gradleup.shadow") version "8.3.5" apply false
     id("com.google.cloud.tools.jib") version "3.4.5" apply false
-    id("io.micronaut.application") version "4.5.0" apply false
-    id("io.micronaut.test-resources") version "4.5.0" apply false
-    id("io.micronaut.aot") version "4.5.0" apply false
+    id("io.micronaut.application") version "4.5.1" apply false
+    id("io.micronaut.test-resources") version "4.5.1" apply false
+    id("io.micronaut.aot") version "4.5.1" apply false
     id("net.researchgate.release") version "3.1.0"
     id("maven-publish")
     id("jacoco")

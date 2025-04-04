@@ -38,7 +38,7 @@ micronaut {
 
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.5.17")
+    implementation("ch.qos.logback:logback-classic:1.5.18")
     runtimeOnly("org.yaml:snakeyaml")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
@@ -74,8 +74,8 @@ dependencies {
     // kotlin
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.1.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.1.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.20")
 
     // caching
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
@@ -131,7 +131,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.3.13")
+    implementation("com.jillesvangurp:search-client:2.4.0")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.18.3")

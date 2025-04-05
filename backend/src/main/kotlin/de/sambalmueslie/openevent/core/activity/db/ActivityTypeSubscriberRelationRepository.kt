@@ -10,4 +10,5 @@ import io.micronaut.data.repository.GenericRepository
 interface ActivityTypeSubscriberRelationRepository : GenericRepository<ActivityTypeSubscriberRelation, Long> {
     fun save(relation: ActivityTypeSubscriberRelation): ActivityTypeSubscriberRelation
     fun saveAll(relations: List<ActivityTypeSubscriberRelation>): List<ActivityTypeSubscriberRelation>
+    fun findByTypeIdAndAccountIdIn(typeId: Long, accountIds: Set<Long>): List<ActivityTypeSubscriberRelation>
 }

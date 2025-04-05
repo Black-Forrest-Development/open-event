@@ -8,7 +8,6 @@ import de.sambalmueslie.openevent.core.activity.ActivityCrudService
 import de.sambalmueslie.openevent.core.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
-import de.sambalmueslie.openevent.core.notification.handler.EventNotificationHandler.Companion.KEY_EVENT_CREATED
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.data.model.Page
 import io.micronaut.scheduling.annotation.Scheduled
@@ -93,7 +92,7 @@ class ActivityNotificationHandler(
         if (result.isEmpty()) return
         val recipient = accountService.getInfo(account)
         service.process(
-            NotificationEvent(KEY_EVENT_CREATED, accountService.getSystemAccount(), result),
+            NotificationEvent(KEY_ACTIVITY_CREATED, accountService.getSystemAccount(), result),
             setOf(recipient)
         )
     }

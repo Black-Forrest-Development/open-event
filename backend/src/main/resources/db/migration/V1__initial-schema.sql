@@ -401,12 +401,12 @@ CREATE TABLE activity_source
 CREATE SEQUENCE activity_type_seq;
 CREATE TABLE activity_type
 (
-    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_type_seq'::regclass),
-    key     VARCHAR(255)                NOT NULL,
-    source_id    BIGINT                      NOT NULL references activity_source (id),
+    id        BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_type_seq'::regclass),
+    key       VARCHAR(255)                NOT NULL,
+    source_id BIGINT                      NOT NULL references activity_source (id),
 
-    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated TIMESTAMP WITHOUT TIME ZONE
+    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated   TIMESTAMP WITHOUT TIME ZONE
 );
 
 -- activity
@@ -438,14 +438,14 @@ CREATE TABLE activity_subscriber
 
 CREATE TABLE activity_source_subscriber
 (
-    activity_id BIGINT NOT NULL references activity (id),
-    source_id   BIGINT NOT NULL references activity_source (id),
-    PRIMARY KEY (activity_id, source_id)
+    account_id BIGINT NOT NULL references account (id),
+    source_id  BIGINT NOT NULL references activity_source (id),
+    PRIMARY KEY (account_id, source_id)
 );
 
 CREATE TABLE activity_type_subscriber
 (
-    activity_id BIGINT NOT NULL references activity (id),
-    type_id     BIGINT NOT NULL references activity_type (id),
-    PRIMARY KEY (activity_id, type_id)
+    account_id BIGINT NOT NULL references account (id),
+    type_id    BIGINT NOT NULL references activity_type (id),
+    PRIMARY KEY (account_id, type_id)
 );

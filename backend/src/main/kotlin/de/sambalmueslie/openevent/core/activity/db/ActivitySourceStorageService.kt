@@ -45,4 +45,8 @@ class ActivitySourceStorageService(
     override fun filterSubscriber(source: ActivitySource, accountIds: Set<Long>): Set<Long> {
         return subscriberRepository.findBySourceIdAndAccountIdIn(source.id, accountIds).map { it.accountId }.toSet()
     }
+
+    override fun findByIds(ids: Set<Long>): List<ActivitySource> {
+        return repository.findByIdIn(ids).map { it.convert() }
+    }
 }

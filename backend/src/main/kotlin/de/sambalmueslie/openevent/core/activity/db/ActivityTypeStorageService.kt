@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 class ActivityTypeStorageService(
     private val repository: ActivityTypeRepository,
+    private val subscriberRepository: ActivityTypeSubscriberRelationRepository,
     cacheService: CacheService,
     private val timeProvider: TimeProvider,
 ) : BaseStorageService<Long, ActivityType, ActivityTypeChangeRequest, ActivityTypeData>(
@@ -46,5 +47,17 @@ class ActivityTypeStorageService(
 
     override fun findBySource(source: ActivitySource): List<ActivityType> {
         return repository.findBySourceId(source.id).map { it.convert() }
+    }
+
+    override fun findByIds(ids: Set<Long>): List<ActivityType> {
+        return repository.findByIdIn(ids).map { it.convert() }
+    }
+
+    override fun findByKey(key: String): ActivityType? {
+        return repository.findByKey(key)?.convert()
+    }
+
+    override fun filterSubscriber(type: ActivityType, accountIds: Set<Long>): Set<Long> {
+        return subscriberRepository.findByTypeIdAndAccountIdIn(type.id, accountIds).map { it.accountId }.toSet()
     }
 }

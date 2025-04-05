@@ -22,7 +22,7 @@ data class ActivityData(
     @Column var created: LocalDateTime,
     @Column var updated: LocalDateTime? = null
 ) : DataObject {
-    fun convert(actor: AccountInfo, source: ActivitySourceData, type: ActivityTypeData): Activity {
+    fun convert(actor: AccountInfo, source: ActivitySource, type: ActivityType): Activity {
         return Activity(id, title, actor, source.key, referenceId, type.key, updated ?: created)
     }
 

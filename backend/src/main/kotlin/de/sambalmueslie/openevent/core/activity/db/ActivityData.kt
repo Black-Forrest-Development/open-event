@@ -16,26 +16,26 @@ data class ActivityData(
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long = 0,
     @Column var title: String,
     @Column var actorId: Long,
-    @Column @Enumerated(EnumType.STRING) var source: ActivitySource,
     @Column var sourceId: Long,
-    @Column @Enumerated(EnumType.STRING) var type: ActivityType,
+    @Column var typeId: Long,
+    @Column var referenceId: Long,
     @Column var created: LocalDateTime,
     @Column var updated: LocalDateTime? = null
 ) : DataObject {
-    fun convert(actor: AccountInfo): Activity {
-        return Activity(id, title, actor, source, sourceId,  type, updated ?: created)
+    fun convert(actor: AccountInfo, source: ActivitySourceData, type: ActivityTypeData): Activity {
+        return Activity(id, title, actor, source.key, referenceId, type.key, updated ?: created)
     }
 
 
     companion object {
-        fun create(actor: Account, request: ActivityChangeRequest, timestamp: LocalDateTime): ActivityData {
+        fun create(actor: Account, request: ActivityChangeRequest, source: ActivitySource, type: ActivityType, timestamp: LocalDateTime): ActivityData {
             return ActivityData(
                 0,
                 request.title,
                 actor.id,
-                request.source,
-                request.sourceId,
-                request.type,
+                source.id,
+                type.id,
+                request.referenceId,
                 timestamp
             )
         }
@@ -43,10 +43,9 @@ data class ActivityData(
 
     fun update(request: ActivityChangeRequest, timestamp: LocalDateTime): ActivityData {
         title = request.title
-        source = request.source
-        sourceId = request.sourceId
-        type = request.type
+        referenceId = request.referenceId
         updated = timestamp
         return this
     }
+
 }

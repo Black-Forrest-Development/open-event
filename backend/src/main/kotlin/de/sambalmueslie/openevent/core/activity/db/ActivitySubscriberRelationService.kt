@@ -9,6 +9,7 @@ import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime
 
 @Singleton
 class ActivitySubscriberRelationService(
@@ -63,11 +64,15 @@ class ActivitySubscriberRelationService(
         repository.updateByAccountId(account.id, true)
     }
 
-    fun getUnreadInfosForAccount(accountId: Long): List<ActivitySubscriberRelation> {
+    fun getUnreadForAccount(accountId: Long): List<ActivitySubscriberRelation> {
         return repository.findByAccountIdAndReadFalseOrderByTimestamp(accountId, Pageable.from(0, 20)).content
     }
 
-    fun countUnreadInfosForAccount(accountId: Long): Long {
+    fun getUnreadForAccount(accountId: Long, timestamp: LocalDateTime, pageable: Pageable): Page<ActivitySubscriberRelation> {
+        return repository.findByAccountIdAndReadFalseAndTimestampGreaterThanEqualsOrderByTimestamp(accountId, timestamp, pageable)
+    }
+
+    fun countUnreadForAccount(accountId: Long): Long {
         return repository.countByAccountIdAndReadFalse(accountId)
     }
 

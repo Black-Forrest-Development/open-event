@@ -5,9 +5,7 @@ import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.activity.ActivityStorage
-import de.sambalmueslie.openevent.core.activity.api.Activity
-import de.sambalmueslie.openevent.core.activity.api.ActivityChangeRequest
-import de.sambalmueslie.openevent.core.activity.api.ActivityInfo
+import de.sambalmueslie.openevent.core.activity.api.*
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
@@ -38,16 +36,20 @@ class ActivityStorageService(
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(ActivityStorageService::class.java)
         private const val ACTOR_REFERENCE = "actor"
+        private const val SOURCE_REFERENCE = "source"
+        private const val TYPE_REFERENCE = "type"
     }
 
-    override fun create(request: ActivityChangeRequest, actor: Account): Activity {
-        return create(request, mapOf(Pair(ACTOR_REFERENCE, actor)))
+    override fun create(request: ActivityChangeRequest, actor: Account, source: ActivitySource, type: ActivityType): Activity {
+        return create(request, mapOf(Pair(ACTOR_REFERENCE, actor), Pair(SOURCE_REFERENCE, source), Pair(TYPE_REFERENCE, type)))
     }
 
     override fun createData(request: ActivityChangeRequest, properties: Map<String, Any>): ActivityData {
         val actor = properties[ACTOR_REFERENCE] as? Account ?: throw InvalidRequestException("Cannot find account")
+        val source = properties[SOURCE_REFERENCE] as? ActivitySource ?: throw InvalidRequestException("Cannot find source")
+        val type = properties[TYPE_REFERENCE] as? ActivityType ?: throw InvalidRequestException("Cannot find type")
         unreadInfosCache.invalidateAll()
-        return ActivityData.create(actor, request, timeProvider.now())
+        return ActivityData.create(actor, request, source, type, timeProvider.now())
     }
 
     override fun updateData(data: ActivityData, request: ActivityChangeRequest): ActivityData {
@@ -60,9 +62,10 @@ class ActivityStorageService(
         unreadInfosCache.invalidateAll()
     }
 
+    @Deprecated("Move that to core")
     override fun isValid(request: ActivityChangeRequest) {
         if (request.title.isBlank()) throw InvalidRequestException("Title cannot be blank")
-        if (request.sourceId <= 0) throw InvalidRequestException("Source id must be valid")
+        if (request.referenceId <= 0) throw InvalidRequestException("Source id must be valid")
     }
 
     override fun getRecentForAccount(account: Account, pageable: Pageable): Page<Activity> {
@@ -107,14 +110,21 @@ class ActivityStorageService(
         }
 
     private fun collectUnreadInfosForAccount(accountId: Long): List<ActivityInfo> {
-        val page = subscriberRelationService.getUnreadInfosForAccount(accountId)
+        val page = subscriberRelationService.getUnreadForAccount(accountId)
         val recentSubscriptions = page.associateBy { it.activityId }
         val activities = converter.convert(repository.findByIdIn(recentSubscriptions.keys))
         return activities.map { ActivityInfo(it, recentSubscriptions[it.id]?.read ?: true) }
     }
 
+    override fun getUnreadForAccount(account: Account, timestamp: LocalDateTime, pageable: Pageable): Page<Activity> {
+        val content = subscriberRelationService.getUnreadForAccount(account.id, timestamp, pageable)
+        val activityIds = content.map { it.activityId }.toSet()
+        val activities = converter.convert(repository.findByIdIn(activityIds))
+        return Page.of(activities, content.pageable, content.totalSize)
+    }
+
     override fun countUnreadForAccount(account: Account): Long {
-        return subscriberRelationService.countUnreadInfosForAccount(account.id)
+        return subscriberRelationService.countUnreadForAccount(account.id)
     }
 
 

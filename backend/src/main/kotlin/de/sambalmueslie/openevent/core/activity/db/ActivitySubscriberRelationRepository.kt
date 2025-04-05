@@ -6,6 +6,7 @@ import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.GenericRepository
+import java.time.LocalDateTime
 
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
@@ -15,10 +16,8 @@ interface ActivitySubscriberRelationRepository :
     fun saveAll(relations: List<ActivitySubscriberRelation>): List<ActivitySubscriberRelation>
 
     fun findByAccountIdOrderByTimestamp(accountId: Long, pageable: Pageable): Page<ActivitySubscriberRelation>
-    fun findByAccountIdAndReadFalseOrderByTimestamp(
-        accountId: Long,
-        pageable: Pageable
-    ): Page<ActivitySubscriberRelation>
+    fun findByAccountIdAndReadFalseOrderByTimestamp(accountId: Long, pageable: Pageable): Page<ActivitySubscriberRelation>
+    fun findByAccountIdAndReadFalseAndTimestampGreaterThanEqualsOrderByTimestamp(accountId: Long, timestamp: LocalDateTime, pageable: Pageable): Page<ActivitySubscriberRelation>
     fun countByAccountIdAndReadFalse(accountId: Long): Long
 
     fun findByActivityIdAndAccountId(activityId: Long, accountId: Long): ActivitySubscriberRelation?

@@ -384,21 +384,46 @@ CREATE TABLE share
     updated   TIMESTAMP WITHOUT TIME ZONE
 );
 
+
+-- activity source
+CREATE SEQUENCE activity_source_seq;
+CREATE TABLE activity_source
+(
+    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_source_seq'::regclass),
+    key     VARCHAR(255)                NOT NULL,
+
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated TIMESTAMP WITHOUT TIME ZONE
+);
+
+
+-- activity type
+CREATE SEQUENCE activity_type_seq;
+CREATE TABLE activity_type
+(
+    id      BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_type_seq'::regclass),
+    key     VARCHAR(255)                NOT NULL,
+    source_id    BIGINT                      NOT NULL references activity_source (id),
+
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated TIMESTAMP WITHOUT TIME ZONE
+);
+
 -- activity
 CREATE SEQUENCE activity_seq;
 CREATE TABLE activity
 (
-    id        BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_seq'::regclass),
-    title     VARCHAR(255)                NOT NULL,
-    actor_id  BIGINT                      NOT NULL references account (id),
+    id           BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('activity_seq'::regclass),
+    title        VARCHAR(255)                NOT NULL,
+    actor_id     BIGINT                      NOT NULL references account (id),
 
-    source    VARCHAR(255)                NOT NULL,
-    source_id BIGINT                      NOT NULL,
-    type      VARCHAR(255)                NOT NULL,
+    source_id    BIGINT                      NOT NULL references activity_source (id),
+    type_id      BIGINT                      NOT NULL references activity_type (id),
 
+    reference_id BIGINT                      NOT NULL,
 
-    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated   TIMESTAMP WITHOUT TIME ZONE
+    created      TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated      TIMESTAMP WITHOUT TIME ZONE
 );
 
 CREATE TABLE activity_subscriber
@@ -409,4 +434,18 @@ CREATE TABLE activity_subscriber
     timestamp   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 
     PRIMARY KEY (activity_id, account_id)
+);
+
+CREATE TABLE activity_source_subscriber
+(
+    activity_id BIGINT NOT NULL references activity (id),
+    source_id   BIGINT NOT NULL references activity_source (id),
+    PRIMARY KEY (activity_id, source_id)
+);
+
+CREATE TABLE activity_type_subscriber
+(
+    activity_id BIGINT NOT NULL references activity (id),
+    type_id     BIGINT NOT NULL references activity_type (id),
+    PRIMARY KEY (activity_id, type_id)
 );

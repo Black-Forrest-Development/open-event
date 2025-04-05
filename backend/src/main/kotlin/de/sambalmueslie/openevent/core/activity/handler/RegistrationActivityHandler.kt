@@ -1,11 +1,12 @@
 package de.sambalmueslie.openevent.core.activity.handler
 
+import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.activity.ActivityCrudService
+import de.sambalmueslie.openevent.core.activity.ActivitySourceStorage
+import de.sambalmueslie.openevent.core.activity.ActivityTypeStorage
 import de.sambalmueslie.openevent.core.activity.api.Activity
 import de.sambalmueslie.openevent.core.activity.api.ActivityChangeRequest
-import de.sambalmueslie.openevent.core.activity.api.ActivitySource
-import de.sambalmueslie.openevent.core.activity.api.ActivityType
 import de.sambalmueslie.openevent.core.activity.db.ActivitySubscriberRelationService
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
@@ -15,16 +16,33 @@ import de.sambalmueslie.openevent.core.registration.RegistrationChangeListener
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.Registration
 import jakarta.inject.Singleton
+import org.slf4j.LoggerFactory
 
 @Singleton
 class RegistrationActivityHandler(
     private val registrationService: RegistrationCrudService,
-    private val eventService: EventCrudService,
-    private val service: ActivityCrudService,
-    private val subscriberService: ActivitySubscriberRelationService
-) : ActivityHandler, RegistrationChangeListener {
+    service: ActivityCrudService,
+    typeStorage: ActivityTypeStorage,
+    sourceStorage: ActivitySourceStorage,
+    subscriberService: ActivitySubscriberRelationService,
 
-    override fun setup() {
+    private val eventService: EventCrudService,
+    private val accountService: AccountCrudService,
+) : BaseActivityHandler(service, typeStorage, sourceStorage, subscriberService, logger), RegistrationChangeListener {
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(RegistrationActivityHandler::class.java)
+        val SOURCE = "registration"
+        private val TYPE_PARTICIPANT_ACCEPTED = "registration.participant.accepted"
+        private val TYPE_PARTICIPANT_CHANGED = "registration.participant.changed"
+        private val TYPE_PARTICIPANT_DECLINED = "registration.participant.declined"
+    }
+
+    override fun getSourceKey(): String {
+        return SOURCE
+    }
+
+    override fun registerListener() {
         registrationService.register(this)
     }
 
@@ -35,12 +53,12 @@ class RegistrationActivityHandler(
         status: ParticipateStatus
     ) {
         val type = when (status) {
-            ParticipateStatus.ACCEPTED -> ActivityType.PARTICIPANT_ACCEPTED
-            ParticipateStatus.WAITING_LIST -> ActivityType.PARTICIPANT_ACCEPTED
-            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> ActivityType.PARTICIPANT_ACCEPTED
+            ParticipateStatus.ACCEPTED -> TYPE_PARTICIPANT_ACCEPTED
+            ParticipateStatus.WAITING_LIST -> TYPE_PARTICIPANT_ACCEPTED
+            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> TYPE_PARTICIPANT_ACCEPTED
             else -> null
         } ?: return
-        participantUpdated(actor, registration, participant, type)
+        createActivity(actor, registration, participant, type)
     }
 
     override fun participantChanged(
@@ -50,63 +68,34 @@ class RegistrationActivityHandler(
         status: ParticipateStatus
     ) {
         val type = when (status) {
-            ParticipateStatus.ACCEPTED -> ActivityType.PARTICIPANT_CHANGED
-            ParticipateStatus.WAITING_LIST -> ActivityType.PARTICIPANT_CHANGED
-            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> ActivityType.PARTICIPANT_CHANGED
+            ParticipateStatus.ACCEPTED -> TYPE_PARTICIPANT_CHANGED
+            ParticipateStatus.WAITING_LIST -> TYPE_PARTICIPANT_CHANGED
+            ParticipateStatus.WAITING_LIST_DECREASE_SIZE -> TYPE_PARTICIPANT_CHANGED
             else -> null
         } ?: return
-        participantUpdated(actor, registration, participant, type)
+        createActivity(actor, registration, participant, type)
     }
-
-    private fun participantUpdated(
-        actor: Account,
-        registration: Registration,
-        participant: Participant,
-        type: ActivityType
-    ) {
-        val event = eventService.get(registration.eventId) ?: return
-        val activity = service.create(actor, createRequest(actor, event, participant, type))
-        setupSubscribers(actor, registration, activity, event)
-    }
-
 
     override fun participantRemoved(actor: Account, registration: Registration, participant: Participant) {
-        val event = eventService.get(registration.eventId) ?: return
-        val type = ActivityType.PARTICIPANT_DECLINED
-        val activity = service.create(actor, createRequest(actor, event, participant, type))
-        setupSubscribers(actor, registration, activity, event)
+        createActivity(actor, registration, participant, TYPE_PARTICIPANT_DECLINED)
     }
 
-    private fun createRequest(
-        actor: Account,
-        event: Event,
-        participant: Participant,
-        type: ActivityType
-    ): ActivityChangeRequest {
-        val title = "${event.title} - ${participant.author.getTitle()}"
-        return ActivityChangeRequest(
-            title,
-            actor,
-            ActivitySource.REGISTRATION,
-            type,
-            event.id,
-        )
+
+    private fun createActivity(actor: Account, registration: Registration, participant: Participant, type: String) {
+        val event = eventService.get(registration.eventId) ?: return logger.error("[${registration.id}] cannot find event for registration")
+        val request = ActivityChangeRequest("${event.title} - ${participant.author.getTitle()}", event.id)
+        val activity = create(actor, request, type) ?: return
+        setupSubscribers(actor, event, registration, participant, activity)
     }
 
-    private fun setupSubscribers(actor: Account, registration: Registration, activity: Activity, event: Event) {
-        notifyEventOwner(actor, registration, activity)
-        notifyOtherParticipants(actor, registration, activity)
-    }
-
-    private fun notifyEventOwner(actor: Account, registration: Registration, activity: Activity) {
-        val event = eventService.get(registration.eventId) ?: return
-        if(actor.id == event.owner.id) return
-        subscriberService.addAccountInfoSubscriber(activity, event.owner)
-    }
-
-    private fun notifyOtherParticipants(actor: Account, registration: Registration, activity: Activity) {
+    private fun setupSubscribers(actor: Account, event: Event, registration: Registration, participant: Participant, activity: Activity) {
+        val accountIds = mutableSetOf(event.owner.id)
         val participants = registrationService.getParticipants(registration.id)
-        val subscribers = participants.map { it.author }.filter { it.id != actor.id }
-        subscriberService.addAccountInfoSubscriber(activity, subscribers)
+        participants.forEach {accountIds.add(it.author.id)}
+        accountIds.remove(actor.id)
+
+        val accounts = accountService.getByIds(accountIds)
+        subscribe(actor, activity, accounts)
     }
+
 }

@@ -1,11 +1,10 @@
 package de.sambalmueslie.openevent.core.activity.api
 
-enum class ActivityType {
-    EVENT_CREATED,
-    EVENT_CHANGED,
-    EVENT_DELETED,
-    EVENT_PUBLISHED,
-    PARTICIPANT_ACCEPTED,
-    PARTICIPANT_DECLINED,
-    PARTICIPANT_CHANGED,
-}
+import de.sambalmueslie.openevent.common.BusinessObject
+import io.micronaut.serde.annotation.Serdeable
+
+@Serdeable
+data class ActivityType(
+    override val id: Long,
+    val key: String,
+): BusinessObject<Long>

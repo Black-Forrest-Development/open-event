@@ -3,27 +3,25 @@ package de.sambalmueslie.openevent.core.activity
 import de.sambalmueslie.openevent.common.BaseCrudService
 import de.sambalmueslie.openevent.common.PageSequence
 import de.sambalmueslie.openevent.core.account.api.Account
-import de.sambalmueslie.openevent.core.activity.api.Activity
-import de.sambalmueslie.openevent.core.activity.api.ActivityChangeRequest
-import de.sambalmueslie.openevent.core.activity.api.ActivityCleanupRequest
-import de.sambalmueslie.openevent.core.activity.api.ActivityInfo
+import de.sambalmueslie.openevent.core.activity.api.*
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Singleton
 class ActivityCrudService(
-    private val storage: ActivityStorage
+    private val storage: ActivityStorage,
 ) : BaseCrudService<Long, Activity, ActivityChangeRequest, ActivityChangeListener>(storage) {
 
     companion object {
         private val logger = LoggerFactory.getLogger(ActivityCrudService::class.java)
     }
 
-    fun create(actor: Account, request: ActivityChangeRequest): Activity {
-        val result = storage.create(request, actor)
+    fun create(actor: Account, request: ActivityChangeRequest, source: ActivitySource, type: ActivityType): Activity {
+        val result = storage.create(request, actor, source, type)
         notifyCreated(actor, result)
         return result
     }
@@ -44,6 +42,11 @@ class ActivityCrudService(
 
     fun getUnreadInfosForAccount(account: Account): List<ActivityInfo> {
         return storage.getUnreadInfosForAccount(account)
+    }
+
+
+    fun getUnreadForAccount(account: Account, timestamp: LocalDateTime, pageable: Pageable): Page<Activity> {
+        return storage.getUnreadForAccount(account, timestamp, pageable)
     }
 
     fun countUnreadForAccount(account: Account): Long {

@@ -45,7 +45,7 @@ class NewsletterNotificationHandler(
 
     override fun getTypes(): Set<NotificationTypeChangeRequest> {
         return setOf(
-            NotificationTypeChangeRequest(KEY_EVENT_NEWSLETTER, "Event Newsletter, """)
+            NotificationTypeChangeRequest(KEY_EVENT_NEWSLETTER, "Event Newsletter", "")
         )
     }
 

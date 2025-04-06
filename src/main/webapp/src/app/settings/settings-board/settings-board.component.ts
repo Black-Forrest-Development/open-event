@@ -1,6 +1,5 @@
 import {Component, EventEmitter} from '@angular/core';
 import {SettingService} from "../model/setting.service";
-import {HotToastService} from "@ngxpert/hot-toast";
 import {Setting} from "../model/settings-api";
 import {Page} from "../../shared/model/page";
 import {PageEvent} from "@angular/material/paginator";
@@ -28,7 +27,6 @@ export class SettingsBoardComponent {
 
   constructor(
     private service: SettingService,
-    private toastService: HotToastService,
     private dialog: MatDialog,
   ) {
   }

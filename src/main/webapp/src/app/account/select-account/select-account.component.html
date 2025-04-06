@@ -2,8 +2,7 @@
   <div class="flex flex-row gap-2 content-stretch items-center">
     <mat-form-field class="dense-1 flex-auto" subscriptSizing="dynamic">
       <mat-label>{{ 'event.form.owner' | translate }}</mat-label>
-      <input #input (keyup)="keyUp.emit(input.value)" [disabled]="accountCreating" [matAutocomplete]="auto" matInput
-             type="text">
+      <input #input (keyup)="keyUp.emit(input.value)" [disabled]="accountCreating" [matAutocomplete]="auto" matInput type="text">
     </mat-form-field>
     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
       <mat-option (onSelectionChange)="select($event, account)" *ngFor="let account of accounts"

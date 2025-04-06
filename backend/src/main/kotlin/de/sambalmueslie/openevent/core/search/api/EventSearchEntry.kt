@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.search.api
 
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
+import de.sambalmueslie.openevent.core.formatRange
 import java.time.LocalDateTime
 
 data class EventSearchEntry(
@@ -43,4 +44,6 @@ data class EventSearchEntry(
     // categories
     val categories: Set<String>,
     val tags: Set<String>,
-)
+) {
+    fun format() = formatRange(start, finish)
+}

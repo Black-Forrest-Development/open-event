@@ -6,6 +6,8 @@ import java.time.LocalDateTime
 data class EventSearchEntry(
     // event data
     val id: String,
+    val created: LocalDateTime,
+    val updated: LocalDateTime,
     val start: LocalDateTime,
     val finish: LocalDateTime,
 

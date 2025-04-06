@@ -9,34 +9,38 @@ class EventFieldMappingProvider : FieldMappingProvider {
 
     override fun createMappings(): FieldMappings.() -> Unit {
         return {
-            number<Long>("id")
-            date("start")
-            date("finish")
-            date("date")
-            text("title")
-            text("shortText")
-            text("longText")
-            bool("published")
-            number<Long>("owner")
+            number<Long>(EventSearchEntryData::id)
+            date(EventSearchEntryData::created)
+            date(EventSearchEntryData::updated)
+            date(EventSearchEntryData::start)
+            date(EventSearchEntryData::finish)
+            date(EventSearchEntryData::date)
+            text(EventSearchEntryData::title)
+            text(EventSearchEntryData::shortText)
+            text(EventSearchEntryData::longText)
+            bool(EventSearchEntryData::published)
+            number<Long>(EventSearchEntryData::owner)
 
-            keyword("street")
-            keyword("streetNumber")
-            keyword("zip")
-            keyword("city")
-            keyword("country")
+            keyword(EventSearchEntryData::street)
+            keyword(EventSearchEntryData::streetNumber)
+            keyword(EventSearchEntryData::zip)
+            keyword(EventSearchEntryData::city)
+            keyword(EventSearchEntryData::country)
 
-            geoPoint("geo")
+            geoPoint(EventSearchEntryData::geoPoint)
+            number<Double>(EventSearchEntryData::lat)
+            number<Double>(EventSearchEntryData::lon)
 
-            bool("hasSpaceLeft")
-            number<Int>("maxGuestAmount")
-            number<Int>("amountAccepted")
-            number<Int>("amountOnWaitingList")
-            number<Int>("remainingSpace")
+            bool(EventSearchEntryData::hasSpaceLeft)
+            number<Int>(EventSearchEntryData::maxGuestAmount)
+            number<Int>(EventSearchEntryData::amountAccepted)
+            number<Int>(EventSearchEntryData::amountOnWaitingList)
+            number<Int>(EventSearchEntryData::remainingSpace)
 
-            number<Long>("participant")
+            number<Long>(EventSearchEntryData::participant)
 
-            keyword("categories")
-            keyword("tags")
+            keyword(EventSearchEntryData::categories)
+            keyword(EventSearchEntryData::tags)
         }
     }
 }

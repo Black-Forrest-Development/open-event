@@ -10,7 +10,6 @@ import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import io.micronaut.data.model.Page
-import io.micronaut.scheduling.annotation.Scheduled
 import jakarta.inject.Singleton
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -51,7 +50,7 @@ class ActivityNotificationHandler(
 
     private val processing = AtomicBoolean(false)
 
-    @Scheduled(cron = "* * 22 * * ?")
+//    @Scheduled(cron = "* * 22 * * ?")
     fun createDailyActivityNotification() {
         if (processing.get()) return logger.warn("Ignore creation of daily activity notification, cause job hasn't finished yet")
         processing.set(true)

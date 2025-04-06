@@ -27,6 +27,10 @@ class SearchService(
         return eventOperator.search(actor, request, pageable)
     }
 
+    fun searchEvents(actor: Account, request: EventCreatedSearchRequest, pageable: Pageable): EventSearchResponse {
+        return eventOperator.searchCreated(actor, request, pageable)
+    }
+
     fun setupEvents() {
         return eventOperator.setup()
     }

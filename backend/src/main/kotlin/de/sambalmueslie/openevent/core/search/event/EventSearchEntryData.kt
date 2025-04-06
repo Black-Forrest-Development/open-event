@@ -14,6 +14,8 @@ import java.time.LocalDateTime
 @Serializable
 data class EventSearchEntryData(
     var id: String,
+    @Serializable(with = DateTimeSerializer::class) var created: LocalDateTime,
+    @Serializable(with = DateTimeSerializer::class) var updated: LocalDateTime,
     @Serializable(with = DateTimeSerializer::class) var start: LocalDateTime,
     @Serializable(with = DateTimeSerializer::class) var finish: LocalDateTime,
     @Serializable(with = DateSerializer::class) var date: LocalDate,
@@ -29,6 +31,7 @@ data class EventSearchEntryData(
     var zip: String?,
     var city: String?,
     var country: String?,
+    var geoPoint: List<Double>,
     var lat: Double?,
     var lon: Double?,
 
@@ -61,6 +64,8 @@ data class EventSearchEntryData(
 
             return EventSearchEntryData(
                 e.id.toString(),
+                e.created,
+                e.changed ?: e.created,
                 e.start,
                 e.finish,
                 e.start.toLocalDate(),
@@ -76,6 +81,7 @@ data class EventSearchEntryData(
                 l?.zip,
                 l?.city,
                 l?.country,
+                l?.let { listOf(it.lat, it.lon) } ?: emptyList(),
                 l?.lat,
                 l?.lon,
 
@@ -96,6 +102,8 @@ data class EventSearchEntryData(
     fun convert(owner: AccountInfo): EventSearchEntry {
         return EventSearchEntry(
             id,
+            created,
+            updated,
             start,
             finish,
             title,

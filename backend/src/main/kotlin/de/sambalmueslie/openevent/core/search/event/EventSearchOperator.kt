@@ -17,6 +17,7 @@ import de.sambalmueslie.openevent.core.search.common.SearchUpdateEvent
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
+import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
@@ -25,12 +26,13 @@ import java.time.format.DateTimeFormatter
 @Singleton
 open class EventSearchOperator(
     private val service: EventCrudService,
-    private val registrationService: RegistrationCrudService,
+    registrationService: RegistrationCrudService,
     private val accountService: AccountStorageService,
 
     private val fieldMapping: EventFieldMappingProvider,
     private val queryBuilder: EventSearchQueryBuilder,
-    private val config: OpenSearchConfig,
+    private val createdQueryBuilder: EventCreatedSearchQueryBuilder,
+    config: OpenSearchConfig,
     openSearch: SearchClientFactory
 ) : BaseOpenSearchOperator<EventSearchEntry, EventSearchRequest, EventSearchResponse>(openSearch, "event", config, logger) {
 
@@ -92,5 +94,12 @@ open class EventSearchOperator(
         return EventSearchResponse(Page.of(content, pageable, response.total), dateHistogram)
     }
 
+
+    fun searchCreated(actor: Account, request: EventCreatedSearchRequest, pageable: Pageable): EventSearchResponse {
+        val response = runBlocking {
+            client.search(name, block = createdQueryBuilder.buildSearchQuery(pageable, request, actor))
+        }
+        return processSearchResponse(actor, request, response, pageable)
+    }
 
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {EventService} from "../model/event.service";
+import {EventService} from "@open-event-workspace/core";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";

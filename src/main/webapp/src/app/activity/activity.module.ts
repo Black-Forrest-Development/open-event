@@ -17,7 +17,8 @@ import {ActivityReadComponent} from './activity-read/activity-read.component';
   ],
     exports: [
         ActivityButtonComponent,
-        ActivityTableComponent
+        ActivityTableComponent,
+        ActivityReadComponent
     ],
   imports: [
     CommonModule,

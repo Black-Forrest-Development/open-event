@@ -51,14 +51,14 @@ class NewsletterNotificationHandler(
 
     private val processing = AtomicBoolean(false)
 
-    @Scheduled(cron = "* * 2 * * ?")
+    @Scheduled(cron = "0 0 2 * * ?")
     fun createDailyNewsletterNotification() {
         if (processing.get()) return logger.warn("Ignore creation of daily newsletter notification, cause job hasn't finished yet")
         processing.set(true)
         val actor = accountService.getSystemAccount()
         try {
             logger.info("Starting daily newsletter notification")
-            val timestamp = timeProvider.now().toLocalDate()
+            val timestamp = timeProvider.now().toLocalDate().minusDays(1)
             val duration = measureTimeMillis {
                 val request = EventCreatedSearchRequest(timestamp.atStartOfDay(), timestamp.plusDays(1).atStartOfDay(), true, true)
                 val result = searchService.searchEvents(actor, request, Pageable.from(0, MAX_RESULT))

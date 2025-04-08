@@ -11,7 +11,6 @@ import de.sambalmueslie.openevent.core.account.api.Profile
 import de.sambalmueslie.openevent.core.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
-import de.sambalmueslie.openevent.core.notification.handler.ActivityNotificationHandler.Companion.KEY_ACTIVITY_CREATED
 import de.sambalmueslie.openevent.core.search.SearchService
 import de.sambalmueslie.openevent.core.search.api.EventCreatedSearchRequest
 import de.sambalmueslie.openevent.core.search.api.EventSearchResponse
@@ -88,7 +87,7 @@ class NewsletterNotificationHandler(
             logger.debug("[${page.pageable.number}] Found ${recipients.size} recipients")
             if (recipients.isEmpty()) return@measureTimeMillis
 
-            service.process(NotificationEvent(KEY_ACTIVITY_CREATED, actor, result), recipients.toSet())
+            service.process(NotificationEvent(KEY_EVENT_NEWSLETTER, actor, result), recipients.toSet())
         }
         logger.info("Finished daily newsletter notification for page ${page.pageable.number} within $duration ms")
     }

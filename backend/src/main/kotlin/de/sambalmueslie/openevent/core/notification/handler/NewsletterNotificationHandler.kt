@@ -95,7 +95,7 @@ class NewsletterNotificationHandler(
     private fun isValidAccount(timestamp: LocalDate, account: Account): Boolean {
         if (account.serviceAccount) return false
         val lastLoginDate = account.lastLoginDate ?: return false
-        return lastLoginDate.toLocalDate().isBefore(timestamp.minusYears(1))
+        return lastLoginDate.toLocalDate().isAfter(timestamp.minusYears(1))
     }
 
     private fun getRecipient(actor: Account, result: EventSearchResponse, account: Account, preferences: Preferences?, profile: Profile?): AccountInfo? {

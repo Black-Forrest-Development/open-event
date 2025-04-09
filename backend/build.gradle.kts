@@ -109,7 +109,7 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.4.0")
+    implementation("org.apache.poi:poi:5.4.1")
     implementation("org.apache.poi:poi-ooxml:5.4.1")
 
     // mail
@@ -131,7 +131,7 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.4.0")
+    implementation("com.jillesvangurp:search-client:2.4.1")
 
     // jsoup
     implementation("org.jsoup:jsoup:1.18.3")

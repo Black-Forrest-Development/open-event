@@ -109,8 +109,8 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.4.0")
-    implementation("org.apache.poi:poi-ooxml:5.4.0")
+    implementation("org.apache.poi:poi:5.4.1")
+    implementation("org.apache.poi:poi-ooxml:5.4.1")
 
     // mail
     implementation("org.simplejavamail:simple-java-mail:8.12.4")

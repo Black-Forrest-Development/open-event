@@ -87,7 +87,7 @@ class NewsletterNotificationHandler(
             logger.debug("[${page.pageable.number}] Found ${recipients.size} recipients")
             if (recipients.isEmpty()) return@measureTimeMillis
 
-            service.process(NotificationEvent(KEY_EVENT_NEWSLETTER, actor, result), recipients.toSet())
+            service.process(NotificationEvent(KEY_EVENT_NEWSLETTER, actor, result.result.content), recipients.toSet())
         }
         logger.info("Finished daily newsletter notification for page ${page.pageable.number} within $duration ms")
     }

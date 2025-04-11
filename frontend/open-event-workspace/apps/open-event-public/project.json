@@ -22,7 +22,10 @@
             "input": "apps/open-event-public/public"
           }
         ],
-        "styles": ["apps/open-event-public/src/styles.scss"],
+        "styles": [
+          "apps/open-event-public/src/theme.scss",
+          "apps/open-event-public/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -44,7 +47,26 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/open-event-backoffice/src/environments/environment.ts",
+              "with": "apps/open-event-backoffice/src/environments/environment.development.ts"
+            }
+          ]
+        },
+        "local": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/open-event-backoffice/src/environments/environment.ts",
+              "with": "apps/open-event-backoffice/src/environments/environment.local.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -57,9 +79,16 @@
         },
         "development": {
           "buildTarget": "open-event-public:build:development"
+        },
+        "local": {
+          "buildTarget": "open-event-public:build:local"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "proxy.conf.json",
+        "port": 4202
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

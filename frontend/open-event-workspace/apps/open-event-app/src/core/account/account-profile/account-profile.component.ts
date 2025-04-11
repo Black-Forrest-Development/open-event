@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Profile, ProfileChangeRequest, ProfileService} from "@open-event-workspace/core";
+import {Profile, ProfileChangeRequest} from "@open-event-workspace/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {HotToastService} from "@ngxpert/hot-toast";
@@ -11,7 +11,7 @@ import {MatList, MatListItem} from "@angular/material/list";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "@open-event-workspace/shared";
 import {AccountService} from "@open-event-workspace/app";
 
 @Component({
@@ -29,8 +29,7 @@ export class AccountProfileComponent {
 
   constructor(
     private fb: FormBuilder,
-    private service: ProfileService,
-    private accountService: AccountService,
+    private service: AccountService,
     private translate: TranslateService,
     private toast: HotToastService
   ) {
@@ -56,11 +55,8 @@ export class AccountProfileComponent {
     if (this.fg.dirty && this.profile) {
       let request = this.fg.value as ProfileChangeRequest
       this.reloading = true
-      this.service.updateProfile(this.profile.id, request).subscribe({
-        next: d => {
-          this.translate.use(d.language)
-          this.handleData(d)
-        },
+      this.service.updateProfile(request).subscribe({
+        next: d => this.handleData(d),
         error: err => this.handleError(err)
       })
     }
@@ -70,7 +66,7 @@ export class AccountProfileComponent {
   private reload() {
     if (this.reloading) return
     this.reloading = true
-    this.accountService.getProfile().subscribe(d => this.handleData(d))
+    this.service.getProfile().subscribe(d => this.handleData(d))
   }
 
   private handleData(d: Profile) {
@@ -87,6 +83,7 @@ export class AccountProfileComponent {
       website: d.website,
       language: d.language
     })
+    this.translate.use(d.language)
     this.reloading = false
   }
 

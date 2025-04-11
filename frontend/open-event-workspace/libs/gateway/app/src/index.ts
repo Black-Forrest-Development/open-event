@@ -8,6 +8,8 @@ export * from './lib/category/category.service';
 
 export * from './lib/event/event.service';
 
+export * from './lib/registration/registration.service';
+
 export * from './lib/settings/settings.service';
 
 export * from './lib/share/share.service';

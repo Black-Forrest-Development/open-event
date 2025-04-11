@@ -36,7 +36,8 @@
           "node_modules/quill/dist/quill.core.css",
           "node_modules/quill/dist/quill.bubble.css",
           "node_modules/quill/dist/quill.snow.css",
-          "node_modules/@ngxpert/hot-toast/src/styles/styles.css"],
+          "node_modules/@ngxpert/hot-toast/src/styles/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -66,6 +67,18 @@
               "with": "apps/open-event-app/src/environments/environment.development.ts"
             }
           ]
+        },
+        "local": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/open-event-app/src/environments/environment.ts",
+              "with": "apps/open-event-app/src/environments/environment.local.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -78,6 +91,9 @@
         },
         "development": {
           "buildTarget": "open-event-app:build:development"
+        },
+        "local": {
+          "buildTarget": "open-event-app:build:local"
         }
       },
       "defaultConfiguration": "development",

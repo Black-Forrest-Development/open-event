@@ -5,10 +5,8 @@ import {RegistrationParticipateDialogComponent} from "../registration-participat
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {RegistrationEditDialogComponent} from "../registration-edit-dialog/registration-edit-dialog.component";
 import {RegistrationCancelDialogComponent} from "../registration-cancel-dialog/registration-cancel-dialog.component";
-import {RegistrationParticipateAccountDialogComponent} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
-import {RegistrationParticipateManualDialogComponent} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
-import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
-import {Participant, ParticipantAddRequest, ParticipateRequest, ParticipateResponse, RegistrationInfo, RegistrationService} from '@open-event-workspace/core';
+import {AuthService, LoadingBarComponent} from "@open-event-workspace/shared";
+import {Participant, ParticipateRequest, ParticipateResponse, RegistrationInfo} from '@open-event-workspace/core';
 import {MatButton} from "@angular/material/button";
 import {NgTemplateOutlet} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
@@ -16,8 +14,8 @@ import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/m
 import {RegistrationStatusComponent} from "../registration-status/registration-status.component";
 import {MatDivider} from "@angular/material/divider";
 import {AccountComponent} from "../../account/account/account.component";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {Roles} from "../../../shared/roles";
+import {RegistrationService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-registration-details',
@@ -97,43 +95,6 @@ export class RegistrationDetailsComponent {
     })
   }
 
-  participateAccount() {
-    if (!this.registration) return
-    if (this.reloading) return
-    let dialogRef = this.dialog.open(RegistrationParticipateAccountDialogComponent)
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestParticipateAccount(request)
-    })
-  }
-
-  participateManual() {
-    if (!this.registration) return
-    if (this.reloading) return
-    let dialogRef = this.dialog.open(RegistrationParticipateManualDialogComponent)
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestParticipateManual(request)
-    })
-  }
-
-  editParticipant(part: Participant) {
-    if (!this.registration) return
-    if (this.reloading) return
-
-    let dialogRef = this.dialog.open(RegistrationEditDialogComponent, {data: part})
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestEditParticipant(part, request)
-    })
-  }
-
-  removeParticipant(part: Participant) {
-    if (!this.registration) return
-    if (this.reloading) return
-
-    let dialogRef = this.dialog.open(RegistrationCancelDialogComponent, {data: part})
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestRemoveParticipant(part)
-    })
-  }
 
   private updateData() {
     if (this.registration) {
@@ -147,33 +108,23 @@ export class RegistrationDetailsComponent {
     if (!this.registration) return
     if (this.reloading) return
     this.reloading = true
-    this.service.participateSelf(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
+    this.service.addParticipant(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private requestEditSelf(request: ParticipateRequest) {
     if (!this.registration) return
     if (this.reloading) return
     this.reloading = true
-    this.service.editSelf(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
+    this.service.changeParticipant(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private requestCancelSelf() {
     if (!this.registration) return
     if (this.reloading) return
     this.reloading = true
-    this.service.cancelSelf(this.registration.registration.id).subscribe(r => this.handleParticipateResponse(r))
+    this.service.removeParticipant(this.registration.registration.id).subscribe(r => this.handleParticipateResponse(r))
   }
 
-  private requestParticipateAccount(request: any) {
-
-  }
-
-  private requestParticipateManual(request: ParticipantAddRequest) {
-    if (!this.registration) return
-    if (this.reloading) return
-    this.reloading = true
-    this.service.participateManual(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
-  }
 
   private handleParticipateResponse(response: ParticipateResponse) {
     this.updateParticipants(response.participants)
@@ -195,19 +146,6 @@ export class RegistrationDetailsComponent {
     this.reloading = false
   }
 
-  private requestEditParticipant(participant: Participant, request: ParticipateRequest) {
-    if (!this.registration) return
-    if (this.reloading) return
-    this.reloading = true
-    this.service.changeParticipant(this.registration.registration.id, participant.id, request).subscribe(r => this.handleParticipateResponse(r))
-  }
-
-  private requestRemoveParticipant(participant: Participant) {
-    if (!this.registration) return
-    if (this.reloading) return
-    this.reloading = true
-    this.service.removeParticipant(this.registration.registration.id, participant.id).subscribe(r => this.handleParticipateResponse(r))
-  }
 
   private updateParticipants(participants: Participant[]) {
     if (!this.registration) return

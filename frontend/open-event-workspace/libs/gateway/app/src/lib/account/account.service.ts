@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Account, AccountChangeRequest, AccountValidationResult, Preferences, Profile} from "@open-event-workspace/core";
+import {Account, AccountChangeRequest, AccountValidationResult, Preferences, PreferencesChangeRequest, Profile, ProfileChangeRequest} from "@open-event-workspace/core";
 import {Observable} from "rxjs";
 import {BaseService} from "@open-event-workspace/shared";
 
@@ -32,8 +32,15 @@ export class AccountService extends BaseService {
     return this.get('profile')
   }
 
+  updateProfile(request: ProfileChangeRequest): Observable<Profile> {
+    return this.put('profile', request)
+  }
+
   getPreferences(): Observable<Preferences> {
     return this.get('preferences')
   }
 
+  updatePreferences(request: PreferencesChangeRequest): Observable<Preferences> {
+    return this.put('preferences', request)
+  }
 }

@@ -1,6 +1,8 @@
 package de.sambalmueslie.openevent.gateway.app.account
 
 import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.PreferencesCrudService
+import de.sambalmueslie.openevent.core.account.ProfileCrudService
 import de.sambalmueslie.openevent.core.account.api.*
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
@@ -12,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "APP Account API")
 class AccountController(
     private val service: AccountCrudService,
+    private val profileService: ProfileCrudService,
+    private val preferencesService: PreferencesCrudService,
     audit: AuditService,
 ) {
     companion object {
@@ -51,15 +55,31 @@ class AccountController(
     fun getProfile(auth: Authentication): Profile? {
         return auth.checkPermission(PERMISSION_READ) {
             val account = service.get(auth) ?: return@checkPermission null
-            service.getProfile(account)
+            profileService.getForAccount(account)
+        }
+    }
+
+    @Put("/profile")
+    fun updateProfile(auth: Authentication, @Body request: ProfileChangeRequest): Profile? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = service.get(auth) ?: return@checkPermission null
+            profileService.update(account, account.id, request)
         }
     }
 
     @Get("/preferences")
-    fun getPreferences(auth: Authentication): Preferences? {
+    fun getPreferences(auth: Authentication, @Body request: PreferencesChangeRequest): Preferences? {
         return auth.checkPermission(PERMISSION_READ) {
             val account = service.get(auth) ?: return@checkPermission null
-            service.getPreferences(account)
+            preferencesService.getForAccount(account)
+        }
+    }
+
+    @Put("/preferences")
+    fun updatePreferences(auth: Authentication, @Body request: PreferencesChangeRequest): Preferences? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = service.get(auth) ?: return@checkPermission null
+            preferencesService.update(account, account.id, request)
         }
     }
 }

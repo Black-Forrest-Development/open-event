@@ -204,7 +204,7 @@ $open-event-theme: mat.m2-define-light-theme((
 }
 
 .main-menu-item {
-  color: map.get($open-event-primary, default-contrast) !important;
+  //color: map.get($open-event-primary, default-contrast) !important;
 }
 
 .active {
@@ -212,3 +212,25 @@ $open-event-theme: mat.m2-define-light-theme((
   color: map.get($open-event-accent, default-contrast) !important;
   border-style: solid;
 }
+
+.main-menu-item {
+  //color: map.get($open-event-primary, default-contrast) !important;
+}
+
+.menu-active {
+  background-color: map.get($open-event-accent, default) !important;
+  color: map.get($open-event-accent, default-contrast) !important;
+  border-style: solid;
+}
+
+.menu-unselected {
+  background-color: map.get($open-event-accent, lighter);
+  color: map.get($open-event-accent, lighter-contrast);
+  border-style: solid;
+}
+
+.second-toolbar {
+  background-color: map.get($open-event-accent, lighter) !important;
+  color: map.get($open-event-accent, lighter-contrast) !important;
+}
+

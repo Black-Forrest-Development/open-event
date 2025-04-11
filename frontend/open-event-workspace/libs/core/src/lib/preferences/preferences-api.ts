@@ -16,3 +16,12 @@ export interface CommunicationPreferences {
 export interface NotificationPreferences {
   enabled: boolean
 }
+
+export class PreferencesChangeRequest {
+  constructor(
+    public emailNotificationsPreferences: EmailNotificationsPreferences,
+    public communicationPreferences: CommunicationPreferences,
+    public notificationPreferences: NotificationPreferences
+  ) {
+  }
+}

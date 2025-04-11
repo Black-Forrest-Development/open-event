@@ -41,9 +41,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.5.18")
     runtimeOnly("org.yaml:snakeyaml")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
-    testImplementation("io.mockk:mockk:1.13.17")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.12.1")
+    testImplementation("io.mockk:mockk:1.14.0")
 
     // jackson
     kapt("io.micronaut.serde:micronaut-serde-processor")
@@ -81,9 +81,9 @@ dependencies {
     implementation("io.micronaut.cache:micronaut-cache-caffeine")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.10.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.10.2")
     // reactor
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
@@ -109,19 +109,19 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
 
     // POI
-    implementation("org.apache.poi:poi:5.4.0")
-    implementation("org.apache.poi:poi-ooxml:5.4.0")
+    implementation("org.apache.poi:poi:5.4.1")
+    implementation("org.apache.poi:poi-ooxml:5.4.1")
 
     // mail
-    implementation("org.simplejavamail:simple-java-mail:8.12.4")
+    implementation("org.simplejavamail:simple-java-mail:8.12.5")
     implementation("org.simplejavamail:batch-module:8.12.4")
-    implementation("org.simplejavamail:authenticated-socks-module:8.12.4")
+    implementation("org.simplejavamail:authenticated-socks-module:8.12.5")
 
     // test
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
-    testImplementation("org.opensearch:opensearch-testcontainers:2.1.2")
+    testImplementation("org.opensearch:opensearch-testcontainers:2.1.3")
     testImplementation("io.micronaut.test:micronaut-test-rest-assured")
     testImplementation("io.fusionauth:fusionauth-jwt:5.3.3")
 
@@ -131,10 +131,10 @@ dependencies {
     // tracing
     implementation("io.micronaut.tracing:micronaut-tracing-jaeger")
     // opensearch
-    implementation("com.jillesvangurp:search-client:2.4.0")
+    implementation("com.jillesvangurp:search-client:2.4.1")
 
     // jsoup
-    implementation("org.jsoup:jsoup:1.18.3")
+    implementation("org.jsoup:jsoup:1.19.1")
     // biweekly
     implementation("net.sf.biweekly:biweekly:0.6.8")
 }

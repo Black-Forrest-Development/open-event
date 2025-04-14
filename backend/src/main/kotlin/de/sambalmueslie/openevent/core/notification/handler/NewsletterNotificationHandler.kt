@@ -61,6 +61,10 @@ class NewsletterNotificationHandler(
             val duration = measureTimeMillis {
                 val request = EventCreatedSearchRequest(timestamp.atStartOfDay(), timestamp.plusDays(1).atStartOfDay(), true, true)
                 val result = searchService.searchEvents(actor, request, Pageable.from(0, MAX_RESULT))
+                if (result.result.isEmpty) {
+                    logger.info("No events found for request $request, skipping creation")
+                    return@measureTimeMillis
+                }
 
                 val accountSequence = PageSequence { accountService.getAll(it) }
                 accountSequence.forEach { page ->

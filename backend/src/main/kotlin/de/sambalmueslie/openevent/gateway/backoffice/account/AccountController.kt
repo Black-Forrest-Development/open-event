@@ -94,7 +94,7 @@ class AccountController(
     fun getEvent(auth: Authentication, id: Long, pageable: Pageable): Page<Event>? {
         return auth.checkPermission(PERMISSION_ADMIN) {
             val account = service.get(id) ?: return@checkPermission null
-            eventCrudService.getAllForAccount(account, pageable)
+            eventCrudService.getOwned(account, pageable)
         }
     }
 

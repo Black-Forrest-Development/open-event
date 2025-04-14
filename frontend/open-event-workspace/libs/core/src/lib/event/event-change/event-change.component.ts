@@ -81,7 +81,6 @@ export class EventChangeComponent {
   private createRequest(value: any, endHidden: boolean): EventChangeRequest | undefined {
     let start = this.createDateTime(value.general.startTime, value.general.startDate)
     let end = endHidden ? this.createDateTime(value.general.endTime, value.general.startDate) : this.createDateTime(value.general.endTime, value.general.endDate)
-    debugger
     if (!start || !end) return undefined
 
     let location = new LocationChangeRequest(

@@ -62,6 +62,7 @@ class ShareCrudService(
         return result
     }
 
+    @Deprecated("thats handled by the event controller on public")
     fun getInfo(id: String, account: Account?): SharedInfo? {
         val share = storage.get(id) ?: return null
         val event = eventService.getInfo(share.eventId, account) ?: return null

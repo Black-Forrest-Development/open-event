@@ -113,9 +113,9 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.4.1")
 
     // mail
-    implementation("org.simplejavamail:simple-java-mail:8.12.5")
-    implementation("org.simplejavamail:batch-module:8.12.5")
-    implementation("org.simplejavamail:authenticated-socks-module:8.12.5")
+    implementation("org.simplejavamail:simple-java-mail:8.12.6")
+    implementation("org.simplejavamail:batch-module:8.12.6")
+    implementation("org.simplejavamail:authenticated-socks-module:8.12.6")
 
     // test
     testImplementation("org.testcontainers:junit-jupiter")

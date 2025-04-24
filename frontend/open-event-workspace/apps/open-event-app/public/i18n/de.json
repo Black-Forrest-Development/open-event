@@ -378,5 +378,16 @@
     "prev": "Vorherige Seite",
     "first": "Erste Seite",
     "last": "Letzte Seite"
+  },
+  "issue": {
+    "dialog": {
+      "create": {
+        "title": "Fehler melden"
+      }
+    },
+    "form": {
+      "subject": "Betreff",
+      "description": "Beschreibung"
+    }
   }
 }

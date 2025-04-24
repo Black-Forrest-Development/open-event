@@ -1,14 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {
-  AccountSearchRequest,
-  AccountSearchResponse,
-  CategorySearchRequest,
-  CategorySearchResponse,
-  EventSearchRequest,
-  EventSearchResponse
-} from "./search-api";
+import {AccountSearchRequest, AccountSearchResponse, CategorySearchRequest, CategorySearchResponse, EventSearchRequest, EventSearchResponse} from "./search.api";
 import {BaseService} from "@open-event-workspace/shared";
 
 @Injectable({

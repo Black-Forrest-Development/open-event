@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {BaseService, Page, PatchRequest} from "@open-event-workspace/shared";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Event, EventChangeRequest, EventInfo, EventStats} from "./event-api";
+import {Event, EventChangeRequest, EventInfo, EventStats} from "./event.api";
 import {DateTime} from 'luxon';
-import {LocationChangeRequest} from "../location/location-api";
-import {RegistrationChangeRequest} from "../registration/registration-api";
+import {LocationChangeRequest} from "../location/location.api";
+import {RegistrationChangeRequest} from "../registration/registration.api";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Component, input} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {Event} from './../event-api'
+import {Event} from '../event.api'
 
 @Component({
   selector: 'lib-event-published-icon',

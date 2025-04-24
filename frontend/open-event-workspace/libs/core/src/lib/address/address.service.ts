@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseService, Page} from "@open-event-workspace/shared";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Address, AddressChangeRequest, AddressReadAPI} from "./address-api";
+import {Address, AddressChangeRequest, AddressReadAPI} from "./address.api";
 
 @Injectable({
   providedIn: 'root'

@@ -449,3 +449,25 @@ CREATE TABLE activity_type_subscriber
     type_id    BIGINT NOT NULL references activity_type (id),
     PRIMARY KEY (account_id, type_id)
 );
+
+-- issue
+
+CREATE SEQUENCE issue_seq;
+CREATE TABLE issue
+(
+    id          BIGINT                      NOT NULL PRIMARY KEY DEFAULT nextval('issue_seq'::regclass),
+    subject     TEXT                        NOT NULL,
+    description TEXT                        NOT NULL,
+    error       TEXT                        NOT NULL,
+    url         TEXT                        NOT NULL,
+
+    status      VARCHAR(30)                 NOT NULL,
+
+    client_ip   VARCHAR(30)                 NOT NULL,
+    user_agent  TEXT                        NOT NULL,
+
+    account_id  BIGINT                      NOT NULL references account (id),
+
+    created     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated     TIMESTAMP WITHOUT TIME ZONE
+);

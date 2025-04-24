@@ -1,5 +1,5 @@
 import {Component, computed, effect, input, resource} from '@angular/core';
-import {EventInfo} from "../event-api";
+import {EventInfo} from "../event.api";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";

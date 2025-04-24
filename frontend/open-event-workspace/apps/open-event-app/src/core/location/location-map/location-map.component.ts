@@ -4,9 +4,9 @@ import {icon, Map, Marker} from "leaflet";
 import {Location, SharedLocation} from "@open-event-workspace/core";
 
 
-const iconRetinaUrl = 'assets/marker/marker-icon-2x.png';
-const iconUrl = 'assets/marker/marker-icon.png';
-const shadowUrl = 'assets/marker/marker-shadow.png';
+const iconRetinaUrl = 'marker/marker-icon-2x.png';
+const iconUrl = 'marker/marker-icon.png';
+const shadowUrl = 'marker/marker-shadow.png';
 const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,

@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {TranslatePipe} from "@ngx-translate/core";
-import {AccountSearchEntry} from "../../search/search-api";
-import {AccountChangeRequest, AccountDetails, AccountSetupRequest} from "../account-api";
-import {ProfileChangeRequest} from "../../profile/profile-api";
+import {AccountSearchEntry} from "../../search/search.api";
+import {AccountChangeRequest, AccountDetails, AccountSetupRequest} from "../account.api";
+import {ProfileChangeRequest} from "../../profile/profile.api";
 
 @Component({
   selector: 'lib-account-change',

@@ -95,7 +95,7 @@
         "week": "This week",
         "next": "Next week",
         "start": "Start date",
-        "end" : "End date"
+        "end": "End date"
       }
     },
     "table": {
@@ -398,5 +398,16 @@
     "prev": "Previous page",
     "first": "First page",
     "last": "Last page"
+  },
+  "issue": {
+    "dialog": {
+      "create": {
+        "title": "Report Bug"
+      }
+    },
+    "form": {
+      "subject": "Subject",
+      "description": "Description"
+    }
   }
 }

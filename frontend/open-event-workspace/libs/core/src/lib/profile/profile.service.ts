@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "@open-event-workspace/shared";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Profile, ProfileChangeRequest} from "./profile-api";
+import {Profile, ProfileChangeRequest} from "./profile.api";
 
 @Injectable({
   providedIn: 'root'

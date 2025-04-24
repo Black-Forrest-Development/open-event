@@ -1,6 +1,5 @@
 package de.sambalmueslie.openevent.gateway.app.share
 
-import de.sambalmueslie.openevent.api.ShareAPI
 import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.account.api.Account
@@ -53,7 +52,7 @@ class ShareController(
     @Put("/{id}")
     fun update(auth: Authentication, id: String, @Body request: ShareChangeRequest): Share {
         return auth.checkPermission(PERMISSION_WRITE) {
-            val (account, share) = validateUpdate(auth, id)
+            val (account, _) = validateUpdate(auth, id)
             logger.traceUpdate(auth, request) { service.update(account, id, request) }
         }
     }
@@ -61,8 +60,8 @@ class ShareController(
 
     @Put("/{id}/published")
     fun setPublished(auth: Authentication, id: String, @Body value: PatchRequest<Boolean>): Share? {
-        return auth.checkPermission(ShareAPI.PERMISSION_WRITE) {
-            val (account, share) = validateUpdate(auth, id)
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (account, _) = validateUpdate(auth, id)
             logger.traceAction(auth, "PUBLISHED", id, value) { service.setPublished(account, id, value) }
         }
     }

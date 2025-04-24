@@ -39,19 +39,6 @@ export class DashboardComponent implements AfterViewInit {
     new MainNavItem('/account', 'account.type', 'person', [Roles.ACCOUNT_READ]),
     new MainNavItem('/address', 'address.title', 'contact_mail', [Roles.ADDRESS_READ]),
     new MainNavItem('/activity', 'activity.title', 'notifications', [Roles.ACTIVITY_READ]),
-    new MainNavItem('/category', 'category.type', 'label', [Roles.CATEGORY_WRITE]),
-    new MainNavItem('/settings', 'settings.type', 'settings_applications', [Roles.SETTINGS_READ, Roles.SETTINGS_WRITE]),
-    new MainNavItem('/mail', 'mail.type', 'email', [Roles.MAIL_READ, Roles.MAIL_WRITE]),
-    new MainNavItem('/cache', 'cache.type', 'memory', [Roles.CACHE_READ, Roles.CACHE_WRITE]),
-    new MainNavItem('/backoffice', 'backoffice.type', 'admin_panel_settings', [Roles.BACKOFFICE_ACCESS]),
-    new MainNavItem('/history', 'history.type', 'history', [Roles.HISTORY_ADMIN]),
-
-
-    // new MainNavItem('/inquiry', 'INQUIRY.Type', 'question_answer'),
-    // new MainNavItem('/structure', 'STRUCT.Type', 'ballot'),
-    // new MainNavItem('/profile', 'MENU.Profile', 'person'),
-    // new MainNavItem('/administration', 'MENU.Administration', 'settings_applications'),
-    // new MainNavItem('/imprint', 'MENU.Imprint', 'contact_support'),
   ]
 
   accessibleItems: MainNavItem[] = []

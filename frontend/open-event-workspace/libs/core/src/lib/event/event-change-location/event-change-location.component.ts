@@ -1,5 +1,5 @@
 import {Component, computed, effect, input, OnInit, resource} from '@angular/core';
-import {EventInfo} from "../event-api";
+import {EventInfo} from "../event.api";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -8,7 +8,7 @@ import {MatInputModule} from "@angular/material/input";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectChange, MatSelectModule} from "@angular/material/select";
-import {Address, AddressReadAPI} from "../../address/address-api";
+import {Address, AddressReadAPI} from "../../address/address.api";
 import {toPromise} from "@open-event-workspace/shared";
 
 @Component({

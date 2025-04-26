@@ -6,7 +6,7 @@
     <span class="title ps-2">{{ info?.event?.title }}</span>
     <div class="flex-auto"></div>
 
-    @if (!reloading && !menu.publishMenuItem.disabled && isAdminOrCanEdit && !info?.event?.published) {
+    @if (!reloading && !menu.publishMenuItem.disabled && isOwner && !info?.event?.published) {
       <button (click)="menu.publishMenuItem.handleClick()" class="action-fab" mat-mini-fab>
         @if (menu.publishing) {
           <mat-icon>
@@ -18,14 +18,14 @@
 
       </button>
     }
-    @if (isAdminOrCanEdit) {
+    @if (isOwner) {
       <ng-container *ngFor="let item of menu.menuItems">
         <button (click)="item.handleClick()" class="toolbar-action-fab" mat-mini-fab>
           <mat-icon>{{ item.icon }}</mat-icon>
         </button>
       </ng-container>
     }
-    @if (isAdminOrCanEdit) {
+    @if (isOwner) {
       <button [matMenuTriggerFor]="contextMenu" class="toolbar-action-fab" mat-mini-fab>
         <mat-icon>more_vert</mat-icon>
       </button>

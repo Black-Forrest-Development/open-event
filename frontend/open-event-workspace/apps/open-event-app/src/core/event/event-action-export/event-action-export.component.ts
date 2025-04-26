@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {HttpResponse} from "@angular/common/http";
 import FileSaver from "file-saver";
-import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
+import {AuthService} from "@open-event-workspace/shared";
 import {Event, ExportService} from "@open-event-workspace/core";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";

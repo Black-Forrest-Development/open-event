@@ -52,7 +52,7 @@ export class AddressBoardComponent {
     let account = this.appService.account
     if (!account) return
     this.reloading = true
-    this.service.getAddress(this.pageIndex, this.pageSize).subscribe({
+    this.service.getAddresses(this.pageIndex, this.pageSize).subscribe({
       next: value => this.handleData(value),
       error: e => this.handleError(e)
     })

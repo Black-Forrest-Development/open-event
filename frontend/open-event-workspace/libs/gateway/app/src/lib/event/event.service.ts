@@ -21,8 +21,12 @@ export class EventService extends BaseService {
     return this.post('search', request, params)
   }
 
-  getInfo(id: number): Observable<EventInfo> {
-    return this.get(id + '/info')
+  getEvent(id: number): Observable<Event> {
+    return this.get('' + id)
+  }
+
+  getEventInfo(id: number): Observable<EventInfo> {
+    return this.get('' + id + '/info')
   }
 
   create(request: EventChangeRequest): Observable<Event> {

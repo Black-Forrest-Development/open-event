@@ -39,7 +39,7 @@ export class EventChangeFormLocationComponent {
 
   ngOnInit() {
     this.reloading = true
-    this.addressService.getAddress(0, 20).subscribe(d => this.handleAddresses(d))
+    this.addressService.getAddresses(0, 20).subscribe(d => this.handleAddresses(d))
   }
 
   isVisible(ctrl: string): boolean {

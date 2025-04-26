@@ -325,7 +325,7 @@
         "question": "Soll die Adresse wirklich gelöscht werden?"
       }
     },
-    "table": {
+    "property": {
       "street": "Straße",
       "streetNumber": "Nr",
       "info": "Addresszusatz",

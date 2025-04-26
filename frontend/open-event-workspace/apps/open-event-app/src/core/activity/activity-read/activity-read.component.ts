@@ -2,8 +2,9 @@ import {Component, EventEmitter, input, Output} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {Activity, ActivityInfo, ActivityService} from "@open-event-workspace/core";
+import {Activity, ActivityInfo} from "@open-event-workspace/core";
 import {MatIcon} from "@angular/material/icon";
+import {ActivityService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-activity-read',
@@ -28,7 +29,7 @@ export class ActivityReadComponent {
   markRead() {
     if (this.reloading) return
     this.reloading = true
-    this.service.markRead(this.info().activity.id).subscribe({
+    this.service.markReadSingle(this.info().activity.id).subscribe({
       next: value => this.handleData(value),
       error: err => this.handleError(err)
     })

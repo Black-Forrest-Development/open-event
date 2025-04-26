@@ -7,7 +7,7 @@ import {AsyncPipe, Location, NgIf, NgTemplateOutlet} from "@angular/common";
 import {STEPPER_GLOBAL_OPTIONS, StepperOrientation} from "@angular/cdk/stepper";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {map, Observable} from "rxjs";
-import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
+import {AuthService, LoadingBarComponent} from "@open-event-workspace/shared";
 import {DateTime} from 'luxon';
 import {Account, Event, EventChangeRequest, EventInfo, LocationChangeRequest, RegistrationChangeRequest} from "@open-event-workspace/core";
 import {AppService} from "../../../shared/app.service";
@@ -22,8 +22,6 @@ import {EventChangeFormLocationComponent} from "../event-change-form-location/ev
 import {EventChangeFormRegistrationComponent} from "../event-change-form-registration/event-change-form-registration.component";
 import {EventChangeHelpComponent} from "../event-change-help/event-change-help.component";
 import {EventService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "@open-event-workspace/shared";
-import {Roles} from "../../../shared/roles";
 
 @Component({
   selector: 'app-event-change',
@@ -49,7 +47,7 @@ import {Roles} from "../../../shared/roles";
     EventChangeFormRegistrationComponent,
     EventChangeHelpComponent,
     NgTemplateOutlet,
-    LoadingBarComponent
+    LoadingBarComponent,
   ],
   standalone: true
 })
@@ -70,7 +68,7 @@ export class EventChangeComponent {
   hiddenFields: string[] = ['shortText', 'iconUrl', 'imageUrl', 'endDate', 'interestedAllowed', 'ticketsEnabled']
 
   helpVisible: boolean = false
-  protected isAdminOrModerator: boolean = false
+  protected isOwner: boolean = false
 
   stepperOrientation: Observable<StepperOrientation>
 
@@ -130,9 +128,7 @@ export class EventChangeComponent {
     this.route.paramMap.subscribe(p => this.handleParams(p))
     let endDate = this.eventForm.get('endDate');
     if (endDate) endDate.validator = this.isEndHidden() ? null : Validators.required
-    if (this.authService.hasRole(Roles.EVENT_ADMIN)) this.isAdminOrModerator = true
-    if (this.authService.hasRole(Roles.EVENT_MODERATOR)) this.isAdminOrModerator = true
-    if (!this.account || !this.isAdminOrModerator) this.account = this.appService.account
+    if (!this.account || !this.isOwner) this.account = this.appService.account
 
   }
 
@@ -188,7 +184,7 @@ export class EventChangeComponent {
 
   private loadData(id: number, callback: (e: EventInfo) => void) {
     this.reloading = true
-    this.service.getInfo(id).subscribe(data => callback(data));
+    this.service.getEventInfo(id).subscribe(data => callback(data));
   }
 
   private handleDataCopy(e: EventInfo) {
@@ -199,6 +195,7 @@ export class EventChangeComponent {
 
   private handleDataEdit(e: EventInfo) {
     this.event = e
+    this.isOwner = e.canEdit
     this.initValues(e)
     this.translationService.get("event.change.update", {event: e.event.shortText}).subscribe(text => this.title = text);
     this.reloading = false

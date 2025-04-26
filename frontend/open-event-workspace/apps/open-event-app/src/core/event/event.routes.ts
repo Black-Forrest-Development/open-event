@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: 'create',
-    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+    loadComponent: () => import('./event-create/event-create.component').then(m => m.EventCreateComponent),
   },
   {
     path: 'details/:id',
@@ -15,11 +15,11 @@ export const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+    loadComponent: () => import('./event-edit/event-edit.component').then(m => m.EventEditComponent),
   },
   {
     path: 'copy/:id',
-    loadComponent: () => import('./event-change/event-change.component').then(m => m.EventChangeComponent),
+    loadComponent: () => import('./event-copy/event-copy.component').then(m => m.EventCopyComponent),
   },
   {
     path: 'admin/:id',

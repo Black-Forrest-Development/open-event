@@ -80,4 +80,9 @@ class AddressCrudService(
         return storage.getData(id)
     }
 
+    fun getForAccount(account: Account, id: Long): Address? {
+        val data = storage.getData(id) ?: return null
+        return if (data.accountId == account.id) data.convert() else null
+    }
+
 }

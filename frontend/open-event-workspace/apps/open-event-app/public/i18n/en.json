@@ -345,9 +345,10 @@
         "question": "Do you really want to delete the address?"
       }
     },
-    "table": {
+    "property": {
       "street": "Street",
       "streetNumber": "Nr",
+      "info": "Additional Info",
       "zip": "Zip",
       "city": "City",
       "country": "Country"

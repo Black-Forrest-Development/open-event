@@ -27,6 +27,11 @@ class CategoryController(
 
     private val logger = audit.getLogger("APP Category API")
 
+    @Get("/{id}")
+    fun get(auth: Authentication, id: Long): Category? {
+        return auth.checkPermission(PERMISSION_READ) { service.get(id) }
+    }
+
     @Get()
     fun getAll(auth: Authentication, pageable: Pageable): Page<Category> {
         return auth.checkPermission(PERMISSION_READ) { service.getAll(pageable) }

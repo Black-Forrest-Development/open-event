@@ -4,7 +4,6 @@ import {EventMenuComponent} from "../event-menu/event-menu.component";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
-import {AuthService} from "@open-event-workspace/shared";
 import {Event, EventInfo} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatMiniFabButton} from "@angular/material/button";
@@ -12,7 +11,6 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIcon} from "@angular/material/icon";
 import {TranslatePipe} from "@ngx-translate/core";
-import {Roles} from "../../../shared/roles";
 import {EventService} from "@open-event-workspace/app";
 
 @Component({
@@ -36,7 +34,7 @@ export class EventDetailsHeaderComponent {
 
   info: EventInfo | undefined
   @Input() reloading: boolean = false
-  isAdminOrCanEdit: boolean = false
+  isOwner: boolean = false
   @Output() changed: EventEmitter<Event> = new EventEmitter();
   menu: EventMenuComponent
 
@@ -45,8 +43,7 @@ export class EventDetailsHeaderComponent {
     private location: Location,
     service: EventService,
     toastService: HotToastService,
-    dialog: MatDialog,
-    private authService: AuthService
+    dialog: MatDialog
   ) {
     this.menu = new EventMenuComponent(router, dialog, service, toastService)
   }
@@ -54,13 +51,11 @@ export class EventDetailsHeaderComponent {
   @Input()
   set data(value: EventInfo | undefined) {
     this.info = value
-    if (this.info && this.info.canEdit) this.isAdminOrCanEdit = true
+    if (this.info && this.info.canEdit) this.isOwner = true
     if (value) this.menu.data = value.event
   }
 
   ngOnInit() {
-    if (this.authService.hasRole(Roles.EVENT_ADMIN)) this.isAdminOrCanEdit = true
-    if (this.authService.hasRole(Roles.EVENT_MODERATOR)) this.isAdminOrCanEdit = true
     this.menu.changed.subscribe(e => this.changed.emit(e))
   }
 

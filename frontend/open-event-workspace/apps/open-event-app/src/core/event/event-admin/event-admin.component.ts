@@ -48,7 +48,7 @@ export class EventAdminComponent {
     if (!this.eventId) return
     if (this.reloading) return
     this.reloading = true
-    this.service.getInfo(this.eventId).subscribe(d => this.handleData(d))
+    this.service.getEventInfo(this.eventId).subscribe(d => this.handleData(d))
   }
 
   private handleParams(p: ParamMap) {

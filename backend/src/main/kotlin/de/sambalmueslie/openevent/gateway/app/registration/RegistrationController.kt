@@ -3,10 +3,13 @@ package de.sambalmueslie.openevent.gateway.app.registration
 import de.sambalmueslie.openevent.core.account.AccountCrudService
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.participant.api.Participant
+import de.sambalmueslie.openevent.core.participant.api.ParticipantAddRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateResponse
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
+import de.sambalmueslie.openevent.core.registration.api.RegistrationDetails
 import de.sambalmueslie.openevent.error.InvalidRequestException
+import de.sambalmueslie.openevent.gateway.app.event.EventGuardService
 import de.sambalmueslie.openevent.infrastructure.audit.AuditService
 import io.micronaut.http.annotation.*
 import io.micronaut.security.authentication.Authentication
@@ -16,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Tag(name = "APP Registration API")
 class RegistrationController(
     private val service: RegistrationCrudService,
+    private val eventService: EventGuardService,
     private val accountService: AccountCrudService,
     audit: AuditService,
 ) {
@@ -23,7 +27,6 @@ class RegistrationController(
         private const val PERMISSION_READ = "registration.read"
         private const val PERMISSION_WRITE = "registration.write"
     }
-
 
     private val logger = audit.getLogger("APP Registration API")
 
@@ -66,4 +69,57 @@ class RegistrationController(
         }
     }
 
+
+    @Post("/{id}/participant/manual")
+    fun moderationParticipateManual(
+        auth: Authentication,
+        id: Long,
+        @Body request: ParticipantAddRequest
+    ): ParticipateResponse? {
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (event, actor) = eventService.getIfAccessible(auth, id) ?: return@checkPermission null
+            val account = accountService.findByEmail(request.email)
+            logger.traceAction(auth, "addParticipant", id.toString(), request) {
+                if (account != null) {
+                    service.addParticipant(actor, event.id, account, ParticipateRequest(request.size))
+                } else {
+                    service.addParticipant(actor, event.id, request)
+                }
+            }
+        }
+    }
+
+    @Put("/{id}/participant/{participantId}")
+    fun moderationChangeParticipant(
+        auth: Authentication,
+        id: Long,
+        participantId: Long,
+        @Body request: ParticipateRequest
+    ): ParticipateResponse? {
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (event, actor) = eventService.getIfAccessible(auth, id) ?: return@checkPermission null
+            logger.traceAction(auth, "changeParticipant", participantId.toString(), request) {
+                service.changeParticipant(actor, event.id, participantId, request)
+            }
+        }
+    }
+
+    @Delete("/{id}/participant/{participantId}")
+    fun moderationRemoveParticipant(auth: Authentication, id: Long, participantId: Long): ParticipateResponse? {
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (event, actor) = eventService.getIfAccessible(auth, id) ?: return@checkPermission null
+            logger.traceAction(auth, "removeParticipant", participantId.toString()) {
+                service.removeParticipant(actor, event.id, participantId)
+            }
+        }
+    }
+
+
+    @Get("{id}/details")
+    fun getDetails(auth: Authentication, id: Long): RegistrationDetails? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val (event, _) = eventService.getIfAccessible(auth, id) ?: return@checkPermission null
+            service.getDetails(event.id)
+        }
+    }
 }

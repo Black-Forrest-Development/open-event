@@ -14,8 +14,12 @@ export class AddressService extends BaseService {
     this.retryCount = 1
   }
 
-  getAddress(page: number, size: number): Observable<Page<Address>> {
+  getAddresses(page: number, size: number): Observable<Page<Address>> {
     return this.getPaged('', page, size)
+  }
+
+  getAddress(id: number): Observable<Address> {
+    return this.get('' + id)
   }
 
   importAddress(): Observable<Page<Address>> {

@@ -13,9 +13,11 @@ export function errorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       console.log("Error intercepted")
-      dialog.open(IssueCreateDialogComponent, {
-        data: error
-      });
+      if (error.status >= 500) {
+        dialog.open(IssueCreateDialogComponent, {
+          data: error
+        });
+      }
       return throwError(() => error);
     })
   );

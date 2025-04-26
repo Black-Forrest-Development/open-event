@@ -24,31 +24,31 @@
         <table [dataSource]="address" mat-table>
 
           <ng-container matColumnDef="street">
-            <th *matHeaderCellDef mat-header-cell>{{ 'address.table.street' | translate }}</th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'address.property.street' | translate }}</th>
             <td *matCellDef="let entry" mat-cell>{{ entry.street }}</td>
           </ng-container>
 
 
           <ng-container matColumnDef="streetNumber">
-            <th *matHeaderCellDef mat-header-cell>{{ 'address.table.streetNumber' | translate }}</th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'address.property.streetNumber' | translate }}</th>
             <td *matCellDef="let entry" mat-cell>{{ entry.streetNumber }}</td>
           </ng-container>
 
 
           <ng-container matColumnDef="zip">
-            <th *matHeaderCellDef mat-header-cell>{{ 'address.table.zip' | translate }}</th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'address.property.zip' | translate }}</th>
             <td *matCellDef="let entry" mat-cell>{{ entry.zip }}</td>
           </ng-container>
 
 
           <ng-container matColumnDef="city">
-            <th *matHeaderCellDef mat-header-cell>{{ 'address.table.city' | translate }}</th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'address.property.city' | translate }}</th>
             <td *matCellDef="let entry" mat-cell>{{ entry.city }}</td>
           </ng-container>
 
 
           <ng-container matColumnDef="country">
-            <th *matHeaderCellDef mat-header-cell>{{ 'address.table.country' | translate }}</th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'address.property.country' | translate }}</th>
             <td *matCellDef="let entry" mat-cell>{{ entry.country }}</td>
           </ng-container>
 

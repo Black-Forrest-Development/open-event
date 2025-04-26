@@ -8,10 +8,11 @@ import {MatMiniFabButton} from "@angular/material/button";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatToolbar} from "@angular/material/toolbar";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MailJobHistoryEntry, MailService} from "@open-event-workspace/core";
+import {MailJobHistoryEntry} from "@open-event-workspace/core";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {ActivatedRoute, Router} from "@angular/router";
 import {debounceTime, distinctUntilChanged} from "rxjs";
+import {MailService} from "@open-event-workspace/backoffice";
 
 @Component({
   selector: 'boffice-mail-history',

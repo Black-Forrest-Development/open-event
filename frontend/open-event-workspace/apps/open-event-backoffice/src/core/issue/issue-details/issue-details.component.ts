@@ -2,21 +2,15 @@ import {Component, computed, resource, signal} from '@angular/core';
 import {toPromise} from "@open-event-workspace/shared";
 import {IssueService} from "@open-event-workspace/backoffice";
 import {ActivatedRoute} from "@angular/router";
-import {DatePipe, Location} from "@angular/common";
-import {BoardComponent, BoardToolbarActions} from "../../../shared/board/board.component";
-import {TranslatePipe} from "@ngx-translate/core";
-import {MatButton} from "@angular/material/button";
-import {MatDivider} from "@angular/material/divider";
+import {Location} from "@angular/common";
+import {BoardComponent} from "../../../shared/board/board.component";
+import {IssueCardComponent} from "../issue-card/issue-card.component";
 
 @Component({
   selector: 'app-issue-details',
   imports: [
     BoardComponent,
-    TranslatePipe,
-    DatePipe,
-    BoardToolbarActions,
-    MatButton,
-    MatDivider,
+    IssueCardComponent,
   ],
   templateUrl: './issue-details.component.html',
   styleUrl: './issue-details.component.scss'

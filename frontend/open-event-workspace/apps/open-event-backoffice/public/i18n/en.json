@@ -500,6 +500,23 @@
     }
   },
   "issue": {
-    "type": "Issue"
+    "type": "Issue",
+    "title": "Issues",
+    "property": {
+      "subject": "Subject",
+      "description": "Description",
+      "error": "Error",
+      "url": "URL",
+      "account": "Account",
+      "status": "Status",
+      "client_ip": "Client IP",
+      "user_agent": "User Agent",
+      "timestamp": "Timestamp"
+    },
+    "status": {
+      "CREATED": "Created",
+      "IN_PROGRESS": "In Progress",
+      "RESOLVED": "Resolved"
+    }
   }
 }

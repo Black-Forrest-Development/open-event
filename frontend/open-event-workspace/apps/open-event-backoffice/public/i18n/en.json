@@ -498,5 +498,8 @@
       "country": "Country",
       "size": "Max Size"
     }
+  },
+  "issue": {
+    "type": "Issue"
   }
 }

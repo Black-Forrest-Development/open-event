@@ -64,6 +64,12 @@ export const appRoutes: Route[] = [
     canActivate: [canActivateAuthRole],
     data: {roles: [Roles.SEARCH_ADMIN]}
   },
+  {
+    path: 'issue',
+    loadChildren: () => import('../core/issue/issue.routes').then(m => m.routes),
+    canActivate: [canActivateAuthRole],
+    data: {roles: [Roles.ISSUE_ADMIN]}
+  },
   {path: 'forbidden', component: ForbiddenComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

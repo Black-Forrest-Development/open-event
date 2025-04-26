@@ -14,15 +14,19 @@ export class ActivityService extends BaseService {
     this.retryCount = 0
   }
 
+  getActivity(id: number): Observable<Activity> {
+    return this.get('' + id)
+  }
+
   getAllActivities(page: number, size: number): Observable<Page<Activity>> {
     return this.getPaged('', page, size)
   }
 
-  cleanup(request: ActivityCleanupRequest): Observable<any>{
+  cleanup(request: ActivityCleanupRequest): Observable<any> {
     return this.post('cleanup', request)
   }
 
-  getRecentForAccount(accountId: number,page: number, size: number ): Observable<Page<Activity>> {
+  getRecentForAccount(accountId: number, page: number, size: number): Observable<Page<Activity>> {
     let params = new HttpParams()
       .set("page", page)
       .set("size", size)

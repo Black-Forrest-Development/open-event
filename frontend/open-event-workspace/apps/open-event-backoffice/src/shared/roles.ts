@@ -1,5 +1,3 @@
-
-
 export class Roles {
   public static SETTINGS_READ = "settings.read"
   public static SETTINGS_WRITE = "settings.write"
@@ -50,4 +48,6 @@ export class Roles {
   public static ACTIVITY_ADMIN = "activity.admin"
 
   public static SEARCH_ADMIN = "search.admin"
+
+  public static ISSUE_ADMIN = "issue.admin"
 }

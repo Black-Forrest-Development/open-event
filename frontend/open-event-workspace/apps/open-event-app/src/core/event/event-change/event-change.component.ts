@@ -22,7 +22,7 @@ import {EventChangeFormLocationComponent} from "../event-change-form-location/ev
 import {EventChangeFormRegistrationComponent} from "../event-change-form-registration/event-change-form-registration.component";
 import {EventChangeHelpComponent} from "../event-change-help/event-change-help.component";
 import {EventService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "@open-event-workspace/shared";
 import {Roles} from "../../../shared/roles";
 
 @Component({

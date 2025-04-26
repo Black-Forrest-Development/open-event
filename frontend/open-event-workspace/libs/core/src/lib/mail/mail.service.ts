@@ -4,7 +4,9 @@ import {MailJob, MailJobHistoryEntry} from "./mail-api";
 import {Observable} from "rxjs";
 import {BaseService, Page} from "@open-event-workspace/shared";
 
-
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

@@ -2,13 +2,14 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {Location} from "@angular/common";
-import {EventInfo, EventService} from "@open-event-workspace/core";
+import {EventInfo} from "@open-event-workspace/core";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {EventActionExportComponent} from "../event-action-export/event-action-export.component";
 import {RegistrationModerationComponent} from "../../registration/registration-moderation/registration-moderation.component";
 import {MatMiniFabButton} from "@angular/material/button";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "@open-event-workspace/shared";
+import {EventService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-event-admin',
@@ -47,7 +48,7 @@ export class EventAdminComponent {
     if (!this.eventId) return
     if (this.reloading) return
     this.reloading = true
-    this.service.getEventInfo(this.eventId).subscribe(d => this.handleData(d))
+    this.service.getInfo(this.eventId).subscribe(d => this.handleData(d))
   }
 
   private handleParams(p: ParamMap) {

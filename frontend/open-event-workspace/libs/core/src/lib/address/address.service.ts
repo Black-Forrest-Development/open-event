@@ -4,6 +4,9 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Address, AddressChangeRequest, AddressReadAPI} from "./address.api";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

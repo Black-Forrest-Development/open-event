@@ -11,7 +11,7 @@ import {MatDivider} from "@angular/material/divider";
 import {MatMiniFabButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "@open-event-workspace/shared";
 
 @Component({
   selector: 'app-event-board-table',

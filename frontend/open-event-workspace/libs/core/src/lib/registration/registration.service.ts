@@ -5,6 +5,9 @@ import {Observable} from "rxjs";
 import {ParticipantAddRequest, ParticipateRequest, ParticipateResponse, RegistrationDetails} from "./registration.api";
 import {Participant} from "../participant/participant.api";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

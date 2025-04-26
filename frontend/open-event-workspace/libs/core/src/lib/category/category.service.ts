@@ -4,6 +4,9 @@ import {Observable} from "rxjs";
 import {Category, CategoryChangeRequest, CategoryReadAPI} from "./category-api";
 import {BaseService, Page} from "@open-event-workspace/shared";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

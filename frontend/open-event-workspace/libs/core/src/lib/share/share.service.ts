@@ -5,7 +5,9 @@ import {Share, ShareChangeRequest, SharedParticipateResponse, ShareInfo} from ".
 import {BaseService, PatchRequest} from "@open-event-workspace/shared";
 import {ParticipantAddRequest} from "../registration/registration.api";
 
-
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

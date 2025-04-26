@@ -4,7 +4,9 @@ import {Observable} from "rxjs";
 import {Setting, SettingChangeRequest, TextResponse} from "./settings.api";
 import {BaseService, Page} from "@open-event-workspace/shared";
 
-
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

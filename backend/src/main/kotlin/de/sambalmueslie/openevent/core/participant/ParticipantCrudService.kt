@@ -98,22 +98,25 @@ class ParticipantCrudService(
     ): ParticipateResponse {
 
         val sizeChanged = participant.size != request.size
+        if (!sizeChanged) {
+            val result = updateWaitList(actor, registration)
+            val status = if (participant.waitingList) ParticipateStatus.WAITING_LIST else ParticipateStatus.ACCEPTED
+            return ParticipateResponse(registration, participant, result, status, false)
+        }
 
-        var waitingList = if (sizeChanged) participant.waitingList else true
-        var rank = if (sizeChanged) Int.MAX_VALUE else participant.rank
+        var waitingList = true
+        var rank = Int.MAX_VALUE
 
-        if (sizeChanged) {
-            val participants = storage.get(registration)
+        val participants = storage.get(registration)
 
-            val availableSpace = registration.maxGuestAmount
-            val usedSpace = participants.filter { it.status == ParticipantStatus.ACCEPTED }
-                .filter { it.id != participant.id }
-                .sumOf { it.size }
-            val remainingSpace = availableSpace - usedSpace
-            if (remainingSpace >= request.size) {
-                waitingList = false
-                rank = participant.rank
-            }
+        val availableSpace = registration.maxGuestAmount
+        val usedSpace = participants.filter { it.status == ParticipantStatus.ACCEPTED }
+            .filter { it.id != participant.id }
+            .sumOf { it.size }
+        val remainingSpace = availableSpace - usedSpace
+        if (remainingSpace >= request.size) {
+            waitingList = false
+            rank = participant.rank
         }
 
         val status = if (waitingList) ParticipateStatus.WAITING_LIST else ParticipateStatus.ACCEPTED
@@ -211,7 +214,6 @@ class ParticipantCrudService(
             notifyDeleted(actor, it)
         }
     }
-
 
 
 }

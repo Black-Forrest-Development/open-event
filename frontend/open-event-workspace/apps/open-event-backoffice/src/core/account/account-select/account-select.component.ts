@@ -10,7 +10,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, filter} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TranslatePipe} from "@ngx-translate/core";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-account-select',
@@ -22,8 +21,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     MatLabel,
     ReactiveFormsModule,
     MatAutocompleteTrigger,
-    TranslatePipe,
-    MatProgressSpinner
+    TranslatePipe
   ],
   templateUrl: './account-select.component.html',
   styleUrl: './account-select.component.scss'

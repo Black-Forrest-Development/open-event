@@ -64,4 +64,10 @@ data class IssueData(
         updated = timestamp
         return this
     }
+
+    fun status(status: IssueStatus, timestamp: LocalDateTime): IssueData {
+        this.status = status
+        this.updated = timestamp
+        return this
+    }
 }

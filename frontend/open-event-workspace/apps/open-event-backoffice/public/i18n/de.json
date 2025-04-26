@@ -493,5 +493,8 @@
       "country": "Land",
       "size": "Maximale Teilnehmer"
     }
+  },
+  "issue": {
+    "type": "Fehler"
   }
 }

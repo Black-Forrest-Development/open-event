@@ -23,8 +23,6 @@ class ActivityController(
     audit: AuditService,
 ) {
     companion object {
-        private const val PERMISSION_READ = "activity.read"
-        private const val PERMISSION_WRITE = "activity.write"
         private const val PERMISSION_ADMIN = "activity.admin"
     }
 
@@ -33,6 +31,11 @@ class ActivityController(
     @Get()
     fun getAll(auth: Authentication, pageable: Pageable): Page<Activity> {
         return auth.checkPermission(PERMISSION_ADMIN) { service.getAll(pageable) }
+    }
+
+    @Get("{id}")
+    fun get(auth: Authentication, id: Long): Activity? {
+        return auth.checkPermission(PERMISSION_ADMIN) { service.get(id) }
     }
 
     @Post("cleanup")

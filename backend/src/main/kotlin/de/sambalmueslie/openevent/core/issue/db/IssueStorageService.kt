@@ -2,10 +2,12 @@ package de.sambalmueslie.openevent.core.issue.db
 
 
 import de.sambalmueslie.openevent.common.BaseStorageService
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.common.findByIdOrNull
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.issue.api.Issue
 import de.sambalmueslie.openevent.core.issue.api.IssueChangeRequest
+import de.sambalmueslie.openevent.core.issue.api.IssueStatus
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
@@ -29,6 +31,7 @@ class IssueStorageService(
         private const val ACCOUNT_REFERENCE = "account"
         private const val CLIENT_IP_REFERENCE = "clientIp"
         private const val USER_AGENT_REFERENCE = "userAgent"
+        private val unresolvedStatus = setOf(IssueStatus.CREATED, IssueStatus.IN_PROGRESS)
     }
 
     override fun create(request: IssueChangeRequest, account: Account, clientIp: String, userAgent: String): Issue {
@@ -62,6 +65,18 @@ class IssueStorageService(
 
     override fun getData(id: Long): IssueData? {
         return repository.findByIdOrNull(id)
+    }
+
+    override fun getUnresolved(pageable: Pageable): Page<Issue> {
+        return repository.findByStatusIn(unresolvedStatus, pageable).let { converter.convert(it) }
+    }
+
+    override fun getUnresolvedByAccount(account: Account, pageable: Pageable): Page<Issue> {
+        return repository.findByStatusInAndAccountId(unresolvedStatus, account.id, pageable).let { converter.convert(it) }
+    }
+
+    override fun updateStatus(id: Long, status: PatchRequest<IssueStatus>): Issue? {
+        return patchData(id) { it.status(status.value, timeProvider.now()) }
     }
 
 }

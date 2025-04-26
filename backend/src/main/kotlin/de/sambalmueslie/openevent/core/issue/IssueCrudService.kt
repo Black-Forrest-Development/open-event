@@ -1,10 +1,14 @@
 package de.sambalmueslie.openevent.core.issue
 
 import de.sambalmueslie.openevent.common.BaseCrudService
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.issue.api.Issue
 import de.sambalmueslie.openevent.core.issue.api.IssueChangeRequest
+import de.sambalmueslie.openevent.core.issue.api.IssueStatus
 import de.sambalmueslie.openevent.core.issue.db.IssueStorage
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.http.HttpRequest
 import jakarta.inject.Singleton
 import org.slf4j.Logger
@@ -26,4 +30,24 @@ class IssueCrudService(
         notifyCreated(actor, result)
         return result
     }
+
+    fun getByAccount(account: Account, pageable: Pageable): Page<Issue> {
+        return storage.findByAccount(account, pageable)
+    }
+
+    fun getUnresolved(pageable: Pageable): Page<Issue> {
+        return storage.getUnresolved(pageable)
+    }
+
+    fun getUnresolvedByAccount(account: Account, pageable: Pageable): Page<Issue> {
+        return storage.getUnresolvedByAccount(account, pageable)
+    }
+
+    fun changeStatus(actor: Account, id: Long, status: PatchRequest<IssueStatus>): Issue? {
+        val result = storage.updateStatus(id, status) ?: return null
+        notifyUpdated(actor, result)
+        return result
+    }
+
+
 }

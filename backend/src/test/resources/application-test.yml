@@ -22,3 +22,4 @@ tracing:
 opensearch:
   user: "user"
   password: "password"
+  prefix: "test"

@@ -180,7 +180,7 @@ application {
 }
 
 jib {
-    from.image = "eclipse-temurin:21-jre-ubi9-minimal"
+    from.image = "eclipse-temurin:24-jre-ubi9-minimal"
     to {
         image = "open-event-backend"
         tags = setOf(version.toString(), "latest")

@@ -5,8 +5,9 @@ import {DatePipe} from "@angular/common";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
 import {TranslatePipe} from "@ngx-translate/core";
+import {MatDialog} from "@angular/material/dialog";
+import {IssueDetailsDialogComponent} from "../issue-details-dialog/issue-details-dialog.component";
 
 @Component({
   selector: 'app-issue-table',
@@ -16,7 +17,6 @@ import {TranslatePipe} from "@ngx-translate/core";
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    RouterLink,
     TranslatePipe
   ],
   templateUrl: './issue-table.component.html',
@@ -31,4 +31,11 @@ export class IssueTableComponent {
 
   pageEvent = output<PageEvent>()
   displayedColumns: string[] = ['error', 'actor', 'status', 'timestamp', 'cmd']
+
+  constructor(private dialog: MatDialog) {
+  }
+
+  showDetails(issue: Issue) {
+    this.dialog.open(IssueDetailsDialogComponent, {data: issue})
+  }
 }

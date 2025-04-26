@@ -17,4 +17,8 @@ export class CategoryService extends BaseService {
   getCategories(page: number, size: number): Observable<Page<Category>> {
     return this.getPaged('', page, size)
   }
+
+  getCategory(id: number): Observable<Category> {
+    return this.get('' + id)
+  }
 }

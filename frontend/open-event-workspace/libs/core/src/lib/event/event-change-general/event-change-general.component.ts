@@ -60,9 +60,9 @@ export class EventChangeGeneralComponent implements OnInit {
     this.fg.setValue(
       {
         startTime: startTime,
-        startDate: start.toJSDate(),
+        startDate: start,
         endTime: finishTime,
-        endDate: finish.toJSDate(),
+        endDate: finish,
 
         imageUrl: info.event.imageUrl ?? "",
         iconUrl: info.event.iconUrl ?? "",

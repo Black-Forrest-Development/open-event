@@ -2,9 +2,10 @@ import {Component, viewChild} from '@angular/core';
 import {Subscription} from "rxjs";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {Router} from "@angular/router";
-import {Activity, ActivityInfo, ActivityService} from "@open-event-workspace/core";
+import {Activity, ActivityInfo} from "@open-event-workspace/core";
 import {ActivityIndicatorComponent} from "../activity-indicator/activity-indicator.component";
 import {ActivityMenuComponent} from "../activity-menu/activity-menu.component";
+import {ActivityService} from "@open-event-workspace/app";
 
 
 @Component({
@@ -45,7 +46,7 @@ export class ActivityButtonComponent {
 
 
   handleActivityClick(a: ActivityInfo) {
-    this.service.markRead(a.activity.id).subscribe({
+    this.service.markReadSingle(a.activity.id).subscribe({
       next: value => this.navigateToSource(value),
       error: err => this.handleError(err)
     })
@@ -63,7 +64,7 @@ export class ActivityButtonComponent {
   private refresh() {
     if (this.reloading) return
     this.reloading = true
-    this.service.getUnreadActivityInfos().subscribe({
+    this.service.unreadInfo().subscribe({
       next: value => this.handleData(value),
       error: err => this.handleError(err)
     })
@@ -71,7 +72,7 @@ export class ActivityButtonComponent {
 
   handleMarkAllReadClick() {
     this.reloading = true
-    this.service.markAllRead().subscribe({
+    this.service.markReadAll().subscribe({
       next: value => this.handleData(value),
       error: err => this.handleError(err)
     })

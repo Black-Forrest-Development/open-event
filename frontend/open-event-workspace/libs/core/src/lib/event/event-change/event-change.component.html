@@ -31,7 +31,7 @@
 </mat-stepper>
 
 <ng-template #submitButton>
-  <button (click)="submit()" color="accent" mat-flat-button type="submit" [disabled]="!fg.valid">
+  <button (click)="submit()" color="accent" mat-flat-button type="submit" [disabled]="!fg.valid && !loading">
     <mat-icon>save</mat-icon>
     {{ 'action.submit' | translate }}
   </button>

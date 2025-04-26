@@ -7,7 +7,7 @@
     }
     <span class="title ps-2">{{ title | translate }}</span>
     <div class="flex-auto"></div>
-    <div class="text-sm border border-gray-400 rounded-sm px-3 py-2" *ngIf="account && isAdminOrModerator">
+    <div class="text-sm border border-gray-400 rounded-sm px-3 py-2" *ngIf="account && isOwner">
       {{ account.name }}
     </div>
   </div>

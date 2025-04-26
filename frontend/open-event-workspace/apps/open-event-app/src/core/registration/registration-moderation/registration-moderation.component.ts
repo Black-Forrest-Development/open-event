@@ -9,13 +9,14 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {RegistrationParticipateAccountDialogComponent} from "../registration-participate-account-dialog/registration-participate-account-dialog.component";
 import {RegistrationParticipateManualDialogComponent} from "../registration-participate-manual-dialog/registration-participate-manual-dialog.component";
-import {Participant, ParticipantAddRequest, ParticipantDetails, ParticipateRequest, ParticipateResponse, RegistrationDetails, RegistrationInfo, RegistrationService} from "@open-event-workspace/core";
+import {Participant, ParticipantAddRequest, ParticipantDetails, ParticipateRequest, ParticipateResponse, RegistrationDetails, RegistrationInfo} from "@open-event-workspace/core";
 import {MatButton} from "@angular/material/button";
 import {DatePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {Roles} from "../../../shared/roles";
+import {RegistrationService} from "@open-event-workspace/app";
 
 @Component({
   selector: 'app-registration-moderation',
@@ -99,13 +100,13 @@ export class RegistrationModerationComponent {
   private requestEditParticipant(participant: Participant, request: ParticipateRequest) {
     if (this.reloading || !this.registration) return
     this.reloading = true
-    this.service.changeParticipant(this.registration.registration.id, participant.id, request).subscribe(r => this.handleParticipateResponse(r))
+    this.service.moderationChangeParticipant(this.registration.registration.id, participant.id, request).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private requestRemoveParticipant(participant: Participant) {
     if (this.reloading || !this.registration) return
     this.reloading = true
-    this.service.removeParticipant(this.registration.registration.id, participant.id).subscribe(r => this.handleParticipateResponse(r))
+    this.service.moderationRemoveParticipant(this.registration.registration.id, participant.id).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private handleParticipateResponse(response: ParticipateResponse) {
@@ -168,7 +169,7 @@ export class RegistrationModerationComponent {
     if (!this.registration) return
     if (this.reloading) return
     this.reloading = true
-    this.service.participateManual(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
+    this.service.moderationParticipateManual(this.registration.registration.id, request).subscribe(r => this.handleParticipateResponse(r))
   }
 
   private handleRegistrationChanged() {

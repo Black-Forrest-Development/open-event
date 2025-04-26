@@ -30,9 +30,17 @@ class AddressController(
 
     @Get()
     fun get(auth: Authentication, pageable: Pageable): Page<Address> {
-        return auth.checkPermission(PERMISSION_READ, PERMISSION_WRITE) {
+        return auth.checkPermission(PERMISSION_READ) {
             val account = accountService.get(auth) ?: return@checkPermission Page.empty()
             service.getAllForAccount(account, pageable)
+        }
+    }
+
+    @Get("/{id}")
+    fun get(auth: Authentication, id: Long): Address? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.getForAccount(account, id)
         }
     }
 

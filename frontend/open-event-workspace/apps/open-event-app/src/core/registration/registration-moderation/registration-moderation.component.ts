@@ -3,7 +3,7 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {RegistrationEditDialogComponent} from "../registration-edit-dialog/registration-edit-dialog.component";
 import {RegistrationCancelDialogComponent} from "../registration-cancel-dialog/registration-cancel-dialog.component";
-import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
+import {AuthService, LoadingBarComponent} from "@open-event-workspace/shared";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
@@ -15,7 +15,6 @@ import {DatePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {Roles} from "../../../shared/roles";
 
 @Component({

@@ -4,7 +4,7 @@ import {AddressChangeDialogComponent} from "../address-change-dialog/address-cha
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {AddressDeleteDialogComponent} from "../address-delete-dialog/address-delete-dialog.component";
 import {Address} from "@open-event-workspace/core";
-import {Page} from "@open-event-workspace/shared";
+import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
 import {AppService} from "../../../shared/app.service";
 import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
@@ -12,7 +12,6 @@ import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
 import {MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {AddressService} from "@open-event-workspace/app";
 
 @Component({

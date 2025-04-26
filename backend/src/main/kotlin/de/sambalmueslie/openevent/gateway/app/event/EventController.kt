@@ -1,6 +1,8 @@
 package de.sambalmueslie.openevent.gateway.app.event
 
+import de.sambalmueslie.openevent.common.PatchRequest
 import de.sambalmueslie.openevent.core.account.AccountCrudService
+import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.checkPermission
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.Event
@@ -37,6 +39,14 @@ class EventController(
         return auth.checkPermission(PERMISSION_READ) { searchService.searchEvents(accountService.find(auth), request, pageable) }
     }
 
+    @Get("/{id}/info")
+    fun getInfo(auth: Authentication, id: Long): EventInfo? {
+        return auth.checkPermission(PERMISSION_READ) {
+            val account = accountService.get(auth) ?: return@checkPermission null
+            service.getInfo(id, account)
+        }
+    }
+
     @Post()
     fun create(auth: Authentication, @Body request: EventChangeRequest): Event {
         return auth.checkPermission(PERMISSION_WRITE) {
@@ -47,18 +57,34 @@ class EventController(
     @Put("/{id}")
     fun update(auth: Authentication, id: Long, @Body request: EventChangeRequest): Event {
         return auth.checkPermission(PERMISSION_WRITE) {
-            val event = service.get(id) ?: return@checkPermission create(auth, request)
-            val account = accountService.find(auth)
-            if (event.owner.id != account.id) throw InsufficientPermissionsException("You are not allowed to change that event")
-            logger.traceUpdate(auth, request) { service.update(account, id, request) }
+            val (event, account) = getIfAccessible(auth, id) ?: return@checkPermission create(auth, request)
+            logger.traceUpdate(auth, request) { service.update(account, event.id, request) }
         }
     }
 
-    @Get("/{id}/info")
-    fun getInfo(auth: Authentication, id: Long): EventInfo? {
-        return auth.checkPermission(PERMISSION_READ) {
-            val account = accountService.get(auth) ?: return@checkPermission null
-            service.getInfo(id, account)
+    @Delete("/{id}")
+    fun delete(auth: Authentication, id: Long): Event? {
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (event, account) = getIfAccessible(auth, id) ?: return@checkPermission null
+            logger.traceDelete(auth) { service.delete(account, event.id) }
         }
+    }
+
+    @Put("/{id}/published")
+    fun setPublished(auth: Authentication, id: Long, @Body value: PatchRequest<Boolean>): Event? {
+        return auth.checkPermission(PERMISSION_WRITE) {
+            val (event, account) = getIfAccessible(auth, id) ?: return@checkPermission null
+            logger.traceAction(auth, "PUBLISHED", id.toString(), value) {
+                service.setPublished(account, event.id, value)
+            }
+        }
+    }
+
+
+    private fun getIfAccessible(auth: Authentication, id: Long): Pair<Event, Account>? {
+        val event = service.get(id) ?: return null
+        val account = accountService.find(auth)
+        if (event.owner.id != account.id) throw InsufficientPermissionsException("You are not allowed to change that event")
+        return Pair(event, account)
     }
 }

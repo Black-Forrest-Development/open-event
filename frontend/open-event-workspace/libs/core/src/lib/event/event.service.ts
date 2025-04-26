@@ -7,6 +7,9 @@ import {DateTime} from 'luxon';
 import {LocationChangeRequest} from "../location/location.api";
 import {RegistrationChangeRequest} from "../registration/registration.api";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

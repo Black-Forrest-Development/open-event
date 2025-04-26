@@ -4,6 +4,9 @@ import {Observable} from "rxjs";
 import {AccountSearchRequest, AccountSearchResponse, CategorySearchRequest, CategorySearchResponse, EventSearchRequest, EventSearchResponse} from "./search.api";
 import {BaseService} from "@open-event-workspace/shared";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {AuthService} from "../../../../../../libs/shared/src/lib/auth/auth.service";
+import {AuthService, LoadingBarComponent} from "@open-event-workspace/shared";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {Event, Share, ShareChangeRequest} from "@open-event-workspace/core";
 import {MatCard} from "@angular/material/card";
@@ -7,7 +7,6 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {MatDivider} from "@angular/material/divider";
 import {ShareButtons} from "ngx-sharebuttons/buttons";
 import {ShareService} from "@open-event-workspace/app";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {Roles} from "../../../shared/roles";
 
 @Component({

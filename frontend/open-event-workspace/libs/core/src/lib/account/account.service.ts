@@ -6,6 +6,9 @@ import {BaseService, Page} from "@open-event-workspace/shared";
 import {Profile} from "../profile/profile.api";
 import {Preferences} from "../preferences/preferences.api";
 
+/**
+ * @deprecated use gateway instead
+ */
 @Injectable({
   providedIn: 'root'
 })

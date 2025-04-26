@@ -11,7 +11,7 @@ export class IssueService extends BaseIssueService {
 
   constructor(http: HttpClient) {
     super(http, 'app/issue')
-    this.retryCount = 1
+    this.retryCount = 0
   }
 
   override createIssue(request: IssueChangeRequest): Observable<any> {

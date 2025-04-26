@@ -9,9 +9,8 @@ import {MatButton} from "@angular/material/button";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {ActivityInfo} from "@open-event-workspace/core";
-import {Page} from "@open-event-workspace/shared";
+import {LoadingBarComponent, Page} from "@open-event-workspace/shared";
 import {ActivityReadComponent} from "../activity-read/activity-read.component";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
 import {ActivityService} from "@open-event-workspace/app";
 
 @Component({

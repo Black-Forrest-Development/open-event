@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {BaseService} from "@open-event-workspace/shared";
+import {BaseService, PatchRequest} from "@open-event-workspace/shared";
 import {Event, EventChangeRequest, EventInfo, EventSearchRequest, EventSearchResponse} from "@open-event-workspace/core";
 import {Observable} from "rxjs";
 
@@ -21,6 +21,9 @@ export class EventService extends BaseService {
     return this.post('search', request, params)
   }
 
+  getInfo(id: number): Observable<EventInfo> {
+    return this.get(id + '/info')
+  }
 
   create(request: EventChangeRequest): Observable<Event> {
     return this.post('', request)
@@ -30,7 +33,11 @@ export class EventService extends BaseService {
     return this.put(id + '', request)
   }
 
-  getInfo(id: number): Observable<EventInfo> {
-    return this.get(id + '/info')
+  deleteEvent(id: number): Observable<Event> {
+    return this.delete('' + id)
+  }
+
+  publish(id: number): Observable<Event> {
+    return this.put('' + id + '/published', new PatchRequest(true))
   }
 }

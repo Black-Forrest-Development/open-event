@@ -6,7 +6,7 @@ import {EventNavigationService} from "../event-navigation.service";
 import {Router} from "@angular/router";
 import {EventBoardService} from "../event-board.service";
 import {MatCard} from "@angular/material/card";
-import {LoadingBarComponent} from "../../../../../../libs/shared/src/lib/loading-bar/loading-bar.component";
+import {LoadingBarComponent} from "@open-event-workspace/shared";
 
 @Component({
   selector: 'app-event-board-calendar',

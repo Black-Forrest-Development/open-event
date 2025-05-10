@@ -52,7 +52,12 @@ export class RegistrationStatusComponent {
   }
 
   private updateIndicator() {
-    if(this.maxIndicatorSize() <= 0) return
-    this.indicator = Array.from({length: this.space.available}, (_, i) => (i < this.space.remaining ? 'bg-green-500' : 'bg-orange-300'));
+    if (this.maxIndicatorSize() <= 0) return
+    if (this.space.available >= this.maxIndicatorSize() || !this.spaceAvailable) {
+      this.indicator = []
+    } else {
+      this.indicator = Array.from({length: this.space.available}, (_, i) => (i < this.space.remaining ? 'bg-green-500' : 'bg-orange-300'));
+    }
   }
+
 }

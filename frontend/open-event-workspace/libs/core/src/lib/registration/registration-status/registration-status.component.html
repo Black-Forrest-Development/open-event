@@ -2,7 +2,7 @@
   @if (indicator.length) {
     <div class="flex flex-row gap-0.5">
       @for (i of indicator; track i) {
-        <div class="rounded min-w-2" [ngClass]="i"></div>
+        <div class="rounded min-w-2 !max-h-[20px]" [ngClass]="i"></div>
       }
     </div>
   }

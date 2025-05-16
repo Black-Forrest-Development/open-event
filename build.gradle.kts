@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "2.1.21"
     id("org.jetbrains.kotlin.plugin.jpa") version "2.1.21"
     kotlin("plugin.serialization") version "2.1.21"
-    id("org.sonarqube") version "6.1.0.5360"
+    id("org.sonarqube") version "6.2.0.5505"
     id("com.gradleup.shadow") version "8.3.6" apply false
     id("com.google.cloud.tools.jib") version "3.4.5" apply false
     id("io.micronaut.application") version "4.5.3" apply false

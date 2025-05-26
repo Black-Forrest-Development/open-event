@@ -23,8 +23,11 @@
           }
         ],
         "styles": [
+          "node_modules/leaflet/dist/leaflet.css",
+          "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
           "apps/open-event-public/src/theme.scss",
-          "apps/open-event-public/src/styles.scss"
+          "apps/open-event-public/src/styles.scss",
+          "node_modules/@ngxpert/hot-toast/src/styles/styles.css"
         ],
         "scripts": []
       },

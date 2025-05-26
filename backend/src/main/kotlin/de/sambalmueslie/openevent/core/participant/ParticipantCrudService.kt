@@ -36,7 +36,8 @@ class ParticipantCrudService(
         actor: Account,
         registration: Registration,
         account: Account,
-        request: ParticipateRequest
+        request: ParticipateRequest,
+        status: ParticipantStatus = ParticipantStatus.ACCEPTED
     ): ParticipateResponse {
         if (request.size <= 0) return remove(actor, registration, account)
         val participant = storage.findByAccount(registration, account)
@@ -54,7 +55,7 @@ class ParticipantCrudService(
 
         val changeRequest = ParticipantChangeRequest(
             request.size,
-            ParticipantStatus.ACCEPTED,
+            status,
             participants.size,
             waitingList
         )

@@ -2,6 +2,7 @@ import {Component, input, Input} from '@angular/core';
 import {EventSearchEntry, Participant, RegistrationInfo, SharedParticipant, SharedRegistration} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
+import {PublicEvent} from "@open-event-workspace/external";
 
 @Component({
   selector: 'lib-registration-status',
@@ -45,6 +46,14 @@ export class RegistrationStatusComponent {
 
   @Input()
   set entry(entry: EventSearchEntry) {
+    this.spaceAvailable = entry.hasSpaceLeft
+    this.space.remaining = entry.remainingSpace
+    this.space.available = entry.maxGuestAmount
+    this.updateIndicator()
+  }
+
+  @Input()
+  set public(entry: PublicEvent) {
     this.spaceAvailable = entry.hasSpaceLeft
     this.space.remaining = entry.remainingSpace
     this.space.available = entry.maxGuestAmount

@@ -21,4 +21,18 @@ class AppConfig {
             field = value
         }
 
+    @NotBlank
+    var externalParticipantExpires: String = "en"
+        set(value) {
+            logger.info("Set external participant expires from '$field' to '$value'")
+            field = value
+        }
+
+    @NotBlank
+    var maxConfirmationTrials: Int = 5
+        set(value) {
+            logger.info("Set max confirmation trials from '$field' to '$value'")
+            field = value
+        }
+
 }

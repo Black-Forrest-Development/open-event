@@ -1,0 +1,54 @@
+{
+  "action": {
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "help": "Help",
+    "yes": "Yes",
+    "no": "No",
+    "logout": "Logout",
+    "collapse": "Collapse",
+    "close": "Close",
+    "ok": "Ok",
+    "details": "Details",
+    "edit": "Edit",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "event": {
+    "property": {
+      "owner": "Owner",
+      "date": "Date",
+      "time": "Time",
+      "location": "Location",
+      "registration": "Registration"
+    }
+  },
+  "registration": {
+    "peopleAmount": "Amount of people",
+    "status": {
+      "full": "Full",
+      "available": "seats available"
+    },
+    "dialog": {
+      "manual": {
+        "title": "Add participant",
+        "question": "Add the data of the participant please"
+      }
+    },
+    "action": {
+      "participate": "Participate on event"
+    }
+  },
+  "account": {
+    "form": {
+      "name": "Name",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "mobile": "Mobile"
+    }
+  }
+}

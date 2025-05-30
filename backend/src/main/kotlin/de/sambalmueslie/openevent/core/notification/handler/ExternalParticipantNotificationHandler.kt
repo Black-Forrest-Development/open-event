@@ -1,5 +1,6 @@
 package de.sambalmueslie.openevent.core.notification.handler
 
+import de.sambalmueslie.openevent.config.AppConfig
 import de.sambalmueslie.openevent.core.account.api.Account
 import de.sambalmueslie.openevent.core.account.api.AccountInfo
 import de.sambalmueslie.openevent.core.event.api.EventInfo
@@ -8,6 +9,8 @@ import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
+import de.sambalmueslie.openevent.core.share.api.Share
+import io.micronaut.http.uri.UriBuilder
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,6 +18,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 class ExternalParticipantNotificationHandler(
     private val service: NotificationService,
+    private val config: AppConfig
 ) : NotificationHandler {
 
 
@@ -32,8 +36,14 @@ class ExternalParticipantNotificationHandler(
         )
     }
 
-    fun handleCreated(actor: Account, event: EventInfo, registration: RegistrationInfo, obj: ExternalParticipantData) {
-        val content = ExternalParticipantEventContent(event.event, registration.registration, obj)
+    fun handleCreated(actor: Account, share: Share, event: EventInfo, registration: RegistrationInfo, obj: ExternalParticipantData) {
+        val confirmUrl = UriBuilder.of(config.confirmationBaseUrl)
+            .fragment("event")
+            .fragment(share.id)
+            .fragment("confirm")
+            .queryParam("lang", obj.language)
+            .queryParam("pid", obj.id)
+        val content = ExternalParticipantEventContent(confirmUrl.toString(), event.event, registration.registration, obj)
         service.process(
             NotificationEvent(
                 KEY_EXTERNAL_PARTICIPANT_CREATED,

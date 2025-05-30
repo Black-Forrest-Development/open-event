@@ -16,6 +16,7 @@ import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantRepository
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
+import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.gateway.external.participant.api.*
 import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
@@ -51,9 +52,8 @@ class ExternalParticipantService(
     }
     private val systemAccount = accountService.getSystemAccount()
 
-    fun requestParticipation(event: EventInfo, request: ExternalParticipantAddRequest, lang: String): ExternalParticipantChangeResponse {
+    fun requestParticipation(share: Share, event: EventInfo, request: ExternalParticipantAddRequest, lang: String): ExternalParticipantChangeResponse {
         val registration = event.registration ?: return ExternalParticipantChangeResponse.failed()
-
         validate(request)
         val existing = repository.findByEventIdAndEmail(event.event.id, request.email)
         val result = if (existing != null) {
@@ -61,7 +61,7 @@ class ExternalParticipantService(
         } else {
             requestParticipationNew(event, request, lang)
         } ?: return ExternalParticipantChangeResponse.failed()
-        notificationHandler.handleCreated(systemAccount, event, registration, result)
+        notificationHandler.handleCreated(systemAccount, share, event, registration, result)
         return ExternalParticipantChangeResponse(ParticipateStatus.UNCONFIRMED)
     }
 

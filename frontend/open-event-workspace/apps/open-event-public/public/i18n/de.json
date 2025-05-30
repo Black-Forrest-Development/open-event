@@ -1,0 +1,63 @@
+{
+  "action": {
+    "next": "Weiter",
+    "back": "Zurück",
+    "submit": "Speichern",
+    "cancel": "Abbrechen",
+    "help": "Hilfe",
+    "yes": "Ja",
+    "no": "Nein",
+    "logout": "Ausloggen",
+    "collapse": "Collapse",
+    "close": "Schliesen",
+    "ok": "Ok",
+    "details": "Details",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "delete": "Löschen"
+  },
+  "event": {
+    "property": {
+      "owner": "Veranstalter",
+      "date": "Datum",
+      "time": "Zeit",
+      "location": "Adresse",
+      "registration": "Anmeldestatus"
+    }
+  },
+  "registration": {
+    "peopleAmount": "Anzahl Personen",
+    "status": {
+      "full": "Ausgebucht",
+      "available": "Plätze frei"
+    },
+    "dialog": {
+      "manual": {
+        "title": "Anmelden",
+        "question": "Bitte Daten des Teilnehemers eingeben"
+      },
+      "response": {
+        "title": "Anmeldung eingegangen",
+        "content": {
+          "1": "Vielen Dank für deine Anmeldung! Deine Teilnahmeanfrage wurde erfolgreich übermittelt.",
+          "2": "Du erhälst in Kürze eine Bestätigungs-E-Mail mit weiteren Informationen und Anweisungen.",
+          "3": "Bitte überprüfen auch deinen Spam-Ordner, falls die E-Mail nicht in deinem Posteingang ankommt."
+        },
+        "error": "Leider konnte Ihre Teilnahmeanfrage nicht übermittelt werden. Es ist ein technischer Fehler aufgetreten.\n\nBitte versuchen Sie es in wenigen Minuten erneut oder wenden Sie sich an den Support, falls das Problem weiterhin besteht."
+      }
+    },
+    "action": {
+      "participate": "Anmelden"
+    }
+  },
+  "account": {
+    "form": {
+      "name": "Name",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "Email",
+      "phone": "Telefon",
+      "mobile": "Mobil"
+    }
+  }
+}

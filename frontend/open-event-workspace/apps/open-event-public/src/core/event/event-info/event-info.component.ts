@@ -1,4 +1,4 @@
-import {Component, input, output} from "@angular/core";
+import {Component, computed, input, output} from "@angular/core";
 import {PublicEvent} from "@open-event-workspace/external";
 import {MatCard} from "@angular/material/card";
 import {DatePipe} from "@angular/common";
@@ -27,7 +27,15 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 export class EventInfoComponent {
 
   event = input.required<PublicEvent>()
+  status = input.required<string>()
   processing = input(false)
+  participationPossible = computed(() => this.possibleStatus(this.status()) && !this.processing())
   participateEvent = output()
+
+
+  private possibleStatus(status: string): boolean {
+    if (!status) return true
+    return status !== 'UNCONFIRMED'
+  }
 
 }

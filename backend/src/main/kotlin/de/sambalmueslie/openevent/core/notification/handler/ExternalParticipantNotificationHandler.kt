@@ -6,8 +6,8 @@ import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.notification.NotificationEvent
 import de.sambalmueslie.openevent.core.notification.NotificationService
 import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRequest
+import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
-import de.sambalmueslie.openevent.gateway.external.participant.db.ExternalParticipantData
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

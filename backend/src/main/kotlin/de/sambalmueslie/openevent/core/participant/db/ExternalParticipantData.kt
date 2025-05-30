@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.gateway.external.participant.db
+package de.sambalmueslie.openevent.core.participant.db
 
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.gateway.external.participant.api.ExternalParticipantAddRequest

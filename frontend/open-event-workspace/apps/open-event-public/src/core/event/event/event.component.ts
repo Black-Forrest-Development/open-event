@@ -5,12 +5,13 @@ import {ActivatedRoute, ParamMap, Params, RouterLink} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {EventService, ExternalParticipantAddRequest} from "@open-event-workspace/external";
+import {EventService, ExternalParticipantAddRequest, ExternalParticipantChangeResponse} from "@open-event-workspace/external";
 import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
 import {EventInfoComponent} from "../event-info/event-info.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {ExternalParticipantChangeResponse} from "../../../../../../libs/gateway/external/src/lib/participant/participant.api";
 import {RequestParticipationDialogComponent} from "../../participant/request-participation-dialog/request-participation-dialog.component";
+import {RequestParticipationResponseDialogComponent} from "../../participant/request-participation-response-dialog/request-participation-response-dialog.component";
+
 
 @Component({
   selector: 'app-event',
@@ -40,7 +41,7 @@ export class EventComponent {
   error = this.eventResource.error
 
   processing = signal(false)
-
+  status = signal('')
 
   constructor(
     private service: EventService,
@@ -55,6 +56,13 @@ export class EventComponent {
     this.translate.setDefaultLang('en')
     this.route.queryParams.pipe(takeUntilDestroyed()).subscribe(p => this.handleQueryParams(p))
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe(p => this.handleParams(p))
+    effect(() => {
+      let eventId = this.eventId()
+      if (eventId) {
+        let status = sessionStorage.getItem(eventId)
+        if (status) this.status.set(status)
+      }
+    });
   }
 
   private handleParams(p: ParamMap) {
@@ -98,29 +106,19 @@ export class EventComponent {
   }
 
   private handleParticipateResponse(response: ExternalParticipantChangeResponse) {
-    // switch (response.status) {
-    //   case 'ACCEPTED':
-    //     this.translate.get('registration.message.accepted').subscribe(msg => this.hotToast.success(msg))
-    //     this.participated = true
-    //     break;
-    //   case 'WAITING_LIST_DECREASE_SIZE':
-    //   case 'WAITING_LIST':
-    //     this.translate.get('registration.message.waiting').subscribe(msg => this.hotToast.info(msg))
-    //     this.participated = true
-    //     break;
-    //   case 'DECLINED':
-    //     this.translate.get('registration.message.declined').subscribe(msg => this.hotToast.warning(msg))
-    //     break;
-    //   case 'FAILED':
-    //     this.translate.get('registration.message.failed').subscribe(msg => this.hotToast.error(msg))
-    //     break;
-    // }
-    //
-    // this.processing = false
-    this.reload()
+    if (response.status == 'FAILED') {
+      this.translate.get('registration.dialog.response.error').subscribe(v => this.handleError(v))
+    } else {
+      this.showRequestParticipationResponseDialog();
+      this.processing.set(false)
+      this.status.set(response.status)
+      let eventId = this.eventId()
+      if (eventId) sessionStorage.setItem(eventId, response.status)
+    }
   }
 
-  private reload() {
-    this.eventResource.reload()
+  private showRequestParticipationResponseDialog() {
+    this.dialog.open(RequestParticipationResponseDialogComponent)
   }
+
 }

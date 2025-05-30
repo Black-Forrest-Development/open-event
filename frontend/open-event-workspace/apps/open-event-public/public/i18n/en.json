@@ -35,6 +35,15 @@
       "manual": {
         "title": "Add participant",
         "question": "Add the data of the participant please"
+      },
+      "response": {
+        "title": "Participation request Received",
+        "content": {
+          "1": "Thank you for your registration! Your participation request has been successfully submitted.",
+          "2": "You will receive a confirmation email shortly with further information and instructions.",
+          "3": "Please also check your spam folder if the email doesn't appear in your inbox."
+        },
+        "error": "Unfortunately, your participation request could not be submitted. A technical error has occurred.\\n\\nPlease try again in a few minutes or contact support if the problem persists."
       }
     },
     "action": {

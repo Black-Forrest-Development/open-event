@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.gateway.external.participant.db
+package de.sambalmueslie.openevent.core.participant.db
 
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jdbc.annotation.JdbcRepository

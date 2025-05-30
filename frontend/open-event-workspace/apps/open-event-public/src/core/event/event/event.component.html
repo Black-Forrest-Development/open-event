@@ -7,6 +7,6 @@
   </mat-toolbar>
   <app-loading-bar [reloading]="loading()"></app-loading-bar>
   @if (event()) {
-    <app-event-info [event]="event()!!" (participateEvent)="participate()" [processing]="processing()" class="container flex-auto"/>
+    <app-event-info [event]="event()!!" [status]="status()" (participateEvent)="participate()" [processing]="processing()" class="container flex-auto"/>
   }
 </div>

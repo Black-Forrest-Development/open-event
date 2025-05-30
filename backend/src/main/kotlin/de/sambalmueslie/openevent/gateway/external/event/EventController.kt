@@ -1,7 +1,7 @@
 package de.sambalmueslie.openevent.gateway.external.event
 
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
+import de.sambalmueslie.openevent.gateway.external.participant.api.*
+import io.micronaut.http.annotation.*
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -16,6 +16,27 @@ class EventController(
     @Get("{id}")
     fun get(id: String): PublicEvent? {
         return service.getPublicEvent(id)
+    }
+
+    @Post("/{id}/participant")
+    fun requestParticipation(id: String, @Body request: ExternalParticipantAddRequest, @QueryValue(defaultValue = "") lang: String): ExternalParticipantChangeResponse {
+        return service.requestParticipation(id, request, lang)
+    }
+
+
+    @Put("/{id}/participant/{participantId}")
+    fun changeParticipation(id: String, participantId: String, @Body request: ExternalParticipantChangeRequest): ExternalParticipantChangeResponse {
+        return service.changeParticipation(id, participantId, request)
+    }
+
+    @Delete("/{id}/participant/{participantId}")
+    fun cancelParticipation(id: String, participantId: String): ExternalParticipantChangeResponse {
+        return service.cancelParticipation(id, participantId)
+    }
+
+    @Post("/{id}/participant/{participantId}/confirm")
+    fun confirmParticipation(id: String, participantId: String, @Body request: ExternalParticipantConfirmRequest): ExternalParticipantConfirmResponse {
+        return service.confirmParticipation(id, participantId, request)
     }
 
 }

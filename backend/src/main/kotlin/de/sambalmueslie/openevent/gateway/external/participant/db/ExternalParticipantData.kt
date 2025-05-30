@@ -20,6 +20,7 @@ data class ExternalParticipantData(
     @Column var email: String,
     @Column var phone: String,
     @Column var mobile: String,
+    @Column var language: String,
     @Column var size: Long,
 
     @Column var expires: LocalDateTime,
@@ -35,13 +36,14 @@ data class ExternalParticipantData(
             id: String,
             event: EventInfo,
             request: ExternalParticipantAddRequest,
+            lang: String,
             code: String,
             expires: LocalDateTime,
             timestamp: LocalDateTime
         ): ExternalParticipantData {
             return ExternalParticipantData(
                 id, event.event.id,
-                request.firstName, request.lastName, request.email, request.phone, request.mobile, request.size,
+                request.firstName, request.lastName, request.email, request.phone, request.mobile, lang, request.size,
                 expires, code, 0, timestamp, null
             )
         }
@@ -52,5 +54,6 @@ data class ExternalParticipantData(
         this.updated = timestamp
         return this
     }
+
 
 }

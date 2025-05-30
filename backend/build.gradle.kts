@@ -185,5 +185,27 @@ jib {
         image = "open-event-backend"
         tags = setOf(version.toString(), "latest")
     }
-    container.creationTime.set("USE_CURRENT_TIMESTAMP")
+    container {
+        creationTime.set("USE_CURRENT_TIMESTAMP")
+
+        jvmFlags = listOf(
+            "-server",
+            "-XX:+UseContainerSupport",
+            "-XX:MaxRAMPercentage=75.0",
+
+            // Java 21+ ZGC for better performance
+            "-XX:+UseZGC",
+            "-XX:+UnlockExperimentalVMOptions",
+
+            "-XX:+TieredCompilation",
+            "-Dmicronaut.runtime.environment=prod",
+            "-Dio.netty.allocator.maxOrder=3"
+        )
+
+        user = "1001"
+
+        environment = mapOf(
+            "JAVA_TOOL_OPTIONS" to "-XX:+ExitOnOutOfMemoryError"
+        )
+    }
 }

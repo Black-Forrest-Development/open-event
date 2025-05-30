@@ -1,15 +1,16 @@
 import {Component, computed, effect, resource, signal} from '@angular/core';
 import {MatToolbar} from "@angular/material/toolbar";
-import {ParticipantAddRequest, SharedParticipateResponse} from "@open-event-workspace/core";
+import {ParticipantAddRequest} from "@open-event-workspace/core";
 import {ActivatedRoute, ParamMap, Params, RouterLink} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {EventService, RegistrationService} from "@open-event-workspace/external";
+import {EventService, ExternalParticipantAddRequest} from "@open-event-workspace/external";
 import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
 import {EventInfoComponent} from "../event-info/event-info.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {ParticipateDialogComponent} from "../../registration/participate-dialog/participate-dialog.component";
+import {ExternalParticipantChangeResponse} from "../../../../../../libs/gateway/external/src/lib/participant/participant.api";
+import {RequestParticipationDialogComponent} from "../../participant/request-participation-dialog/request-participation-dialog.component";
 
 @Component({
   selector: 'app-event',
@@ -43,7 +44,6 @@ export class EventComponent {
 
   constructor(
     private service: EventService,
-    private registrationService: RegistrationService,
     private translate: TranslateService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -75,18 +75,18 @@ export class EventComponent {
 
   participate() {
     if (this.processing()) return
-    let dialogRef = this.dialog.open(ParticipateDialogComponent, {disableClose: true})
+    let dialogRef = this.dialog.open(RequestParticipationDialogComponent, {disableClose: true})
     dialogRef.afterClosed().subscribe(request => {
       if (request) this.requestParticipate(request)
     })
   }
 
-  private requestParticipate(request: ParticipantAddRequest) {
+  private requestParticipate(request: ExternalParticipantAddRequest) {
     if (!this.isValid(request)) return
     let id = this.eventId()
     if (!id) return
     this.processing.set(true)
-    this.registrationService.requestParticipation(id, request).subscribe({
+    this.service.requestParticipation(id, request).subscribe({
       next: value => this.handleParticipateResponse(value),
       error: err => this.handleError(err)
     })
@@ -97,7 +97,7 @@ export class EventComponent {
     return request.email.length > 0 || request.mobile.length > 0 || request.phone.length > 0
   }
 
-  private handleParticipateResponse(response: SharedParticipateResponse) {
+  private handleParticipateResponse(response: ExternalParticipantChangeResponse) {
     // switch (response.status) {
     //   case 'ACCEPTED':
     //     this.translate.get('registration.message.accepted').subscribe(msg => this.hotToast.success(msg))

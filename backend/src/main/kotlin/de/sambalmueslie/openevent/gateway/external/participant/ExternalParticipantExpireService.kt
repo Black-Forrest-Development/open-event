@@ -36,18 +36,6 @@ class ExternalParticipantExpireService(
     }
 
     private fun handleExpiredExternalParticipant(participant: ExternalParticipantData) {
-        val registration = eventService.getRegistration(participant.eventId)
-        if (registration != null) {
-            participantService.remove(systemAccount, registration, participant.participantId)
-        }
-        if (participant.accountCreated) {
-            cleanupAccount(participant)
-        }
         repository.delete(participant)
     }
-
-    private fun cleanupAccount(participant: ExternalParticipantData) {
-        accountService.delete(systemAccount, participant.accountId)
-    }
-
 }

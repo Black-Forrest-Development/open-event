@@ -18,7 +18,7 @@ export class RequestParticipationDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<RequestParticipationDialogComponent>,
-    private fb: FormBuilder
+    fb: FormBuilder
   ) {
     this.fg = fb.group({
       firstName: ['', Validators.required],

@@ -45,6 +45,7 @@ export * from './lib/mail/mail.service';
 
 export * from './lib/participant/participant.api';
 export * from './lib/participant/participant.service';
+export * from './lib/participant/waiting-list.pipe';
 
 export * from './lib/preferences/preferences.api';
 export * from './lib/preferences/preferences.service';

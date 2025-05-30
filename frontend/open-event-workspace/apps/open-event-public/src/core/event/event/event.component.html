@@ -7,6 +7,14 @@
   </mat-toolbar>
   <app-loading-bar [reloading]="loading()"></app-loading-bar>
   @if (event()) {
-    <app-event-info [event]="event()!!" [status]="status()" (participateEvent)="participate()" [processing]="processing()" class="container flex-auto"/>
+    <div class="flex flex-col container gap-4 content-stretch w-full">
+      <mat-card class="flex flex-col">
+        <app-event-info [event]="event()!!" class="container flex-auto"/>
+        <app-event-action [status]="status()" [processing]="processing()"
+                          (participateEvent)="participate()"
+                          (confirmEvent)="confirm($event)"
+        ></app-event-action>
+      </mat-card>
+    </div>
   }
 </div>

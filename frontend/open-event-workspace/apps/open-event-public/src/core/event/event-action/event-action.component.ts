@@ -21,7 +21,7 @@ export class EventActionComponent {
   participationPossible = computed(() => this.status() !== 'UNCONFIRMED' && !this.processing() && this.action() === '')
 
   participantId = signal<string | undefined>(undefined)
-  confirmationPossible = signal(() => this.action() === 'confirm' && this.participantId() && this.status() === 'UNCONFIRMED')
+  confirmationPossible = computed(() => this.action() === 'confirm' && this.participantId() && (this.status() === 'UNCONFIRMED' || this.status() === ''))
 
   visible = computed(() => this.participationPossible() || this.confirmationPossible())
 

@@ -1,6 +1,7 @@
 package de.sambalmueslie.openevent.core.participant.db
 
 import de.sambalmueslie.openevent.core.event.api.EventInfo
+import de.sambalmueslie.openevent.core.formatTimestamp
 import de.sambalmueslie.openevent.gateway.external.participant.api.ExternalParticipantAddRequest
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -55,5 +56,5 @@ data class ExternalParticipantData(
         return this
     }
 
-
+    fun format() = formatTimestamp(expires)
 }

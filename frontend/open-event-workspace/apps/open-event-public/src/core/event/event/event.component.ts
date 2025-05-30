@@ -21,6 +21,7 @@ import {RequestParticipationResponseDialogComponent} from "../../participant/req
 import {EventActionComponent} from "../event-action/event-action.component";
 import {MatCard} from "@angular/material/card";
 import {ConfirmParticipationDialogComponent} from "../../participant/confirm-participation-dialog/confirm-participation-dialog.component";
+import {ConfirmParticipationResponseDialogComponent} from "../../participant/confirm-participation-response-dialog/confirm-participation-response-dialog.component";
 
 
 @Component({
@@ -127,6 +128,7 @@ export class EventComponent {
       let eventId = this.eventId()
       if (eventId) sessionStorage.setItem(eventId, response.status)
     }
+    this.eventResource.reload()
   }
 
   private showRequestParticipationResponseDialog() {
@@ -163,9 +165,10 @@ export class EventComponent {
       let eventId = this.eventId()
       if (eventId) sessionStorage.setItem(eventId, response.status)
     }
+    this.eventResource.reload()
   }
 
   private showConfirmParticipationResponseDialog(participant: ExternalParticipant) {
-    this.dialog.open(RequestParticipationResponseDialogComponent, {data: participant})
+    this.dialog.open(ConfirmParticipationResponseDialogComponent, {data: participant})
   }
 }

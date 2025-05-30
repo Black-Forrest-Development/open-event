@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {ExternalParticipant} from "@open-event-workspace/external";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDivider} from "@angular/material/divider";
@@ -17,7 +17,8 @@ import {WaitingListPipe} from "@open-event-workspace/core";
     MatDialogActions,
     MatDialogClose,
     MatDivider,
-    WaitingListPipe
+    WaitingListPipe,
+    MatDialogTitle
   ],
   templateUrl: './confirm-participation-response-dialog.component.html',
   styleUrl: './confirm-participation-response-dialog.component.scss'

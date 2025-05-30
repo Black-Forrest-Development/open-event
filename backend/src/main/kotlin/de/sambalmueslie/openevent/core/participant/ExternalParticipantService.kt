@@ -10,11 +10,11 @@ import de.sambalmueslie.openevent.core.account.api.AccountSetupRequest
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.notification.handler.ExternalParticipantNotificationHandler
-import de.sambalmueslie.openevent.core.participant.api.ParticipantStatus
 import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
 import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantRepository
+import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.error.InvalidRequestException
@@ -32,7 +32,7 @@ import kotlin.random.Random
 class ExternalParticipantService(
     private val accountService: AccountCrudService,
     private val settingsService: SettingsService,
-    private val participantService: ParticipantCrudService,
+    private val registrationService: RegistrationCrudService,
     private val notificationHandler: ExternalParticipantNotificationHandler,
 
     private val repository: ExternalParticipantRepository,
@@ -127,7 +127,7 @@ class ExternalParticipantService(
         if (registration.participants.any { it.author.id == account.id }) return ExternalParticipantConfirmResponse.failed()
 
         val participateRequest = ParticipateRequest(participant.size)
-        val participateResponse = participantService.change(systemAccount, registration.registration, account, participateRequest, ParticipantStatus.ACCEPTED)
+        val participateResponse = registrationService.addParticipant(systemAccount, registration.registration.id, account, participateRequest) ?: return ExternalParticipantConfirmResponse.failed()
         repository.delete(participant)
         return ExternalParticipantConfirmResponse(participateResponse.participant?.toExternalParticipant(), participateResponse.status)
     }

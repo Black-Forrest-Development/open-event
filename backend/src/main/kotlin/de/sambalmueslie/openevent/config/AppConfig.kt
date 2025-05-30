@@ -34,10 +34,4 @@ class AppConfig {
             field = value
         }
 
-    @NotBlank
-    var confirmationBaseUrl: String = "http://localhost:4202"
-        set(value) {
-            logger.info("Set confirmation baseUrl from '$field' to '$value'")
-            field = value
-        }
 }

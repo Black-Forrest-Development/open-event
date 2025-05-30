@@ -10,7 +10,6 @@ import de.sambalmueslie.openevent.core.notification.api.NotificationTypeChangeRe
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.share.api.Share
-import io.micronaut.http.uri.UriBuilder
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -37,13 +36,7 @@ class ExternalParticipantNotificationHandler(
     }
 
     fun handleCreated(actor: Account, share: Share, event: EventInfo, registration: RegistrationInfo, obj: ExternalParticipantData) {
-        val confirmUrl = UriBuilder.of(config.confirmationBaseUrl)
-            .fragment("event")
-            .fragment(share.id)
-            .fragment("confirm")
-            .queryParam("lang", obj.language)
-            .queryParam("pid", obj.id)
-        val content = ExternalParticipantEventContent(confirmUrl.toString(), event.event, registration.registration, obj)
+        val content = ExternalParticipantEventContent(share, event.event, registration.registration, obj)
         service.process(
             NotificationEvent(
                 KEY_EXTERNAL_PARTICIPANT_CREATED,

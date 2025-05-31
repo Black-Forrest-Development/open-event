@@ -58,8 +58,10 @@ data class ShareData(
     }
 
     fun convert(owner: AccountInfo, baseUrl: String): Share {
-        val url = UriBuilder.of(baseUrl).path("share").path("info").path(id)
-            .queryParam("lang", "en")
+        val url = UriBuilder.of(baseUrl)
+            .path("event")
+            .path(id)
+            .queryParam("lang", owner.language)
             .toString()
         return Share(id, eventId, published, url, owner, created, updated)
     }

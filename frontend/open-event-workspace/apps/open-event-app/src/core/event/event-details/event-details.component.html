@@ -8,7 +8,7 @@
         <app-registration-details [data]="info.registration"></app-registration-details>
       }
     </div>
-    <div class="flex flex-col gap-4 basis-auto shrink grow-0 content-stretch">
+    <div class="flex flex-col gap-4 basis-md shrink grow-0 content-stretch">
       <app-event-details-location [info]="info"></app-event-details-location>
       @if (info.canEdit) {
         <app-share-details [event]="info.event"></app-share-details>

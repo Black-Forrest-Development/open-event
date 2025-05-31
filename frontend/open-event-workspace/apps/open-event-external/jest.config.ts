@@ -1,8 +1,8 @@
 export default {
-  displayName: 'open-event-public',
+  displayName: 'open-event-external',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/open-event-public',
+  coverageDirectory: '../../coverage/apps/open-event-external',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

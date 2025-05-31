@@ -54,7 +54,7 @@ export class ShareDetailsComponent {
     let share = this.share()
     if (share && !share.published) {
       this.update(this.service.publish(share.id))
-    } else if (!this.share) {
+    } else if (!share) {
       this.update(this.service.createShare(new ShareChangeRequest(this.event().id, true)))
     }
   }

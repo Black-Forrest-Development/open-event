@@ -15,13 +15,13 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome open-event-public'
+      'Welcome open-event-external'
     );
   });
 
-  it(`should have as title 'open-event-public'`, () => {
+  it(`should have as title 'open-event-external'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('open-event-public');
+    expect(app.title).toEqual('open-event-external');
   });
 });

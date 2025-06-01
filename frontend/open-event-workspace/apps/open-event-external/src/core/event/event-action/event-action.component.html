@@ -14,12 +14,6 @@
           {{ 'registration.action.participate' | translate }}
         </button>
       }
-
-      @if (confirmationPossible()) {
-        <button mat-flat-button color="accent" (click)="confirmEvent.emit(this.participantId()!!)">
-          {{ 'registration.action.confirm' | translate }}
-        </button>
-      }
     </div>
   </div>
 }

@@ -1,35 +1,31 @@
 import {Component, computed, effect, resource, signal} from '@angular/core';
+import {EventInfoComponent} from "../event-info/event-info.component";
+import {ConfirmationCodeComponent, LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
+import {MatCard} from "@angular/material/card";
 import {MatToolbar} from "@angular/material/toolbar";
-import {ParticipantAddRequest} from "@open-event-workspace/core";
 import {ActivatedRoute, ParamMap, Params, RouterLink} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
+import {EventService, ExternalParticipantConfirmRequest, ExternalParticipantConfirmResponse} from "@open-event-workspace/external";
+import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngxpert/hot-toast";
-import {EventService, ExternalParticipantAddRequest, ExternalParticipantChangeResponse} from "@open-event-workspace/external";
-import {LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
-import {EventInfoComponent} from "../event-info/event-info.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {RequestParticipationDialogComponent} from "../../participant/request-participation-dialog/request-participation-dialog.component";
-import {RequestParticipationResponseDialogComponent} from "../../participant/request-participation-response-dialog/request-participation-response-dialog.component";
-import {EventActionComponent} from "../event-action/event-action.component";
-import {MatCard} from "@angular/material/card";
-
+import {ConfirmParticipationResponseDialogComponent} from "../../participant/confirm-participation-response-dialog/confirm-participation-response-dialog.component";
 
 @Component({
-  selector: 'app-event',
+  selector: 'app-event-confirm',
   imports: [
+    EventInfoComponent,
+    LoadingBarComponent,
+    MatCard,
     MatToolbar,
     RouterLink,
-    LoadingBarComponent,
-    EventInfoComponent,
-    EventActionComponent,
-    MatCard
+    ConfirmationCodeComponent,
+    TranslatePipe
   ],
-  templateUrl: './event.component.html',
-  styleUrl: './event.component.scss'
+  templateUrl: './event-confirm.component.html',
+  styleUrl: './event-confirm.component.scss'
 })
-export class EventComponent {
-
+export class EventConfirmComponent {
 
   eventId = signal<string | undefined>(undefined)
   eventResource = resource({
@@ -46,6 +42,9 @@ export class EventComponent {
 
   processing = signal(false)
   status = signal('')
+
+  participantId = signal<string | undefined>(undefined)
+  confirmationPossible = computed(() => this.participantId() && (this.status() === 'UNCONFIRMED' || this.status() === '' || this.status() === 'FAILED'))
 
   constructor(
     private service: EventService,
@@ -78,42 +77,42 @@ export class EventComponent {
   private handleQueryParams(p: Params) {
     let lang = p['lang']
     if (lang) this.translate.use(lang)
+
+    let participantId = p['pid']
+    this.participantId.set(participantId)
   }
 
   private handleError(err: any) {
     if (!err) return
-    this.hotToast.error("Something went wrong")
+    this.hotToast.error(err)
   }
 
-  participate() {
+  onCodeComplete(code: string) {
+    let participantId = this.participantId()
+    if (!participantId) return
+    this.confirm(code, participantId)
+  }
+
+
+  private confirm(code: string, participantId: string) {
     if (this.processing()) return
-    let dialogRef = this.dialog.open(RequestParticipationDialogComponent, {disableClose: true})
-    dialogRef.afterClosed().subscribe(request => {
-      if (request) this.requestParticipate(request)
-    })
-  }
-
-  private requestParticipate(request: ExternalParticipantAddRequest) {
-    if (!this.isValid(request)) return
     let id = this.eventId()
     if (!id) return
+    let request = new ExternalParticipantConfirmRequest(code)
     this.processing.set(true)
-    this.service.requestParticipation(id, request).subscribe({
-      next: value => this.handleParticipateResponse(value),
+    this.service.confirmParticipation(id, participantId, request).subscribe({
+      next: value => this.handleConfirmationResponse(value),
       error: err => this.handleError(err)
     })
   }
 
-  private isValid(request: ParticipantAddRequest) {
-    if (request.size <= 0) return false
-    return request.email.length > 0 || request.mobile.length > 0 || request.phone.length > 0
-  }
 
-  private handleParticipateResponse(response: ExternalParticipantChangeResponse) {
-    if (response.status == 'FAILED') {
+  private handleConfirmationResponse(response: ExternalParticipantConfirmResponse) {
+    let participant = response.participant
+    if (response.status == 'FAILED' || !participant) {
       this.translate.get('registration.dialog.response.error').subscribe(v => this.handleError(v))
     } else {
-      this.showRequestParticipationResponseDialog()
+      this.dialog.open(ConfirmParticipationResponseDialogComponent, {data: participant})
       this.processing.set(false)
       this.status.set(response.status)
       let eventId = this.eventId()
@@ -121,9 +120,4 @@ export class EventComponent {
     }
     this.eventResource.reload()
   }
-
-  private showRequestParticipationResponseDialog() {
-    this.dialog.open(RequestParticipationResponseDialogComponent)
-  }
-
 }

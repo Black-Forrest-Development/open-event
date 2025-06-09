@@ -42,7 +42,7 @@ dependencies {
     runtimeOnly("org.yaml:snakeyaml")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.1")
     testImplementation("io.mockk:mockk:1.14.2")
 
     // jackson

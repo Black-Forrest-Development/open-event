@@ -8,9 +8,9 @@ plugins {
     id("org.sonarqube") version "6.2.0.5505"
     id("com.gradleup.shadow") version "8.3.6" apply false
     id("com.google.cloud.tools.jib") version "3.4.5" apply false
-    id("io.micronaut.application") version "4.5.3" apply false
-    id("io.micronaut.test-resources") version "4.5.3" apply false
-    id("io.micronaut.aot") version "4.5.3" apply false
+    id("io.micronaut.application") version "4.5.4" apply false
+    id("io.micronaut.test-resources") version "4.5.4" apply false
+    id("io.micronaut.aot") version "4.5.4" apply false
     id("net.researchgate.release") version "3.1.0"
     id("maven-publish")
     id("jacoco")

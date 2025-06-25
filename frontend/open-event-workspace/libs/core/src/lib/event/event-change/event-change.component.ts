@@ -72,7 +72,7 @@ export class EventChangeComponent {
     if (!this.fg.valid) return
     let value = this.fg.value
     let request = this.createRequest(value, this.isEndHidden())
-    debugger
+
     if (!request) return
     this.loading = true
     this.request.emit(request)

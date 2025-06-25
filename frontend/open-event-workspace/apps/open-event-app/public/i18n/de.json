@@ -344,7 +344,8 @@
     "action": {
       "enable": "Teilen aktivieren",
       "disable": "Teilen deaktivieren",
-      "activate": "Ja, ich möchte die Veranstaltung gerne teilen"
+      "activate": "Ja, ich möchte die Veranstaltung gerne teilen",
+      "show": "Geteilte Veranstaltung anzeigen"
     },
     "info": {
       "description": {

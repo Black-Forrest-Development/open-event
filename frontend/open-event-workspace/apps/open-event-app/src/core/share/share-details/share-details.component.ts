@@ -5,7 +5,7 @@ import {MatCard} from "@angular/material/card";
 import {TranslatePipe} from "@ngx-translate/core";
 import {MatDivider} from "@angular/material/divider";
 import {ShareButtons} from "ngx-sharebuttons/buttons";
-import {MatButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-share-details',
@@ -17,7 +17,7 @@ import {MatButton} from "@angular/material/button";
     MatDivider,
     ShareButtons,
     LoadingBarComponent,
-    MatButton
+    MatButtonModule
   ],
   standalone: true
 })
@@ -28,6 +28,7 @@ export class ShareDetailsComponent {
   share = computed(() => this.info().share)
   active = computed(() => this.share() && this.share()!!.share.enabled)
   title = computed(() => this.info().event.title)
+  url = computed(() => this.share()?.url ?? '')
 
   changed = output<boolean>()
 
@@ -36,19 +37,10 @@ export class ShareDetailsComponent {
 
   enableSharing() {
     this.changed.emit(true)
-    // let share = this.share()
-    // if (share && !share.enabled) {
-    //   this.update(this.service.publish(share.id))
-    // } else if (!share) {
-    //   this.update(this.service.createShare(new ShareChangeRequest(this.event().id, true)))
-    // }
   }
 
   disableSharing() {
     this.changed.emit(false)
-    // let share = this.share()
-    // if (!share) return
-    // this.update(this.service.updateShare(share.id, new ShareChangeRequest(this.event().id, false)))
   }
 
 }

@@ -365,7 +365,8 @@
       "enable": "Enable Sharing",
       "disable": "Disable Sharing",
       "participate": "Participate (without login)",
-      "activate": "Yes i like to activate sharing"
+      "activate": "Yes i like to activate sharing",
+      "show": "Show shared event"
     },
     "info": {
       "description": {

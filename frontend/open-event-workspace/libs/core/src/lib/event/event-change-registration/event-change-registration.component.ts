@@ -12,10 +12,11 @@ import {CategoryReadAPI} from "../../category/category-api";
 import {ChipSelectPaneComponent, LoadingBarComponent, toPromise} from "@open-event-workspace/shared";
 import {ChipSelectEntry} from "../../../../../shared/src/lib/chip-select-pane/chip-select-entry";
 import {MatIconModule} from "@angular/material/icon";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @Component({
   selector: 'lib-event-change-registration',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatSelectModule, MatChipsModule, MatIconModule, TranslatePipe, LoadingBarComponent, ChipSelectPaneComponent],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatSelectModule, MatChipsModule, MatIconModule, TranslatePipe, LoadingBarComponent, ChipSelectPaneComponent, MatCheckbox],
   templateUrl: './event-change-registration.component.html',
   styleUrl: './event-change-registration.component.scss'
 })
@@ -68,7 +69,7 @@ export class EventChangeRegistrationComponent {
         ticketsEnabled: registration.registration.ticketsEnabled,
         maxGuestAmount: registration.registration.maxGuestAmount,
         interestedAllowed: registration.registration.interestedAllowed,
-
+        shared: info.share?.share.enabled ?? false,
         categories: info.categories.map(c => c.id) ?? [],
         tags: info.event.tags ?? [],
       })

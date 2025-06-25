@@ -5,6 +5,5 @@ import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
 data class ShareChangeRequest(
-    val eventId: Long,
-    val published: Boolean
+    val enabled: Boolean
 ) : BusinessObjectChangeRequest

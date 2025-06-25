@@ -22,5 +22,6 @@ data class EventChangeRequest(
     val location: LocationChangeRequest?,
     val registration: RegistrationChangeRequest,
     val published: Boolean,
+    val shared: Boolean,
     val tags: Set<String>,
 ) : BusinessObjectChangeRequest

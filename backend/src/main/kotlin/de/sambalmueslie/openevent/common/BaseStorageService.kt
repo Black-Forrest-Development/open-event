@@ -45,7 +45,6 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
     }
 
     override fun create(request: R, properties: Map<String, Any>): O {
-        isValid(request)
         val existing = existing(request)
         if (existing != null) return converter.convert(existing)
 
@@ -63,7 +62,6 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
 
     override fun update(id: T, request: R): O {
         val data = repository.findByIdOrNull(id) ?: return create(request)
-        isValid(request)
         val result = repository.update(updateData(data, request)).let { converter.convert(it) }
         updateDependencies(request, result)
         cache.put(result.id, result)
@@ -102,8 +100,6 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
         return result
     }
 
-    @Deprecated("Move that to core")
-    abstract fun isValid(request: R)
     protected open fun existing(request: R): D? {
         return null
     }

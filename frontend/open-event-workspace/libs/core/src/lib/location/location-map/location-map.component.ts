@@ -1,5 +1,5 @@
 import {Component, effect, input} from '@angular/core';
-import {Location, SharedLocation} from "@open-event-workspace/core";
+import {Location} from "@open-event-workspace/core";
 import * as L from "leaflet";
 import {icon, Map, Marker} from "leaflet";
 
@@ -25,7 +25,7 @@ Marker.prototype.options.icon = iconDefault;
   styleUrl: './location-map.component.scss'
 })
 export class LocationMapComponent {
-  location = input<Location | SharedLocation>();
+  location = input<Location>();
   private map: Map | undefined
   private marker: Marker | undefined
 

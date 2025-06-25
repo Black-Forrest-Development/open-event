@@ -374,14 +374,12 @@ CREATE TABLE history_entry
 -- share
 CREATE TABLE share
 (
-    id        VARCHAR(40) PRIMARY KEY,
-    event_id  BIGINT                      NOT NULL references event (id),
-    owner_id  BIGINT                      NOT NULL references account (id),
+    id       VARCHAR(40) PRIMARY KEY,
+    event_id BIGINT                      NOT NULL references event (id),
+    enabled  BOOLEAN                     NOT NULL,
 
-    published BOOLEAN                     NOT NULL,
-
-    created   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    updated   TIMESTAMP WITHOUT TIME ZONE
+    created  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated  TIMESTAMP WITHOUT TIME ZONE
 );
 
 

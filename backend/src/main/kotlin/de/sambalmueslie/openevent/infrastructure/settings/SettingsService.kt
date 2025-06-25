@@ -58,10 +58,6 @@ class SettingsService(
         return data.update(request, timeProvider.now())
     }
 
-    override fun isValid(request: SettingChangeRequest) {
-        // intentionally left empty
-    }
-
     fun setValue(id: Long, value: Any): Setting? {
         val result = patchData(id) { it.setValue(value) } ?: return null
         keyCache.invalidate(result.key)

@@ -60,4 +60,10 @@ export class EventDetailsComponent {
     this.reloading = false
   }
 
+  setSharingEnabled(enabled: boolean) {
+    const eventId = this.eventId
+    if (!eventId || this.reloading) return
+    this.reloading = true
+    this.service.setShared(eventId, enabled).subscribe(d => this.handleData(d))
+  }
 }

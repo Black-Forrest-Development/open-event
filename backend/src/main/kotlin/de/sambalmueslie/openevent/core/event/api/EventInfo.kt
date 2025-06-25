@@ -3,6 +3,7 @@ package de.sambalmueslie.openevent.core.event.api
 import de.sambalmueslie.openevent.core.category.api.Category
 import de.sambalmueslie.openevent.core.location.api.Location
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
+import de.sambalmueslie.openevent.core.share.api.ShareInfo
 import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
@@ -11,5 +12,6 @@ data class EventInfo(
     val location: Location?,
     val registration: RegistrationInfo?,
     val categories: List<Category>,
+    val share: ShareInfo?,
     val canEdit: Boolean
 )

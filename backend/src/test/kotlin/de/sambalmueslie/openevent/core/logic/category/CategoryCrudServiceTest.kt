@@ -1,4 +1,4 @@
-package de.sambalmueslie.openevent.core.logic
+package de.sambalmueslie.openevent.core.logic.category
 
 import de.sambalmueslie.openevent.TimeBasedTest
 import de.sambalmueslie.openevent.core.account.AccountStorage
@@ -11,8 +11,7 @@ import io.micronaut.data.model.Pageable
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.mockk.*
 import jakarta.inject.Inject
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 @MicronautTest
@@ -38,24 +37,24 @@ class CategoryCrudServiceTest : TimeBasedTest() {
         var category = service.create(actor, request)
         verify { listener.handleCreated(actor, category) }
 
-        assertEquals(request.name, category.name)
-        assertEquals(request.iconUrl, category.iconUrl)
-        assertTrue(category.id > 0)
+        Assertions.assertEquals(request.name, category.name)
+        Assertions.assertEquals(request.iconUrl, category.iconUrl)
+        Assertions.assertTrue(category.id > 0)
 
-        assertEquals(category, service.get(category.id))
-        assertEquals(category, service.findByName(request.name))
-        assertEquals(listOf(category), service.getAll(Pageable.from(0)).content)
+        Assertions.assertEquals(category, service.get(category.id))
+        Assertions.assertEquals(category, service.findByName(request.name))
+        Assertions.assertEquals(listOf(category), service.getAll(Pageable.from(0)).content)
 
         val update = CategoryChangeRequest("name-update", "icon-url-update")
         category = service.update(actor, category.id, update)
         verify { listener.handleUpdated(actor, category) }
 
-        assertEquals(update.name, category.name)
-        assertEquals(update.iconUrl, category.iconUrl)
+        Assertions.assertEquals(update.name, category.name)
+        Assertions.assertEquals(update.iconUrl, category.iconUrl)
 
         service.delete(actor, category.id)
         verify { listener.handleDeleted(actor, category) }
-        assertEquals(emptyList<Category>(), service.getAll(Pageable.from(0)).content)
+        Assertions.assertEquals(emptyList<Category>(), service.getAll(Pageable.from(0)).content)
 
     }
 

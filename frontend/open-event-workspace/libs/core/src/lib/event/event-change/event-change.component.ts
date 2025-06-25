@@ -113,6 +113,7 @@ export class EventChangeComponent {
       location,
       registration,
       true,
+      value.shared,
       value.registration.tags ?? []
     )
   }

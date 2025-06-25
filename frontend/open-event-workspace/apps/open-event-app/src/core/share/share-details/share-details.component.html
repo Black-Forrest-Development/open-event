@@ -12,12 +12,12 @@
                        [showIcon]="true"
                        [showText]="true"
                        [url]="share()!!.url"
-                       description="{{event().title}}"
+                       description="{{title()}}"
         >
         </share-buttons>
       } @else {
         <div class="text-sm text-justify hyphens-auto">{{ 'share.info.description.content' | translate }}</div>
-        <button mat-flat-button color="accent" (click)="enableSharing()" [disabled]="updating()">
+        <button mat-flat-button color="accent" (click)="enableSharing()" [disabled]="reloading()">
           {{ 'share.action.activate' | translate }}
         </button>
       }
@@ -27,7 +27,7 @@
       <div class="font-bold">{{ 'share.info.disclaimer.title' | translate }}</div>
       <div class="text-sm text-justify hyphens-auto">{{ 'share.info.disclaimer.content' | translate }}</div>
       @if (active()) {
-        <button mat-stroked-button color="warn" (click)="disableSharing()" [disabled]="updating()"> {{ 'share.action.disable' | translate }}</button>
+        <button mat-stroked-button color="warn" (click)="disableSharing()" [disabled]="reloading()"> {{ 'share.action.disable' | translate }}</button>
       }
     </div>
   </div>

@@ -1,5 +1,5 @@
 import {Component, input, Input} from '@angular/core';
-import {EventSearchEntry, Participant, RegistrationInfo, SharedParticipant, SharedRegistration} from "@open-event-workspace/core";
+import {EventSearchEntry, Participant, RegistrationInfo} from "@open-event-workspace/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 import {PublicEvent} from "@open-event-workspace/external";
@@ -33,16 +33,6 @@ export class RegistrationStatusComponent {
     }
   }
 
-  @Input()
-  set shared(info: SharedRegistration) {
-    if (info) {
-      let totalAmount = info.participants.filter(p => !p.waitingList).reduce((sum: number, p: SharedParticipant) => sum + p.size, 0)
-      this.space.available = info.maxGuestAmount
-      this.space.remaining = this.space.available - totalAmount
-      this.spaceAvailable = this.space.remaining > 0
-      this.updateIndicator()
-    }
-  }
 
   @Input()
   set entry(entry: EventSearchEntry) {

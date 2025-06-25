@@ -13,7 +13,7 @@
         <div>{{ info().location?.zip }} {{ info().location?.city }}</div>
         <div>{{ info().location?.country }}</div>
       </div>
-      <app-location-map [data]="info().location!!" mat-card-image></app-location-map>
+      <lib-location-map [location]="info().location!!" mat-card-image></lib-location-map>
       <div class="flex flex-row flex-wrap gap-4 px-3 pb-3 justify-between">
         <button mat-flat-button (click)="openRoute()" color="primary">
           <mat-icon>map_search</mat-icon>

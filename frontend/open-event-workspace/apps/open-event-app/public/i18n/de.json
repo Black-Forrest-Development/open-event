@@ -97,7 +97,7 @@
     },
     "table": {
       "account": "Veranstalter",
-      "period": "Zeitram",
+      "period": "Zeitraum",
       "location": "Ort",
       "description": "Beschreibung",
       "status": "Status",

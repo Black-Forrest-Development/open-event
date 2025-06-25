@@ -21,8 +21,7 @@ class ExternalEventService(
 
 
     fun getPublicEvent(id: String): PublicEvent? {
-        val share = shareService.get(id) ?: return null
-        val event = service.getInfo(share.eventId, null) ?: return null
+        val (share, event) = getEvent(id) ?: return null
         return event.toPublicEvent(share)
     }
 
@@ -53,6 +52,7 @@ class ExternalEventService(
     private fun getEvent(id: String): Pair<Share, EventInfo>? {
         val share = shareService.get(id) ?: return null
         val event = service.getInfo(share.eventId, null) ?: return null
+        if (!event.event.published) return null
         return Pair(share, event)
     }
 }

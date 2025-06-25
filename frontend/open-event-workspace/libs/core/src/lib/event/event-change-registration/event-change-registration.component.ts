@@ -44,6 +44,7 @@ export class EventChangeRegistrationComponent {
       maxGuestAmount: [4, Validators.required],
       interestedAllowed: [false, Validators.required],
       ticketsEnabled: [false, Validators.required],
+      shared: [true, Validators.required],
       categories: [[]],
       tags: fb.control([]),
     })
@@ -67,6 +68,7 @@ export class EventChangeRegistrationComponent {
         ticketsEnabled: registration.registration.ticketsEnabled,
         maxGuestAmount: registration.registration.maxGuestAmount,
         interestedAllowed: registration.registration.interestedAllowed,
+
         categories: info.categories.map(c => c.id) ?? [],
         tags: info.event.tags ?? [],
       })

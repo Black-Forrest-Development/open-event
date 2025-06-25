@@ -53,11 +53,6 @@ class RegistrationStorageService(
         cacheByEvent.invalidate(data.eventId)
     }
 
-    override fun isValid(request: RegistrationChangeRequest) {
-        if (request.maxGuestAmount <= 0) throw InvalidRequestException("Max guest must be positive number")
-    }
-
-
     private val cacheByEvent: LoadingCache<Long, Registration> = cacheService.register("RegistrationByEvent") {
         Caffeine.newBuilder()
             .maximumSize(1000)

@@ -2,11 +2,11 @@ package de.sambalmueslie.openevent.infrastructure.settings
 
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.api.SettingsAPI
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
+import de.sambalmueslie.openevent.infrastructure.cache.KotlinLoadingCache
 import de.sambalmueslie.openevent.infrastructure.settings.api.Setting
 import de.sambalmueslie.openevent.infrastructure.settings.api.SettingChangeRequest
 import de.sambalmueslie.openevent.infrastructure.settings.db.SettingData
@@ -17,6 +17,7 @@ import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 @Singleton
@@ -32,12 +33,12 @@ class SettingsService(
     logger
 ) {
 
-    private val keyCache: LoadingCache<String, Setting> = cacheService.register("Settings-Key") {
+    private val keyCache: KotlinLoadingCache<String, Setting> = cacheService.registerNullable("Settings-Key") {
         Caffeine.newBuilder()
             .maximumSize(100)
             .expireAfterWrite(1, TimeUnit.HOURS)
             .recordStats()
-            .build { key -> repository.findByKey(key)?.convert() }
+            .build { key -> Optional.ofNullable(repository.findByKey(key)?.convert()) }
     }
 
     companion object {

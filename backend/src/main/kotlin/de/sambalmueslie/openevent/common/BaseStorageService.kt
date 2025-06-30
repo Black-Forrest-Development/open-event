@@ -2,11 +2,12 @@ package de.sambalmueslie.openevent.common
 
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
+import de.sambalmueslie.openevent.infrastructure.cache.KotlinLoadingCache
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import org.slf4j.Logger
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
@@ -20,12 +21,12 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
     cacheSize: Long = 100,
 ) : Storage<T, O, R> {
 
-    private val cache: LoadingCache<T, O> = cacheService.register(type) {
+    private val cache: KotlinLoadingCache<T, O> = cacheService.register(type) {
         Caffeine.newBuilder()
             .maximumSize(cacheSize)
             .expireAfterWrite(1, TimeUnit.HOURS)
             .recordStats()
-            .build { id -> repository.findByIdOrNull(id)?.let { converter.convert(it) } }
+            .build { id -> Optional.ofNullable(repository.findByIdOrNull(id)?.let { converter.convert(it) }) }
     }
 
     override fun get(id: T): O? {
@@ -83,7 +84,7 @@ abstract class BaseStorageService<T : Any, O : BusinessObject<T>, R : BusinessOb
     protected fun patchData(data: D, patch: (D) -> Unit): O {
         patch.invoke(data)
         val result = repository.update(data).let { converter.convert(it) }
-        cache.put(result.id, result)
+        cache.put(result.id,result)
         return result
     }
 

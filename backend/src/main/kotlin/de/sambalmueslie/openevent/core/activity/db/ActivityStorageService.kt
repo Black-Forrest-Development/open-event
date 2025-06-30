@@ -95,7 +95,7 @@ class ActivityStorageService(
     }
 
     private val unreadInfosCache: LoadingCache<Long, List<ActivityInfo>> =
-        cacheService.register(ActivityInfo::class.java.simpleName) {
+        cacheService.registerNotNullable(ActivityInfo::class.java.simpleName) {
             Caffeine.newBuilder()
                 .maximumSize(1000)
                 .expireAfterWrite(1, TimeUnit.HOURS)

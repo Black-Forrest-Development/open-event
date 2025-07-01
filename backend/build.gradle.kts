@@ -78,7 +78,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0")
 
     // caching
-    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+//    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.1")
 
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")

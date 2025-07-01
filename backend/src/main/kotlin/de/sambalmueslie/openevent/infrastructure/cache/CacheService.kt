@@ -5,7 +5,6 @@ import com.github.benmanes.caffeine.cache.LoadingCache
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.*
 import kotlin.reflect.KClass
 
 @Singleton
@@ -17,21 +16,11 @@ class CacheService {
 
     private val caches = mutableMapOf<String, LoadingCache<*, *>>()
 
-    fun <T : Any, O : Any> registerNotNullable(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
-        return register(key, builder)
+    fun <T : Any, O> register(type: KClass<out Any>, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
+        return register(type.java.canonicalName, builder)
     }
 
-    fun <T : Any, O : Any> registerNullable(key: String, builder: () -> LoadingCache<T, Optional<O>>): KotlinLoadingCache<T, O> {
-        val cache = register(key, builder)
-        return KotlinLoadingCache(cache)
-    }
-
-    fun <T : Any, O : Any> register(type: KClass<O>, builder: () -> LoadingCache<T, Optional<O>>): KotlinLoadingCache<T, O> {
-        val cache = register(type.java.canonicalName, builder)
-        return KotlinLoadingCache(cache)
-    }
-
-    private fun <T : Any, O : Any> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
+    fun <T : Any, O> register(key: String, builder: () -> LoadingCache<T, O>): LoadingCache<T, O> {
         logger.info("Register cache for $key")
         val cache = builder.invoke()
         caches[key] = cache

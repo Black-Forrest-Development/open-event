@@ -2,6 +2,7 @@ package de.sambalmueslie.openevent.core.registration.db
 
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.github.benmanes.caffeine.cache.LoadingCache
 import de.sambalmueslie.openevent.common.BaseStorageService
 import de.sambalmueslie.openevent.common.SimpleDataObjectConverter
 import de.sambalmueslie.openevent.core.event.api.Event
@@ -9,12 +10,10 @@ import de.sambalmueslie.openevent.core.registration.api.Registration
 import de.sambalmueslie.openevent.core.registration.api.RegistrationChangeRequest
 import de.sambalmueslie.openevent.error.InvalidRequestException
 import de.sambalmueslie.openevent.infrastructure.cache.CacheService
-import de.sambalmueslie.openevent.infrastructure.cache.KotlinLoadingCache
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 @Singleton
@@ -54,13 +53,14 @@ class RegistrationStorageService(
         cacheByEvent.invalidate(data.eventId)
     }
 
-    private val cacheByEvent: KotlinLoadingCache<Long, Registration> = cacheService.registerNullable("RegistrationByEvent") {
+    private val cacheByEvent: LoadingCache<Long, Registration?> = cacheService.register("RegistrationByEvent") {
         Caffeine.newBuilder()
             .maximumSize(1000)
             .expireAfterWrite(12, TimeUnit.HOURS)
             .recordStats()
-            .build { id -> Optional.ofNullable(repository.findByEventId(id)?.convert()) }
+            .build { id -> repository.findByEventId(id)?.convert() }
     }
+
 
     override fun findByEvent(event: Event): Registration? {
         return cacheByEvent[event.id]

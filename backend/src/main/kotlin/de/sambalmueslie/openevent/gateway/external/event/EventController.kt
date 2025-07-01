@@ -1,6 +1,6 @@
 package de.sambalmueslie.openevent.gateway.external.event
 
-import de.sambalmueslie.openevent.gateway.external.participant.api.*
+import de.sambalmueslie.openevent.core.participant.api.*
 import io.micronaut.http.annotation.*
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule

@@ -4,8 +4,8 @@
             label="{{'event.step.event' | translate}}">
     <lib-event-change-general [data]="info()" [hiddenFields]="hiddenFields" [parent]="fg" #general></lib-event-change-general>
     <div class="flex flex-row justify-content-end gap-3 pt-5">
-      <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
-      <ng-container *ngTemplateOutlet="submitButton"></ng-container>
+      <button color="primary" mat-flat-button matStepperNext [disabled]="!general.fg.valid">{{ 'action.next' | translate }}</button>
+<!--      <ng-container *ngTemplateOutlet="submitButton"></ng-container>-->
       <ng-container *ngTemplateOutlet="cancelButton"></ng-container>
     </div>
   </mat-step>
@@ -14,8 +14,8 @@
     <lib-event-change-location [data]="info()" [hiddenFields]="hiddenFields" [addressReadAPI]="addressReadAPI()" [parent]="fg" #location></lib-event-change-location>
     <div class="flex flex-row justify-content-end gap-3 pt-5">
       <button color="primary" mat-flat-button matStepperPrevious>{{ 'action.back' | translate }}</button>
-      <button color="primary" mat-flat-button matStepperNext>{{ 'action.next' | translate }}</button>
-      <ng-container *ngTemplateOutlet="submitButton"></ng-container>
+      <button color="primary" mat-flat-button matStepperNext [disabled]="!location.fg.valid">{{ 'action.next' | translate }}</button>
+<!--      <ng-container *ngTemplateOutlet="submitButton"></ng-container>-->
       <ng-container *ngTemplateOutlet="cancelButton"></ng-container>
     </div>
   </mat-step>

@@ -10,15 +10,13 @@ import de.sambalmueslie.openevent.core.account.api.AccountSetupRequest
 import de.sambalmueslie.openevent.core.account.api.ProfileChangeRequest
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.notification.handler.ExternalParticipantNotificationHandler
-import de.sambalmueslie.openevent.core.participant.api.ParticipateRequest
-import de.sambalmueslie.openevent.core.participant.api.ParticipateStatus
+import de.sambalmueslie.openevent.core.participant.api.*
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantData
 import de.sambalmueslie.openevent.core.participant.db.ExternalParticipantRepository
 import de.sambalmueslie.openevent.core.registration.RegistrationCrudService
 import de.sambalmueslie.openevent.core.registration.api.RegistrationInfo
 import de.sambalmueslie.openevent.core.share.api.Share
 import de.sambalmueslie.openevent.error.InvalidRequestException
-import de.sambalmueslie.openevent.gateway.external.participant.api.*
 import de.sambalmueslie.openevent.infrastructure.settings.SettingsService
 import de.sambalmueslie.openevent.infrastructure.time.TimeProvider
 import jakarta.inject.Singleton

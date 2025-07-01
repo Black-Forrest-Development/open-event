@@ -340,7 +340,7 @@
     }
   },
   "share": {
-    "title": "Veranstaltung Teilen",
+    "title": "Veranstaltung teilen",
     "action": {
       "enable": "Teilen aktivieren",
       "disable": "Teilen deaktivieren",
@@ -354,7 +354,7 @@
       },
       "disclaimer": {
         "title": "Hinweis zum Datenschutz",
-        "content": "Beim Teilen deiner Veranstaltung werden einige Angaben wie der Titel und der Veranstaltungsort für alle sichtbar, die den Link haben. Der Link enthält jedoch eine zufällig erzeugte Kennung, sodass er nicht erraten werden kann. Nur Personen, denen du den Link gibst, können auf die Veranstaltungsseite zugreifen.\nDu kannst die Freigabe jederzeit wieder deaktivieren. Dann ist der Link nicht mehr gültig und die Veranstaltung nicht mehr einsehbar."
+        "content": "Beim teilen deiner Veranstaltung werden einige Angaben wie der Titel und der Veranstaltungsort für alle sichtbar, die den Link haben. Der Link enthält jedoch eine zufällig erzeugte Kennung, sodass er nicht erraten werden kann. Nur Personen, denen du den Link gibst, können auf die Veranstaltungsseite zugreifen.\nDu kannst die Freigabe jederzeit wieder deaktivieren. Dann ist der Link nicht mehr gültig und die Veranstaltung nicht mehr einsehbar."
       }
     }
   },

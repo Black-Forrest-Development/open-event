@@ -3,9 +3,9 @@ package de.sambalmueslie.openevent.gateway.external.event
 import de.sambalmueslie.openevent.core.event.EventCrudService
 import de.sambalmueslie.openevent.core.event.api.EventInfo
 import de.sambalmueslie.openevent.core.participant.ExternalParticipantService
+import de.sambalmueslie.openevent.core.participant.api.*
 import de.sambalmueslie.openevent.core.share.ShareCrudService
 import de.sambalmueslie.openevent.core.share.api.Share
-import de.sambalmueslie.openevent.gateway.external.participant.api.*
 import jakarta.inject.Singleton
 import org.slf4j.LoggerFactory
 
